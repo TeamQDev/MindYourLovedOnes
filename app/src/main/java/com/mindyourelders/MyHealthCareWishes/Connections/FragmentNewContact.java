@@ -80,6 +80,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     int prox;
     int connectionFlag;
     boolean inPrimary;
+    int id;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation;
     TextInputLayout tilName,tilFName,tilEmergencyNote;
 
@@ -221,15 +222,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "Emergency":
                 visiEmergency();
-
+                txtAdd.setText("Add Emergency");
+                txtTitle.setText("Add Emergency Contact");
                 break;
             case "EmergencyUpdate":
                 visiEmergency();
+                txtAdd.setText("Update Emergency");
+                txtTitle.setText("Update Emergency Contact");
                 Intent EmergencyIntent = getActivity().getIntent();
                 if (EmergencyIntent.getExtras()!=null)
                 {
 
-                       Emergency rel= (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
+                    Emergency rel= (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
                     txtMobile.setText(rel.getMobile());
@@ -237,13 +241,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtWorkPhone.setText(rel.getWorkPhone());
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
+                    id=rel.getId();
                         int index = 0;
                         for (int i = 0; i < Relationship.length; i++) {
                             if (rel.getRelationType().equals(Relationship[i])) {
                                 index = i;
                             }
                         }
+
                     spinnerRelation.setSelection(index+1);
+                    byte[] photo=rel.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
 
                 }
                 break;
@@ -426,8 +435,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         rlAids.setVisibility(View.GONE);
         rlFinance.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
-        txtAdd.setText("Add Emergency");
-        txtTitle.setText("Add Emergency Contact");
+
         tilName.setHint("First Name, Last Name");
         tilEmergencyNote.setVisibility(View.VISIBLE);
         rlPharmacy.setVisibility(View.GONE);
@@ -756,7 +764,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                     }
                     break;
+                    case "EmergencyUpdate":
+                        if (validate("Emergency")) {
 
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,2);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated emergency contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Succesas",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
                     case "Proxy":
                         if (validate("Proxy")) {
 
@@ -932,7 +961,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         else if(screen.equals("Proxy"))
         {
             relation=Relationship[indexValue-1];
-            Integer indexValues = spinnerProxy.getSelectedItemPosition();
+            int indexValues = spinnerProxy.getSelectedItemPosition();
             proxy=proxyType[indexValues-1];
             if (proxy.equals("Primary")) {
                 prox=1;
@@ -968,7 +997,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else return true;
         }
         else if (screen.equals("Physician")) {
-            Integer indexValuex = spinner.getSelectedItemPosition();
+            int indexValuex = spinner.getSelectedItemPosition();
             speciality=healthSpeciality[indexValuex-1];
             fax= txtFax.getText().toString();
             practice_name=txtPracticeName.getText().toString();
