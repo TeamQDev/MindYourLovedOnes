@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/colorWhite"
+    >
+    <RelativeLayout
+        android:id="@+id/rlEmergencyContact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension160dp"
+        android:background="@drawable/rlborder"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:layout_marginBottom="@dimen/dimension15dp"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:elevation="@dimen/dimension10dp"
+        android:gravity="center"
+        >
+         <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+            android:id="@+id/imgConPhoto"
+            android:layout_width="@dimen/dimension65dp"
+            android:layout_height="@dimen/dimension65dp"
+            android:src="@drawable/ic_profile_default"
+            android:background="@color/colorWhite"
+            android:layout_margin="@dimen/dimension8dp"
+             android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/txtConName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension2dp"
+            android:layout_below="@+id/imgConPhoto"
+            android:text="Suzy Jon"
+            android:textSize="@dimen/dimension20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/txtConRelation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtConName"
+            android:text="Mother"
+            android:padding="@dimen/dimension2dp"
+            android:textSize="@dimen/dimension16dp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+</RelativeLayout>
+<!--
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>-->

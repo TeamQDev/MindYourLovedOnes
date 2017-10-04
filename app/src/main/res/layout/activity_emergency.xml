@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dimension15dp"
+    android:background="@color/colorLightBlue"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlue">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorBlue">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                android:src="@drawable/backward_arrow" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:layout_toRightOf="@+id/imgBack"
+                android:text="Medical Emergency Information"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/dimension22dp" />
+
+            <ImageView
+                android:id="@+id/imgDone"
+                android:layout_width="@dimen/dimension30dp"
+                android:layout_height="@dimen/dimension30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension15dp"
+                android:src="@drawable/check_mark"
+                android:visibility="gone" />
+        </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/rlMaps"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/header"
+  android:visibility="gone"
+    >
+    <RelativeLayout
+        android:id="@+id/rlMap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension250dp"
+
+        >
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            ></fragment>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please call to 911 for help!"
+            android:background="@color/colorBlack"
+            android:layout_alignParentTop="true"
+            android:alpha="0.65"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:padding="@dimen/dimension5dp"
+            />
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share_round"
+            android:layout_above="@+id/imgDiection"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+        <ImageView
+            android:id="@+id/imgDiection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/direction_round"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+        <ImageView
+            android:id="@+id/imgOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:layout_below="@+id/imgDiection"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension5dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/rlMap"
+        android:layout_margin="@dimen/dimension15dp"
+        android:background="@drawable/gray_white_border"
+        >
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/ic_user_one" />
+        <!--<ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:src="@drawable/ic_user_one"
+            android:layout_margin="@dimen/dimension5dp"
+            android:layout_centerVertical="true"
+            />-->
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text= "&quot;Having trouble breathing... come help!&quot;"
+            android:textColor="@color/colorMaroon"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgProfile"
+
+            />
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension5dp"
+            android:text="- Suzy Keller"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtMessage"
+
+            android:gravity="top|left"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            />
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aug 06,2017 15:30"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtName"
+            android:drawableLeft="@drawable/time"
+            android:gravity="center"
+            android:drawablePadding="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            android:paddingLeft="@dimen/dimension5dp"
+            />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension5dp"
+            android:text="Lane 30, Long Iceland City, New york"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtDate"
+            android:drawableLeft="@drawable/loc"
+            android:drawablePadding="@dimen/dimension10dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgVideo"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:layout_toRightOf="@+id/txtDate"
+            android:layout_below="@+id/txtName"
+            android:src="@drawable/video"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dimension5dp"
+
+            />
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llNear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/rlMessage"
+        >
+        <RelativeLayout
+            android:id="@+id/rlHospitals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHospitals"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/doctor" />
+
+            <TextView
+                android:id="@+id/txtHospitalNear"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imgHospitals"
+                android:text="Hospital Near Suzy"
+                android:layout_toLeftOf="@+id/imgForword"
+                android:singleLine="true"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/txtHospitalDesc"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHospitalNear"
+                android:layout_toRightOf="@id/imgHospitals"
+                android:text="5 Hospitals within 5 Miles"
+                android:layout_toLeftOf="@+id/imgForword"
+                android:drawableLeft="@drawable/near"
+                android:drawablePadding="@dimen/dimension10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgForword"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/forword_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlEmergencys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgEmergency"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/place" />
+
+            <TextView
+                android:id="@+id/txtEmergencyNear"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:layout_toRightOf="@+id/imgEmergency"
+                android:text="Emergency Services Near Suzy"
+                android:layout_toLeftOf="@+id/imgForword1"
+
+                />
+
+            <TextView
+                android:id="@+id/txtEmergencyDesc"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEmergencyNear"
+                android:layout_toRightOf="@id/imgEmergency"
+                android:text="5 Police stations within 5 Miles"
+                android:layout_toLeftOf="@+id/imgForword1"
+                android:drawableLeft="@drawable/near"
+                android:drawablePadding="@dimen/dimension10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgForword1"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/forword_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlContact"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:layout_below="@+id/rlMaps"
+            >
+        <TextView
+            android:id="@+id/txtContact"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:gravity="center"
+            android:text="Emergency Contact"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension26dp"
+            />
+            <ImageView
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:src="@drawable/addplus"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimension20dp"
+              android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+        <!--<RelativeLayout
+            android:id="@+id/rlEmergency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtContact"
+            android:padding="@dimen/dimension10dp"
+            android:layout_margin="@dimen/dimension5dp"
+            >-->
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/lvEmergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlContact"
+                android:layout_margin="@dimen/dimension5dp"
+                ></com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView>
+        <!--</RelativeLayout>-->
+        <RelativeLayout
+            android:id="@+id/rlPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:layout_below="@+id/lvEmergency"
+            >
+            <TextView
+                android:id="@+id/txtPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:background="@color/colorSkyBlue"
+                android:gravity="center"
+                android:text="Primary Physician"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension26dp"
+                />
+            <ImageView
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:src="@drawable/addplus"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimension20dp"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+        <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            android:id="@+id/lvPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlPrimary"
+            android:layout_margin="@dimen/dimension5dp"
+            ></com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView>
+        <RelativeLayout
+            android:id="@+id/rlOther"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:layout_below="@+id/lvPrimary"
+            >
+            <TextView
+                android:id="@+id/txtOther"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:background="@color/colorSkyBlue"
+                android:gravity="center"
+                android:text="Other Information"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension26dp"
+                />
+            <ImageView
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:src="@drawable/addplus"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimension20dp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlDoctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlOther"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/imgDoctor"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/doctor" />
+
+            <TextView
+                android:id="@+id/txtDoctorHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgDoctor"
+                android:text="Primary Physician" />
+
+            <TextView
+                android:id="@+id/txtDoctor"
+                style="@style/EmergencyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDoctorHeader"
+                android:layout_toRightOf="@id/imgDoctor"
+                android:text="Dr Jane" />
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="8789-879-78"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_toRightOf="@+id/txtDoctor"
+                android:layout_below="@+id/txtDoctorHeader"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                android:drawableLeft="@drawable/phone"
+                android:gravity="center"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlHospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlDoctor"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHosp"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/hospital" />
+
+            <TextView
+                android:id="@+id/txtHospitalHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgHosp"
+                android:text="Preferred Hospital" />
+
+            <TextView
+                android:id="@+id/txtHospital"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHospitalHeader"
+                android:layout_toRightOf="@id/imgHosp"
+                android:text="Apolo hospital, 124 street, New York." />
+        </RelativeLayout>
+
+        <!--Blood-->
+        <RelativeLayout
+            android:id="@+id/rlBlood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHospital"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgBlood"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/blood" />
+
+            <TextView
+                android:id="@+id/txtBloodHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgBlood"
+                android:text="Blood Type" />
+
+            <TextView
+                android:id="@+id/txtBlood"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtBloodHeader"
+                android:layout_toRightOf="@id/imgBlood"
+                android:text="rh A+" />
+        </RelativeLayout>
+        <!--Allergies-->
+        <RelativeLayout
+            android:id="@+id/rlAllergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlBlood"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgAllergy"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/allergies" />
+
+            <TextView
+                android:id="@+id/txtAllergyHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:text="Allergies" />
+
+            <TextView
+                android:id="@+id/txtAllergy"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAllergyHeader"
+                android:layout_toRightOf="@id/imgAllergy"
+                android:text="Asprin, Red bull, Milk Products" />
+        </RelativeLayout>
+
+        <!--Prescription-->
+        <RelativeLayout
+            android:id="@+id/rlPrescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlAllergy"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgPrescription"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/prescription" />
+
+            <TextView
+                android:id="@+id/txtPrescriptionHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgPrescription"
+                android:text="Prescription Drugs" />
+
+            <TextView
+                android:id="@+id/txtPrescription1"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPrescriptionHeader"
+                android:layout_toRightOf="@id/imgPrescription"
+                android:text="Desprin daily twice" />
+
+            <TextView
+                android:id="@+id/txtPrescription2"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPrescription1"
+                android:layout_toRightOf="@id/imgPrescription"
+                android:text="Crosin daily thrice" />
+
+            <TextView
+                android:id="@+id/txtAddPrescription"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPrescription2"
+                android:layout_toRightOf="@id/imgPrescription"
+                android:text="Add scanned copy of prescription"
+                android:textColor="@color/colorGreen" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtAddPrescription"
+                android:layout_toRightOf="@id/imgPrescription"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/receipt" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/receipt" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/receipt" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/add" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlPets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlMedical"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgPet"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/pet" />
+
+            <TextView
+                android:id="@+id/txtPetHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgPet"
+                android:text="Pets at Home" />
+
+            <EditText
+                android:id="@+id/txtPet"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension100dp"
+                android:layout_below="@+id/txtPetHeader"
+                android:layout_toRightOf="@id/imgPet"
+                android:background="@drawable/darkgray_white_border"
+                android:padding="@dimen/dimension10dp"
+                android:layout_margin="@dimen/dimension10dp"
+                android:gravity="top"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlMedical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlPrescription"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgMedical"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/health" />
+
+            <TextView
+                android:id="@+id/txtMedicalHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgMedical"
+                android:text="Medical History" />
+
+            <EditText
+                android:id="@+id/txtMedical"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension100dp"
+                android:layout_below="@+id/txtMedicalHeader"
+                android:layout_toRightOf="@id/imgMedical"
+                android:background="@drawable/darkgray_white_border"
+                android:padding="@dimen/dimension10dp"
+                android:layout_margin="@dimen/dimension10dp"
+                android:gravity="top"
+                />
+        </RelativeLayout>
+        <!-- <TextView
+             android:id="@+id/txtContact"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="@color/colorDarkBlue"
+             android:gravity="center_vertical"
+             android:paddingLeft="@dimen/dimension10dp"
+             android:paddingTop="@dimen/dimension5dp"
+             android:paddingBottom="@dimen/dimension5dp"
+             android:text="Emergency Contact"
+             android:textColor="@color/colorWhite"
+             android:textSize="@dimen/dimension20dp"
+             android:layout_below="@+id/rlPrescription"
+             android:layout_marginTop="@dimen/dimension15dp"
+             android:layout_marginBottom="@dimen/dimension15dp"
+             />-->
+
+
+
+         <!-- <ListView
+             android:id="@+id/lvContact"
+             android:layout_width="match_parent"
+             android:layout_height="300dp"
+             android:layout_below="@+id/txtContact"
+             android:scrollbars="none"
+             android:divider="@null"
+             android:nestedScrollingEnabled="true"
+             android:layout_marginBottom="@dimen/dimension10dp"
+             ></ListView>-->
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:dragEdge="right"
+    app:mode="same_level">
+
+    <FrameLayout
+        android:id="@+id/delete_layout"
+        android:layout_width="@dimen/dimension150dp"
+        android:layout_height="wrap_content"
+        android:background="#ffcc0000"
+        >
+      <TextView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+          android:text="DELETE"
+          android:textSize="@dimen/dimension24dp"
+          android:gravity="center"
+          android:textColor="@color/colorWhite"
+          android:background="#fa694E"
+          />
+        <!--<ImageView
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+             android:src="@drawable/delete_icon"
+            />-->
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimension2dp"
+        android:gravity="center_vertical"
+      >
+
+        <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:src="@drawable/ic_user_one"
+            android:layout_margin="@dimen/dimension10dp"
+            android:layout_centerVertical="true"
+            />
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:layout_toLeftOf="@+id/imgForword"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text= "Cfklj kj ouio "
+                android:textColor="@color/colorDarkBlue"
+                android:textSize="@dimen/dimension20dp"
+                android:paddingLeft="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dimension10dp"
+                android:text= "Primary Proxy"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/dimension17dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:layout_below="@+id/txtName"
+                />
+
+            <TextView
+                android:id="@+id/txtOfficePhone"
+                android:layout_width="@dimen/dimension140dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="8789-879-782"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_toRightOf="@+id/txtTelePhone"
+                android:layout_below="@+id/txtType"
+                android:layout_marginLeft="@dimen/dimension6dp"
+                android:drawableLeft="@drawable/ofcphone"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension5dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="#203,10 Downing Street, los Angeles, California."
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_below="@+id/txtType"
+                android:layout_marginLeft="@dimen/dimension6dp"
+                android:drawableLeft="@drawable/markers"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="8789-879-78"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_below="@+id/txtType"
+                android:drawableLeft="@drawable/mobile"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension5dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                />
+            <TextView
+                android:id="@+id/txtTelePhone"
+                android:layout_width="@dimen/dimension140dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="8789-879-78"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:drawableLeft="@drawable/tele"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension5dp"
+                android:layout_toRightOf="@+id/txtPhone"
+                android:layout_below="@+id/txtType" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgEdit"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:src="@drawable/ic_edit_blue"
+            android:layout_toRightOf="@+id/rlMain"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            />
+
+        <ImageView
+            android:id="@+id/imgForword"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:paddingRight="@dimen/dimension5dp"
+            android:src="@drawable/forword_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorDarkGray"
+            ></View>
+    </RelativeLayout>
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dimension10dp"
+    android:background="@drawable/gray_white_border"
+    >
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="@dimen/dimension100dp"
+        android:layout_height="@dimen/dimension100dp"
+        android:src="@drawable/ic_user_one"
+        android:layout_margin="@dimen/dimension10dp"
+        />
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text= "Caite Charlo"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="@dimen/dimension25dp"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:layout_marginLeft="@dimen/dimension35dp"
+        />
+    <ImageView
+        android:id="@+id/imgEdit"
+        android:layout_width="@dimen/dimension30dp"
+        android:layout_height="@dimen/dimension30dp"
+        android:src="@drawable/ic_edit_blue"
+        android:layout_toRightOf="@+id/txtName"
+        />
+    <TextView
+        android:id="@+id/txtType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="EDIT"
+        android:textColor="@color/colorGreen"
+        android:textSize="@dimen/dimension16dp"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:layout_marginLeft="@dimen/dimension35dp"
+        android:layout_marginBottom="@dimen/dimension5dp"
+        android:paddingLeft="@dimen/dimension6dp"
+        android:layout_below="@+id/txtName"
+        />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension5dp"
+        android:text="#203,10 Downing Street, los Angeles, California."
+        android:textColor="@color/colorDarkGray"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:layout_below="@+id/txtType"
+        android:layout_marginLeft="@dimen/dimension6dp"
+        android:drawableLeft="@drawable/markers"
+        android:gravity="top|left"
+        android:drawablePadding="@dimen/dimension10dp"
+        />
+
+    <TextView
+        android:id="@+id/txtPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension5dp"
+        android:text="8789-879-78"
+        android:textColor="@color/colorDarkGray"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:layout_below="@+id/txtAddress"
+        android:layout_marginLeft="@dimen/dimension6dp"
+        android:drawableLeft="@drawable/phone"
+        android:gravity="top|left"
+        android:drawablePadding="@dimen/dimension10dp"
+        />
+
+   <!-- <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension1dp"
+        android:layout_below="@+id/txtPhone"
+        android:layout_marginTop="@dimen/dimension10dp"
+        android:background="@color/colorDarkGray"
+        ></View>-->
+</RelativeLayout>

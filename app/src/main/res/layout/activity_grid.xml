@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context="com.mindyourelders.MyHealthCareWishes.Connections.GridActivity">
+    <com.riontech.staggeredtextgridview.StaggeredTextGridView
+        custom:horizontalSpace="2dp"
+        custom:verticalSpace="2dp"
+        custom:isFitToScreen="false"
+        android:background="@color/colorWhite"
+        android:id="@+id/gridRelation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1" />
+</RelativeLayout>

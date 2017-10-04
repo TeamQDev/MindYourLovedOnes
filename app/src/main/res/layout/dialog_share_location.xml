@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension5dp"
+        android:text="Share Location"
+        android:textColor="@color/colorDarkBlue"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/dimension24dp"
+        android:layout_marginTop="@dimen/dimension20dp"
+        />
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:src="@drawable/delete"
+        android:layout_alignParentRight="true"
+        />
+    <TextView
+        android:id="@+id/txtSelectRelationship"
+        android:layout_below="@+id/txtTitle"
+        android:textSize="@dimen/dimension18dp"
+        android:textColor="@color/colorBlue"
+        android:text="Martha How r u feeling?"
+        android:layout_marginTop="@dimen/dimension20dp"
+        android:layout_marginLeft="@dimen/dimension22dp"
+        android:layout_marginBottom="@dimen/dimension20dp"
+        android:layout_marginRight="@dimen/dimension5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtselectone"
+        android:layout_toRightOf="@+id/txtSelectRelationship"
+        android:layout_below="@+id/txtTitle"
+        android:textSize="@dimen/dimension18dp"
+        android:textColor="@color/colorGray"
+        android:textStyle="italic"
+        android:text="(Select One)"
+        android:layout_marginTop="@dimen/dimension20dp"
+        android:layout_marginLeft="@dimen/dimension2dp"
+        android:layout_marginRight="@dimen/dimension20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_below="@+id/txtSelectRelationship"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension0.5dp"
+        android:background="@color/colorBlack"
+        android:layout_marginLeft="@dimen/dimension20dp"
+        android:layout_marginRight="@dimen/dimension15dp">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/llSelectRelation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/view1"
+        android:layout_margin="@dimen/dimension15dp"
+        >
+    <LinearLayout
+        android:id="@+id/llOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/btnPain"
+            android:text="Pain"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            ></TextView>
+        <TextView
+            android:id="@+id/btnBreath"
+            android:text="Breathless"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            ></TextView>
+        <TextView
+            android:id="@+id/btnAccident"
+            android:text="Accident"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/btnAnxiety"
+            android:text="Anxiety"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            ></TextView>
+        <TextView
+            android:id="@+id/btnSweating"
+            android:text="Sweating"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            ></TextView>
+        <TextView
+            android:id="@+id/btnSon"
+            android:text="Son"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            style="@style/relationButton"
+            android:visibility="gone"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/btnShowMore"
+            android:text="Show More.."
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dimension10dp"
+            android:layout_margin="@dimen/dimension10dp"
+            ></TextView>
+    </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etComment"
+        style="@style/EmergencyDesc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension100dp"
+        android:layout_below="@+id/llSelectRelation"
+        android:background="@drawable/darkgray_white_border"
+        android:padding="@dimen/dimension10dp"
+        android:layout_margin="@dimen/dimension15dp"
+        android:gravity="top"
+        android:hint="(OPTIONAL) Enter some comments to best describe how you feel."
+        />
+    <ImageView
+        android:id="@+id/imgRecord"
+        android:layout_width="@dimen/dimension60dp"
+        android:layout_height="@dimen/dimension60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/dimension15dp"
+        android:layout_below="@+id/etComment"
+        android:src="@drawable/audio"
+        />
+    <TextView
+        android:id="@+id/txtRecord"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hold to Record"
+    android:textSize="@dimen/dimension18dp"
+        android:textColor="@color/colorDarkGray"
+    android:layout_below="@+id/imgRecord"
+    android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+    />
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leave a voice message"
+        android:textSize="@dimen/dimension17dp"
+        android:layout_below="@+id/txtRecord"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorGray"
+
+        />
+    <LinearLayout
+        android:id="@+id/llfooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/txtDesc"
+        android:layout_marginTop="@dimen/dimension10dp"
+        >
+        <TextView
+            android:id="@+id/txtCancel"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:text="Cancel"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@color/colorBlue"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="@dimen/dimension15dp"
+            />
+
+        <TextView
+            android:id="@+id/txtShare"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:text="Share"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@color/colorBlue"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="@dimen/dimension15dp"
+            />
+    </LinearLayout>
+</RelativeLayout>
+</RelativeLayout>

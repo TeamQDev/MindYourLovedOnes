@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddCardActivity">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorBlue">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="Add Insurance Card"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension22dp" />
+
+        <ImageView
+            android:id="@+id/imgDone"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/check_mark"
+            />
+    </RelativeLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/header"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="Provider Name"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:focusable="false"
+            android:hint="Type"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilType"
+        android:layout_marginLeft="@dimen/dimension30dp"
+        android:layout_marginRight="@dimen/dimension30dp"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:padding="@dimen/dimension5dp">
+        <TextView
+            android:id="@+id/txtFront"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:text="Add Front Photo"
+            android:background="@color/colorLightBlue"
+            android:textColor="@color/colorDarkGray"
+            android:paddingLeft="@dimen/dimension10dp"
+            />
+        <FrameLayout
+            android:id="@+id/flFront"
+            android:layout_width="@dimen/dimension110dp"
+            android:layout_height="@dimen/dimension110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtFront"
+            >
+
+            <ImageView
+                android:id="@+id/imgFrontCard"
+                android:layout_width="@dimen/dimension100dp"
+                android:layout_height="@dimen/dimension100dp"
+                android:src="@drawable/cards" />
+
+            <ImageView
+                android:id="@+id/imgEdit1"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/ic_edit_blue" />
+        </FrameLayout>
+        <TextView
+            android:id="@+id/txtBack"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:text="Add Back Photo"
+            android:background="@color/colorLightBlue"
+            android:textColor="@color/colorDarkGray"
+            android:paddingLeft="@dimen/dimension10dp"
+            android:layout_below="@+id/flFront"
+            />
+        <FrameLayout
+            android:id="@+id/flBack"
+            android:layout_width="@dimen/dimension110dp"
+            android:layout_height="@dimen/dimension110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtBack"
+            >
+
+            <ImageView
+                android:id="@+id/imgBackCard"
+                android:layout_width="@dimen/dimension100dp"
+                android:layout_height="@dimen/dimension100dp"
+                android:src="@drawable/cards" />
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/ic_edit_blue" />
+        </FrameLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

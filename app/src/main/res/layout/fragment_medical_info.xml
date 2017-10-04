@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:custom="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension45dp"
+            android:background="@color/colorSkyBlue"
+            android:gravity="center"
+            android:text="XYZ XYZ"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension22dp" />
+
+        <RelativeLayout
+            android:id="@+id/rlHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtName"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHeight"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/height" />
+
+            <TextView
+                android:id="@+id/txtHeightHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgHeight"
+                android:text="Height" />
+
+            <EditText
+                android:id="@+id/etFt"
+                style="@style/EmergencyDesc"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeightHeader"
+                android:layout_margin="@dimen/dimension8dp"
+                android:layout_toRightOf="@id/imgHeight"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp" />
+
+            <TextView
+                android:id="@+id/txtFt"
+                style="@style/EmergencyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeightHeader"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_toRightOf="@id/etFt"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp"
+                android:text="Ft" />
+
+            <EditText
+                android:id="@+id/etInch"
+                style="@style/EmergencyDesc"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeightHeader"
+                android:layout_margin="@dimen/dimension8dp"
+                android:layout_toRightOf="@id/txtFt"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp" />
+
+            <TextView
+                android:id="@+id/txtInch"
+                style="@style/EmergencyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeightHeader"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_toRightOf="@id/etInch"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp"
+                android:text="Inches" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHeight"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgWeight"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/weight" />
+
+            <TextView
+                android:id="@+id/txtWeightHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgWeight"
+                android:text="Weight" />
+
+            <EditText
+                android:id="@+id/etWeight"
+                style="@style/EmergencyDesc"
+                android:layout_width="@dimen/dimension200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtWeightHeader"
+                android:layout_margin="@dimen/dimension8dp"
+                android:layout_toRightOf="@id/imgWeight"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp" />
+
+            <TextView
+                android:id="@+id/txtPound"
+                style="@style/EmergencyDesc"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtWeightHeader"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_toRightOf="@id/etWeight"
+                android:gravity="top"
+                android:inputType="number"
+                android:padding="@dimen/dimension8dp"
+                android:text="lbs" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlEyeColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlWeight"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgEye"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/eye" />
+
+            <TextView
+                android:id="@+id/txtEyeHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgEye"
+                android:text="Eyes Color" />
+
+            <Spinner
+                android:id="@+id/spinnerEyes"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_below="@+id/txtEyeHeader"
+                android:layout_margin="@dimen/dimension10dp"
+                android:layout_toRightOf="@+id/imgEye"
+                android:popupBackground="@android:color/transparent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlLang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlEyeColor"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgLang"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/lang" />
+
+            <TextView
+                android:id="@+id/txtLangHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgLang"
+                android:text="Language Spoken" />
+
+            <!-- <EditText
+                 android:id="@+id/etPrimary"
+                 style="@style/EmergencyDesc"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/txtLangHeader"
+                 android:layout_margin="@dimen/dimension8dp"
+                 android:layout_toRightOf="@id/imgLang"
+                 android:background="@drawable/darkgray_white_border"
+                 android:gravity="top"
+                 android:hint="Primary"
+                 android:padding="@dimen/dimension8dp" />-->
+            <Spinner
+                android:id="@+id/spinnerPrimary"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_below="@+id/txtLangHeader"
+                android:layout_margin="@dimen/dimension10dp"
+                android:layout_toRightOf="@id/imgLang"
+                android:popupBackground="@android:color/transparent" />
+
+            <EditText
+                android:id="@+id/etAdditional"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerPrimary"
+                android:layout_margin="@dimen/dimension8dp"
+                android:layout_toRightOf="@id/imgLang"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Additional"
+                android:padding="@dimen/dimension8dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtCondition"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension45dp"
+            android:layout_below="@+id/rlLang"
+            android:background="@color/colorSkyBlue"
+            android:gravity="center"
+            android:text="Pre-existing Medical Conditions"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension22dp" />
+
+        <RelativeLayout
+            android:id="@+id/rlAllergis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCondition"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgAllergy"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/allergies" />
+
+            <TextView
+                android:id="@+id/txtAllergyHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:text="Allergies" />
+
+            <ImageView
+                android:id="@+id/imgAddAllergy"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListAllergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAllergyHeader"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:divider="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlEyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlAllergis"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgEyes"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/eye" />
+
+            <TextView
+                android:id="@+id/txtEyesHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgEyes"
+                android:text="Eyes" />
+
+            <RelativeLayout
+                android:id="@+id/rlGlass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEyesHeader"
+                android:layout_toRightOf="@+id/imgEyes">
+
+                <TextView
+                    android:id="@+id/txtGlass"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Glasses" />
+
+                <ToggleButton
+                    android:id="@+id/tbGlass"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlLense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlGlass"
+                android:layout_toRightOf="@+id/imgEyes">
+
+                <TextView
+                    android:id="@+id/txtLense"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Contact Lenses" />
+
+                <ToggleButton
+                    android:id="@+id/tbLense"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTeeth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlEyes"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgTeeth"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/teeth" />
+
+            <TextView
+                android:id="@+id/txtTeethHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgTeeth"
+                android:text="Teeth" />
+
+            <RelativeLayout
+                android:id="@+id/rlFalse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTeethHeader"
+                android:layout_toRightOf="@+id/imgTeeth">
+
+                <TextView
+                    android:id="@+id/txtFalse"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="False" />
+
+                <ToggleButton
+                    android:id="@+id/tbFalse"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlImplant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFalse"
+                android:layout_toRightOf="@+id/imgTeeth">
+
+                <TextView
+                    android:id="@+id/txtImplants"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Implants" />
+
+                <ToggleButton
+                    android:id="@+id/tbImplants"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlAides"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlTeeth"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgAides"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/aide" />
+
+            <TextView
+                android:id="@+id/txtAidesHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgAides"
+                android:text="Hearing" />
+
+            <RelativeLayout
+                android:id="@+id/rlHearingAid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAidesHeader"
+                android:layout_toRightOf="@+id/imgAides">
+
+                <TextView
+                    android:id="@+id/txtHearingAid"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Hearing Aids" />
+
+                <ToggleButton
+                    android:id="@+id/tbHearingAid"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlImplants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlAides"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgImplants"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/implants" />
+
+            <TextView
+                android:id="@+id/txtImplantsHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgImplants"
+                android:text="Medical Implants" />
+
+            <ImageView
+                android:id="@+id/imgAddImplants"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListImplants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtImplantsHeader"
+                android:layout_toRightOf="@+id/imgImplants"
+                android:divider="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlHospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlImplants"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHospital"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/hospital" />
+
+            <TextView
+                android:id="@+id/txtHospitalHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgHospital"
+                android:text="Preferred Hospital" />
+
+            <ImageView
+                android:id="@+id/imgAddHospital"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListHospital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHospitalHeader"
+                android:layout_toRightOf="@+id/imgHospital"
+                android:divider="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlBlood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHospital"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgBlood"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/bloodtype" />
+
+            <TextView
+                android:id="@+id/txtBloodHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgBlood"
+                android:text="Blood Type" />
+
+            <Spinner
+                android:id="@+id/spinnerBlood"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_below="@+id/txtBloodHeader"
+                android:layout_margin="@dimen/dimension10dp"
+                android:layout_toRightOf="@+id/imgBlood"
+                android:popupBackground="@android:color/transparent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlBlood"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHistory"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/history" />
+
+            <TextView
+                android:id="@+id/txtHistoryHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgHistory"
+                android:text="Medical History" />
+
+            <ImageView
+                android:id="@+id/imgAddHistory"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHistoryHeader"
+                android:layout_toRightOf="@+id/imgHistory"
+                android:divider="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlDonor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHistory"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgDonor"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/donor" />
+
+            <TextView
+                android:id="@+id/txtDonorHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgDonor"
+                android:text="Organ Donor" />
+
+            <RelativeLayout
+                android:id="@+id/rlRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDonorHeader"
+                android:layout_toRightOf="@+id/imgDonor">
+
+                <RadioGroup
+                    android:id="@+id/rgDonor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:text="Yes"
+                        android:textSize="@dimen/dimension18dp"
+
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rbNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="No"
+                        android:textSize="@dimen/dimension18dp" />
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlYes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDonorHeader"
+                android:layout_toRightOf="@+id/imgDonor"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtYes"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Yes" />
+
+                <ToggleButton
+                    android:id="@+id/tbYes"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlYes"
+                android:layout_toRightOf="@+id/imgDonor"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtNo"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="No" />
+
+                <ToggleButton
+                    android:id="@+id/tbNo"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtNote"
+                style="@style/EmergencyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlRadio"
+                android:layout_toRightOf="@+id/imgDonor"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dimension5dp"
+                android:text="If yes see Drivers Lic or Health Care Proxy
+Transplant, Therapy, Research, Education
+"
+                android:textSize="@dimen/dimension17dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlDonor"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgPet"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/pet" />
+
+            <TextView
+                android:id="@+id/txtPetHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgPet"
+                android:text="Pet's at Home" />
+
+            <EditText
+                android:id="@+id/etPet"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPetHeader"
+                android:layout_margin="@dimen/dimension8dp"
+                android:layout_toRightOf="@id/imgPet"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:padding="@dimen/dimension8dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

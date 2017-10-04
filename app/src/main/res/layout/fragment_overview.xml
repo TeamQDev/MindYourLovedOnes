@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlue">
+
+        <TextView
+            android:id="@+id/txtdocuments"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:gravity="center"
+            android:text="Advance care plan documents"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension26dp" />
+
+        <RelativeLayout
+            android:id="@+id/rlADM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtdocuments"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension1dp"
+            >
+
+            <TextView
+                android:id="@+id/txtADM"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:text="ADM" />
+
+            <ImageView
+                android:id="@+id/imgADMTick"
+                style="@style/overviewIcon"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:layout_below="@+id/txtADM"
+                android:background="@color/colorGray"></View>
+
+            <TextView
+                style="@style/overviewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:text="Advance Medical Directive /Living Will and /or Proxy" />
+        </RelativeLayout>
+
+        <!--DNR-->
+
+        <RelativeLayout
+            android:id="@+id/rlDNR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlADM"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension1dp"
+            >
+
+            <TextView
+                android:id="@+id/txtDNR"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:text="DNR Order Signed by Physician" />
+
+            <ImageView
+                android:id="@+id/imgDNRTick"
+                style="@style/overviewIcon"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:layout_below="@+id/txtDNR"
+                android:background="@color/colorGray"></View>
+
+            <TextView
+                style="@style/overviewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view2"
+                android:text="Any type of travel/portable DNR" />
+        </RelativeLayout>
+
+        <!--POLST-->
+
+        <RelativeLayout
+            android:id="@+id/rlPOLST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlDNR"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension1dp"
+            >
+
+            <TextView
+                android:id="@+id/txtPOLST"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:text="POLST" />
+
+            <ImageView
+                android:id="@+id/imgPOLSTTick"
+                style="@style/overviewIcon"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:layout_below="@+id/txtPOLST"
+                android:background="@color/colorGray"></View>
+
+            <TextView
+                style="@style/overviewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view3"
+                android:text="Physicians order for Life-Sustaining Treatment Signed by the physician" />
+        </RelativeLayout>
+
+
+        <!--Anatomical Gift-->
+
+        <RelativeLayout
+            android:id="@+id/rlGIFT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlPOLST"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension1dp">
+
+            <TextView
+                android:id="@+id/txtGIFT"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:text="Anatomical Gift" />
+
+            <ImageView
+                android:id="@+id/imgGiftTick"
+                style="@style/overviewIcon"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:layout_below="@+id/txtGIFT"
+                android:background="@color/colorGray"></View>
+
+            <TextView
+                style="@style/overviewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view4"
+                android:text="Whole Body or Organ/Tissue donor" />
+        </RelativeLayout>
+
+
+        <!--Documents Location-->
+
+        <RelativeLayout
+            android:id="@+id/rlStorage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlGIFT"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension1dp">
+
+            <TextView
+                android:id="@+id/txtStorage"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:text="Where are they located?"
+                android:textColor="@color/colorGreen" />
+
+            <TextView
+                android:id="@+id/txtStoragePhone"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:layout_below="@+id/txtStorage"
+                android:text="On my Smartphone" />
+
+            <ImageView
+                android:id="@+id/imgPhoneTick"
+                style="@style/overviewIcon"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp"
+                android:layout_below="@id/txtStorage" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:layout_below="@+id/txtStoragePhone"
+                android:background="@color/colorGray"></View>
+
+            <TextView
+                android:id="@+id/txtSecondStorage"
+                style="@style/overviewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension60dp"
+                android:layout_below="@+id/view5"
+                android:text="Where else to find them?"
+                android:textColor="@color/colorGreen" />
+             <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/txtSecondStorage"
+                 android:background="@color/colorWhite"
+                 >
+                 <EditText
+                     android:id="@+id/etStorage"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/gray_white_border"
+                     android:gravity="center_vertical"
+                     android:hint="E.g. Office Closet, in my study drawer."
+                     android:padding="@dimen/dimension10dp"
+                     android:textColor="@color/colorBlack"
+                     android:textSize="@dimen/dimension18dp"
+                     android:layout_marginLeft="@dimen/dimension10dp"
+                     android:layout_marginRight="@dimen/dimension10dp"
+                     android:layout_marginBottom="@dimen/dimension25dp"
+                     />
+             </RelativeLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtProxy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorSkyBlue"
+            android:gravity="center"
+            android:text="Proxies"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension26dp"
+            android:layout_below="@+id/rlStorage"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            />
+        <LinearLayout
+            android:id="@+id/llProxy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtProxy"
+            android:orientation="vertical"
+            ></LinearLayout>
+<ListView
+    android:id="@+id/lvProxy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/llProxy"
+    android:scrollbars="none"
+  android:divider="@null"
+    ></ListView>
+    </RelativeLayout>
+
+</ScrollView>

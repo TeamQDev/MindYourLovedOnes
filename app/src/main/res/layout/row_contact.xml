@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >-->
+        <RelativeLayout
+            android:id="@+id/rlCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
+            android:padding="@dimen/dimension5dp"
+            android:gravity="center_vertical"
+            >
+
+            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+                android:id="@+id/imgConPhoto"
+                android:layout_width="@dimen/dimension80dp"
+                android:layout_height="@dimen/dimension80dp"
+                android:src="@drawable/ic_profile_default"
+                android:background="@color/colorLightBlue"
+                />
+
+            <TextView
+                android:id="@+id/txtConName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgConPhoto"
+                android:text="Suzy Jon"
+                android:layout_toLeftOf="@+id/imgForword"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                />
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension2dp"
+                android:text="789564132"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_toLeftOf="@+id/imglink"
+                android:layout_below="@+id/txtConName"
+                android:drawableLeft="@drawable/phone"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:layout_toRightOf="@id/imgConPhoto"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension2dp"
+                android:text="suzy.jkd@gmail.com"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_toLeftOf="@+id/imglink"
+                android:layout_below="@+id/txtPhone"
+                android:drawableLeft="@drawable/email"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:layout_toRightOf="@id/imgConPhoto"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                android:layout_marginTop="@dimen/dimension2dp"
+                ></TextView>
+          <!--  <ImageView
+                android:id="@+id/imgForword"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/ic_untick"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension10dp"
+                />-->
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_below="@+id/rlCon"
+            ></View>
+
+    </RelativeLayout>
+<!--
+</RelativeLayout>-->

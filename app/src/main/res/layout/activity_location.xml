@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.LocationActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorBlue"
+        >
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="Suzy needs your HELP!"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension21dp"
+
+            />
+
+        <!--  <ImageView
+              android:id="@+id/imgDone"
+              android:layout_width="@dimen/dimension25dp"
+              android:layout_height="@dimen/dimension25dp"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="@dimen/dimension15dp"
+              android:src="@drawable/check_mark"
+              />-->
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlMap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension250dp"
+        android:layout_below="@+id/header"
+        >
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+       ></fragment>
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share_round"
+            android:layout_above="@+id/imgDiection"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+        <ImageView
+            android:id="@+id/imgDiection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/direction_round"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+        <ImageView
+            android:id="@+id/imgOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:layout_below="@+id/imgDiection"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/rlMap"
+        android:layout_margin="@dimen/dimension15dp"
+        android:background="@drawable/gray_white_border"
+        >
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/ic_user_one" />
+        <!--<ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:src="@drawable/ic_user_one"
+            android:layout_margin="@dimen/dimension5dp"
+            android:layout_centerVertical="true"
+            />-->
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "Having trouble breathing... come help!"
+            android:textColor="@color/colorMaroon"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            />
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension5dp"
+            android:text="- Suzy Keller"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtMessage"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:gravity="top|left"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            />
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aug 06,2017 15:30"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtName"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:drawableLeft="@drawable/time"
+            android:gravity="center"
+            android:drawablePadding="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            android:paddingLeft="@dimen/dimension5dp"
+            />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension5dp"
+            android:text="Lane 30, Long Iceland City, New york"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:drawableLeft="@drawable/loc"
+            android:drawablePadding="@dimen/dimension10dp"
+
+            />
+
+
+        <ImageView
+            android:id="@+id/imgVideo"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:layout_toRightOf="@+id/txtDate"
+            android:layout_below="@+id/txtName"
+            android:src="@drawable/video"
+           android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dimension5dp"
+
+            />
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llNear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/rlMessage"
+        >
+        <RelativeLayout
+            android:id="@+id/rlHosp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgHosp"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/doctor" />
+
+            <TextView
+                android:id="@+id/txtHospNear"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgHosp"
+                android:text="Hospital Near Suzy"
+                android:layout_toLeftOf="@+id/imgForword"
+                android:singleLine="true"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/txtHospDesc"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHospNear"
+                android:layout_toRightOf="@id/imgHosp"
+                android:text="5 Hospitals within 5 Miles"
+                android:layout_toLeftOf="@+id/imgForword"
+                android:drawableLeft="@drawable/near"
+                android:drawablePadding="@dimen/dimension10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgForword"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/forword_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlEmergency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgEmergency"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/doctor" />
+
+            <TextView
+                android:id="@+id/txtEmergencyNear"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgEmergency"
+                android:text="Hospital Near Suzy"
+                android:layout_toLeftOf="@+id/imgForword1"
+                android:singleLine="true"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/txtEmergencyDesc"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEmergencyNear"
+                android:layout_toRightOf="@id/imgEmergency"
+                android:text="5 Hospitals within 5 Miles"
+                android:layout_toLeftOf="@+id/imgForword1"
+                android:drawableLeft="@drawable/near"
+                android:drawablePadding="@dimen/dimension10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgForword1"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/forword_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+</ScrollView>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MindYourElders</string>
+    <string name="headerText">jhdfs kljsd fkjkfds kljjfds kljuodfs kl</string>
+    <string name="PolicyText">By creating an account, you agree to MHCW <a href="http://www.myhealthcarewishes.com"><b>Private Policy</b></a> and <a href="http://www.myhealthcarewishes.com"><b>Terms of Use</b></a>.</string>
+
+    <!-- <string-array name="specialist_arrays">
+        <item>Insurance</item>
+        <item>Doctors</item>
+        <item>Health Aides</item>
+        <item>Finance and Legal</item>
+    </string-array>-->
+
+</resources>

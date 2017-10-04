@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewEventActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorBlue">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="Emergency Event Notes"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension22dp" />
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/check_mark"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+<TextView
+    android:id="@+id/txtDate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/dimension18dp"
+    android:layout_below="@+id/header"
+    android:text="jkehfjksd "
+    android:padding="@dimen/dimension10dp"
+    android:layout_marginLeft="@dimen/dimension20dp"
+
+    />
+    <EditText
+    android:id="@+id/etNote"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="@dimen/dimension18dp"
+        android:layout_below="@+id/txtDate"
+        android:layout_margin="@dimen/dimension15dp"
+        android:layout_above="@+id/rlBottom"
+        android:background="@drawable/gray_white_corner_border"
+        android:gravity="top"
+        android:padding="@dimen/dimension10dp"
+    />
+    <RelativeLayout
+        android:id="@+id/rlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension10dp"
+        android:layout_margin="13dp"
+        android:layout_alignParentBottom="true"
+      >
+    <ImageView
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:src="@drawable/deletes"
+        android:scaleType="fitXY"
+        />
+    <ImageView
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:src="@drawable/edit"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        />
+    </RelativeLayout>
+</RelativeLayout>

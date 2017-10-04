@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    >
+    <RelativeLayout
+        android:id="@+id/rlEmergencyContact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension160dp"
+        android:background="@drawable/rlborder"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:layout_marginBottom="@dimen/dimension15dp"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:elevation="@dimen/dimension10dp"
+        android:gravity="center"
+        >
+         <ImageView
+            android:id="@+id/imgConPhoto"
+            android:layout_width="@dimen/dimension65dp"
+            android:layout_height="@dimen/dimension65dp"
+            android:src="@drawable/add_square"
+            android:background="@color/colorLightBlue"
+            android:layout_margin="@dimen/dimension8dp"
+             android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/txtConName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimension2dp"
+            android:layout_below="@+id/imgConPhoto"
+            android:text="Add Connection"
+            android:textSize="@dimen/dimension20dp"
+            android:textColor="@color/colorDarkGray"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
+<!--
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>-->

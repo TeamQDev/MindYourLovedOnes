@@ -1,0 +1,111 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base" />
+
+    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="SplashButton">
+        <item name="android:paddingLeft">@dimen/dimension10dp</item>
+        <item name="android:paddingRight">@dimen/dimension10dp</item>
+        <item name="android:paddingTop">@dimen/dimension15dp</item>
+        <item name="android:paddingBottom">@dimen/dimension15dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension20dp</item>
+    </style>
+
+
+    <style name="overviewCategory">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension22dp</item>
+        <item name="android:padding">@dimen/dimension10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
+    <style name="overviewIcon">
+        <item name="android:src">@drawable/ic_untick</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/dimension5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/dimension10dp</item>
+    </style>
+
+    <style name="overviewDesc">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension18dp</item>
+        <item name="android:padding">@dimen/dimension10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
+
+    </style>
+    <style name="EmergencyCategory">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension20dp</item>
+        <item name="android:padding">@dimen/dimension5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+    <style name="EmergencyDesc">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension18dp</item>
+        <item name="android:padding">@dimen/dimension5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
+
+    </style>
+
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorLightBlue</item>
+        <item name="colorButtonNormal">@color/colorBlue</item>
+    </style>
+
+    <style name="relationButton">
+    <item name="android:background">@drawable/lightgray_gray_border</item>
+    <item name="android:textSize">@dimen/dimension18dp</item>
+    <item name="android:padding">@dimen/dimension10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/dimension5dp</item>
+    </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+</resources>

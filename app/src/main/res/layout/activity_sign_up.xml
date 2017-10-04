@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+    tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:src="@drawable/ic_back" />
+
+        <FrameLayout
+            android:id="@+id/flProfile"
+            android:layout_width="@dimen/dimension110dp"
+            android:layout_height="@dimen/dimension110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimension40dp">
+
+            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/dimension100dp"
+                android:layout_height="@dimen/dimension100dp"
+                android:src="@drawable/ic_profile_default" />
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/ic_edit_blue" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/txtLoginVia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimension5dp"
+            android:padding="@dimen/dimension10dp"
+            android:text="Feeling Lazy? Sign up via"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/dimension18dp" />
+
+        <LinearLayout
+            android:id="@+id/llLoginVia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLoginVia"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgFbSignup"
+                android:layout_width="@dimen/dimension50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension30dp"
+                android:layout_weight="1"
+                android:padding="@dimen/dimension10dp"
+                android:src="@drawable/ic_fb" />
+
+            <View
+                android:layout_width="@dimen/dimension0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"></View>
+
+            <ImageView
+                android:id="@+id/imgGoogleSignup"
+                android:layout_width="@dimen/dimension50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimension30dp"
+                android:layout_weight="1"
+                android:padding="@dimen/dimension10dp"
+                android:src="@drawable/ic_gplu" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llLoginVia"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilName"
+
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilAddres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmail"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:maxLines="2"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilAddres"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:drawableRight="@drawable/ic_droupdown_arrow"
+                android:hint="Country"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilAddres"
+            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginRight="@dimen/dimension35dp"
+            app:ms_arrowColor="@color/colorBlue"
+            app:ms_arrowSize="16dp"
+            app:ms_floatingLabelText="Country"
+            app:ms_hint="hint"
+            app:ms_multiline="true"
+            custom:ms_floatingLabelColor="@color/colorBlue"
+            custom:ms_hintColor="@color/colorDarkGray"
+            android:visibility="gone"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone"
+            >
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilBdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tilPhone"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtBdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Birth Date"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp"
+                android:visibility="gone"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmail"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            app:passwordToggleEnabled="true">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:drawableRight="@drawable/show"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+        <!-- <LinearLayout
+             android:id="@+id/llPassword"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_below="@+id/tilBdate"
+             >
+         <android.support.design.widget.TextInputLayout
+             android:id="@+id/tilPassword"
+             android:layout_width="@dimen/dimension0dp"
+             android:layout_height="wrap_content"
+             android:paddingBottom="@dimen/dimension8dp"
+             android:paddingLeft="@dimen/dimension30dp"
+             android:layout_weight="75"
+             >
+             &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+             <AutoCompleteTextView
+                 android:id="@+id/txtPassword"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Password"
+                 android:inputType="textPassword"
+                 android:maxLength="10"
+                 android:maxLines="1"
+                 android:singleLine="true"
+                 android:textColor="@color/colorPrimaryDark"
+                 android:textSize="@dimen/dimension20dp"
+                 />
+         </android.support.design.widget.TextInputLayout>
+
+             <android.support.design.widget.TextInputLayout
+                 android:id="@+id/tilPasswordShow"
+                 android:layout_width="@dimen/dimension0dp"
+                 android:layout_height="wrap_content"
+                 android:paddingBottom="@dimen/dimension8dp"
+                 android:paddingRight="@dimen/dimension30dp"
+                 android:layout_weight="30"
+                 >
+                 &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+                 <TextView
+                     android:id="@+id/txtPasswordShow"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="SHOW"
+                     android:gravity="right"
+                     android:maxLength="10"
+                     android:maxLines="1"
+                     android:singleLine="true"
+                     android:textColor="@color/colorPrimaryDark"
+                     android:textSize="@dimen/dimension20dp"
+                     />
+             </android.support.design.widget.TextInputLayout>
+         </LinearLayout>-->
+       <!-- <TextView
+            android:id="@+id/txtPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilPassword"
+            android:layout_marginLeft="@dimen/dimension60dp"
+            android:layout_marginRight="@dimen/dimension60dp"
+            android:layout_marginTop="@dimen/dimension30dp"
+            android:gravity="center"
+            android:text="@string/PolicyText"
+            android:textColor="@color/colorGrayPolicy"
+            android:textSize="@dimen/dimension16dp" />-->
+
+        <TextView
+            android:id="@+id/txtPolicy1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimension30dp"
+            android:text="By creating an account, you agree to MHCW "
+            android:textColor="@color/colorGrayPolicy"
+            android:textSize="@dimen/dimension16dp" />
+
+        <RelativeLayout
+            android:id="@+id/rlPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPolicy1"
+            android:gravity="center_horizontal"
+
+            >
+
+            <TextView
+                android:id="@+id/txtPolicy2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Private Policy "
+                android:textColor="@color/colorGrayPolicy"
+                android:textSize="@dimen/dimension16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPolicy3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/txtPolicy2"
+                android:text="and "
+                android:textColor="@color/colorGrayPolicy"
+                android:textSize="@dimen/dimension16dp" />
+
+            <TextView
+                android:id="@+id/txtPolicy4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/txtPolicy3"
+                android:text="Terms of Use"
+                android:textColor="@color/colorGrayPolicy"
+                android:textSize="@dimen/dimension16dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_below="@+id/rlPolicy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/dimension30dp"
+            android:layout_marginRight="@dimen/dimension30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/selector_white_gray"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimension24dp" />
+
+        <LinearLayout
+            android:id="@+id/llFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSignUp"
+            android:layout_marginBottom="@dimen/dimension10dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtLogin"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Have Account? Log In"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp" />
+
+            <TextView
+                android:id="@+id/txtForgotPassword"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Forgot your password?"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

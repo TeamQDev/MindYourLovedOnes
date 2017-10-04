@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLightBlue"
+    >
+
+    <TextView
+        android:id="@+id/txtMedicine"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7/08/1235 45:52"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimension18dp"
+        android:background="@color/colorLightBlue"
+        android:drawableLeft="@drawable/dot"
+        android:drawablePadding="@dimen/dimension10dp"
+        />
+    <TextView
+        android:id="@+id/txtDose"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDoctor"
+        android:text="7/08/1235 45:52"
+        android:textColor="@color/colorDarkGray"
+        android:textSize="@dimen/dimension18dp"
+        android:background="@color/colorLightBlue"
+       android:layout_marginLeft="@dimen/dimension20dp"
+        />
+<View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimension1dp"
+    android:background="@color/colorWhite"
+    >
+
+</View>
+</LinearLayout>

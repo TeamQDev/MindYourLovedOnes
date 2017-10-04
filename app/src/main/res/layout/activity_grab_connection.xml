@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity"
+    android:background="@color/colorLightBlue"
+    >
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorBlue"
+        >
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension35dp"
+            android:layout_height="@dimen/dimension45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="Grab Contact (Manual)"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension21dp"
+            />
+
+         <ImageView
+              android:id="@+id/imgRefresh"
+              android:layout_width="@dimen/dimension30dp"
+              android:layout_height="@dimen/dimension30dp"
+             android:layout_marginRight="16dp"
+              android:src="@drawable/refresh"
+             android:layout_centerVertical="true"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentEnd="true"
+             android:layout_marginEnd="16dp"
+             android:visibility="gone"
+             />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llGrab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension50dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/header"
+        android:background="@color/colorLightBlue"
+        >
+        <TextView
+            android:id="@+id/txtNew"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="match_parent"
+           android:textColor="@color/colorGray"
+            android:background="@color/colorLightBlue"
+            android:layout_weight="1"
+            android:text="NEW"
+            android:textSize="@dimen/dimension20dp"
+            android:gravity="center"
+            android:layout_margin="@dimen/dimension1dp"
+            />
+        <ImageView
+            android:id="@+id/imgContact"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_person_white"
+            android:layout_weight="1"
+            android:background="@color/colorGray"
+            android:layout_margin="@dimen/dimension1dp"
+            android:scaleType="center"
+
+            />
+
+        <ImageView
+            android:id="@+id/imgFb"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/fb"
+            android:layout_weight="1"
+            android:background="@color/colorGray"
+            android:layout_margin="@dimen/dimension1dp"
+            android:scaleType="center"
+            />
+        <ImageView
+            android:id="@+id/imgGoogle"
+            android:layout_width="@dimen/dimension0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/g"
+            android:layout_weight="1"
+            android:background="@color/colorGray"
+            android:layout_margin="@dimen/dimension1dp"
+            android:scaleType="center"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llGrab"
+        >
+
+    </RelativeLayout>
+</RelativeLayout>

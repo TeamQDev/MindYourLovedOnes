@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+    tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
+
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+       <!--  <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:background="@color/colorBlue"
+            >
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimension15dp"
+                android:src="@drawable/backward_arrow" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:layout_toRightOf="@+id/imgBack"
+                android:text="Individual Contact"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/dimension22dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgDone"
+                android:layout_width="@dimen/dimension30dp"
+                android:layout_height="@dimen/dimension30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension15dp"
+                android:src="@drawable/check_mark"
+                />
+        </RelativeLayout>-->
+
+        <FrameLayout
+            android:id="@+id/flProfile"
+            android:layout_width="@dimen/dimension110dp"
+            android:layout_height="@dimen/dimension110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimension40dp"
+
+            >
+
+            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/dimension100dp"
+                android:layout_height="@dimen/dimension100dp"
+                android:src="@drawable/ic_profile_default" />
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/ic_edit_blue" />
+        </FrameLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flProfile"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilName"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilAddres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmail"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilAddres"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:drawableRight="@drawable/ic_droupdown_arrow"
+                android:hint="Country"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilAddres"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/tilHomePhone"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/tilPhone"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp">
+           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+           <AutoCompleteTextView
+               android:id="@+id/txtHomePhone"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Home Phone"
+               android:inputType="phone"
+               android:maxLength="12"
+               android:maxLines="1"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension2dp"
+               android:singleLine="true"
+               android:textColor="@color/colorPrimaryDark"
+               android:textSize="@dimen/dimension20dp" />
+       </android.support.design.widget.TextInputLayout>
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/tilWorkPhone"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/tilHomePhone"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp">
+           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+           <AutoCompleteTextView
+               android:id="@+id/txtWorkPhone"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Work Phone"
+               android:inputType="phone"
+               android:maxLength="12"
+               android:maxLines="1"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension2dp"
+               android:singleLine="true"
+               android:textColor="@color/colorPrimaryDark"
+               android:textSize="@dimen/dimension20dp" />
+       </android.support.design.widget.TextInputLayout>
+       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+           android:id="@+id/spinnerRelation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/dimension35dp"
+           android:layout_marginRight="@dimen/dimension35dp"
+           app:ms_arrowColor="@color/colorBlue"
+           app:ms_arrowSize="16dp"
+           app:ms_floatingLabelText="Relation"
+           app:ms_hint="hint"
+           app:ms_multiline="true"
+           custom:ms_floatingLabelColor="@color/colorBlue"
+           custom:ms_hintColor="@color/colorDarkGray"
+           android:layout_below="@+id/tilWorkPhone"
+           android:visibility="gone"
+           />
+       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+           android:id="@+id/spinner"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/tilPhone"
+           android:layout_marginLeft="@dimen/dimension35dp"
+           android:layout_marginRight="@dimen/dimension35dp"
+           app:ms_arrowColor="@color/colorBlue"
+           app:ms_arrowSize="16dp"
+           app:ms_floatingLabelText="Country"
+           app:ms_hint="hint"
+           app:ms_multiline="true"
+           custom:ms_floatingLabelColor="@color/colorBlue"
+           custom:ms_hintColor="@color/colorDarkGray"
+           android:visibility="gone"
+           />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilBdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spinner"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone"
+            >
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtBdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Birth Date"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+
+       <!-- <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilBdate"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            app:passwordToggleEnabled="true">
+            &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+            <AutoCompleteTextView
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:drawableRight="@drawable/show"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>-->
+        <!-- <LinearLayout
+             android:id="@+id/llPassword"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_below="@+id/tilBdate"
+             >
+         <android.support.design.widget.TextInputLayout
+             android:id="@+id/tilPassword"
+             android:layout_width="@dimen/dimension0dp"
+             android:layout_height="wrap_content"
+             android:paddingBottom="@dimen/dimension8dp"
+             android:paddingLeft="@dimen/dimension30dp"
+             android:layout_weight="75"
+             >
+             &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+             <AutoCompleteTextView
+                 android:id="@+id/txtPassword"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Password"
+                 android:inputType="textPassword"
+                 android:maxLength="10"
+                 android:maxLines="1"
+                 android:singleLine="true"
+                 android:textColor="@color/colorPrimaryDark"
+                 android:textSize="@dimen/dimension20dp"
+                 />
+         </android.support.design.widget.TextInputLayout>
+
+             <android.support.design.widget.TextInputLayout
+                 android:id="@+id/tilPasswordShow"
+                 android:layout_width="@dimen/dimension0dp"
+                 android:layout_height="wrap_content"
+                 android:paddingBottom="@dimen/dimension8dp"
+                 android:paddingRight="@dimen/dimension30dp"
+                 android:layout_weight="30"
+                 >
+                 &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+                 <TextView
+                     android:id="@+id/txtPasswordShow"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="SHOW"
+                     android:gravity="right"
+                     android:maxLength="10"
+                     android:maxLines="1"
+                     android:singleLine="true"
+                     android:textColor="@color/colorPrimaryDark"
+                     android:textSize="@dimen/dimension20dp"
+                     />
+             </android.support.design.widget.TextInputLayout>
+         </LinearLayout>-->
+        <!-- <TextView
+             android:id="@+id/txtPolicy"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tilPassword"
+             android:layout_marginLeft="@dimen/dimension60dp"
+             android:layout_marginRight="@dimen/dimension60dp"
+             android:layout_marginTop="@dimen/dimension30dp"
+             android:gravity="center"
+             android:text="@string/PolicyText"
+             android:textColor="@color/colorGrayPolicy"
+             android:textSize="@dimen/dimension16dp" />-->
+
+
+    </RelativeLayout>
+</ScrollView>

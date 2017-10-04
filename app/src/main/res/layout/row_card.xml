@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+   android:padding="@dimen/dimension10dp"
+    >
+    <ImageView
+        android:id="@+id/imgForword"
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dimension5dp"
+        android:src="@drawable/forword_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dimension5dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlProvider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/txtProvider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/dimension5dp"
+            android:text="Provider Name :"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/dimension18dp" />
+        <TextView
+            android:id="@+id/txtProviderValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/dimension5dp"
+            android:layout_toRightOf="@+id/txtProvider"
+            android:text="Provider Name"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension18dp" />
+        <TextView
+            android:id="@+id/txtType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtProvider"
+            android:padding="@dimen/dimension5dp"
+            android:text="Type :"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/dimension18dp" />
+        <TextView
+            android:id="@+id/txtTypeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtProvider"
+            android:layout_toRightOf="@+id/txtType"
+            android:padding="@dimen/dimension5dp"
+            android:text="Type"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="@dimen/dimension18dp" />
+    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imgCard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension30dp"
+                android:layout_marginRight="@dimen/dimension30dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:src="@drawable/treat"
+                android:layout_below="@+id/rlProvider"
+                />
+    <LinearLayout
+        android:id="@+id/llDot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_below="@+id/imgCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimension10dp"
+    >
+    <ImageView
+        android:id="@+id/imgFront"
+        android:layout_width="@dimen/dimension25dp"
+        android:layout_height="@dimen/dimension25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/dimension10dp"
+        android:layout_weight="4"
+        android:src="@drawable/blue_dot"
+        />
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:src="@drawable/white_dot"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/llDot"
+        android:layout_margin="@dimen/dimension10dp"
+></View>
+</RelativeLayout>

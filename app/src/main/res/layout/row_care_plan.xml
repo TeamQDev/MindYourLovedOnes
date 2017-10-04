@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+    >
+    <RelativeLayout
+        android:id="@+id/rlDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:layout_marginTop="@dimen/dimension10dp"
+        android:layout_marginBottom="@dimen/dimension10dp"
+
+        android:background="@drawable/gray_white_border"
+        android:padding="@dimen/dimension5dp">
+
+        <ImageView
+            android:id="@+id/imgDocType"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/word" />
+
+        <TextView
+            android:id="@+id/txtDocHeader"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_toRightOf="@+id/imgDocType"
+            android:text="ADM"
+            android:layout_toLeftOf="@+id/imgForword"
+            android:singleLine="true"
+            android:ellipsize="end"
+            />
+        <!--<TextView
+            android:id="@+id/txtDocDesc"
+            style="@style/EmergencyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDocHeader"
+            android:layout_toRightOf="@id/imgDocType"
+            android:text="This is the ADM Document"
+            android:layout_toLeftOf="@+id/imgForword"
+            />-->
+
+        <TextView
+            android:id="@+id/txtDocTime"
+            style="@style/EmergencyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDocHeader"
+            android:layout_toRightOf="@id/imgDocType"
+            android:text="08/09/2017  14:00"
+            android:layout_toLeftOf="@+id/imgForword"
+            />
+
+        <ImageView
+            android:id="@+id/imgForword"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/forword_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension5dp"
+            />
+    </RelativeLayout>
+</RelativeLayout>

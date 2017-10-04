@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+       >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/dimension60dp"
+            android:layout_marginTop="@dimen/dimension60dp"
+            >
+            <ImageView
+                android:id="@+id/img_zoom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/prescript"
+
+                />
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/bt_zoom_dialogclose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_gravity="right|top"
+            android:padding="@dimen/dimension5dp"
+            android:layout_margin="@dimen/dimension8dp"
+            android:src="@drawable/dele"
+            android:textSize="@dimen/dimension15dp" />
+
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="@dimen/dimension30dp"
+        android:layout_height="@dimen/dimension30dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginBottom="@dimen/dimension10dp"
+        android:src="@drawable/deletes"
+        android:textSize="@dimen/dimension15dp" />
+    <ImageView
+        android:id="@+id/imgPrint"
+        android:layout_width="@dimen/dimension30dp"
+        android:layout_height="@dimen/dimension30dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/dimension10dp"
+        android:src="@drawable/print"
+        android:textSize="@dimen/dimension15dp" />
+    <ImageView
+        android:id="@+id/imgFax"
+        android:layout_width="@dimen/dimension30dp"
+        android:layout_height="@dimen/dimension30dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:layout_marginBottom="@dimen/dimension10dp"
+        android:src="@drawable/fax"
+        android:textSize="@dimen/dimension15dp" />
+    </FrameLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dimension15dp"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/txtDoctor"
+        style="@style/EmergencyCategory"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension40dp"
+        android:text="Apex Hospital"
+        android:layout_toLeftOf="@+id/txtDate"
+        />
+
+    <TextView
+        android:id="@+id/txtDate"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="7/08/1235 45:52"
+        android:layout_marginRight="@dimen/dimension10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/llPrescription"
+        style="@style/EmergencyDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDoctor"
+        android:orientation="vertical"
+      />
+    <LinearLayout
+        android:id="@+id/llImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llPrescription"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite"
+        >
+
+       <!-- <ImageView
+            android:id="@+id/img1"
+            android:layout_width="@dimen/dimension50dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/receipt" />
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="@dimen/dimension50dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/receipt" />
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="@dimen/dimension50dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/receipt" />
+
+        <ImageView
+            android:layout_width="@dimen/dimension50dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/add" />
+-->
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgForword"
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dimension5dp"
+        android:src="@drawable/forword_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dimension5dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension1dp"
+        android:background="@color/colorBlack"
+       android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dimension5dp"
+        android:layout_marginBottom="@dimen/dimension5dp"
+></View>
+</RelativeLayout>
+
