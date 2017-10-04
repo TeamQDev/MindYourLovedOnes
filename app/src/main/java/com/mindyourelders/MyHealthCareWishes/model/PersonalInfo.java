@@ -11,6 +11,26 @@ public class PersonalInfo {
     String address="";
     String phone="";
 
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public void setHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+    }
+
+    String homePhone="";
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    String gender="";
+
     public int getId() {
         return id;
     }

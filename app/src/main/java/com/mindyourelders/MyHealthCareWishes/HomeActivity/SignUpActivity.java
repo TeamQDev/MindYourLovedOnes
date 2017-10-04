@@ -57,9 +57,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     Context context = this;
     TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4;
     ImageView imgBack, imgEdit,imgProfile;
-    TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword;
+    TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
 
-    String name, email, phone, country, bdate, password,address;
+    String name, email, mobile, country, bdate, password,address,phone;
 
 
 
@@ -192,7 +192,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo = baos.toByteArray();
-                        Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, phone, bdate, password, photo);
+                        Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, mobile, bdate, password, photo,"","");
                         if (flag == true) {
                             Toast.makeText(context, "You have registered Successfully", Toast.LENGTH_SHORT).show();
                             Intent signupIntent = new Intent(context, BaseActivity.class);
@@ -296,7 +296,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] photo = baos.toByteArray();
-        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,phone," ","","Self",photo," ",1,2);
+        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",photo," ",1,2);
         if (flag==true)
         {
             Toast.makeText(context,"You have added connection Successfully",Toast.LENGTH_SHORT).show();
@@ -347,7 +347,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private boolean validate() {
         name = txtName.getText().toString().trim();
         email = txtEmail.getText().toString().trim();
-     //   phone = txtPhone.getText().toString().trim();
+     //   mobile = txtPhone.getText().toString().trim();
   //      bdate = txtBdate.getText().toString().trim();
 //        country=spinner.getSelectedItem().toString();
         password = txtPassword.getText().toString().trim();
@@ -370,10 +370,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         else if (country.equals("")) {
             spinner.setError("Please Select Country");
             showAlert("Please Select Country", context);
-        } else if (phone.equals("")) {
+        } else if (mobile.equals("")) {
             txtPhone.setError("Please Enter Phone");
             showAlert("Please Enter Phone", context);
-        } else if (phone.length() < 10) {
+        } else if (mobile.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits", context);
         } else if (bdate.equals("")) {

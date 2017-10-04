@@ -57,9 +57,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
    
     TextView txtSignUp, txtLogin, txtForgotPassword;
     ImageView imgEdit,imgProfile,imgDone;
-    TextView txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate, txtPassword,txtRelation;
+    TextView txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
 
-    String name, email, phone, country, bdate,address,homePhone,workPhone;
+    String name, email, phone, country, bdate,address,homePhone,workPhone,gender;
 
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
@@ -114,6 +114,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtBdate.setOnClickListener(this);
         imgEdit.setOnClickListener(this);
         imgDone.setOnClickListener(this);
+        txtGender.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -125,6 +126,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtLogin = (TextView) rootview.findViewById(R.id.txtLogin);
         txtForgotPassword = (TextView) rootview.findViewById(R.id.txtForgotPassword);
         txtBdate = (TextView)rootview.findViewById(R.id.txtBdate);
+        txtGender= (TextView)rootview.findViewById(R.id.txtGender);
         imgBack = (ImageView)getActivity().findViewById(R.id.imgBack);
         imgEdit = (ImageView) rootview.findViewById(R.id.imgEdit);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
@@ -183,15 +185,19 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     private void setValues() {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
             tilBdate.setVisibility(View.VISIBLE);
-            spinner.setVisibility(View.VISIBLE);
+           // spinner.setVisibility(View.VISIBLE);
+            txtGender.setVisibility(View.VISIBLE);
             spinnerRelation.setVisibility(View.GONE);
+            txtWorkPhone.setVisibility(View.GONE);
+            txtHomePhone.setVisibility(View.VISIBLE);
             if (personalInfo != null) {
-                txtHomePhone.setVisibility(View.GONE);
-                txtWorkPhone.setVisibility(View.GONE);
+
+                txtGender.setText(personalInfo.getGender());
                 txtName.setText(personalInfo.getName());
                 txtEmail.setText(personalInfo.getEmail());
                 txtAddress.setText(personalInfo.getAddress());
-
+                txtHomePhone.setText(personalInfo.getHomePhone());
+/*
                 if (personalInfo.getCountry()!=null) {
                     int index = 0;
                     for (int i = 0; i < countryList.length; i++) {
@@ -203,7 +209,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 }
                 else{
                     spinner.setHint("Country");
-                }
+                }*/
                 txtPhone.setText(personalInfo.getPhone());
                 txtBdate.setText(personalInfo.getDob());
                 byte[] photo=personalInfo.getPhoto();
@@ -213,8 +219,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
         else{
             tilBdate.setVisibility(View.GONE);
-            spinner.setVisibility(View.GONE);
+           // spinner.setVisibility(View.GONE);
+            txtWorkPhone.setVisibility(View.VISIBLE);
             spinnerRelation.setVisibility(View.VISIBLE);
+            txtGender.setVisibility(View.GONE);
             if (connection != null) {
                 txtName.setText(connection.getName());
                 txtEmail.setText(connection.getEmail());
@@ -249,7 +257,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     byte[] photo = baos.toByteArray();
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -272,6 +280,49 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 getActivity().finish();
                 break;
 
+            case R.id.txtGender:
+                final Dialog dialogs = new Dialog(getActivity());
+                dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogs.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                LayoutInflater lf1 = (LayoutInflater) getActivity()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View dialogview1 = lf1.inflate(R.layout.dialog_gender, null);
+                final TextView textOptions1 = (TextView) dialogview1.findViewById(R.id.txtOption1);
+                final TextView textOptions2 = (TextView) dialogview1.findViewById(R.id.txtOption2);
+                TextView textCancels = (TextView) dialogview1.findViewById(R.id.txtCancel);
+                textOptions1.setText("Male");
+                textOptions2.setText("Female");
+                dialogs.setContentView(dialogview1);
+                WindowManager.LayoutParams lps = new WindowManager.LayoutParams();
+                lps.copyFrom(dialogs.getWindow().getAttributes());
+                int widths = (int) (getActivity().getResources().getDisplayMetrics().widthPixels * 0.80);
+                lps.width = widths;
+                lps.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                lps.gravity = Gravity.CENTER;
+                dialogs.getWindow().setAttributes(lps);
+                dialogs.show();
+                textOptions1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                     txtGender.setText("Male");
+                        dialogs.dismiss();
+                    }
+                });
+                textOptions2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        txtGender.setText("Female");
+                        dialogs.dismiss();
+                    }
+                });
+                textCancels.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogs.dismiss();
+                    }
+                });
+
+                break;
             case R.id.imgEdit:
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -382,6 +433,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         email = txtEmail.getText().toString().trim();
         phone = txtPhone.getText().toString().trim();
         bdate = txtBdate.getText().toString().trim();
+        homePhone=txtHomePhone.getText().toString().trim();
+        gender=txtGender.getText().toString().trim();
         if (spinner.getSelectedItem()!=null) {
             country = spinner.getSelectedItem().toString();
         }

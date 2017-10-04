@@ -33,6 +33,7 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.utility.AppConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -219,19 +220,32 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
 
             case "Emergency":
-                rlTop.setVisibility(View.GONE);
-                rlCommon.setVisibility(View.VISIBLE);
-                rlConnection.setVisibility(View.VISIBLE);
-                rlDoctor.setVisibility(View.GONE);
-                rlInsurance.setVisibility(View.GONE);
-                rlAids.setVisibility(View.GONE);
-                rlFinance.setVisibility(View.GONE);
-                rlProxy.setVisibility(View.GONE);
-                txtAdd.setText("Add Emergency");
-                txtTitle.setText("Add Emergency Contact");
-                tilName.setHint("First Name, Last Name");
-                tilEmergencyNote.setVisibility(View.VISIBLE);
-                rlPharmacy.setVisibility(View.GONE);
+                visiEmergency();
+
+                break;
+            case "EmergencyUpdate":
+                visiEmergency();
+                Intent EmergencyIntent = getActivity().getIntent();
+                if (EmergencyIntent.getExtras()!=null)
+                {
+
+                       Emergency rel= (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
+                    txtName.setText(rel.getName());
+                    txtEmail.setText(rel.getEmail());
+                    txtMobile.setText(rel.getMobile());
+                    txtHomePhone.setText(rel.getPhone());
+                    txtWorkPhone.setText(rel.getWorkPhone());
+                    txtAddress.setText(rel.getAddress());
+                    txtEmergencyNote.setText(rel.getNote());
+                        int index = 0;
+                        for (int i = 0; i < Relationship.length; i++) {
+                            if (rel.getRelationType().equals(Relationship[i])) {
+                                index = i;
+                            }
+                        }
+                    spinnerRelation.setSelection(index+1);
+
+                }
                 break;
 
             case "Speciality":
@@ -401,6 +415,22 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
         }
 
+    }
+
+    private void visiEmergency() {
+        rlTop.setVisibility(View.GONE);
+        rlCommon.setVisibility(View.VISIBLE);
+        rlConnection.setVisibility(View.VISIBLE);
+        rlDoctor.setVisibility(View.GONE);
+        rlInsurance.setVisibility(View.GONE);
+        rlAids.setVisibility(View.GONE);
+        rlFinance.setVisibility(View.GONE);
+        rlProxy.setVisibility(View.GONE);
+        txtAdd.setText("Add Emergency");
+        txtTitle.setText("Add Emergency Contact");
+        tilName.setHint("First Name, Last Name");
+        tilEmergencyNote.setVisibility(View.VISIBLE);
+        rlPharmacy.setVisibility(View.GONE);
     }
 
     private void disableFinance() {
@@ -711,6 +741,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo = baos.toByteArray();
+
                         Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,2);
                         if (flag==true)
                         {
@@ -829,7 +860,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         phone=txtHomePhone.getText().toString().trim();
         workphone=txtWorkPhone.getText().toString().trim();
         address=txtAddress.getText().toString().trim();
-        Integer indexValue = spinnerRelation.getSelectedItemPosition();
+        int indexValue = spinnerRelation.getSelectedItemPosition();
 
         if (screen.equals("Connection")) {
             relation=Relationship[indexValue-1];

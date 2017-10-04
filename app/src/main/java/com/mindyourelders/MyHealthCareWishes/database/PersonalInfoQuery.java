@@ -23,7 +23,9 @@ public class PersonalInfoQuery {
     public static final String COL_EMAIL = "Email";
     public static final String COL_ADDRESS = "Address";
     public static final String COL_COUNTRY= "Country";
+    public static final String COL_MOBILE= "Mobile";
     public static final String COL_PHONE= "Phone";
+    public static final String COL_GENDER= "Gender";
     public static final String COL_DOB= "DOB";
     public static final String COL_PASS= "Password";
     public static final String COL_PHOTO= "Photo";
@@ -37,7 +39,7 @@ public class PersonalInfoQuery {
     }
 
     public static String createPersonalInfoTable() {
-        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+COL_PHOTO+" BLOB);";
+        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
 
@@ -46,7 +48,7 @@ public class PersonalInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertPersonalInfoData(String name, String email, String address, String country, String phone, String bdate, String password, byte[] photo) {
+    public static Boolean insertPersonalInfoData(String name, String email, String address, String country, String phone, String bdate, String password, byte[] photo, String homephone, String gender) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -55,10 +57,12 @@ public class PersonalInfoQuery {
         cv.put(COL_EMAIL,email);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_COUNTRY,country);
-        cv.put(COL_PHONE,phone);
+        cv.put(COL_MOBILE,phone);
         cv.put(COL_DOB,bdate);
         cv.put(COL_PASS,password);
         cv.put(COL_PHOTO,photo);
+        cv.put(COL_PHONE,homephone);
+        cv.put(COL_GENDER,gender);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -90,10 +94,12 @@ public class PersonalInfoQuery {
                             Person.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                             Person.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                             Person.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
-                            Person.setPhone(c.getString(c.getColumnIndex(COL_PHONE)));
+                            Person.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
                             Person.setPassword(c.getString(c.getColumnIndex(COL_PASS)));
                             Person.setDob(c.getString(c.getColumnIndex(COL_DOB)));
                             Person.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                            Person.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
+                            Person.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
                             personList.add(Person);
                         }
                     }
@@ -116,10 +122,12 @@ public class PersonalInfoQuery {
                 connection.setId(c.getInt(c.getColumnIndex(COL_ID)));
                 connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                 connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
-                connection.setPhone(c.getString(c.getColumnIndex(COL_PHONE)));
+                connection.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
                 connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                 connection.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
                 connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
+                connection.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
+                connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
             } while (c.moveToNext());
         }
 
@@ -142,7 +150,7 @@ public class PersonalInfoQuery {
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -151,9 +159,12 @@ public class PersonalInfoQuery {
         cv.put(COL_EMAIL,email);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_COUNTRY,country);
-        cv.put(COL_PHONE,phone);
+        cv.put(COL_MOBILE,phone);
         cv.put(COL_DOB,bdate);
         cv.put(COL_PHOTO,photo);
+        cv.put(COL_PHONE,homephone);
+        cv.put(COL_GENDER,gender);
+
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
         if (rowid==0)

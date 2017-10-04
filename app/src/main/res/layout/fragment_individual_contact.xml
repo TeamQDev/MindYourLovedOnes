@@ -104,7 +104,7 @@
             android:id="@+id/tilEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tilName"
+            android:layout_below="@+id/spinnerRelation"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp">
@@ -127,7 +127,7 @@
             android:id="@+id/tilAddres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tilEmail"
+            android:layout_below="@+id/tilWorkPhone"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp">
@@ -175,7 +175,7 @@
             android:id="@+id/tilPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tilAddres"
+            android:layout_below="@+id/tilEmail"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp">
@@ -224,7 +224,9 @@
            android:layout_below="@+id/tilHomePhone"
            android:paddingBottom="@dimen/dimension8dp"
            android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp">
+           android:paddingRight="@dimen/dimension30dp"
+
+           >
            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
            <AutoCompleteTextView
                android:id="@+id/txtWorkPhone"
@@ -253,7 +255,7 @@
            app:ms_multiline="true"
            custom:ms_floatingLabelColor="@color/colorBlue"
            custom:ms_hintColor="@color/colorDarkGray"
-           android:layout_below="@+id/tilWorkPhone"
+           android:layout_below="@+id/tilName"
            android:visibility="gone"
            />
        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
@@ -272,6 +274,34 @@
            custom:ms_hintColor="@color/colorDarkGray"
            android:visibility="gone"
            />
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/tilGender"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentStart="true"
+           android:layout_below="@+id/tilAddres"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp"
+           android:focusable="false"
+
+           >
+           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+           <AutoCompleteTextView
+               android:id="@+id/txtGender"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:focusable="false"
+               android:hint="Gender"
+               android:maxLength="30"
+               android:maxLines="1"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension2dp"
+               android:singleLine="true"
+               android:textColor="@color/colorPrimaryDark"
+               android:textSize="@dimen/dimension20dp" />
+       </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilBdate"
@@ -279,7 +309,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/spinner"
+            android:layout_below="@+id/tilGender"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"

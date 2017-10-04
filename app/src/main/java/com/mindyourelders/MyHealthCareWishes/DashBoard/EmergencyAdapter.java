@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
+import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
 
@@ -25,11 +29,13 @@ public class EmergencyAdapter extends BaseAdapter {
     ArrayList<Emergency> emergencyList;
     LayoutInflater lf;
     ViewHolder holder;
+    Preferences preferences;
 
     public EmergencyAdapter(Context context, ArrayList<Emergency> emergencyList) {
         this.context=context;
         this.emergencyList=emergencyList;
         lf= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        preferences=new Preferences(context);
     }
 
     @Override
@@ -60,6 +66,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtTelePhone= (TextView) convertView.findViewById(R.id.txtTelePhone);
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         }
@@ -72,11 +79,20 @@ public class EmergencyAdapter extends BaseAdapter {
         holder.txtPhone.setText(emergencyList.get(position).getMobile());
         holder.txtType.setText(emergencyList.get(position).getRelationType());
         holder.txtTelePhone.setText(emergencyList.get(position).getPhone());
+
         byte[] photo=emergencyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
 
-
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferences.putString(PrefConstants.SOURCE,"EmergencyUpdate");
+                Intent i=new Intent(context,GrabConnectionActivity.class);
+                i.putExtra("EmergencyObject",emergencyList.get(position));
+                context.startActivity(i);
+            }
+        });
        /* holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +112,7 @@ public class EmergencyAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
-        ImageView imgProfile;
+        ImageView imgProfile,imgEdit;
         SwipeRevealLayout swipeLayout;
     }
 }
