@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chauthai.swipereveallayout.SwipeRevealLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:dragEdge="right"
-    app:mode="same_level">
+  >
+<!--
 
     <FrameLayout
         android:id="@+id/delete_layout"
@@ -23,14 +23,15 @@
           android:textColor="@color/colorWhite"
           android:background="#fa694E"
           />
-        <!--<ImageView
+        &lt;!&ndash;<ImageView
             android:layout_width="@dimen/dimension70dp"
             android:layout_height="@dimen/dimension70dp"
             android:gravity="center"
             android:layout_gravity="center"
              android:src="@drawable/delete_icon"
-            />-->
+            />&ndash;&gt;
     </FrameLayout>
+-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -169,4 +170,4 @@
             android:background="@color/colorDarkGray"
             ></View>
     </RelativeLayout>
-</com.chauthai.swipereveallayout.SwipeRevealLayout>
+</RelativeLayout>

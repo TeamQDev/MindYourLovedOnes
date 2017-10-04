@@ -133,13 +133,13 @@ public class FragmentConnection extends Fragment implements View.OnClickListener
     }
 
     private void deleteConnection(RelativeConnection item) {
-        boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
+      /*  boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
         if(flag==true)
         {
             Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
             getData();
             setListData();
-        }
+        }*/
     }
 
     private void getData() {

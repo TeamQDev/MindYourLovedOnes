@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -142,7 +141,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
     }
 
-    private void deleteConnection(RelativeConnection item) {
+   /* private void deleteConnection(RelativeConnection item) {
         boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
         if(flag==true)
         {
@@ -151,7 +150,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
             setListData();
         }
     }
-
+*/
     private void getData() {
         connectionList = MyConnectionsQuery.fetchAllRecord(preferences.getInt(PrefConstants.USER_ID),1);
 

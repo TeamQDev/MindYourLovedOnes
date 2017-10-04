@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -98,46 +99,22 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
                         break;
                     case 1:
                         // delete
-                        /*if (item.getEmail().equals(preferences.getString(PrefConstants.USER_EMAIL)))
-                        {
-                            Toast.makeText(getActivity(),"You can not delete self connection",Toast.LENGTH_SHORT).show();
-                        }
-                        else {*/
-                            deleteConnection(item);
-                      //  }
-                        // mAppList.remove(position);
-                        // mAdapter.notifyDataSetChanged();
+                            deleteEmergency(item);
                         break;
                 }
                 return false;
             }
         });
-        // set SwipeListener
-        lvEmergency.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
-
-            @Override
-            public void onSwipeStart(int position) {
-                // swipe start
-            }
-
-            @Override
-            public void onSwipeEnd(int position) {
-                // swipe end
-            }
-        });
-
-
-
     }
 
-    private void deleteConnection(Emergency item) {
-      /* boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
+    private void deleteEmergency(Emergency item) {
+      boolean flag= MyConnectionsQuery.deleteRecord(item.getId());
         if(flag==true)
         {
             Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
             getData();
             setListData();
-        }*/
+        }
     }
 
     private void getData() {

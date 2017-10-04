@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
@@ -67,7 +66,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+//            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         }
         else{
@@ -113,6 +112,6 @@ public class EmergencyAdapter extends BaseAdapter {
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
         ImageView imgProfile,imgEdit;
-        SwipeRevealLayout swipeLayout;
+       // SwipeRevealLayout swipeLayout;
     }
 }
