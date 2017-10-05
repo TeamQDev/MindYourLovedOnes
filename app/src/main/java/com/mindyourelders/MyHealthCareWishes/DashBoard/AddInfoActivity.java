@@ -17,6 +17,7 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -25,16 +26,18 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     Context context=this;
     ImageView imgBack;
     RelativeLayout llAddConn;
-    TextView txtName,txtReaction,txtTreatment;
+    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd;
     TextInputLayout tilTitle,tilReaction,tilTreatment;
     public static final int RESULT_ALLERGY=100;
     public static final int RESULT_HISTORY=200;
     public static final int RESULT_IMPLANTS=300;
     public static final int RESULT_HOSPITAL=400;
-    String from,name;
+    String from,name,title;
     Boolean isAllergy;
     Preferences preferences;
     DBHelper dbHelper;
+    int id;
+    String data="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,9 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         {
            from=i.getExtras().getString("ADD");
             name=i.getExtras().getString("Name");
+            title=i.getExtras().getString("Title");
+            txtTitle.setText(title);
+            txtAdd.setText(title);
             tilTitle.setHint(name);
             isAllergy=i.getExtras().getBoolean("IsAllergy");
             if (isAllergy==true)
@@ -66,6 +72,34 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 tilTreatment.setVisibility(View.GONE);
                 tilReaction.setVisibility(View.GONE);
             }
+            switch (from) {
+                case "AllergyUpdate":
+                    Allergy allergy= (Allergy) i.getExtras().getSerializable("AllergyObject");
+                    txtName.setText(allergy.getAllergy());
+                    txtReaction.setText(allergy.getReaction());
+                    txtTreatment.setText(allergy.getTreatment());
+                    id=allergy.getId();
+                    break;
+
+                case "ImplantUpdate":
+                    String value= i.getExtras().getString("ImplantObject");
+                    txtName.setText(value);
+                    data=value;
+                    break;
+
+                case "HospitalUpdate":
+                    String values= i.getExtras().getString("HospitalObject");
+                    txtName.setText(values);
+                    data=values;
+                    break;
+
+                case "HistoryUpdate":
+                    String values1= i.getExtras().getString("HistoryObject");
+                    txtName.setText(values1);
+                    data=values1;
+                    break;
+            }
+
         }
     }
 
@@ -81,7 +115,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         txtName= (TextView) findViewById(R.id.txtName);
         tilReaction= (TextInputLayout) findViewById(R.id.tilReaction);
         txtReaction= (TextView) findViewById(R.id.txtReaction);
-
+        txtAdd= (TextView) findViewById(R.id.txtAdd);
+        txtTitle= (TextView) findViewById(R.id.txtTitle);
         tilTreatment= (TextInputLayout) findViewById(R.id.tilTreatment);
         txtTreatment= (TextView) findViewById(R.id.txtTreatment);
 
@@ -115,6 +150,24 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             setResult(RESULT_ALLERGY, intentAllergy);
                             finish();
                             break;
+
+                        case "AllergyUpdate":
+                            String reactions=txtReaction.getText().toString();
+                            String treatments=txtTreatment.getText().toString();
+                            Boolean flags = AllergyQuery.updateAllergyData(id,value,reactions,treatments);
+                            if (flags == true) {
+                                Toast.makeText(context, "Allergy updated Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentAllergys = new Intent();
+                           /* intentAllergy.putExtra("Value", value);
+                            intentAllergy.putExtra("Reaction", reaction);
+                            intentAllergy.putExtra("Treatment", treatment);*/
+                            setResult(RESULT_ALLERGY, intentAllergys);
+                            finish();
+                            break;
                         case "Implants":
                             Boolean flag1 = MedicalImplantsQuery.insertImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
                             if (flag1 == true) {
@@ -128,6 +181,21 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             setResult(RESULT_IMPLANTS, intentImplants);
                             finish();
                             break;
+
+                        case "ImplantUpdate":
+                            Boolean flag1s = MedicalImplantsQuery.updateImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
+                            if (flag1s == true) {
+                                Toast.makeText(context, "Implants updated Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentImplant = new Intent();
+                            // intentImplants.putExtra("Value", value);
+                            setResult(RESULT_IMPLANTS, intentImplant);
+                            finish();
+                            break;
+
                         case "Hospital":
                             Boolean flag2 = HospitalQuery.insertHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
                             if (flag2 == true) {
@@ -141,6 +209,20 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             setResult(RESULT_HOSPITAL, intentHospital);
                             finish();
                             break;
+
+                        case "HospitalUpdate":
+                            Boolean flag2s = HospitalQuery.updateHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
+                            if (flag2s == true) {
+                                Toast.makeText(context, "Hospital updated Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentHospitals = new Intent();
+                            //  intentHospital.putExtra("Value", value);
+                            setResult(RESULT_HOSPITAL, intentHospitals);
+                            finish();
+                            break;
                         case "History":
                             Boolean flag3= HistoryQuery.insertHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
                             if (flag3 == true) {
@@ -152,6 +234,20 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             Intent intentHistory = new Intent();
                            // intentHistory.putExtra("Value", value);
                             setResult(RESULT_HISTORY, intentHistory);
+                            finish();
+                            break;
+
+                        case "HistoryUpdate":
+                            Boolean flag3s= HistoryQuery.updateHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
+                            if (flag3s == true) {
+                                Toast.makeText(context, "History updated Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentHistorys = new Intent();
+                            // intentHistory.putExtra("Value", value);
+                            setResult(RESULT_HISTORY, intentHistorys);
                             finish();
                             break;
                     }

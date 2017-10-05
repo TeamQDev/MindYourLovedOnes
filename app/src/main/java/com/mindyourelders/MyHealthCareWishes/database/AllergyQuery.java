@@ -86,4 +86,42 @@ public class AllergyQuery {
 
         return allergyList;
     }
+
+    public static Boolean updateAllergyData(int id, String value, String reactions, String treatments) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(COL_ALLERGY, value);
+        cv.put(COL_TREATMENT, treatments);
+        cv.put(COL_REACTION, reactions);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+        }
+
+        return flag;
+    }
+
+    public static boolean deleteRecord(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+        return true;
+    }
+
 }

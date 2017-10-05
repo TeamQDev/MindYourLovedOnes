@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by welcome on 9/22/2017.
  */
 
-public class Allergy {
+public class Allergy implements Serializable{
     public int getUserId() {
         return userId;
     }
