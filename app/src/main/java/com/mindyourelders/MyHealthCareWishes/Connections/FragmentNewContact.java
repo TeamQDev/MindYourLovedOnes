@@ -35,6 +35,7 @@ import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
+import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.AppConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -60,7 +61,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
-    TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote;
+    TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
+    TextView txtDoctorAddress,txtDoctorLastSeen;
 
     TextView txtAids, txtSchedule, txtOther,txtFName,txtEmergencyNote;
 
@@ -74,14 +76,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     private static int RESULT_SELECT_PHOTO = 2;
 
     String name, email, mobile, speciality,phone,address,workphone,note;
-    String network,affil,practice_name;
+    String network,affil,practice_name,website,lastseen;
     String fax="";
     String relation="";
     String proxy="";
     int prox;
     int connectionFlag;
     boolean inPrimary;
-    int id;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation;
     TextInputLayout tilName,tilFName,tilEmergencyNote;
 
@@ -106,6 +107,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     Boolean isEdit;
 
     DBHelper dbHelper;
+    int id;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_new_contact, null);
@@ -298,23 +300,33 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
 
             case "SpecialistData":
+
                 visiSpecialist();
+                txtAdd.setText("Update Doctor");
+                txtTitle.setText("Update Doctor");
                 Intent specialistIntent = getActivity().getIntent();
                 if (specialistIntent.getExtras() != null) {
-
-                    txtName.setText(specialistIntent.getExtras().getString("Name"));
-                    // txtEmail.setText(specialistIntent.getExtras().getString());
-                    txtMobile.setText(specialistIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(specialistIntent.getExtras().getString("Address"));
-
+                    Specialist specialist= (Specialist) specialistIntent.getExtras().getSerializable("SpecialistObject");
+                    txtDoctorName.setText(specialist.getName());
+                    txtDoctorOtherPhone.setText(specialist.getOtherPhone());
+                    txtDoctorLastSeen.setText(specialist.getLastseen());
+                    txtDoctorAddress.setText(specialist.getAddress());
+                    txtDoctorWebsite.setText(specialist.getWebsite());
+                    txtDoctorFax.setText(specialist.getFax());
+                    txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
+                    txtDoctorOfficePhone.setText(specialist.getOfficePhone());
+                    txtAffiliation.setText(specialist.getHospAffiliation());
+                    txtPracticeName.setText(specialist.getPracticeName());
+                    txtNetwork.setText(specialist.getNetwork());
+                    txtDoctorNote.setText(specialist.getNote());
+                    id=specialist.getId();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialistIntent.getExtras().getString("Type").equals(healthSpeciality[i])) {
+                        if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index);
-
+                    spinner.setSelection(index+1);
                 }
                 break;
 
@@ -623,6 +635,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     }
 
     private void initUI() {
+
+        txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
+        txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
+        txtDoctorHourOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorHourOfficePhone);
+        txtDoctorOtherPhone = (TextView) rootview.findViewById(R.id.txtDoctorOtherPhone);
+        txtDoctorFax = (TextView) rootview.findViewById(R.id.txtDoctorFax);
+        txtDoctorWebsite = (TextView) rootview.findViewById(R.id.txtDoctorWebsite);
+        txtDoctorAddress = (TextView) rootview.findViewById(R.id.txtDoctorAddress);
+        txtDoctorLastSeen = (TextView) rootview.findViewById(R.id.txtDoctorLastSeen);
+
+
+
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
         rlTop = (RelativeLayout) rootview.findViewById(R.id.rlTop);
@@ -877,14 +901,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         break;
 
                     case "Physician":
-                        Toast.makeText(getActivity(),"Need to implement",Toast.LENGTH_SHORT).show();
-                       /*if (validate("Physician")) {
 
+                       if (validate("Physician")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,"",address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1);
+                            Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1,lastseen);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added physician contact successfully",Toast.LENGTH_SHORT).show();
@@ -896,9 +919,27 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
-                        }*/
+                        }
                         break;
-                    case "Speciality":
+                    case "SpecialistData":
+                        if (validate("Physician")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= SpecialistQuery.updatePhysicianData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1,lastseen);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated physician contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
                         break;
                 }
                 break;
@@ -1065,39 +1106,22 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else return true;
         }
         else if (screen.equals("Physician")) {
+            name=txtDoctorName.getText().toString();
+            mobile=txtDoctorOfficePhone.getText().toString();
+            phone=txtDoctorHourOfficePhone.getText().toString();
+            workphone=txtDoctorOtherPhone.getText().toString();
+            fax=txtDoctorFax.getText().toString();
+            address=txtDoctorAddress.getText().toString();
+            website=txtDoctorWebsite.getText().toString();
+            lastseen=txtDoctorLastSeen.getText().toString();
+            fax=txtDoctorFax.getText().toString();
             int indexValuex = spinner.getSelectedItemPosition();
             speciality=healthSpeciality[indexValuex-1];
-            fax= txtFax.getText().toString();
             practice_name=txtPracticeName.getText().toString();
             network=txtNetwork.getText().toString();
             affil=txtAffiliation.getText().toString();
             note=txtDoctorNote.getText().toString();
-            if (name.equals("")) {
-                txtName.setError("Please Enter Name");
-                showAlert("Please Enter Name", getActivity());
-            } else if (email.equals("")) {
-                txtEmail.setError("Please Enter email");
-                showAlert("Please Enter email", getActivity());
-            } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                txtEmail.setError("Please enter valid email");
-                showAlert("Please enter valid email", getActivity());
-            } else if (mobile.equals("")) {
-                txtMobile.setError("Please Enter Mobile");
-                showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
-                txtMobile.setError("Mobile number should be 10 digits");
-                showAlert("Mobile number should be 10 digits", getActivity());
-            }
-            else if (phone.equals("")) {
-                txtHomePhone.setError("Please Enter Home Phone");
-                showAlert("Please Enter Mobile", getActivity());
-            }else if (workphone.equals("")) {
-                txtWorkPhone.setError("Please Enter Work Phone");
-                showAlert("Please Enter Mobile", getActivity());
-            }else if (address.equals("")) {
-                txtAddress.setError("Please Enter Address");
-                showAlert("Please Enter Address", getActivity());
-            } else return true;
+             return true;
         }
 
         return false;

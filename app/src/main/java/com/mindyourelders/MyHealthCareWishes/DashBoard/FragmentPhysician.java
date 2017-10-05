@@ -82,9 +82,9 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     }
 
     private void getData() {
-      //  specialistList=SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
+       specialistList=SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
 
-       specialistList=new ArrayList<>();
+       /*specialistList=new ArrayList<>();
 
         Specialist P1=new Specialist();
         P1.setName("Dr. John");
@@ -111,7 +111,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
         specialistList.add(P1);
        specialistList.add(P2);
         specialistList.add(P3);
-
+*/
     }
 
     @Override

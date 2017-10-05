@@ -1,10 +1,59 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by varsha on 8/28/2017.
  */
 
-public class Specialist {
+public class Specialist implements Serializable {
+    String lastseen="";
+    String website="";
+    String officePhone="";
+
+    public String getLastseen() {
+        return lastseen;
+    }
+
+    public void setLastseen(String lastseen) {
+        this.lastseen = lastseen;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getOfficePhone() {
+        return officePhone;
+    }
+
+    public void setOfficePhone(String officePhone) {
+        this.officePhone = officePhone;
+    }
+
+    public String getHourPhone() {
+        return hourPhone;
+    }
+
+    public void setHourPhone(String hourPhone) {
+        this.hourPhone = hourPhone;
+    }
+
+    public String getOtherPhone() {
+        return otherPhone;
+    }
+
+    public void setOtherPhone(String otherPhone) {
+        this.otherPhone = otherPhone;
+    }
+
+    String hourPhone="";
+    String otherPhone="";
+
     public int getIsPhysician() {
         return isPhysician;
     }
@@ -88,24 +137,9 @@ public class Specialist {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
 
-    public String getWorkPhone() {
-        return workPhone;
-    }
 
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
-
-    String mobile="";
-    String workPhone="";
     String name="";
     String type="";
     String address="";
@@ -134,13 +168,6 @@ public class Specialist {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public int getImage() {
         return image;
@@ -150,7 +177,7 @@ public class Specialist {
         this.image = image;
     }
 
-    String phone="";
+
     int image;
 
 

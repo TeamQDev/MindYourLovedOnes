@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,15 +75,15 @@ public class SpecialistAdapter extends BaseAdapter {
         }
 
         holder.txtName.setText(specialistList.get(position).getName());
-        holder.txtOfficePhone.setText(specialistList.get(position).getWorkPhone());
-        holder.txtPhone.setText(specialistList.get(position).getPhone());
+        holder.txtOfficePhone.setText(specialistList.get(position).getOtherPhone());
+        holder.txtPhone.setText(specialistList.get(position).getOfficePhone());
         holder.txtType.setText(specialistList.get(position).getType());
-        holder.txtTelePhone.setText(specialistList.get(position).getPhone());
+        holder.txtTelePhone.setText(specialistList.get(position).getOtherPhone());
         holder.txtAddress.setText(specialistList.get(position).getAddress());
-        holder.imgProfile.setImageResource(specialistList.get(position).getImage());
-        /*byte[] photo=specialistList.get(position).getPhoto();
+      //  holder.imgProfile.setImageResource(specialistList.get(position).getImage());
+        byte[] photo=specialistList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);*/
+        holder.imgProfile.setImageBitmap(bmp);
 
 
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
@@ -90,11 +92,13 @@ public class SpecialistAdapter extends BaseAdapter {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE, "SpecialistData");
                 Specialist insurance = specialistList.get(position);
-                i.putExtra("Name", insurance.getName());
+               /* i.putExtra("Name", insurance.getName());
                 i.putExtra("Type", insurance.getType());
                 i.putExtra("Address", insurance.getAddress());
-                i.putExtra("Phone", insurance.getPhone());
-                i.putExtra("Photo", insurance.getImage());
+                i.putExtra("Phone", insurance.getOfficePhone());
+                i.putExtra("Photo", insurance.getImage());*/
+                i.putExtra("SpecialistObject",insurance);
+                i.putExtra("IsPhysician",insurance.getIsPhysician());
                 context.startActivity(i);
             }
         });
@@ -108,7 +112,7 @@ public class SpecialistAdapter extends BaseAdapter {
                 i.putExtra("Name", insurance.getName());
                 i.putExtra("Type", insurance.getType());
                 i.putExtra("Address", insurance.getAddress());
-                i.putExtra("Phone", insurance.getPhone());
+                i.putExtra("Phone", insurance.getOfficePhone());
                 i.putExtra("Photo", insurance.getImage());
                 context.startActivity(i);
             }

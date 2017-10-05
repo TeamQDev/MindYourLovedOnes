@@ -88,7 +88,7 @@ public class EmergencyActivity extends AppCompatActivity implements View.OnClick
         P1.setType("Orthopedic");
         P1.setAddress("#203,10 los Street, los Angeles, California.");
         P1.setImage(R.drawable.doct);
-        P1.setPhone("789-789-5236");
+        P1.setOfficePhone("789-789-5236");
 
         specialistList.add(P1);
     }

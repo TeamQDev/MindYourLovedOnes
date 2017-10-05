@@ -74,9 +74,9 @@ public class DoctorQuery {
                     connection.setId(c.getInt(c.getColumnIndex(COL_ID)));
                     connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                     connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
-                    connection.setMobile(c.getString(c.getColumnIndex(COL_MOBILE)));
-                    connection.setPhone(c.getString(c.getColumnIndex(COL_HOME_PHONE)));
-                    connection.setWorkPhone(c.getString(c.getColumnIndex(COL_WORK_PHONE)));
+                    connection.setOfficePhone(c.getString(c.getColumnIndex(COL_MOBILE)));
+                    connection.setHourPhone(c.getString(c.getColumnIndex(COL_HOME_PHONE)));
+                    connection.setOtherPhone(c.getString(c.getColumnIndex(COL_WORK_PHONE)));
                     connection.setType(c.getString(c.getColumnIndex(COL_SPECIALITY)));
                     connection.setPracticeName(c.getString(c.getColumnIndex(COL_PRACTICENAME)));
                     connection.setNetwork(c.getString(c.getColumnIndex(COL_NETWORK)));
