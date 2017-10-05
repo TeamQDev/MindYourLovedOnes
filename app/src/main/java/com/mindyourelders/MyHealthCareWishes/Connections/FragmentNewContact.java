@@ -291,6 +291,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
 
             case "Physician":
+                
                 visiSpecialist();
                 txtAdd.setText("Add Physician");
                 txtTitle.setText("Add Physician");

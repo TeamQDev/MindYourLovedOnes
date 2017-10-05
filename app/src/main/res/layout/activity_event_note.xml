@@ -13,6 +13,7 @@
         android:layout_height="@dimen/dimension60dp"
         android:background="@color/colorBlue">
 
+
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="@dimen/dimension40dp"
@@ -44,7 +45,7 @@
             />
     </RelativeLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvNote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +54,7 @@
         android:divider="@null"
         android:background="@color/colorLightBlue"
         android:visibility="gone"
-        ></ListView>
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
   <TextView
       android:id="@+id/txtView"
       android:layout_width="match_parent"

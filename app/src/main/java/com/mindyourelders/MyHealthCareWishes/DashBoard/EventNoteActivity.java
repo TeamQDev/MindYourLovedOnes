@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.Date;
 
 public class EventNoteActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
-    ListView lvNote;
+    SwipeMenuListView lvNote;
     ArrayList<Note> noteList=new ArrayList<>();
     ImageView imgBack,imgAdd;
     TextView txtView;
@@ -50,9 +53,40 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
-        lvNote= (ListView) findViewById(R.id.lvNote);
+        lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
         txtView= (TextView) findViewById(R.id.txtView);
         if (noteList.size()!=0) {
+            setNoteData();
+        }
+        lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(context);
+        lvNote.setMenuCreator(creator);
+        lvNote.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Note item = noteList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deleteNote(item);
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void deleteNote(Note item) {
+        boolean flag= EventNoteQuery.deleteRecord(item.getId());
+        if(flag==true)
+        {
+            Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
             setNoteData();
         }
     }
