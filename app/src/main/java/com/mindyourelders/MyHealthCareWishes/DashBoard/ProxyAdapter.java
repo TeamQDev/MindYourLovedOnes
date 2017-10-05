@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -10,8 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
+import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
 
@@ -25,11 +29,13 @@ public class ProxyAdapter extends BaseAdapter {
     LayoutInflater lf;
 
     ViewHolder holder;
+    Preferences preferences;
 
     public ProxyAdapter(Context context, ArrayList<Proxy> proxyList) {
         this.context=context;
         this.proxyList=proxyList;
         lf= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        preferences=new Preferences(context);
     }
 
     @Override
@@ -48,7 +54,7 @@ public class ProxyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView==null)
         {
@@ -61,7 +67,7 @@ public class ProxyAdapter extends BaseAdapter {
             holder.txtTelePhone= (TextView) convertView.findViewById(R.id.txtTelePhone);
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
-          //  holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
 
             convertView.setTag(holder);
         }
@@ -79,19 +85,28 @@ public class ProxyAdapter extends BaseAdapter {
                 holder.txtType.setText("Secondary Proxy");
             }
 
-
         holder.txtTelePhone.setText(proxyList.get(position).getPhone());
         byte[] photo=proxyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
+
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferences.putString(PrefConstants.SOURCE,"ProxyUpdate");
+                Intent i=new Intent(context,GrabConnectionActivity.class);
+                i.putExtra("ProxyObject",proxyList.get(position));
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }
 
     public class ViewHolder
     {
-        TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;;
-        ImageView imgProfile;
+        TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
+        ImageView imgProfile,imgEdit;
      //   SwipeRevealLayout swipeLayout;
     }
 }

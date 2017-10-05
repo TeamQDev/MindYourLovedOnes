@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by varsha on 8/23/2017.
  */
 
-public class Proxy {
+public class Proxy implements Serializable {
 
     public String getProxy() {
         return Proxy;

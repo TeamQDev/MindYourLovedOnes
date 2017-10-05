@@ -102,9 +102,7 @@ public class MyConnectionsQuery {
                     connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                     connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
-                            connectionList.add(connection);
-
-
+                    connectionList.add(connection);
                 } while (c.moveToNext());
             }
         }

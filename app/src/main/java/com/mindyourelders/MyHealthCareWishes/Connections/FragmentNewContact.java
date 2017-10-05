@@ -34,6 +34,7 @@ import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.utility.AppConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -203,21 +204,49 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
 
             case "Proxy":
-                rlTop.setVisibility(View.GONE);
-                rlCommon.setVisibility(View.VISIBLE);
-
-                rlConnection.setVisibility(View.VISIBLE);
-                rlDoctor.setVisibility(View.GONE);
-                rlInsurance.setVisibility(View.GONE);
-                rlProxy.setVisibility(View.VISIBLE);
-                spinnerProxy.setVisibility(View.VISIBLE);
-                rlAids.setVisibility(View.GONE);
-                rlFinance.setVisibility(View.GONE);
+                visiProxy();
                 txtAdd.setText("Add Proxy");
                 txtTitle.setText("Add Proxy");
-                tilName.setHint("First Name, Last Name");
-                tilEmergencyNote.setVisibility(View.GONE);
-                rlPharmacy.setVisibility(View.GONE);
+                break;
+
+            case "ProxyUpdate":
+                visiProxy();
+                txtAdd.setText("Update Proxy");
+                txtTitle.setText("Update Proxy");
+                Intent ProxyIntent = getActivity().getIntent();
+                if (ProxyIntent.getExtras()!=null)
+                {
+
+                    Proxy rel= (Proxy) ProxyIntent.getExtras().getSerializable("ProxyObject");
+                    txtName.setText(rel.getName());
+                    txtEmail.setText(rel.getEmail());
+                    txtMobile.setText(rel.getMobile());
+                    txtHomePhone.setText(rel.getPhone());
+                    txtWorkPhone.setText(rel.getWorkPhone());
+                    txtAddress.setText(rel.getAddress());
+                    txtEmergencyNote.setText(rel.getNote());
+                    id=rel.getId();
+                    int index = 0;
+                    for (int i = 0; i < Relationship.length; i++) {
+                        if (rel.getRelationType().equals(Relationship[i])) {
+                            index = i;
+                        }
+                    }
+                    spinnerRelation.setSelection(index+1);
+                    prox=rel.getIsPrimary();
+                    if (prox==1) {
+                        spinnerProxy.setSelection(0);
+                    }else if (prox==2)
+                    {
+                        spinnerProxy.setSelection(1);
+                    }
+
+
+                    byte[] photo=rel.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+
                 break;
 
             case "Emergency":
@@ -424,6 +453,22 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
         }
 
+    }
+
+    private void visiProxy() {
+        rlTop.setVisibility(View.GONE);
+        rlCommon.setVisibility(View.VISIBLE);
+
+        rlConnection.setVisibility(View.VISIBLE);
+        rlDoctor.setVisibility(View.GONE);
+        rlInsurance.setVisibility(View.GONE);
+        rlProxy.setVisibility(View.VISIBLE);
+        spinnerProxy.setVisibility(View.VISIBLE);
+        rlAids.setVisibility(View.GONE);
+        rlFinance.setVisibility(View.GONE);
+        tilName.setHint("First Name, Last Name");
+        tilEmergencyNote.setVisibility(View.GONE);
+        rlPharmacy.setVisibility(View.GONE);
     }
 
     private void visiEmergency() {
@@ -797,6 +842,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added proxy contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+
+                    case "ProxyUpdate":
+                        if (validate("Proxy")) {
+
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated proxy contact successfully",Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
                             }
                             else{
