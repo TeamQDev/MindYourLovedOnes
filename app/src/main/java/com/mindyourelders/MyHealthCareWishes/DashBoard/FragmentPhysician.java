@@ -19,7 +19,6 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistAdapter;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
-import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -108,7 +107,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     }
 
     private void deleteSpecialist(Specialist item) {
-        boolean flag= MyConnectionsQuery.deleteRecord(item.getId());
+        boolean flag= SpecialistQuery.deleteRecord(item.getId());
         if(flag==true)
         {
             Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
