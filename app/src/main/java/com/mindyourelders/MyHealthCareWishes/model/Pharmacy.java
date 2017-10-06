@@ -1,10 +1,40 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by welcome on 9/22/2017.
  */
 
-public class Pharmacy {
+public class Pharmacy implements Serializable {
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    byte[] photo;
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    int userid;
     public String getPhone() {
         return phone;
     }

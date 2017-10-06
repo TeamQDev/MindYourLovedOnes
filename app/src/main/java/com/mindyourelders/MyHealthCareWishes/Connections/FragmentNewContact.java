@@ -32,8 +32,10 @@ import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
+import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.AppConstants;
@@ -65,7 +67,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     TextView txtDoctorAddress,txtDoctorLastSeen;
 
     TextView txtAids, txtSchedule, txtOther,txtFName,txtEmergencyNote;
-
+TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtTitle;
     ImageView imgEdit, imgProfile;
     View rootview;
@@ -191,20 +193,30 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
 
             case "Pharmacy":
-                rlTop.setVisibility(View.GONE);
-                rlCommon.setVisibility(View.GONE);
-                spinnerRelation.setVisibility(View.GONE);
-                rlConnection.setVisibility(View.GONE);
-                rlDoctor.setVisibility(View.GONE);
-                rlInsurance.setVisibility(View.GONE);
-                rlAids.setVisibility(View.GONE);
-                rlProxy.setVisibility(View.GONE);
-                rlFinance.setVisibility(View.GONE);
+                visiPharmacy();
                 txtAdd.setText("Add Pharmacy");
                 txtTitle.setText("Add Pharmacy");
-                tilEmergencyNote.setVisibility(View.GONE);
-                rlPharmacy.setVisibility(View.VISIBLE);
                 break;
+            case "PharmacyData":
+                visiPharmacy();
+                txtAdd.setText("Update Pharmacy");
+                txtTitle.setText("Update Pharmacy");
+                Intent specialistIntents = getActivity().getIntent();
+                if (specialistIntents.getExtras() != null) {
+                    Pharmacy specialist = (Pharmacy) specialistIntents.getExtras().getSerializable("PharmacyObject");
+                    txtPharmacyName.setText(specialist.getName());
+                    txtPharmacyAddress.setText(specialist.getAddress());
+                    txtPharmacyWebsite.setText(specialist.getWebsite());
+                    txtPharmacyFax.setText(specialist.getFax());
+                    txtPharmacyPhone.setText(specialist.getPhone());
+                    txtPharmacyNote.setText(specialist.getNote());
+                    id = specialist.getId();
+
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+                    break;
 
             case "Proxy":
                 visiProxy();
@@ -476,6 +488,20 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     }
 
+    private void visiPharmacy() {
+        rlTop.setVisibility(View.GONE);
+        rlCommon.setVisibility(View.GONE);
+        spinnerRelation.setVisibility(View.GONE);
+        rlConnection.setVisibility(View.GONE);
+        rlDoctor.setVisibility(View.GONE);
+        rlInsurance.setVisibility(View.GONE);
+        rlAids.setVisibility(View.GONE);
+        rlProxy.setVisibility(View.GONE);
+        rlFinance.setVisibility(View.GONE);
+        tilEmergencyNote.setVisibility(View.GONE);
+        rlPharmacy.setVisibility(View.VISIBLE);
+    }
+
     private void visiProxy() {
         rlTop.setVisibility(View.GONE);
         rlCommon.setVisibility(View.VISIBLE);
@@ -644,6 +670,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     private void initUI() {
 
+        //Doctor
         txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
         txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
         txtDoctorHourOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorHourOfficePhone);
@@ -653,6 +680,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtDoctorAddress = (TextView) rootview.findViewById(R.id.txtDoctorAddress);
         txtDoctorLastSeen = (TextView) rootview.findViewById(R.id.txtDoctorLastSeen);
 
+        //Pharmacy
+        txtPharmacyName = (TextView) rootview.findViewById(R.id.txtPharmacyName);
+        txtPharmacyAddress = (TextView) rootview.findViewById(R.id.txtPharmacyAddress);
+        txtPharmacyPhone = (TextView) rootview.findViewById(R.id.txtPharmacyPhone);
+        txtPharmacyFax = (TextView) rootview.findViewById(R.id.txtPharmacyFax);
+        txtPharmacyWebsite = (TextView) rootview.findViewById(R.id.txtPharmacyWebsite);
+        txtPharmacyNote = (TextView) rootview.findViewById(R.id.txtPharmacyNote);
 
 
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
@@ -984,6 +1018,48 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+                    case "Pharmacy":
+
+                        if (validate("Pharmacy")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= PharmacyQuery.insertPharmacyData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,phone,photo,fax,note);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have added pharmacy successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+                    case "PharmacyData":
+
+                        if (validate("Pharmacy")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= PharmacyQuery.updatePharmacyData(id,name,website,address,phone,photo,fax,note);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated pharmacy successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
                 }
                 break;
             case R.id.imgEdit:
@@ -1166,7 +1242,16 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             note=txtDoctorNote.getText().toString();
              return true;
         }
+        else if (screen.equals("Pharmacy")) {
+            name=txtPharmacyName.getText().toString();
+            phone=txtPharmacyPhone.getText().toString();
+            fax=txtPharmacyFax.getText().toString();
+            address=txtPharmacyAddress.getText().toString();
+            website=txtPharmacyWebsite.getText().toString();
+            note=txtPharmacyNote.getText().toString();
 
+            return true;
+        }
         return false;
     }
 

@@ -54,6 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(PrescribeImageQuery.createImageTable());
         db.execSQL(DosageQuery.createDosageTable());
         db.execSQL(PrescriptionQuery.createPrescriptionTable());
+        db.execSQL(PharmacyQuery.createPharmacyTable());
 
 
     }
@@ -94,6 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(PrescribeImageQuery.dropTable());
         db.execSQL(PrescriptionQuery.dropTable());
         db.execSQL(DosageQuery.dropTable());
+        db.execSQL(PharmacyQuery.dropTable());
 
         onCreate(db);
     }

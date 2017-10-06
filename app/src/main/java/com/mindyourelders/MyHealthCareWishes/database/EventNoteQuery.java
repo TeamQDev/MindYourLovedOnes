@@ -32,7 +32,7 @@ public class EventNoteQuery {
     }
 
     public static String createNoteTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_NOTE + " VARCHAR(20)," + COL_DATE_TIME + " VARCHAR(10));";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_NOTE + " VARCHAR(100)," + COL_DATE_TIME + " VARCHAR(20));";
         return createTableQuery;
     }
 
