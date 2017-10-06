@@ -31,7 +31,7 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvSpecialist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,5 +39,5 @@
         android:divider="@null"
         android:scrollbars="none"
 android:layout_alignParentTop="true"
-        ></ListView>
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
 </RelativeLayout>

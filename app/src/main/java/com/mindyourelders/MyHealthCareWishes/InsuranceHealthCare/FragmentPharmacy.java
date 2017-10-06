@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -17,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,7 @@ import java.util.ArrayList;
 
 public class FragmentPharmacy extends Fragment implements View.OnClickListener{
     View rootview;
-    ListView lvPharmacy;
+    SwipeMenuListView lvPharmacy;
     ArrayList<Pharmacy> PharmacyList;
     RelativeLayout llAddPharmacy;
     Preferences preferences;
@@ -53,6 +57,10 @@ DBHelper dbHelper;
         if (PharmacyList.size()!=0) {
             PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(getActivity(), PharmacyList);
             lvPharmacy.setAdapter(pharmacyAdapter);
+            lvPharmacy.setVisibility(View.VISIBLE);
+        }
+        else{
+            lvPharmacy.setVisibility(View.GONE);
         }
     }
 
@@ -64,8 +72,41 @@ DBHelper dbHelper;
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddPharmacy= (RelativeLayout) rootview.findViewById(R.id.llAddPharmacy);
-        lvPharmacy= (ListView) rootview.findViewById(R.id.lvPharmacy);
-        setListData();
+        lvPharmacy= (SwipeMenuListView) rootview.findViewById(R.id.lvPharmacy);
+        if (PharmacyList.size()!=0) {
+            setListData();
+        }
+        lvPharmacy.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(getActivity());
+        lvPharmacy.setMenuCreator(creator);
+        lvPharmacy.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Pharmacy item = PharmacyList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deletePharmacy(item);
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void deletePharmacy(Pharmacy item) {
+        boolean flag= PharmacyQuery.deleteRecord(item.getId());
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 
     private void getData() {

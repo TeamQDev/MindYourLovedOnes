@@ -166,13 +166,13 @@ public class SpecialistQuery {
    }
 
 
-    public static boolean deleteRecord(int id) {
+    public static boolean deleteRecord(int id, int i) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "' and "+COL_ISPHISYCIAN+"='" + i +"';", null);
 
         if (c.moveToFirst()) {
             do {
-                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id + "' and "+COL_ISPHISYCIAN+"='" + i +"';");
             } while (c.moveToNext());
         }
 

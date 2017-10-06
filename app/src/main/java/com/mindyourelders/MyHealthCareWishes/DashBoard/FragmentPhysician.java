@@ -61,10 +61,14 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     }
 
     private void setListData() {
-       specialistAdapter=new SpecialistAdapter(getActivity(),specialistList);
-        lvSpecialist.setAdapter(specialistAdapter);
-
-
+        if (specialistList.size()!=0) {
+            specialistAdapter = new SpecialistAdapter(getActivity(), specialistList);
+            lvSpecialist.setAdapter(specialistAdapter);
+            lvSpecialist.setVisibility(View.VISIBLE);
+        }
+        else{
+            lvSpecialist.setVisibility(View.GONE);
+        }
     }
 
     private void initListener() {
@@ -107,7 +111,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     }
 
     private void deleteSpecialist(Specialist item) {
-        boolean flag= SpecialistQuery.deleteRecord(item.getId());
+        boolean flag= SpecialistQuery.deleteRecord(item.getId(), 1);
         if(flag==true)
         {
             Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();

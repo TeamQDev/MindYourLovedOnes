@@ -129,4 +129,18 @@ public class PharmacyQuery {
 
         return flag;
     }
-}
+
+    public static boolean deleteRecord(int id) {
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+        return true;
+    }
+    }
