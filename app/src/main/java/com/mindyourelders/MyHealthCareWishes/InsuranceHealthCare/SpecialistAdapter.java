@@ -66,7 +66,7 @@ public class SpecialistAdapter extends BaseAdapter {
             holder.txtTelePhone= (TextView) convertView.findViewById(R.id.txtTelePhone);
             holder.txtType = (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile = (ImageView) convertView.findViewById(R.id.imgProfile);
-            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+          //  holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.imgForword = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);

@@ -7,19 +7,24 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistAdapter;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
+import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -29,7 +34,7 @@ import java.util.ArrayList;
 
 public class FragmentPhysician extends Fragment implements View.OnClickListener{
     View rootview;
-    ListView lvSpecialist;
+    SwipeMenuListView lvSpecialist;
     ArrayList<Specialist> specialistList;
     RelativeLayout llAddSpecialist;
     Preferences preferences;
@@ -73,12 +78,43 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
         txtTitle.setText("Primary Physician");
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);
-        lvSpecialist= (ListView) rootview.findViewById(R.id.lvSpecialist);
+        lvSpecialist = (SwipeMenuListView) rootview.findViewById(R.id.lvSpecialist);
         if (specialistList.size()!=0||specialistList!=null)
         {
             setListData();
         }
+        lvSpecialist.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(getActivity());
+        lvSpecialist.setMenuCreator(creator);
+        lvSpecialist.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Specialist item = specialistList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deleteSpecialist(item);
+                        break;
+                }
+                return false;
+            }
+        });
 
+    }
+
+    private void deleteSpecialist(Specialist item) {
+        boolean flag= MyConnectionsQuery.deleteRecord(item.getId());
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 
     private void getData() {
