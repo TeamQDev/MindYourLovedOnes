@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -28,12 +30,13 @@ public class FragmentAids extends Fragment implements View.OnClickListener{
     ArrayList<Aides> AidesList;
     RelativeLayout llAddAides;
     Preferences preferences;
-
+DBHelper dbHelper;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_aides,null);
-        preferences = new Preferences(getActivity());
+        initComponent();
+
         getData();
         initUI();
         initListener();
@@ -41,9 +44,21 @@ public class FragmentAids extends Fragment implements View.OnClickListener{
         return rootview;
     }
 
+    private void initComponent() {
+        preferences = new Preferences(getActivity());
+        dbHelper=new DBHelper(getActivity());
+        AideQuery a=new AideQuery(getActivity(),dbHelper);
+    }
+
     private void setListData() {
+        if (AidesList.size()!=0) {
         AidesAdapter aidesAdapter=new AidesAdapter(getActivity(),AidesList);
         lvAides.setAdapter(aidesAdapter);
+            lvAides.setVisibility(View.VISIBLE);
+    }
+        else{
+            lvAides.setVisibility(View.GONE);
+    }
     }
 
     private void initListener() {
@@ -59,7 +74,8 @@ public class FragmentAids extends Fragment implements View.OnClickListener{
     }
 
     private void getData() {
-        AidesList=new ArrayList<>();
+        AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+       /* AidesList=new ArrayList<>();
 
         Aides P1=new Aides();
         P1.setFirm("Home Instead Senior Care");
@@ -86,7 +102,7 @@ public class FragmentAids extends Fragment implements View.OnClickListener{
 
         AidesList.add(P1);
         AidesList.add(P2);
-        AidesList.add(P3);
+        AidesList.add(P3);*/
 
 
     }
@@ -101,5 +117,12 @@ public class FragmentAids extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setListData();
     }
 }

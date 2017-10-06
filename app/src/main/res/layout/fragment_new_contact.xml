@@ -1154,7 +1154,7 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlCommon"
-                android:visibility="gone"
+
             >
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilAideCompName"
@@ -1297,12 +1297,33 @@ android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp" />
                 </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilAideAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilAideEmail"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/txtAideAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilAideWebsite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tilAideEmail"
+                    android:layout_below="@+id/tilAideAddress"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp">

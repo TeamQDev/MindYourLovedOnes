@@ -8,7 +8,90 @@ public class Aides {
     String firm="";
     String phone="";
     int image;
+    String fax="";
+    String website="";
 
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    String note="";
+    byte[] photo;
+
+    public String getOfficePhone() {
+        return officePhone;
+    }
+
+    public void setOfficePhone(String officePhone) {
+        this.officePhone = officePhone;
+    }
+
+    public String getHourPhone() {
+        return hourPhone;
+    }
+
+    public void setHourPhone(String hourPhone) {
+        this.hourPhone = hourPhone;
+    }
+
+    public String getOtherPhone() {
+        return otherPhone;
+    }
+
+    public void setOtherPhone(String otherPhone) {
+        this.otherPhone = otherPhone;
+    }
+
+    String officePhone="";
+    String hourPhone="";
+    String otherPhone="";
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    int id;
+    int userid;
     public int getImage() {
         return image;
     }
@@ -35,13 +118,6 @@ public class Aides {
         this.firm = firm;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getMobile() {
         return mobile;

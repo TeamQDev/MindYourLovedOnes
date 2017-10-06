@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
+import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
@@ -68,6 +69,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     TextView txtAids, txtSchedule, txtOther,txtFName,txtEmergencyNote;
 TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
+    TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
     ImageView imgEdit, imgProfile;
     View rootview;
@@ -417,10 +419,14 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
 
             case "Aides":
                 visiAides();
+                txtAdd.setText("Add Health Service");
+                txtTitle.setText("Add Health Service");
                 break;
 
             case "AidesData":
                 visiAides();
+                txtAdd.setText("Update Health Service");
+                txtTitle.setText("Update Health Service");
                 Intent aidesIntent = getActivity().getIntent();
                 if (aidesIntent.getExtras() != null) {
                     txtName.setText(aidesIntent.getExtras().getString("Name"));
@@ -620,8 +626,7 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         rlAids.setVisibility(View.VISIBLE);
         rlFinance.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
-        txtAdd.setText("Add Health Service");
-        txtTitle.setText("Add Health Service");
+
 
         tilName.setHint("Name of Firm");
         rlPharmacy.setVisibility(View.GONE);
@@ -688,6 +693,16 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         txtPharmacyWebsite = (TextView) rootview.findViewById(R.id.txtPharmacyWebsite);
         txtPharmacyNote = (TextView) rootview.findViewById(R.id.txtPharmacyNote);
 
+        //Aides
+        txtAideCompName = (TextView) rootview.findViewById(R.id.txtAideCompName);
+        txtAideOfficePhone = (TextView) rootview.findViewById(R.id.txtAideOfficePhone);
+        txtHourOfficePhone = (TextView) rootview.findViewById(R.id.txtHourOfficePhone);
+        txtOtherPhone = (TextView) rootview.findViewById(R.id.txtOtherPhone);
+        txtAideFax = (TextView) rootview.findViewById(R.id.txtAideFax);
+        txtAideEmail = (TextView) rootview.findViewById(R.id.txtAideEmail);
+        txtAideWebsite = (TextView) rootview.findViewById(R.id.txtAideWebsite);
+        txtAideNote = (TextView) rootview.findViewById(R.id.txtAideNote);
+        txtAideAddress= (TextView) rootview.findViewById(R.id.txtAideAddress);
 
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
@@ -1060,6 +1075,27 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+                    case "Aides":
+
+                        if (validate("Aides")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= AideQuery.insertAidesData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,email,mobile,phone,workphone,photo,fax,note,address);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have added Health Service successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
                 }
                 break;
             case R.id.imgEdit:
@@ -1249,6 +1285,19 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
             address=txtPharmacyAddress.getText().toString();
             website=txtPharmacyWebsite.getText().toString();
             note=txtPharmacyNote.getText().toString();
+
+            return true;
+        }
+        else if (screen.equals("Aides")) {
+            name=txtAideCompName.getText().toString();
+            mobile=txtAideOfficePhone.getText().toString();
+            phone=txtDoctorHourOfficePhone.getText().toString();
+            workphone=txtOtherPhone.getText().toString();
+            website=txtAideWebsite.getText().toString();
+            note=txtAideNote.getText().toString();
+            email=txtAideEmail.getText().toString();
+            fax=txtAideFax.getText().toString();
+            address=txtAideAddress.getText().toString();
 
             return true;
         }

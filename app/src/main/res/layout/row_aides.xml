@@ -1,45 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chauthai.swipereveallayout.SwipeRevealLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:dragEdge="right"
-    app:mode="same_level">
-
-    <FrameLayout
-        android:id="@+id/delete_layout"
-        android:layout_width="@dimen/dimension150dp"
-        android:layout_height="@dimen/dimension150dp"
-        android:background="#ffcc0000"
-        >
-      <TextView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-          android:text="DELETE"
-          android:textSize="@dimen/dimension24dp"
-          android:gravity="center"
-          android:textColor="@color/colorWhite"
-          android:background="#fa694E"
-          />
-        <!--<ImageView
-            android:layout_width="@dimen/dimension70dp"
-            android:layout_height="@dimen/dimension70dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-             android:src="@drawable/delete_icon"
-            />-->
-    </FrameLayout>
+  >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension150dp"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimension2dp"
         android:gravity="center_vertical"
       >
 
-        <ImageView
+        <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension70dp"
             android:layout_height="@dimen/dimension70dp"
@@ -47,73 +22,77 @@
             android:layout_margin="@dimen/dimension10dp"
             android:layout_centerVertical="true"
             />
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text= "Cfklj kj ouio "
-            android:textColor="@color/colorDarkBlue"
-            android:textSize="@dimen/dimension20dp"
             android:layout_toRightOf="@+id/imgProfile"
-            android:layout_marginLeft="@dimen/dimension35dp"
-            />
+            android:layout_marginLeft="@dimen/dimension25dp"
+            android:layout_toLeftOf="@+id/imgEdit"
+            >
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text= "Cfklj kj ouio "
+                android:textColor="@color/colorDarkBlue"
+                android:textSize="@dimen/dimension20dp"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text= "Primary Proxy"
+                android:textColor="@color/colorGreen"
+                android:textSize="@dimen/dimension17dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:visibility="gone"
+                android:layout_below="@+id/txtName"
+                />
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="#203,10 Downing Street, los Angeles, California."
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_below="@+id/txtType"
+                android:drawableLeft="@drawable/markers"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimension5dp"
+                android:text="8789-879-78"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension16dp"
+                android:layout_below="@+id/txtAddress"
+                android:drawableLeft="@drawable/phone"
+                android:gravity="top|left"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                />
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/imgEdit"
             android:layout_width="@dimen/dimension25dp"
             android:layout_height="@dimen/dimension25dp"
             android:src="@drawable/ic_edit_blue"
-            android:layout_toRightOf="@+id/txtName"
             android:layout_marginLeft="@dimen/dimension10dp"
-            />
-        <TextView
-            android:id="@+id/txtType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text= "Primary Proxy"
-            android:textColor="@color/colorGreen"
-            android:textSize="@dimen/dimension17dp"
-            android:layout_toRightOf="@+id/imgProfile"
-            android:layout_marginLeft="@dimen/dimension35dp"
-            android:layout_marginBottom="@dimen/dimension5dp"
-
-            android:layout_below="@+id/txtName"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimension5dp"
             />
 
-        <TextView
-            android:id="@+id/txtAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimension5dp"
-            android:text="#203,10 Downing Street, los Angeles, California."
-            android:textColor="@color/colorDarkGray"
-            android:textSize="@dimen/dimension16dp"
-            android:layout_toRightOf="@+id/imgProfile"
-            android:layout_below="@+id/txtType"
-            android:layout_marginLeft="@dimen/dimension6dp"
-            android:drawableLeft="@drawable/markers"
-            android:gravity="top|left"
-            android:drawablePadding="@dimen/dimension10dp"
-            android:layout_toLeftOf="@+id/imgForword"
-            />
-
-        <TextView
-            android:id="@+id/txtPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimension5dp"
-            android:text="8789-879-78"
-            android:textColor="@color/colorDarkGray"
-            android:textSize="@dimen/dimension16dp"
-            android:layout_toRightOf="@+id/imgProfile"
-            android:layout_below="@+id/txtAddress"
-            android:layout_marginLeft="@dimen/dimension6dp"
-            android:drawableLeft="@drawable/phone"
-            android:gravity="top|left"
-            android:drawablePadding="@dimen/dimension10dp"
-            android:layout_marginBottom="@dimen/dimension5dp"
-            />
         <ImageView
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"
@@ -133,4 +112,4 @@
             android:background="@color/colorDarkGray"
             ></View>
     </RelativeLayout>
-</com.chauthai.swipereveallayout.SwipeRevealLayout>
+</RelativeLayout>

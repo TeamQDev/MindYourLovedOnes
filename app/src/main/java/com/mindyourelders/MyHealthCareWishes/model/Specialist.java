@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Specialist implements Serializable {
     String lastseen="";
     String website="";
-    String officePhone="";
+
 
     public String getLastseen() {
         return lastseen;
@@ -50,7 +50,7 @@ public class Specialist implements Serializable {
     public void setOtherPhone(String otherPhone) {
         this.otherPhone = otherPhone;
     }
-
+    String officePhone="";
     String hourPhone="";
     String otherPhone="";
 

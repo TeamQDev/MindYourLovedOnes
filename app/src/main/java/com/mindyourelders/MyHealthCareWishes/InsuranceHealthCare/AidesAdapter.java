@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,7 @@ public class AidesAdapter extends BaseAdapter {
             holder.txtPhone = (TextView) convertView.findViewById(R.id.txtPhone);
             holder.txtType = (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile = (ImageView) convertView.findViewById(R.id.imgProfile);
-            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+//            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.imgForword = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);
@@ -70,12 +72,13 @@ public class AidesAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtName.setText(AidesList.get(position).getFirm());
+        holder.txtName.setText(AidesList.get(position).getAidName());
         holder.txtAddress.setText(AidesList.get(position).getAddress());
-        holder.txtPhone.setText(AidesList.get(position).getPhone());
-        holder.txtType.setText(AidesList.get(position).getAidName());
-        holder.imgProfile.setImageResource(AidesList.get(position).getImage());
-
+        holder.txtPhone.setText(AidesList.get(position).getOfficePhone());
+       // holder.imgProfile.setImageResource(AidesList.get(position).getImage());
+        byte[] photo=AidesList.get(position).getPhoto();
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        holder.imgProfile.setImageBitmap(bmp);
 
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +89,7 @@ public class AidesAdapter extends BaseAdapter {
                 i.putExtra("Name", aides.getFirm());
                 i.putExtra("AideName", aides.getAidName());
                 i.putExtra("Address", aides.getAddress());
-                i.putExtra("Phone", aides.getPhone());
+                i.putExtra("Phone", aides.getOfficePhone());
                 i.putExtra("Photo", aides.getImage());
                 context.startActivity(i);
             }
@@ -100,7 +103,7 @@ public class AidesAdapter extends BaseAdapter {
                 i.putExtra("Name", aides.getFirm());
                 i.putExtra("AideName", aides.getAidName());
                 i.putExtra("Address", aides.getAddress());
-                i.putExtra("Phone", aides.getPhone());
+                i.putExtra("Phone", aides.getOfficePhone());
                 i.putExtra("Photo", aides.getImage());
                 context.startActivity(i);
             }
