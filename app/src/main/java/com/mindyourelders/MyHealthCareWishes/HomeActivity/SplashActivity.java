@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
@@ -41,7 +38,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 // method for adding indicators
         addBottomDots(0);
 
-        final Handler handler = new Handler();
+      /*  final Handler handler = new Handler();
 
         final Runnable update = new Runnable() {
             public void run() {
@@ -60,7 +57,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             public void run() {
                 handler.post(update);
             }
-        }, 100, 5000);
+        }, 100, 5000);*/
 
 
 

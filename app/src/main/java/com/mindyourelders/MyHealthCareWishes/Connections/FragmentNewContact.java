@@ -108,6 +108,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     DBHelper dbHelper;
     int id;
+    int isPhysician;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_new_contact, null);
@@ -290,10 +291,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "Speciality":
                 visiSpecialist();
+                txtAdd.setText("Add Doctor");
+                txtTitle.setText("Add Doctor");
                 break;
 
             case "Physician":
-                
                 visiSpecialist();
                 txtAdd.setText("Add Physician");
                 txtTitle.setText("Add Physician");
@@ -320,6 +322,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
                     id=specialist.getId();
+                    isPhysician=specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
                         if (specialist.getType().equals(healthSpeciality[i])) {
@@ -327,6 +330,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         }
                     }
                     spinner.setSelection(index+1);
+
+                    byte[] photo=specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+
                 }
                 break;
 
@@ -921,22 +929,57 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
-                    case "SpecialistData":
+
+                    case "Speciality":
+
                         if (validate("Physician")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= SpecialistQuery.updatePhysicianData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1,lastseen);
+                            Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,2,lastseen);
                             if (flag==true)
                             {
-                                Toast.makeText(getActivity(),"You have updated physician contact successfully",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),"You have added doctor contact successfully",Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
                             }
                             else{
                                 Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
                             }
                             Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+                    case "SpecialistData":
+                        if (validate("Physician")) {
+
+
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            if (isPhysician==1) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 1, lastseen);
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(isPhysician==2)
+                            {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 2, lastseen);
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            }
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -1069,9 +1112,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         }
         else if(screen.equals("Proxy"))
         {
-            relation=Relationship[indexValue-1];
+            relation=Relationship[indexValue];
             int indexValues = spinnerProxy.getSelectedItemPosition();
-            proxy=proxyType[indexValues-1];
+            proxy=proxyType[indexValues];
             if (proxy.equals("Primary")) {
                 prox=1;
             }else if (proxy.equals("Secondary"))

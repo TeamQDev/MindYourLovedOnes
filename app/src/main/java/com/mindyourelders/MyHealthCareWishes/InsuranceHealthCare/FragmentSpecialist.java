@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -28,11 +30,12 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
     ArrayList<Specialist> specialistList;
     RelativeLayout llAddSpecialist;
     Preferences preferences;
+    DBHelper dbHelper;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_specialist,null);
-        preferences = new Preferences(getActivity());
+        initComponent();
         getData();
         initUI();
         initListener();
@@ -40,9 +43,17 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
         return rootview;
     }
 
+    private void initComponent() {
+        preferences = new Preferences(getActivity());
+        dbHelper=new DBHelper(getActivity());
+        SpecialistQuery s=new SpecialistQuery(getActivity(),dbHelper);
+    }
+
     private void setListData() {
-        SpecialistAdapter specialistAdapter=new SpecialistAdapter(getActivity(),specialistList);
-        lvSpecialist.setAdapter(specialistAdapter);
+        if (specialistList.size()!=0) {
+            SpecialistAdapter specialistAdapter = new SpecialistAdapter(getActivity(), specialistList);
+            lvSpecialist.setAdapter(specialistAdapter);
+        }
 
 
     }
@@ -57,11 +68,13 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);
         lvSpecialist= (ListView) rootview.findViewById(R.id.lvSpecialist);
+
         setListData();
     }
 
     private void getData() {
-        specialistList=new ArrayList<>();
+        specialistList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
+     //   specialistList=new ArrayList<>();
 
         /*Specialist P1=new Specialist();
         P1.setName("Dr. John");
@@ -109,5 +122,12 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
         //preferences.putString(PrefConstants.SOURCE,"Speciality");
         Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setListData();
     }
 }

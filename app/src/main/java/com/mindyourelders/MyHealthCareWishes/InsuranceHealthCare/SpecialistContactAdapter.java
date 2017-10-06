@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.DashBoard.EmergencyInfoActivity;
@@ -52,7 +53,16 @@ class SpecialistContactAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = lf.inflate(R.layout.row_specialists, parent, false);
+            convertView = lf.inflate(R.layout.row_specialistsnew, parent, false);
+        }
+
+        RelativeLayout rlmain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+        if (position%2==0)
+        {
+            rlmain.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+        }
+        else{
+            rlmain.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
         }
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
         ImageView imgLogo= (ImageView) convertView.findViewById(R.id.imgLogo);

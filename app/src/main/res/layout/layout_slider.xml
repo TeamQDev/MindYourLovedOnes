@@ -8,13 +8,14 @@
     <ImageView
         android:id="@+id/im_slider"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension300dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:layout_above="@+id/rlBottom"
         />
     <RelativeLayout
+        android:id="@+id/rlBottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/im_slider"
+        android:layout_height="@dimen/dimension200dp"
         android:background="#000000"
         android:alpha="0.65"
         android:paddingTop="15dp"

@@ -51,5 +51,6 @@
     android:divider="@null"
         android:layout_below="@+id/header"
         android:layout_marginTop="@dimen/dimension15dp"
+        android:background="@color/colorLightBlue"
     ></ListView>
 </RelativeLayout>
