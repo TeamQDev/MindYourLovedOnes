@@ -4,13 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     >
+
     <RelativeLayout
         android:id="@+id/rlDoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
         android:background="@drawable/gray_white_border"
-        android:padding="@dimen/dimension5dp">
+        android:padding="@dimen/dimension5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/txtNote"
@@ -24,6 +27,7 @@
             android:ellipsize="end"
             android:textStyle="bold"
             />
+
         <TextView
             android:id="@+id/txtDateTime"
             style="@style/EmergencyDesc"

@@ -30,7 +30,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     Context context=this;
     SwipeMenuListView lvNote;
     ArrayList<Note> noteList=new ArrayList<>();
-    ImageView imgBack,imgAdd;
+    ImageView imgBack,imgAdd,imgEdit;
     TextView txtView;
     Preferences preferences;
     DBHelper dbHelper;
@@ -48,11 +48,13 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     private void initListener() {
         imgAdd.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+
     }
 
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
+        //imgEdit= (ImageView) findViewById(R.id.imgEdit);
         lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
         txtView= (TextView) findViewById(R.id.txtView);
         if (noteList.size()!=0) {
