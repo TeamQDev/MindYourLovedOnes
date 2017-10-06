@@ -2,12 +2,9 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,7 +75,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
     }
-    public void onWindowFocusChanged(boolean hasFocus)
+ /*   public void onWindowFocusChanged(boolean hasFocus)
     {
         super.onWindowFocusChanged(hasFocus);
         resizeImage(img1);
@@ -109,5 +106,5 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                 FrameLayout.LayoutParams.WRAP_CONTENT));
         img.getLayoutParams().width = intendedWidth;
         img.getLayoutParams().height = newHeight;
-    }
+    }*/
 }

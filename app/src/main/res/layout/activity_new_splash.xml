@@ -6,70 +6,69 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SplashActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/llSplash">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
-
+        android:weightSum="2"
+        android:layout_above="@+id/llSplash"
         >
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
+            android:layout_height="@dimen/dimension0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="2"
             >
-       <ImageView
-           android:id="@+id/img1"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:src="@drawable/splash_one"
-           />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="@dimen/dimension0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/splash_one"
+                    android:scaleType="fitXY"
+                    android:layout_weight="1"
+                    />
 
-            >
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/splash_two"
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="@dimen/dimension0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/splash_two"
+                    android:scaleType="fitXY"
+                    android:layout_weight="1"
+                    />
 
-            />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="2"
+        >
 
-            >
         <ImageView
             android:id="@+id/img3"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimension0dp"
             android:layout_height="match_parent"
             android:src="@drawable/splash_three"
-
+            android:scaleType="fitXY"
+            android:layout_weight="1"
             />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            >
         <ImageView
             android:id="@+id/img4"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimension0dp"
             android:layout_height="match_parent"
             android:src="@drawable/splash_four"
-
+            android:scaleType="fitXY"
+            android:layout_weight="1"
             />
-        </FrameLayout>
+
+        </LinearLayout>
     </LinearLayout>
-</ScrollView>
+
     <LinearLayout
         android:id="@+id/llSplash"
         android:layout_width="match_parent"
