@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by varsha on 9/8/2017.
  */
 
-public class Aides {
+public class Aides implements Serializable {
     String firm="";
     String phone="";
     int image;

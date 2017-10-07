@@ -32,10 +32,14 @@ import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
+import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
+import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
@@ -65,10 +69,10 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     TextView txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
     TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
-    TextView txtDoctorAddress,txtDoctorLastSeen;
-
-    TextView txtAids, txtSchedule, txtOther,txtFName,txtEmergencyNote;
-TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
+    TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
+TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
+    TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
+   TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
     ImageView imgEdit, imgProfile;
@@ -79,7 +83,7 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
 
-    String name, email, mobile, speciality,phone,address,workphone,note;
+    String name, email, mobile, speciality,phone,address,workphone,note,member,group,subscriber,type;
     String network,affil,practice_name,website,lastseen;
     String fax="";
     String relation="";
@@ -374,10 +378,14 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
 
             case "Insurance":
                 visiInsurance();
+                txtAdd.setText("Add Insurance");
+                txtTitle.setText("Add Insurance");
                 break;
 
             case "InsuranceData":
                 visiInsurance();
+                txtAdd.setText("Update Insurance");
+                txtTitle.setText("Update Insurance");
                 Intent insuranceIntent = getActivity().getIntent();
                 if (insuranceIntent.getExtras() != null) {
                     txtInsuaranceName.setText(insuranceIntent.getExtras().getString("Name"));
@@ -429,11 +437,24 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
                 txtTitle.setText("Update Health Service");
                 Intent aidesIntent = getActivity().getIntent();
                 if (aidesIntent.getExtras() != null) {
-                    txtName.setText(aidesIntent.getExtras().getString("Name"));
-                    txtMobile.setText(aidesIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(aidesIntent.getExtras().getString("Address"));
-                    txtAids.setText(aidesIntent.getExtras().getString("AideName"));
+                    Aides aides= (Aides) aidesIntent.getSerializableExtra("AideObject");
+                    txtAideCompName.setText(aides.getAidName());
+                    txtAideOfficePhone.setText(aides.getOfficePhone());
+                    txtHourOfficePhone.setText(aides.getHourPhone());
+                    txtOtherPhone.setText(aides.getOtherPhone());
+                    txtAideFax.setText(aides.getFax());
+                    txtAideEmail.setText(aides.getEmail());
+                    txtAideAddress.setText(aides.getAddress());
+                    txtAideWebsite.setText(aides.getWebsite());
+                    txtAideWebsite.setText(aides.getWebsite());
+                    txtAideNote.setText(aides.getNote());
+                    id=aides.getId();
+
+                    byte[] photo=aides.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
+
                 break;
 
             case "AidesViewData":
@@ -450,23 +471,40 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
 
             case "Finance":
                 visiFinance();
+                txtAdd.setText("Add Finane and Legal");
+                txtTitle.setText("Add Finane and Legal");
                 break;
 
             case "FinanceData":
                 visiFinance();
-                Intent finaceIntent = getActivity().getIntent();
-                if (finaceIntent.getExtras() != null) {
+                txtAdd.setText("Update Finane and Legal");
+                txtTitle.setText("Update Finane and Legal");
+                Intent financeIntent = getActivity().getIntent();
+                if (financeIntent.getExtras() != null) {
+                    Finance specialist = (Finance) financeIntent.getExtras().getSerializable("FinanceObject");
+
+                    txtFName.setText(specialist.getName());
+                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
+                    txtLastSeen.setText(specialist.getLastseen());
+                    txtFinanceAddress.setText(specialist.getAddress());
+                    txtFinanceWebsite.setText(specialist.getWebsite());
+                    txtFinanceFax.setText(specialist.getFax());
+                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
+                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
+                    txtFinancePracticeName.setText(specialist.getPracticeName());
+                    txtFinanceNote.setText(specialist.getNote());
+                    id = specialist.getId();
                     int index = 0;
                     for (int i = 0; i < financeType.length; i++) {
-                        if (finaceIntent.getExtras().getString("Category").equals(insuaranceType[i])) {
+                        if (specialist.getCategory().equals(financeType[i])) {
                             index = i;
                         }
                     }
-                    spinnerFinance.setSelection(index);
-                    txtFName.setText(finaceIntent.getExtras().getString("Firm"));
-                    txtName.setText(finaceIntent.getExtras().getString("Name"));
-                    txtMobile.setText(finaceIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(finaceIntent.getExtras().getString("Address"));
+                    spinnerFinance.setSelection(index + 1);
+
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
                 break;
 
@@ -609,8 +647,7 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         rlAids.setVisibility(View.GONE);
         rlFinance.setVisibility(View.VISIBLE);
         rlProxy.setVisibility(View.GONE);
-        txtAdd.setText("Add Finane and Legal");
-        txtTitle.setText("Add Finane and Legal");
+
         tilFName.setHint("Name");
         tilName.setHint("Name");
         rlPharmacy.setVisibility(View.GONE);
@@ -661,8 +698,7 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         rlInsurance.setVisibility(View.VISIBLE);
         rlAids.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
-        txtAdd.setText("Add Insurance");
-        txtTitle.setText("Add Insurance");
+
         tilName.setHint("Name of Firm");
         rlPharmacy.setVisibility(View.GONE);
     }
@@ -703,6 +739,25 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         txtAideWebsite = (TextView) rootview.findViewById(R.id.txtAideWebsite);
         txtAideNote = (TextView) rootview.findViewById(R.id.txtAideNote);
         txtAideAddress= (TextView) rootview.findViewById(R.id.txtAideAddress);
+
+        //Finance
+        txtFinanceOfficePhone = (TextView) rootview.findViewById(R.id.txtFinanceOfficePhone);
+        txtFinanceMobilePhone = (TextView) rootview.findViewById(R.id.txtFinanceMobilePhone);
+        txtFinanceOtherPhone = (TextView) rootview.findViewById(R.id.txtFinanceOtherPhone);
+        txtFinanceFax = (TextView) rootview.findViewById(R.id.txtFinanceFax);
+        txtFinanceAddress = (TextView) rootview.findViewById(R.id.txtFinanceAddress);
+        txtFinanceWebsite = (TextView) rootview.findViewById(R.id.txtFinanceWebsite);
+        txtFinancePracticeName = (TextView) rootview.findViewById(R.id.txtFinancePracticeName);
+        txtLastSeen = (TextView) rootview.findViewById(R.id.txtLastSeen);
+        txtFinanceNote= (TextView) rootview.findViewById(R.id.txtFinanceNote);
+
+        // Insurance
+        txtSubscribe = (TextView) rootview.findViewById(R.id.txtSubscribe);
+        txtInsuaranceFax = (TextView) rootview.findViewById(R.id.txtInsuaranceFax);
+        txtInsuaranceEmail = (TextView) rootview.findViewById(R.id.txtInsuaranceEmail);
+        txtWebsite = (TextView) rootview.findViewById(R.id.txtWebsite);
+        txtInsuaranceNote = (TextView) rootview.findViewById(R.id.txtInsuaranceNote);
+
 
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
@@ -1096,6 +1151,86 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+                    case "AidesData":
+
+                        if (validate("Aides")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= AideQuery.updateAideData(id,name,website,email,mobile,phone,workphone,photo,fax,note,address);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated Health Service successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+                    case "Finance":
+
+                        if (validate("Finance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case "FinanceData":
+
+                        if (validate("Finance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case "Insurance":
+
+                        if (validate("Insurance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
                 }
                 break;
             case R.id.imgEdit:
@@ -1291,13 +1426,45 @@ TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtP
         else if (screen.equals("Aides")) {
             name=txtAideCompName.getText().toString();
             mobile=txtAideOfficePhone.getText().toString();
-            phone=txtDoctorHourOfficePhone.getText().toString();
+            phone=txtHourOfficePhone.getText().toString();
             workphone=txtOtherPhone.getText().toString();
             website=txtAideWebsite.getText().toString();
             note=txtAideNote.getText().toString();
             email=txtAideEmail.getText().toString();
             fax=txtAideFax.getText().toString();
             address=txtAideAddress.getText().toString();
+
+            return true;
+        }
+        else if (screen.equals("Finance")) {
+
+            name=txtFName.getText().toString();
+            mobile=txtFinanceOfficePhone.getText().toString();
+            phone=txtFinanceMobilePhone.getText().toString();
+            workphone=txtFinanceOtherPhone.getText().toString();
+            fax=txtFinanceFax.getText().toString();
+            address=txtFinanceAddress.getText().toString();
+            website=txtFinanceWebsite.getText().toString();
+            lastseen=txtLastSeen.getText().toString();
+            int indexValuex = spinnerFinance.getSelectedItemPosition();
+            speciality=financeType[indexValuex-1];
+            practice_name=txtFinancePracticeName.getText().toString();
+            note=txtFinanceNote.getText().toString();
+            return true;
+        }
+        else if (screen.equals("Insurance")) {
+            name=txtInsuaranceName.getText().toString();
+            phone=txtInsuarancePhone.getText().toString();
+            fax=txtInsuaranceFax.getText().toString();
+            address=txtAddress.getText().toString();
+            website=txtWebsite.getText().toString();
+            note=txtInsuaranceNote.getText().toString();
+            member=txtMember.getText().toString();
+            group=txtGroup.getText().toString();
+            subscriber=txtSubscribe.getText().toString();
+            int indexValuex = spinnerInsuarance.getSelectedItemPosition();
+            type=insuaranceType[indexValuex-1];
+
 
             return true;
         }

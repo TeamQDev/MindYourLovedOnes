@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -22,18 +24,19 @@ import java.util.ArrayList;
  * Created by varsha on 8/28/2017.
  */
 
-public class FragmentInsurance extends Fragment implements View.OnClickListener{
+public class FragmentInsurance extends Fragment implements View.OnClickListener {
     View rootview;
     ListView lvInsurance;
     ArrayList<Insurance> insuranceList;
     RelativeLayout llAddInsurance;
     Preferences preferences;
+    DBHelper dbHelper;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootview=inflater.inflate(R.layout.fragment_insurance,null);
-        preferences = new Preferences(getActivity());
+        rootview = inflater.inflate(R.layout.fragment_insurance, null);
+        initComponent();
         getData();
         initUI();
         initListener();
@@ -41,11 +44,20 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener{
         return rootview;
     }
 
+    private void initComponent() {
+        preferences = new Preferences(getActivity());
+        dbHelper = new DBHelper(getActivity());
+        InsuranceQuery i = new InsuranceQuery(getActivity(), dbHelper);
+    }
+
     private void setListData() {
-        InsuranceAdapter insuranceAdapter=new InsuranceAdapter(getActivity(),insuranceList);
-        lvInsurance.setAdapter(insuranceAdapter);
-
-
+        if (insuranceList.size() != 0) {
+            InsuranceAdapter insuranceAdapter = new InsuranceAdapter(getActivity(), insuranceList);
+            lvInsurance.setAdapter(insuranceAdapter);
+            lvInsurance.setVisibility(View.VISIBLE);
+        } else {
+            lvInsurance.setVisibility(View.GONE);
+        }
     }
 
     private void initListener() {
@@ -56,13 +68,14 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener{
     private void initUI() {
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
-        llAddInsurance= (RelativeLayout) rootview.findViewById(R.id.llAddInsurance);
-        lvInsurance= (ListView) rootview.findViewById(R.id.lvInsurance);
+        llAddInsurance = (RelativeLayout) rootview.findViewById(R.id.llAddInsurance);
+        lvInsurance = (ListView) rootview.findViewById(R.id.lvInsurance);
         setListData();
     }
 
     private void getData() {
-        insuranceList=new ArrayList<>();
+        insuranceList = InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+       /* insuranceList=new ArrayList<>();
 
         Insurance P1=new Insurance();
         P1.setName("Symphonix Health");
@@ -118,7 +131,7 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener{
         insuranceList.add(P4);
         insuranceList.add(P5);
 
-
+*/
     }
 
     @Override
@@ -126,10 +139,17 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.llAddInsurance:
-                preferences.putString(PrefConstants.SOURCE,"Insurance");
-                Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
+                preferences.putString(PrefConstants.SOURCE, "Insurance");
+                Intent i = new Intent(getActivity(), GrabConnectionActivity.class);
                 startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setListData();
     }
 }

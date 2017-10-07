@@ -113,7 +113,7 @@ public class AideQuery {
         return flag;
     }
 
-    public static Boolean updateAideData(int id, String name, String website, String email, String officephone,String hourPhone,String otherphone, String phone, byte[] photo, String fax, String note,String address) {
+    public static Boolean updateAideData(int id, String name, String website, String email, String officephone,String hourPhone,String otherphone, byte[] photo, String fax, String note,String address) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 

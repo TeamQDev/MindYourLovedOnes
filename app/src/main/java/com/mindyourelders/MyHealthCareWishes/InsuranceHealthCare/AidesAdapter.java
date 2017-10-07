@@ -86,11 +86,7 @@ public class AidesAdapter extends BaseAdapter {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE, "AidesData");
                 Aides aides = AidesList.get(position);
-                i.putExtra("Name", aides.getFirm());
-                i.putExtra("AideName", aides.getAidName());
-                i.putExtra("Address", aides.getAddress());
-                i.putExtra("Phone", aides.getOfficePhone());
-                i.putExtra("Photo", aides.getImage());
+                i.putExtra("AideObject",aides);
                 context.startActivity(i);
             }
         });

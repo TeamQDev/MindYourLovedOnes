@@ -75,6 +75,7 @@ DBHelper dbHelper;
 
     private void getData() {
         AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
        /* AidesList=new ArrayList<>();
 
         Aides P1=new Aides();

@@ -44,14 +44,11 @@
             android:layout_width="@dimen/dimension60dp"
             android:layout_height="@dimen/dimension60dp"
             android:src="@drawable/ic_user_one"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_marginRight="@dimen/dimension10dp"
-            android:layout_marginTop="@dimen/dimension5dp"
-            android:layout_marginBottom="@dimen/dimension5dp"
-            android:layout_centerVertical="true"
             android:scaleType="fitXY"
-
-            />
+android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <RelativeLayout
             android:id="@+id/rlName"
             android:layout_width="match_parent"

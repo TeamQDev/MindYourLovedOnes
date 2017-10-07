@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +67,7 @@ public class FinanceAdapter extends BaseAdapter {
             holder.imgProfile = (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgForward = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+//            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -73,11 +75,13 @@ public class FinanceAdapter extends BaseAdapter {
 
         holder.txtName.setText(FinanceList.get(position).getName());
         holder.txtAddress.setText(FinanceList.get(position).getAddress());
-        holder.txtPhone.setText(FinanceList.get(position).getPhone());
+        holder.txtPhone.setText(FinanceList.get(position).getOfficePhone());
         holder.txtType.setText(FinanceList.get(position).getName());
         holder.txtCategory.setText(FinanceList.get(position).getCategory());
-        holder.imgProfile.setImageResource(FinanceList.get(position).getImage());
-
+        //holder.imgProfile.setImageResource(FinanceList.get(position).getImage());
+        byte[] photo=FinanceList.get(position).getPhoto();
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        holder.imgProfile.setImageBitmap(bmp);
 
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,12 +89,7 @@ public class FinanceAdapter extends BaseAdapter {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE, "FinanceData");
                 Finance finance = FinanceList.get(position);
-                i.putExtra("Category", finance.getCategory());
-                i.putExtra("Firm", finance.getFirm());
-                i.putExtra("Name", finance.getName());
-                i.putExtra("Address", finance.getAddress());
-                i.putExtra("Phone", finance.getPhone());
-                i.putExtra("Photo", finance.getImage());
+                i.putExtra("FinanceObject",finance);
                 context.startActivity(i);
             }
         });

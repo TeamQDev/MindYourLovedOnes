@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -28,12 +30,12 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
     ArrayList<Finance> FinanceList;
     RelativeLayout llAddFinance;
     Preferences preferences;
-
+DBHelper dbHelper;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_finance,null);
-        preferences = new Preferences(getActivity());
+       initComponent();
         getData();
         initUI();
         initListener();
@@ -41,9 +43,21 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
         return rootview;
     }
 
+    private void initComponent() {
+        preferences = new Preferences(getActivity());
+        dbHelper=new DBHelper(getActivity());
+        FinanceQuery f=new FinanceQuery(getActivity(),dbHelper);
+    }
+
     private void setListData() {
+        if (FinanceList.size()!=0) {
         FinanceAdapter financeAdapter=new FinanceAdapter(getActivity(),FinanceList);
         lvFinance.setAdapter(financeAdapter);
+            lvFinance.setVisibility(View.VISIBLE);
+        }
+        else{
+            lvFinance.setVisibility(View.GONE);
+        }
     }
 
     private void initListener() {
@@ -51,7 +65,6 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
     }
 
     private void initUI() {
-
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddFinance= (RelativeLayout) rootview.findViewById(R.id.llAddFinance);
         lvFinance= (ListView) rootview.findViewById(R.id.lvFinance);
@@ -59,7 +72,8 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
     }
 
     private void getData() {
-        FinanceList=new ArrayList<>();
+        FinanceList= FinanceQuery.fetchAllFinanceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+       /* FinanceList=new ArrayList<>();
 
         Finance P1=new Finance();
         P1.setFirm("Grand Capital");
@@ -89,7 +103,7 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
 
         FinanceList.add(P1);
         FinanceList.add(P2);
-        FinanceList.add(P3);
+        FinanceList.add(P3);*/
 
 
     }
@@ -104,5 +118,12 @@ public class FragmentFinance extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setListData();
     }
 }

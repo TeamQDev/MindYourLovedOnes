@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,13 +61,11 @@ public class InsuranceAdapter extends BaseAdapter {
             convertView=lf.inflate(R.layout.row_insurance,parent,false);
             holder=new ViewHolder();
             holder.txtName= (TextView) convertView.findViewById(R.id.txtName);
-            holder.txtId= (TextView) convertView.findViewById(R.id.txtId);
+
             holder.txtPhone= (TextView) convertView.findViewById(R.id.txtPhone);
-            holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
-            holder.txtGroup= (TextView) convertView.findViewById(R.id.txtGroup);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
-            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
+           // holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);
         }
@@ -74,11 +74,11 @@ public class InsuranceAdapter extends BaseAdapter {
         }
 
         holder.txtName.setText(insuranceList.get(position).getName()+" - "+insuranceList.get(position).getType());
-        holder.txtId.setText(insuranceList.get(position).getId());
         holder.txtPhone.setText(insuranceList.get(position).getPhone());
-        holder.txtGroup.setText(insuranceList.get(position).getGroup());
-        holder.imgProfile.setImageResource(insuranceList.get(position).getImage());
-
+      //  holder.imgProfile.setImageResource(insuranceList.get(position).getImage());
+        byte[] photo=insuranceList.get(position).getPhoto();
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        holder.imgProfile.setImageBitmap(bmp);
 
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override

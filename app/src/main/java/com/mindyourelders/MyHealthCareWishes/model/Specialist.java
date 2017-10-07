@@ -108,7 +108,7 @@ public class Specialist implements Serializable {
         this.practiceName = practiceName;
     }
 
-    String practiceName;
+
     public byte[] getPhoto() {
         return photo;
     }
@@ -116,7 +116,7 @@ public class Specialist implements Serializable {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
-
+    String practiceName;
     byte[] photo;
     int id;
     String email="";
