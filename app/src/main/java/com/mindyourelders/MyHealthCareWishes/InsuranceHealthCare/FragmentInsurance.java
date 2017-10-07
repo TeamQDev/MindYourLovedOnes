@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -17,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,7 @@ import java.util.ArrayList;
 
 public class FragmentInsurance extends Fragment implements View.OnClickListener {
     View rootview;
-    ListView lvInsurance;
+    SwipeMenuListView lvInsurance;
     ArrayList<Insurance> insuranceList;
     RelativeLayout llAddInsurance;
     Preferences preferences;
@@ -69,8 +73,40 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddInsurance = (RelativeLayout) rootview.findViewById(R.id.llAddInsurance);
-        lvInsurance = (ListView) rootview.findViewById(R.id.lvInsurance);
+        lvInsurance = (SwipeMenuListView) rootview.findViewById(R.id.lvInsurance);
         setListData();
+
+        lvInsurance.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(getActivity());
+        lvInsurance.setMenuCreator(creator);
+        lvInsurance.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Insurance item = insuranceList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deleteInsurance(item);
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void deleteInsurance(Insurance item) {
+        boolean flag= InsuranceQuery.deleteRecord(item.getId());
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 
     private void getData() {

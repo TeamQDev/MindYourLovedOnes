@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chauthai.swipereveallayout.SwipeRevealLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
@@ -10,29 +10,7 @@
 
     >
 
-    <FrameLayout
-        android:id="@+id/delete_layout"
-        android:layout_width="@dimen/dimension120dp"
-        android:layout_height="wrap_content"
-        android:background="#ffcc0000"
-        >
-      <TextView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-          android:text="DELETE"
-          android:textSize="@dimen/dimension24dp"
-          android:gravity="center"
-          android:textColor="@color/colorWhite"
-          android:background="#fa694E"
-          />
-        <!--<ImageView
-            android:layout_width="@dimen/dimension70dp"
-            android:layout_height="@dimen/dimension70dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-             android:src="@drawable/delete_icon"
-            />-->
-    </FrameLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -173,4 +151,4 @@ android:visibility="gone"
            android:layout_alignParentBottom="true"
             ></View>
     </RelativeLayout>
-</com.chauthai.swipereveallayout.SwipeRevealLayout>
+</RelativeLayout>

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class InsuranceAdapter extends BaseAdapter {
     Context context;
+    //SwipeMenuListView lvInsurance;
     ArrayList<Insurance> insuranceList;
     LayoutInflater lf;
     ViewHolder holder;
