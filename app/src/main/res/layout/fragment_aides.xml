@@ -29,7 +29,7 @@
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvAides"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,5 +38,5 @@
         android:scrollbars="none"
         android:paddingTop="@dimen/dimension15dp"
         android:layout_alignParentTop="true"
-        ></ListView>
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
 </RelativeLayout>

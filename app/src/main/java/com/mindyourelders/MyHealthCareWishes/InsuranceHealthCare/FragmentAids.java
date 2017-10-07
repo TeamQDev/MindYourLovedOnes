@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
@@ -17,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,7 @@ import java.util.ArrayList;
 
 public class FragmentAids extends Fragment implements View.OnClickListener{
     View rootview;
-    ListView lvAides;
+    SwipeMenuListView lvAides;
     ArrayList<Aides> AidesList;
     RelativeLayout llAddAides;
     Preferences preferences;
@@ -69,8 +73,40 @@ DBHelper dbHelper;
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddAides= (RelativeLayout) rootview.findViewById(R.id.llAddAides);
-        lvAides= (ListView) rootview.findViewById(R.id.lvAides);
+        lvAides = (SwipeMenuListView) rootview.findViewById(R.id.lvAides);
         setListData();
+
+        lvAides.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(getActivity());
+        lvAides.setMenuCreator(creator);
+        lvAides.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Aides item = AidesList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deleteAides(item);
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void deleteAides(Aides item) {
+        boolean flag= AideQuery.deleteRecord(item.getId());
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 
     private void getData() {
