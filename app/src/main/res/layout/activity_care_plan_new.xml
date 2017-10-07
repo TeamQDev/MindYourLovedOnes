@@ -50,9 +50,9 @@
             android:id="@+id/rlAD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorSkyBlue"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
-          android:layout_below="@id/header"
+            android:layout_below="@+id/header"
             >
 
             <ImageView
@@ -84,7 +84,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
+            android:background="@color/colorLightGray"
             android:layout_below="@id/rlAD"
             >
 
@@ -128,7 +128,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />
@@ -138,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
+            android:background="@color/colorSkyBlue"
             android:layout_below="@id/rlLegal"
             >
 
@@ -171,7 +171,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />
@@ -181,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
+            android:background="@color/colorLightGray"
             android:layout_below="@id/rlHome"
             >
 
@@ -214,7 +214,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />
@@ -224,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
+            android:background="@color/colorSkyBlue"
             android:layout_below="@id/rlInsurance"
             >
 
@@ -257,7 +257,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />
@@ -267,7 +267,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gradient_background"
+            android:background="@color/colorLightGray"
             android:layout_below="@id/rlMedical"
             >
 
@@ -300,7 +300,7 @@
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
-                android:src="@drawable/white_forword"
+                android:src="@drawable/forword"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/dimension5dp"
                 />

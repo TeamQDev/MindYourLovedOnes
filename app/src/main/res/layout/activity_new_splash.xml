@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SplashActivity">
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rlTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlue">
+    <ImageView
+        android:id="@+id/imgABa"
+        android:layout_width="@dimen/dimension80dp"
+        android:layout_height="@dimen/dimension60dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/aba"
+        android:layout_marginRight="@dimen/dimension20dp"
+        />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llTOp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="2"
-        android:layout_above="@+id/llSplash"
+        android:layout_below="@+id/rlTop"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +87,8 @@
         android:id="@+id/llSplash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+
+        android:layout_below="@+id/llTOp"
         android:orientation="horizontal">
 
         <TextView
@@ -92,5 +107,22 @@
             android:background="@color/colorGreen"
             android:text="I'm Registered" />
     </LinearLayout>
-
+    <RelativeLayout
+        android:id="@+id/rlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:layout_below="@+id/llSplash"
+        android:layout_alignParentBottom="true"
+        >
+        <com.mindyourelders.MyHealthCareWishes.customview.TextViewRomanS
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimension20dp"
+            android:textColor="@color/colorWhite"
+           android:text="Courtesy of Barbara Keller from Mind Your Elders"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            />
+        </RelativeLayout>
 </RelativeLayout>
