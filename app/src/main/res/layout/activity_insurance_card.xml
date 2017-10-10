@@ -31,7 +31,7 @@
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_alignParentTop="true"
         android:layout_above="@+id/llAddCard"
         android:layout_toRightOf="@+id/txtView"
-        android:layout_toEndOf="@+id/txtView"></ListView>
+        android:layout_toEndOf="@+id/txtView"></com.baoyz.swipemenulistview.SwipeMenuListView>
     <TextView
         android:id="@+id/txtView"
         android:layout_width="match_parent"

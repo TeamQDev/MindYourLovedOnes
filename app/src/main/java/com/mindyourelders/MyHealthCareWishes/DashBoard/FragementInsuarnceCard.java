@@ -11,16 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.CardQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -33,7 +37,7 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgBack;
 public class FragementInsuarnceCard extends Fragment implements View.OnClickListener{
 Preferences preferences;
     View rootview;
-    ListView lvCard;
+    SwipeMenuListView lvCard;
 
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
@@ -85,7 +89,7 @@ Preferences preferences;
 
     private void initUI() {
         llAddCard= (RelativeLayout) rootview.findViewById(R.id.llAddCard);
-        lvCard= (ListView)rootview.findViewById(R.id.lvCard);
+        lvCard= (SwipeMenuListView) rootview.findViewById(R.id.lvCard);
         txtView= (TextView) rootview.findViewById(R.id.txtView);
     }
 
@@ -144,7 +148,41 @@ Preferences preferences;
         } else{
             lvCard.setVisibility(View.GONE);
         }
+
+
+        lvCard.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createMenu(getActivity());
+        lvCard.setMenuCreator(creator);
+        lvCard.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Card item = CardList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        //  open(item);
+                        break;
+                    case 1:
+                        // delete
+                        deleteInsuranceCard(item);
+                        break;
+                }
+                return false;
+            }
+        });
     }
+
+    private void deleteInsuranceCard(Card item) {
+        boolean flag= CardQuery.deleteRecord(item.getId(), 1);
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setCardData();
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
