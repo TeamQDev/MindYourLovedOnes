@@ -40,6 +40,7 @@ import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
+import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
@@ -388,19 +389,28 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 txtTitle.setText("Update Insurance");
                 Intent insuranceIntent = getActivity().getIntent();
                 if (insuranceIntent.getExtras() != null) {
-                    txtInsuaranceName.setText(insuranceIntent.getExtras().getString("Name"));
+                    Insurance insurance= (Insurance) insuranceIntent.getExtras().getSerializable("InsuranceObject");
                     int index = 0;
                     for (int i = 0; i < insuaranceType.length; i++) {
-                        if (insuranceIntent.getExtras().getString("Type").equalsIgnoreCase(insuaranceType[i])) {
+                        if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
                             index = i;
                         }
                     }
                     spinnerInsuarance.setSelection(index+1);
                     spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
-                    txtInsuarancePhone.setText(insuranceIntent.getExtras().getString("Phone"));
-                    txtId.setText(insuranceIntent.getExtras().getString("Id"));
-                    txtGroup.setText(insuranceIntent.getExtras().getString("Group"));
-                    txtMember.setText(insuranceIntent.getExtras().getString("Member"));
+                    txtInsuarancePhone.setText(insurance.getPhone());
+                    txtId.setText(insurance.getMember());
+                    txtGroup.setText(insurance.getGroup());
+                    txtInsuaranceFax.setText(insurance.getFax());
+                    txtInsuaranceEmail.setText(insurance.getEmail());
+                    txtWebsite.setText(insurance.getWebsite());
+                    txtInsuaranceNote.setText(insurance.getNote());
+                    txtInsuaranceName.setText(insurance.getName());
+                    txtSubscribe.setText(insurance.getSubscriber());
+                    id=insurance.getId();
+                    byte[] photo=insurance.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
                 break;
 
@@ -1217,7 +1227,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber);
+                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
@@ -1231,6 +1241,28 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+                    case "InsuranceData":
+
+                        if (validate("Insurance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated insurance information successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+                    // InsuranceObject
                 }
                 break;
             case R.id.imgEdit:
@@ -1459,12 +1491,12 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             address=txtAddress.getText().toString();
             website=txtWebsite.getText().toString();
             note=txtInsuaranceNote.getText().toString();
-            member=txtMember.getText().toString();
+            member=txtId.getText().toString();
             group=txtGroup.getText().toString();
             subscriber=txtSubscribe.getText().toString();
             int indexValuex = spinnerInsuarance.getSelectedItemPosition();
             type=insuaranceType[indexValuex-1];
-
+             email=txtInsuaranceEmail.getText().toString();
 
             return true;
         }

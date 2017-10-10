@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -38,7 +37,7 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
     private void getData() {
         CardList=new ArrayList<>();
 
-        Card c1=new Card();
+       /* Card c1=new Card();
         c1.setName("Jackson Montana");
         c1.setType("Supplemental Insurance");
         c1.setImgFront(R.drawable.front);
@@ -51,7 +50,7 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
         c2.setImgBack(R.drawable.backs);
 
         CardList.add(c1);
-        CardList.add(c2);
+        CardList.add(c2);*/
     }
 
     private void initListener() {
@@ -79,7 +78,7 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
         CardAdapter adapter=new CardAdapter(context,CardList);
         lvCard.setAdapter(adapter);
 
-        lvCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* lvCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final ImageView imgFront= (ImageView) view.findViewById(R.id.imgFront);
@@ -112,7 +111,7 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
                     }
                 });
             }
-        });
+        });*/
     }
 
     @Override

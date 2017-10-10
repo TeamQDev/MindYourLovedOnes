@@ -1,6 +1,8 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,10 @@ class CardAdapter extends BaseAdapter{
         } else {
             holder = (Holder) convertView.getTag();
         }
-        holder.imgCard.setImageResource(cardList.get(position).getImgFront());
+        byte[] photo=cardList.get(position).getImgFront();
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        holder.imgCard.setImageBitmap(bmp);
+     //   holder.imgCard.setImageResource(cardList.get(position).getImgFront());
         holder.txtProvider.setText(cardList.get(position).getName());
         holder.txtType.setText(cardList.get(position).getType());
         return convertView;

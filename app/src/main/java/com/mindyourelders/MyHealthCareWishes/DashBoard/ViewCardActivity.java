@@ -23,12 +23,12 @@ import java.util.TimerTask;
 
 public class ViewCardActivity extends AppCompatActivity {
     Context context=this;
-    TextView txtNew,txtRegistered;
+    TextView txtNew,txtRegistered,txtProviderValue,txtTypeValue;
     private ViewPager vp_slider;
     ImageView imageBack;
     private LinearLayout ll_dots;
     SliderPagerAdapter sliderPagerAdapter;
-    ArrayList<Integer> slider_image_list;
+    ArrayList<byte[]> slider_image_list;
     ArrayList<String> slider_text_list=new ArrayList<>();
     private TextView[] dots;
     int page_position = 0;
@@ -65,8 +65,6 @@ public class ViewCardActivity extends AppCompatActivity {
             }
         }, 100, 2000);
 
-
-
     }
 
     private void initComponent() {
@@ -74,9 +72,13 @@ public class ViewCardActivity extends AppCompatActivity {
         if (i.getExtras()!=null)
         {
             Card card= (Card) i.getSerializableExtra("Card");
-            int front=card.getImgFront();
-            int back=card.getImgBack();
+            byte[] front=card.getImgFront();
+            byte[] back=card.getImgBack();
+           String provider=card.getName();
+            String type=card.getType();
 
+            txtProviderValue.setText(provider);
+            txtTypeValue.setText(type);
             slider_image_list = new ArrayList<>();
            slider_image_list.add(front);
             slider_image_list.add(back);
@@ -142,6 +144,8 @@ imageBack= (ImageView) findViewById(R.id.imgBack);
                 finish();
             }
         });
+        txtTypeValue= (TextView) findViewById(R.id.txtTypeValue);
+        txtProviderValue= (TextView) findViewById(R.id.txtProviderValue);
     }
 
 

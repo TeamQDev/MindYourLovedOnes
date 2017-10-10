@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.CardQuery;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
@@ -34,11 +39,12 @@ Preferences preferences;
     RelativeLayout llAddCard;
     TextView txtView;
     public static final int REQUEST_PRES=100;
+    DBHelper dbHelper;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.activity_insurance_card, null);
-        preferences=new Preferences(getActivity());
+      initComponent();
         getData();
         initUI();
         initListener();
@@ -46,8 +52,15 @@ Preferences preferences;
         return rootview;
     }
 
+    private void initComponent() {
+        preferences=new Preferences(getActivity());
+        dbHelper=new DBHelper(getActivity());
+        CardQuery c=new CardQuery(getActivity(),dbHelper);
+    }
+
     private void getData() {
-        CardList=new ArrayList<>();
+        CardList= CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+       /* CardList=new ArrayList<>();
 
         Card c1=new Card();
         c1.setName("Jackson Montana");
@@ -62,7 +75,7 @@ Preferences preferences;
         c2.setImgBack(R.drawable.backs);
 
         CardList.add(c1);
-        CardList.add(c2);
+        CardList.add(c2);*/
     }
 
     private void initListener() {
@@ -85,44 +98,52 @@ Preferences preferences;
             txtView.setVisibility(View.VISIBLE);
             lvCard.setVisibility(View.GONE);
         }*/
-        lvCard.setVisibility(View.VISIBLE);
-        CardAdapter adapter=new CardAdapter(getActivity(),CardList);
-        lvCard.setAdapter(adapter);
+        if (CardList.size()!=0) {
+            lvCard.setVisibility(View.VISIBLE);
+            CardAdapter adapter = new CardAdapter(getActivity(), CardList);
+            lvCard.setAdapter(adapter);
 
-        lvCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                final ImageView imgFront= (ImageView) view.findViewById(R.id.imgFront);
-                final ImageView imgPre= (ImageView) view.findViewById(imgBack);
-                final ImageView imgCard= (ImageView) view.findViewById(R.id.imgCard);
-                ImageView imgForword= (ImageView) view.findViewById(R.id.imgForword);
-                imgFront.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        imgCard.setImageResource(CardList.get(position).getImgFront());
-                        imgPre.setImageResource(R.drawable.white_dot);
-                        imgFront.setImageResource(R.drawable.blue_dot);
-                    }
-                });
-                imgPre.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        imgCard.setImageResource(CardList.get(position).getImgBack());
-                        imgPre.setImageResource(R.drawable.blue_dot);
-                        imgFront.setImageResource(R.drawable.white_dot);
-                    }
-                });
+            lvCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    final ImageView imgFront = (ImageView) view.findViewById(R.id.imgFront);
+                    final ImageView imgPre = (ImageView) view.findViewById(imgBack);
+                    final ImageView imgCard = (ImageView) view.findViewById(R.id.imgCard);
+                    ImageView imgForword = (ImageView) view.findViewById(R.id.imgForword);
+                    imgFront.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            byte[] photo=CardList.get(position).getImgFront();
+                            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                            imgCard.setImageBitmap(bmp);
+                            imgPre.setImageResource(R.drawable.white_dot);
+                            imgFront.setImageResource(R.drawable.blue_dot);
+                        }
+                    });
+                    imgPre.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            byte[] photo1=CardList.get(position).getImgBack();
+                            Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
+                            imgCard.setImageBitmap(bmp1);
+                            imgPre.setImageResource(R.drawable.blue_dot);
+                            imgFront.setImageResource(R.drawable.white_dot);
+                        }
+                    });
 
-                imgForword.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i=new Intent(getActivity(),ViewCardActivity.class);
-                        i.putExtra("Card",CardList.get(position));
-                        startActivity(i);
-                    }
-                });
-            }
-        });
+                    imgForword.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getActivity(), ViewCardActivity.class);
+                            i.putExtra("Card", CardList.get(position));
+                            startActivity(i);
+                        }
+                    });
+                }
+            });
+        } else{
+            lvCard.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -151,4 +172,10 @@ Preferences preferences;
 
     }*/
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setCardData();
+    }
 }

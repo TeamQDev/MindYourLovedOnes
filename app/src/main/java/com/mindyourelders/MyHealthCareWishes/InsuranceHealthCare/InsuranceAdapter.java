@@ -87,12 +87,7 @@ public class InsuranceAdapter extends BaseAdapter {
                 Intent i=new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE,"InsuranceData");
                 Insurance insurance= insuranceList.get(position);
-                i.putExtra("Name",insurance.getName());
-                i.putExtra("Id",insurance.getId());
-                i.putExtra("Phone",insurance.getPhone());
-                i.putExtra("Group",insurance.getGroup());
-                i.putExtra("Member",insurance.getMember());
-                i.putExtra("Type",insurance.getType());
+                i.putExtra("InsuranceObject",insurance);
                 context.startActivity(i);
             }
         });

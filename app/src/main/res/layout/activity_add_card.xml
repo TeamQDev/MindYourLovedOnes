@@ -90,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:focusable="false"
             android:hint="Type"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
@@ -159,14 +158,15 @@
             android:layout_below="@+id/txtBack"
             >
 
+
+
             <ImageView
                 android:id="@+id/imgBackCard"
                 android:layout_width="@dimen/dimension100dp"
                 android:layout_height="@dimen/dimension100dp"
                 android:src="@drawable/cards" />
-
             <ImageView
-                android:id="@+id/imgEdit"
+                android:id="@+id/imgEdit2"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_gravity="top|right"

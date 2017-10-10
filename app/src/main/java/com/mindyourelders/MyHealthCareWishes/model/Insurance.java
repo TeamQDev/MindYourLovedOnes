@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by varsha on 8/28/2017.
  */
 
-public class Insurance {
+public class Insurance implements Serializable{
 
     String name="";
     String phone="";
@@ -12,6 +14,26 @@ public class Insurance {
     int id;
     int userid;
     String fax="";
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    String note="";
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    String email="";
 
     public int getUserid() {
         return userid;

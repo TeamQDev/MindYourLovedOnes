@@ -107,7 +107,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-        sliderPagerAdapter = new SliderPagerAdapter(SplashActivity.this, slider_image_list,slider_text_list);
+       // sliderPagerAdapter = new SliderPagerAdapter(SplashActivity.this, slider_image_list,slider_text_list);
         vp_slider.setAdapter(sliderPagerAdapter);
 
         vp_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

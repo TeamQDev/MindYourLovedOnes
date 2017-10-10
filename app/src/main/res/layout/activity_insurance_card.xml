@@ -38,6 +38,7 @@
         android:divider="@null"
         android:scrollbars="none"
         android:paddingTop="@dimen/dimension15dp"
+        android:layout_alignParentTop="true"
         android:layout_above="@+id/llAddCard"
         android:layout_toRightOf="@+id/txtView"
         android:layout_toEndOf="@+id/txtView"></ListView>

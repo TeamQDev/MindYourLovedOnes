@@ -8,26 +8,44 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
 
+int id;
 
-    public int getImgFront() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    int userid;
+    public  byte[] getImgFront() {
         return imgFront;
     }
 
-    public void setImgFront(int imgFront) {
+    public void setImgFront( byte[] imgFront) {
         this.imgFront = imgFront;
     }
 
-    int imgFront;
+    byte[] imgFront;
 
-    public int getImgBack() {
+    public  byte[] getImgBack() {
         return imgBack;
     }
 
-    public void setImgBack(int imgBack) {
+    public void setImgBack( byte[] imgBack) {
         this.imgBack = imgBack;
     }
 
-    int imgBack;
+    byte[] imgBack;
     String name = "";
 
     public String getName() {
