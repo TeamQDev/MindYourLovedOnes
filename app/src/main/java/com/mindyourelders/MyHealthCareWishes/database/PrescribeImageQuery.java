@@ -22,6 +22,7 @@ public class PrescribeImageQuery {
     public static final String TABLE_NAME = "PrescriptionImage";
 
     public static final String COL_ID = "Id";
+    public static final String COL_PREID = "Pre_Id";
     public static final String COL_USERID = "UserId";
     public static final String COL_Image= "Image";
 
@@ -31,7 +32,7 @@ public class PrescribeImageQuery {
     }
 
     public static String createImageTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"  + COL_Image + " BLOB);";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_PREID + " INTEGER,"  + COL_Image + " BLOB);";
         return createTableQuery;
     }
 
@@ -59,16 +60,17 @@ public class PrescribeImageQuery {
         return flag;
     }
 
-    public static ArrayList<PrescribeImage> fetchAllImageRecord(int userid) {
+    public static ArrayList<PrescribeImage> fetchAllImageRecord(int userid, int id) {
         ArrayList<PrescribeImage> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid  +"';",null);
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid+"' and "+COL_PREID+"='"+id+"';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
                     PrescribeImage notes = new PrescribeImage();
                     notes.setId(c.getInt(c.getColumnIndex(COL_ID)));
                     notes.setUserid(c.getInt(c.getColumnIndex(COL_USERID)));
+                    notes.setPreid(c.getInt(c.getColumnIndex(COL_PREID)));
                     notes.setImage(c.getBlob(c.getColumnIndex(COL_Image)));
                     noteList.add(notes);
                 } while (c.moveToNext());
@@ -78,13 +80,14 @@ public class PrescribeImageQuery {
         return noteList;
     }
 
-    public static Boolean insertImageData(int userid, ArrayList<PrescribeImage> imageList) {
+    public static Boolean insertImageData(int userid, ArrayList<PrescribeImage> imageList,int id) {
         boolean flag=false;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         for(int i=0;i<imageList.size();i++) {
             ContentValues cv = new ContentValues();
             cv.put(COL_USERID, userid);
+            cv.put(COL_PREID, id);
             cv.put(COL_Image, imageList.get(i).getImage());
 
             long rowid = db.insert(TABLE_NAME, null, cv);

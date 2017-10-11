@@ -11,8 +11,6 @@ import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 
 import java.util.ArrayList;
 
-import static com.mindyourelders.MyHealthCareWishes.database.DosageQuery.fetchAllDosageRecord;
-
 /**
  * Created by welcome on 9/29/2017.
  */
@@ -28,6 +26,7 @@ public class PrescriptionQuery {
     public static final String COL_ID = "Id";
     public static final String COL_USERID = "UserId";
     public static final String COL_DOCTOR= "Doctor";
+    public static final String COL_UNIQUE= "UniqueNumber";
     public static final String COL_PURPOSE = "Purpose";
     public static final String COL_NOTE = "Note";
     public static final String COL_DATE_TIME = "DateTime";
@@ -40,7 +39,7 @@ public class PrescriptionQuery {
     }
 
     public static String createPrescriptionTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_NOTE + " VARCHAR(20)," + COL_DOCTOR + " VARCHAR(20)," + COL_PURPOSE + " VARCHAR(20)," + COL_DATE_TIME + " VARCHAR(10));";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_UNIQUE + " INTEGER," + COL_NOTE + " VARCHAR(20)," + COL_DOCTOR + " VARCHAR(20)," + COL_PURPOSE + " VARCHAR(20)," + COL_DATE_TIME + " VARCHAR(10));";
         return createTableQuery;
     }
 
@@ -49,12 +48,9 @@ public class PrescriptionQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertPrescriptionData(int userid, String doctor, String purpose, String notes, String dt, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList) {
+    public static Boolean insertPrescriptionData(int userid, String doctor, String purpose, String notes, String dt, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList,int unique) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        Boolean flags = DosageQuery.insertDosageData(userid,dosageList);
-        Boolean flag3 = PrescribeImageQuery.insertImageData(userid,imageList);
 
         ContentValues cv = new ContentValues();
         cv.put(COL_USERID, userid);
@@ -62,6 +58,7 @@ public class PrescriptionQuery {
         cv.put(COL_DATE_TIME, dt);
         cv.put(COL_DOCTOR, doctor);
         cv.put(COL_PURPOSE, purpose);
+        cv.put(COL_UNIQUE, unique);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -69,7 +66,21 @@ public class PrescriptionQuery {
             flag = false;
         } else {
             flag = true;
+
+/*
+            Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "' and " + COL_UNIQUE + "='" + unique + "';", null);
+            if (c != null && c.getCount() > 0) {
+                if (c.moveToFirst()) {
+                    do {*/
+                        Boolean flags = DosageQuery.insertDosageData(userid, dosageList, unique);
+                        Boolean flag3 = PrescribeImageQuery.insertImageData(userid, imageList,unique);
+                   /* } while (c.moveToNext());
+                }
+            }*/
         }
+       /* Boolean flags = DosageQuery.insertDosageData(userid,dosageList);
+        Boolean flag3 = PrescribeImageQuery.insertImageData(userid,imageList);*/
+
 
         return flag;
     }
@@ -88,13 +99,13 @@ public class PrescriptionQuery {
                     notes.setDoctor(c.getString(c.getColumnIndex(COL_DOCTOR)));
                     notes.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                     notes.setPurpose(c.getString(c.getColumnIndex(COL_PURPOSE)));
-
-                    ArrayList<Dosage> Dosagelist = fetchAllDosageRecord(c.getInt(c.getColumnIndex(COL_USERID)),c.getInt(c.getColumnIndex(COL_ID)));
+                    notes.setUnique(c.getInt(c.getColumnIndex(COL_UNIQUE)));
+                    ArrayList<Dosage> Dosagelist = DosageQuery.fetchAllDosageRecord(c.getInt(c.getColumnIndex(COL_USERID)),c.getInt(c.getColumnIndex(COL_UNIQUE)));
                     if (Dosagelist.size()!=0)
                     {
                         notes.setDosageList(Dosagelist);
                     }
-                    ArrayList<PrescribeImage> imageList =PrescribeImageQuery.fetchAllImageRecord(c.getInt(c.getColumnIndex(COL_USERID)));
+                    ArrayList<PrescribeImage> imageList =PrescribeImageQuery.fetchAllImageRecord(c.getInt(c.getColumnIndex(COL_USERID)),c.getInt(c.getColumnIndex(COL_UNIQUE)));
                     if (imageList.size()!=0)
                     {
                         notes.setPrescriptionImageList(imageList);

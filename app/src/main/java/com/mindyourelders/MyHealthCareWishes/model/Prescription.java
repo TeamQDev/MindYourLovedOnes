@@ -8,6 +8,15 @@ import java.util.ArrayList;
  */
 
 public class Prescription implements Serializable {
+    public int getUnique() {
+        return unique;
+    }
+
+    public void setUnique(int unique) {
+        this.unique = unique;
+    }
+
+    int unique;
     String doctor="";
     String dates="";
     String note="";

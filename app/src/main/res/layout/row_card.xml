@@ -105,7 +105,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorDarkGray"
-        android:layout_below="@+id/llDot"
+
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dimension10dp"
 ></View>
 </RelativeLayout>

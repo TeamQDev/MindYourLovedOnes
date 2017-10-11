@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 
 public class AddPrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -133,11 +134,12 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.imgDone:
+                int unique=generateRandom();
                 String doctor=txtName.getText().toString().trim();
                 String purpose=txtPurpose.getText().toString().trim();
                 String note=etNote.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
-                Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID),doctor,purpose,note,date,dosageList,imageList);
+                Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID),doctor,purpose,note,date,dosageList,imageList,unique);
                 if (flag == true) {
                     Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
                 } else {
@@ -210,6 +212,13 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 break;
 
         }
+    }
+
+    private int generateRandom() {
+        Random r = new Random();
+        int randomNumber = r.nextInt(500);
+
+        return randomNumber;
     }
 
     private void dispatchTakePictureIntent() {

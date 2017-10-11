@@ -19,9 +19,9 @@
         style="@style/EmergencyDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:text="7/08/1235 45:52"
-        android:layout_marginRight="@dimen/dimension10dp"
+        android:layout_marginRight="@dimen/dimension5dp"
+        android:layout_toLeftOf="@+id/imgForword"
         />
 
     <LinearLayout
@@ -39,6 +39,7 @@
         android:layout_below="@id/llPrescription"
         android:orientation="horizontal"
         android:background="@color/colorWhite"
+        android:layout_marginBottom="@dimen/dimension5dp"
         >
 
        <!-- <ImageView
