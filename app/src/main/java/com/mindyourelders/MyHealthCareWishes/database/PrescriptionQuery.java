@@ -119,4 +119,17 @@ public class PrescriptionQuery {
         return noteList;
     }
 
+    public static boolean deleteRecord(int unique) {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_UNIQUE + "='" + unique + "';", null);
+
+            if (c.moveToFirst()) {
+                do {
+                    db.execSQL("delete from " + TABLE_NAME + " where " + COL_UNIQUE + "='" + unique+"';");
+                } while (c.moveToNext());
+            }
+            DosageQuery.deleteRecord(unique);
+            PrescribeImageQuery.deleteRecord(unique);
+            return true;
+    }
 }

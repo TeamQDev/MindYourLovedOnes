@@ -107,4 +107,15 @@ public class DosageQuery {
         return flag;
     }
 
+    public static void deleteRecord(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_PREID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_PREID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+    }
 }

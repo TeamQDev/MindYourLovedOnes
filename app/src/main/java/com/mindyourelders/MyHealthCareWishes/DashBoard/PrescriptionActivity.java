@@ -15,7 +15,6 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
-import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PrescriptionQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -95,7 +94,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void deletePrescription(Prescription item) {
-        boolean flag= EventNoteQuery.deleteRecord(item.getId());
+        boolean flag= PrescriptionQuery.deleteRecord(item.getUnique());
         if(flag==true)
         {
             Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
@@ -103,7 +102,6 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             setPrescriptionData();
         }
     }
-
 
 
     private void setPrescriptionData() {
