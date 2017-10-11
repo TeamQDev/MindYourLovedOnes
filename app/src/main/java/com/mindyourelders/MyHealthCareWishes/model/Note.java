@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import java.io.Serializable;
+
 /**
  * Created by welcome on 9/18/2017.
  */
 
-public class Note {
+public class Note implements Serializable{
     public int getId() {
         return id;
     }

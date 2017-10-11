@@ -97,4 +97,27 @@ public class EventNoteQuery {
 
         return true;
     }
+
+    public static Boolean updateEvent(int id, String note, String date) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_ID, id);
+        cv.put(COL_NOTE, note);
+        cv.put(COL_DATE_TIME, date);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+        }
+
+        return flag;
+    }
 }

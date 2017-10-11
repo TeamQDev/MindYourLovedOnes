@@ -65,8 +65,7 @@ public class NoteAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context,ViewEventActivity.class);
-                intent.putExtra("Note",noteList.get(position).getTxtNote());
-                intent.putExtra("Date",noteList.get(position).getTxtDate());
+                intent.putExtra("NoteObject",noteList.get(position));
                 context.startActivity(intent);
             }
         });

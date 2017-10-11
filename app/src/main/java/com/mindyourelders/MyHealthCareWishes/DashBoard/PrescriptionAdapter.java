@@ -85,15 +85,15 @@ class PrescriptionAdapter extends BaseAdapter {
                     holder.llPrescription.addView(v);
                 }
             }
-            holder.txtDoctor.setText(prescriptionList.get(position).getDoctor());
-            holder.txtDate.setText(prescriptionList.get(position).getDates());
-
-
 
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
+        holder.txtDoctor.setText(prescriptionList.get(position).getDoctor());
+        holder.txtDate.setText(prescriptionList.get(position).getDates());
+
+
 
         /*holder.txtNote.setText(prescriptionList.get(position).getTxtNote());
         holder.txtDateTime.setText(prescriptionList.get(position).getTxtDate());
