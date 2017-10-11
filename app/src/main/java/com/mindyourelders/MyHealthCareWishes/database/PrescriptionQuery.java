@@ -132,4 +132,32 @@ public class PrescriptionQuery {
             PrescribeImageQuery.deleteRecord(unique);
             return true;
     }
+
+    public static Boolean updatePrescriptionData(int colid, int id, String doctor, String purpose, String note, String date, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int userid) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(COL_NOTE, doctor);
+        cv.put(COL_DATE_TIME, date);
+        cv.put(COL_DOCTOR, doctor);
+        cv.put(COL_NOTE, note);
+        cv.put(COL_PURPOSE, purpose);
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+colid,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+            ArrayList<Dosage> d=DosageQuery.fetchAllDosageRecord(userid,id);
+            ArrayList<PrescribeImage> i=PrescribeImageQuery.fetchAllImageRecord(userid,id);
+        Boolean flags = DosageQuery.updateDosageData(dosageList,id,d);
+        Boolean flag3 = PrescribeImageQuery.updateImageData(imageList,id,i);
+        }
+        return flag;
+    }
 }

@@ -2,10 +2,18 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@color/colorLightBlue"
+    android:weightSum="10"
     >
-
+<LinearLayout
+    android:layout_width="@dimen/dimension0dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_weight="8"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    >
     <TextView
         android:id="@+id/txtMedicine"
         style="@style/EmergencyDesc"
@@ -30,11 +38,26 @@
         android:background="@color/colorLightBlue"
        android:layout_marginLeft="@dimen/dimension20dp"
         />
-<View
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dimension1dp"
-    android:background="@color/colorWhite"
-    >
-
-</View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension1dp"
+        android:background="@color/colorWhite"
+        ></View>
+</LinearLayout>
+    <ImageView
+        android:id="@+id/imgEdit"
+        android:layout_width="@dimen/dimension0dp"
+        android:layout_height="@dimen/dimension25dp"
+        android:src="@drawable/edit"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        ></ImageView>
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="@dimen/dimension0dp"
+        android:layout_height="@dimen/dimension25dp"
+        android:src="@drawable/delete_icon"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        ></ImageView>
 </LinearLayout>

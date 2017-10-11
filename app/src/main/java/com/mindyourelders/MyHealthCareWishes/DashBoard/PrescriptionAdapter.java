@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -94,19 +95,19 @@ class PrescriptionAdapter extends BaseAdapter {
         holder.txtDate.setText(prescriptionList.get(position).getDates());
 
 
-
-        /*holder.txtNote.setText(prescriptionList.get(position).getTxtNote());
-        holder.txtDateTime.setText(prescriptionList.get(position).getTxtDate());
-        //holder.imgProfile.setImageResource(student.getImgid());
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context,ViewEventActivity.class);
-                intent.putExtra("Prescription",prescriptionList.get(position).getTxtNote());
-                intent.putExtra("Date",prescriptionList.get(position).getTxtDate());
+                Intent intent=new Intent(context,AddPrescriptionActivity.class);
+                intent.putExtra("PrescriptionObject",prescriptionList.get(position));
+                intent.putExtra("IsEdit",true);
                 context.startActivity(intent);
             }
-        });*/
+        });
+        /*holder.txtNote.setText(prescriptionList.get(position).getTxtNote());
+        holder.txtDateTime.setText(prescriptionList.get(position).getTxtDate());
+        //holder.imgProfile.setImageResource(student.getImgid());
+       */
         return convertView;
     }
 

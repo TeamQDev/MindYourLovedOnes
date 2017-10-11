@@ -118,4 +118,37 @@ public class DosageQuery {
         }
 
     }
+
+
+    public static boolean deleteRecords(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+        return true;
+    }
+
+    public static Boolean updateDosageData(ArrayList<Dosage> dosageList, int unique, ArrayList<Dosage> d) {
+        boolean flag=false;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for(int i=0;i<dosageList.size();i++) {
+            ContentValues cv = new ContentValues();
+            cv.put(COL_MEDICINE, dosageList.get(i).getMedicine());
+            cv.put(COL_DOSE, dosageList.get(i).getDose());
+            int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique+" and "+COL_ID+ "=" + d.get(i).getId(), null);
+
+            if (rowid == 0) {
+                flag = false;
+            } else {
+                flag = true;
+            }
+        }
+            return flag;
+    }
 }

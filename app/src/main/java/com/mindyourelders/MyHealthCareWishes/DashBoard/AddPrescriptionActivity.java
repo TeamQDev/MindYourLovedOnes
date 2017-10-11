@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ import com.mindyourelders.MyHealthCareWishes.database.PrescribeImageQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PrescriptionQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Dosage;
 import com.mindyourelders.MyHealthCareWishes.model.PrescribeImage;
+import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -55,7 +57,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     ArrayList<PrescribeImage> imageList = new ArrayList<>();
     RelativeLayout llAddPrescription;
     public static final int RESULT_PRES = 100;
-    TextView txtName, txtDate,txtPurpose;
+    TextView txtName, txtDate,txtPurpose,txtNote;
     EditText etNote;
     MySpinner spinner;
     String[] FormList = {"Tablet", "Capsule", "Pills", "Powder", "Liquid", "Syrup", "Cream", "Gel", "Lotion", "Drops", "Other"};
@@ -65,7 +67,9 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
 
     Preferences preferences;
     DBHelper dbHelper;
-
+    int unique;
+    boolean isEdit;
+    int id,colid,dosageid,imageid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +101,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         txtName = (TextView) findViewById(R.id.txtName);
         txtDate = (TextView) findViewById(R.id.txtDate);
         txtPurpose= (TextView) findViewById(R.id.txtPurpose);
+
         spinner = (MySpinner) findViewById(R.id.spinner);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgAddDosage = (ImageView) findViewById(R.id.imgAddDosage);
@@ -106,11 +111,66 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         ListPhoto = (ListView) findViewById(R.id.ListPhoto);
         imgDone = (ImageView) findViewById(R.id.imgDone);
         etNote= (EditText) findViewById(R.id.etNote);
+        txtNote=(TextView) findViewById(R.id.txtNote);
 
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, FormList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setHint("Dosage Form");
+
+
+        Intent i=getIntent();
+        if (i.getExtras()!=null)
+        {
+            Prescription p= (Prescription) i.getExtras().getSerializable("PrescriptionObject");
+            isEdit=i.getExtras().getBoolean("IsEdit");
+            if (isEdit==true) {
+                id = p.getUnique();
+                colid=p.getId();
+                txtName.setText(p.getDoctor());
+                txtDate.setText(p.getDates());
+                etNote.setText(p.getNote());
+                txtPurpose.setText(p.getPurpose());
+                dosageList = p.getDosageList();
+                imageList = p.getPrescriptionImageList();
+                setDosageData();
+                setImageListData();
+            }
+        }
+
+        ListDosage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                ImageView imgEdit= (ImageView) view.findViewById(R.id.imgEdit);
+                ImageView imgDelete= (ImageView) view.findViewById(R.id.imgDelete);
+                imgEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dosage a=dosageList.get(position);
+                        showInputDialog(context,a, true);
+                    }
+                });
+
+                imgDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dosage a=dosageList.get(position);
+                        boolean flag= DosageQuery.deleteRecords(a.getId());
+                        if(flag==true)
+                        {
+                            Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+                           dosageList.remove(a);
+                            setDosageData();
+                            ListDosage.requestFocus();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void getDosageData() {
+        dosageList=DosageQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),unique);
     }
 
     @Override
@@ -134,16 +194,26 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 break;
 
             case R.id.imgDone:
-                int unique=generateRandom();
+                unique=generateRandom();
                 String doctor=txtName.getText().toString().trim();
                 String purpose=txtPurpose.getText().toString().trim();
                 String note=etNote.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
-                Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID),doctor,purpose,note,date,dosageList,imageList,unique);
-                if (flag == true) {
-                    Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                if (isEdit==false) {
+                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique);
+                    if (flag == true) {
+                        Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    if (flag == true) {
+                        Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 Intent i=new Intent();
@@ -163,7 +233,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 finish();
                 break;
             case R.id.imgAddDosage:
-                showInputDialog(context);
+                showInputDialog(context, null,false);
                 break;
             case R.id.imgAddPhoto:
                 final Dialog dialog = new Dialog(context);
@@ -259,7 +329,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         return image;
     }
 
-    private void showInputDialog(final Context context) {
+    private void showInputDialog(final Context context, final Dosage a, final boolean b) {
         final Dialog customDialog;
         customDialog = new Dialog(context);
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -270,6 +340,12 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         TextView txtMedicine = (TextView) customDialog.findViewById(R.id.txtMedicine);
         TextView txtDose = (TextView) customDialog.findViewById(R.id.txtDose);
 
+        if (b==true) {
+            if (a != null) {
+                etMedicine.setText(a.getMedicine());
+                etDose.setText(a.getDose());
+            }
+        }
         TextView btnAdd = (TextView) customDialog.findViewById(R.id.btnYes);
         TextView btnCancel = (TextView) customDialog.findViewById(R.id.btnNo);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -282,10 +358,26 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String dose = etDose.getText().toString();
                 String medicine = etMedicine.getText().toString();
                /* SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                 String currentDateandTime = sdf.format(new Date());*/
+               if (b==true)
+               {
+                   if (medicine.length() != 0) {
+
+                       a.setDose(dose);
+                       a.setMedicine(medicine);
+                       //dosageList.add(dosage);
+                       customDialog.dismiss();
+                       setDosageData();
+                   } else {
+                       Toast.makeText(context, "Enter Medicine", Toast.LENGTH_SHORT).show();
+                   }
+               }
+               else{
+
                 if (medicine.length() != 0) {
                     Dosage dosage = new Dosage();
                     dosage.setDose(dose);
@@ -296,14 +388,21 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 } else {
                     Toast.makeText(context, "Enter Medicine", Toast.LENGTH_SHORT).show();
                 }
+               }
             }
         });
         customDialog.show();
     }
 
     private void setDosageData() {
-        DosageAdapter adapter = new DosageAdapter(context, dosageList);
-        ListDosage.setAdapter(adapter);
+        if (dosageList.size()!=0) {
+            DosageAdapter adapter = new DosageAdapter(context, dosageList);
+            ListDosage.setAdapter(adapter);
+            ListDosage.setVisibility(View.VISIBLE);
+        }
+        else{
+            ListDosage.setVisibility(View.GONE);
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

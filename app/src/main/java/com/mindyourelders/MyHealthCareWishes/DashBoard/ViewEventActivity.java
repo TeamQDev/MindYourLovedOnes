@@ -51,6 +51,8 @@ public class ViewEventActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initUI() {
+
+
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgEdit= (ImageView) findViewById(R.id.imgEdit);
         imgDelete= (ImageView) findViewById(R.id.imgDelete);

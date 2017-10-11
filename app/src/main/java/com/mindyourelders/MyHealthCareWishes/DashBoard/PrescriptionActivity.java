@@ -34,6 +34,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
    public static final int REQUEST_PRES=100;
     Preferences preferences;
     DBHelper dbHelper;
+    boolean isEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                 return false;
             }
         });
+
     }
 
     private void deletePrescription(Prescription item) {
@@ -126,6 +128,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             case R.id.llAddPrescription:
                // preferences.putString(PrefConstants.SOURCE,"Prescription");
                 Intent i=new Intent(context,AddPrescriptionActivity.class);
+                i.putExtra("IsEdit",false);
                 startActivityForResult(i,REQUEST_PRES);
                 break;
         }

@@ -111,4 +111,24 @@ public class PrescribeImageQuery {
             } while (c.moveToNext());
         }
     }
+
+    public static Boolean updateImageData(ArrayList<PrescribeImage> imageList, int unique, ArrayList<PrescribeImage> d) {
+        boolean flag=false;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for(int i=0;i<imageList.size();i++) {
+            ContentValues cv = new ContentValues();
+            cv.put(COL_Image, imageList.get(i).getImage());
+
+            int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique+" and "+COL_ID+ "=" + d.get(i).getId(), null);
+
+
+            if (rowid == 0) {
+                flag = false;
+            } else {
+                flag = true;
+            }
+        }
+            return flag;
+    }
 }

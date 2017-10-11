@@ -51,6 +51,8 @@ class DosageAdapter extends BaseAdapter {
             holder = new Holder();
             holder.txtNote = (TextView) convertView.findViewById(R.id.txtMedicine);
             holder.txtDateTime = (TextView) convertView.findViewById(R.id.txtDose);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
+            holder.imgDelete= (ImageView) convertView.findViewById(R.id.imgDelete);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -58,6 +60,10 @@ class DosageAdapter extends BaseAdapter {
 
         holder.txtNote.setText(dosageList.get(position).getMedicine());
         holder.txtDateTime.setText(dosageList.get(position).getDose());
+
+
+
+
         //holder.imgProfile.setImageResource(student.getImgid());
        /* holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +79,7 @@ class DosageAdapter extends BaseAdapter {
 
     private class Holder {
         TextView txtNote, txtDateTime, txtTime;
-        ImageView imgForward;
+        ImageView imgForward,imgEdit,imgDelete;
     }
 
 }
