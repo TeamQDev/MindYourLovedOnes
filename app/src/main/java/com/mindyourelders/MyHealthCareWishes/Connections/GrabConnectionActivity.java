@@ -38,7 +38,7 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
         fragmentData();
         //  if (fragmentManager.findFragmentByTag("INSURANCE") == null) {
         source = preferences.getString(PrefConstants.SOURCE);
-            if (source.equals("SpecialistViewData")||source.equals("FinanceViewData")||source.equals("InsuranceViewData")||source.equals("AidesViewData"))
+            if (source.equals("PharmacyDataView")||source.equals("ProxyUpdateView")||source.equals("EmergencyView")||source.equals("SpecialistViewData")||source.equals("FinanceViewData")||source.equals("InsuranceViewData")||source.equals("AidesViewData"))
             {
                 llGrab.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.GONE);

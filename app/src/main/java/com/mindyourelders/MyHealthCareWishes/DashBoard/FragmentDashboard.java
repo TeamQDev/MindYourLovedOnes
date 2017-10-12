@@ -118,8 +118,11 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
 
             //Emergency Event Note
             case R.id.rlEmergencyEvent:
-                Intent intentContact = new Intent(getActivity(), EventNoteActivity.class);
+                Intent intentContact = new Intent(getActivity(), SpecialistsActivity.class);
+                intentContact.putExtra("FROM","Event");
                 startActivity(intentContact);
+               /* Intent intentContact = new Intent(getActivity(), EventNoteActivity.class);
+                startActivity(intentContact);*/
                 break;
 
             case R.id.rlPrescription:

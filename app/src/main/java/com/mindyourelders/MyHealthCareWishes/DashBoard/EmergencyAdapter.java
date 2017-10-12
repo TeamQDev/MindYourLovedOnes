@@ -66,6 +66,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
+            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 //            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         }
@@ -78,6 +79,7 @@ public class EmergencyAdapter extends BaseAdapter {
         holder.txtPhone.setText(emergencyList.get(position).getMobile());
         holder.txtType.setText(emergencyList.get(position).getRelationType());
         holder.txtTelePhone.setText(emergencyList.get(position).getPhone());
+
 
         byte[] photo=emergencyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -92,18 +94,15 @@ public class EmergencyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-       /* holder.imgForword.setOnClickListener(new View.OnClickListener() {
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentDashboard ldf = new FragmentDashboard ();
-                Bundle args = new Bundle();
-                args.putString("Name", emergencyList.get(position).getName());
-                args.putString("Relation", emergencyList.get(position).getRelationType());
-                ldf.setArguments(args);
-
-                ((BaseActivity)context).callFragment("DASHBOARD",ldf);
+                preferences.putString(PrefConstants.SOURCE,"EmergencyView");
+                Intent i=new Intent(context,GrabConnectionActivity.class);
+                i.putExtra("EmergencyObject",emergencyList.get(position));
+                context.startActivity(i);
             }
-        });*/
+        });
 
         return convertView;
     }
@@ -111,7 +110,7 @@ public class EmergencyAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
-        ImageView imgProfile,imgEdit;
+        ImageView imgProfile,imgEdit,imgForword;
        // SwipeRevealLayout swipeLayout;
     }
 }

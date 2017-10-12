@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorBlue">
+
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="Medical Appointment"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension22dp" />
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/add_white_square"
+
+            />
+    </RelativeLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lvNote"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:background="@color/colorLightBlue"
+        android:visibility="gone"
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Appointment Available"
+        android:layout_below="@+id/header"
+        android:gravity="center"
+        android:textSize="@dimen/dimension18dp"
+        />
+</RelativeLayout>

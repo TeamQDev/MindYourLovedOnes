@@ -93,6 +93,16 @@ class PharmacyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, GrabConnectionActivity.class);
+                preferences.putString(PrefConstants.SOURCE, "PharmacyDataView");
+                Pharmacy insurance = pharmacyList.get(position);
+                i.putExtra("PharmacyObject",insurance);
+                context.startActivity(i);
+            }
+        });
         return convertView;
     }
 

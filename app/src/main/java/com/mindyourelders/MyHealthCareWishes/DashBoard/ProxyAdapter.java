@@ -68,7 +68,7 @@ public class ProxyAdapter extends BaseAdapter {
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
-
+            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             convertView.setTag(holder);
         }
         else{
@@ -99,6 +99,15 @@ public class ProxyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferences.putString(PrefConstants.SOURCE,"ProxyUpdateView");
+                Intent i=new Intent(context,GrabConnectionActivity.class);
+                i.putExtra("ProxyObject",proxyList.get(position));
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }
@@ -106,7 +115,7 @@ public class ProxyAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
-        ImageView imgProfile,imgEdit;
+        ImageView imgProfile,imgEdit,imgForword;
      //   SwipeRevealLayout swipeLayout;
     }
 }

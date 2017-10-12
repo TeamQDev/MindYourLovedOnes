@@ -224,7 +224,27 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                     imgProfile.setImageBitmap(bmp);
                 }
                     break;
+            case "PharmacyDataView":
+                visiPharmacy();
+                disablePharmacy();
+                txtTitle.setText("Pharmacy");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent specialistIntents2 = getActivity().getIntent();
+                if (specialistIntents2.getExtras() != null) {
+                    Pharmacy specialist = (Pharmacy) specialistIntents2.getExtras().getSerializable("PharmacyObject");
+                    txtPharmacyName.setText(specialist.getName());
+                    txtPharmacyAddress.setText(specialist.getAddress());
+                    txtPharmacyWebsite.setText(specialist.getWebsite());
+                    txtPharmacyFax.setText(specialist.getFax());
+                    txtPharmacyPhone.setText(specialist.getPhone());
+                    txtPharmacyNote.setText(specialist.getNote());
+                    id = specialist.getId();
 
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+                break;
             case "Proxy":
                 visiProxy();
                 txtAdd.setText("Add Proxy");
@@ -270,7 +290,46 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 }
 
                 break;
+            case "ProxyUpdateView":
+                visiProxy();
+                disableProxy();
+                txtTitle.setText("Proxy");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent ProxyIntents = getActivity().getIntent();
+                if (ProxyIntents.getExtras()!=null)
+                {
 
+                    Proxy rel= (Proxy) ProxyIntents.getExtras().getSerializable("ProxyObject");
+                    txtName.setText(rel.getName());
+                    txtEmail.setText(rel.getEmail());
+                    txtMobile.setText(rel.getMobile());
+                    txtHomePhone.setText(rel.getPhone());
+                    txtWorkPhone.setText(rel.getWorkPhone());
+                    txtAddress.setText(rel.getAddress());
+                    txtEmergencyNote.setText(rel.getNote());
+                    id=rel.getId();
+                    int index = 0;
+                    for (int i = 0; i < Relationship.length; i++) {
+                        if (rel.getRelationType().equals(Relationship[i])) {
+                            index = i;
+                        }
+                    }
+                    spinnerRelation.setSelection(index+1);
+                    prox=rel.getIsPrimary();
+                    if (prox==1) {
+                        spinnerProxy.setSelection(0);
+                    }else if (prox==2)
+                    {
+                        spinnerProxy.setSelection(1);
+                    }
+
+
+                    byte[] photo=rel.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+
+                break;
             case "Emergency":
                 visiEmergency();
                 txtAdd.setText("Add Emergency");
@@ -299,6 +358,38 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                                 index = i;
                             }
                         }
+
+                    spinnerRelation.setSelection(index+1);
+                    byte[] photo=rel.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+
+                }
+                break;
+            case "EmergencyView":
+                visiEmergency();
+                disableEmergency();
+                txtTitle.setVisibility(View.VISIBLE);
+                txtTitle.setText("Emergency Contact");
+                Intent EmergencyIntents = getActivity().getIntent();
+                if (EmergencyIntents.getExtras()!=null)
+                {
+
+                    Emergency rel= (Emergency) EmergencyIntents.getExtras().getSerializable("EmergencyObject");
+                    txtName.setText(rel.getName());
+                    txtEmail.setText(rel.getEmail());
+                    txtMobile.setText(rel.getMobile());
+                    txtHomePhone.setText(rel.getPhone());
+                    txtWorkPhone.setText(rel.getWorkPhone());
+                    txtAddress.setText(rel.getAddress());
+                    txtEmergencyNote.setText(rel.getNote());
+                    id=rel.getId();
+                    int index = 0;
+                    for (int i = 0; i < Relationship.length; i++) {
+                        if (rel.getRelationType().equals(Relationship[i])) {
+                            index = i;
+                        }
+                    }
 
                     spinnerRelation.setSelection(index+1);
                     byte[] photo=rel.getPhoto();
@@ -360,20 +451,37 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "SpecialistViewData":
                 visiSpecialist();
                 disableSpecialist();
-                Intent specialistViewIntent = getActivity().getIntent();
-                if (specialistViewIntent.getExtras() != null) {
-                    txtName.setText(specialistViewIntent.getExtras().getString("Name"));
-                    // txtEmail.setText(specialistIntent.getExtras().getString());
-                    txtMobile.setText(specialistViewIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(specialistViewIntent.getExtras().getString("Address"));
-
+                txtTitle.setText("Doctor");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent specialistIntentss = getActivity().getIntent();
+                if (specialistIntentss.getExtras() != null) {
+                    Specialist specialist= (Specialist) specialistIntentss.getExtras().getSerializable("SpecialistObject");
+                    txtDoctorName.setText(specialist.getName());
+                    txtDoctorOtherPhone.setText(specialist.getOtherPhone());
+                    txtDoctorLastSeen.setText(specialist.getLastseen());
+                    txtDoctorAddress.setText(specialist.getAddress());
+                    txtDoctorWebsite.setText(specialist.getWebsite());
+                    txtDoctorFax.setText(specialist.getFax());
+                    txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
+                    txtDoctorOfficePhone.setText(specialist.getOfficePhone());
+                    txtAffiliation.setText(specialist.getHospAffiliation());
+                    txtPracticeName.setText(specialist.getPracticeName());
+                    txtNetwork.setText(specialist.getNetwork());
+                    txtDoctorNote.setText(specialist.getNote());
+                    id=specialist.getId();
+                    isPhysician=specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialistViewIntent.getExtras().getString("Type").equals(healthSpeciality[i])) {
+                        if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index);
+                    spinner.setSelection(index+1);
+
+                    byte[] photo=specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+
                 }
                 break;
 
@@ -416,22 +524,33 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
             case "InsuranceViewData":
                 visiInsurance();
-                disableInsurance();
-                Intent insuranceViewIntent = getActivity().getIntent();
-                if (insuranceViewIntent.getExtras() != null) {
-                    txtInsuaranceName.setText(insuranceViewIntent.getExtras().getString("Name"));
-                    String insuranceName=insuranceViewIntent.getExtras().getString("Type");
+              disableInsurance();
+                txtTitle.setText("Insurance Information");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent insuranceIntent2 = getActivity().getIntent();
+                if (insuranceIntent2.getExtras() != null) {
+                    Insurance insurance= (Insurance) insuranceIntent2.getExtras().getSerializable("InsuranceObject");
                     int index = 0;
                     for (int i = 0; i < insuaranceType.length; i++) {
-                        if (insuranceName.equalsIgnoreCase(insuaranceType[i])) {
+                        if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
                             index = i;
                         }
                     }
                     spinnerInsuarance.setSelection(index+1);
-                    txtInsuarancePhone.setText(insuranceViewIntent.getExtras().getString("Phone"));
-                    txtId.setText(insuranceViewIntent.getExtras().getString("Id"));
-                    txtGroup.setText(insuranceViewIntent.getExtras().getString("Group"));
-                    txtMember.setText(insuranceViewIntent.getExtras().getString("Member"));
+                    spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
+                    txtInsuarancePhone.setText(insurance.getPhone());
+                    txtId.setText(insurance.getMember());
+                    txtGroup.setText(insurance.getGroup());
+                    txtInsuaranceFax.setText(insurance.getFax());
+                    txtInsuaranceEmail.setText(insurance.getEmail());
+                    txtWebsite.setText(insurance.getWebsite());
+                    txtInsuaranceNote.setText(insurance.getNote());
+                    txtInsuaranceName.setText(insurance.getName());
+                    txtSubscribe.setText(insurance.getSubscriber());
+                    id=insurance.getId();
+                    byte[] photo=insurance.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
                 break;
 
@@ -470,13 +589,28 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "AidesViewData":
                 visiAides();
                 disableAides();
-                Intent aidesViewIntent = getActivity().getIntent();
-                if (aidesViewIntent.getExtras() != null) {
-                    txtName.setText(aidesViewIntent.getExtras().getString("Name"));
-                    txtMobile.setText(aidesViewIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(aidesViewIntent.getExtras().getString("Address"));
-                    txtAids.setText(aidesViewIntent.getExtras().getString("AideName"));
+                txtTitle.setText("Health Service");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent aidesIntent2 = getActivity().getIntent();
+                if (aidesIntent2.getExtras() != null) {
+                    Aides aides= (Aides) aidesIntent2.getSerializableExtra("AideObject");
+                    txtAideCompName.setText(aides.getAidName());
+                    txtAideOfficePhone.setText(aides.getOfficePhone());
+                    txtHourOfficePhone.setText(aides.getHourPhone());
+                    txtOtherPhone.setText(aides.getOtherPhone());
+                    txtAideFax.setText(aides.getFax());
+                    txtAideEmail.setText(aides.getEmail());
+                    txtAideAddress.setText(aides.getAddress());
+                    txtAideWebsite.setText(aides.getWebsite());
+                    txtAideWebsite.setText(aides.getWebsite());
+                    txtAideNote.setText(aides.getNote());
+                    id=aides.getId();
+
+                    byte[] photo=aides.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
+
                 break;
 
             case "Finance":
@@ -521,25 +655,78 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "FinanceViewData":
                 visiFinance();
                 disableFinance();
-                Intent finaceViewIntent = getActivity().getIntent();
-                if (finaceViewIntent.getExtras() != null) {
+                txtTitle.setText("Finane and Legal");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent financeIntent2 = getActivity().getIntent();
+                if (financeIntent2.getExtras() != null) {
+                    Finance specialist = (Finance) financeIntent2.getExtras().getSerializable("FinanceObject");
+
+                    txtFName.setText(specialist.getName());
+                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
+                    txtLastSeen.setText(specialist.getLastseen());
+                    txtFinanceAddress.setText(specialist.getAddress());
+                    txtFinanceWebsite.setText(specialist.getWebsite());
+                    txtFinanceFax.setText(specialist.getFax());
+                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
+                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
+                    txtFinancePracticeName.setText(specialist.getPracticeName());
+                    txtFinanceNote.setText(specialist.getNote());
+                    id = specialist.getId();
                     int index = 0;
                     for (int i = 0; i < financeType.length; i++) {
-                        if (finaceViewIntent.getExtras().getString("Category").equals(insuaranceType[i])) {
+                        if (specialist.getCategory().equals(financeType[i])) {
                             index = i;
                         }
                     }
-                    spinnerFinance.setSelection(index);
-                    txtFName.setText(finaceViewIntent.getExtras().getString("Firm"));
-                    txtName.setText(finaceViewIntent.getExtras().getString("Name"));
-                    txtMobile.setText(finaceViewIntent.getExtras().getString("Phone"));
-                    txtAddress.setText(finaceViewIntent.getExtras().getString("Address"));
+                    spinnerFinance.setSelection(index + 1);
+
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
                 }
                 break;
 
 
         }
 
+    }
+
+    private void disablePharmacy() {
+        txtPharmacyName.setEnabled(false);
+        txtPharmacyAddress.setEnabled(false);
+        txtPharmacyWebsite.setEnabled(false);
+        txtPharmacyFax.setEnabled(false);
+        txtPharmacyPhone.setEnabled(false);
+        txtPharmacyNote.setEnabled(false);
+        imgEdit.setVisibility(View.GONE);
+        llAddConn.setVisibility(View.GONE);
+    }
+
+    private void disableProxy() {
+        txtName.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtMobile.setEnabled(false);
+        txtHomePhone.setEnabled(false);
+        txtWorkPhone.setEnabled(false);
+        txtAddress.setEnabled(false);
+        txtEmergencyNote.setEnabled(false);
+        spinnerRelation.setClickable(false);
+
+        imgEdit.setVisibility(View.GONE);
+        llAddConn.setVisibility(View.GONE);
+    }
+
+    private void disableEmergency() {
+        txtName.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtMobile.setEnabled(false);
+        txtHomePhone.setEnabled(false);
+        txtWorkPhone.setEnabled(false);
+        txtAddress.setEnabled(false);
+        txtEmergencyNote.setEnabled(false);
+        spinnerRelation.setClickable(false);
+        imgEdit.setVisibility(View.GONE);
+        llAddConn.setVisibility(View.GONE);
     }
 
     private void visiPharmacy() {
@@ -588,61 +775,71 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     }
 
     private void disableFinance() {
-        txtName.setEnabled(false);
         txtFName.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtMobile.setEnabled(false);
-        txtHomePhone.setEnabled(false);
-        txtWorkPhone.setEnabled(false);
-        txtAddress.setEnabled(false);
-        spinnerFinance.setEnabled(false);
+        txtFinanceOtherPhone.setEnabled(false);
+        txtLastSeen.setEnabled(false);
+        txtFinanceAddress.setEnabled(false);
+        txtFinanceWebsite.setEnabled(false);
+        txtFinanceFax.setEnabled(false);
+        txtFinanceMobilePhone.setEnabled(false);
+        txtFinanceOfficePhone.setEnabled(false);
+        txtFinancePracticeName.setEnabled(false);
+        txtFinanceNote.setEnabled(false);
+        spinnerFinance.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
-        rlPharmacy.setVisibility(View.GONE);
+
     }
 
     private void disableAides() {
-        txtName.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtMobile.setEnabled(false);
-        txtHomePhone.setEnabled(false);
-        txtWorkPhone.setEnabled(false);
-        txtAddress.setEnabled(false);
-        txtAids.setEnabled(false);
-        txtSchedule.setEnabled(false);
-        txtOther.setEnabled(false);
+        txtAideCompName.setEnabled(false);
+        txtAideOfficePhone.setEnabled(false);
+        txtHourOfficePhone.setEnabled(false);
+        txtOtherPhone.setEnabled(false);
+        txtAideFax.setEnabled(false);
+        txtAideEmail.setEnabled(false);
+        txtAideAddress.setEnabled(false);
+        txtAideWebsite.setEnabled(false);
+        txtAideWebsite.setEnabled(false);
+        txtAideNote.setEnabled(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
-        rlPharmacy.setVisibility(View.GONE);
+
     }
 
     private void disableInsurance() {
-        txtInsuaranceName.setEnabled(false);
-        spinnerInsuarance.setClickable(false);
         txtInsuarancePhone.setEnabled(false);
         txtId.setEnabled(false);
         txtGroup.setEnabled(false);
-        txtMember.setEnabled(false);
+        txtInsuaranceFax.setEnabled(false);
+        txtInsuaranceEmail.setEnabled(false);
+        txtWebsite.setEnabled(false);
+        txtInsuaranceNote.setEnabled(false);
+        txtInsuaranceName.setEnabled(false);
+        txtSubscribe.setEnabled(false);
+        spinnerInsuarance.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
-        rlPharmacy.setVisibility(View.GONE);
+
     }
 
     private void disableSpecialist() {
-        txtName.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtMobile.setEnabled(false);
-        txtHomePhone.setEnabled(false);
-        txtWorkPhone.setEnabled(false);
-        txtAddress.setEnabled(false);
-        spinner.setEnabled(false);
-        txtPracticeName.setEnabled(false);
-        txtFax.setEnabled(false);
-        txtNetwork.setEnabled(false);
+        txtDoctorName.setEnabled(false);
+        txtDoctorOtherPhone.setEnabled(false);
+        txtDoctorLastSeen.setEnabled(false);
+        txtDoctorAddress.setEnabled(false);
+        txtDoctorWebsite.setEnabled(false);
+        txtDoctorFax.setEnabled(false);
+        txtDoctorHourOfficePhone.setEnabled(false);
+        txtDoctorOfficePhone.setEnabled(false);
         txtAffiliation.setEnabled(false);
+        txtPracticeName.setEnabled(false);
+        txtNetwork.setEnabled(false);
+        txtDoctorNote.setEnabled(false);
+        spinner.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
-        rlPharmacy.setVisibility(View.GONE);
+
     }
 
     private void visiFinance() {
@@ -1140,6 +1337,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+
                     case "Aides":
 
                         if (validate("Aides")) {

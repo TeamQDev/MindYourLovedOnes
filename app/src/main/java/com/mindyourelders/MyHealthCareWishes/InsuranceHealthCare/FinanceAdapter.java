@@ -96,15 +96,11 @@ public class FinanceAdapter extends BaseAdapter {
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE, "FinanceViewData");
                 Finance finance = FinanceList.get(position);
-                i.putExtra("Category", finance.getCategory());
-                i.putExtra("Firm", finance.getFirm());
-                i.putExtra("Name", finance.getName());
-                i.putExtra("Address", finance.getAddress());
-                i.putExtra("Phone", finance.getPhone());
-                i.putExtra("Photo", finance.getImage());
+                i.putExtra("FinanceObject",finance);
                 context.startActivity(i);
             }
         });

@@ -109,11 +109,8 @@ public class SpecialistAdapter extends BaseAdapter {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
                 preferences.putString(PrefConstants.SOURCE, "SpecialistViewData");
                 Specialist insurance = specialistList.get(position);
-                i.putExtra("Name", insurance.getName());
-                i.putExtra("Type", insurance.getType());
-                i.putExtra("Address", insurance.getAddress());
-                i.putExtra("Phone", insurance.getOfficePhone());
-                i.putExtra("Photo", insurance.getImage());
+                i.putExtra("SpecialistObject",insurance);
+                i.putExtra("IsPhysician",insurance.getIsPhysician());
                 context.startActivity(i);
             }
         });

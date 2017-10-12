@@ -66,6 +66,15 @@ Context context=this;
                 isEmergency=false;
                 isInsurance=true;
             }
+            else if (from.equals("Event"))
+            {
+
+                txtTitle.setText("Event Notes and Appt Tracker");
+                profile=new int[]{R.drawable.finances,R.drawable.insurancess};
+                specialist= new String[]{"Event Notes", "Appointment Tracker"};
+                isEmergency=false;
+                isInsurance=false;
+            }
         }
     }
 

@@ -29,11 +29,14 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".SplashNewActivity"
@@ -134,48 +137,61 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity"
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewEventActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.PrescriptionActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.PrescriptionActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceInfoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceInfoActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceCardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceCardActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPrescriptionActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPrescriptionActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddCardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddCardActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewCardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewCardActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.CarePlanListActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.CarePlanListActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivity"
+            android:label="@string/title_activity_medical_appoint"
+            android:theme="@style/MyMaterialTheme" />
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity"></activity>
     </application>
 
 </manifest>

@@ -11,8 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.DashBoard.EmergencyInfoActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceInfoActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 
 /**
@@ -114,11 +116,35 @@ class SpecialistContactAdapter extends BaseAdapter {
                     case "Insurance Card":
                         fragment = "Insurance Card";
                         break;
+
+                    case "Event Notes":
+                        fragment = "Event Notes";
+                        break;
+
+                    case "Appointment Tracker":
+                        fragment = "Appointment Tracker";
+                        break;
                 }
                 if (isEmergency == false&&isInsurance==false) {
-                    Intent i = new Intent(context, InsuranceActivity.class);
-                    i.putExtra("FRAGMENT", fragment);
-                    context.startActivity(i);
+                    if (fragment.equals("Event Notes")||fragment.equals("Appointment Tracker"))
+                    {
+                        if (fragment.equals("Event Notes"))
+                        {
+                            Intent i = new Intent(context, EventNoteActivity.class);
+                            i.putExtra("FRAGMENT", fragment);
+                            context.startActivity(i);
+                        } else if (fragment.equals("Appointment Tracker")) {
+                           Intent i = new Intent(context, MedicalAppointActivity.class);
+                            i.putExtra("FRAGMENT", fragment);
+                            context.startActivity(i);
+                        }
+
+                    }
+                    else {
+                        Intent i = new Intent(context, InsuranceActivity.class);
+                        i.putExtra("FRAGMENT", fragment);
+                        context.startActivity(i);
+                    }
                 } else if (isEmergency == true&&isInsurance==false){
                     Intent i = new Intent(context, EmergencyInfoActivity.class);
                     i.putExtra("FRAGMENT", fragment);
