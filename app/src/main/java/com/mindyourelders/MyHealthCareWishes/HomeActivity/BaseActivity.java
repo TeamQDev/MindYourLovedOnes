@@ -165,7 +165,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlLogOutt:
-              preferences.clearPreferences();
+                preferences.clearPreferences();
                 finish();
                 startActivity(new Intent(BaseActivity.this,LoginActivity.class));
                 break;

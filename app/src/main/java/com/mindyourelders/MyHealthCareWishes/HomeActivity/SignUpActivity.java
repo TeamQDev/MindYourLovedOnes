@@ -204,6 +204,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             preferences.putString(PrefConstants.USER_NAME, personalInfo.getName());
                             String saveThis = Base64.encodeToString( personalInfo.getPhoto(), Base64.DEFAULT);
                             preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
+                            preferences.setREGISTERED(true);
+                            preferences.setLogin(true);
                             startActivity(signupIntent);
                             finish();
                             saveToConnection(personalInfo.getId());

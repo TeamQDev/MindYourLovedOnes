@@ -5,16 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 public class SplashNewActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
-    TextView txtNew,txtRegistered;
+    TextView txtNew,txtRegistered,textMessage,txtWelcome;
     Preferences preferences;
-    ImageView img1,img2,img3,img4;
+    ImageView img1,img2,img3,img4,imgForword;
+    RelativeLayout rlBottom;
+    LinearLayout llSplash,llBottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +48,54 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
     private void initListener() {
         txtNew.setOnClickListener(this);
         txtRegistered.setOnClickListener(this);
+        txtWelcome.setOnClickListener(this);
+        imgForword.setOnClickListener(this);
     }
 
     private void initUI() {
+        textMessage= (TextView) findViewById(R.id.textMessage);
         txtNew= (TextView) findViewById(R.id.txtNew);
         txtRegistered= (TextView) findViewById(R.id.txtRegistered);
+        txtWelcome= (TextView) findViewById(R.id.txtWelcome);
         img1= (ImageView) findViewById(R.id.img1);
         img2= (ImageView) findViewById(R.id.img2);
         img3= (ImageView) findViewById(R.id.img3);
         img4= (ImageView) findViewById(R.id.img4);
+        imgForword= (ImageView) findViewById(R.id.imgForword);
+        llBottom= (LinearLayout) findViewById(R.id.llBottom);
+        llSplash= (LinearLayout) findViewById(R.id.llSplash);
+
+        final String[] array = {"Access to Critical Information And Health Care Directives 24/7","Mobile Tech for Seniors and their Families","Manage and share critical documents and information from your phone or tablet"};
+        textMessage.post(new Runnable() {
+            int i = 0;
+            @Override
+            public void run() {
+
+                textMessage.setText(array[i]);
+                Animation RightSwipe = AnimationUtils.loadAnimation(context, R.anim.enter);
+                textMessage.startAnimation(RightSwipe);
+                i++;
+                if (i ==3)
+                    i = 0;
+                textMessage.postDelayed(this, 5000);
+            }
+        });
+
+        if (preferences == null) {
+            preferences = new Preferences(SplashNewActivity.this);
+        }
+        if (preferences.getREGISTERED()) {
+
+            if (preferences.isLogin()) {
+                llBottom.setVisibility(View.VISIBLE);
+                llSplash.setVisibility(View.GONE);
+                txtWelcome.setText("Welcome Back "+ preferences.getString(PrefConstants.USER_NAME));
+            } else {
+                llBottom.setVisibility(View.GONE);
+                llSplash.setVisibility(View.VISIBLE);
+
+            }
+        }
     }
 
     @Override
@@ -72,6 +119,33 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                     finish();
                 }
 
+                break;
+
+            case R.id.txtWelcome:
+                if (preferences == null) {
+                    preferences = new Preferences(SplashNewActivity.this);
+                }
+
+                if (preferences.getREGISTERED()) {
+                    startActivity(new Intent(SplashNewActivity.this, BaseActivity.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(SplashNewActivity.this, LoginActivity.class));
+                    finish();
+                }
+                break;
+            case R.id.imgForword:
+                if (preferences == null) {
+                    preferences = new Preferences(SplashNewActivity.this);
+                }
+
+                if (preferences.getREGISTERED()) {
+                    startActivity(new Intent(SplashNewActivity.this, BaseActivity.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(SplashNewActivity.this, LoginActivity.class));
+                    finish();
+                }
                 break;
         }
     }

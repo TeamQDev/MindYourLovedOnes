@@ -191,7 +191,7 @@
             android:layout_height="@dimen/dimension160dp"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_weight="1"
-            android:background="@drawable/rlborder"
+            android:background="@drawable/rlborderone"
             android:elevation="@dimen/dimension10dp"
 
             >
@@ -242,7 +242,7 @@
            android:layout_width="@dimen/dimension160dp"
             android:layout_height="@dimen/dimension160dp"
             android:layout_weight="1"
-            android:background="@drawable/rlborder"
+            android:background="@drawable/rlbordertwo"
             android:layout_margin="@dimen/dimension10dp"
             android:elevation="@dimen/dimension10dp"
 
@@ -300,62 +300,60 @@
         android:layout_marginRight="@dimen/dimension10dp"
        >
     <!--EMrgency-->
-    <RelativeLayout
-        android:id="@+id/rlSpecialist"
-       android:layout_width="@dimen/dimension160dp"
-        android:layout_height="@dimen/dimension160dp"
-        android:background="@drawable/rlborder"
-        android:layout_margin="@dimen/dimension10dp"
-        android:elevation="@dimen/dimension10dp"
-        android:layout_weight="1"
-        >
-        <ImageView
-            android:id="@+id/imgSpecialistCount"
-            android:layout_width="@dimen/dimension40dp"
-            android:layout_height="@dimen/dimension40dp"
-            android:src="@drawable/ic_check"
-            android:layout_marginTop="@dimen/dimension20dp"
-            android:visibility="gone"
-            />
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-        <ImageView
-            android:id="@+id/imgSpecialistLogo"
-            android:layout_width="@dimen/dimension50dp"
-            android:layout_height="@dimen/dimension50dp"
-            android:src="@drawable/speci"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/rlSpecialist"
+            android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension160dp"
+            android:layout_margin="@dimen/dimension10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rlborderthree"
+            android:elevation="@dimen/dimension10dp">
 
-            android:scaleType="fitXY"
-            />
+            <ImageView
+                android:id="@+id/imgSpecialistCount"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_marginTop="@dimen/dimension20dp"
+                android:src="@drawable/ic_check"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/txtSpecialist"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension60dp"
-            android:padding="@dimen/dimension5dp"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
 
-            android:text="SPECIALISTS"
-            android:textColor="@color/colorBlackDark"
-            android:textStyle="normal"
-            android:textSize="@dimen/dimension16dp"
-            android:layout_below="@+id/imgSpecialistLogo"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dimension10dp"
-            />
-      </RelativeLayout>
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/imgSpecialistLogo"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
 
-    <!--CARE PLAN-->
+                    android:src="@drawable/speci" />
+
+                <TextView
+                    android:id="@+id/txtSpecialist"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_below="@+id/imgSpecialistLogo"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="SPECIALISTS"
+                    android:textColor="@color/colorBlackDark"
+                    android:textSize="@dimen/dimension16dp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!--CARE PLAN-->
     <RelativeLayout
         android:id="@+id/rlInsuranceCard"
        android:layout_width="@dimen/dimension160dp"
         android:layout_height="@dimen/dimension160dp"
-        android:background="@drawable/rlborder"
+        android:background="@drawable/rlborderfour"
         android:layout_margin="@dimen/dimension10dp"
         android:elevation="@dimen/dimension10dp"
         android:layout_weight="1"
@@ -414,7 +412,7 @@
             android:id="@+id/rlEmergencyEvent"
            android:layout_width="@dimen/dimension160dp"
             android:layout_height="@dimen/dimension160dp"
-            android:background="@drawable/rlborder"
+            android:background="@drawable/rlborderfive"
             android:layout_margin="@dimen/dimension10dp"
             android:elevation="@dimen/dimension10dp"
             android:layout_weight="1"
@@ -460,50 +458,49 @@
         <!--CARE PLAN-->
         <RelativeLayout
             android:id="@+id/rlPrescription"
-           android:layout_width="@dimen/dimension160dp"
+            android:layout_width="@dimen/dimension160dp"
             android:layout_height="@dimen/dimension160dp"
-            android:background="@drawable/rlborder"
             android:layout_margin="@dimen/dimension10dp"
-            android:elevation="@dimen/dimension10dp"
             android:layout_weight="1"
-            >
+            android:background="@drawable/rlbordersix"
+            android:elevation="@dimen/dimension10dp">
+
             <ImageView
                 android:id="@+id/imgPrescriptionCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
-                android:src="@drawable/ic_check"
                 android:layout_marginTop="@dimen/dimension20dp"
-                android:visibility="gone"
-                />
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
-            <ImageView
-            android:id="@+id/imgPrescriptionLogo"
-            android:layout_width="@dimen/dimension50dp"
-            android:layout_height="@dimen/dimension50dp"
-            android:src="@drawable/treat"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            />
+                android:src="@drawable/ic_check"
+                android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/txtPrescription"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension70dp"
-                android:padding="@dimen/dimension5dp"
-                android:text="PRESCRIPTIONS"
-                android:textColor="@color/colorBlackDark"
-                android:textStyle="normal"
-                android:textSize="@dimen/dimension16dp"
-                android:layout_below="@+id/imgPrescriptionLogo"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dimension10dp"
-                />
-           </RelativeLayout>
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/imgPrescriptionLogo"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/treat" />
+
+                <TextView
+                    android:id="@+id/txtPrescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension70dp"
+                    android:layout_below="@+id/imgPrescriptionLogo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="PRESCRIPTIONS"
+                    android:textColor="@color/colorBlackDark"
+                    android:textSize="@dimen/dimension16dp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
         </RelativeLayout>
