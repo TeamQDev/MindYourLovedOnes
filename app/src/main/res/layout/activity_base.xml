@@ -21,10 +21,10 @@ android:background="@color/colorBlue"
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension60dp"
-
-                >
-
+                android:layout_height="@dimen/dimension80dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
                 <ImageView
                     android:id="@+id/imgDrawer"
                     android:layout_width="@dimen/dimension30dp"
@@ -34,15 +34,13 @@ android:background="@color/colorBlue"
                     android:src="@drawable/ic_menu" />
                 <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                     android:id="@+id/imgProfile"
-                    android:layout_width="@dimen/dimension50dp"
-                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_width="@dimen/dimension75dp"
+                    android:layout_height="@dimen/dimension75dp"
                     android:src="@drawable/circular_profile"
                     android:scaleType="fitXY"
-                    android:layout_marginLeft="@dimen/dimension10dp"
                     android:layout_marginTop="@dimen/dimension2dp"
                     android:layout_marginBottom="@dimen/dimension2dp"
                     android:layout_centerInParent="true"
-                    android:visibility="gone"
                     />
                 <TextView
                     android:id="@+id/txtName"
@@ -71,13 +69,13 @@ android:background="@color/colorBlue"
 
                 <ImageView
                     android:id="@+id/imgNoti"
-                    android:layout_width="@dimen/dimension80dp"
-                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_width="@dimen/dimension100dp"
+                    android:layout_height="@dimen/dimension75dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dimension15dp"
                     android:src="@drawable/aba"
-android:visibility="gone"
+
                     />
                 <ImageView
                     android:id="@+id/imgLocationFeed"

@@ -59,7 +59,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         rlPrescription.setOnClickListener(this);
         //  rlInsurance.setOnClickListener(this);
         //  rlEmergency.setOnClickListener(this);
-        imgShareLocation.setOnClickListener(this);
+//        imgShareLocation.setOnClickListener(this);
         // rlEmergency.setOnLongClickListener(this);
     }
 
@@ -86,7 +86,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
 
         txtRelation = (TextView) rootview.findViewById(R.id.txtRelation);
-        imgShareLocation = (ImageView) rootview.findViewById(R.id.imgShareLocation);
+       // imgShareLocation = (ImageView) rootview.findViewById(R.id.imgShareLocation);
         imgLocationFeed = (ImageView) getActivity().findViewById(R.id.imgLocationFeed);
 
         Bundle bundle = this.getArguments();
@@ -150,9 +150,9 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
                 startActivity(intentEmergency);*/
                 break;
 
-            case R.id.imgShareLocation:
+            /*case R.id.imgShareLocation:
                 ShowShareLocationDialog();
-                break;
+                break;*/
         }
     }
 

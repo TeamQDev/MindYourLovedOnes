@@ -19,6 +19,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -197,8 +198,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.makeText(context, "You have registered Successfully", Toast.LENGTH_SHORT).show();
                             Intent signupIntent = new Intent(context, BaseActivity.class);
                             preferences.putString(PrefConstants.USER_EMAIL, email);
+
                             PersonalInfo personalInfo=PersonalInfoQuery.fetchEmailRecord(email);
                             preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
+                            preferences.putString(PrefConstants.USER_NAME, personalInfo.getName());
+                            String saveThis = Base64.encodeToString( personalInfo.getPhoto(), Base64.DEFAULT);
+                            preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
                             startActivity(signupIntent);
                             finish();
                             saveToConnection(personalInfo.getId());

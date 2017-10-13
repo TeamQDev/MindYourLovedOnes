@@ -5,9 +5,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.Connections.FragmentConnectionNew;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentDashboard;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentNotification;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,8 +31,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     FragmentConnectionNew fragmentConnection = null;
     FragmentNotification fragmentNotification=null;
     FragmentOverview fragmentOverview = null;
-    ImageView imgDrawer, imgNoti, imgLogout, imgLocationFeed,imgProfile;
-    TextView txtTitle,txtName;
+    ImageView imgDrawer, imgNoti, imgLogout, imgLocationFeed,imgProfile,imgDrawerProfile;
+    TextView txtTitle,txtName,txtDrawerName;
     DrawerLayout drawerLayout;
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
@@ -62,7 +66,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private void initListener() {
         imgDrawer.setOnClickListener(this);
      //   imgNoti.setOnClickListener(this);
- rlLogOutt.setOnClickListener(this);
+        rlLogOutt.setOnClickListener(this);
         imgLocationFeed.setOnClickListener(this);
     }
 
@@ -70,14 +74,22 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         imgDrawer = (ImageView) findViewById(R.id.imgDrawer);
         imgNoti = (ImageView) findViewById(R.id.imgNoti);
         imgProfile = (ImageView) findViewById(R.id.imgProfile);
+
         imgLocationFeed = (ImageView) findViewById(R.id.imgLocationFeed);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         txtName = (TextView) findViewById(R.id.txtName);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         leftDrawer = (RelativeLayout) findViewById(R.id.leftDrawer);
         header = (RelativeLayout) findViewById(R.id.header);
-
         rlLogOutt= (RelativeLayout) findViewById(R.id.rlLogOutt);
+        txtDrawerName = (TextView) leftDrawer.findViewById(R.id.txtDrawerName);
+        imgDrawerProfile = (ImageView) leftDrawer.findViewById(R.id.imgDrawerProfile);
+        String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
+        byte[] photo = Base64.decode(image, Base64.DEFAULT);
+        txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        imgDrawerProfile.setImageBitmap(bmp);
     }
 
     private void fragmentData() {

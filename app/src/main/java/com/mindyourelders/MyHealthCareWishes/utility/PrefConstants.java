@@ -16,4 +16,6 @@ public class PrefConstants {
 
     public static final String CONNECTED_USERID ="connected_Id" ;
 
+    public static final String USER_NAME ="username" ;
+    public static final String USER_PROFILEIMAGE ="userImage" ;
 }

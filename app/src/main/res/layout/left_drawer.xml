@@ -15,8 +15,8 @@
             android:background="@color/colorBlue"
             android:padding="@dimen/dimension10dp"
             >
-            <ImageView
-                android:id="@+id/imgProfile"
+            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+                android:id="@+id/imgDrawerProfile"
                 android:layout_width="@dimen/dimension110dp"
                 android:layout_height="@dimen/dimension110dp"
                 android:src="@drawable/ic_user_profile"
@@ -25,10 +25,10 @@
                 android:layout_centerHorizontal="true"
                 />
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txtDrawerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgProfile"
+                android:layout_below="@+id/imgDrawerProfile"
                 android:padding="@dimen/dimension5dp"
                 android:text="Martha Matheson"
                 android:textColor="@color/colorDarkBlue"

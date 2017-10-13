@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                          if (username.equals(PersonList.get(i).getEmail()) && password.equals(PersonList.get(i).getPassword())) {
                              Toast.makeText(context, "You have Logged in Successfully", Toast.LENGTH_SHORT).show();
                              preferences.putString(PrefConstants.USER_EMAIL, PersonList.get(i).getEmail());
+                             preferences.putString(PrefConstants.USER_NAME, PersonList.get(i).getName());
+                             String saveThis = Base64.encodeToString( PersonList.get(i).getPhoto(), Base64.DEFAULT);
+                             preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
                              preferences.putInt(PrefConstants.USER_ID, PersonList.get(i).getId());
                              preferences.setREGISTERED(true);
                              preferences.setLogin(true);

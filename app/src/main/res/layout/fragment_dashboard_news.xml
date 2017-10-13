@@ -5,16 +5,13 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
        >
-     <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/land"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
     <ImageView
         android:id="@+id/imgSynch"
         android:layout_width="@dimen/dimension30dp"
@@ -33,6 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/colorBlue"
+       android:gravity="center"
         >
 
         <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
@@ -53,7 +51,6 @@
             android:padding="@dimen/dimension2dp"
             android:text="Martha Matheson"
             android:textColor="@color/colorWhite"
-            android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension20dp" />
         <TextView
             android:id="@+id/txtRelation"
@@ -61,12 +58,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text= "SELF"
+            android:padding="@dimen/dimension5dp"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dimension16dp"
-            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginBottom="@dimen/dimension5dp"
-            android:layout_below="@+id/txtName"
-            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/txtName"
             />
 
         <TextView
@@ -163,12 +160,25 @@
             android:layout_below="@+id/rlProfile"
             ></RelativeLayout>
     <!--RoW One-->
+        <ScrollView
+            android:id="@+id/rlBox"
+            android:layout_below="@+id/rlProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_above="@+id/llbottom"
+            >
+        <RelativeLayout
+            android:layout_above="@+id/llbottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
     <LinearLayout
         android:id="@+id/llRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/rlProfile"
+
         android:layout_marginLeft="@dimen/dimension10dp"
         android:layout_marginRight="@dimen/dimension10dp"
         android:gravity="center_horizontal"
@@ -177,60 +187,60 @@
         <!--OVERVIEW-->
         <RelativeLayout
             android:id="@+id/rlEmergencyContact"
-           android:layout_width="@dimen/dimension140dp"
-            android:layout_height="@dimen/dimension145dp"
+            android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension160dp"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_weight="1"
             android:background="@drawable/rlborder"
             android:elevation="@dimen/dimension10dp"
 
             >
+
             <ImageView
                 android:id="@+id/imgECCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_marginTop="@dimen/dimension20dp"
                 android:src="@drawable/ic_check"
-                android:visibility="gone"
-                />
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-            <ImageView
-                android:id="@+id/imgECLogo"
-                android:layout_width="@dimen/dimension50dp"
-                android:layout_height="@dimen/dimension50dp"
-                android:src="@drawable/ic_contacts"
-                android:scaleType="fitXY"
-                android:layout_centerHorizontal="true"
+                android:visibility="gone" />
 
-                />
-
-            <TextView
-                android:id="@+id/txtEmergencyContact"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension60dp"
-                android:layout_below="@+id/imgECLogo"
-                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
 
-                android:padding="@dimen/dimension5dp"
-                android:text="CONTACTS AND MEDICAL INFO"
-                android:textColor="@color/colorBlackDark"
-                android:textSize="@dimen/dimension16dp"
+                <ImageView
+                    android:id="@+id/imgECLogo"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
 
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dimension10dp"
-                />
-        </RelativeLayout>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_contacts" />
+
+                <TextView
+                    android:id="@+id/txtEmergencyContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_below="@+id/imgECLogo"
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="CONTACTS AND MEDICAL INFO"
+
+                    android:textColor="@color/colorBlackDark"
+                    android:textSize="@dimen/dimension16dp" />
+            </RelativeLayout>
         </RelativeLayout>
 
         <!--CARE PLAN-->
         <RelativeLayout
             android:id="@+id/rlCarePlan"
-           android:layout_width="@dimen/dimension140dp"
-            android:layout_height="@dimen/dimension145dp"
+           android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension160dp"
             android:layout_weight="1"
             android:background="@drawable/rlborder"
             android:layout_margin="@dimen/dimension10dp"
@@ -264,7 +274,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimension60dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="ADV DIRECTIVES OTHER DOCUMENTS"
+                android:text="ADV DIRECTIVES AND OTHER DOCUMENTS"
                 android:textColor="@color/colorBlackDark"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -292,8 +302,8 @@
     <!--EMrgency-->
     <RelativeLayout
         android:id="@+id/rlSpecialist"
-       android:layout_width="@dimen/dimension140dp"
-        android:layout_height="@dimen/dimension145dp"
+       android:layout_width="@dimen/dimension160dp"
+        android:layout_height="@dimen/dimension160dp"
         android:background="@drawable/rlborder"
         android:layout_margin="@dimen/dimension10dp"
         android:elevation="@dimen/dimension10dp"
@@ -324,7 +334,7 @@
 
         <TextView
             android:id="@+id/txtSpecialist"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dimension60dp"
             android:padding="@dimen/dimension5dp"
 
@@ -343,8 +353,8 @@
     <!--CARE PLAN-->
     <RelativeLayout
         android:id="@+id/rlInsuranceCard"
-       android:layout_width="@dimen/dimension140dp"
-        android:layout_height="@dimen/dimension145dp"
+       android:layout_width="@dimen/dimension160dp"
+        android:layout_height="@dimen/dimension160dp"
         android:background="@drawable/rlborder"
         android:layout_margin="@dimen/dimension10dp"
         android:elevation="@dimen/dimension10dp"
@@ -379,7 +389,6 @@
             android:layout_height="@dimen/dimension60dp"
             android:padding="@dimen/dimension5dp"
             android:text="INSURANCE INFO AND CARDS"
-
             android:textColor="@color/colorBlackDark"
             android:textStyle="normal"
             android:textSize="@dimen/dimension16dp"
@@ -403,8 +412,8 @@
         <!--EMrgency-->
         <RelativeLayout
             android:id="@+id/rlEmergencyEvent"
-           android:layout_width="@dimen/dimension140dp"
-            android:layout_height="@dimen/dimension145dp"
+           android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension160dp"
             android:background="@drawable/rlborder"
             android:layout_margin="@dimen/dimension10dp"
             android:elevation="@dimen/dimension10dp"
@@ -429,16 +438,15 @@
                 android:layout_height="@dimen/dimension50dp"
                 android:src="@drawable/events"
                 android:layout_centerHorizontal="true"
-
                 android:scaleType="fitXY"
                 />
 
             <TextView
                 android:id="@+id/txtEmergencyEvent"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension70dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="EVENT NOTES AND APPT TRACKER"
+                android:text="EVENT NOTES AND APPOINTMENT TRACKER"
                 android:textColor="@color/colorBlackDark"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -452,8 +460,8 @@
         <!--CARE PLAN-->
         <RelativeLayout
             android:id="@+id/rlPrescription"
-           android:layout_width="@dimen/dimension140dp"
-            android:layout_height="@dimen/dimension145dp"
+           android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension160dp"
             android:background="@drawable/rlborder"
             android:layout_margin="@dimen/dimension10dp"
             android:elevation="@dimen/dimension10dp"
@@ -470,24 +478,23 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
             <ImageView
             android:id="@+id/imgPrescriptionLogo"
             android:layout_width="@dimen/dimension50dp"
             android:layout_height="@dimen/dimension50dp"
             android:src="@drawable/treat"
             android:layout_centerHorizontal="true"
-                android:scaleType="fitXY"
+            android:scaleType="fitXY"
             />
 
             <TextView
                 android:id="@+id/txtPrescription"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension60dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension70dp"
                 android:padding="@dimen/dimension5dp"
                 android:text="PRESCRIPTIONS"
-
                 android:textColor="@color/colorBlackDark"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -499,51 +506,28 @@
            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
+        </RelativeLayout>
+        </ScrollView>
 
-    <ImageView
-        android:id="@+id/imgShareLocation"
-        android:layout_width="@dimen/dimension60dp"
-        android:layout_height="@dimen/dimension60dp"
-        android:src="@drawable/ic_share_location"
-        android:layout_centerHorizontal="true"
-      android:layout_marginTop="@dimen/dimension20dp"
-        android:layout_below="@+id/llRow3"
-        android:visibility="gone"
 
-        />
-    <TextView
-        android:id="@+id/txtShareLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imgShareLocation"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="@dimen/dimension10dp"
-        android:text="Share Location"
-        android:textStyle="normal"
-        android:textColor="@color/colorBlackDark"
-        android:textSize="@dimen/dimension16dp"
-        android:visibility="gone"
-        />
-</RelativeLayout>
-
-</ScrollView>
     <LinearLayout
         android:id="@+id/llbottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorBlackDark"
-        android:alpha="0.65"
-        >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <com.mindyourelders.MyHealthCareWishes.customview.TextViewRomanS
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Courtesy of Barbara Keller from MYE."
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dimension16dp"
+            android:textSize="@dimen/dimension19dp"
             android:textStyle="normal"
             android:gravity="center"
-            android:padding="@dimen/dimension5dp"
+            android:padding="@dimen/dimension10dp"
             />
     </LinearLayout>
+        </RelativeLayout>
 </RelativeLayout>
