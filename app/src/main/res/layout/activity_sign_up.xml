@@ -90,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/llLoginVia"
             android:layout_marginTop="@dimen/dimension20dp"
+            app:hintEnabled="false"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/dimension8dp"

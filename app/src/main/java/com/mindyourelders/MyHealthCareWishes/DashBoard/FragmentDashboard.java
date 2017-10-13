@@ -95,7 +95,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         String relation = bundle.getString("Relation");
         String image=preferences.getString(PrefConstants.USER_IMAGE);
         byte[] array = Base64.decode(image, Base64.DEFAULT);
-        txtName.setText(name);
+        txtName.setText(name+" - "+relation);
         txtRelation.setText(relation);
         txtAddress.setText(address);
         Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);

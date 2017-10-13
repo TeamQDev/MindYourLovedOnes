@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -22,6 +23,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4;
     ImageView imgBack, imgEdit,imgProfile;
     TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
-
+     TextInputLayout tilName;
     String name, email, mobile, country, bdate, password,address,phone;
 
 
@@ -130,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgEdit = (ImageView) findViewById(R.id.imgEdit);
 
+        tilName = (TextInputLayout) findViewById(R.id.tilName);
         txtAddress= (TextView) findViewById(R.id.txtAddress);
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
@@ -175,7 +178,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilName.setHintEnabled(true);
+                txtName.setFocusable(true);
+                return false;
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

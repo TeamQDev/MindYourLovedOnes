@@ -161,23 +161,25 @@
             android:text="I'm Registered" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension60dp"
         android:orientation="horizontal"
         android:background="@color/colorBlue"
-        android:visibility="gone"
+
         >
 
         <TextView
             android:id="@+id/txtWelcome"
             style="@style/SplashButton"
-            android:layout_width="@dimen/dimension0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Welcome"
-           android:gravity="center"
-            android:layout_gravity="center"
+            android:gravity="center"
+           android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/imgForword"
+
             />
         <ImageView
             android:id="@+id/imgForword"
@@ -186,7 +188,8 @@
             android:src="@drawable/white_forword"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
             />
-    </LinearLayout>
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -20,8 +20,8 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
     TextView txtNew,txtRegistered,textMessage,txtWelcome;
     Preferences preferences;
     ImageView img1,img2,img3,img4,imgForword;
-    RelativeLayout rlBottom;
-    LinearLayout llSplash,llBottom;
+    RelativeLayout llBottom;
+    LinearLayout llSplash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         img3= (ImageView) findViewById(R.id.img3);
         img4= (ImageView) findViewById(R.id.img4);
         imgForword= (ImageView) findViewById(R.id.imgForword);
-        llBottom= (LinearLayout) findViewById(R.id.llBottom);
+        llBottom= (RelativeLayout) findViewById(R.id.llBottom);
         llSplash= (LinearLayout) findViewById(R.id.llSplash);
 
         final String[] array = {"Access to Critical Information And Health Care Directives 24/7","Mobile Tech for Seniors and their Families","Manage and share critical documents and information from your phone or tablet"};

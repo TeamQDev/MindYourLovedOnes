@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text= "SELF"
+            android:visibility="gone"
             android:padding="@dimen/dimension5dp"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dimension16dp"
