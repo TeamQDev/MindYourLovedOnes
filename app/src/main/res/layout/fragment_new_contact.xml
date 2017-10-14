@@ -100,6 +100,8 @@ android:visibility="gone"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"
                     android:layout_below="@+id/spinnerFinance"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
                     >
 
                     <AutoCompleteTextView
@@ -334,6 +336,7 @@ android:visibility="gone"
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/dimension8dp"
+                    app:hintEnabled="false"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"
                     android:paddingTop="@dimen/dimension8dp">
@@ -595,6 +598,8 @@ android:visibility="gone"
                     android:id="@+id/tilDoctorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp">

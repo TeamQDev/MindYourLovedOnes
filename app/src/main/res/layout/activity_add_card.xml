@@ -61,8 +61,8 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:hint="Provider Name"
+            android:maxLines="1"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
@@ -120,22 +120,24 @@
             />
         <FrameLayout
             android:id="@+id/flFront"
-            android:layout_width="@dimen/dimension110dp"
-            android:layout_height="@dimen/dimension110dp"
+            android:layout_width="@dimen/dimension200dp"
+            android:layout_height="@dimen/dimension160dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtFront"
             >
 
             <ImageView
                 android:id="@+id/imgFrontCard"
-                android:layout_width="@dimen/dimension100dp"
-                android:layout_height="@dimen/dimension100dp"
-                android:src="@drawable/cards" />
+                android:layout_width="@dimen/dimension200dp"
+                android:layout_height="@dimen/dimension155dp"
+                android:src="@drawable/cards"
+                android:scaleType="fitXY"
+                />
 
             <ImageView
                 android:id="@+id/imgEdit1"
-                android:layout_width="@dimen/dimension40dp"
-                android:layout_height="@dimen/dimension40dp"
+                android:layout_width="@dimen/dimension45dp"
+                android:layout_height="@dimen/dimension45dp"
                 android:layout_gravity="top|right"
                 android:src="@drawable/ic_edit_blue" />
         </FrameLayout>
@@ -152,8 +154,8 @@
             />
         <FrameLayout
             android:id="@+id/flBack"
-            android:layout_width="@dimen/dimension110dp"
-            android:layout_height="@dimen/dimension110dp"
+            android:layout_width="@dimen/dimension200dp"
+            android:layout_height="@dimen/dimension160dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtBack"
             >
@@ -162,13 +164,15 @@
 
             <ImageView
                 android:id="@+id/imgBackCard"
-                android:layout_width="@dimen/dimension100dp"
-                android:layout_height="@dimen/dimension100dp"
-                android:src="@drawable/cards" />
+                android:layout_width="@dimen/dimension200dp"
+                android:layout_height="@dimen/dimension150dp"
+                android:src="@drawable/cards"
+                android:scaleType="fitXY"
+                />
             <ImageView
                 android:id="@+id/imgEdit2"
-                android:layout_width="@dimen/dimension40dp"
-                android:layout_height="@dimen/dimension40dp"
+                android:layout_width="@dimen/dimension45dp"
+                android:layout_height="@dimen/dimension45dp"
                 android:layout_gravity="top|right"
                 android:src="@drawable/ic_edit_blue" />
         </FrameLayout>

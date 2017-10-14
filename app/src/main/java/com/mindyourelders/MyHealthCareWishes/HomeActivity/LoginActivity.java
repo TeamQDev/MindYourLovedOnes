@@ -3,8 +3,10 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView txtUserName, txtPassword;
     String username, password;
     Preferences preferences;
+    TextInputLayout tilUserName;
 
     DBHelper dbHelper;
 
@@ -62,6 +65,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imgGoogleSignup = (ImageView) findViewById(R.id.imgGoogleSignup);
         txtUserName = (TextView) findViewById(R.id.txtUserName);
         txtPassword = (TextView) findViewById(R.id.txtPassword);
+        tilUserName= (TextInputLayout) findViewById(R.id.tilUserName);
+        tilUserName.setHintEnabled(false);
+        txtUserName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilUserName.setHintEnabled(true);
+                txtUserName.setFocusable(true);
+
+                return false;
+            }
+        });
+
     }
 
     @Override

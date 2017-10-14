@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,6 +58,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     ArrayList<Dosage> dosageList = new ArrayList<>();
     ArrayList<PrescribeImage> imageList = new ArrayList<>();
     RelativeLayout llAddPrescription;
+    TextInputLayout tilTitle;
     public static final int RESULT_PRES = 100;
     TextView txtName, txtDate,txtPurpose,txtNote;
     EditText etNote;
@@ -118,6 +121,17 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         spinner.setAdapter(adapter);
         spinner.setHint("Dosage Form");
 
+        tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
+        tilTitle.setHintEnabled(false);
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilTitle.setHintEnabled(true);
+                txtName.setFocusable(true);
+
+                return false;
+            }
+        });
 
         Intent i=getIntent();
         if (i.getExtras()!=null)

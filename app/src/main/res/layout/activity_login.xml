@@ -40,7 +40,10 @@
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
-        android:paddingTop="@dimen/dimension8dp">
+        android:paddingTop="@dimen/dimension8dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        >
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
             android:id="@+id/txtUserName"

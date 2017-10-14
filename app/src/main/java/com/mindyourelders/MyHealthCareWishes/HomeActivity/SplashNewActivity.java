@@ -93,7 +93,6 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
             } else {
                 llBottom.setVisibility(View.GONE);
                 llSplash.setVisibility(View.VISIBLE);
-
             }
         }
     }

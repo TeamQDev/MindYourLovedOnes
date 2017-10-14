@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -62,6 +63,17 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
             txtTitle.setText(title);
             txtAdd.setText(title);
             tilTitle.setHint(name);
+            tilTitle.setHintEnabled(false);
+            txtName.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    tilTitle.setHintEnabled(true);
+                    txtName.setFocusable(true);
+
+                    return false;
+                }
+            });
+
             isAllergy=i.getExtras().getBoolean("IsAllergy");
             if (isAllergy==true)
             {

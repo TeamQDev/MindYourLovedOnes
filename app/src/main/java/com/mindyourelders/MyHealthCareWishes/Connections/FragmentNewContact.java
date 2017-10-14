@@ -17,6 +17,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -76,6 +77,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
    TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
+
     ImageView imgEdit, imgProfile;
     View rootview;
     RelativeLayout rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
@@ -93,7 +95,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     int connectionFlag;
     boolean inPrimary;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation;
-    TextInputLayout tilName,tilFName,tilEmergencyNote;
+    TextInputLayout tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
     ArrayList<String> relationArraylist;
@@ -194,6 +196,16 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 rlFinance.setVisibility(View.GONE);
                 txtAdd.setText("Add Connection");
                 tilName.setHint("First Name, Last Name");
+                tilName.setHintEnabled(false);
+                txtName.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        tilName.setHintEnabled(true);
+                        txtName.setFocusable(true);
+
+                        return false;
+                    }
+                });
                 txtTitle.setText("Add Connection");
                 tilEmergencyNote.setVisibility(View.GONE);
                 rlPharmacy.setVisibility(View.GONE);
@@ -741,6 +753,17 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlFinance.setVisibility(View.GONE);
         tilEmergencyNote.setVisibility(View.GONE);
         rlPharmacy.setVisibility(View.VISIBLE);
+
+        tilPharmacyName.setHintEnabled(false);
+        txtPharmacyName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilPharmacyName.setHintEnabled(true);
+                txtPharmacyName.setFocusable(true);
+
+                return false;
+            }
+        });
     }
 
     private void visiProxy() {
@@ -755,6 +778,16 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlAids.setVisibility(View.GONE);
         rlFinance.setVisibility(View.GONE);
         tilName.setHint("First Name, Last Name");
+        tilName.setHintEnabled(false);
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilName.setHintEnabled(true);
+                txtName.setFocusable(true);
+
+                return false;
+            }
+        });
         tilEmergencyNote.setVisibility(View.GONE);
         rlPharmacy.setVisibility(View.GONE);
     }
@@ -768,8 +801,18 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlAids.setVisibility(View.GONE);
         rlFinance.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
-
         tilName.setHint("First Name, Last Name");
+        tilName.setHintEnabled(false);
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilName.setHintEnabled(true);
+                txtName.setFocusable(true);
+
+                return false;
+            }
+        });
+
         tilEmergencyNote.setVisibility(View.VISIBLE);
         rlPharmacy.setVisibility(View.GONE);
     }
@@ -856,7 +899,17 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlProxy.setVisibility(View.GONE);
 
         tilFName.setHint("Name");
-        tilName.setHint("Name");
+
+        tilFName.setHintEnabled(false);
+        txtFName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilFName.setHintEnabled(true);
+                txtFName.setFocusable(true);
+
+                return false;
+            }
+        });
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -871,8 +924,16 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlFinance.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
 
+        tilAideCompName.setHintEnabled(false);
+        txtAideCompName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilAideCompName.setHintEnabled(true);
+                txtAideCompName.setFocusable(true);
 
-        tilName.setHint("Name of Firm");
+                return false;
+            }
+        });
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -890,9 +951,17 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
         txtAdd.setText("Add Doctor");
         txtTitle.setText("Add Doctor");
+        tilDoctorName.setHintEnabled(false);
 
-        tilName.setHint("Name of Doctor");
+        txtDoctorName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilDoctorName.setHintEnabled(true);
+                txtDoctorName.setFocusable(true);
 
+                return false;
+            }
+        });
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -906,7 +975,16 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         rlAids.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
 
-        tilName.setHint("Name of Firm");
+        tilInsuaranceName.setHintEnabled(false);
+        txtInsuaranceName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilInsuaranceName.setHintEnabled(true);
+                txtInsuaranceName.setFocusable(true);
+
+                return false;
+            }
+        });
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -1006,9 +1084,15 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         spinnerFinance = (MySpinner) rootview.findViewById(R.id.spinnerFinance);
         spinnerProxy= (MySpinner) rootview.findViewById(R.id.spinnerProxy);
         spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
+
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
+        tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
         tilFName= (TextInputLayout) rootview.findViewById(R.id.tilFName);
+        tilAideCompName = (TextInputLayout) rootview.findViewById(R.id.tilAideCompName);
+        tilDoctorName= (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
+        tilInsuaranceName= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
         tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
+
         txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
         txtPracticeName = (TextView) rootview.findViewById(R.id.txtPracticeName);
         txtFax = (TextView) rootview.findViewById(R.id.txtFax);
@@ -1062,6 +1146,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProxy.setAdapter(adapterProxy);
         spinnerProxy.setHint("Proxy Type");
+
+        /**/
     }
 
     public void setRelationData() {

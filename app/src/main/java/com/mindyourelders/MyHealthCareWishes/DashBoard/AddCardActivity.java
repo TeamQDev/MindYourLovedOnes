@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -36,6 +38,7 @@ import java.io.InputStream;
 public class AddCardActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
     TextView txtName,txttype;
+    TextInputLayout tilTitle;
     ImageView imgDone,imgBack,imgEdit1,imgEdit2,imgfrontCard,imgBackCard;
     private static int RESULT_CAMERA_IMAGE1 = 1;
     private static int RESULT_SELECT_PHOTO1 = 2;
@@ -78,6 +81,18 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
 
         txtName= (TextView) findViewById(R.id.txtName);
         txttype= (TextView) findViewById(R.id.txtType);
+        tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
+        tilTitle.setHintEnabled(false);
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilTitle.setHintEnabled(true);
+                txtName.setFocusable(true);
+
+                return false;
+            }
+        });
+
     }
 
     @Override
