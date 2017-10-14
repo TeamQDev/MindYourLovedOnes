@@ -43,7 +43,19 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
-            android:src="@drawable/check_mark" />
+            android:src="@drawable/check_mark"
+            android:visibility="gone"
+            />
+        <ImageView
+            android:id="@+id/imgDot"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/check_mark"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 

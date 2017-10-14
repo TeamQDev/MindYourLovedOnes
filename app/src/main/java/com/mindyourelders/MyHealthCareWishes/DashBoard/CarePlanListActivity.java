@@ -220,6 +220,7 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.llAddDoc:
                 Intent i=new Intent(context,AddDocumentActivity.class);
+                i.putExtra("GoTo","Add");
                 startActivity(i);
                 break;
         }

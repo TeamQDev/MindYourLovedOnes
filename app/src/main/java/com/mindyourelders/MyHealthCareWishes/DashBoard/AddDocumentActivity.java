@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,12 +17,13 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
-    ImageView imgBack;
+    ImageView imgBack,imgDot,imgDone;
     MySpinner spinnerDoc;
     TextView txtName, txtDate, txtLocation,txtHolderName;
     String From;
     Preferences preferences;
     ArrayAdapter<String> adapter;
+    String Goto="";
     String[] DocList = {"Health Care Proxy/Living Will","Health Care Proxy", "Living Will", "Non-Hospital DNR", "HIPAA Form", "Power of Attorney"," Ethical Will","Other Documents"};
 
     String[] ADList={"Living Will","Health Care Proxy","Living Will/Health Care Proxy","HIPAA Authorization"," Non-Hospital DNR Order"," Ethical Will"};
@@ -46,13 +48,22 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
     private void initListener() {
         imgBack.setOnClickListener(this);
+        imgDot.setOnClickListener(this);
+        imgDone.setOnClickListener(this);
     }
 
     private void initUi() {
+        imgDot = (ImageView) findViewById(R.id.imgDot);
+        imgDone = (ImageView) findViewById(R.id.imgDone);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         spinnerDoc= (MySpinner) findViewById(R.id.spinnerDoc);
 
         From=preferences.getString(PrefConstants.FROM);
+        Intent i=getIntent();
+        if (i.getExtras()!=null)
+        {
+            Goto=i.getExtras().getString("Goto");
+        }
 
         switch (From)
         {
@@ -84,6 +95,12 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBack:
+                finish();
+                break;
+            case R.id.imgDone:
+                finish();
+                break;
+            case R.id.imgDot:
                 finish();
                 break;
         }

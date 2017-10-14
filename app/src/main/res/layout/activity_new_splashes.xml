@@ -42,7 +42,7 @@
             android:layout_height="@dimen/dimension90dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dimension20dp"
-            android:src="@drawable/mye" />
+            android:src="@drawable/ic_launcher" />
     </RelativeLayout>
 
     <LinearLayout

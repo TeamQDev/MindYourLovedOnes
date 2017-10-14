@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ public class DocumentAdapter extends BaseAdapter {
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
           //  holder.txtDocDesc= (TextView) convertView.findViewById(R.id.txtDocDesc);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
-
+holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 
             convertView.setTag(holder);
         }
@@ -67,6 +68,15 @@ public class DocumentAdapter extends BaseAdapter {
         holder.txtDocHeader.setText(documentList.get(position).getName());
       //  holder.txtDocDesc.setText(documentList.get(position).getDesc());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,AddDocumentActivity.class);
+                i.putExtra("GoTo","View");
+                context.startActivity(i);
+            }
+        });
+
 
      convertView.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -88,6 +98,6 @@ public class DocumentAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtDocHeader, txtDocDesc;
-        ImageView imgDocType;
+        ImageView imgDocType,imgForword;
     }
 }
