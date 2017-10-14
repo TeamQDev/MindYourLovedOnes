@@ -54,7 +54,7 @@ Context context=this;
                 isEmergency=true;
                 isInsurance=false;
                 profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "Individual Info", "Medical Information", "Emergency Contacts", "Primary Physician", "Health Care Proxy Agents" };
+                specialist= new String[] { "Individual Information", "Medical Information", "Emergency Contacts", "Primary Physician", "Health Care Proxy Agents" };
 
             }
             else if (from.equals("Insurance"))
@@ -69,7 +69,7 @@ Context context=this;
             else if (from.equals("Event"))
             {
 
-                txtTitle.setText("Event Notes and Appt Tracker");
+                txtTitle.setText("Event Notes and Appointment Tracker");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
                 specialist= new String[]{"Event Notes", "Appointment Tracker"};
                 isEmergency=false;

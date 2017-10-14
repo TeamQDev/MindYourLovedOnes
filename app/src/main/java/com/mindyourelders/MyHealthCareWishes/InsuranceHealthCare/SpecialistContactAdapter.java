@@ -94,7 +94,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                         break;
 
 
-                    case "Individual Info":
+                    case "Individual Information":
                         fragment = "Individual";
                         break;
                     case "Medical Information":

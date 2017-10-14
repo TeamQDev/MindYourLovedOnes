@@ -37,15 +37,21 @@
             android:layout_toLeftOf="@+id/imgForword"
 
             />
-
+<RelativeLayout
+    android:id="@+id/rltype"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/txtDoctor"
+    android:layout_toLeftOf="@+id/txtDate"
+    >
         <TextView
             android:id="@+id/txtType"
             style="@style/EmergencyDesc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="jksdffs "
             android:textColor="@color/colorBlack"
-            android:layout_below="@+id/txtDoctor"
+
             />
         <TextView
             android:id="@+id/txtFrequency"
@@ -56,6 +62,22 @@
             android:textColor="@color/colorBlack"
             android:layout_below="@+id/txtType"
             />
+</RelativeLayout>
+        <TextView
+            android:id="@+id/txtDate"
+            style="@style/EmergencyCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Completion Date "
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/txtDateTime"
+            android:layout_toLeftOf="@+id/imgForword"
+            android:background="@drawable/blue_blue_border"
+            android:padding="@dimen/dimension10dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dimension15dp"
+            />
+
         <ImageView
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"

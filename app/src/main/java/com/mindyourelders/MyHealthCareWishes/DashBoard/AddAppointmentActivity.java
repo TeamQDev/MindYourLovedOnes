@@ -33,7 +33,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     RelativeLayout llAddConn;
     TextInputLayout tilName;
 
-    String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist","Mammogram", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
+    String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
             "Hypothyroid Blood test", "Glucose Test"};
 
     String[] Frequency = { "Daily", "Weekly", "Monthly", "Quarterly","Semi-Annual", "Annual", "Every 5 Years"};
@@ -109,9 +109,13 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
 
             case R.id.llAddConn:
                 String name=txtName.getText().toString().trim();
-                String frequency=spinnerFrequency.getSelectedItem().toString();
                 String date=txtDate.getText().toString().trim();
-                String type=spinnerType.getSelectedItem().toString();
+                int indexValuex = spinnerType.getSelectedItemPosition();
+                String type=Type[indexValuex-1];
+
+                int indexValue = spinnerFrequency.getSelectedItemPosition();
+                String frequency=Frequency[indexValue-1];
+
 
                 Appoint appoint=new Appoint();
                 appoint.setDoctor(name);

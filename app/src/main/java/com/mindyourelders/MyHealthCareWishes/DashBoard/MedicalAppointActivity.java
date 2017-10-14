@@ -1,10 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class MedicalAppointActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,6 +55,34 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
         lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
+
+        lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                 TextView txtDate= (TextView) view.findViewById(R.id.txtDate);
+                final TextView txtDateTime= (TextView) view.findViewById(R.id.txtDateTime);
+                txtDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar calendar = Calendar.getInstance();
+                        int year = calendar.get(Calendar.YEAR);
+                        int month = calendar.get(Calendar.MONTH);
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                txtDateTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                                noteList.get(position).setDate(dayOfMonth + "/" + (month + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                        dpd.show();
+                    }
+                });
+
+            }
+        });
+
+
         txtView= (TextView) findViewById(R.id.txtView);
         if (noteList.size()!=0) {
             setNoteData();
