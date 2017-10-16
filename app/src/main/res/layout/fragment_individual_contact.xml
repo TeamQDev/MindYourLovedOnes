@@ -76,15 +76,18 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimension80dp"
             android:layout_below="@+id/flProfile"
-            android:layout_marginTop="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension22dp"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
-            android:paddingTop="@dimen/dimension8dp">
+            android:paddingTop="@dimen/dimension8dp"
+            android:gravity="bottom"
+
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtName"
@@ -93,21 +96,27 @@
                 android:hint="Name"
                 android:maxLength="30"
                 android:maxLines="1"
+
                 android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
+                android:textSize="@dimen/dimension20dp"
+                android:background="@drawable/corner_gray_white_border"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimension80dp"
             android:layout_below="@+id/spinnerRelation"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp">
+            android:paddingRight="@dimen/dimension30dp"
+            android:gravity="bottom"
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtEmail"
@@ -117,20 +126,25 @@
                 android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
+                android:textSize="@dimen/dimension20dp"
+                android:background="@drawable/corner_gray_white_border"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilAddres"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimension80dp"
             android:layout_below="@+id/tilWorkPhone"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp">
+            android:paddingRight="@dimen/dimension30dp"
+            android:gravity="bottom"
+            >
 
             <AutoCompleteTextView
                 android:id="@+id/txtAddress"
@@ -138,9 +152,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
+                android:textSize="@dimen/dimension20dp"
+                android:background="@drawable/corner_gray_white_border"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -174,11 +191,13 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilPhone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimension80dp"
             android:layout_below="@+id/tilEmail"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp">
+            android:paddingRight="@dimen/dimension30dp"
+            android:gravity="bottom"
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtPhone"
@@ -189,19 +208,24 @@
                 android:maxLength="12"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
+                android:textSize="@dimen/dimension20dp"
+                android:background="@drawable/corner_gray_white_border"
+                />
         </android.support.design.widget.TextInputLayout>
        <android.support.design.widget.TextInputLayout
            android:id="@+id/tilHomePhone"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="@dimen/dimension80dp"
            android:layout_below="@+id/tilPhone"
            android:paddingBottom="@dimen/dimension8dp"
            android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp">
+           android:paddingRight="@dimen/dimension30dp"
+           android:gravity="bottom"
+           >
            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
            <AutoCompleteTextView
                android:id="@+id/txtHomePhone"
@@ -212,20 +236,24 @@
                android:maxLength="12"
                android:maxLines="1"
                android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension2dp"
+               android:paddingTop="@dimen/dimension10dp"
+               android:paddingBottom="@dimen/dimension10dp"
                android:singleLine="true"
                android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp" />
+               android:textSize="@dimen/dimension20dp"
+               android:background="@drawable/corner_gray_white_border"
+               />
        </android.support.design.widget.TextInputLayout>
        <android.support.design.widget.TextInputLayout
            android:id="@+id/tilWorkPhone"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="@dimen/dimension80dp"
            android:layout_below="@+id/tilHomePhone"
            android:paddingBottom="@dimen/dimension8dp"
            android:paddingLeft="@dimen/dimension30dp"
            android:paddingRight="@dimen/dimension30dp"
-
+android:gravity="bottom"
+           android:visibility="gone"
            >
            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
            <AutoCompleteTextView
@@ -237,15 +265,18 @@
                android:maxLength="12"
                android:maxLines="1"
                android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension2dp"
+               android:paddingTop="@dimen/dimension10dp"
+               android:paddingBottom="@dimen/dimension10dp"
                android:singleLine="true"
                android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp" />
+               android:textSize="@dimen/dimension20dp"
+               android:background="@drawable/corner_gray_white_border"
+               />
        </android.support.design.widget.TextInputLayout>
        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
            android:id="@+id/spinnerRelation"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="@dimen/dimension80dp"
            android:layout_marginLeft="@dimen/dimension35dp"
            android:layout_marginRight="@dimen/dimension35dp"
            app:ms_arrowColor="@color/colorBlue"
@@ -257,11 +288,12 @@
            custom:ms_hintColor="@color/colorDarkGray"
            android:layout_below="@+id/tilName"
            android:visibility="gone"
+           android:background="@drawable/corner_gray_white_border"
            />
        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
            android:id="@+id/spinner"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="@dimen/dimension80dp"
            android:layout_below="@+id/tilPhone"
            android:layout_marginLeft="@dimen/dimension35dp"
            android:layout_marginRight="@dimen/dimension35dp"
@@ -273,11 +305,12 @@
            custom:ms_floatingLabelColor="@color/colorBlue"
            custom:ms_hintColor="@color/colorDarkGray"
            android:visibility="gone"
+           android:background="@drawable/corner_gray_white_border"
            />
        <android.support.design.widget.TextInputLayout
            android:id="@+id/tilGender"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="@dimen/dimension80dp"
            android:layout_alignParentLeft="true"
            android:layout_alignParentStart="true"
            android:layout_below="@+id/tilAddres"
@@ -285,7 +318,7 @@
            android:paddingLeft="@dimen/dimension30dp"
            android:paddingRight="@dimen/dimension30dp"
            android:focusable="false"
-
+android:gravity="bottom"
            >
            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
            <AutoCompleteTextView
@@ -297,16 +330,19 @@
                android:maxLength="30"
                android:maxLines="1"
                android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension2dp"
+               android:paddingTop="@dimen/dimension10dp"
+               android:paddingBottom="@dimen/dimension10dp"
                android:singleLine="true"
                android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp" />
+               android:textSize="@dimen/dimension20dp"
+               android:background="@drawable/corner_gray_white_border"
+               />
        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilBdate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimension80dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tilGender"
@@ -314,6 +350,7 @@
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
             android:visibility="gone"
+            android:gravity="bottom"
             >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
@@ -325,10 +362,13 @@
                 android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
+                android:textSize="@dimen/dimension20dp"
+                android:background="@drawable/corner_gray_white_border"
+                />
         </android.support.design.widget.TextInputLayout>
 
        <!-- <android.support.design.widget.TextInputLayout

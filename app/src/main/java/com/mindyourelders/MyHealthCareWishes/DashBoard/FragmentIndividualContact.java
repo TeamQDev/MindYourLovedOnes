@@ -80,7 +80,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     RelativeConnection connection;
     PersonalInfo personalInfo;
 
-    TextInputLayout tilBdate;
+    TextInputLayout tilBdate,tilName,tilWorkPhone;
     String[] Relationship = {"Mother", "Father", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter", "Other"};
 
     @Nullable
@@ -123,6 +123,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle.setText("Individual Contact");
         imgProfile= (ImageView)rootview.findViewById(R.id.imgProfile);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
+        tilName= (TextInputLayout) rootview.findViewById(R.id.tilName);
+        tilWorkPhone= (TextInputLayout) rootview.findViewById(R.id.tilWorkPhone);
         txtLogin = (TextView) rootview.findViewById(R.id.txtLogin);
         txtForgotPassword = (TextView) rootview.findViewById(R.id.txtForgotPassword);
         txtBdate = (TextView)rootview.findViewById(R.id.txtBdate);
@@ -189,6 +191,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             txtGender.setVisibility(View.VISIBLE);
             spinnerRelation.setVisibility(View.GONE);
             txtWorkPhone.setVisibility(View.GONE);
+            tilWorkPhone.setVisibility(View.GONE);
             txtHomePhone.setVisibility(View.VISIBLE);
             if (personalInfo != null) {
 
@@ -221,6 +224,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             tilBdate.setVisibility(View.GONE);
            // spinner.setVisibility(View.GONE);
             txtWorkPhone.setVisibility(View.VISIBLE);
+            tilWorkPhone.setVisibility(View.VISIBLE);
             spinnerRelation.setVisibility(View.VISIBLE);
             txtGender.setVisibility(View.GONE);
             if (connection != null) {
