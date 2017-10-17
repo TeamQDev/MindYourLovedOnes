@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -44,6 +46,9 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     RelativeLayout llAddDoc;
     Preferences preferences;
+
+DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +64,15 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
 
     private void initComponent() {
         preferences=new Preferences(context);
+        dbHelper=new DBHelper(context);
+        DocumentQuery d=new DocumentQuery(context,dbHelper);
     }
 
     private void setDocuments() {
-        DocumentAdapter documentAdapter=new DocumentAdapter(context,documentList);
-        lvDoc.setAdapter(documentAdapter);
+        if (documentList.size()!=0) {
+            DocumentAdapter documentAdapter = new DocumentAdapter(context, documentList);
+            lvDoc.setAdapter(documentAdapter);
+        }
     }
 
     private void initListener() {
@@ -104,13 +113,16 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void getDocuments() {
-        documentList=new ArrayList<>();
+       documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+       /* documentList=new ArrayList<>();
 
         switch (From)
         {
             case "AD":
                 Document P1d=new Document();
                 P1d.setName("HealthCare Proxy");
+                P1d.setDate("10/10/2017");
+                P1d.setType("Health Care Proxy");
                 P1d.setImage(R.drawable.pdf);
                 P1d.setDesc("This is Helath care proxy Document");
                 P1d.setDocument("healthcare_proxy_nys.pdf");
@@ -206,7 +218,7 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
                 documentList.add(P4);
                 documentList.add(P5);
                 break;
-        }
+        }*/
 
     }
 
@@ -405,5 +417,12 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
                 }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDocuments();
+        setDocuments();
     }
 }

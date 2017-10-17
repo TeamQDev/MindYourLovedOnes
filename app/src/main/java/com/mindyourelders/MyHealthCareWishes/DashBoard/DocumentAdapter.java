@@ -2,7 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +54,9 @@ public class DocumentAdapter extends BaseAdapter {
            convertView=lf.inflate(R.layout.row_care_plan,parent,false);
            holder=new ViewHolder();
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
-          //  holder.txtDocDesc= (TextView) convertView.findViewById(R.id.txtDocDesc);
+           holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
-holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
+            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 
             convertView.setTag(holder);
         }
@@ -66,28 +65,26 @@ holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
         }
 
         holder.txtDocHeader.setText(documentList.get(position).getName());
-      //  holder.txtDocDesc.setText(documentList.get(position).getDesc());
+        holder.txtDocTime.setText(documentList.get(position).getDate());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
-        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(context,AddDocumentActivity.class);
                 i.putExtra("GoTo","View");
+                i.putExtra("DocumentObject",documentList.get(position));
                 context.startActivity(i);
             }
         });
 
 
-     convertView.setOnClickListener(new View.OnClickListener() {
+     /*convertView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        ((CarePlanListActivity)context).CopyReadAssets(documentList.get(position).getDocument());
-        ((CarePlanListActivity)context).onPDFClicked(Environment.getExternalStorageDirectory()
-                + "/mhcw/"+documentList.get(position).getDocument());
-       // ((CarePlanActivity)context).CopyAssets();
+
 
     }
-      });
+      });*/
         return convertView;
 
 
@@ -97,7 +94,7 @@ holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 
     public class ViewHolder
     {
-        TextView txtDocHeader, txtDocDesc;
+        TextView txtDocHeader, txtDocDesc,txtDocTime;
         ImageView imgDocType,imgForword;
     }
 }

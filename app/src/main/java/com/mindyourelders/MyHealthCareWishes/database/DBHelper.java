@@ -59,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(FinanceQuery.createFinanceTable());
         db.execSQL(InsuranceQuery.createInsuranceTable());
         db.execSQL(CardQuery.createCardTable());
-
+        db.execSQL(DocumentQuery.createDocumentTable());
     }
 
     @Override
@@ -103,6 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(FinanceQuery.dropTable());
         db.execSQL(InsuranceQuery.dropTable());
         db.execSQL(CardQuery.dropTable());
+        db.execSQL(DocumentQuery.dropTable());
         onCreate(db);
     }
 }

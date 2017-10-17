@@ -191,7 +191,8 @@
             android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivity"
             android:label="@string/title_activity_medical_appoint"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity"></activity>
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity" />
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList"></activity>
     </application>
 
 </manifest>

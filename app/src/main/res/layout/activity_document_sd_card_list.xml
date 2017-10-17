@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList" android:background="@color/colorLightBlue">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="368dp"
+        android:layout_height="53dp"
+        android:background="@color/colorBlue">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_toRightOf="@+id/imgBack"
+            android:text="ADD SD CARD DOCUMENTS"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension22dp"
+            android:textAllCaps="true"
+            />
+
+        <!--  <ImageView
+              android:id="@+id/imgDone"
+              android:layout_width="@dimen/dimension30dp"
+              android:layout_height="@dimen/dimension30dp"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="@dimen/dimension15dp"
+              android:src="@drawable/check_mark"
+              />-->
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvDoc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:background="@color/colorLightBlue"
+       ></ListView>
+</RelativeLayout>
+
+
