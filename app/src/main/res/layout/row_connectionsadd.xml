@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimension2dp"
             android:layout_below="@+id/imgConPhoto"
-            android:text="Add Connection"
+            android:text="Add Profile"
             android:textSize="@dimen/dimension20dp"
             android:textColor="@color/colorDarkGray"
             android:layout_centerHorizontal="true"

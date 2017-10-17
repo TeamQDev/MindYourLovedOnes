@@ -27,11 +27,11 @@ android:background="@color/colorBlue"
                 android:layout_alignParentStart="true">
                 <ImageView
                     android:id="@+id/imgDrawer"
-                    android:layout_width="@dimen/dimension30dp"
-                    android:layout_height="@dimen/dimension30dp"
+                    android:layout_width="@dimen/dimension40dp"
+                    android:layout_height="@dimen/dimension40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimension15dp"
-                    android:src="@drawable/ic_menu" />
+                    android:src="@drawable/ic_menus" />
                 <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/dimension75dp"
@@ -76,6 +76,17 @@ android:background="@color/colorBlue"
                     android:layout_marginRight="@dimen/dimension15dp"
                     android:src="@drawable/aba"
 
+                    />
+                <ImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="@dimen/dimension80dp"
+                    android:layout_height="@dimen/dimension85dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:src="@drawable/ic_launcher"
+                     android:padding="@dimen/dimension10dp"
+                    android:visibility="gone"
                     />
                 <ImageView
                     android:id="@+id/imgLocationFeed"

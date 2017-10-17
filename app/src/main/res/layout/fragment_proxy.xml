@@ -26,6 +26,7 @@
             android:layout_height="@dimen/dimension60dp"
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
+            android:textAllCaps="true"
             android:text="Add Proxy"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />

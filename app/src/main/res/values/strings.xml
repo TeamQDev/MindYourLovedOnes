@@ -4,6 +4,9 @@
     <string name="PolicyText">By creating an account, you agree to MHCW <a href="http://www.myhealthcarewishes.com"><b>Private Policy</b></a> and <a href="http://www.myhealthcarewishes.com"><b>Terms of Use</b></a>.</string>
     <string name="title_activity_events">EventsActivity</string>
     <string name="title_activity_medical_appoint">MedicalAppointActivity</string>
+    <string name="header_title"><font size="40">M</font><font size="30">IND</font> <font size="40">Y</font><font size="30">OUR </font><font size="40">E</font><font size="30">LDERS</font></string>
+    <string name="adv_title">&amp; Adavanced Directives</string>
+    <string name="msg">Mobile Tech for Seniors and their Families<html> &#160;&#160;&#160;&#160;&#160;</html></string>
 
     <!-- <string-array name="specialist_arrays">
         <item>Insurance</item>

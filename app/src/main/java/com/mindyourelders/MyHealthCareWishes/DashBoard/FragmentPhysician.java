@@ -78,7 +78,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
 
     private void initUI() {
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
-        txtTitle.setText("Primary Physician");
+        txtTitle.setText("PRIMARY PHYSICIAN");
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);
         lvSpecialist = (SwipeMenuListView) rootview.findViewById(R.id.lvSpecialist);

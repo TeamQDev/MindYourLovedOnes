@@ -109,7 +109,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("Medical Information");
+        txtTitle.setText("MEDICAL INFORMATION");
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);

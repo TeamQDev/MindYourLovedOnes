@@ -29,6 +29,7 @@
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_toRightOf="@+id/imgBack"
             android:text="Prescriptions"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp" />
 
@@ -64,6 +65,7 @@
             android:layout_height="@dimen/dimension60dp"
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
+            android:textAllCaps="true"
             android:text="Add Prescription"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
@@ -88,7 +90,7 @@
         android:text="No Prescription Available"
         android:gravity="center"
         android:textSize="@dimen/dimension18dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/lvPrescription"
+        android:layout_toEndOf="@+id/lvPrescription" />
 </RelativeLayout>

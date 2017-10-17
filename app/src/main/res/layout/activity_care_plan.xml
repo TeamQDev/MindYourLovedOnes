@@ -31,6 +31,7 @@
                 android:text="Advance Care Plan Documents"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/dimension22dp"
+                android:textAllCaps="true"
                 />
 
           <!--  <ImageView
@@ -93,6 +94,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/dimension26dp"
                 android:gravity="center"
+                android:textAllCaps="true"
                 />
 
         </RelativeLayout>

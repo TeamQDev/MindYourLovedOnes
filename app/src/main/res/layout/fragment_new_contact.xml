@@ -902,7 +902,7 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlCommon"
-
+android:visibility="gone"
                >
 
                 <android.support.design.widget.TextInputLayout
@@ -1641,7 +1641,7 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension60dp"
                 android:layout_toRightOf="@+id/imgAdd"
-
+                android:textAllCaps="true"
                 android:gravity="center"
                 android:text="Add Connection"
                 android:textColor="#FFFFFF"

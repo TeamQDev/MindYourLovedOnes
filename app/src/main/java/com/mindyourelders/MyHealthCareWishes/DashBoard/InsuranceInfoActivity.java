@@ -40,11 +40,11 @@ ImageView imgBack;
             switch (fragment)
             {
                 case "Insurance Info":
-                    txtTitle.setText("Insurance Info");
+                    txtTitle.setText("INSURANCE INFORMATION");
                     callFragment("INFO", fragmentInsurance);
                     break;
-                case "Insurance Card":
-                    txtTitle.setText("Insurance Card");
+                case "INSURANCE CARD":
+                    txtTitle.setText("INSURANCE CARD");
                     callFragment("CARD", fragementInsuarnceCard);
                     break;
             }
@@ -68,7 +68,7 @@ ImageView imgBack;
 
     private void initUI() {
         txtTitle= (TextView) findViewById(R.id.txtTitle);
-        txtTitle.setText("Insurance");
+        txtTitle.setText("INSURANCE");
         imgBack= (ImageView) findViewById(R.id.imgBack);
     }
 

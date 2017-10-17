@@ -7,11 +7,9 @@
         android:id="@+id/llAddAides"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorGreen"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/dimension15dp"
-        android:layout_marginLeft="@dimen/dimension15dp"
-        android:layout_marginRight="@dimen/dimension15dp"
-        android:background="@color/colorGreen">
+        android:layout_centerHorizontal="true">
         <ImageView
             android:id="@+id/imgAdd"
             android:layout_width="@dimen/dimension60dp"
@@ -25,6 +23,7 @@
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
             android:text="Add Health Service"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>

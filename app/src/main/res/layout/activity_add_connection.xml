@@ -32,6 +32,7 @@
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_toRightOf="@+id/imgBack"
             android:text="Add Connection"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension21dp"
 

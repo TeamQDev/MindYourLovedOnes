@@ -18,6 +18,7 @@
         android:layout_marginRight="@dimen/dimension15dp"
         android:elevation="@dimen/dimension10dp"
         android:gravity="center"
+
         >
          <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
             android:id="@+id/imgConPhoto"

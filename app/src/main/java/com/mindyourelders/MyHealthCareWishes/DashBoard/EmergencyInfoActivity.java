@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
-import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentPharmacy;
 
 
 public class EmergencyInfoActivity extends AppCompatActivity implements View.OnClickListener {
@@ -83,7 +82,7 @@ ImageView imgBack;
 
     private void initUI() {
         txtTitle= (TextView) findViewById(R.id.txtTitle);
-        txtTitle.setText("Contacts and Medical Info");
+        txtTitle.setText("PERSONAL AND MEDICAL INFORMATION");
         imgBack= (ImageView) findViewById(R.id.imgBack);
     }
 

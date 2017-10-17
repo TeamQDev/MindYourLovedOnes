@@ -29,6 +29,7 @@
             android:layout_toRightOf="@+id/imgBack"
             android:text="Add Insurance Card"
             android:textColor="#FFFFFF"
+            android:textAllCaps="true"
             android:textSize="@dimen/dimension22dp" />
 
         <ImageView
@@ -51,6 +52,7 @@
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
+        android:textAllCaps="true"
         android:paddingTop="@dimen/dimension8dp"
         android:layout_below="@+id/header"
         android:layout_alignParentLeft="true"

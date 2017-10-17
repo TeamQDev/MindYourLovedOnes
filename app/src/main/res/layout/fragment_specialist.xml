@@ -21,6 +21,7 @@
         <TextView
             android:id="@+id/txtAdd"
             android:layout_width="match_parent"
+            android:textAllCaps="true"
             android:layout_height="@dimen/dimension60dp"
             android:gravity="center"
             android:text="Add Specialist"

@@ -35,7 +35,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     TextView txtAdd;
     //RelativeLayout llAddConn;
     TextView txtTitle,txtName;
-    ImageView imgNoti,imgProfile;
+    ImageView imgNoti,imgProfile,imgLogo;
     DBHelper dbHelper;
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
@@ -74,13 +74,17 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("Mind Your Elders");
+        txtTitle.setText("PROFILES");
         imgProfile= (ImageView) getActivity().findViewById(R.id.imgProfile);
         txtName= (TextView) getActivity().findViewById(R.id.txtName);
         txtName.setVisibility(View.GONE);
         imgProfile.setVisibility(View.GONE);
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);
+        imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
+        imgLogo.setVisibility(View.VISIBLE);
+
+
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         //llAddConn = (RelativeLayout) rootview.findViewById(llAddConn);
         lvConnection = (GridView) rootview.findViewById(R.id.lvConnection);

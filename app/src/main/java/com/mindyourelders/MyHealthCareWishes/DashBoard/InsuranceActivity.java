@@ -32,7 +32,7 @@ TextView txtTitle;
     ImageView imgBack;
 
 
-    String[] specialist = { "Insurance", "Doctors", "Home Health Services", "Finance,Insurance and Legal" };
+  //  String[] specialist = { "Insurance", "DOCTORS", "HOME HEALTH SERVICES", "FINANCE, INSURANCE & LEGAL" };
 
 
     // FragmentConnection fragmentConnection = null;
@@ -59,23 +59,23 @@ TextView txtTitle;
             switch (fragment)
             {
                 case "Insurance":
-                    txtTitle.setText("Insurance");
+                    txtTitle.setText("INSURANCE");
                     callFragment("INSURANCE", fragmentInsurance);
                     break;
                 case "Doctors":
-                    txtTitle.setText("Doctors");
+                    txtTitle.setText("DOCTORS");
                     callFragment("SPECIALIST", fragmentSpecialist);
                     break;
                 case "Pharmacies":
-                    txtTitle.setText("Pharmacies");
+                    txtTitle.setText("PHARMACIES");
                     callFragment("PHARMACY", fragmentPharmacy);
                     break;
                 case "Home Health Services":
-                    txtTitle.setText("Home Health Services");
+                    txtTitle.setText("HOME HEALTH SERVICES");
                     callFragment("AIDS", fragmentAids);
                     break;
                 case "Finance,Insurance and Legal":
-                    txtTitle.setText("Finance,Insurance and Legal");
+                    txtTitle.setText("FINANCE, INSURANCE & LEGAL");
                     callFragment("FINANCE", fragmentFinance);
                     break;
             }

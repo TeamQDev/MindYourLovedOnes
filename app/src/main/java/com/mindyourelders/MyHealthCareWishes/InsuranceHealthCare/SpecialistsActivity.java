@@ -41,37 +41,37 @@ Context context=this;
             from=i.getExtras().getString("FROM");
             if (from.equals("Speciality"))
             {
-                txtTitle.setText("Specialist Contacts");
+                txtTitle.setText("SPECIALISTS CONTACTS");
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
-                specialist= new String[]{"Doctors", "Pharmacies", "Home Health Services", "Finance,Insurance and Legal"};
+                specialist= new String[]{"DOCTORS", "PHARMACIES", "HOME HEALTH SERVICES", "FINANCE, INSURANCE & LEGAL"};
                 isEmergency=false;
                 isInsurance=false;
             }
             else if (from.equals("Emergency"))
             {
 
-                txtTitle.setText("Contacts and Medical Information");
+                txtTitle.setText("PERSONAL AND MEDICAL INFORMATION");
                 isEmergency=true;
                 isInsurance=false;
                 profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "Individual Information", "Medical Information", "Emergency Contacts", "Primary Physician", "Health Care Proxy Agents" };
+                specialist= new String[] { "PERSONAL INFORMATION", "MEDICAL INFORMATION", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENTS" };
 
             }
             else if (from.equals("Insurance"))
             {
 
-                txtTitle.setText("Insurance");
+                txtTitle.setText("INSURANCE");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
-                specialist= new String[]{"Insurance Info", "Insurance Card"};
+                specialist= new String[]{"INSURANCE INFORMATION", "INSURANCE CARD"};
                 isEmergency=false;
                 isInsurance=true;
             }
             else if (from.equals("Event"))
             {
 
-                txtTitle.setText("Event Notes and Appointment Tracker");
+                txtTitle.setText("EVENT NOTES AND APPOINTMENT TRACKER");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
-                specialist= new String[]{"Event Notes", "Appointment Tracker"};
+                specialist= new String[]{"EVENT NOTES", "APPOINTMENT TRACKER"};
                 isEmergency=false;
                 isInsurance=false;
             }

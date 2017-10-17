@@ -12,7 +12,8 @@
         android:layout_height="@dimen/dimension60dp"
         android:background="@color/colorBlue"
         android:layout_alignParentTop="true"
-       >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/imgBack"
@@ -32,7 +33,7 @@
             android:text="Add Appointment"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension21dp"
-
+            android:textAllCaps="true"
             />
 
         <ImageView
@@ -165,6 +166,7 @@
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
             android:text="Add"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>

@@ -33,6 +33,7 @@
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_toRightOf="@+id/imgBack"
             android:text="Add Prescription"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp" />
 

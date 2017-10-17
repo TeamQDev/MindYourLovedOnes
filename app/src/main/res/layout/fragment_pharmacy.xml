@@ -19,6 +19,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/adddoc" />
         <TextView
+            android:textAllCaps="true"
             android:id="@+id/txtAdd"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension60dp"

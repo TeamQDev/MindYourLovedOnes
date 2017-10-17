@@ -194,7 +194,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 rlAids.setVisibility(View.GONE);
                 rlProxy.setVisibility(View.GONE);
                 rlFinance.setVisibility(View.GONE);
-                txtAdd.setText("Add Connection");
+                txtAdd.setText("ADD CONNECTION");
                 tilName.setHint("First Name, Last Name");
                 tilName.setHintEnabled(false);
                 txtName.setOnTouchListener(new View.OnTouchListener() {
@@ -206,7 +206,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         return false;
                     }
                 });
-                txtTitle.setText("Add Connection");
+                txtTitle.setText("Add Connection");txtTitle.setAllCaps(true);
+
                 tilEmergencyNote.setVisibility(View.GONE);
                 rlPharmacy.setVisibility(View.GONE);
                 break;
@@ -537,7 +538,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "InsuranceViewData":
                 visiInsurance();
               disableInsurance();
-                txtTitle.setText("Insurance Information");
+                txtTitle.setText("INSURANCE INFORMATION");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent insuranceIntent2 = getActivity().getIntent();
                 if (insuranceIntent2.getExtras() != null) {
@@ -1146,8 +1147,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProxy.setAdapter(adapterProxy);
         spinnerProxy.setHint("Proxy Type");
+        txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
 
-        /**/
     }
 
     public void setRelationData() {

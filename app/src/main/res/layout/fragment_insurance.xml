@@ -25,6 +25,7 @@
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
             android:text="Add Insurance"
+            android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>

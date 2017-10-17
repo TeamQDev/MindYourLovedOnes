@@ -74,7 +74,7 @@ public class FragmentProxy extends Fragment implements View.OnClickListener{
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("Health Care Proxy Agents");
+        txtTitle.setText("HEALTH CARE PROXY AGENTS");
         /*imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);*/
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);

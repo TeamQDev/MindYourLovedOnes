@@ -75,53 +75,53 @@ class SpecialistContactAdapter extends BaseAdapter {
             public void onClick(View v) {
                 String fragment = null;
                 switch (specialist[position]) {
-                    case "Insurance":
+                    case "INSURANCE":
                         fragment = "Insurance";
                         break;
 
-                    case "Pharmacies":
+                    case "PHARMACIES":
                         fragment="Pharmacies";
                         break;
 
-                    case "Doctors":
+                    case "DOCTORS":
                         fragment = "Doctors";
                         break;
-                    case "Home Health Services":
+                    case "HOME HEALTH SERVICES":
                         fragment = "Home Health Services";
                         break;
-                    case "Finance,Insurance and Legal":
+                    case "FINANCE, INSURANCE & LEGAL":
                         fragment = "Finance,Insurance and Legal";
                         break;
 
 
-                    case "Individual Information":
+                    case "PERSONAL INFORMATION":
                         fragment = "Individual";
                         break;
-                    case "Medical Information":
+                    case "MEDICAL INFORMATION":
                         fragment = "Information";
                         break;
-                    case "Emergency Contacts":
+                    case "EMERGENCY CONTACTS":
                         fragment = "Emergency";
                         break;
-                    case "Primary Physician":
+                    case "PRIMARY PHYSICIAN":
                         fragment = "Physician";
                         break;
-                    case "Health Care Proxy Agents":
+                    case "HEALTH CARE PROXY AGENTS":
                         fragment = "Proxy";
                         break;
 
-                    case "Insurance Info":
+                    case "INSURANCE INFORMATION":
                         fragment = "Insurance Info";
                         break;
-                    case "Insurance Card":
-                        fragment = "Insurance Card";
+                    case "INSURANCE CARD":
+                        fragment = "INSURANCE CARD";
                         break;
 
-                    case "Event Notes":
+                    case "EVENT NOTES":
                         fragment = "Event Notes";
                         break;
 
-                    case "Appointment Tracker":
+                    case "APPOINTMENT TRACKER":
                         fragment = "Appointment Tracker";
                         break;
                 }

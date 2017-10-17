@@ -65,7 +65,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         llBottom= (RelativeLayout) findViewById(R.id.llBottom);
         llSplash= (LinearLayout) findViewById(R.id.llSplash);
 
-        final String[] array = {"Access to Critical Information And Health Care Directives 24/7","Mobile Tech for Seniors and their Families","Manage and share critical documents and information from your phone or tablet"};
+      final String[] array = {"Access to Critical Information And Health Care Directives 24/7",getResources().getString(R.string.msg),"Manage and share critical documents and information from your phone or tablet","All Information on this app resides on your smartphone or tablet.  HIPAA federal privacy rules do not apply to this app because the app is in your control.","Mind Your Elders only has access to your email address"};
         textMessage.post(new Runnable() {
             int i = 0;
             @Override

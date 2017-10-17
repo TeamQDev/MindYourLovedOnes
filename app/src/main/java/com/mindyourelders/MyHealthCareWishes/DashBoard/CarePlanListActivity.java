@@ -77,7 +77,7 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
         lvDoc= (ListView) findViewById(R.id.lvDoc);
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
-
+        txtTitle.setAllCaps(true);
 
         From=preferences.getString(PrefConstants.FROM);
         switch (From)

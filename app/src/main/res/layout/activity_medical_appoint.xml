@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_toRightOf="@+id/imgBack"
-            android:text="Medical Appointment"
+            android:text="MEDICAL APPOINTMENT"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp" />
 

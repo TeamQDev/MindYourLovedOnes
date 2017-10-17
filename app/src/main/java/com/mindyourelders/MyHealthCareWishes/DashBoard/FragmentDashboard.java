@@ -31,7 +31,7 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergenc
 
 public class FragmentDashboard extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     FragmentOverview fragmentOverview;
-    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti;
+    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti,imgLogo;
     TextView txtName,txtAddress, txtRelation;
     RelativeLayout rlEmergencyContact, rlSpecialist, rlInsuranceCard, rlEmergencyEvent, rlPrescription, rlCarePlan;
     View rootview;
@@ -69,7 +69,8 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         txtTitle.setText("");
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.VISIBLE);
-
+        imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
+        imgLogo.setVisibility(View.GONE);
         imgProfile = (ImageView) getActivity().findViewById(R.id.imgProfile);
         imgProfile.setVisibility(View.VISIBLE);
         txtName = (TextView)rootview.findViewById(R.id.txtName);

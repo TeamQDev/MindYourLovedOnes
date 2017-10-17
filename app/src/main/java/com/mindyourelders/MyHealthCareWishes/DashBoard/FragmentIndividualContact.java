@@ -120,7 +120,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("Individual Contact");
+        txtTitle.setText("PERSONAL INFORMATION");
         imgProfile= (ImageView)rootview.findViewById(R.id.imgProfile);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
         tilName= (TextInputLayout) rootview.findViewById(R.id.tilName);

@@ -3,7 +3,9 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String From;
     Preferences preferences;
     ArrayAdapter<String> adapter;
+    TextInputLayout tilDate;
     String Goto="";
     String[] DocList = {"Health Care Proxy/Living Will","Health Care Proxy", "Living Will", "Non-Hospital DNR", "HIPAA Form", "Power of Attorney"," Ethical Will","Other Documents"};
 
@@ -58,6 +61,18 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         imgBack = (ImageView) findViewById(R.id.imgBack);
         spinnerDoc= (MySpinner) findViewById(R.id.spinnerDoc);
 
+        tilDate= (TextInputLayout) findViewById(R.id.tilDate);
+        txtDate= (TextView) findViewById(R.id.txtDate);
+        tilDate.setHintEnabled(false);
+        txtDate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilDate.setHintEnabled(true);
+                txtDate.setFocusable(true);
+
+                return false;
+            }
+        });
         From=preferences.getString(PrefConstants.FROM);
         Intent i=getIntent();
         if (i.getExtras()!=null)

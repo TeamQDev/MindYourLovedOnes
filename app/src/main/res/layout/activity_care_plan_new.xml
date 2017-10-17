@@ -33,6 +33,7 @@
                 android:layout_toRightOf="@+id/imgBack"
                 android:text="Documents"
                 android:textColor="#FFFFFF"
+                android:textAllCaps="true"
                 android:textSize="@dimen/dimension22dp" />
 
             <ImageView
@@ -69,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Advanced Directives"
+                android:textAllCaps="true"
                 android:padding="@dimen/dimension15dp"
                 android:textSize="@dimen/dimension20dp"
                 android:paddingLeft="@dimen/dimension20dp"
@@ -117,6 +119,7 @@
                 android:textSize="@dimen/dimension20dp"
                 android:paddingLeft="@dimen/dimension20dp"
                 android:layout_margin="@dimen/dimension10dp"
+                android:textAllCaps="true"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlackDark"
@@ -140,6 +143,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:background="@color/colorSkyBlue"
             android:layout_below="@id/rlLegal"
+            android:textAllCaps="true"
             >
 
             <ImageView
@@ -160,6 +164,7 @@
                 android:textSize="@dimen/dimension20dp"
                 android:paddingLeft="@dimen/dimension20dp"
                 android:layout_margin="@dimen/dimension10dp"
+                android:textAllCaps="true"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlackDark"
@@ -203,6 +208,7 @@
                 android:textSize="@dimen/dimension20dp"
                 android:paddingLeft="@dimen/dimension20dp"
                 android:layout_margin="@dimen/dimension10dp"
+                android:textAllCaps="true"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlackDark"
@@ -247,6 +253,7 @@
                 android:paddingLeft="@dimen/dimension20dp"
                 android:layout_margin="@dimen/dimension10dp"
                 android:gravity="center_vertical"
+                android:textAllCaps="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlackDark"
                 android:layout_toRightOf="@+id/imgMedical"
@@ -290,6 +297,7 @@
                 android:paddingLeft="@dimen/dimension20dp"
                 android:layout_margin="@dimen/dimension10dp"
                 android:gravity="center_vertical"
+                android:textAllCaps="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlackDark"
                 android:layout_toRightOf="@+id/imgOther"

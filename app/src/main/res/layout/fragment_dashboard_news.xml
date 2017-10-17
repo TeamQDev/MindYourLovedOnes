@@ -99,8 +99,8 @@
             >
             <ImageView
                 android:id="@+id/imgProfile"
-                android:layout_width="@dimen/dimension80dp"
-                android:layout_height="@dimen/dimension80dp"
+                android:layout_width="@dimen/dimension75dp"
+                android:layout_height="@dimen/dimension75dp"
                 android:src="@drawable/circular_profile"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
@@ -156,7 +156,7 @@
         <RelativeLayout
             android:id="@+id/rlBack"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension75dp"
             android:background="@color/colorBlue"
             android:layout_below="@+id/rlProfile"
             ></RelativeLayout>
@@ -223,14 +223,14 @@
                 <TextView
                     android:id="@+id/txtEmergencyContact"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_height="@dimen/dimension75dp"
                     android:layout_below="@+id/imgECLogo"
                     android:layout_centerHorizontal="true"
 
                     android:layout_marginTop="@dimen/dimension10dp"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/dimension5dp"
-                    android:text="CONTACTS AND MEDICAL INFO"
+                    android:text="PERSONAL &amp; MEDICAL INFORMATION "
 
                     android:textColor="@color/colorBlackDark"
                     android:textSize="@dimen/dimension16dp" />
@@ -273,9 +273,9 @@
             <TextView
                 android:id="@+id/txtCarePlan"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension75dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="ADV DIRECTIVES AND OTHER DOCUMENTS"
+                android:text="ADVANCED DIRECTIVES &amp; OTHER DOCUMENTS"
                 android:textColor="@color/colorBlackDark"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -335,7 +335,7 @@
                 <TextView
                     android:id="@+id/txtSpecialist"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_height="@dimen/dimension75dp"
                     android:layout_below="@+id/imgSpecialistLogo"
 
                     android:layout_centerHorizontal="true"
@@ -385,9 +385,9 @@
         <TextView
             android:id="@+id/txtInsuranceCard"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension75dp"
             android:padding="@dimen/dimension5dp"
-            android:text="INSURANCE INFO AND CARDS"
+            android:text="INSURANCE INFORMATION AND CARDS"
             android:textColor="@color/colorBlackDark"
             android:textStyle="normal"
             android:textSize="@dimen/dimension16dp"
@@ -443,9 +443,9 @@
             <TextView
                 android:id="@+id/txtEmergencyEvent"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension75dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="EVENT NOTES AND APPOINTMENT TRACKER"
+                android:text="EVENT NOTES &amp; APPOINTMENT TRACKER"
                 android:textColor="@color/colorBlackDark"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -491,7 +491,7 @@
                 <TextView
                     android:id="@+id/txtPrescription"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension70dp"
+                    android:layout_height="@dimen/dimension75dp"
                     android:layout_below="@+id/imgPrescriptionLogo"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dimension10dp"
