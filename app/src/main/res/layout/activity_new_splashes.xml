@@ -7,50 +7,67 @@
     android:fitsSystemWindows="true"
     android:background="@color/colorLightBlue"
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SplashActivity">
+<RelativeLayout
+    android:id="@+id/rlHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/txtHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimension10dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:padding="@dimen/dimension10dp"
         android:text="@string/header_title"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"
+        android:layout_toLeftOf="@+id/imgLogo"
         />
     <TextView
-        android:id="@+id/textMessage"
+        android:id="@+id/txtMed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtHeader"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="Medical Information"
-        android:textSize="@dimen/dimension20dp"
+        android:textSize="@dimen/dimension22dp"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/dimension10dp"
+        android:layout_toLeftOf="@+id/imgLogo"
         />
-  <!--  <TextView
+    <TextView
         android:id="@+id/txtMed2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtMed"
-        android:gravity="center"
-        android:paddingBottom="@dimen/dimension5dp"
+        android:gravity="center_horizontal"
         android:text="&amp; Adavanced Directives"
         android:textSize="@dimen/dimension22dp"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"
-
-        />-->
+        android:layout_toLeftOf="@+id/imgLogo"
+        />
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="@dimen/dimension70dp"
+        android:layout_height="@dimen/dimension70dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimension20dp"
+        android:layout_marginTop="@dimen/dimension10dp"
+        android:src="@drawable/ic_launcher"
+        />
+</RelativeLayout>
+  <!--  -->
 
     <LinearLayout
         android:id="@+id/llTOp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textMessage"
-        android:layout_above="@+id/rlBottom"
+        android:layout_below="@+id/rlHeader"
+        android:layout_above="@+id/textMessage"
+        android:layout_marginTop="@dimen/dimension10dp"
+
         android:orientation="horizontal"
         android:weightSum="2">
     <LinearLayout
@@ -65,8 +82,11 @@
             android:layout_height="@dimen/dimension0dp"
             android:layout_weight="3"
             android:scaleType="fitXY"
-            android:layout_margin="@dimen/dimension5dp"
-            android:src="@drawable/splash_one" />
+            android:layout_marginTop="@dimen/dimension5dp"
+            android:layout_marginLeft="@dimen/dimension5dp"
+            android:layout_marginRight="@dimen/dimension1dp"
+            android:layout_marginBottom="@dimen/dimension1dp"
+            android:src="@drawable/s_one" />
 
         <ImageView
             android:id="@+id/img2"
@@ -74,8 +94,11 @@
             android:layout_height="@dimen/dimension0dp"
             android:layout_weight="2"
             android:scaleType="fitXY"
-            android:layout_margin="@dimen/dimension5dp"
-            android:src="@drawable/splash_two" />
+            android:layout_marginTop="@dimen/dimension1dp"
+            android:layout_marginLeft="@dimen/dimension5dp"
+            android:layout_marginRight="@dimen/dimension1dp"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            android:src="@drawable/s_two" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,22 +111,45 @@
                 android:id="@+id/img3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension0dp"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="2.5"
+                android:layout_marginTop="@dimen/dimension5dp"
+                android:layout_marginLeft="@dimen/dimension1dp"
+                android:layout_marginRight="@dimen/dimension5dp"
+                android:layout_marginBottom="@dimen/dimension1dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/splash_three" />
+                android:src="@drawable/s_three" />
 
             <ImageView
                 android:id="@+id/img4"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension0dp"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:scaleType="fitXY"
-                android:layout_margin="@dimen/dimension5dp"
-                android:src="@drawable/splash_four" />
+                android:layout_marginTop="@dimen/dimension1dp"
+                android:layout_marginLeft="@dimen/dimension1dp"
+                android:layout_marginRight="@dimen/dimension5dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:src="@drawable/s_four" />
 
         </LinearLayout>
         </LinearLayout>
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension90dp"
+        android:layout_above="@+id/rlBottom"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dimension10dp"
+        android:paddingRight="@dimen/dimension10dp"
+        android:text="Medical Information"
+        android:textSize="@dimen/dimension20dp"
+        android:textColor="@color/colorBlackDark"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/dimension10dp"
+        android:layout_marginTop="@dimen/dimension10dp"
+        />
+
     <RelativeLayout
         android:id="@+id/rlBottom"
         android:layout_width="match_parent"
@@ -171,24 +217,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         >
-        <com.mindyourelders.MyHealthCareWishes.customview.TextViewRomanS
+        <TextView
             android:id="@+id/txtCourtesy"
             android:layout_width="match_parent"
             android:gravity="center|bottom"
-            android:layout_height="@dimen/dimension80dp"
+            android:layout_height="@dimen/dimension60dp"
             android:padding="@dimen/dimension15dp"
             android:text="Courtesy Of Barbara Keller"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:textColor="@color/colorBlackDark"
-            android:layout_toLeftOf="@+id/imgLogo"
-android:textStyle="bold"
             />
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="@dimen/dimension70dp"
-            android:layout_height="@dimen/dimension70dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimension20dp"
-            android:src="@drawable/ic_launcher" />
+
     </RelativeLayout>
 </RelativeLayout>

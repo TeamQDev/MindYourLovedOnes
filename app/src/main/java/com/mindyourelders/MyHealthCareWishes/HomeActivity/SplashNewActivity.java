@@ -65,7 +65,9 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         llBottom= (RelativeLayout) findViewById(R.id.llBottom);
         llSplash= (LinearLayout) findViewById(R.id.llSplash);
 
-      final String[] array = {"Access to Critical Information And Health Care Directives 24/7",getResources().getString(R.string.msg),"Manage and share critical documents and information from your phone or tablet","All Information on this app resides on your smartphone or tablet.  HIPAA federal privacy rules do not apply to this app because the app is in your control.","Mind Your Elders only has access to your email address"};
+      final String[] array = {getResources().getString(R.string.msgstay),getResources().getString(R.string.msg),"Manage and Share Critical Information on\n" +
+              "your Smartphone or Tablet","Access to Critical Information and Advanced\n" +
+              "Care Directives 24/7", "The Just In Case App"};
         textMessage.post(new Runnable() {
             int i = 0;
             @Override
@@ -75,7 +77,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                 Animation RightSwipe = AnimationUtils.loadAnimation(context, R.anim.enter);
                 textMessage.startAnimation(RightSwipe);
                 i++;
-                if (i ==3)
+                if (i == 5)
                     i = 0;
                 textMessage.postDelayed(this, 5000);
             }

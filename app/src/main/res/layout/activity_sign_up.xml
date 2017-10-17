@@ -398,12 +398,52 @@
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold" />
         </RelativeLayout>
+        <TextView
+            android:id="@+id/txtPolicy5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPolicy1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+              android:paddingLeft="@dimen/dimension15dp"
+            android:paddingRight="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension30dp"
+            android:text="All Information on this app resides on your smartphone or tablet. HIPAA federal privacy
+rules do not apply to this app because the app is in your control."
+            android:textColor="@color/colorGrayPolicy"
+            android:textSize="@dimen/dimension16dp" />
+        <TextView
+            android:id="@+id/txtPolicy6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPolicy5"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingRight="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:text="Mind Your Elders only has access to your email address"
+            android:textColor="@color/colorGrayPolicy"
+            android:textSize="@dimen/dimension16dp" />
+        <TextView
+            android:id="@+id/txtPolicy7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPolicy6"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingRight="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:text="Mind Your Elders only has access to your email address"
+            android:textColor="@color/colorGrayPolicy"
+            android:textSize="@dimen/dimension16dp" />
 
         <TextView
             android:id="@+id/txtSignUp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension60dp"
-            android:layout_below="@+id/rlPolicy"
+            android:layout_below="@+id/txtPolicy7"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/dimension30dp"
             android:layout_marginRight="@dimen/dimension30dp"

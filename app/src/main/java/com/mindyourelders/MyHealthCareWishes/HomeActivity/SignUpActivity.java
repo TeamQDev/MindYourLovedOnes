@@ -58,7 +58,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
-    TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4;
+    TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4,txtPolicy5;
     ImageView imgBack, imgEdit,imgProfile;
     TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
      TextInputLayout tilName;
@@ -141,6 +141,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPassword = (TextView) findViewById(R.id.txtPassword);
         txtPolicy2= (TextView) findViewById(R.id.txtPolicy2);
         txtPolicy4= (TextView) findViewById(R.id.txtPolicy4);
+        txtPolicy5= (TextView) findViewById(R.id.txtPolicy5);
         txtPolicy2.setClickable(true);
         txtPolicy2.setMovementMethod(LinkMovementMethod.getInstance());
         String text = "<a href='http://www.myhealthcarewishes.com'> Private Policy </a>";
@@ -150,6 +151,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy4.setMovementMethod(LinkMovementMethod.getInstance());
         String text1 = "<a href='http://www.myhealthcarewishes.com'> Terms of Use </a>";
         txtPolicy4.setText(Html.fromHtml(text1));
+
+        String texts = "<b><a href='http://www.myhealthcarewishes.com'> All Information </a> </b> on this app resides on your smartphone or tablet. HIPAA federal privacy\n" +
+                "rules <b> <a href='http://www.myhealthcarewishes.com'> do not apply </a> </b> to this app because the app is in your control.";
+        txtPolicy5.setText(Html.fromHtml(texts));
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, countryList);
