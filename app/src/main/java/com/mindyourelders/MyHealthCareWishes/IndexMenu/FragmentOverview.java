@@ -93,7 +93,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener{
 
         Proxy P2=new Proxy();
         P2.setName("Chuck Charlo");
-        P2.setRelationType("Secondary Proxy");
+        P2.setRelationType("Successor Proxy");
         P2.setAddress("#203,10 Downing Street, los Angeles, California.");
         P2.setPhone("900-203-2244");
 

@@ -54,7 +54,7 @@ Context context=this;
                 isEmergency=true;
                 isInsurance=false;
                 profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "PERSONAL INFORMATION", "MEDICAL INFORMATION", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENTS" };
+                specialist= new String[] { "PERSONAL INFORMATION", "MEDICAL INFORMATION", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
 
             }
             else if (from.equals("Insurance"))

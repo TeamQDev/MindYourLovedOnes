@@ -63,10 +63,10 @@ class AppointAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        holder.txtDoctor.setText(noteList.get(position).getDoctor());
+        holder.txtDoctor.setText(noteList.get(position).getType());
         holder.txtDateTime.setText(noteList.get(position).getDate());
         holder.txtFrequency.setText(noteList.get(position).getFrequency());
-        holder.txtType.setText(noteList.get(position).getType());
+        holder.txtType.setText(noteList.get(position).getDoctor());
         //holder.imgProfile.setImageResource(student.getImgid());
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override

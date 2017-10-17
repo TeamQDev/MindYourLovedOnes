@@ -82,7 +82,7 @@ public class ProxyAdapter extends BaseAdapter {
             holder.txtType.setText("Primary Proxy");
         }else if (proxyList.get(position).getIsPrimary()==2)
             {
-                holder.txtType.setText("Secondary Proxy");
+                holder.txtType.setText("Successor Proxy");
             }
 
         holder.txtTelePhone.setText(proxyList.get(position).getPhone());

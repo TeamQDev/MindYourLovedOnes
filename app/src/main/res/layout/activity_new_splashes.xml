@@ -24,17 +24,26 @@
         android:textStyle="bold"
         android:layout_toLeftOf="@+id/imgLogo"
         />
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="@dimen/dimension70dp"
+        android:layout_height="@dimen/dimension70dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimension20dp"
+        android:layout_marginTop="@dimen/dimension10dp"
+        android:src="@drawable/ic_launcher"
+        />
+    </RelativeLayout>
     <TextView
         android:id="@+id/txtMed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHeader"
+        android:layout_below="@+id/rlHeader"
         android:gravity="center_horizontal"
         android:text="Medical Information"
         android:textSize="@dimen/dimension22dp"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"
-        android:layout_toLeftOf="@+id/imgLogo"
         />
     <TextView
         android:id="@+id/txtMed2"
@@ -46,25 +55,15 @@
         android:textSize="@dimen/dimension22dp"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"
-        android:layout_toLeftOf="@+id/imgLogo"
         />
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="@dimen/dimension70dp"
-        android:layout_height="@dimen/dimension70dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dimension20dp"
-        android:layout_marginTop="@dimen/dimension10dp"
-        android:src="@drawable/ic_launcher"
-        />
-</RelativeLayout>
+
   <!--  -->
 
     <LinearLayout
         android:id="@+id/llTOp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rlHeader"
+        android:layout_below="@+id/txtMed2"
         android:layout_above="@+id/textMessage"
         android:layout_marginTop="@dimen/dimension10dp"
 
