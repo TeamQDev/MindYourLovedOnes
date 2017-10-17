@@ -75,7 +75,7 @@ TextView txtTitle;
                     callFragment("AIDS", fragmentAids);
                     break;
                 case "Finance,Insurance and Legal":
-                    txtTitle.setText("FINANCE, INSURANCE & LEGAL");
+                    txtTitle.setText("FINANCE, INSURANCE, LEGAL");
                     callFragment("FINANCE", fragmentFinance);
                     break;
             }

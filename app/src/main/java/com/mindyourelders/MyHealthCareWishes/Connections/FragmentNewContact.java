@@ -111,9 +111,9 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
     String[] insuaranceType = {"Dental", "Medical", "Medicare", "Medicare Supplement (Medigap)", "Medicaid", "Disability", "Long Term Care", "Supplemental", "Other"};
 
-    String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee"};
+    String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
 
-    String[] proxyType = {"Primary", "Secondary"};
+    String[] proxyType = {"Primary", "Successor"};
 
     Boolean isEdit;
 
@@ -260,14 +260,14 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 break;
             case "Proxy":
                 visiProxy();
-                txtAdd.setText("Add Proxy");
-                txtTitle.setText("Add Proxy");
+                txtAdd.setText("Add Proxy AGENT & SUCCESSOR(S)");
+                txtTitle.setText("Add Proxy AGENT & SUCCESSOR(S)");
                 break;
 
             case "ProxyUpdate":
                 visiProxy();
-                txtAdd.setText("Update Proxy");
-                txtTitle.setText("Update Proxy");
+                txtAdd.setText("Update Proxy AGENT & SUCCESSOR(S)");
+                txtTitle.setText("Update Proxy AGENT & SUCCESSOR(S)");
                 Intent ProxyIntent = getActivity().getIntent();
                 if (ProxyIntent.getExtras()!=null)
                 {
@@ -628,14 +628,14 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
             case "Finance":
                 visiFinance();
-                txtAdd.setText("Add Finane and Legal");
-                txtTitle.setText("Add Finane and Legal");
+                txtAdd.setText("Add Finance,Insurance,Legal");
+                txtTitle.setText("Add Finance,Insurance,Legal");
                 break;
 
             case "FinanceData":
                 visiFinance();
-                txtAdd.setText("Update Finane and Legal");
-                txtTitle.setText("Update Finane and Legal");
+                txtAdd.setText("Update Finance and Legal");
+                txtTitle.setText("Update Finance and Legal");
                 Intent financeIntent = getActivity().getIntent();
                 if (financeIntent.getExtras() != null) {
                     Finance specialist = (Finance) financeIntent.getExtras().getSerializable("FinanceObject");
@@ -668,7 +668,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "FinanceViewData":
                 visiFinance();
                 disableFinance();
-                txtTitle.setText("Finane and Legal");
+                txtTitle.setText("Finance and Legal");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent financeIntent2 = getActivity().getIntent();
                 if (financeIntent2.getExtras() != null) {
@@ -1678,10 +1678,10 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         {
             relation=Relationship[indexValue];
             int indexValues = spinnerProxy.getSelectedItemPosition();
-            proxy=proxyType[indexValues];
+            proxy=proxyType[indexValues-1];
             if (proxy.equals("Primary")) {
                 prox=1;
-            }else if (proxy.equals("Secondary"))
+            }else if (proxy.equals("Successor"))
             {
                 prox=2;
             }

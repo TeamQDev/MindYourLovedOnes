@@ -450,8 +450,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
             try {
 
-                imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())
-                        + ".jpg";
+                imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())+ ".jpg";
                 // Write to SD Card
                 outStream = new FileOutputStream(imagepath);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();

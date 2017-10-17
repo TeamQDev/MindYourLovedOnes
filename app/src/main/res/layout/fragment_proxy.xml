@@ -27,7 +27,7 @@
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
             android:textAllCaps="true"
-            android:text="Add Proxy"
+            android:text="Add Proxy agent &amp; successor(s)"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>

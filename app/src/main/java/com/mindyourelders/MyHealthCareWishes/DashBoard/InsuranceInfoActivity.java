@@ -44,7 +44,7 @@ ImageView imgBack;
                     callFragment("INFO", fragmentInsurance);
                     break;
                 case "INSURANCE CARD":
-                    txtTitle.setText("INSURANCE CARD");
+                    txtTitle.setText("INSURANCE CARDS");
                     callFragment("CARD", fragementInsuarnceCard);
                     break;
             }

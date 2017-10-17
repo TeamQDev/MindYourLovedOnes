@@ -43,14 +43,14 @@ Context context=this;
             {
                 txtTitle.setText("SPECIALISTS CONTACTS");
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
-                specialist= new String[]{"DOCTORS", "PHARMACIES", "HOME HEALTH SERVICES", "FINANCE, INSURANCE & LEGAL"};
+                specialist= new String[]{"DOCTORS", "PHARMACIES", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
                 isEmergency=false;
                 isInsurance=false;
             }
             else if (from.equals("Emergency"))
             {
 
-                txtTitle.setText("PERSONAL AND MEDICAL INFORMATION");
+                txtTitle.setText("PERSONAL & MEDICAL INFORMATION");
                 isEmergency=true;
                 isInsurance=false;
                 profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
@@ -62,14 +62,14 @@ Context context=this;
 
                 txtTitle.setText("INSURANCE");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
-                specialist= new String[]{"INSURANCE INFORMATION", "INSURANCE CARD"};
+                specialist= new String[]{"INSURANCE INFORMATION", "INSURANCE CARDS"};
                 isEmergency=false;
                 isInsurance=true;
             }
             else if (from.equals("Event"))
             {
 
-                txtTitle.setText("EVENT NOTES AND APPOINTMENT TRACKER");
+                txtTitle.setText("EVENT NOTES & APPOINTMENT TRACKER");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
                 specialist= new String[]{"EVENT NOTES", "APPOINTMENT TRACKER"};
                 isEmergency=false;
