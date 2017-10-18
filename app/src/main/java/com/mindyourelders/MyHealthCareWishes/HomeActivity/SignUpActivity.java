@@ -224,6 +224,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             startActivity(signupIntent);
                             finish();
                             saveToConnection(personalInfo.getId());
+
                         } else {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                         }
@@ -312,6 +313,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;*/
         }
     }
+
+
 
     private void saveToConnection(int id) {
         Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();

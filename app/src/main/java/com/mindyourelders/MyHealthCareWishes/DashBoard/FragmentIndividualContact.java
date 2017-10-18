@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -274,6 +275,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     else {
                         if (validateConnection())
                         editToConnection(photo);
+                        getActivity().finish();
                     }
 
 
@@ -351,7 +353,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 textOption1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       //dispatchTakePictureIntent();
+                       dispatchTakePictureIntent();
                         dialog.dismiss();
                     }
                 });
@@ -392,6 +394,44 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                 break;*/
         }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                ex.printStackTrace();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+               /* Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.infidigi.fotobuddies.fileprovider",
+                        photoFile);*/
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile.getAbsolutePath());
+                startActivityForResult(takePictureIntent, RESULT_CAMERA_IMAGE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String imageFileName = "JPEG_PROFILE";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        imagepath = image.getAbsolutePath();
+        return image;
     }
 
     private boolean validateConnection() {
@@ -489,8 +529,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
         }
         else{
-
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone, spinnerRelation.getSelectedItem().toString(), photo,"", 1, 2);
+            int indexValuex = spinnerRelation.getSelectedItemPosition();
+           String relation =Relationship[indexValuex-1];
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {

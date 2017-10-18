@@ -72,6 +72,7 @@
                 android:layout_marginTop="@dimen/dimension10dp"
                 android:src="@drawable/treat"
                 android:layout_centerInParent="true"
+                android:background="@color/colorWhite"
                 android:layout_below="@+id/rlProvider"
                 android:scaleType="fitXY"
                 />

@@ -1,6 +1,5 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,7 +37,7 @@ public class DocumentSdCardList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_sd_card_list);
 
-        checkRuntimePermission();
+      //  checkRuntimePermission();
         lvDoc= (ListView) findViewById(R.id.lvDoc);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +47,10 @@ public class DocumentSdCardList extends AppCompatActivity {
             }
         });
 
+       showFile();
+    }
+
+    private void showFile() {
         File images = Environment.getExternalStorageDirectory();
         imagelist = images.listFiles(new FilenameFilter(){
             public boolean accept(File dir, String name)
@@ -57,7 +60,7 @@ public class DocumentSdCardList extends AppCompatActivity {
         });
 
         if (imagelist!=null) {
-        pdflist = new String[imagelist.length];
+            pdflist = new String[imagelist.length];
             for (int i = 0; i < imagelist.length; i++) {
                 pdflist[i] = imagelist[i].getName();
             }
@@ -70,7 +73,33 @@ public class DocumentSdCardList extends AppCompatActivity {
     }
 
     private boolean checkRuntimePermission() {
-        if (ContextCompat.checkSelfPermission(context,
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PERMISSIONS_REQUEST_READ_CONTACTS);
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+            return false;
+        } else {
+            return true;
+        }
+       /* if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Asking user if explanation is needed
@@ -79,16 +108,18 @@ public class DocumentSdCardList extends AppCompatActivity {
                 ActivityCompat.requestPermissions(DocumentSdCardList.this,
                         new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_READ_CONTACTS);
+
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(DocumentSdCardList.this,
                         new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_READ_CONTACTS);
+
             }
             return false;
         } else {
             return true;
-        }
+        }*/
     }
 
     /*@Override

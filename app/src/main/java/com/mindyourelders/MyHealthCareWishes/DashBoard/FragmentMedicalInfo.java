@@ -43,7 +43,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     View rootview;
     ImageView imgBack, imgDone;
     TextView txtTitle;
-
+     EditText etNote;
     EditText etFt, etInch, etWeight, etAdditional, etPet;
     ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid;
     RadioButton rbYes, rbNo;
@@ -58,7 +58,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     public static final int REQUEST_HISTORY = 200;
     public static final int REQUEST_IMPLANTS = 300;
     public static final int REQUEST_HOSPITAL = 400;
-
+String note="";
     ArrayList historList = new ArrayList();
 
     ArrayList hospitalList = new ArrayList();
@@ -113,7 +113,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
-
+        etNote= (EditText) rootview.findViewById(R.id.etNote);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
 
@@ -188,6 +188,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             etWeight.setText(medInfo.getWeight());
             etAdditional.setText(medInfo.getLang2());
             etPet.setText(medInfo.getPet());
+            etNote.setText(medInfo.getNote());
             int index = 0;
             for (int i = 0; i < EyesList.length; i++) {
                 if (medInfo.getColor().equals(EyesList[i])) {
@@ -450,7 +451,8 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 lang2 = etAdditional.getText().toString();
                 blood = spinnerBlood.getSelectedItem().toString();
                 pet = etPet.getText().toString().trim();
-                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor);
+                note = etNote.getText().toString().trim();
+                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Medical Information Saved", Toast.LENGTH_SHORT).show();
                 } else {

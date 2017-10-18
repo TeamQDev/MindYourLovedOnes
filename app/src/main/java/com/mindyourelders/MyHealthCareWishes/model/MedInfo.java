@@ -8,6 +8,16 @@ public class MedInfo {
     int id;
     int userId;
     String feet="";
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    String note="";
     String inch="";
     String weight="";
     String color="";

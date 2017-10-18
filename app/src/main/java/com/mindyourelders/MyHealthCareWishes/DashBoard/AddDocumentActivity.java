@@ -61,7 +61,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String Goto="";
 
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
-    final CharSequence[] dialog_items = {"Print", "Fax" };
+    final CharSequence[] dialog_items = {"Print", "Fax", "View" };
     String[] DocList = {"Health Care Proxy/Living Will","Health Care Proxy", "Living Will", "Non-Hospital DNR", "HIPAA Form", "Power of Attorney"," Ethical Will","Other Documents"};
 
     String[] ADList={"Living Will","Health Care Proxy","Living Will/Health Care Proxy","HIPAA Authorization"," Non-Hospital DNR Order"," Ethical Will"};
@@ -356,10 +356,15 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         break;
                     case 2: // view
 
-                        /*String path_of_file = item.getAbsolutePath();
-                        viewFile(context, path_of_file);*/
+                        if (!documentPath.equals(""))
+                        {
+                            Uri uri= Uri.parse(documentPath);
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_VIEW);
+                            intent.setDataAndType(uri, "application/pdf");
+                            context.startActivity(intent);
 
-                        // ShearedValues.activityID = getApplicationContext();
+                        }
                         break;
 
                 }

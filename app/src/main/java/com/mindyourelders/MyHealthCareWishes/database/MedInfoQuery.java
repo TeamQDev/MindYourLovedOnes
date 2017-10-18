@@ -21,6 +21,7 @@ public class MedInfoQuery {
     public static final String COL_ID= "Id";
     public static final String COL_USERID= "UserId";
     public static final String COL_FT ="Feet";
+    public static final String COL_NOTE ="Note";
     public static final String COL_INCH ="Inches";
     public static final String COL_WT="Weight";
     public static final String COL_EYE_COLOR= "EyeColor";
@@ -47,7 +48,7 @@ public class MedInfoQuery {
                 COL_WT+" VARCHAR(20),"+COL_EYE_COLOR+" VARCHAR(20),"+COL_LANG_PRIMARY+" VARCHAR(20),"+
                 COL_LANG_SECONDORY+" VARCHAR(20),"+COL_EYE_GLASSES+" VARCHAR(20),"+COL_EYE_LENSE+" VARCHAR(20),"+
                 COL_TEETH_FALSE+" VARCHAR(20),"+COL_TEETH_IMPLANTS+" VARCHAR(20),"+COL_HEARING_AIDES+" VARCHAR(20),"+
-                COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_PETS+" VARCHAR(20)"+
+                COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_PETS+" VARCHAR(20),"+COL_NOTE+" VARCHAR(20)"+
                 ");";
         return createTableQuery;
     }
@@ -57,13 +58,14 @@ public class MedInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor) {
+    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
         ContentValues cv=new ContentValues();
         cv.put(COL_USERID,userid);
         cv.put(COL_FT,ft);
+        cv.put(COL_NOTE,note);
         cv.put(COL_INCH,inch);
         cv.put(COL_WT,weight);
         cv.put(COL_EYE_COLOR,color);
@@ -103,6 +105,7 @@ public class MedInfoQuery {
                 medInfo.setId(c.getInt(c.getColumnIndex(COL_ID)));
                 medInfo.setUserId(c.getInt(c.getColumnIndex(COL_USERID)));
                 medInfo.setFeet(c.getString(c.getColumnIndex(COL_FT)));
+                medInfo.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                 medInfo.setInch(c.getString(c.getColumnIndex(COL_INCH)));
                 medInfo.setWeight(c.getString(c.getColumnIndex(COL_WT)));
                 medInfo.setColor(c.getString(c.getColumnIndex(COL_EYE_COLOR)));

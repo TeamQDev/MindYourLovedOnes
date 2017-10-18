@@ -264,12 +264,22 @@
             android:text="Pre-existing Medical Conditions"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/dimension22dp" />
-
+        <EditText
+            android:id="@+id/etNote"
+            style="@style/EmergencyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCondition"
+            android:layout_margin="@dimen/dimension15dp"
+            android:background="@drawable/darkgray_white_border"
+            android:gravity="top"
+            android:hint="Note"
+            android:padding="@dimen/dimension8dp" />
         <RelativeLayout
             android:id="@+id/rlAllergis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtCondition"
+            android:layout_below="@+id/etNote"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -422,7 +432,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgTeeth"
-                android:text="Teeth" />
+                android:text="Dentures" />
 
             <RelativeLayout
                 android:id="@+id/rlFalse"
@@ -438,7 +448,7 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="False" />
+                    android:text="Upper" />
 
                 <ToggleButton
                     android:id="@+id/tbFalse"
@@ -469,7 +479,7 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Implants" />
+                    android:text="Lower" />
 
                 <ToggleButton
                     android:id="@+id/tbImplants"
@@ -528,7 +538,7 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Hearing Aids" />
+                    android:text="Hearing Aid" />
 
                 <ToggleButton
                     android:id="@+id/tbHearingAid"
