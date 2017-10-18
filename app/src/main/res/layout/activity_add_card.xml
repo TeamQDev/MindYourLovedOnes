@@ -24,9 +24,9 @@
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dimension20dp"
-            android:layout_toRightOf="@+id/imgBack"
+
             android:text="Add Insurance Card"
             android:textColor="#FFFFFF"
             android:textAllCaps="true"

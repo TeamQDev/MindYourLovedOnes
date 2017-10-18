@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension60dp"
         android:background="@color/colorBlue"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+       >
 
         <ImageView
             android:id="@+id/imgBack"
@@ -27,9 +25,8 @@
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+           android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_toRightOf="@+id/imgBack"
             android:text="Add Appointment"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension21dp"
