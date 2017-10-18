@@ -30,11 +30,21 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension10dp"
            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/imgBack"
+            android:layout_toLeftOf="@+id/imgdg"
             android:text="Grab Contact (Manual)"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension21dp"
             />
-
+        <ImageView
+            android:id="@+id/imgdg"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            />
          <ImageView
               android:id="@+id/imgRefresh"
               android:layout_width="@dimen/dimension30dp"
