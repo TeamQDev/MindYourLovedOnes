@@ -2,7 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +12,13 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
+import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
-import com.mindyourelders.MyHealthCareWishes.model.Appoint;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.Calendar;
@@ -50,6 +51,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     private void initComponent() {
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
+        AppointmentQuery a=new AppointmentQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -116,8 +118,17 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 int indexValue = spinnerFrequency.getSelectedItemPosition();
                 String frequency=Frequency[indexValue-1];
 
+                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency);
+                if (flag == true) {
+                    Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
+                   finish();
+                } else {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                }
 
-                Appoint appoint=new Appoint();
+
+
+               /* Appoint appoint=new Appoint();
                 appoint.setDoctor(name);
                 appoint.setDate(date);
                 appoint.setFrequency(frequency);
@@ -125,7 +136,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 Intent i=new Intent();
                 i.putExtra("AppointObject",appoint);
 
-                setResult(100,i);
+                setResult(100,i);*/
                 finish();
                 break;
         }

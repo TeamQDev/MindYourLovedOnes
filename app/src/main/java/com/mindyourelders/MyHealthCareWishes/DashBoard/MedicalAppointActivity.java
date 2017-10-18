@@ -16,14 +16,18 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class MedicalAppointActivity extends AppCompatActivity implements View.OnClickListener {
@@ -71,8 +75,28 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                         DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                txtDateTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                                noteList.get(position).setDate(dayOfMonth + "/" + (month + 1) + "/" + year);
+                                int id=noteList.get(position).getId();
+
+                                Calendar newDate = Calendar.getInstance();
+                                newDate.set(year, month, dayOfMonth);
+                                long selectedMilli = newDate.getTimeInMillis();
+
+                                Date datePickerDate = new Date(selectedMilli);
+                                String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                                Boolean flag= AppointmentQuery.updateDate(id,reportDate);
+                                if (flag==true)
+                                {
+                                    Toast.makeText(context,"You have updated date successfully",Toast.LENGTH_SHORT).show();
+                                    getData();
+                                    setNoteData();
+
+                                }
+                                else{
+                                    Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
+                                }
+                               /* txtDateTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                                noteList.get(position).setDate(dayOfMonth + "/" + (month + 1) + "/" + year);*/
                             }
                         }, year, month, day);
                         dpd.show();
@@ -109,7 +133,23 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
             }
         });
     }
+    public static String getFormattedDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        //2nd of march 2015
+        int day = cal.get(Calendar.DATE);
 
+        switch (day % 10) {
+            case 1:
+                return new SimpleDateFormat("MMM d'st', yyyy").format(date);
+            case 2:
+                return new SimpleDateFormat("MMM d'nd', yyyy").format(date);
+            case 3:
+                return new SimpleDateFormat("MMM d'rd', yyyy").format(date);
+            default:
+                return new SimpleDateFormat("MMM d'th', yyyy").format(date);
+        }
+    }
     private void deleteNote(Appoint item) {
         boolean flag= EventNoteQuery.deleteRecord(item.getId());
         if(flag==true)
@@ -134,13 +174,14 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     }
 
     private void getData() {
-      //  noteList=AppointmentQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-        noteList=new ArrayList<>();
+       noteList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+     //   noteList=new ArrayList<>();
     }
 
     private void initComponent() {
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
+        AppointmentQuery a=new AppointmentQuery(context,dbHelper);
   //      EventNoteQuery e=new EventNoteQuery(context,dbHelper);
     }
 
@@ -153,21 +194,22 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.imgAdd:
             Intent i=new Intent(context,AddAppointmentActivity.class);
-                startActivityForResult(i,100);
+                startActivity(i);
                 break;
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==100&& data !=null)
-        {
-            Appoint appoint= (Appoint) data.getExtras().getSerializable("AppointObject");
-            noteList.add(appoint);
-            setNoteData();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode==100&& data !=null)
+//        {
+//          //  Appoint appoint= (Appoint) data.getExtras().getSerializable("AppointObject");
+//           // noteList.add(appoint);
+//            getData();
+//            setNoteData();
+//        }
+//    }
 
     /*private void showInputDialog(final Context context) {
             final Dialog customDialog;
@@ -227,7 +269,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     @Override
     protected void onResume() {
         super.onResume();
-       // getData();
+        getData();
         setNoteData();
     }
 }

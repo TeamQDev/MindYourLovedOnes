@@ -155,7 +155,7 @@ preferences=new Preferences(context);
             public void onClick(View v) {
 
                 String note=etNote.getText().toString();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
                 String currentDateandTime = sdf.format(new Date());
                 if (note.length()!=0) {
                     Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID),note,currentDateandTime);

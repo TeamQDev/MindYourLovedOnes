@@ -60,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(InsuranceQuery.createInsuranceTable());
         db.execSQL(CardQuery.createCardTable());
         db.execSQL(DocumentQuery.createDocumentTable());
+        db.execSQL(AppointmentQuery.createAppointmentTable());
     }
 
     @Override
@@ -104,6 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(InsuranceQuery.dropTable());
         db.execSQL(CardQuery.dropTable());
         db.execSQL(DocumentQuery.dropTable());
+        db.execSQL(AppointmentQuery.dropTable());
         onCreate(db);
     }
 }
