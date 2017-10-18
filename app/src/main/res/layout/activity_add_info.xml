@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_toRightOf="@+id/imgBack"
+            android:layout_centerInParent="true"
             android:text="Emergency Info"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension21dp"

@@ -628,8 +628,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
             case "Finance":
                 visiFinance();
-                txtAdd.setText("Add Finance,Insurance,Legal");
-                txtTitle.setText("Add Finance,Insurance,Legal");
+                txtAdd.setText("Add Finance, Insurance, Legal");
+                txtTitle.setText("Add Finance, Insurance, Legal");
                 break;
 
             case "FinanceData":
