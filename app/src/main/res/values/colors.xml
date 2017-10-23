@@ -26,4 +26,19 @@
     <color name="colorMaroon">#C00000</color>
 
 
+    <color name="colorOne">#a2c535</color>
+    <color name="colorOneLight">#d2e49a</color>
+
+    <color name="colorThree">#f0bd24</color>
+    <color name="colorThreeLight">#f7db88</color>
+
+    <color name="colorFour">#C8598A</color>
+    <color name="colorFourLight">#df9fbb</color>
+
+    <color name="colorFive">#4fa7ac</color>
+    <color name="colorFiveLight">#a8d4d7</color>
+
+    <color name="colorSix">#DC3520</color>
+    <color name="colorSixLight">#ec8779</color>
+    <color name="colorPres">#B0B4b7</color>
 </resources>

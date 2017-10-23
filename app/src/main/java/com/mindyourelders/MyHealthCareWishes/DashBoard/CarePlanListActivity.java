@@ -92,7 +92,7 @@ DBHelper dbHelper;
         switch (From)
         {
             case "AD":
-                txtTitle.setText("Advanced Directives");
+                txtTitle.setText("Advance Directives");
                 break;
             case "Other":
                 txtTitle.setText("Other");

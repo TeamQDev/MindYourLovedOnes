@@ -100,7 +100,7 @@
             <ImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/dimension75dp"
-                android:layout_height="@dimen/dimension75dp"
+                android:layout_height="@dimen/dimension90dp"
                 android:src="@drawable/circular_profile"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dimension5dp"
@@ -156,7 +156,7 @@
         <RelativeLayout
             android:id="@+id/rlBack"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension75dp"
+            android:layout_height="@dimen/dimension90dp"
             android:background="@color/colorBlue"
             android:layout_below="@+id/rlProfile"
             ></RelativeLayout>
@@ -189,8 +189,8 @@
         <!--OVERVIEW-->
         <RelativeLayout
             android:id="@+id/rlEmergencyContact"
-            android:layout_width="@dimen/dimension160dp"
-            android:layout_height="@dimen/dimension160dp"
+            android:layout_width="@dimen/dimension165dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_weight="1"
             android:background="@drawable/rlborderone"
@@ -224,7 +224,7 @@
                 <TextView
                     android:id="@+id/txtEmergencyContact"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension75dp"
+                    android:layout_height="@dimen/dimension90dp"
                     android:layout_below="@+id/imgECLogo"
                     android:layout_centerHorizontal="true"
 
@@ -241,8 +241,8 @@
         <!--CARE PLAN-->
         <RelativeLayout
             android:id="@+id/rlCarePlan"
-           android:layout_width="@dimen/dimension160dp"
-            android:layout_height="@dimen/dimension160dp"
+           android:layout_width="@dimen/dimension165dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_weight="1"
             android:background="@drawable/rlbordertwo"
             android:layout_margin="@dimen/dimension10dp"
@@ -274,7 +274,7 @@
             <TextView
                 android:id="@+id/txtCarePlan"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension75dp"
+                android:layout_height="@dimen/dimension90dp"
                 android:padding="@dimen/dimension5dp"
                 android:text="ADVANCE DIRECTIVES &amp; OTHER DOCUMENTS"
                 android:textColor="@color/colorWhite"
@@ -304,8 +304,8 @@
     <!--EMrgency-->
         <RelativeLayout
             android:id="@+id/rlSpecialist"
-            android:layout_width="@dimen/dimension160dp"
-            android:layout_height="@dimen/dimension160dp"
+            android:layout_width="@dimen/dimension165dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_weight="1"
             android:background="@drawable/rlborderthree"
@@ -336,7 +336,7 @@
                 <TextView
                     android:id="@+id/txtSpecialist"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension75dp"
+                    android:layout_height="@dimen/dimension90dp"
                     android:layout_below="@+id/imgSpecialistLogo"
 
                     android:layout_centerHorizontal="true"
@@ -353,9 +353,9 @@
         <!--CARE PLAN-->
     <RelativeLayout
         android:id="@+id/rlInsuranceCard"
-       android:layout_width="@dimen/dimension160dp"
-        android:layout_height="@dimen/dimension160dp"
-        android:background="@drawable/rlborderfour"
+       android:layout_width="@dimen/dimension165dp"
+        android:layout_height="@dimen/dimension165dp"
+        android:background="@drawable/rlbordersix"
         android:layout_margin="@dimen/dimension10dp"
         android:elevation="@dimen/dimension10dp"
         android:layout_weight="1"
@@ -386,7 +386,7 @@
         <TextView
             android:id="@+id/txtInsuranceCard"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimension75dp"
+            android:layout_height="@dimen/dimension90dp"
             android:padding="@dimen/dimension5dp"
             android:text="INSURANCE INFORMATION AND CARDS"
             android:textColor="@color/colorWhite"
@@ -412,9 +412,9 @@
         <!--EMrgency-->
         <RelativeLayout
             android:id="@+id/rlEmergencyEvent"
-           android:layout_width="@dimen/dimension160dp"
-            android:layout_height="@dimen/dimension160dp"
-            android:background="@drawable/rlborderfive"
+           android:layout_width="@dimen/dimension165dp"
+            android:layout_height="@dimen/dimension165dp"
+            android:background="@drawable/rlborderfour"
             android:layout_margin="@dimen/dimension10dp"
             android:elevation="@dimen/dimension10dp"
             android:layout_weight="1"
@@ -444,7 +444,7 @@
             <TextView
                 android:id="@+id/txtEmergencyEvent"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension75dp"
+                android:layout_height="@dimen/dimension90dp"
                 android:padding="@dimen/dimension5dp"
                 android:text="NOTES &amp; APPOINTMENT CHECKLIST"
                 android:textColor="@color/colorWhite"
@@ -460,11 +460,11 @@
         <!--CARE PLAN-->
         <RelativeLayout
             android:id="@+id/rlPrescription"
-            android:layout_width="@dimen/dimension160dp"
-            android:layout_height="@dimen/dimension160dp"
+            android:layout_width="@dimen/dimension165dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_weight="1"
-            android:background="@drawable/rlbordersix"
+            android:background="@drawable/rlborderfive"
             android:elevation="@dimen/dimension10dp">
 
             <ImageView
@@ -492,7 +492,7 @@
                 <TextView
                     android:id="@+id/txtPrescription"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension75dp"
+                    android:layout_height="@dimen/dimension90dp"
                     android:layout_below="@+id/imgPrescriptionLogo"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dimension10dp"

@@ -27,13 +27,15 @@ class SpecialistContactAdapter extends BaseAdapter {
     LayoutInflater lf;
     boolean isEmergency,isInsurance;
     int[] profile;
+    String from;
 
-    public SpecialistContactAdapter(Context context, String[] specialist, int[] profile, boolean isEmergency, boolean isInsurance) {
+    public SpecialistContactAdapter(Context context, String[] specialist, int[] profile, boolean isEmergency, boolean isInsurance, String from) {
         this.context = context;
         this.specialist = specialist;
         this.isEmergency = isEmergency;
         this.isInsurance=isInsurance;
         this.profile=profile;
+        this.from=from;
         lf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -57,15 +59,52 @@ class SpecialistContactAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = lf.inflate(R.layout.row_specialistsnew, parent, false);
         }
-
-        RelativeLayout rlmain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
-        if (position%2==0)
+        switch(from)
         {
-            rlmain.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+
+            case "Speciality":
+                RelativeLayout rlmain3= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+                if (position%2==0)
+                {
+                    rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                }
+                else{
+                    rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+                }
+                break;
+            case "Emergency":
+                RelativeLayout rlmain1= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+                if (position%2==0)
+                {
+                    rlmain1.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                }
+                else{
+                    rlmain1.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+                }
+                break;
+            case "Insurance":
+                RelativeLayout rlmain5= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+                if (position%2==0)
+                {
+                    rlmain5.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                }
+                else{
+                    rlmain5.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+                }
+
+                break;
+            case "Event":
+                RelativeLayout rlmain4= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+                if (position%2==0)
+                {
+                    rlmain4.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                }
+                else{
+                    rlmain4.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+                }
+                break;
         }
-        else{
-            rlmain.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
-        }
+
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
         ImageView imgLogo= (ImageView) convertView.findViewById(R.id.imgLogo);
         imgLogo.setImageResource(profile[position]);
@@ -113,6 +152,10 @@ class SpecialistContactAdapter extends BaseAdapter {
                     case "INSURANCE INFORMATION":
                         fragment = "Insurance Info";
                         break;
+                    case "INSURANCE FORM":
+                        fragment = "Insurance Info";
+                        break;
+
                     case "INSURANCE CARDS":
                         fragment = "INSURANCE CARD";
                         break;
