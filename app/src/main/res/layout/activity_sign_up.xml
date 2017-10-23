@@ -435,7 +435,7 @@ rules do not apply to this app because the app is in your control."
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension15dp"
-            android:text="Mind Your Elders only has access to your email address"
+            android:text="Users can decide if they want to add a Password to the data"
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
 

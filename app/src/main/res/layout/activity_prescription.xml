@@ -29,7 +29,7 @@
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_toRightOf="@+id/imgBack"
             android:gravity="center"
-            android:text="Prescriptions"
+            android:text="PRESCRIPTION TRACKER"
             android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp"

@@ -446,7 +446,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimension75dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="EVENT NOTES &amp; APPOINTMENT TRACKER"
+                android:text="NOTES &amp; APPOINTMENT CHECKLIST"
                 android:textColor="@color/colorWhite"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -498,7 +498,7 @@
                     android:layout_marginTop="@dimen/dimension10dp"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/dimension5dp"
-                    android:text="PRESCRIPTIONS"
+                    android:text="PRESCRIPTION TRACKER"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dimension16dp"
                     android:textStyle="normal" />

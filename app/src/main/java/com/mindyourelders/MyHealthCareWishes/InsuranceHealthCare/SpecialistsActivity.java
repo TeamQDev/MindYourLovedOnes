@@ -69,7 +69,7 @@ Context context=this;
             else if (from.equals("Event"))
             {
 
-                txtTitle.setText("EVENT NOTES & APPOINTMENT TRACKER");
+                txtTitle.setText("NOTES & APPOINTMENT CHECKLIST");
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
                 specialist= new String[]{"EVENT NOTES", "APPOINTMENT TRACKER"};
                 isEmergency=false;
