@@ -49,7 +49,7 @@ DBHelper dbHelper;
     PersonalInfo personalInfo;
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-    String[] Relationship = {"Mother", "Father", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter", "Other"};
+    String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
     @Nullable
     @Override

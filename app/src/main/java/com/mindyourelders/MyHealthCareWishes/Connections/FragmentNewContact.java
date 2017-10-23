@@ -105,11 +105,11 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
     String imagepath = "";
 
-    String[] Relationship = {"Mother", "Father", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter", "Other"};
+    String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
-    String[] healthSpeciality = {"FAMILY PRACTICE PHYSICIAN", "NEUROLOGIST", "ORTHOPEDICS", "AUDIOLOGIST", "CARDIOLOGIST", "ENDOCRINOLOGISTS", "GERIATRICIAN", "GERIATRIC PSYCHIATRIST", "INTERNIST", "NEPHROLOGIST", "NUTRITIONIST", "OPHTHALMOLOGIST", "PHARMACIST", "PHYSICAL THERAPISTS", "PULMONOLOGIST", "RHEUMATOLOGISTIS", "SPEECH LANGUAGE PATHOLOGIST", "UROLOGIST"};
+    String[] healthSpeciality = {"CARDIOLOGIST","ENDOCRINOLOGISTS","FAMILY PRACTICE PHYSICIAN","GERIATRIC PSYCHIATRIST","GERIATRICIAN","GYNECOLOGIST","INTERNIST","NEPHROLOGIST","NEUROLOGIST","ONCOLOGIST","OPHTHALMOLOGIST","ORTHOPEDICS","PHYSICAL THERAPISTS","PULMONOLOGIST","RHEUMATOLOGIST","UROLOGIST"};
 
-    String[] insuaranceType = {"Dental", "Medical", "Medicare", "Medicare Supplement (Medigap)", "Medicaid", "Disability", "Long Term Care", "Supplemental", "Other"};
+    String[] insuaranceType = {"Dental", "Medical", "Medicare", "Medicare Supplement (Medigap)", "Medicaid", "Disability", "Long Term Care", "Supplemental","Life","Vision", "Other"};
 
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
 
@@ -194,7 +194,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 rlAids.setVisibility(View.GONE);
                 rlProxy.setVisibility(View.GONE);
                 rlFinance.setVisibility(View.GONE);
-                txtAdd.setText("ADD CONNECTION");
+                txtAdd.setText("ADD PROFILE");
                 tilName.setHint("First Name, Last Name");
                 tilName.setHintEnabled(false);
                 txtName.setOnTouchListener(new View.OnTouchListener() {
@@ -206,7 +206,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         return false;
                     }
                 });
-                txtTitle.setText("Add Connection");txtTitle.setAllCaps(true);
+                txtTitle.setText("Add Profile");txtTitle.setAllCaps(true);
 
                 tilEmergencyNote.setVisibility(View.GONE);
                 rlPharmacy.setVisibility(View.GONE);
@@ -217,6 +217,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 txtAdd.setText("Add Pharmacy");
                 txtTitle.setText("Add Pharmacy");
                 break;
+
             case "PharmacyData":
                 visiPharmacy();
                 txtAdd.setText("Update Pharmacy");
@@ -231,12 +232,12 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                     txtPharmacyPhone.setText(specialist.getPhone());
                     txtPharmacyNote.setText(specialist.getNote());
                     id = specialist.getId();
-
                     byte[] photo = specialist.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
                 }
                     break;
+
             case "PharmacyDataView":
                 visiPharmacy();
                 disablePharmacy();
@@ -258,6 +259,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                     imgProfile.setImageBitmap(bmp);
                 }
                 break;
+
             case "Proxy":
                 visiProxy();
                 txtAdd.setText("Add Proxy AGENT & SUCCESSOR(S)");
@@ -301,8 +303,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
                 }
-
                 break;
+
             case "ProxyUpdateView":
                 visiProxy();
                 disableProxy();
@@ -343,11 +345,13 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 }
 
                 break;
+
             case "Emergency":
                 visiEmergency();
                 txtAdd.setText("Add Emergency");
                 txtTitle.setText("Add Emergency Contact");
                 break;
+
             case "EmergencyUpdate":
                 visiEmergency();
                 txtAdd.setText("Update Emergency");
@@ -379,6 +383,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
                 }
                 break;
+
             case "EmergencyView":
                 visiEmergency();
                 disableEmergency();
@@ -1126,12 +1131,12 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Relationship);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRelation.setAdapter(adapter1);
-        spinnerRelation.setHint("Relation");
+        spinnerRelation.setHint("Relationship");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, healthSpeciality);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setHint("Specialist");
+        spinner.setHint("Specialty");
 
         ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1146,7 +1151,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         ArrayAdapter<String> adapterProxy = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, proxyType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProxy.setAdapter(adapterProxy);
-        spinnerProxy.setHint("Proxy Type");
+        spinnerProxy.setHint("Proxy Agent Priority");
         txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
 
     }

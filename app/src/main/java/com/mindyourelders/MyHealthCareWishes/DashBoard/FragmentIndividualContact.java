@@ -82,7 +82,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     PersonalInfo personalInfo;
 
     TextInputLayout tilBdate,tilName,tilWorkPhone;
-    String[] Relationship = {"Mother", "Father", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter", "Other"};
+    String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
     @Nullable
     @Override
@@ -121,7 +121,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("PERSONAL INFORMATION");
+        txtTitle.setText("PERSONAL PROFILE");
         imgProfile= (ImageView)rootview.findViewById(R.id.imgProfile);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
         tilName= (TextInputLayout) rootview.findViewById(R.id.tilName);
@@ -156,7 +156,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Relationship);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRelation.setAdapter(adapter1);
-        spinnerRelation.setHint("Relation");
+        spinnerRelation.setHint("Relationship");
 
         txtPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;

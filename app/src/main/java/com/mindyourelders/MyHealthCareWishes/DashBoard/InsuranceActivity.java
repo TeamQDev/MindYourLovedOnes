@@ -67,7 +67,7 @@ TextView txtTitle;
                     callFragment("SPECIALIST", fragmentSpecialist);
                     break;
                 case "Pharmacies":
-                    txtTitle.setText("PHARMACIES");
+                    txtTitle.setText("PHARMACIES AND HOME MEDICAL EQUIPMENT");
                     callFragment("PHARMACY", fragmentPharmacy);
                     break;
                 case "Home Health Services":

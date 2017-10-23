@@ -109,7 +109,7 @@ String note="";
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("MEDICAL INFORMATION");
+        txtTitle.setText("MEDICAL PROFILE");
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
@@ -454,7 +454,7 @@ String note="";
                 note = etNote.getText().toString().trim();
                 Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note);
                 if (flag == true) {
-                    Toast.makeText(getActivity(), "Medical Information Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Medical Profile Saved", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }

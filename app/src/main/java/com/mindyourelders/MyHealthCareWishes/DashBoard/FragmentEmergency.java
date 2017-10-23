@@ -74,7 +74,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("EMERGENCY CONTACT");
+        txtTitle.setText("EMERGENCY CONTACTS");
         /*imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);*/
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);

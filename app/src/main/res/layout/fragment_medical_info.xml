@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgEye"
-                android:text="Eyes Color" />
+                android:text="Eye Color" />
 
             <Spinner
                 android:id="@+id/spinnerEyes"
@@ -343,7 +343,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgEyes"
-                android:text="Eyes" />
+                android:text="Corrective Lenses" />
 
             <RelativeLayout
                 android:id="@+id/rlGlass"
@@ -522,7 +522,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgAides"
-                android:text="Hearing" />
+                android:text="Hearing Device" />
 
             <RelativeLayout
                 android:id="@+id/rlHearingAid"
@@ -888,7 +888,7 @@ Transplant, Therapy, Research, Education
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgPet"
-                android:text="Pet's at Home" />
+                android:text="Pets" />
 
             <EditText
                 android:id="@+id/etPet"

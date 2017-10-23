@@ -43,18 +43,18 @@ Context context=this;
             {
                 txtTitle.setText("SPECIALISTS CONTACTS");
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
-                specialist= new String[]{"DOCTORS", "PHARMACIES", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
+                specialist= new String[]{"DOCTORS", "PHARMACIES AND HOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
                 isEmergency=false;
                 isInsurance=false;
             }
             else if (from.equals("Emergency"))
             {
 
-                txtTitle.setText("PERSONAL & MEDICAL INFORMATION");
+                txtTitle.setText("PERSONAL & MEDICAL PROFILE & EMERGANCY CONTACTS");
                 isEmergency=true;
                 isInsurance=false;
                 profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "PERSONAL INFORMATION", "MEDICAL INFORMATION", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
+                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
 
             }
             else if (from.equals("Insurance"))

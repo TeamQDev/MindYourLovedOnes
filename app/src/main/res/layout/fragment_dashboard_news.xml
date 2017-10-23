@@ -231,7 +231,7 @@
                     android:layout_marginTop="@dimen/dimension10dp"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/dimension5dp"
-                    android:text="PERSONAL &amp; MEDICAL INFORMATION "
+                    android:text="PERSONAL &amp; MEDICAL PROFILE &amp; EMERGENCY CONTACTS "
 
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dimension16dp" />
@@ -276,7 +276,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimension75dp"
                 android:padding="@dimen/dimension5dp"
-                android:text="ADVANCED DIRECTIVES &amp; OTHER DOCUMENTS"
+                android:text="ADVANCE DIRECTIVES &amp; OTHER DOCUMENTS"
                 android:textColor="@color/colorWhite"
                 android:textStyle="normal"
                 android:textSize="@dimen/dimension16dp"
@@ -343,7 +343,7 @@
                     android:layout_marginTop="@dimen/dimension10dp"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/dimension5dp"
-                    android:text="SPECIALISTS"
+                    android:text="SPECIALTY CONTACTS"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dimension16dp"
                     android:textStyle="normal" />

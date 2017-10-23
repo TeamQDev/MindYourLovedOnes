@@ -82,7 +82,7 @@ ImageView imgBack;
 
     private void initUI() {
         txtTitle= (TextView) findViewById(R.id.txtTitle);
-        txtTitle.setText("PERSONAL AND MEDICAL INFORMATION");
+        txtTitle.setText("PERSONAL AND MEDICAL PROFILE AND EMERGENCY CONTACTS");
         imgBack= (ImageView) findViewById(R.id.imgBack);
     }
 
