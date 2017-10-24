@@ -62,10 +62,10 @@ class SpecialistContactAdapter extends BaseAdapter {
         RelativeLayout rlmain3= (RelativeLayout) convertView.findViewById(R.id.rlMain);
         if (position%2==0)
         {
-            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorOneBar));
         }
         else{
-            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorTwoBar));
         }
         /*switch(from)
         {

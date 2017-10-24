@@ -66,7 +66,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         llSplash= (LinearLayout) findViewById(R.id.llSplash);
 
       final String[] array = {getResources().getString(R.string.msgstay),getResources().getString(R.string.msg),"Manage and Share Critical Information on\n" +
-              "your Smartphone or Tablet","Access to Critical Information and Advanced\n" +
+              "your Smartphone or Tablet","Access to Critical Information and Advance\n" +
               "Care Directives 24/7", "The Just In Case App"};
         textMessage.post(new Runnable() {
             int i = 0;

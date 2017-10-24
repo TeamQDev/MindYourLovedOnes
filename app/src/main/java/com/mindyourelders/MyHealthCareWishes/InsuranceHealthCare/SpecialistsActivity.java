@@ -44,7 +44,7 @@ Context context=this;
             from=i.getExtras().getString("FROM");
             if (from.equals("Speciality"))
             {
-                txtTitle.setText("SPECIALITY CONTACTS");
+                txtTitle.setText("SPECIALITY");
                 header.setBackgroundResource(R.color.colorThree);
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
                 specialist= new String[]{"DOCTORS", "PHARMACIES AND \n HOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};

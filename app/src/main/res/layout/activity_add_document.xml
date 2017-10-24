@@ -113,6 +113,12 @@
         android:layout_below="@+id/rlDocument"
         />
 
+    <RelativeLayout
+        android:id="@+id/rlSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerType"
+        >
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinnerDoc"
         android:layout_width="match_parent"
@@ -121,14 +127,43 @@
         android:layout_marginRight="@dimen/dimension35dp"
         app:ms_arrowColor="@color/colorBlue"
         app:ms_arrowSize="16dp"
-        app:ms_floatingLabelText="Document Type"
         app:ms_hint="hint"
         app:ms_multiline="true"
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
-        android:layout_below="@+id/spinnerType"
+
 
         />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+    <AutoCompleteTextView
+        android:id="@+id/txtDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Document Type"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dimension15dp"
+        android:paddingTop="@dimen/dimension2dp"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/dimension20dp"
+        android:drawableRight="@drawable/rsz_blue_drop"
+        />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilDate"
         android:layout_width="match_parent"
@@ -139,7 +174,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/spinnerDoc"
+        android:layout_below="@+id/rlSpinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 

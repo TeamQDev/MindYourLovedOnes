@@ -45,11 +45,11 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
-    TextView txtName, txtDate, txtLocation,txtHolderName,txtDist;
+    TextView txtName, txtDate, txtLocation,txtHolderName,txtDist,txtDoc;
     String From;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
-    TextInputLayout tilDate;
+    TextInputLayout tilDate,tilDoc;
     Document document;
     DBHelper dbHelper;
     String name;
@@ -112,6 +112,19 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         txtLocation= (TextView) findViewById(R.id.txtLocation);
         txtHolderName= (TextView) findViewById(R.id.txtHolderName);
         txtDist= (TextView) findViewById(R.id.txtDist);
+        txtDoc= (TextView) findViewById(R.id.txtDoc);
+        tilDoc= (TextInputLayout) findViewById(R.id.tilDoc);
+
+        txtDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tilDoc.setVisibility(View.GONE);
+                spinnerDoc.setVisibility(View.VISIBLE);
+                spinnerDoc.setHint("Document Type");
+                spinnerDoc.performClick();
+            }
+        });
+
         tilDate= (TextInputLayout) findViewById(R.id.tilDate);
         txtDate= (TextView) findViewById(R.id.txtDate);
         tilDate.setHintEnabled(false);
@@ -168,7 +181,14 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         });
 
         From=preferences.getString(PrefConstants.FROM);
-
+        if (From.equals("AD"))
+        {
+            adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerDoc.setAdapter(adapter);
+            spinnerDoc.setHint("Document Type");
+            tilDoc.setVisibility(View.GONE);
+        }
         switch (From) {
             case "AD":
                 spinnerType.setVisibility(View.GONE);
@@ -197,45 +217,22 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             documentPath=document.getDocument();
             imgDoc.setImageResource(document.getImage());
 
-            int indexs = 0;
-            int index= 0;
 
-            if (document.getFrom().equals("AD"))
+            int index= 0;
+            if (From.equals("AD"))
             {
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
                 spinnerDoc.setHint("Document Type");
-
-
-                for (int j = 0; j < ADList.length; j++) {
-                    if (document.getType().equals(ADList[j])) {
-                        indexs = j;
-                    }
-                }
-                spinnerDoc.setSelection(indexs+1);
-            String sel=spinnerDoc.getSelectedItem().toString();
-            Toast.makeText(context,sel,Toast.LENGTH_SHORT).show();
-            }else{
-
-                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerDoc.setAdapter(adapter);
-                spinnerDoc.setHint("Document Type");
-
-
-                for (int j = 0; j < ADList.length; j++) {
-                    if (document.getType().equals(ADList[j])) {
-                        indexs = j;
-                    }
-                }
-                spinnerDoc.setSelection(indexs+1);
-
+                tilDoc.setVisibility(View.GONE);
+                txtDoc.setVisibility(View.GONE);
+            }
+            else{
                 adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, OtherList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerType.setAdapter(adapter1);
                 spinnerType.setHint("Document Category");
-
 
                 for (int j = 0; j < OtherList.length; j++) {
                     if (document.getCategory().equals(OtherList[j])) {
@@ -243,39 +240,55 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
                 spinnerType.setSelection(index+1);
+            }
 
-                switch(document.getCategory())
-                {
-                    case "Legal":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
-                        break;
-                    case "Financial":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
-                        break;
-                    case "Home Health":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
-                        break;
-                    case "Insurance":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, InsurancerList);
-                        break;
-                    case "Medical":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
-                        break;
-                }
+            if (document.getFrom().equals("AD"))
+            {
+                int indexs = 0;
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
                 spinnerDoc.setHint("Document Type");
+                tilDoc.setVisibility(View.GONE);
+                txtDoc.setVisibility(View.GONE);
+                for (int j = 0; j < ADList.length; j++) {
+                    if (document.getType().equals(ADList[j])) {
+                        indexs = j;
+                    }
+                }
+                spinnerDoc.setSelection(indexs+1);
+               String sel=spinnerDoc.getSelectedItem().toString();
 
-                switch(document.getCategory())
+           }else{
+                int indexs = 0;
+
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDoc.setAdapter(adapter);
+                spinnerDoc.setHint("");
+                spinnerDoc.setSelection(indexs+1);
+                spinnerDoc.setVisibility(View.INVISIBLE);
+                txtDoc.setText(spinnerDoc.getSelectedItem().toString());
+                txtDoc.setFocusable(false);
+                /*for (int j = 0; j < LegalList.length; j++) {
+                    if (document.getType().equals(LegalList[j])) {
+                        indexs = j;
+                    }
+                }
+                spinnerDoc.setSelection(indexs+1);*/
+                  /* switch(document.getCategory())
                 {
-
                     case "Legal":
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDoc.setAdapter(adapter);
+                        spinnerDoc.setHint("Document Type");
                         for (int j = 0; j < LegalList.length; j++) {
                             if (document.getType().equals(LegalList[j])) {
                                 indexs = j;
                             }
                         }
-
+                        spinnerDoc.setSelection(indexs+1);
                         break;
                     case "Financial":
                         adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
@@ -285,15 +298,15 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         for (int j = 0; j < LegalList.length; j++) {
                             if (document.getType().equals(LegalList[j])) {
                                 indexs = j;
-
                             }
                         }
-                       spinnerDoc.setSelection(indexs+1,false);
-                        String sel=spinnerDoc.getSelectedItem().toString();
-                        Toast.makeText(context,sel,Toast.LENGTH_SHORT).show();
-
+                        spinnerDoc.setSelection(indexs+1);
                         break;
                     case "Home Health":
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDoc.setAdapter(adapter);
+                        spinnerDoc.setHint("Document Type");
                         for (int j = 0; j < DocList.length; j++) {
                             if (document.getType().equals(DocList[j])) {
                                 indexs = j;
@@ -302,6 +315,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         spinnerDoc.setSelection(indexs+1);
                         break;
                     case "Insurance":
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, InsurancerList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDoc.setAdapter(adapter);
+                        spinnerDoc.setHint("Document Type");
                         for (int j = 0; j < InsurancerList.length; j++) {
                             if (document.getType().equals(InsurancerList[j])) {
                                 indexs = j;
@@ -310,6 +327,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         spinnerDoc.setSelection(indexs+1);
                         break;
                     case "Medical":
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDoc.setAdapter(adapter);
+                        spinnerDoc.setHint("Document Type");
                         for (int j = 0; j < DocList.length; j++) {
                             if (document.getType().equals(DocList[j])) {
                                 indexs = j;
@@ -317,24 +338,22 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         }
                         spinnerDoc.setSelection(indexs+1);
                         break;
-                }
+                }*/
 
-            }
+          }
 
             imgAdd.setVisibility(View.GONE);
+            tilDoc.setVisibility(View.VISIBLE);
+            imgDone.setVisibility(View.GONE);
+            imgDot.setVisibility(View.VISIBLE);
         }
         else{
             imgDot.setVisibility(View.GONE);
+            tilDoc.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
         }
-        if (From.equals("AD"))
-        {
-            adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerDoc.setAdapter(adapter);
-            spinnerDoc.setHint("Document Type");
-        }
+
        /* switch (From)
         {
             case "AD":
