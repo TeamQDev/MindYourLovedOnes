@@ -274,6 +274,7 @@
             android:background="@drawable/darkgray_white_border"
             android:gravity="top"
             android:hint="Note"
+            android:textColor="@color/colorBlue"
             android:padding="@dimen/dimension8dp" />
         <RelativeLayout
             android:id="@+id/rlAllergis"
@@ -432,7 +433,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgTeeth"
-                android:text="Dentures" />
+                android:text="Mouth" />
 
             <RelativeLayout
                 android:id="@+id/rlFalse"
@@ -445,10 +446,11 @@
                     android:id="@+id/txtFalse"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension60dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Upper" />
+                    android:text="Removable Dentures – Upper"
+                    android:layout_toLeftOf="@+id/tbFalse"/>
 
                 <ToggleButton
                     android:id="@+id/tbFalse"
@@ -466,6 +468,36 @@
 
 
             <RelativeLayout
+                android:id="@+id/rlMouth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlImplant"
+                android:layout_toRightOf="@+id/imgTeeth">
+
+                <TextView
+                    android:id="@+id/txtMouth"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension60dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Dry Mouth" />
+
+                <ToggleButton
+                    android:id="@+id/tbMouth"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/rlImplant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -476,10 +508,12 @@
                     android:id="@+id/txtImplants"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension60dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Lower" />
+                    android:text="Removable  Dentures – Lower"
+                    android:layout_toLeftOf="@+id/tbImplants"
+                    />
 
                 <ToggleButton
                     android:id="@+id/tbImplants"
@@ -494,8 +528,18 @@
                     android:textOff=""
                     android:textOn="" />
             </RelativeLayout>
-
-
+            <EditText
+                android:id="@+id/etMouthNote"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlMouth"
+                android:layout_margin="@dimen/dimension15dp"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Note"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension8dp" />
         </RelativeLayout>
 
         <RelativeLayout

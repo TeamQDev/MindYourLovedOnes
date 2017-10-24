@@ -47,7 +47,7 @@ Context context=this;
                 txtTitle.setText("SPECIALITY CONTACTS");
                 header.setBackgroundResource(R.color.colorThree);
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
-                specialist= new String[]{"DOCTORS", "PHARMACIES AND HOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
+                specialist= new String[]{"DOCTORS", "PHARMACIES AND \n HOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
                 isEmergency=false;
                 isInsurance=false;
             }
@@ -68,7 +68,7 @@ Context context=this;
                 txtTitle.setText("INSURANCE");
                 header.setBackgroundResource(R.color.colorFive);
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess,R.drawable.finances};
-                specialist= new String[]{"INSURANCE INFORMATION", "INSURANCE CARDS","INSURANCE FORM"};
+                specialist= new String[]{"INSURANCE INFORMATION", "INSURANCE CARDS","INSURANCE FORMS"};
                 isEmergency=false;
                 isInsurance=true;
             }
@@ -78,7 +78,7 @@ Context context=this;
                 txtTitle.setText("NOTES & APPOINTMENT CHECKLIST");
                 header.setBackgroundResource(R.color.colorFour);
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};
-                specialist= new String[]{"EVENT NOTES", "APPOINTMENT TRACKER"};
+                specialist= new String[]{"EVENT NOTES", "APPOINTMENT CHECKLIST"};
                 isEmergency=false;
                 isInsurance=false;
             }

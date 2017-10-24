@@ -22,6 +22,7 @@ public class MedInfoQuery {
     public static final String COL_USERID= "UserId";
     public static final String COL_FT ="Feet";
     public static final String COL_NOTE ="Note";
+    public static final String COL_MOUTH_NOTE ="MouthNote";
     public static final String COL_INCH ="Inches";
     public static final String COL_WT="Weight";
     public static final String COL_EYE_COLOR= "EyeColor";
@@ -31,6 +32,7 @@ public class MedInfoQuery {
     public static final String COL_EYE_LENSE="Lense";
     public static final String COL_TEETH_FALSE= "False";
     public static final String COL_TEETH_IMPLANTS="Implants";
+    public static final String COL_TEETH_MOUTH="Mouth";
     public static final String COL_HEARING_AIDES ="Aides";
     public static final String COL_BLOODTYPE="BloodType";
     public static final String COL_ORGANDONOR="OrganDonor";
@@ -48,7 +50,8 @@ public class MedInfoQuery {
                 COL_WT+" VARCHAR(20),"+COL_EYE_COLOR+" VARCHAR(20),"+COL_LANG_PRIMARY+" VARCHAR(20),"+
                 COL_LANG_SECONDORY+" VARCHAR(20),"+COL_EYE_GLASSES+" VARCHAR(20),"+COL_EYE_LENSE+" VARCHAR(20),"+
                 COL_TEETH_FALSE+" VARCHAR(20),"+COL_TEETH_IMPLANTS+" VARCHAR(20),"+COL_HEARING_AIDES+" VARCHAR(20),"+
-                COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_PETS+" VARCHAR(20),"+COL_NOTE+" VARCHAR(20)"+
+                COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_PETS+" VARCHAR(20),"+COL_NOTE+" VARCHAR(20),"+
+                COL_MOUTH_NOTE+" VARCHAR(20),"+COL_TEETH_MOUTH+" VARCHAR(20)"+
                 ");";
         return createTableQuery;
     }
@@ -58,7 +61,7 @@ public class MedInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note) {
+    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -79,7 +82,8 @@ public class MedInfoQuery {
         cv.put(COL_BLOODTYPE,blood);
         cv.put(COL_ORGANDONOR,donor);
         cv.put(COL_PETS,pet);
-
+        cv.put(COL_MOUTH_NOTE,mouthnote);
+        cv.put(COL_TEETH_MOUTH,mouth);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -119,6 +123,8 @@ public class MedInfoQuery {
                 medInfo.setBloodType(c.getString(c.getColumnIndex(COL_BLOODTYPE)));
                 medInfo.setDonor(c.getString(c.getColumnIndex(COL_ORGANDONOR)));
                 medInfo.setPet(c.getString(c.getColumnIndex(COL_PETS)));
+                medInfo.setMouth(c.getString(c.getColumnIndex(COL_TEETH_MOUTH)));
+                medInfo.setMouthnote(c.getString(c.getColumnIndex(COL_MOUTH_NOTE)));
             } while (c.moveToNext());
         }
         

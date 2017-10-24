@@ -59,7 +59,15 @@ class SpecialistContactAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = lf.inflate(R.layout.row_specialistsnew, parent, false);
         }
-        switch(from)
+        RelativeLayout rlmain3= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+        if (position%2==0)
+        {
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+        }
+        else{
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorLightGray));
+        }
+        /*switch(from)
         {
 
             case "Speciality":
@@ -104,7 +112,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                 }
                 break;
         }
-
+*/
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
         ImageView imgLogo= (ImageView) convertView.findViewById(R.id.imgLogo);
         imgLogo.setImageResource(profile[position]);
@@ -118,7 +126,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment = "Insurance";
                         break;
 
-                    case "PHARMACIES AND HOME MEDICAL EQUIPMENT":
+                    case "PHARMACIES AND \n HOME MEDICAL EQUIPMENT":
                         fragment="Pharmacies";
                         break;
 
@@ -152,7 +160,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                     case "INSURANCE INFORMATION":
                         fragment = "Insurance Info";
                         break;
-                    case "INSURANCE FORM":
+                    case "INSURANCE FORMS":
                         fragment = "Insurance Info";
                         break;
 
@@ -164,7 +172,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment = "Event Notes";
                         break;
 
-                    case "APPOINTMENT TRACKER":
+                    case "APPOINTMENT CHECKLIST":
                         fragment = "Appointment Tracker";
                         break;
                 }

@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtMed"
         android:gravity="center_horizontal"
-        android:text="&amp; Advanced Directives"
+        android:text="&amp; Advance Directives"
         android:textSize="@dimen/dimension22dp"
         android:textColor="@color/colorBlackDark"
         android:textStyle="bold"

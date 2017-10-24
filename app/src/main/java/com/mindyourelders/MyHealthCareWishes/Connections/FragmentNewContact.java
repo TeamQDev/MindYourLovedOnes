@@ -107,9 +107,9 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
-    String[] healthSpeciality = {"CARDIOLOGIST","ENDOCRINOLOGISTS","FAMILY PRACTICE PHYSICIAN","GERIATRIC PSYCHIATRIST","GERIATRICIAN","GYNECOLOGIST","INTERNIST","NEPHROLOGIST","NEUROLOGIST","ONCOLOGIST","OPHTHALMOLOGIST","ORTHOPEDICS","PHYSICAL THERAPISTS","PULMONOLOGIST","RHEUMATOLOGIST","UROLOGIST"};
+    String[] healthSpeciality = {"CARDIOLOGIST","ENDOCRINOLOGIST","FAMILY PRACTICE PHYSICIAN","GERIATRIC PSYCHIATRIST","GERIATRICIAN","GYNECOLOGIST","INTERNIST","NEPHROLOGIST","NEUROLOGIST","ONCOLOGIST","OPHTHALMOLOGIST","ORTHOPEDIC","PHYSICAL THERAPIST","PULMONOLOGIST","RHEUMATOLOGIST","UROLOGIST"};
 
-    String[] insuaranceType = {"Dental", "Medical", "Medicare", "Medicare Supplement (Medigap)", "Medicaid", "Disability", "Long Term Care", "Supplemental","Life","Vision", "Other"};
+    String[] insuaranceType = {"Dental","Disability","Life","Long Term Care","Medicaid","Medical","Medicare Supplement (Medigap)","Medicare","Supplemental","Vision", "Other"};
 
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
 

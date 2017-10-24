@@ -43,11 +43,11 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     View rootview;
     ImageView imgBack, imgDone;
     TextView txtTitle;
-     EditText etNote;
+     EditText etNote,etMouthNote;
     EditText etFt, etInch, etWeight, etAdditional, etPet;
-    ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid;
+    ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid,tbMouth;
     RadioButton rbYes, rbNo;
-    String glass = "No", lense = "No", falses = "No", implants = "No", aid = "No", donor = "No";
+    String glass = "No", lense = "No", falses = "No", implants = "No", aid = "No", donor = "No",mouth="No";
     String ft, inch, weight, color, lang1, lang2, blood, pet;
     RadioGroup rgDonor;
     TextView txtName;
@@ -59,6 +59,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     public static final int REQUEST_IMPLANTS = 300;
     public static final int REQUEST_HOSPITAL = 400;
 String note="";
+    String mouthnote="";
     ArrayList historList = new ArrayList();
 
     ArrayList hospitalList = new ArrayList();
@@ -100,6 +101,7 @@ String note="";
         imgAddImplants.setOnClickListener(this);
 
         tbGlass.setOnCheckedChangeListener(this);
+        tbMouth.setOnCheckedChangeListener(this);
         tbLense.setOnCheckedChangeListener(this);
         tbFalse.setOnCheckedChangeListener(this);
         tbImplants.setOnCheckedChangeListener(this);
@@ -114,6 +116,7 @@ String note="";
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
         etNote= (EditText) rootview.findViewById(R.id.etNote);
+        etMouthNote= (EditText) rootview.findViewById(R.id.etMouthNote);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
 
@@ -136,6 +139,7 @@ String note="";
         etPet = (EditText) rootview.findViewById(R.id.etPet);
 
         tbGlass = (ToggleButton) rootview.findViewById(R.id.tbGlass);
+        tbMouth = (ToggleButton) rootview.findViewById(R.id.tbMouth);
         tbLense = (ToggleButton) rootview.findViewById(R.id.tbLense);
         tbFalse = (ToggleButton) rootview.findViewById(R.id.tbFalse);
         tbImplants = (ToggleButton) rootview.findViewById(R.id.tbImplants);
@@ -189,6 +193,7 @@ String note="";
             etAdditional.setText(medInfo.getLang2());
             etPet.setText(medInfo.getPet());
             etNote.setText(medInfo.getNote());
+            etMouthNote.setText(medInfo.getMouthnote());
             int index = 0;
             for (int i = 0; i < EyesList.length; i++) {
                 if (medInfo.getColor().equals(EyesList[i])) {
@@ -219,6 +224,12 @@ String note="";
                 tbGlass.setChecked(true);
             } else if (medInfo.getGlass().equals("No")) {
                 tbGlass.setChecked(false);
+            }
+
+            if (medInfo.getMouth().equals("Yes")) {
+                tbMouth.setChecked(true);
+            } else if (medInfo.getMouth().equals("No")) {
+                tbMouth.setChecked(false);
             }
 
             if (medInfo.getLense().equals("Yes")) {
@@ -452,7 +463,8 @@ String note="";
                 blood = spinnerBlood.getSelectedItem().toString();
                 pet = etPet.getText().toString().trim();
                 note = etNote.getText().toString().trim();
-                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note);
+                mouthnote=etMouthNote.getText().toString().trim();
+                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Medical Profile Saved", Toast.LENGTH_SHORT).show();
                 } else {
@@ -535,6 +547,13 @@ String note="";
                     glass = "Yes";
                 else
                     glass = "No";
+                break;
+
+            case R.id.tbMouth:
+                if (isChecked == true)
+                    mouth = "Yes";
+                else
+                    mouth = "No";
                 break;
             case R.id.tbLense:
                 if (isChecked == true)

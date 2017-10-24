@@ -45,7 +45,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
-    TextView txtName, txtDate, txtLocation,txtHolderName;
+    TextView txtName, txtDate, txtLocation,txtHolderName,txtDist;
     String From;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
@@ -54,8 +54,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     DBHelper dbHelper;
     String name;
     String type;
-    String documentPath;
-    String loacation;
+    String documentPath="";
+    String location;
     String holder;
     int photo;
     String date;
@@ -111,6 +111,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         txtName= (TextView) findViewById(R.id.txtName);
         txtLocation= (TextView) findViewById(R.id.txtLocation);
         txtHolderName= (TextView) findViewById(R.id.txtHolderName);
+        txtDist= (TextView) findViewById(R.id.txtDist);
         tilDate= (TextInputLayout) findViewById(R.id.tilDate);
         txtDate= (TextView) findViewById(R.id.txtDate);
         tilDate.setHintEnabled(false);
@@ -206,13 +207,29 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 spinnerDoc.setAdapter(adapter);
                 spinnerDoc.setHint("Document Type");
 
+
                 for (int j = 0; j < ADList.length; j++) {
                     if (document.getType().equals(ADList[j])) {
                         indexs = j;
                     }
                 }
                 spinnerDoc.setSelection(indexs+1);
+            String sel=spinnerDoc.getSelectedItem().toString();
+            Toast.makeText(context,sel,Toast.LENGTH_SHORT).show();
             }else{
+
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDoc.setAdapter(adapter);
+                spinnerDoc.setHint("Document Type");
+
+
+                for (int j = 0; j < ADList.length; j++) {
+                    if (document.getType().equals(ADList[j])) {
+                        indexs = j;
+                    }
+                }
+                spinnerDoc.setSelection(indexs+1);
 
                 adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, OtherList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -226,6 +243,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
                 spinnerType.setSelection(index+1);
+
                 switch(document.getCategory())
                 {
                     case "Legal":
@@ -247,26 +265,33 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
                 spinnerDoc.setHint("Document Type");
-                spinnerDoc.setSelection(0);
 
-                /*switch(document.getCategory())
+                switch(document.getCategory())
                 {
+
                     case "Legal":
                         for (int j = 0; j < LegalList.length; j++) {
                             if (document.getType().equals(LegalList[j])) {
                                 indexs = j;
                             }
                         }
-                        spinnerDoc.setSelection(indexs+1);
+
                         break;
                     case "Financial":
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDoc.setAdapter(adapter);
+                        spinnerDoc.setHint("Document Type");
                         for (int j = 0; j < LegalList.length; j++) {
                             if (document.getType().equals(LegalList[j])) {
                                 indexs = j;
 
                             }
                         }
-                        spinnerDoc.setSelection(indexs);
+                       spinnerDoc.setSelection(indexs+1,false);
+                        String sel=spinnerDoc.getSelectedItem().toString();
+                        Toast.makeText(context,sel,Toast.LENGTH_SHORT).show();
+
                         break;
                     case "Home Health":
                         for (int j = 0; j < DocList.length; j++) {
@@ -293,7 +318,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         spinnerDoc.setSelection(indexs+1);
                         break;
                 }
-*/
+
             }
 
             imgAdd.setVisibility(View.GONE);
@@ -302,6 +327,13 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             imgDot.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
+        }
+        if (From.equals("AD"))
+        {
+            adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerDoc.setAdapter(adapter);
+            spinnerDoc.setHint("Document Type");
         }
        /* switch (From)
         {
@@ -366,7 +398,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDone:
                 if (validate()) {
-                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,loacation,holder,photo,documentPath,type,From);
+                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,location,holder,photo,documentPath,type,From);
                     if (flag == true) {
                         Toast.makeText(context, "You have added proxy contact successfully", Toast.LENGTH_SHORT).show();
                        finish();
@@ -424,10 +456,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
 
         name=txtName.getText().toString();
-        loacation=txtLocation.getText().toString();
+        location=txtLocation.getText().toString();
         holder=txtHolderName.getText().toString();
         date=txtDate.getText().toString();
-        loacation=txtLocation.getText().toString();
         photo=R.drawable.pdf;
        /* switch (From)
         {

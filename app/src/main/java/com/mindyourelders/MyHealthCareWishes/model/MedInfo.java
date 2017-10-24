@@ -9,6 +9,16 @@ public class MedInfo {
     int userId;
     String feet="";
 
+    public String getMouth() {
+        return mouth;
+    }
+
+    public void setMouth(String mouth) {
+        this.mouth = mouth;
+    }
+
+    String mouth="";
+
     public String getNote() {
         return note;
     }
@@ -18,6 +28,16 @@ public class MedInfo {
     }
 
     String note="";
+
+    public String getMouthnote() {
+        return mouthnote;
+    }
+
+    public void setMouthnote(String mouthnote) {
+        this.mouthnote = mouthnote;
+    }
+
+    String mouthnote="";
     String inch="";
     String weight="";
     String color="";
