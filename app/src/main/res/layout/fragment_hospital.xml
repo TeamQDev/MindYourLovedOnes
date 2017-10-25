@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dimension15dp"
+    >
+    <RelativeLayout
+        android:id="@+id/llAddHospital"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:background="@color/colorGreen">
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/adddoc" />
+        <TextView
+            android:id="@+id/txtAdd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_toRightOf="@+id/imgAdd"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:text="Add hospital &amp; other health professionals"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension24dp" />
+    </RelativeLayout>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lvHospital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddFinance"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:paddingTop="@dimen/dimension15dp"
+        android:layout_alignParentTop="true"
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
+</RelativeLayout>

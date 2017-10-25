@@ -130,6 +130,10 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment="Pharmacies";
                         break;
 
+                    case "HOSPITALS AND \nOTHER HEALTH PROFESSIONALS":
+                        fragment="Hospitals";
+                        break;
+
                     case "DOCTORS":
                         fragment = "Doctors";
                         break;
@@ -139,7 +143,6 @@ class SpecialistContactAdapter extends BaseAdapter {
                     case "FINANCE, INSURANCE, LEGAL":
                         fragment = "Finance,Insurance and Legal";
                         break;
-
 
                     case "PERSONAL PROFILE":
                         fragment = "Individual";
