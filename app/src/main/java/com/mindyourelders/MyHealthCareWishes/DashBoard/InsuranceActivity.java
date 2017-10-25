@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentAids;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentFinance;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentHospital;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentInsurance;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentPharmacy;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentSpecialist;
@@ -26,6 +27,7 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
     FragmentAids fragmentAids=null;
     FragmentPharmacy fragmentPharmacy=null;
     FragmentFinance fragmentFinance=null;
+    FragmentHospital fragmentHospital=null;
 TextView txtTitle;
     Spinner spinner;
 
@@ -66,6 +68,11 @@ TextView txtTitle;
                     txtTitle.setText("DOCTORS");
                     callFragment("SPECIALIST", fragmentSpecialist);
                     break;
+
+                case "Hospitals":
+                    txtTitle.setText("HOSPITALS AND OTHER HEALTH PROFESSIONALS");
+                    callFragment("HOSPITAL", fragmentHospital);
+                    break;
                 case "Pharmacies":
                     txtTitle.setText("PHARMACIES AND \nHOME MEDICAL EQUIPMENT");
                     callFragment("PHARMACY", fragmentPharmacy);
@@ -95,6 +102,7 @@ TextView txtTitle;
         fragmentAids=new FragmentAids();
         fragmentFinance=new FragmentFinance();
         fragmentPharmacy=new FragmentPharmacy();
+        fragmentHospital=new FragmentHospital();
     }
 
     private void initListener() {

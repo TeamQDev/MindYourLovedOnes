@@ -34,6 +34,7 @@ import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
+import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
@@ -41,6 +42,7 @@ import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
+import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
@@ -72,9 +74,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
     TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
-TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
+    TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
     TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
-   TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
+    TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
 
@@ -114,6 +116,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     String[] insuaranceType = {"Dental","Disability","Life","Long Term Care","Medicaid","Medical","Medicare Supplement (Medigap)","Medicare","Supplemental","Vision", "Other"};
 
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
+    String[] HospitalType = {"Hospital", "Rehabilitation Center", "Physical Therapist", "Speech Pathologist","Other"};
 
     String[] proxyType = {"Primary", "Successor"};
     String[] priorityType = {"Primary", "Secondary"};
@@ -140,6 +143,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
         DoctorQuery d=new DoctorQuery(getActivity(),dbHelper);
         SpecialistQuery s=new SpecialistQuery(getActivity(),dbHelper);
+        HospitalHealthQuery h=new HospitalHealthQuery(getActivity(),dbHelper);
     }
 
     private void getRelationData() {
@@ -661,6 +665,79 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 txtTitle.setText("Add Finance, Insurance, Legal");
                 break;
 
+            case "Hospital":
+                visiFinance();
+                txtAdd.setText("Add Hospitals and Other Health Professionals");
+                txtTitle.setText("Add Hospitals and Other Health Professionals");
+                break;
+
+            case "HospitalData":
+                visiFinance();
+                txtAdd.setText("Update Hospitals and Other Health Professionals");
+                txtTitle.setText("Update Hospitals and Other Health Professionals");
+                Intent hospIntent = getActivity().getIntent();
+                if (hospIntent.getExtras() != null) {
+                    Hospital specialist = (Hospital) hospIntent.getExtras().getSerializable("HospitalObject");
+
+                    txtFName.setText(specialist.getName());
+                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
+                    txtLastSeen.setText(specialist.getLastseen());
+                    txtFinanceAddress.setText(specialist.getAddress());
+                    txtFinanceWebsite.setText(specialist.getWebsite());
+                    txtFinanceFax.setText(specialist.getFax());
+                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
+                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
+                    txtFinancePracticeName.setText(specialist.getPracticeName());
+                    txtFinanceNote.setText(specialist.getNote());
+                    id = specialist.getId();
+                    int index = 0;
+                    for (int i = 0; i < HospitalType.length; i++) {
+                        if (specialist.getCategory().equals(HospitalType[i])) {
+                            index = i;
+                        }
+                    }
+                    spinnerFinance.setSelection(index + 1);
+
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+                break;
+            case "HospitalViewData":
+                visiFinance();
+                disableFinance();
+                txtTitle.setText("Hospitals and Other Health Professionals");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent financeIntent2 = getActivity().getIntent();
+                if (financeIntent2.getExtras() != null) {
+                    Hospital specialist = (Hospital) financeIntent2.getExtras().getSerializable("HospitalObject");
+
+                    txtFName.setText(specialist.getName());
+                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
+                    txtLastSeen.setText(specialist.getLastseen());
+                    txtFinanceAddress.setText(specialist.getAddress());
+                    txtFinanceWebsite.setText(specialist.getWebsite());
+                    txtFinanceFax.setText(specialist.getFax());
+                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
+                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
+                    txtFinancePracticeName.setText(specialist.getPracticeName());
+                    txtFinanceNote.setText(specialist.getNote());
+                    id = specialist.getId();
+                    int index = 0;
+                    for (int i = 0; i < HospitalType.length; i++) {
+                        if (specialist.getCategory().equals(HospitalType[i])) {
+                            index = i;
+                        }
+                    }
+                    spinnerFinance.setSelection(index + 1);
+
+                    byte[] photo = specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+                }
+                break;
+
+
             case "FinanceData":
                 visiFinance();
                 txtAdd.setText("Update Finance and Legal");
@@ -699,9 +776,9 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                 disableFinance();
                 txtTitle.setText("Finance and Legal");
                 txtTitle.setVisibility(View.VISIBLE);
-                Intent financeIntent2 = getActivity().getIntent();
-                if (financeIntent2.getExtras() != null) {
-                    Finance specialist = (Finance) financeIntent2.getExtras().getSerializable("FinanceObject");
+                Intent financeIntentd = getActivity().getIntent();
+                if (financeIntentd.getExtras() != null) {
+                    Finance specialist = (Finance) financeIntentd.getExtras().getSerializable("FinanceObject");
 
                     txtFName.setText(specialist.getName());
                     txtFinanceOtherPhone.setText(specialist.getOtherPhone());
@@ -1164,10 +1241,19 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         spinner.setAdapter(adapter);
         spinner.setHint("Specialty");
 
-        ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFinance.setAdapter(financeadapter);
-        spinnerFinance.setHint("Category");
+        String sources=preferences.getString(PrefConstants.SOURCE);
+        if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
+            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerFinance.setAdapter(financeadapter);
+            spinnerFinance.setHint("Category");
+        }
+        else{
+            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerFinance.setAdapter(financeadapter);
+            spinnerFinance.setHint("Category");
+        }
 
         ArrayAdapter<String> adapterInsuarance = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, insuaranceType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1505,6 +1591,46 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+
+                    case "Hospital":
+
+                        if (validate("Finance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case "HospitalData":
+
+                        if (validate("Finance")) {
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] photo = baos.toByteArray();
+                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            if (flag==true)
+                            {
+                                Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            }
+                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                     case "Finance":
 
                         if (validate("Finance")) {
@@ -1812,7 +1938,13 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             website=txtFinanceWebsite.getText().toString();
             lastseen=txtLastSeen.getText().toString();
             int indexValuex = spinnerFinance.getSelectedItemPosition();
-            speciality=financeType[indexValuex-1];
+            String sources=preferences.getString(PrefConstants.SOURCE);
+            if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
+                speciality = financeType[indexValuex - 1];
+            }
+            else{
+                speciality=HospitalType[indexValuex-1];
+            }
             practice_name=txtFinancePracticeName.getText().toString();
             note=txtFinanceNote.getText().toString();
             return true;

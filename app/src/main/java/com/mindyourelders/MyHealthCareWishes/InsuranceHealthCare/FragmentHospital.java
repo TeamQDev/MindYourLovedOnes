@@ -150,7 +150,7 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.llAddHospital:
-                preferences.putString(PrefConstants.SOURCE,"HospitalHealthObject");
+                preferences.putString(PrefConstants.SOURCE,"Hospital");
                 Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
                 startActivity(i);
                 break;
