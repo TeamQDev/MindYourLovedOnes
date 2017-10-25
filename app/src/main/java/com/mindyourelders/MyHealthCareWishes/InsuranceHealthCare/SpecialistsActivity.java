@@ -47,7 +47,7 @@ Context context=this;
                 txtTitle.setText("SPECIALITY");
                 header.setBackgroundResource(R.color.colorThree);
                 profile=new int[]{R.drawable.physician,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
-                specialist= new String[]{"DOCTORS", "PHARMACIES AND \n HOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
+                specialist= new String[]{"DOCTORS", "PHARMACIES AND \nHOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
                 isEmergency=false;
                 isInsurance=false;
             }

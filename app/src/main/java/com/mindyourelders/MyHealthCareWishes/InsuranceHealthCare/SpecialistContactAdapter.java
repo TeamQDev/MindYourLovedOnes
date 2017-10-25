@@ -62,10 +62,10 @@ class SpecialistContactAdapter extends BaseAdapter {
         RelativeLayout rlmain3= (RelativeLayout) convertView.findViewById(R.id.rlMain);
         if (position%2==0)
         {
-            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorOneBar));
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorTwoBar));
         }
         else{
-            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorTwoBar));
+            rlmain3.setBackgroundColor(context.getResources().getColor(R.color.colorOneBar));
         }
         /*switch(from)
         {
@@ -126,7 +126,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment = "Insurance";
                         break;
 
-                    case "PHARMACIES AND \n HOME MEDICAL EQUIPMENT":
+                    case "PHARMACIES AND \nHOME MEDICAL EQUIPMENT":
                         fragment="Pharmacies";
                         break;
 

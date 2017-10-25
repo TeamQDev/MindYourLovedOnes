@@ -31,7 +31,7 @@
            android:gravity="center"
            android:padding="@dimen/dimension5dp"
            android:layout_centerVertical="true"
-           android:text="MYE - Medical Info and Advanced Directives"
+           android:text="MYE - Medical Info and Advance Directives"
            android:textSize="@dimen/dimension22dp"
            android:textColor="@color/colorBlackDark"
            android:textStyle="bold"

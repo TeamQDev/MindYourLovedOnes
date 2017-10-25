@@ -15,7 +15,7 @@
             android:id="@+id/rlAD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorOneBar"
+            android:background="@color/colorTwoBar"
             android:layout_margin="@dimen/dimension10dp"
             android:layout_below="@+id/header"
             >
@@ -242,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension10dp"
-            android:background="@color/colorTwoBar"
+            android:background="@color/colorOneBar"
             android:layout_below="@id/rlMedical"
             >
 
