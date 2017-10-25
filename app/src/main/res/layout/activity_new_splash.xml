@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/imgABa"
         android:layout_width="@dimen/dimension80dp"
-        android:layout_height="@dimen/dimension60dp"
+        android:layout_height="@dimen/dimension70dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/aba"
         android:layout_marginRight="@dimen/dimension20dp"

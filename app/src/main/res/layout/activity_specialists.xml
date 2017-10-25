@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension60dp"
+        android:layout_height="@dimen/dimension70dp"
         android:background="@color/colorBlue"
         >
 
@@ -25,11 +25,10 @@
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_centerInParent="true"
             android:text="Specialist Contacts"
             android:gravity="center"
-            android:layout_toLeftOf="@+id/imgdg"
             android:layout_toRightOf="@+id/imgBack"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp"

@@ -280,7 +280,7 @@
         <RelativeLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension70dp"
             android:background="@color/colorSix"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
