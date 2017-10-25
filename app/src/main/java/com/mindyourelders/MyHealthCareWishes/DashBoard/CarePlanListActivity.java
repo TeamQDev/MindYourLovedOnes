@@ -35,11 +35,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.drawable.pdf;
+
 
 public class CarePlanListActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
     ListView lvDoc;
     ArrayList<Document> documentList;
+    ArrayList<Document> documentListOld;
     ImageView imgBack;
     TextView txtTitle;
     String From;
@@ -69,8 +72,8 @@ DBHelper dbHelper;
     }
 
     private void setDocuments() {
-        if (documentList.size()!=0) {
-            DocumentAdapter documentAdapter = new DocumentAdapter(context, documentList);
+        if (documentListOld.size()!=0) {
+            DocumentAdapter documentAdapter = new DocumentAdapter(context, documentListOld);
             lvDoc.setAdapter(documentAdapter);
         }
     }
@@ -81,7 +84,6 @@ DBHelper dbHelper;
     }
 
     private void initUI() {
-
         imgBack= (ImageView) findViewById(R.id.imgBack);
         lvDoc= (ListView) findViewById(R.id.lvDoc);
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
@@ -113,10 +115,104 @@ DBHelper dbHelper;
     }
 
     private void getDocuments() {
-       documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
-       /* documentList=new ArrayList<>();
+        documentListOld=new ArrayList<>();
+         switch (From) {
+            case "AD":
+                Document P1d = new Document();
+                P1d.setName("HealthCare Proxy");
+                P1d.setType("Health Care Proxy");
+                P1d.setDate("10/10/2017");
+                P1d.setLocation("Locker");
+                P1d.setImage(pdf);
+                P1d.setHolder("Husband");
+                P1d.setDocument("healthcare_proxy_nys.pdf");
 
-        switch (From)
+                Document P2d = new Document();
+                P2d.setName("Living Will");
+                P2d.setImage(pdf);
+                P2d.setType("Living Will");
+                P2d.setDate("10/10/2017");
+                P2d.setLocation("Locker");
+                P2d.setImage(pdf);
+                P2d.setHolder("Husband");
+                P2d.setDocument("HCD_forms.pdf");
+
+                Document P3d = new Document();
+                P3d.setName("HIPAA Form");
+                P3d.setImage(pdf);
+                P3d.setType("HIPAA Form");
+                P3d.setDate("10/10/2017");
+                P3d.setLocation("Locker");
+                P3d.setImage(pdf);
+                P3d.setHolder("Husband");
+                P3d.setDocument("hipaa.pdf");
+
+                Document P4d = new Document();
+                P4d.setName("DNR");
+                P4d.setImage(pdf);
+                P4d.setType("Non-Hospital DNR");
+                P4d.setDate("10/10/2017");
+                P4d.setLocation("Locker");
+                P4d.setImage(pdf);
+                P4d.setHolder("Husband");
+                P4d.setDocument("dnr.pdf");
+
+                documentListOld.add(P1d);
+                documentListOld.add(P2d);
+                documentListOld.add(P3d);
+                documentListOld.add(P4d);
+                break;
+            case "Other":
+                //   txtTitle.setText("Other");
+                Document P1=new Document();
+                P1.setName("Aging Care - Care Plan Guide");
+                P1.setImage(pdf);
+                P1.setType("Other Documents");
+                P1.setDate("10/10/2017");
+                P1.setLocation("Locker");
+                P1.setImage(pdf);
+                P1.setHolder("Husband");
+                P1.setDocument("AgingCare_CarePlanGuide.pdf");
+
+                Document P4i=new Document();
+                P4i.setName("Medical Claim Form");
+                P4i.setImage(pdf);
+                P4i.setType("Other Documents");
+                P4i.setDate("10/10/2017");
+                P4i.setLocation("Locker");
+                P4i.setImage(pdf);
+                P4i.setHolder("Husband");
+                P4i.setDocument("medical_claim_form.pdf");
+
+                Document P5i=new Document();
+                P5i.setName("Dental Claim Form");
+                P5i.setImage(pdf);
+                P5i.setType("Other Documents");
+                P5i.setDate("10/10/2017");
+                P5i.setLocation("Locker");
+                P5i.setImage(pdf);
+                P5i.setHolder("Husband");
+                P5i.setDocument("dental_claim_form.pdf");
+
+                Document P3=new Document();
+                P3.setName("Clinical Flow Sheet");
+                P3.setImage(pdf);
+                P3.setType("Other Documents");
+                P3.setDate("10/10/2017");
+                P3.setLocation("Locker");
+                P3.setImage(pdf);
+                P3.setHolder("Husband");
+                P3.setDocument("dm_chf.pdf");
+
+                documentListOld.add(P4i);
+                documentListOld.add(P5i);
+                documentListOld.add(P1);
+                documentListOld.add(P3);
+                break;
+        }
+        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+        documentListOld.addAll(documentList);
+       /* switch (From)
         {
             case "AD":
                 Document P1d=new Document();

@@ -12,11 +12,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
@@ -41,6 +44,9 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     Preferences preferences;
 
     RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal;
+
+    TextView txtOne,txtTwo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +88,19 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
         rlMedical= (RelativeLayout) findViewById(R.id.rlMedical);
         rlInsurance= (RelativeLayout) findViewById(R.id.rlInsurance);
         rlOther= (RelativeLayout) findViewById(R.id.rlOther);
+        txtOne= (TextView) findViewById(R.id.txtOne);
+        txtTwo= (TextView) findViewById(R.id.txtTwo);
+        rlOther= (RelativeLayout) findViewById(R.id.rlOther);
+
+        String textone = "Click <b><a href='http://www.myhealthcarewishes.com'>here </a> </b> to learn more about them, why they are important, and how to get them completed.";
+        txtOne.setText(Html.fromHtml(textone));
+        txtOne.setClickable(true);
+        txtOne.setMovementMethod(LinkMovementMethod.getInstance());
+
+        String texttwo = "Download this <b><a href='http://www.myhealthcarewishes.com'> Checklist </a> </b> for help updating and organizing your estate planning documents.";
+        txtTwo.setText(Html.fromHtml(texttwo));
+        txtTwo.setClickable(true);
+        txtTwo.setMovementMethod(LinkMovementMethod.getInstance());
     /*   lvDoc= (ListView) findViewById(R.id.lvDoc);
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
         DocumentAdapter documentAdapter=new DocumentAdapter(context,documentList);

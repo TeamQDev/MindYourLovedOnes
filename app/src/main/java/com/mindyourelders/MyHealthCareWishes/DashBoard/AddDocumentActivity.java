@@ -61,6 +61,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String date;
     String category;
     String Goto="";
+    String path="";
 
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     final CharSequence[] dialog_items = {"Print", "Fax", "View" };
@@ -202,6 +203,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         if (i.getExtras()!=null)
         {
             Goto=i.getExtras().getString("GoTo");
+            path=i.getExtras().getString("Path");
         }
 
         if (Goto.equals("View"))
@@ -221,6 +223,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             int index= 0;
             if (From.equals("AD"))
             {
+                spinnerDoc.setVisibility(View.VISIBLE);
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
@@ -392,11 +395,30 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             case R.id.imgDoc:
                 if (!documentPath.equals(""))
                 {
-                    Uri uri= Uri.parse(documentPath);
+                    Uri uri=null;
+                    if (path.equals("No"))
+                    {
+                       /* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/pdf");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(intent);*/
+                       CopyReadAssetss(documentPath);
+                       /* uri= Uri.fromFile(getFileStreamPath("file:///android_asset/"+documentPath));
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/pdf");
+                        context.startActivity(intent);*/
+                    }
+                    else{
+                        uri= Uri.parse(documentPath);
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.setDataAndType(uri, "application/pdf");
                         context.startActivity(intent);
+                    }
+
+
 
                 }
                 break;
@@ -435,12 +457,97 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDot:
 
-                CopyReadAssets(document.getDocument());
-                onPDFClicked(Environment.getExternalStorageDirectory()
-                        + "/mhcw/"+ document.getDocument());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                            case 0: // email
+
+                       /* emailAttachement(item);
+
+                        ShearedValues.activityID = getApplicationContext();*/
+                                break;
+                            case 1: // email
+
+                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
+                                context);
+                        ShearedValues.activityID = getApplicationContext();*/
+
+                                break;
+                            case 2: // view
+                                Uri uri=null;
+                                if (path.equals("No"))
+                                {
+                                    CopyReadAssetss(documentPath);
+                                }
+                                else{
+                                    uri= Uri.parse(documentPath);
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_VIEW);
+                                    intent.setDataAndType(uri, "application/pdf");
+                                    context.startActivity(intent);
+                                }
+
+                                break;
+
+                        }
+                    }
+                });
+
+                builder.create().show();
                 // ((CarePlanActivity)context).CopyAssets();
                 break;
 
+        }
+    }
+
+    private void CopyReadAssetss(String documentPath) {
+        AssetManager assetManager = getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        File file = new File(getFilesDir(), documentPath);
+        try
+        {
+            in = assetManager.open(documentPath);
+            out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
+
+            copyFiles(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e)
+        {
+            Log.e("tag", e.getMessage());
+        }
+        Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, "application/pdf");
+        context.startActivity(intent);
+      /*  Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                Uri.parse("file://" + getFilesDir() +"/"+documentPath),
+                "application/pdf");
+
+        startActivity(intent);*/
+    }
+
+    private void copyFiles(InputStream in, OutputStream out) throws IOException
+    {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1)
+        {
+            out.write(buffer, 0, read);
         }
     }
 

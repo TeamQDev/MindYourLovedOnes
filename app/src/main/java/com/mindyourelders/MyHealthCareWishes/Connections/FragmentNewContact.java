@@ -94,7 +94,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     int prox;
     int connectionFlag;
     boolean inPrimary;
-    MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation;
+    MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority;
     TextInputLayout tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
@@ -114,6 +114,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
 
     String[] proxyType = {"Primary", "Successor"};
+    String[] priorityType = {"Primary", "Secondary"};
 
     Boolean isEdit;
 
@@ -348,12 +349,14 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
 
             case "Emergency":
                 visiEmergency();
+                spinnerPriority.setVisibility(View.VISIBLE);
                 txtAdd.setText("Add Emergency");
                 txtTitle.setText("Add Emergency Contact");
                 break;
 
             case "EmergencyUpdate":
                 visiEmergency();
+                spinnerPriority.setVisibility(View.VISIBLE);
                 txtAdd.setText("Update Emergency");
                 txtTitle.setText("Update Emergency Contact");
                 Intent EmergencyIntent = getActivity().getIntent();
@@ -387,6 +390,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
             case "EmergencyView":
                 visiEmergency();
                 disableEmergency();
+                spinnerPriority.setVisibility(View.VISIBLE);
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Emergency Contact");
                 Intent EmergencyIntents = getActivity().getIntent();
@@ -743,6 +747,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         txtAddress.setEnabled(false);
         txtEmergencyNote.setEnabled(false);
         spinnerRelation.setClickable(false);
+        spinnerPriority.setClickable(false);
         imgEdit.setVisibility(View.GONE);
         llAddConn.setVisibility(View.GONE);
     }
@@ -1090,6 +1095,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         spinnerFinance = (MySpinner) rootview.findViewById(R.id.spinnerFinance);
         spinnerProxy= (MySpinner) rootview.findViewById(R.id.spinnerProxy);
         spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
+        spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
 
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
@@ -1153,6 +1159,13 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         spinnerProxy.setAdapter(adapterProxy);
         spinnerProxy.setHint("Proxy Agent Priority");
         txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
+
+        ArrayAdapter<String> adapterPriority= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, priorityType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPriority.setAdapter(adapterPriority);
+        spinnerPriority.setHint("Priority");
+        txtTitle.setAllCaps(true);
+        txtAdd.setAllCaps(true);
 
     }
 

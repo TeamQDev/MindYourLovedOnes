@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:custom="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:custom="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -322,5 +317,74 @@
                 android:visibility="gone"
                 />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+         android:layout_below="@+id/rlOther"
+            android:layout_margin="@dimen/dimension18dp"
+            android:padding="@dimen/dimension10dp"
+            android:background="@drawable/darkgray_white_border"
+            >]
+            <TextView
+                android:id="@+id/txtHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't have Advance Directives?"
+                android:textStyle="italic|bold"
+                android:textSize="@dimen/dimension20dp"
+                android:textColor="@color/colorBlackDark"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                ></TextView>
+            <RelativeLayout
+                android:id="@+id/rlOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeader"
+                android:layout_marginTop="@dimen/dimension10dp"
+                >
+                <ImageView
+                    android:id="@+id/imgOne"
+                    android:layout_width="@dimen/dimension20dp"
+                    android:layout_height="@dimen/dimension17dp"
+                    android:src="@drawable/checkbullet"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    />
+                <TextView
+                    android:id="@+id/txtOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have Advance Directives?"
+                    android:textSize="@dimen/dimension18dp"
+                    android:textColor="@color/colorBlackDark"
+                    android:layout_toRightOf="@+id/imgOne"
+                    android:layout_marginLeft="@dimen/dimension10dp"
+                    ></TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlOne"
+                android:layout_marginTop="@dimen/dimension10dp"
+                >
+            <ImageView
+                android:id="@+id/imgTwo"
+                android:layout_width="@dimen/dimension20dp"
+                android:layout_height="@dimen/dimension17dp"
+                android:src="@drawable/checkbullet"
+                android:layout_marginTop="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't have Advance Directives?"
+                android:textSize="@dimen/dimension18dp"
+                android:textColor="@color/colorBlackDark"
+                android:layout_toRightOf="@+id/imgTwo"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                ></TextView>
+                </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
-</ScrollView>

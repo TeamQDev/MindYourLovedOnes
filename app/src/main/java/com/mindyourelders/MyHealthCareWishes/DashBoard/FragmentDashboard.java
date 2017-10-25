@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
@@ -49,6 +50,7 @@ DBHelper dbHelper;
     PersonalInfo personalInfo;
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static final int REQUEST_WRITE_PERMISSION = 200;
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
     @Nullable
@@ -57,14 +59,48 @@ DBHelper dbHelper;
         rootview = inflater.inflate(R.layout.fragment_dashboard_news, null);
         preferences=new Preferences(getActivity());
         checkRuntimePermission();
+        //requestPermission();
         initUI();
         initListener();
         initComponent();
 
         return rootview;
     }
-    private boolean checkRuntimePermission() {
+    private boolean requestPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_WRITE_PERMISSION);
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_WRITE_PERMISSION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+    private boolean checkRuntimePermission() {
+       /* requestPermissions(new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PERMISSIONS_REQUEST_READ_CONTACTS);
+        return true;*/
+       if (ContextCompat.checkSelfPermission(getActivity(),
                 android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -302,4 +338,6 @@ DBHelper dbHelper;
         super.onResume();
         initComponent();
     }
+
+
 }
