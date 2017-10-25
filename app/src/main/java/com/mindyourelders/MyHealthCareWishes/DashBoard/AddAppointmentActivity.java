@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,9 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     ImageView imgBack;
     RelativeLayout llAddConn;
     TextInputLayout tilName;
+    RadioGroup rgCompleted;
+    RadioButton rbYes,rbNo;
+    String status="No";
 
     String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
             "Hypothyroid Blood test", "Glucose Test"};
@@ -69,10 +75,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         imgBack= (ImageView) findViewById(R.id.imgBack);
         llAddConn= (RelativeLayout) findViewById(R.id.llAddConn);
 
+        rgCompleted= (RadioGroup) findViewById(R.id.rgCompleted);
+        rbYes= (RadioButton) findViewById(R.id.rbYes);
+        rbNo= (RadioButton) findViewById(R.id.rbNo);
+
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, Type);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(adapter);
-        spinnerType.setHint("Type");
+        spinnerType.setHint("Specialist to see OR Type of Test");
 
         ArrayAdapter adapter1 = new ArrayAdapter(context, android.R.layout.simple_spinner_item, Frequency);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,6 +94,21 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 tilName.setHintEnabled(true);
                 txtName.setFocusable(true);
                 return false;
+            }
+        });
+
+        rgCompleted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId==R.id.rbYes)
+                {
+                    txtDate.setVisibility(View.VISIBLE);
+                    status="Yes";
+                }else if (checkedId==R.id.rbNo)
+                {
+                    txtDate.setVisibility(View.GONE);
+                    status="No";
+                }
             }
         });
     }

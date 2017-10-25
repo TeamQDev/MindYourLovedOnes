@@ -55,7 +55,7 @@
         android:layout_marginRight="@dimen/dimension35dp"
         app:ms_arrowColor="@color/colorBlue"
         app:ms_arrowSize="16dp"
-        app:ms_floatingLabelText="Type"
+        app:ms_floatingLabelText="Specialist to see OR Type of Test"
         app:ms_hint="hint"
         app:ms_multiline="true"
         custom:ms_floatingLabelColor="@color/colorBlue"
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:hint="Doctor's Name Or Lab Test"
+            android:hint="Name of Dr associated (if any)"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
@@ -106,21 +106,58 @@
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
         />
+      <TextView
+        android:id="@+id/txtCompleted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+          android:layout_marginLeft="@dimen/dimension10dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+          android:text="Completed"
+          android:layout_below="@+id/spinnerFrequency"
+        />
+  <RadioGroup
+    android:id="@+id/rgCompleted"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/txtCompleted" android:paddingBottom="@dimen/dimension8dp"
+      android:paddingLeft="@dimen/dimension30dp"
+      android:paddingRight="@dimen/dimension30dp"
+      android:paddingTop="@dimen/dimension8dp"
 
+      >
+    <RadioButton
+        android:id="@+id/rbYes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:textSize="@dimen/dimension20dp"
+        android:layout_marginLeft="@dimen/dimension20dp"
+        />
+    <RadioButton
+        android:id="@+id/rbNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:textSize="@dimen/dimension20dp"
+        android:layout_marginLeft="@dimen/dimension20dp"
+        />
+</RadioGroup>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerFrequency"
+        android:layout_below="@+id/rgCompleted"
         android:descendantFocusability="beforeDescendants"
         android:focusable="false"
         android:focusableInTouchMode="true"
-        android:hint="Date(s) Completed"
+        android:hint="Date Completed"
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-
         >
 
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->

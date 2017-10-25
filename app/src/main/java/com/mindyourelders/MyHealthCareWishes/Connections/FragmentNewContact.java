@@ -91,6 +91,8 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
     String fax="";
     String relation="";
     String proxy="";
+    String priority="";
+    int prior;
     int prox;
     int connectionFlag;
     boolean inPrimary;
@@ -291,14 +293,14 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         }
                     }
                     spinnerRelation.setSelection(index+1);
-                    prox=rel.getIsPrimary();
+                   /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
                     }else if (prox==2)
                     {
                         spinnerProxy.setSelection(1);
-                    }
-
+                    }*/
+                    spinnerProxy.setSelection(rel.getIsPrimary()+1);
 
                     byte[] photo=rel.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -331,15 +333,15 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         }
                     }
                     spinnerRelation.setSelection(index+1);
-                    prox=rel.getIsPrimary();
+                   /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
                     }else if (prox==2)
                     {
                         spinnerProxy.setSelection(1);
-                    }
+                    }*/
 
-
+                    spinnerProxy.setSelection(rel.getIsPrimary()+1);
                     byte[] photo=rel.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
@@ -380,6 +382,23 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         }
 
                     spinnerRelation.setSelection(index+1);
+                    int indexs = 0;
+                   /* int pr=rel.getIsPrimary();String priem="";
+                    if (pr==0)
+                    {
+                        priem="Primary";
+                    }
+                    else{
+                        priem="Secondary";
+                    }
+                    for (int i = 0; i <priorityType.length; i++) {
+                        if (priem.equals(priorityType[i])) {
+                            indexs = i;
+                        }
+                    }*/
+
+                    spinnerPriority.setSelection(rel.getIsPrimary()+1);
+
                     byte[] photo=rel.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
@@ -414,6 +433,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                     }
 
                     spinnerRelation.setSelection(index+1);
+                    spinnerPriority.setSelection(rel.getIsPrimary()+1);
                     byte[] photo=rel.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
@@ -1244,7 +1264,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo = baos.toByteArray();
 
-                        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,2);
+                        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,prior);
                         if (flag==true)
                         {
                             Toast.makeText(getActivity(),"You have added emergency contact successfully",Toast.LENGTH_SHORT).show();
@@ -1266,7 +1286,7 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
 
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,2);
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated emergency contact successfully",Toast.LENGTH_SHORT).show();
@@ -1663,8 +1683,18 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         }
         else if(screen.equals("Emergency"))
         {
+            int indexs=spinnerPriority.getSelectedItemPosition();
             relation=Relationship[indexValue-1];
+            priority=priorityType[indexs-1];
             note=txtEmergencyNote.getText().toString().trim();
+            if (priority.equals("Primary"))
+            {
+                prior=0;
+            }
+            else
+            {
+                prior=1;
+            }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -1694,14 +1724,14 @@ TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPho
         }
         else if(screen.equals("Proxy"))
         {
-            relation=Relationship[indexValue];
+            relation=Relationship[indexValue-1];
             int indexValues = spinnerProxy.getSelectedItemPosition();
             proxy=proxyType[indexValues-1];
             if (proxy.equals("Primary")) {
-                prox=1;
-            }else if (proxy.equals("Successor"))
+                prox=0;
+            }else
             {
-                prox=2;
+                prox=1;
             }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");

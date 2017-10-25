@@ -243,7 +243,7 @@
                 android:id="@+id/txtDataInput"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
-                android:text="DATA INPUT AND INFO"
+                android:text="DATA INPUT AND OUTPUT"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"

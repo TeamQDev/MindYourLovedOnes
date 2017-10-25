@@ -317,14 +317,19 @@
                 android:visibility="gone"
                 />
         </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlOther"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-         android:layout_below="@+id/rlOther"
-            android:layout_margin="@dimen/dimension18dp"
             android:padding="@dimen/dimension10dp"
             android:background="@drawable/darkgray_white_border"
-            >]
+           android:layout_centerInParent="true"
+            android:layout_margin="@dimen/dimension20dp"
+            android:layout_centerHorizontal="true">]
             <TextView
                 android:id="@+id/txtHeader"
                 android:layout_width="match_parent"
@@ -387,4 +392,5 @@
                 ></TextView>
                 </RelativeLayout>
         </RelativeLayout>
+    </RelativeLayout>
     </RelativeLayout>
