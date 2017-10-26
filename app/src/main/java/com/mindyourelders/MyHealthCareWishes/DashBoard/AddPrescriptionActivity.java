@@ -60,7 +60,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     RelativeLayout llAddPrescription;
     TextInputLayout tilTitle;
     public static final int RESULT_PRES = 100;
-    TextView txtName, txtDate,txtPurpose,txtNote;
+    TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre;
     EditText etNote;
     MySpinner spinner;
     String[] FormList = {"Tablet", "Capsule", "Pills", "Powder", "Liquid", "Syrup", "Cream", "Gel", "Lotion", "Drops", "Other"};
@@ -104,6 +104,8 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         txtName = (TextView) findViewById(R.id.txtName);
         txtDate = (TextView) findViewById(R.id.txtDate);
         txtPurpose= (TextView) findViewById(R.id.txtPurpose);
+        txtPre = (TextView) findViewById(R.id.txtPre);
+        txtRX= (TextView) findViewById(R.id.txtRX);
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         imgBack = (ImageView) findViewById(R.id.imgBack);
@@ -144,6 +146,8 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 txtName.setText(p.getDoctor());
                 txtDate.setText(p.getDates());
                 etNote.setText(p.getNote());
+                txtPre.setText(p.getPre());
+                txtRX.setText(p.getRX());
                 txtPurpose.setText(p.getPurpose());
                 dosageList = p.getDosageList();
                 imageList = p.getPrescriptionImageList();
@@ -213,8 +217,10 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String purpose=txtPurpose.getText().toString().trim();
                 String note=etNote.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
+                String pre=txtPre.getText().toString().trim();
+                String rx=txtRX.getText().toString().trim();
                 if (isEdit==false) {
-                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique);
+                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx);
                     if (flag == true) {
                         Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
                     } else {
@@ -222,7 +228,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     }
                 }
                 else{
-                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx);
                     if (flag == true) {
                         Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
                     } else {
@@ -351,6 +357,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         customDialog.setCancelable(false);
         final EditText etMedicine = (EditText) customDialog.findViewById(R.id.etMedicine);
         final EditText etDose = (EditText) customDialog.findViewById(R.id.etDose);
+        final EditText etFrequency= (EditText) customDialog.findViewById(R.id.etFrequency);
         TextView txtMedicine = (TextView) customDialog.findViewById(R.id.txtMedicine);
         TextView txtDose = (TextView) customDialog.findViewById(R.id.txtDose);
 
@@ -358,6 +365,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             if (a != null) {
                 etMedicine.setText(a.getMedicine());
                 etDose.setText(a.getDose());
+                etFrequency.setText(a.getFrequency());
             }
         }
         TextView btnAdd = (TextView) customDialog.findViewById(R.id.btnYes);
@@ -375,6 +383,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
 
                 String dose = etDose.getText().toString();
                 String medicine = etMedicine.getText().toString();
+                String frequency=etFrequency.getText().toString();
                /* SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                 String currentDateandTime = sdf.format(new Date());*/
                if (b==true)
@@ -383,6 +392,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
 
                        a.setDose(dose);
                        a.setMedicine(medicine);
+                       a.setFrequency(frequency);
                        //dosageList.add(dosage);
                        customDialog.dismiss();
                        setDosageData();
@@ -396,6 +406,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     Dosage dosage = new Dosage();
                     dosage.setDose(dose);
                     dosage.setMedicine(medicine);
+                    dosage.setFrequency(frequency);
                     dosageList.add(dosage);
                     customDialog.dismiss();
                     setDosageData();

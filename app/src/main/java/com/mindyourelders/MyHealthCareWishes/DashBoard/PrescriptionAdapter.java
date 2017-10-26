@@ -82,7 +82,7 @@ class PrescriptionAdapter extends BaseAdapter {
                     LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View v = vi.inflate(R.layout.row_txt, null);
                     TextView textView = (TextView) v.findViewById(R.id.txt);
-                    textView.setText(""+DosageList.get(i).getMedicine()+" : "+DosageList.get(i).getDose());
+                    textView.setText(""+DosageList.get(i).getMedicine()+" : "+DosageList.get(i).getDose()+", "+DosageList.get(i).getFrequency());
                     holder.llPrescription.addView(v);
                 }
             }

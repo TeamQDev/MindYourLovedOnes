@@ -2039,12 +2039,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
 
 
-            if (file.isDirectory()) {
+            /*if (file.isDirectory()) {
                 String[] children = file.list();
                 for (int i = 0; i < children.length; i++) {
                     new File(file, children[i]).delete();
                 }
-            }
+            }*/
             try {
 
                 imagepath = path + "/MHCWContact_" + String.valueOf(System.currentTimeMillis())

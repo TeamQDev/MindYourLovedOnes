@@ -9,6 +9,16 @@ import java.io.Serializable;
 public class Dosage implements Serializable {
     int id;
 
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    String frequency="";
+
     public int getId() {
         return id;
     }

@@ -48,27 +48,55 @@
             />
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilTitle"
+    android:id="@+id/tilTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="33dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/dimension8dp"
+    android:paddingLeft="@dimen/dimension30dp"
+    android:paddingRight="@dimen/dimension30dp"
+    android:paddingTop="@dimen/dimension8dp"
+    android:layout_below="@+id/header"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
+
+    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+    <AutoCompleteTextView
+        android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:maxLines="1"
+        android:hint="Prescribing Doctor"
+        android:paddingLeft="@dimen/dimension15dp"
+        android:paddingTop="@dimen/dimension2dp"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/dimension20dp" />
+
+</android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilPre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/tilTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
-            android:id="@+id/txtName"
+            android:id="@+id/txtPre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:hint="Doctor"
+            android:hint="Prescription/Over-the-counter"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
@@ -86,7 +114,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/tilTitle"
+        android:layout_below="@+id/tilPre"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -97,7 +125,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:focusable="false"
-            android:hint="Date"
+            android:hint="Date of Prescription."
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
@@ -134,11 +162,40 @@
             android:textSize="@dimen/dimension20dp" />
 
     </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilRX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilPurpose"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtRX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="RX#"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp" />
+
+    </android.support.design.widget.TextInputLayout>
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilPurpose"
+        android:layout_below="@+id/tilRX"
         android:layout_marginLeft="@dimen/dimension35dp"
         android:layout_marginRight="@dimen/dimension35dp"
         app:ms_arrowColor="@color/colorBlue"

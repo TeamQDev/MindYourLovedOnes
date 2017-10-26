@@ -25,6 +25,7 @@ public class DosageQuery {
     public static final String COL_USERID = "UserId";
     public static final String COL_PREID = "PreId";
     public static final String COL_MEDICINE= "MedicineName";
+    public static final String COL_FREQUENCY= "Frequency";
     public static final String COL_DOSE = "Dose";
 
     public DosageQuery(Context context, DBHelper dbHelper) {
@@ -33,7 +34,7 @@ public class DosageQuery {
     }
 
     public static String createDosageTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY,"+ COL_USERID + " INTEGER,"+ COL_MEDICINE + " VARCHAR(20)," + COL_DOSE+ " VARCHAR(10),"+
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY,"+ COL_USERID + " INTEGER,"+ COL_MEDICINE + " VARCHAR(20)," + COL_DOSE+ " VARCHAR(10),"+COL_FREQUENCY+ " VARCHAR(10),"+
                 COL_PREID + " Integer);";
         return createTableQuery;
     }
@@ -50,7 +51,7 @@ public class DosageQuery {
         cv.put(COL_USERID, userid);
         cv.put(COL_MEDICINE, medicine);
         cv.put(COL_DOSE, dose);
-
+        cv.put(COL_FREQUENCY, dose);
         long rowid = db.insert(TABLE_NAME, null, cv);
 
         if (rowid == -1) {
@@ -77,6 +78,7 @@ public class DosageQuery {
                     notes.setPreid(c.getInt(c.getColumnIndex(COL_PREID)));
                     notes.setMedicine(c.getString(c.getColumnIndex(COL_MEDICINE)));
                     notes.setDose(c.getString(c.getColumnIndex(COL_DOSE)));
+                    notes.setFrequency(c.getString(c.getColumnIndex(COL_FREQUENCY)));
                     noteList.add(notes);
                 } while (c.moveToNext());
             }
@@ -95,6 +97,7 @@ public class DosageQuery {
             cv.put(COL_USERID, userid);
             cv.put(COL_MEDICINE, dosageList.get(i).getMedicine());
             cv.put(COL_DOSE, dosageList.get(i).getDose());
+            cv.put(COL_FREQUENCY,dosageList.get(i).getFrequency());
             cv.put(COL_PREID, id);
             long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -141,6 +144,7 @@ public class DosageQuery {
             ContentValues cv = new ContentValues();
             cv.put(COL_MEDICINE, dosageList.get(i).getMedicine());
             cv.put(COL_DOSE, dosageList.get(i).getDose());
+            cv.put(COL_FREQUENCY, dosageList.get(i).getFrequency());
             int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique+" and "+COL_ID+ "=" + d.get(i).getId(), null);
 
             if (rowid == 0) {

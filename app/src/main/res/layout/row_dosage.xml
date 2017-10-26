@@ -6,7 +6,7 @@
     android:background="@color/colorLightBlue"
     android:weightSum="10"
     >
-<LinearLayout
+<RelativeLayout
     android:layout_width="@dimen/dimension0dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -31,19 +31,34 @@
         style="@style/EmergencyDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtDoctor"
+        android:layout_below="@+id/txtMedicine"
         android:text="7/08/1235 45:52"
         android:textColor="@color/colorDarkGray"
         android:textSize="@dimen/dimension18dp"
         android:background="@color/colorLightBlue"
        android:layout_marginLeft="@dimen/dimension20dp"
+
+        />
+    <TextView
+        android:id="@+id/txtFrequency"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtMedicine"
+        android:layout_toRightOf="@+id/txtDose"
+        android:text="7/08/1235 45:52"
+        android:textColor="@color/colorDarkGray"
+        android:textSize="@dimen/dimension18dp"
+        android:background="@color/colorLightBlue"
+        android:layout_marginLeft="@dimen/dimension5dp"
+
         />
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension1dp"
         android:background="@color/colorWhite"
         ></View>
-</LinearLayout>
+</RelativeLayout>
     <ImageView
         android:id="@+id/imgEdit"
         android:layout_width="@dimen/dimension0dp"

@@ -22,6 +22,25 @@ public class Prescription implements Serializable {
     String note="";
     String purpose="";
 
+    public String getRX() {
+        return RX;
+    }
+
+    public void setRX(String RX) {
+        this.RX = RX;
+    }
+
+    public String getPre() {
+        return Pre;
+    }
+
+    public void setPre(String pre) {
+        Pre = pre;
+    }
+
+    String RX="";
+    String Pre="";
+
     public String getNote() {
         return note;
     }
