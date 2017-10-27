@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -58,10 +59,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
    
     TextView txtSignUp, txtLogin, txtForgotPassword;
     ImageView imgEdit,imgProfile,imgDone;
-    TextView txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
-
+    TextView txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
+   TextInputLayout tilOtherRelation;
     String name, email, phone, country, bdate,address,homePhone,workPhone,gender;
-
+String otherRelation;
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
 
@@ -122,22 +123,24 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
-        imgProfile= (ImageView)rootview.findViewById(R.id.imgProfile);
+        imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
-        tilName= (TextInputLayout) rootview.findViewById(R.id.tilName);
-        tilWorkPhone= (TextInputLayout) rootview.findViewById(R.id.tilWorkPhone);
+        tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
+        tilOtherRelation = (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
+        tilWorkPhone = (TextInputLayout) rootview.findViewById(R.id.tilWorkPhone);
+        txtOtherRelation = (TextView) rootview.findViewById(R.id.txtOtherRelation);
         txtLogin = (TextView) rootview.findViewById(R.id.txtLogin);
         txtForgotPassword = (TextView) rootview.findViewById(R.id.txtForgotPassword);
-        txtBdate = (TextView)rootview.findViewById(R.id.txtBdate);
-        txtGender= (TextView)rootview.findViewById(R.id.txtGender);
-        imgBack = (ImageView)getActivity().findViewById(R.id.imgBack);
+        txtBdate = (TextView) rootview.findViewById(R.id.txtBdate);
+        txtGender = (TextView) rootview.findViewById(R.id.txtGender);
+        imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgEdit = (ImageView) rootview.findViewById(R.id.imgEdit);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
-        txtRelation=(TextView) rootview.findViewById(R.id.txtRelation);
-        tilBdate= (TextInputLayout) rootview.findViewById(R.id.tilBdate);
-        spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
-        txtAddress= (TextView)rootview.findViewById(R.id.txtAddress);
+        txtRelation = (TextView) rootview.findViewById(R.id.txtRelation);
+        tilBdate = (TextInputLayout) rootview.findViewById(R.id.tilBdate);
+        spinnerRelation = (MySpinner) rootview.findViewById(R.id.spinnerRelation);
+        txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtEmail = (TextView) rootview.findViewById(R.id.txtEmail);
         txtCountry = (TextView) rootview.findViewById(R.id.txtCountry);
@@ -146,8 +149,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtWorkPhone = (TextView) rootview.findViewById(R.id.txtWorkPhone);
 
         spinner = (MySpinner) rootview.findViewById(R.id.spinner);
-        
-        
+
+
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, countryList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -183,6 +186,22 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
         setValues();
 
+        spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                    tilOtherRelation.setVisibility(View.VISIBLE);
+                } else {
+                    tilOtherRelation.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
     }
 
     private void setValues() {
@@ -233,6 +252,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 txtEmail.setText(connection.getEmail());
                 txtAddress.setText(connection.getAddress());
                 txtPhone.setText(connection.getMobile());
+                txtOtherRelation.setText(connection.getOtherRelation());
                 txtHomePhone.setText(connection.getPhone());
                 txtWorkPhone.setText(connection.getWorkPhone());
                     int index = 0;
@@ -440,9 +460,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         phone = txtPhone.getText().toString().trim();
         workPhone=txtWorkPhone.getText().toString().trim();
         homePhone=txtHomePhone.getText().toString().trim();
-
+        otherRelation=txtOtherRelation.getText().toString().trim();
         address=txtAddress.getText().toString().trim();
-        relation= spinnerRelation.getSelectedItem().toString();
+        int i= spinnerRelation.getSelectedItemPosition();
+        relation=Relationship[i-1];
 
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
@@ -521,7 +542,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void editToConnection(byte[] photo) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -531,7 +552,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {

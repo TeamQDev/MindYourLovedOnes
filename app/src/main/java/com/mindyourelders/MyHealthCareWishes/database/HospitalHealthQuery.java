@@ -26,6 +26,7 @@ public class HospitalHealthQuery {
     public static final String COL_MOBILE_PHONE = "MobilePhone";
     public static final String COL_OTHER_PHONE = "OtherPhone";
     public static final String COL_CATEGORY = "Category";
+    public static final String COL_OTHER_CATEGORY = "OtherCategory";
     public static final String COL_FAX = "Faxno";
     public static final String COL_WEBSITE = "Website";
     public static final String COL_PRACTICENAME = "PracticeName";
@@ -40,7 +41,7 @@ public class HospitalHealthQuery {
     }
 
 
-    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen) {
+    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -58,6 +59,7 @@ public class HospitalHealthQuery {
         cv.put(COL_CATEGORY,speciality);
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);
+        cv.put(COL_OTHER_CATEGORY,otherCategory);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -77,7 +79,7 @@ public class HospitalHealthQuery {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50)," + COL_LASTSEEN + " VARCHAR(50),"+
                 COL_MOBILE_PHONE + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
-                COL_OFFICE_PHONE + " VARCHAR(20)," + COL_CATEGORY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
+                COL_OFFICE_PHONE + " VARCHAR(20)," + COL_CATEGORY + " VARCHAR(50)," + COL_OTHER_CATEGORY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
                 COL_PHOTO + " BLOB);";
         return createTableQuery;
@@ -88,7 +90,7 @@ public class HospitalHealthQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen) {
+    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -106,6 +108,7 @@ public class HospitalHealthQuery {
         cv.put(COL_CATEGORY,speciality);
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);
+        cv.put(COL_OTHER_CATEGORY,otherCategory);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
@@ -159,7 +162,7 @@ public class HospitalHealthQuery {
                 connection.setFax(c.getString(c.getColumnIndex(COL_FAX)));
                 connection.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                 connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
-
+                connection.setOtherCategory(c.getString(c.getColumnIndex(COL_OTHER_CATEGORY)));
 
                 hospitalList.add(connection);
 

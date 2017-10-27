@@ -321,7 +321,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] photo = baos.toByteArray();
-        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",photo," ",1,2);
+        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",photo," ",1,2, "");
         if (flag==true)
         {
             Toast.makeText(context,"You have added connection Successfully",Toast.LENGTH_SHORT).show();

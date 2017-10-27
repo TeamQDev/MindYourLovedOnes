@@ -11,6 +11,16 @@ public class Emergency implements Serializable {
     String email="";
     String mobile="";
 
+    public String getOtherRelation() {
+        return OtherRelation;
+    }
+
+    public void setOtherRelation(String otherRelation) {
+        OtherRelation = otherRelation;
+    }
+
+    String OtherRelation="";
+
     public String getWorkPhone() {
         return workPhone;
     }

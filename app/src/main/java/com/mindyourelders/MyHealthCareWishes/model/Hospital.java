@@ -18,6 +18,16 @@ public class Hospital implements Serializable {
     String Fax;
     String practiceName;
 
+    public String getOtherCategory() {
+        return OtherCategory;
+    }
+
+    public void setOtherCategory(String otherCategory) {
+        OtherCategory = otherCategory;
+    }
+
+    String OtherCategory="";
+
     public String getPracticeName() {
         return practiceName;
     }

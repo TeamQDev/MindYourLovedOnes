@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -70,7 +71,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
 
     //TextView btnShowMore,btnShowLess,btnSon;
-    TextView txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
+    TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
     TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
     TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
@@ -94,12 +95,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String relation="";
     String proxy="";
     String priority="";
+    String otherRelation="";
+    String otherCategory="";
+    String otherInsurance="";
     int prior;
     int prox;
     int connectionFlag;
     boolean inPrimary;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority;
-    TextInputLayout tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
+    TextInputLayout tilOtherInsurance,tilOtherCategory,tilOtherRelation,tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
     ArrayList<String> relationArraylist;
@@ -289,6 +293,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtWorkPhone.setText(rel.getWorkPhone());
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
+                    txtOtherRelation.setText(rel.getOtherRelation());
                     id=rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
@@ -329,6 +334,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtWorkPhone.setText(rel.getWorkPhone());
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
+                    txtOtherRelation.setText(rel.getOtherRelation());
                     id=rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
@@ -377,6 +383,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtWorkPhone.setText(rel.getWorkPhone());
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
+                    txtOtherRelation.setText(rel.getOtherRelation());
                     id=rel.getId();
                         int index = 0;
                         for (int i = 0; i < Relationship.length; i++) {
@@ -428,6 +435,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtWorkPhone.setText(rel.getWorkPhone());
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
+                    txtOtherRelation.setText(rel.getOtherRelation());
                     id=rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
@@ -539,6 +547,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "InsuranceData":
                 visiInsurance();
+                tilInsuaranceName.setHintEnabled(true);
+                txtInsuaranceName.setFocusable(true);
                 txtAdd.setText("Update Insurance");
                 txtTitle.setText("Update Insurance");
                 Intent insuranceIntent = getActivity().getIntent();
@@ -561,6 +571,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtInsuaranceNote.setText(insurance.getNote());
                     txtInsuaranceName.setText(insurance.getName());
                     txtSubscribe.setText(insurance.getSubscriber());
+                    txtOtherInsurance.setText(insurance.getOtherInsurance());
                     id=insurance.getId();
                     byte[] photo=insurance.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -571,6 +582,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             case "InsuranceViewData":
                 visiInsurance();
               disableInsurance();
+                tilInsuaranceName.setHintEnabled(true);
+                txtInsuaranceName.setFocusable(true);
                 txtTitle.setText("INSURANCE INFORMATION");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent insuranceIntent2 = getActivity().getIntent();
@@ -593,6 +606,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtInsuaranceNote.setText(insurance.getNote());
                     txtInsuaranceName.setText(insurance.getName());
                     txtSubscribe.setText(insurance.getSubscriber());
+                    txtOtherInsurance.setText(insurance.getOtherInsurance());
                     id=insurance.getId();
                     byte[] photo=insurance.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -673,6 +687,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "HospitalData":
                 visiFinance();
+                tilFName.setHintEnabled(true);
+                txtFName.setFocusable(true);
                 txtAdd.setText("Update Hospitals and Other Health Professionals");
                 txtTitle.setText("Update Hospitals and Other Health Professionals");
                 Intent hospIntent = getActivity().getIntent();
@@ -689,7 +705,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtFinanceOfficePhone.setText(specialist.getOfficePhone());
                     txtFinancePracticeName.setText(specialist.getPracticeName());
                     txtFinanceNote.setText(specialist.getNote());
+                    txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
+
                     int index = 0;
                     for (int i = 0; i < HospitalType.length; i++) {
                         if (specialist.getCategory().equals(HospitalType[i])) {
@@ -706,6 +724,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             case "HospitalViewData":
                 visiFinance();
                 disableFinance();
+                tilFName.setHintEnabled(true);
+                txtFName.setFocusable(true);
                 txtTitle.setText("Hospitals and Other Health Professionals");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent financeIntent2 = getActivity().getIntent();
@@ -722,6 +742,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtFinanceOfficePhone.setText(specialist.getOfficePhone());
                     txtFinancePracticeName.setText(specialist.getPracticeName());
                     txtFinanceNote.setText(specialist.getNote());
+                    txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
                     int index = 0;
                     for (int i = 0; i < HospitalType.length; i++) {
@@ -740,6 +761,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "FinanceData":
                 visiFinance();
+                tilFName.setHintEnabled(true);
+                txtFName.setFocusable(true);
                 txtAdd.setText("Update Finance and Legal");
                 txtTitle.setText("Update Finance and Legal");
                 Intent financeIntent = getActivity().getIntent();
@@ -756,6 +779,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtFinanceOfficePhone.setText(specialist.getOfficePhone());
                     txtFinancePracticeName.setText(specialist.getPracticeName());
                     txtFinanceNote.setText(specialist.getNote());
+                    txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
                     int index = 0;
                     for (int i = 0; i < financeType.length; i++) {
@@ -774,6 +798,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             case "FinanceViewData":
                 visiFinance();
                 disableFinance();
+                tilFName.setHintEnabled(true);
+                txtFName.setFocusable(true);
                 txtTitle.setText("Finance and Legal");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent financeIntentd = getActivity().getIntent();
@@ -790,6 +816,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtFinanceOfficePhone.setText(specialist.getOfficePhone());
                     txtFinancePracticeName.setText(specialist.getPracticeName());
                     txtFinanceNote.setText(specialist.getNote());
+                    txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
                     int index = 0;
                     for (int i = 0; i < financeType.length; i++) {
@@ -1007,8 +1034,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         rlProxy.setVisibility(View.GONE);
 
         tilFName.setHint("Name");
-
-        tilFName.setHintEnabled(false);
+       tilFName.setHintEnabled(false);
         txtFName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1113,6 +1139,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtDoctorWebsite = (TextView) rootview.findViewById(R.id.txtDoctorWebsite);
         txtDoctorAddress = (TextView) rootview.findViewById(R.id.txtDoctorAddress);
         txtDoctorLastSeen = (TextView) rootview.findViewById(R.id.txtDoctorLastSeen);
+        txtOtherInsurance= (TextView) rootview.findViewById(R.id.txtOtherInsurance);
 
         //Pharmacy
         txtPharmacyName = (TextView) rootview.findViewById(R.id.txtPharmacyName);
@@ -1151,10 +1178,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtWebsite = (TextView) rootview.findViewById(R.id.txtWebsite);
         txtInsuaranceNote = (TextView) rootview.findViewById(R.id.txtInsuaranceNote);
 
-
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
         rlTop = (RelativeLayout) rootview.findViewById(R.id.rlTop);
+
+        tilOtherCategory = (TextInputLayout) rootview.findViewById(R.id.tilOtherCategory);
+        tilOtherCategory.setHint("Other Category");
+        txtOtherCategory = (TextView) rootview.findViewById(R.id.txtOtherCategory);
+        tilOtherInsurance = (TextInputLayout) rootview.findViewById(R.id.tilOtherInsurance);
+
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtEmail = (TextView) rootview.findViewById(R.id.txtEmail);
         txtMobile = (TextView) rootview.findViewById(R.id.txtMobile);
@@ -1193,6 +1225,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         spinnerProxy= (MySpinner) rootview.findViewById(R.id.spinnerProxy);
         spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
         spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
+        txtOtherRelation=(TextView)rootview.findViewById(R.id.txtOtherRelation);
 
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
@@ -1201,6 +1234,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         tilDoctorName= (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
         tilInsuaranceName= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
         tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
+        tilOtherRelation= (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
+        tilOtherRelation.setHint("Other Relation");
 
         txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
         txtPracticeName = (TextView) rootview.findViewById(R.id.txtPracticeName);
@@ -1273,6 +1308,53 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtTitle.setAllCaps(true);
         txtAdd.setAllCaps(true);
 
+        spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (parent.getItemAtPosition(position).toString().equals("Other"))
+            {
+                tilOtherRelation.setVisibility(View.VISIBLE);
+            }
+            else{
+                tilOtherRelation.setVisibility(View.GONE);
+            }
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    });
+
+        spinnerFinance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherCategory.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherCategory.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherInsurance.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherInsurance.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void setRelationData() {
@@ -1323,7 +1405,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                 byte[] photo = baos.toByteArray();
-                                Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID),name,email,address,mobile,phone,workphone,relation,photo,"",1,2);
+                                Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID),name,email,address,mobile,phone,workphone,relation,photo,"",1,2,otherRelation);
                                 if (flag==true)
                                 {
                                     Toast.makeText(getActivity(),"You have added connection Successfully",Toast.LENGTH_SHORT).show();
@@ -1350,7 +1432,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo = baos.toByteArray();
 
-                        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,prior);
+                        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,prior, otherRelation);
                         if (flag==true)
                         {
                             Toast.makeText(getActivity(),"You have added emergency contact successfully",Toast.LENGTH_SHORT).show();
@@ -1372,7 +1454,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
 
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior);
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior,otherRelation);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated emergency contact successfully",Toast.LENGTH_SHORT).show();
@@ -1393,7 +1475,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,3,prox);
+                            Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,3,prox, otherRelation);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added proxy contact successfully",Toast.LENGTH_SHORT).show();
@@ -1415,7 +1497,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox);
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox,otherRelation);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated proxy contact successfully",Toast.LENGTH_SHORT).show();
@@ -1599,7 +1681,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
@@ -1619,7 +1701,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
@@ -1638,7 +1720,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
@@ -1657,7 +1739,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen);
+                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
@@ -1676,7 +1758,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email);
+                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
@@ -1697,7 +1779,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email);
+                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated insurance information successfully",Toast.LENGTH_SHORT).show();
@@ -1773,6 +1855,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
         if (screen.equals("Connection")) {
             relation=Relationship[indexValue-1];
+            otherRelation=txtOtherRelation.getText().toString();
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -1812,6 +1895,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             int indexs=spinnerPriority.getSelectedItemPosition();
             relation=Relationship[indexValue-1];
             priority=priorityType[indexs-1];
+            otherRelation=txtOtherRelation.getText().toString();
             note=txtEmergencyNote.getText().toString().trim();
             if (priority.equals("Primary"))
             {
@@ -1851,6 +1935,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         else if(screen.equals("Proxy"))
         {
             relation=Relationship[indexValue-1];
+            otherRelation=txtOtherRelation.getText().toString();
             int indexValues = spinnerProxy.getSelectedItemPosition();
             proxy=proxyType[indexValues-1];
             if (proxy.equals("Primary")) {
@@ -1937,6 +2022,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             address=txtFinanceAddress.getText().toString();
             website=txtFinanceWebsite.getText().toString();
             lastseen=txtLastSeen.getText().toString();
+            otherCategory=txtOtherCategory.getText().toString();
+
             int indexValuex = spinnerFinance.getSelectedItemPosition();
             String sources=preferences.getString(PrefConstants.SOURCE);
             if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
@@ -1961,7 +2048,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             subscriber=txtSubscribe.getText().toString();
             int indexValuex = spinnerInsuarance.getSelectedItemPosition();
             type=insuaranceType[indexValuex-1];
-             email=txtInsuaranceEmail.getText().toString();
+            email=txtInsuaranceEmail.getText().toString();
+            otherInsurance=txtOtherInsurance.getText().toString();
 
             return true;
         }
