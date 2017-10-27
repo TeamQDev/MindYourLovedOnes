@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -29,21 +30,23 @@ import java.util.Calendar;
 
 public class AddAppointmentActivity extends AppCompatActivity implements View.OnClickListener{
     Context context=this;
-    TextView txtName,txtDate;
+    TextView txtName,txtDate,txtOtherSpecialist,txtOtherFrequency;
     Preferences preferences;
     MySpinner spinnerType,spinnerFrequency;
     DBHelper dbHelper;
     ImageView imgBack;
     RelativeLayout llAddConn;
-    TextInputLayout tilName;
+    TextInputLayout tilName,tilOtherFrequency,tilOtherSpecialist;
     RadioGroup rgCompleted;
     RadioButton rbYes,rbNo;
+    String otherFrequency="";
+    String otherType="";
     String status="No";
 
     String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
-            "Hypothyroid Blood test", "Glucose Test"};
+            "Hypothyroid Blood test", "Glucose Test","Other"};
 
-    String[] Frequency = { "Daily", "Weekly", "Monthly", "Quarterly","Semi-Annual", "Annual", "Every 5 Years"};
+    String[] Frequency = { "Daily", "Weekly", "Monthly", "Quarterly","Semi-Annual", "Annual", "Every 5 Years","Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,10 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         txtName= (TextView) findViewById(R.id.txtName);
         tilName= (TextInputLayout) findViewById(R.id.tilName);
         txtDate= (TextView) findViewById(R.id.txtDate);
+        txtOtherFrequency= (TextView) findViewById(R.id.txtOtherFrequency);
+        txtOtherSpecialist= (TextView) findViewById(R.id.txtOtherType);
+        tilOtherFrequency= (TextInputLayout) findViewById(R.id.tilOtherFrequency);
+        tilOtherSpecialist= (TextInputLayout) findViewById(R.id.tilOtherType);
         spinnerType= (MySpinner) findViewById(R.id.spinnerType);
         spinnerFrequency= (MySpinner) findViewById(R.id.spinnerFrequency);
         imgBack= (ImageView) findViewById(R.id.imgBack);
@@ -88,6 +95,37 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFrequency.setAdapter(adapter1);
         spinnerFrequency.setHint("Frequency");
+
+        spinnerFrequency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherFrequency.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherFrequency.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherSpecialist.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherSpecialist.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -137,13 +175,15 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
             case R.id.llAddConn:
                 String name=txtName.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
+                otherType=txtOtherSpecialist.getText().toString();
+                otherFrequency=txtOtherFrequency.getText().toString();
                 int indexValuex = spinnerType.getSelectedItemPosition();
                 String type=Type[indexValuex-1];
 
                 int indexValue = spinnerFrequency.getSelectedItemPosition();
                 String frequency=Frequency[indexValue-1];
 
-                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency);
+                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency,otherType,otherFrequency);
                 if (flag == true) {
                     Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
                    finish();

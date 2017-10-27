@@ -25,6 +25,8 @@ public class AppointmentQuery {
     public static final String COL_TYPE = "Type";
     public static final String COL_DOCTORNAME = "Doctor";
     public static final String COL_FREQUENCY = "Frequency";
+    public static final String COL_OTHER_FREQUENCY = "OtherFrequency";
+    public static final String COL_OTHER_COCTOR = "OtherDoctor";
     public static final String COL_DATE_TIME = "DateTime";
 
     public AppointmentQuery(Context context, DBHelper dbHelper) {
@@ -33,7 +35,7 @@ public class AppointmentQuery {
     }
 
     public static String createAppointmentTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_TYPE + " VARCHAR(50)," + COL_DOCTORNAME + " VARCHAR(50),"+ COL_FREQUENCY + " VARCHAR(50)," + COL_DATE_TIME + " VARCHAR(20));";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_TYPE + " VARCHAR(50)," + COL_DOCTORNAME + " VARCHAR(50),"+COL_OTHER_COCTOR + " VARCHAR(50)," + COL_OTHER_FREQUENCY + " VARCHAR(50),"+ COL_FREQUENCY + " VARCHAR(50)," + COL_DATE_TIME + " VARCHAR(20));";
         return createTableQuery;
     }
 
@@ -42,7 +44,7 @@ public class AppointmentQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertAppointmentData(int userid, String name, String date, String type, String frequency) {
+    public static Boolean insertAppointmentData(int userid, String name, String date, String type, String frequency, String otherType, String otherFrequency) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -52,6 +54,8 @@ public class AppointmentQuery {
         cv.put(COL_FREQUENCY, frequency);
         cv.put(COL_DOCTORNAME, name);
         cv.put(COL_DATE_TIME, date);
+        cv.put(COL_OTHER_COCTOR, otherType);
+        cv.put(COL_OTHER_FREQUENCY, otherFrequency);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -78,7 +82,8 @@ public class AppointmentQuery {
                     notes.setFrequency(c.getString(c.getColumnIndex(COL_FREQUENCY)));
                     notes.setDate(c.getString(c.getColumnIndex(COL_DATE_TIME)));
                     notes.setType(c.getString(c.getColumnIndex(COL_TYPE)));
-
+                    notes.setOtherFrequency(c.getString(c.getColumnIndex(COL_OTHER_FREQUENCY)));
+                    notes.setOtherDoctor(c.getString(c.getColumnIndex(COL_OTHER_COCTOR)));
                     noteList.add(notes);
 
 

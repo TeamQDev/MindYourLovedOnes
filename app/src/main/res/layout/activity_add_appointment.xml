@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity"
+    >
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -44,13 +51,18 @@
          android:visibility="gone"
             />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlSpecialist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="35dp"
+        >
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinnerType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
         android:focusable="false"
-        android:layout_marginTop="35dp"
         android:layout_marginLeft="@dimen/dimension35dp"
         android:layout_marginRight="@dimen/dimension35dp"
         app:ms_arrowColor="@color/colorBlue"
@@ -61,6 +73,31 @@
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
         />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilOtherType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinnerType"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/txtOtherType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other Specialist"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilName"
         android:layout_width="match_parent"
@@ -72,7 +109,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/spinnerType"
+        android:layout_below="@+id/rlSpecialist"
       >
 
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
@@ -90,11 +127,16 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp" />
     </android.support.design.widget.TextInputLayout>
+    <RelativeLayout
+        android:id="@+id/rlFrequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilName"
+        >
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinnerFrequency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilName"
         android:focusable="false"
         android:layout_marginLeft="@dimen/dimension35dp"
         android:layout_marginRight="@dimen/dimension35dp"
@@ -106,6 +148,31 @@
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
         />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilOtherFrequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerFrequency"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:visibility="gone"
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/txtOtherFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Other Frequency"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp" />
+    </android.support.design.widget.TextInputLayout>
+</RelativeLayout>
       <TextView
         android:id="@+id/txtCompleted"
         android:layout_width="match_parent"
@@ -116,7 +183,7 @@
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
           android:text="Completed"
-          android:layout_below="@+id/spinnerFrequency"
+          android:layout_below="@+id/rlFrequency"
         />
   <RadioGroup
     android:id="@+id/rgCompleted"
@@ -205,3 +272,4 @@
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>
 </RelativeLayout>
+</ScrollView>

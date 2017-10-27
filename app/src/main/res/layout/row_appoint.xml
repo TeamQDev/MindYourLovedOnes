@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:id="@+id/txtDoctor"
+            android:id="@+id/txtType"
             style="@style/EmergencyCategory"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension40dp"
@@ -41,11 +41,11 @@
     android:id="@+id/rltype"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/txtDoctor"
+    android:layout_below="@+id/txtType"
     android:layout_toLeftOf="@+id/txtDate"
     >
         <TextView
-            android:id="@+id/txtType"
+            android:id="@+id/txtDoctor"
             style="@style/EmergencyDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="jksdffs "
             android:textColor="@color/colorBlack"
-            android:layout_below="@+id/txtType"
+            android:layout_below="@+id/txtDoctor"
             />
 </RelativeLayout>
         <TextView

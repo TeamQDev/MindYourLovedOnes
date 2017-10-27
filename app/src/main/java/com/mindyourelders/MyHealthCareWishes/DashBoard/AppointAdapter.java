@@ -62,11 +62,24 @@ class AppointAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-
-        holder.txtDoctor.setText(noteList.get(position).getType());
+          Appoint a=noteList.get(position);
+        holder.txtDoctor.setText(noteList.get(position).getDoctor());
         holder.txtDateTime.setText(noteList.get(position).getDate());
-        holder.txtFrequency.setText(noteList.get(position).getFrequency());
-        holder.txtType.setText(noteList.get(position).getDoctor());
+    //    holder.txtFrequency.setText(noteList.get(position).getFrequency());
+        if (noteList.get(position).getType().equals("Other"))
+        {
+            holder.txtType.setText(noteList.get(position).getOtherDoctor());
+        }
+        else{
+            holder.txtType.setText(noteList.get(position).getType());
+        }
+        if (noteList.get(position).getFrequency().equals("Other"))
+        {
+            holder.txtFrequency.setText(noteList.get(position).getOtherFrequency());
+        }
+        else{
+            holder.txtFrequency.setText(noteList.get(position).getFrequency());
+        }
         //holder.imgProfile.setImageResource(student.getImgid());
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override

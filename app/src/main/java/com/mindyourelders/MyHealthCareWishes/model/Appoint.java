@@ -11,6 +11,25 @@ public class Appoint implements Serializable {
     int userid;
     String type="";
 
+    public String getOtherDoctor() {
+        return otherDoctor;
+    }
+
+    public void setOtherDoctor(String otherDoctor) {
+        this.otherDoctor = otherDoctor;
+    }
+
+    public String getOtherFrequency() {
+        return OtherFrequency;
+    }
+
+    public void setOtherFrequency(String otherFrequency) {
+        OtherFrequency = otherFrequency;
+    }
+
+    String otherDoctor="";
+    String OtherFrequency="";
+
     public int getId() {
         return id;
     }
