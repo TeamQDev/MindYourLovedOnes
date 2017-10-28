@@ -76,34 +76,43 @@
         android:textSize="@dimen/dimension20dp" />
 
 </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilPre"
+    <RelativeLayout
+        android:id="@+id/rlPre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
         android:layout_below="@+id/tilTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_toRightOf="@+id/imgAides">
 
-        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-        <AutoCompleteTextView
+        <TextView
             android:id="@+id/txtPre"
+            style="@style/EmergencyDesc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:hint="Prescription/Over-the-counter"
-            android:paddingLeft="@dimen/dimension15dp"
-            android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
+            android:layout_height="@dimen/dimension50dp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dimension5dp"
+            android:layout_marginLeft="@dimen/dimension5dp"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:layout_toLeftOf="@+id/tbPre"
+            android:textSize="@dimen/dimension20dp"
+            android:text="Over-the-counter" />
 
-    </android.support.design.widget.TextInputLayout>
+        <ToggleButton
+            android:id="@+id/tbPre"
+            android:layout_width="@dimen/dimension50dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:background="@drawable/toggle_selector"
+            android:checked="false"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textOff=""
+            android:textOn="" />
+    </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilDate"
         android:layout_width="match_parent"
@@ -114,7 +123,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/tilPre"
+        android:layout_below="@+id/rlPre"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -175,7 +184,8 @@
         android:paddingTop="@dimen/dimension8dp"
         android:layout_below="@+id/tilPurpose"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:visibility="gone">
 
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
@@ -184,6 +194,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:hint="RX#"
+            android:visibility="gone"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"

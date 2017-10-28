@@ -425,7 +425,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
-                android:src="@drawable/teeth" />
+                android:src="@drawable/teeth"
+                />
 
             <TextView
                 android:id="@+id/txtTeethHeader"
@@ -449,6 +450,7 @@
                     android:layout_height="@dimen/dimension60dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
+                    android:layout_alignParentLeft="true"
                     android:text="Removable Dentures – Upper"
                     android:layout_toLeftOf="@+id/tbFalse"/>
 
@@ -481,7 +483,8 @@
                     android:layout_height="@dimen/dimension60dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Dry Mouth" />
+                    android:text="Dry Mouth"
+                    android:layout_alignParentLeft="true"/>
 
                 <ToggleButton
                     android:id="@+id/tbMouth"
@@ -513,6 +516,7 @@
                     android:padding="@dimen/dimension5dp"
                     android:text="Removable  Dentures – Lower"
                     android:layout_toLeftOf="@+id/tbImplants"
+                    android:layout_alignParentLeft="true"
                     />
 
                 <ToggleButton

@@ -18,7 +18,7 @@ Context context=this;
     String[] specialist;
     int[] profile;
     ListView listSpeciallist;
-    ImageView imgBack;
+    ImageView imgBack,imgRight;
     TextView txtTitle;
     String from;
     boolean isEmergency,isInsurance;
@@ -39,6 +39,7 @@ Context context=this;
         Intent i=getIntent();
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         header= (RelativeLayout) findViewById(R.id.header);
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         if (i.getExtras()!=null)
         {
             from=i.getExtras().getString("FROM");
@@ -53,8 +54,8 @@ Context context=this;
             }
             else if (from.equals("Emergency"))
             {
-
-                txtTitle.setText("PERSONAL & MEDICAL PROFILE & EMERGANCY CONTACTS");
+                imgRight.setVisibility(View.GONE);
+                txtTitle.setText("PERSONAL & MEDICAL PROFILE & EMERGENCY CONTACTS");
                 header.setBackgroundResource(R.color.colorOne);
                 isEmergency=true;
                 isInsurance=false;
@@ -98,6 +99,7 @@ Context context=this;
     private void initUi() {
         //header= (RelativeLayout) findViewById(R.id.header);
         imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgRight=(ImageView) findViewById(R.id.imgRight);
         listSpeciallist= (ListView) findViewById(R.id.listSpecialist);
         SpecialistContactAdapter adapter=new SpecialistContactAdapter(context,specialist,profile,isEmergency,isInsurance,from);
         listSpeciallist.setAdapter(adapter);

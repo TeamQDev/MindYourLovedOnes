@@ -32,10 +32,11 @@
             android:layout_toRightOf="@+id/imgBack"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension22dp"
+            android:layout_toLeftOf="@+id/imgRight"
             />
         <ImageView
-            android:id="@+id/imgdg"
-            android:layout_width="@dimen/dimension40dp"
+            android:id="@+id/imgRight"
+            android:layout_width="@dimen/dimension30dp"
             android:layout_height="@dimen/dimension50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

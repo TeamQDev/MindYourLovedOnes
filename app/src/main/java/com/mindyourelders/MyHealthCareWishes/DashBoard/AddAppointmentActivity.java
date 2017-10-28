@@ -22,10 +22,13 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 
 public class AddAppointmentActivity extends AppCompatActivity implements View.OnClickListener{
@@ -34,6 +37,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     Preferences preferences;
     MySpinner spinnerType,spinnerFrequency;
     DBHelper dbHelper;
+    ArrayList<DateClass> dateList=null;
     ImageView imgBack;
     RelativeLayout llAddConn;
     TextInputLayout tilName,tilOtherFrequency,tilOtherSpecialist;
@@ -61,6 +65,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
         AppointmentQuery a=new AppointmentQuery(context,dbHelper);
+        DateQuery d=new DateQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -173,6 +178,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.llAddConn:
+                int unique=generateRandom();
                 String name=txtName.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
                 otherType=txtOtherSpecialist.getText().toString();
@@ -183,7 +189,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 int indexValue = spinnerFrequency.getSelectedItemPosition();
                 String frequency=Frequency[indexValue-1];
 
-                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency,otherType,otherFrequency);
+                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency,otherType,otherFrequency,dateList,unique);
                 if (flag == true) {
                     Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
                    finish();
@@ -205,5 +211,12 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 finish();
                 break;
         }
+    }
+
+    private int generateRandom() {
+        Random r = new Random();
+        int randomNumber = r.nextInt(500);
+
+        return randomNumber;
     }
 }

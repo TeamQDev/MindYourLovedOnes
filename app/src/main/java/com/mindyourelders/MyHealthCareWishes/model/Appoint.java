@@ -1,15 +1,45 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
+import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by welcome on 10/12/2017.
  */
 
 public class Appoint implements Serializable {
+    public int getUnique() {
+        return unique;
+    }
+
+    public void setUnique(int unique) {
+        this.unique = unique;
+    }
+
+    int unique;
+    public String getPre() {
+        return Pre;
+    }
+
+    public void setPre(String pre) {
+        Pre = pre;
+    }
+    String Pre="";
     int id;
     int userid;
     String type="";
+
+    public ArrayList<DateClass> getDateList() {
+        return dateList;
+    }
+
+    public void setDateList(ArrayList<DateClass> dateList) {
+        this.dateList = dateList;
+    }
+
+    ArrayList<DateClass> dateList=new ArrayList<>();
 
     public String getOtherDoctor() {
         return otherDoctor;

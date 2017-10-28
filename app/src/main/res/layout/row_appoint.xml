@@ -18,25 +18,35 @@
         <TextView
             android:id="@+id/txtType"
             style="@style/EmergencyCategory"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/dimension40dp"
-            android:layout_toRightOf="@+id/imgDocType"
             android:text="ADM"
+            android:layout_marginRight="@dimen/dimension20dp"
             android:singleLine="true"
             android:ellipsize="end"
             android:textStyle="bold"
-            android:layout_toLeftOf="@+id/txtDateTime"
-            />
-
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <TextView
-            android:id="@+id/txtDateTime"
+            android:id="@+id/txtDoctor"
             style="@style/EmergencyDesc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="08/09/2017  14:00"
+            android:layout_height="@dimen/dimension40dp"
+            android:text="jksdffs "
+            android:textColor="@color/colorBlack"
+            android:layout_toRightOf="@+id/txtType"
             android:layout_toLeftOf="@+id/imgForword"
-
             />
+        <TextView
+        android:id="@+id/txtDateTime"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="08/09/2017  14:00"
+        android:layout_toLeftOf="@+id/imgForword"
+android:visibility="gone"
+        />
 <RelativeLayout
     android:id="@+id/rltype"
     android:layout_width="match_parent"
@@ -44,15 +54,7 @@
     android:layout_below="@+id/txtType"
     android:layout_toLeftOf="@+id/txtDate"
     >
-        <TextView
-            android:id="@+id/txtDoctor"
-            style="@style/EmergencyDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="jksdffs "
-            android:textColor="@color/colorBlack"
 
-            />
         <TextView
             android:id="@+id/txtFrequency"
             style="@style/EmergencyDesc"
@@ -60,9 +62,29 @@
             android:layout_height="wrap_content"
             android:text="jksdffs "
             android:textColor="@color/colorBlack"
-            android:layout_below="@+id/txtDoctor"
             />
+
+
 </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/llDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDate"
+            android:orientation="vertical"
+            ></LinearLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDarkGray"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginRight="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension5dp"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            android:layout_below="@+id/rltype"
+            android:visibility="gone"
+            ></View>
         <TextView
             android:id="@+id/txtDate"
             style="@style/EmergencyCategory"
@@ -70,12 +92,11 @@
             android:layout_height="wrap_content"
             android:text="Set Completion Date "
             android:textColor="@color/colorWhite"
-            android:layout_below="@+id/txtDateTime"
-            android:layout_toLeftOf="@+id/imgForword"
+            android:layout_below="@+id/view"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/blue_blue_border"
             android:padding="@dimen/dimension10dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/dimension15dp"
             />
 
         <ImageView
@@ -89,4 +110,5 @@
             android:layout_margin="@dimen/dimension5dp"
             />
     </RelativeLayout>
+
 </RelativeLayout>

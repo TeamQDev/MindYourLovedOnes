@@ -18,7 +18,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
-import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
+import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -37,6 +37,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     ImageView imgBack,imgAdd,imgEdit;
     TextView txtView;
     Preferences preferences;
+    ArrayList<DateClass> dateList;
     DBHelper dbHelper;
 
     @Override
@@ -63,6 +64,8 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                final Appoint a=noteList.get(position);
+                final ArrayList<DateClass> list=new ArrayList<DateClass>();
                  TextView txtDate= (TextView) view.findViewById(R.id.txtDate);
                 final TextView txtDateTime= (TextView) view.findViewById(R.id.txtDateTime);
                 txtDate.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                         DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                int id=noteList.get(position).getId();
+                                int id=a.getId();
 
                                 Calendar newDate = Calendar.getInstance();
                                 newDate.set(year, month, dayOfMonth);
@@ -84,13 +87,18 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                                 Date datePickerDate = new Date(selectedMilli);
                                 String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
 
-                                Boolean flag= AppointmentQuery.updateDate(id,reportDate);
+                                DateClass d=new DateClass();
+                                d.setDate(reportDate);
+                                list.add(d);
+
+                                ArrayList<DateClass> ds= DateQuery.fetchAllDosageRecord(a.getUserid(),a.getUnique());
+                                Boolean flag= DateQuery.insertDosageData(a.getUserid(),list,a.getUnique());
+
                                 if (flag==true)
                                 {
-                                    Toast.makeText(context,"You have updated date successfully",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"You have inserted date successfully",Toast.LENGTH_SHORT).show();
                                     getData();
                                     setNoteData();
-
                                 }
                                 else{
                                     Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
@@ -151,7 +159,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         }
     }
     private void deleteNote(Appoint item) {
-        boolean flag= EventNoteQuery.deleteRecord(item.getId());
+        boolean flag= AppointmentQuery.deleteRecord(item.getUnique());
         if(flag==true)
         {
             Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
@@ -182,6 +190,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
         AppointmentQuery a=new AppointmentQuery(context,dbHelper);
+        DateQuery d=new DateQuery(context,dbHelper);
   //      EventNoteQuery e=new EventNoteQuery(context,dbHelper);
     }
 

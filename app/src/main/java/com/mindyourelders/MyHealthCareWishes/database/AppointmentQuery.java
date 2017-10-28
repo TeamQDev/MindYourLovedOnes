@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class AppointmentQuery {
     public static final String COL_USERID = "UserId";
     public static final String COL_TYPE = "Type";
     public static final String COL_DOCTORNAME = "Doctor";
+    public static final String COL_UNIQUE= "UniqueNumber";
     public static final String COL_FREQUENCY = "Frequency";
     public static final String COL_OTHER_FREQUENCY = "OtherFrequency";
     public static final String COL_OTHER_COCTOR = "OtherDoctor";
@@ -35,7 +37,7 @@ public class AppointmentQuery {
     }
 
     public static String createAppointmentTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_TYPE + " VARCHAR(50)," + COL_DOCTORNAME + " VARCHAR(50),"+COL_OTHER_COCTOR + " VARCHAR(50)," + COL_OTHER_FREQUENCY + " VARCHAR(50),"+ COL_FREQUENCY + " VARCHAR(50)," + COL_DATE_TIME + " VARCHAR(20));";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+COL_UNIQUE + " INTEGER,"+ COL_TYPE + " VARCHAR(50)," + COL_DOCTORNAME + " VARCHAR(50),"+COL_OTHER_COCTOR + " VARCHAR(50)," + COL_OTHER_FREQUENCY + " VARCHAR(50),"+ COL_FREQUENCY + " VARCHAR(50)," + COL_DATE_TIME + " VARCHAR(20));";
         return createTableQuery;
     }
 
@@ -44,7 +46,7 @@ public class AppointmentQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertAppointmentData(int userid, String name, String date, String type, String frequency, String otherType, String otherFrequency) {
+    public static Boolean insertAppointmentData(int userid, String name, String date, String type, String frequency, String otherType, String otherFrequency, ArrayList<DateClass> dateList, int unique) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -56,6 +58,7 @@ public class AppointmentQuery {
         cv.put(COL_DATE_TIME, date);
         cv.put(COL_OTHER_COCTOR, otherType);
         cv.put(COL_OTHER_FREQUENCY, otherFrequency);
+        cv.put(COL_UNIQUE, unique);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -64,7 +67,9 @@ public class AppointmentQuery {
         } else {
             flag = true;
         }
-
+if (dateList!=null) {
+    Boolean flags = DateQuery.insertDosageData(userid, dateList, unique);
+}
         return flag;
     }
 
@@ -84,7 +89,15 @@ public class AppointmentQuery {
                     notes.setType(c.getString(c.getColumnIndex(COL_TYPE)));
                     notes.setOtherFrequency(c.getString(c.getColumnIndex(COL_OTHER_FREQUENCY)));
                     notes.setOtherDoctor(c.getString(c.getColumnIndex(COL_OTHER_COCTOR)));
+                    notes.setUnique(c.getInt(c.getColumnIndex(COL_UNIQUE)));
+
+                    ArrayList<DateClass> Dosagelist = DateQuery.fetchAllDosageRecord(c.getInt(c.getColumnIndex(COL_USERID)),c.getInt(c.getColumnIndex(COL_UNIQUE)));
+                    if (Dosagelist.size()!=0)
+                    {
+                        notes.setDateList(Dosagelist);
+                    }
                     noteList.add(notes);
+
 
 
                 } while (c.moveToNext());
@@ -96,18 +109,18 @@ public class AppointmentQuery {
 
     public static boolean deleteRecord(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_UNIQUE + "='" + id + "';", null);
 
         if (c.moveToFirst()) {
             do {
-                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_UNIQUE + "='" + id+"';");
             } while (c.moveToNext());
         }
-
+        boolean flag= DateQuery.deleteRecord(id);
         return true;
     }
 
-    public static Boolean updateDate(int id, String date) {
+    /*public static Boolean updateDate(int id, ArrayList<DateClass> date) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -126,6 +139,10 @@ public class AppointmentQuery {
         }
 
         return flag;
+    }*/
+
+    public static Boolean addDate(String string, int id, String reportDate) {
+        return null;
     }
 
    /* public static Boolean updateEvent(int id, String note, String date) {

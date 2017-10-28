@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -58,6 +59,7 @@ class AppointAdapter extends BaseAdapter {
             holder.txtType = (TextView) convertView.findViewById(R.id.txtType);
             holder.txtDate= (TextView) convertView.findViewById(txtDate);
             holder.imgForward= (ImageView) convertView.findViewById(R.id.imgForword);
+            holder.llDate= (LinearLayout) convertView.findViewById(R.id.llDate);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -79,6 +81,33 @@ class AppointAdapter extends BaseAdapter {
         }
         else{
             holder.txtFrequency.setText(noteList.get(position).getFrequency());
+        }
+        ArrayList<DateClass> dates=a.getDateList();
+      /*  ArrayList<Date> datesliST=new ArrayList<>();
+        {
+            for (int i=0;i<dates.size();i++) {
+                String dtStart = "2010-10-15T09:27:37Z";
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                try {
+                    Date date = (Date) format.parse(dtStart);
+                    datesliST.add(date);
+                    System.out.println(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Collections.sort(datesliST, new Comparator<Date>(){
+            public int compare(Date date1, Date date2){
+                return date1.after(date2);
+            }
+        });*/
+        for (int i=0;i<dates.size();i++)
+        {
+            View helperview = lf.inflate(R.layout.date_row, null);
+            holder.llDate.addView(helperview);
+            TextView datetime= (TextView) helperview.findViewById(R.id.txtDateTime);
+            datetime.setText("Completion Date:  "+ dates.get(i).getDate());
         }
         //holder.imgProfile.setImageResource(student.getImgid());
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +140,7 @@ class AppointAdapter extends BaseAdapter {
 
     private class Holder {
         TextView txtDoctor, txtDateTime, txtFrequency,txtType,txtDate;
+        LinearLayout llDate;
         ImageView imgForward;
     }
 

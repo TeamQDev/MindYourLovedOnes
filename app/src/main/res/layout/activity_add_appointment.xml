@@ -184,6 +184,7 @@
         android:paddingTop="@dimen/dimension8dp"
           android:text="Completed"
           android:layout_below="@+id/rlFrequency"
+          android:visibility="gone"
         />
   <RadioGroup
     android:id="@+id/rgCompleted"
@@ -193,6 +194,7 @@
       android:paddingLeft="@dimen/dimension30dp"
       android:paddingRight="@dimen/dimension30dp"
       android:paddingTop="@dimen/dimension8dp"
+      android:visibility="gone"
 
       >
     <RadioButton

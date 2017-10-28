@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
@@ -58,6 +60,8 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     ArrayList<Dosage> dosageList = new ArrayList<>();
     ArrayList<PrescribeImage> imageList = new ArrayList<>();
     RelativeLayout llAddPrescription;
+    String pre = "No";
+    ToggleButton tbPre;
     TextInputLayout tilTitle;
     public static final int RESULT_PRES = 100;
     TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre;
@@ -98,6 +102,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         imgAddPhoto.setOnClickListener(this);
         imgDone.setOnClickListener(this);
         txtDate.setOnClickListener(this);
+
     }
 
     private void initUI() {
@@ -106,6 +111,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         txtPurpose= (TextView) findViewById(R.id.txtPurpose);
         txtPre = (TextView) findViewById(R.id.txtPre);
         txtRX= (TextView) findViewById(R.id.txtRX);
+        tbPre= (ToggleButton) findViewById(R.id.tbPre);
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         imgBack = (ImageView) findViewById(R.id.imgBack);
@@ -117,6 +123,16 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         imgDone = (ImageView) findViewById(R.id.imgDone);
         etNote= (EditText) findViewById(R.id.etNote);
         txtNote=(TextView) findViewById(R.id.txtNote);
+
+        tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true)
+                    pre = "Yes";
+                else
+                    pre = "No";
+            }
+        });
 
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, FormList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -146,7 +162,11 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 txtName.setText(p.getDoctor());
                 txtDate.setText(p.getDates());
                 etNote.setText(p.getNote());
-                txtPre.setText(p.getPre());
+                if (p.getPre().equals("Yes")) {
+                    tbPre.setChecked(true);
+                } else if (p.getPre().equals("No")) {
+                    tbPre.setChecked(false);
+                }
                 txtRX.setText(p.getRX());
                 txtPurpose.setText(p.getPurpose());
                 dosageList = p.getDosageList();
@@ -217,7 +237,6 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String purpose=txtPurpose.getText().toString().trim();
                 String note=etNote.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
-                String pre=txtPre.getText().toString().trim();
                 String rx=txtRX.getText().toString().trim();
                 if (isEdit==false) {
                     Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx);
@@ -358,6 +377,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         final EditText etMedicine = (EditText) customDialog.findViewById(R.id.etMedicine);
         final EditText etDose = (EditText) customDialog.findViewById(R.id.etDose);
         final EditText etFrequency= (EditText) customDialog.findViewById(R.id.etFrequency);
+        final EditText etRX= (EditText) customDialog.findViewById(R.id.etRX);
         TextView txtMedicine = (TextView) customDialog.findViewById(R.id.txtMedicine);
         TextView txtDose = (TextView) customDialog.findViewById(R.id.txtDose);
 
@@ -366,6 +386,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 etMedicine.setText(a.getMedicine());
                 etDose.setText(a.getDose());
                 etFrequency.setText(a.getFrequency());
+                etRX.setText(a.getRx());
             }
         }
         TextView btnAdd = (TextView) customDialog.findViewById(R.id.btnYes);
@@ -384,6 +405,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String dose = etDose.getText().toString();
                 String medicine = etMedicine.getText().toString();
                 String frequency=etFrequency.getText().toString();
+                String rx=etRX.getText().toString();
                /* SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                 String currentDateandTime = sdf.format(new Date());*/
                if (b==true)
@@ -393,6 +415,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                        a.setDose(dose);
                        a.setMedicine(medicine);
                        a.setFrequency(frequency);
+                       a.setRx(rx);
                        //dosageList.add(dosage);
                        customDialog.dismiss();
                        setDosageData();
@@ -407,6 +430,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     dosage.setDose(dose);
                     dosage.setMedicine(medicine);
                     dosage.setFrequency(frequency);
+                    dosage.setRx(rx);
                     dosageList.add(dosage);
                     customDialog.dismiss();
                     setDosageData();

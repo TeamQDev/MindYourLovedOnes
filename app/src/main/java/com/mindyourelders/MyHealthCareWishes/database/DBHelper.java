@@ -62,6 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DocumentQuery.createDocumentTable());
         db.execSQL(AppointmentQuery.createAppointmentTable());
         db.execSQL(HospitalHealthQuery.createHospitalHealthTable());
+        db.execSQL(DateQuery.createDosageTable());
     }
 
     @Override
@@ -108,6 +109,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DocumentQuery.dropTable());
         db.execSQL(AppointmentQuery.dropTable());
         db.execSQL(HospitalHealthQuery.dropTable());
+        db.execSQL(DateQuery.dropTable());
         onCreate(db);
     }
 }

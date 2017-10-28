@@ -7,6 +7,15 @@ import java.io.Serializable;
  */
 
 public class Dosage implements Serializable {
+    public String getRx() {
+        return rx;
+    }
+
+    public void setRx(String rx) {
+        this.rx = rx;
+    }
+
+    String rx="";
     int id;
 
     public String getFrequency() {
