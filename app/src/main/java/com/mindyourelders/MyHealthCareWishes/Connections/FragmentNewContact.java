@@ -69,7 +69,9 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  */
 
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
-
+    String Cname = "";
+    String Cemail ="";
+    String Cphone ="";
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
@@ -172,27 +174,110 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     private void initVariables() {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String name = bundle.getString("Name");
-            String email = bundle.getString("Email");
-            String phone = bundle.getString("Phone");
+           Cname = bundle.getString("Name");
+            Cemail = bundle.getString("Email");
+            Cphone = bundle.getString("Phone");
             byte[] image = bundle.getByteArray("Photo");
             Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
 
             imgProfile.setImageBitmap(photo);
-            txtName.setText(name);
-            txtEmail.setText(email);
-
-            try {
-                String mobile = "";
-                mobile = phone;
-                String code = mobile.substring(0, 3);
-                mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
-                txtMobile.setText(mobile);
-            } catch (Exception e) {
-                e.printStackTrace();
+            source = preferences.getString(PrefConstants.SOURCE);
+            switch(source)
+            {
+                case "Connection":
+                    getContact();
+                    break;
+                case "Proxy":
+                    getContact();
+                    break;
+                case "Emergency":
+                    getContact();
+                    break;
+                case "Physician":
+                    getSContact();
+                    break;
+                case "Speciality":
+                    getSContact();
+                    break;
+                case "Hospital":
+                    txtFName.setText(Cname);
+                   // txtEmail.setText(email);
+                    try {
+                        String mobile = "";
+                        mobile = Cphone;
+                        String code = mobile.substring(0, 3);
+                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        txtFinanceMobilePhone.setText(mobile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Pharmacy":
+                    txtPharmacyName.setText(Cname);
+                    // txtEmail.setText(email);
+                    try {
+                        String mobile = "";
+                        mobile = Cphone;
+                        String code = mobile.substring(0, 3);
+                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        txtPharmacyPhone.setText(mobile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Aides":
+                    txtAideCompName.setText(Cname);
+                    txtAideEmail.setText(Cemail);
+                    try {
+                        String mobile = "";
+                        mobile = Cphone;
+                        String code = mobile.substring(0, 3);
+                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        txtAideOfficePhone.setText(mobile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Finance":
+                    txtFName.setText(Cname);
+                    // txtEmail.setText(email);
+                    try {
+                        String mobile = "";
+                        mobile = Cphone;
+                        String code = mobile.substring(0, 3);
+                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        txtFinanceMobilePhone.setText(mobile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Insurance":
+                    txtInsuaranceName.setText(Cname);
+                    txtInsuaranceEmail.setText(Cemail);
+                    try {
+                        String mobile = "";
+                        mobile = Cphone;
+                        String code = mobile.substring(0, 3);
+                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        txtInsuarancePhone.setText(mobile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
-        }
 
+        }
+      /*  txtName.setText(name);
+        txtEmail.setText(email);
+        try {
+            String mobile = "";
+            mobile = phone;
+            String code = mobile.substring(0, 3);
+            mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+            txtMobile.setText(mobile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
         source = preferences.getString(PrefConstants.SOURCE);
         switch (source) {
             case "Connection":
@@ -835,6 +920,34 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
         }
 
+    }
+
+    private void getSContact() {
+        txtDoctorName.setText(Cname);
+       // txtEmail.setText(email);
+        try {
+            String mobile = "";
+            mobile = Cphone;
+            String code = mobile.substring(0, 3);
+            mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+            txtDoctorOfficePhone.setText(mobile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getContact() {
+        txtName.setText(Cname);
+        txtEmail.setText(Cemail);
+        try {
+            String mobile = "";
+            mobile = Cphone;
+            String code = mobile.substring(0, 3);
+            mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+            txtMobile.setText(mobile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void disablePharmacy() {
