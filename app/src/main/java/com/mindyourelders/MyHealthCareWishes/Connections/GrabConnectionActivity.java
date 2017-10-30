@@ -4,7 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,12 +29,13 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
     ImageView imgContact, imgFb, imgGoogle, imgBack,imgRefresh;
     String source;
     LinearLayout llGrab;
-
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     // FragmentConnection fragmentConnection = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grab_connection);
+        checkRuntimePermission();
         preferences = new Preferences(context);
         initUI();
         initListener();
@@ -54,6 +58,29 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
 
     }
 
+    private boolean checkRuntimePermission() {
+        if (ContextCompat.checkSelfPermission(context,
+                android.Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(GrabConnectionActivity.this,
+                    android.Manifest.permission.READ_CONTACTS)) {
+                ActivityCompat.requestPermissions(GrabConnectionActivity.this,
+                        new String[]{android.Manifest.permission.READ_CONTACTS},
+                        PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(GrabConnectionActivity.this,
+                        new String[]{android.Manifest.permission.READ_CONTACTS},
+                        PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+            return false;
+        } else {
+
+            return true;
+        }
+    }
 
 
     public void callFragment(String fragName, Fragment fragment) {

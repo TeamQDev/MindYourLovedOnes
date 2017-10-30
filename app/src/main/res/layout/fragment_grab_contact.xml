@@ -9,7 +9,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/dimension10dp"
     android:background="@color/colorLightGray"
-
+android:visibility="gone"
     >
     <EditText
         android:id="@+id/etSearch"

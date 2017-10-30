@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -53,18 +54,20 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
     ImageView imgRefresh;
     ArrayList<Contact> offcontactList;
     DBHelper dbHelper;
+    RelativeLayout rlSearch;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview=inflater.inflate(R.layout.fragment_grab_contact,null);
-        checkRuntimePermission();
         initComponent();
         initUI();
         initListener();
         getOfflineContacts();
         setOfflineContacts();
-
+        if (offcontactList.size()==0) {
+            showContacts();
+        }
         return rootview;
     }
     private void initComponent() {
@@ -73,10 +76,12 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
     }
     private void setOfflineContacts() {
         if (offcontactList.size()!=0) {
+            rlSearch.setVisibility(View.VISIBLE);
             contactAdapter = new ContactAdapter(getActivity(), offcontactList);
             lvContact.setAdapter(contactAdapter);
            // contactAdapter.getFilter().filter(etSearch.getText().toString());
         }
+
        //
     }
 
@@ -93,7 +98,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
         lvContact= (ListView) rootview.findViewById(R.id.lvContact);
         etSearch= (EditText) rootview.findViewById(R.id.etSearch);
         imgRefresh=(ImageView)getActivity().findViewById(R.id.imgRefresh);
-
+        rlSearch= (RelativeLayout) rootview.findViewById(R.id.rlSearch);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,6 +141,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{android.Manifest.permission.READ_CONTACTS},
                         PERMISSIONS_REQUEST_READ_CONTACTS);
+
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(getActivity(),
@@ -144,6 +150,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
             }
             return false;
         } else {
+
             return true;
         }
 
