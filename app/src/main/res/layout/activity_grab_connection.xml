@@ -99,6 +99,7 @@
             android:background="@color/colorGray"
             android:layout_margin="@dimen/dimension1dp"
             android:scaleType="center"
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/imgGoogle"
@@ -109,6 +110,7 @@
             android:background="@color/colorGray"
             android:layout_margin="@dimen/dimension1dp"
             android:scaleType="center"
+            android:visibility="gone"
             />
     </LinearLayout>
     <RelativeLayout

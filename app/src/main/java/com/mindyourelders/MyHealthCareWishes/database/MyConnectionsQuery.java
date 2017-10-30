@@ -36,11 +36,11 @@ public class MyConnectionsQuery {
     public static final String COL_FLAG= "Flag";
     public static final String COL_ISPRIMARY= "IsPrimary";
 
-
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
         this.dbHelper=dbHelper;
     }
+
     public static String createMyConnectionsTable() {
         String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_USER_ID+" INTEGER, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_HOME_PHONE+" VARCHAR(20),"+COL_WORK_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_MOBILE+" VARCHAR(20),"+COL_RELATION+" VARCHAR(50),"+COL_OTHER_RELATION+" VARCHAR(50),"+COL_NOTE+" VARCHAR(100),"+COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+COL_PHOTO+" BLOB);";
         return createTableQuery;

@@ -164,7 +164,7 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment = "Insurance Info";
                         break;
                     case "INSURANCE FORMS":
-                        fragment = "Insurance Info";
+                        fragment = "Insurance Form";
                         break;
 
                     case "INSURANCE CARDS":

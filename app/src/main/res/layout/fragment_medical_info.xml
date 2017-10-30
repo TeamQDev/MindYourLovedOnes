@@ -249,6 +249,7 @@
                 android:layout_toRightOf="@id/imgLang"
                 android:background="@drawable/darkgray_white_border"
                 android:gravity="top"
+                android:textColor="@color/colorBlue"
                 android:hint="Additional"
                 android:padding="@dimen/dimension8dp" />
 

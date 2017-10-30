@@ -46,6 +46,7 @@ Context context=this;
             if (from.equals("Speciality"))
             {
                 txtTitle.setText("SPECIALITY");
+                imgRight.setVisibility(View.VISIBLE);
                 header.setBackgroundResource(R.color.colorThree);
                 profile=new int[]{R.drawable.physician,R.drawable.hosp_icon,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
                 specialist= new String[]{"DOCTORS","HOSPITALS AND \nOTHER HEALTH PROFESSIONALS", "PHARMACIES AND \nHOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
@@ -65,7 +66,7 @@ Context context=this;
             }
             else if (from.equals("Insurance"))
             {
-
+                imgRight.setVisibility(View.VISIBLE);
                 txtTitle.setText("INSURANCE");
                 header.setBackgroundResource(R.color.colorFive);
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess,R.drawable.finances};
@@ -75,7 +76,7 @@ Context context=this;
             }
             else if (from.equals("Event"))
             {
-
+                imgRight.setVisibility(View.VISIBLE);
                 txtTitle.setText("NOTES & APPOINTMENT CHECKLIST");
                 header.setBackgroundResource(R.color.colorFour);
                 profile=new int[]{R.drawable.finances,R.drawable.insurancess};

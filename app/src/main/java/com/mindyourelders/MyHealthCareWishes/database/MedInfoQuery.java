@@ -62,9 +62,8 @@ public class MedInfoQuery {
     }
 
     public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote) {
-        boolean flag;
+        boolean flag=false;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
-
         ContentValues cv=new ContentValues();
         cv.put(COL_USERID,userid);
         cv.put(COL_FT,ft);
@@ -84,19 +83,43 @@ public class MedInfoQuery {
         cv.put(COL_PETS,pet);
         cv.put(COL_MOUTH_NOTE,mouthnote);
         cv.put(COL_TEETH_MOUTH,mouth);
+       Cursor c = MedInfoQuery.fetchOneRecordCursor(userid);
+        if (c.moveToFirst()) {
+            int rowid=db.update(TABLE_NAME,cv,COL_USERID+"="+userid,null);
+            if (rowid==0)
+            {
+                flag=false;
+            }
+            else
+            {
+                flag=true;
+            }
 
-        long rowid=db.insert(TABLE_NAME,null,cv);
+        }
+        else{
+            long rowid=db.insert(TABLE_NAME,null,cv);
 
-        if (rowid==-1)
-        {
-            flag=false;
+            if (rowid==-1)
+            {
+                flag=false;
+            }
+            else
+            {
+                flag=true;
+            }
+
         }
-        else
-        {
-            flag=true;
-        }
+
+
+
 
         return flag;
+    }
+
+    private static Cursor fetchOneRecordCursor(int userid) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "';", null);
+        return c;
     }
 
     public static MedInfo fetchOneRecord(int userid) {

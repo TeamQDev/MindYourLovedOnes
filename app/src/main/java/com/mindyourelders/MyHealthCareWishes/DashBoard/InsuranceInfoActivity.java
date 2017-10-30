@@ -19,7 +19,8 @@ public class InsuranceInfoActivity extends AppCompatActivity implements View.OnC
     public FragmentTransaction fragmentTransaction;
     FragmentInsurance fragmentInsurance = null;
     FragementInsuarnceCard fragementInsuarnceCard=null;
-ImageView imgBack;
+    FragementForm fragementform=null;
+    ImageView imgBack;
     TextView txtTitle;
 
     @Override
@@ -46,6 +47,10 @@ ImageView imgBack;
                 case "INSURANCE CARD":
                     txtTitle.setText("INSURANCE CARDS");
                     callFragment("CARD", fragementInsuarnceCard);
+                    break;
+                case "Insurance Form":
+                    txtTitle.setText("INSURANCE FORMS");
+                    callFragment("FORM", fragementInsuarnceCard);
                     break;
             }
         }

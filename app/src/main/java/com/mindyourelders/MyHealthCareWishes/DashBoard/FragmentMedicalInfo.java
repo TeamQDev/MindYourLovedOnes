@@ -222,44 +222,58 @@ String note="";
 
             if (medInfo.getGlass().equals("Yes")) {
                 tbGlass.setChecked(true);
+                glass="Yes";
             } else if (medInfo.getGlass().equals("No")) {
                 tbGlass.setChecked(false);
+                glass="No";
             }
 
             if (medInfo.getMouth().equals("Yes")) {
                 tbMouth.setChecked(true);
+                mouth="Yes";
             } else if (medInfo.getMouth().equals("No")) {
                 tbMouth.setChecked(false);
+                mouth="No";
             }
 
             if (medInfo.getLense().equals("Yes")) {
                 tbLense.setChecked(true);
+                lense="Yes";
             } else if (medInfo.getLense().equals("No")) {
                 tbLense.setChecked(false);
+                lense="No";
             }
 
             if (medInfo.getFalses().equals("Yes")) {
                 tbFalse.setChecked(true);
+                falses="Yes";
             } else if (medInfo.getFalses().equals("No")) {
                 tbFalse.setChecked(false);
+                falses="No";
             }
 
             if (medInfo.getImplants().equals("Yes")) {
                 tbImplants.setChecked(true);
+                implants="Yes";
             } else if (medInfo.getImplants().equals("No")) {
                 tbImplants.setChecked(false);
+                implants="No";
             }
 
             if (medInfo.getAid().equals("Yes")) {
                 tbHearingAid.setChecked(true);
+                aid="Yes";
             } else if (medInfo.getAid().equals("No")) {
                 tbHearingAid.setChecked(false);
+                aid="No";
             }
 
             if (medInfo.getDonor().equals("Yes")) {
                 rbYes.setChecked(true);
+                donor="Yes";
             } else if (medInfo.getDonor().equals("No")) {
                 rbNo.setChecked(true);
+                donor="No";
             }
         }
     }
