@@ -183,6 +183,27 @@ String otherRelation;
             }
         });
 
+        txtHomePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHomePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
 
         setValues();
 
@@ -485,7 +506,15 @@ String otherRelation;
         } else if (phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
-        } else {
+        }
+        else if (homePhone.equals("")) {
+            txtHomePhone.setError("Please Enter Phone");
+            showAlert("Please Enter Phone",  getActivity());
+        } else if (homePhone.length() < 10) {
+            txtHomePhone.setError("Phone number should be 10 digits");
+            showAlert("Phone number should be 10 digits",  getActivity());
+        }
+        else {
             return true;
         }
         return false;

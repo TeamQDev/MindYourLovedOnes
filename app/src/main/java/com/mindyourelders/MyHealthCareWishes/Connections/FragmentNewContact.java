@@ -62,6 +62,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.txtPhone;
 import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAlert;
 
 /**
@@ -1262,6 +1263,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtPharmacyWebsite = (TextView) rootview.findViewById(R.id.txtPharmacyWebsite);
         txtPharmacyNote = (TextView) rootview.findViewById(R.id.txtPharmacyNote);
 
+
+
         //Aides
         txtAideCompName = (TextView) rootview.findViewById(R.id.txtAideCompName);
         txtAideOfficePhone = (TextView) rootview.findViewById(R.id.txtAideOfficePhone);
@@ -1325,7 +1328,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 }
             }
         });
-        txtHomePhone= (TextView) rootview.findViewById(R.id.txtPhone);
+
+        txtHomePhone= (TextView) rootview.findViewById(txtPhone);
         txtWorkPhone= (TextView) rootview.findViewById(R.id.txtOfficePhone);
         rlRelation = (RelativeLayout) rootview.findViewById(R.id.rlRelation);
         rlProxy= (RelativeLayout) rootview.findViewById(R.id.rlProxy);
@@ -1340,6 +1344,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
         txtOtherRelation=(TextView)rootview.findViewById(R.id.txtOtherRelation);
 
+        txtHomePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHomePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
         tilFName= (TextInputLayout) rootview.findViewById(R.id.tilFName);
@@ -1349,6 +1375,27 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
         tilOtherRelation= (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
         tilOtherRelation.setHint("Other Relation");
+        txtWorkPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtWorkPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
 
         txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
         txtPracticeName = (TextView) rootview.findViewById(R.id.txtPracticeName);
@@ -1357,11 +1404,232 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtAffiliation = (TextView) rootview.findViewById(R.id.txtAffiliation);
         txtDoctorNote = (TextView) rootview.findViewById(R.id.txtDoctorNote);
 
+        txtPharmacyPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtPharmacyPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtAideOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtAideOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtHourOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHourOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+        txtOtherPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtOtherPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtFinanceOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtFinanceOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtFinanceMobilePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtFinanceMobilePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtFinanceOtherPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtFinanceOtherPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
         txtFName = (TextView) rootview.findViewById(R.id.txtFName);
         txtAids = (TextView) rootview.findViewById(R.id.txtAids);
         txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
         txtOther = (TextView) rootview.findViewById(R.id.txtOther);
+        txtDoctorOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+        txtDoctorHourOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorHourOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+        txtDoctorOtherPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorOtherPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
         rlConnection = (RelativeLayout) rootview.findViewById(R.id.rlConnection);
         rlDoctor = (RelativeLayout) rootview.findViewById(R.id.rlDoctor);
         rlInsurance = (RelativeLayout) rootview.findViewById(R.id.rlInsurance);
@@ -1369,6 +1637,27 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         rlAids = (RelativeLayout) rootview.findViewById(R.id.rlAids);
         rlFinance = (RelativeLayout) rootview.findViewById(R.id.rlFinance);
         rlPharmacy = (RelativeLayout) rootview.findViewById(R.id.rlPharmacy);
+      /*  txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtInsuarancePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });*/
 
         txtInsuaranceName = (TextView) rootview.findViewById(R.id.txtInsuaranceName);
         txtId = (TextView) rootview.findViewById(R.id.txtId);
@@ -1453,6 +1742,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
         });
 
+       /* txtHomePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHomePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });*/
+
         spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1468,6 +1779,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+
     }
 
     public void setRelationData() {
@@ -2005,6 +2318,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         }
         else if(screen.equals("Emergency"))
         {
+           // int indexs=0;
             int indexs=spinnerPriority.getSelectedItemPosition();
             relation=Relationship[indexValue-1];
             priority=priorityType[indexs-1];
@@ -2037,9 +2351,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             else if (phone.equals("")) {
                 txtHomePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtHomePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
             }else if (workphone.equals("")) {
                 txtWorkPhone.setError("Please Enter Work Phone");
                 showAlert("Please Enter Mobile", getActivity());
+            } else if (workphone.length() < 10) {
+                txtWorkPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
             }else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
@@ -2066,7 +2386,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                 txtEmail.setError("Please enter valid email");
                 showAlert("Please enter valid email", getActivity());
-            } else if (mobile.equals("")) {
+            }
+            else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
             } else if (mobile.length() < 10) {
@@ -2076,10 +2397,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             else if (phone.equals("")) {
                 txtHomePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
-            }else if (workphone.equals("")) {
+            } else if (phone.length() < 10) {
+                txtHomePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (workphone.equals("")) {
                 txtWorkPhone.setError("Please Enter Work Phone");
                 showAlert("Please Enter Mobile", getActivity());
-            }else if (address.equals("")) {
+            }else if (workphone.length() < 10) {
+                txtWorkPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
             } else return true;
@@ -2100,6 +2429,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             network=txtNetwork.getText().toString();
             affil=txtAffiliation.getText().toString();
             note=txtDoctorNote.getText().toString();
+
+              if (mobile.equals("")) {
+                  txtDoctorOfficePhone.setError("Please Enter Mobile");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (mobile.length() < 10) {
+                  txtDoctorOfficePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (phone.equals("")) {
+                  txtDoctorHourOfficePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                  txtDoctorHourOfficePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (workphone.equals("")) {
+                  txtDoctorOtherPhone.setError("Please Enter Work Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            }else if (workphone.length() < 10) {
+                  txtDoctorOtherPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
              return true;
         }
         else if (screen.equals("Pharmacy")) {
@@ -2109,7 +2460,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             address=txtPharmacyAddress.getText().toString();
             website=txtPharmacyWebsite.getText().toString();
             note=txtPharmacyNote.getText().toString();
-
+            if (phone.equals("")) {
+                txtPharmacyPhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtPharmacyPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
             return true;
         }
         else if (screen.equals("Aides")) {
@@ -2122,7 +2479,27 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             email=txtAideEmail.getText().toString();
             fax=txtAideFax.getText().toString();
             address=txtAideAddress.getText().toString();
-
+            if (mobile.equals("")) {
+                txtAideOfficePhone.setError("Please Enter Mobile");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (mobile.length() < 10) {
+                txtAideOfficePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (phone.equals("")) {
+                txtHourOfficePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtHourOfficePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (workphone.equals("")) {
+                txtOtherPhone.setError("Please Enter Work Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            }else if (workphone.length() < 10) {
+                txtOtherPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
             return true;
         }
         else if (screen.equals("Finance")) {
@@ -2136,6 +2513,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             website=txtFinanceWebsite.getText().toString();
             lastseen=txtLastSeen.getText().toString();
             otherCategory=txtOtherCategory.getText().toString();
+
+            if (mobile.equals("")) {
+                txtFinanceOfficePhone.setError("Please Enter Mobile");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (mobile.length() < 10) {
+                txtFinanceOfficePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (phone.equals("")) {
+                txtFinanceMobilePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtFinanceMobilePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (workphone.equals("")) {
+                txtFinanceOtherPhone.setError("Please Enter Work Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            }else if (workphone.length() < 10) {
+                txtFinanceOtherPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
 
             int indexValuex = spinnerFinance.getSelectedItemPosition();
             String sources=preferences.getString(PrefConstants.SOURCE);
@@ -2163,6 +2562,35 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             type=insuaranceType[indexValuex-1];
             email=txtInsuaranceEmail.getText().toString();
             otherInsurance=txtOtherInsurance.getText().toString();
+
+            if (phone.equals("")) {
+                txtInsuarancePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtInsuarancePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+                int prevL = 0;
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    prevL = txtInsuarancePhone.getText().toString().length();
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    int length = editable.length();
+                    if ((prevL < length) && (length == 3 || length == 7)) {
+                        editable.append("-");
+                    }
+                }
+            });
 
             return true;
         }

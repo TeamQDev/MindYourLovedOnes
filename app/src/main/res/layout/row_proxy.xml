@@ -87,7 +87,7 @@
                 android:textSize="@dimen/dimension16dp"
                 android:layout_toRightOf="@+id/txtPhone"
                 android:layout_below="@+id/txtType"
-
+                android:maxLength="10"
                 android:layout_marginLeft="@dimen/dimension6dp"
                 android:drawableLeft="@drawable/tele"
                 android:gravity="top|left"
@@ -100,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimension5dp"
                 android:text="8789-879-782"
+                android:maxLength="10"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
                 android:layout_toRightOf="@+id/txtTelePhone"
