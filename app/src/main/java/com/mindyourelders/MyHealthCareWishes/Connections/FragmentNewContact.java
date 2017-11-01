@@ -88,12 +88,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     View rootview;
     RelativeLayout rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
     Preferences preferences;
-    String source;
+    String source="";
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
 
-    String name, email, mobile, speciality,phone,address,workphone,note,member,group,subscriber,type;
-    String network,affil,practice_name,website,lastseen;
+    String name="", email="", mobile="", speciality="",phone="",address="",workphone="",note="",member="",group="",subscriber="",type="";
+    String network="",affil="",practice_name="",website="",lastseen="";
     String fax="";
     String relation="";
     String proxy="";
@@ -2285,7 +2285,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (email.equals("")) {
+            } /*else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
@@ -2294,24 +2294,24 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            } else if (address.equals("")) {
+            } /*else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
             } else if (relation.equals("")) {
                // txtAddress.setError("Please Enter Address");
                 showAlert("Please select relation", getActivity());
-            } else return true;
+            }*/ else return true;
         } else if (screen.equals("Speciality")) {
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (mobile.equals("")) {
+            } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             } else return true;
@@ -2320,8 +2320,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         {
            // int indexs=0;
             int indexs=spinnerPriority.getSelectedItemPosition();
-            relation=Relationship[indexValue-1];
-            priority=priorityType[indexs-1];
+            if(indexValue!=0) {
+                relation = Relationship[indexValue - 1];
+            }
+            if (indexs!=0) {
+                priority = priorityType[indexs - 1];
+            }
             otherRelation=txtOtherRelation.getText().toString();
             note=txtEmergencyNote.getText().toString().trim();
             if (priority.equals("Primary"))
@@ -2335,7 +2339,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (email.equals("")) {
+            } /*else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
@@ -2344,11 +2348,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }
-            else if (phone.equals("")) {
+           /* else if (phone.equals("")) {
                 txtHomePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
             } else if (phone.length() < 10) {
@@ -2363,7 +2367,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
-            } else return true;
+            }*/ else return true;
         }
         else if(screen.equals("Proxy"))
         {
