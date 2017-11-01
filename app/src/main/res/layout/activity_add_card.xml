@@ -69,15 +69,16 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
+
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
@@ -97,7 +98,9 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -119,7 +122,8 @@
             android:background="@color/colorLightBlue"
             android:textColor="@color/colorDarkGray"
             android:paddingLeft="@dimen/dimension10dp"
-            />
+            android:imeOptions="actionNext"
+            /><requestFocus />
         <FrameLayout
             android:id="@+id/flFront"
             android:layout_width="@dimen/dimension200dp"

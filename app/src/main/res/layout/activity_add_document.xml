@@ -193,7 +193,8 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -225,7 +226,8 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -256,7 +258,8 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -319,7 +322,9 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
 </RelativeLayout></ScrollView>

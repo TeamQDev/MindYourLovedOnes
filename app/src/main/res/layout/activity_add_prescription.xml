@@ -52,8 +52,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="33dp"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true"
+
     android:paddingBottom="@dimen/dimension8dp"
     android:paddingLeft="@dimen/dimension30dp"
     android:paddingRight="@dimen/dimension30dp"
@@ -73,7 +72,9 @@
         android:paddingTop="@dimen/dimension2dp"
         android:singleLine="true"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/dimension20dp" />
+        android:textSize="@dimen/dimension20dp"
+        android:imeOptions="actionNext"
+        /><requestFocus />
 
 </android.support.design.widget.TextInputLayout>
     <RelativeLayout
@@ -139,7 +140,9 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -168,7 +171,9 @@
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -295,7 +300,8 @@
             android:gravity="top"
             android:padding="@dimen/dimension8dp"
 
-            />
+            android:imeOptions="actionNext"
+            /><requestFocus />
     </RelativeLayout>
 
     <RelativeLayout

@@ -69,8 +69,8 @@
                     app:ms_hint="hint"
                     app:ms_multiline="true"
                     custom:ms_floatingLabelColor="@color/colorBlue"
-                    custom:ms_hintColor="@color/colorDarkGray" />
-
+                    custom:ms_hintColor="@color/colorDarkGray" android:imeOptions="actionNext"
+                    /><requestFocus />
                 <RelativeLayout
                     android:id="@+id/rlFinance"
                     android:layout_width="match_parent"
@@ -95,7 +95,8 @@
                             app:ms_hint="hint"
                             app:ms_multiline="true"
                             custom:ms_floatingLabelColor="@color/colorBlue"
-                            custom:ms_hintColor="@color/colorDarkGray" />
+                            custom:ms_hintColor="@color/colorDarkGray" android:imeOptions="actionNext"
+                            /><requestFocus />
 
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/tilOtherCategory"
@@ -121,7 +122,9 @@
                                 android:paddingTop="@dimen/dimension2dp"
                                 android:singleLine="true"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/dimension20dp" />
+                                android:textSize="@dimen/dimension20dp"
+                                android:imeOptions="actionNext"
+                                /><requestFocus />
                         </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
 
@@ -147,7 +150,8 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -171,7 +175,8 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -195,7 +200,8 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -219,7 +225,8 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -242,7 +249,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -264,7 +273,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -287,7 +298,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -310,7 +323,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -332,7 +347,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -350,12 +367,14 @@
                             android:layout_height="wrap_content"
                             android:hint="Notes"
                             android:maxLength="30"
-                            android:maxLines="1"
+                            android:maxLines="3"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
             </RelativeLayout>
@@ -389,7 +408,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <RelativeLayout
@@ -436,7 +457,9 @@
                             android:paddingTop="@dimen/dimension2dp"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/dimension20dp" />
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
@@ -477,7 +500,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -501,7 +526,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -525,7 +552,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -548,7 +577,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -570,7 +601,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
@@ -613,7 +646,9 @@
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <RelativeLayout
@@ -702,7 +737,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -726,7 +763,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -750,7 +789,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -774,7 +815,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -797,7 +840,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -821,7 +866,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -844,7 +891,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -867,7 +916,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -875,8 +926,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tilDoctorWebsite"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"
@@ -893,7 +942,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -916,7 +967,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -939,7 +992,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -962,7 +1017,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -983,7 +1040,9 @@
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
@@ -1068,7 +1127,9 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp"
 
-                        />
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
                 <android.support.design.widget.TextInputLayout
@@ -1264,7 +1325,7 @@
                         android:hint="Notes"
                         android:imeOptions="actionNext"
                         android:maxLength="30"
-                        android:maxLines="1"
+                        android:maxLines="3"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
@@ -1294,7 +1355,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
@@ -1329,7 +1392,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1353,7 +1418,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1377,7 +1444,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1401,7 +1470,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1424,7 +1495,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1447,7 +1520,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1470,7 +1545,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1493,7 +1570,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1511,12 +1590,14 @@
                         android:layout_height="wrap_content"
                         android:hint="Notes"
                         android:maxLength="30"
-                        android:maxLines="1"
+                        android:maxLines="3"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1539,7 +1620,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1563,7 +1646,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1587,7 +1672,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
@@ -1644,7 +1731,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1652,8 +1741,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tilPharmacyName"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
+
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"
@@ -1670,7 +1758,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1694,7 +1784,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1718,7 +1810,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1741,7 +1835,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1760,12 +1856,14 @@
                         android:layout_height="wrap_content"
                         android:hint="Notes"
                         android:maxLength="30"
-                        android:maxLines="1"
+                        android:maxLines="3"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
         </RelativeLayout>
