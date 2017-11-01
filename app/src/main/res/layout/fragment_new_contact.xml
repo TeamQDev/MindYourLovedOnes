@@ -992,14 +992,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlCommon"
-                android:visibility="gone">
+                android:visibility="gone"
+             >
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilInsuaranceName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"
@@ -1014,13 +1013,16 @@
                         android:hint="Name of Insurance Company"
                         android:maxLength="30"
                         android:maxLines="1"
-
+                        android:inputType="text|none"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
+
 <RelativeLayout
     android:id="@+id/rlInsuranceType"
     android:layout_width="match_parent"
@@ -1039,7 +1041,9 @@
                     app:ms_hint="hint"
                     app:ms_multiline="true"
                     custom:ms_floatingLabelColor="@color/colorBlue"
-                    custom:ms_hintColor="@color/colorDarkGray" />
+                    custom:ms_hintColor="@color/colorDarkGray"
+                    android:imeOptions="actionNext"
+                    /><requestFocus />
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilOtherInsurance"
                     android:layout_width="match_parent"
@@ -1062,7 +1066,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+
+                        />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
                 <android.support.design.widget.TextInputLayout
@@ -1072,7 +1078,9 @@
                     android:layout_below="@+id/rlInsuranceType"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
-                    android:paddingRight="@dimen/dimension30dp">
+                    android:paddingRight="@dimen/dimension30dp"
+
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/txtId"
@@ -1085,7 +1093,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1095,7 +1105,9 @@
                     android:layout_below="@+id/tilId"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
-                    android:paddingRight="@dimen/dimension30dp">
+                    android:paddingRight="@dimen/dimension30dp"
+
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/txtGroup"
@@ -1108,7 +1120,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1131,7 +1145,9 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1149,13 +1165,14 @@
                         android:layout_height="wrap_content"
                         android:hint="Provider Phone"
                         android:inputType="phone"
-                        android:maxLength="10"
+                        android:maxLength="12"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"  android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1179,7 +1196,8 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"  android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1202,7 +1220,8 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"  android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1225,7 +1244,8 @@
                         android:paddingTop="@dimen/dimension2dp"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:textSize="@dimen/dimension20dp"  android:imeOptions="actionNext"
+                        /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1242,6 +1262,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Notes"
+                        android:imeOptions="actionNext"
                         android:maxLength="30"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dimension15dp"
@@ -1249,6 +1270,7 @@
                         android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp" />
+                    <requestFocus />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -1727,8 +1749,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tilPharmacyWebsite"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp"

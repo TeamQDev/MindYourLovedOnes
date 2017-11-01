@@ -93,7 +93,7 @@
             android:name="com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.LocationActivity" />
 
         <meta-data
