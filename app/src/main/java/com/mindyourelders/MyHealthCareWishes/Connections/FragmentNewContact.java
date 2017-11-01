@@ -88,12 +88,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     View rootview;
     RelativeLayout rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
     Preferences preferences;
-    String source;
+    String source="";
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
 
-    String name, email, mobile, speciality,phone,address,workphone,note,member,group,subscriber,type;
-    String network,affil,practice_name,website,lastseen;
+    String name="", email="", mobile="", speciality="",phone="",address="",workphone="",note="",member="",group="",subscriber="",type="";
+    String network="",affil="",practice_name="",website="",lastseen="";
     String fax="";
     String relation="";
     String proxy="";
@@ -106,7 +106,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     int connectionFlag;
     boolean inPrimary;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority;
-    TextInputLayout tilOtherInsurance,tilOtherCategory,tilOtherRelation,tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName,tilInsuaranceNote;
+    TextInputLayout tilOtherInsurance,tilOtherCategory,tilOtherRelation,tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
     ArrayList<String> relationArraylist;
@@ -633,10 +633,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             case "InsuranceData":
                 visiInsurance();
-             /*   tilInsuaranceName.setHintEnabled(true);
-                txtInsuaranceName.setFocusable(true);*/
-             /*   tilInsuaranceNote.setHintEnabled(true);
-                tilInsuaranceNote.setFocusable(true);*/
+                tilInsuaranceName.setHintEnabled(true);
+                txtInsuaranceName.setFocusable(true);
                 txtAdd.setText("Update Insurance");
                 txtTitle.setText("Update Insurance");
                 Intent insuranceIntent = getActivity().getIntent();
@@ -670,10 +668,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             case "InsuranceViewData":
                 visiInsurance();
               disableInsurance();
-               /* tilInsuaranceName.setHintEnabled(true);
-                txtInsuaranceName.setFocusable(true);*/
-              /*  tilInsuaranceNote.setHintEnabled(true);
-                tilInsuaranceNote.setFocusable(true);*/
+                tilInsuaranceName.setHintEnabled(true);
+                txtInsuaranceName.setFocusable(true);
                 txtTitle.setText("INSURANCE INFORMATION");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent insuranceIntent2 = getActivity().getIntent();
@@ -1227,7 +1223,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         rlAids.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
 
-      /*  tilInsuaranceName.setHintEnabled(false);
+        tilInsuaranceName.setHintEnabled(false);
         txtInsuaranceName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1236,17 +1232,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                 return false;
             }
-        });*/
-       /* tilInsuaranceNote.setHintEnabled(false);
-        tilInsuaranceNote.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                tilInsuaranceNote.setHintEnabled(true);
-                txtInsuaranceName.setFocusable(true);
-
-                return false;
-            }
-        });*/
+        });
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -1321,6 +1307,27 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtEmail = (TextView) rootview.findViewById(R.id.txtEmail);
         txtMobile = (TextView) rootview.findViewById(R.id.txtMobile);
         txtEmergencyNote = (TextView) rootview.findViewById(R.id.txtEmergencyNote);
+        txtMobile.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtMobile.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
 
         txtHomePhone= (TextView) rootview.findViewById(txtPhone);
         txtWorkPhone= (TextView) rootview.findViewById(R.id.txtOfficePhone);
@@ -1337,122 +1344,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
         txtOtherRelation=(TextView)rootview.findViewById(R.id.txtOtherRelation);
 
-
-        tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
-        tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
-        tilFName= (TextInputLayout) rootview.findViewById(R.id.tilFName);
-        tilAideCompName = (TextInputLayout) rootview.findViewById(R.id.tilAideCompName);
-        tilDoctorName= (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
-        tilInsuaranceName= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
-        tilInsuaranceNote= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceNote);
-        tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
-        tilOtherRelation= (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
-        tilOtherRelation.setHint("Other Relation");
-
-        txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
-        txtPracticeName = (TextView) rootview.findViewById(R.id.txtPracticeName);
-        txtFax = (TextView) rootview.findViewById(R.id.txtFax);
-        txtNetwork = (TextView) rootview.findViewById(R.id.txtNetwork);
-        txtAffiliation = (TextView) rootview.findViewById(R.id.txtAffiliation);
-        txtDoctorNote = (TextView) rootview.findViewById(R.id.txtDoctorNote);
-
-        txtFName = (TextView) rootview.findViewById(R.id.txtFName);
-        txtAids = (TextView) rootview.findViewById(R.id.txtAids);
-        txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
-        txtOther = (TextView) rootview.findViewById(R.id.txtOther);
-
-        rlConnection = (RelativeLayout) rootview.findViewById(R.id.rlConnection);
-        rlDoctor = (RelativeLayout) rootview.findViewById(R.id.rlDoctor);
-        rlInsurance = (RelativeLayout) rootview.findViewById(R.id.rlInsurance);
-        rlCommon = (RelativeLayout) rootview.findViewById(R.id.rlCommon);
-        rlAids = (RelativeLayout) rootview.findViewById(R.id.rlAids);
-        rlFinance = (RelativeLayout) rootview.findViewById(R.id.rlFinance);
-        rlPharmacy = (RelativeLayout) rootview.findViewById(R.id.rlPharmacy);
-
-        txtInsuaranceName = (TextView) rootview.findViewById(R.id.txtInsuaranceName);
-        txtId = (TextView) rootview.findViewById(R.id.txtId);
-        txtGroup = (TextView) rootview.findViewById(R.id.txtGroup);
-        txtMember = (TextView) rootview.findViewById(R.id.txtMember);
-        txtInsuarancePhone = (TextView) rootview.findViewById(R.id.txtInsuarancePhone);
-
-        gridRelation = (StaggeredTextGridView) rootview.findViewById(R.id.gridRelation);
-        setRelationData();
-
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Relationship);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerRelation.setAdapter(adapter1);
-        spinnerRelation.setHint("Relationship");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, healthSpeciality);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setHint("Specialty");
-
-        String sources=preferences.getString(PrefConstants.SOURCE);
-        if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
-            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerFinance.setAdapter(financeadapter);
-            spinnerFinance.setHint("Category");
-        }
-        else{
-            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerFinance.setAdapter(financeadapter);
-            spinnerFinance.setHint("Category");
-        }
-
-        ArrayAdapter<String> adapterInsuarance = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, insuaranceType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerInsuarance.setAdapter(adapterInsuarance);
-        spinnerInsuarance.setHint("Type of Insurance");
-
-        ArrayAdapter<String> adapterProxy = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, proxyType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProxy.setAdapter(adapterProxy);
-        spinnerProxy.setHint("Proxy Agent Priority");
-        txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
-
-        ArrayAdapter<String> adapterPriority= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, priorityType);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPriority.setAdapter(adapterPriority);
-        spinnerPriority.setHint("Priority");
-        txtTitle.setAllCaps(true);
-        txtAdd.setAllCaps(true);
-
-        spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if (parent.getItemAtPosition(position).toString().equals("Other"))
-            {
-                tilOtherRelation.setVisibility(View.VISIBLE);
-            }
-            else{
-                tilOtherRelation.setVisibility(View.GONE);
-            }
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-    });
-
-        spinnerFinance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).toString().equals("Other"))
-                {
-                    tilOtherCategory.setVisibility(View.VISIBLE);
-                }
-                else{
-                    tilOtherCategory.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-       /* txtHomePhone.addTextChangedListener(new TextWatcher() {
+        txtHomePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
@@ -1472,50 +1364,23 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     editable.append("-");
                 }
             }
-        });*/
-
-        spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).toString().equals("Other"))
-                {
-                    tilOtherInsurance.setVisibility(View.VISIBLE);
-                }
-                else{
-                    tilOtherInsurance.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
         });
-        txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+
+        tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
+        tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
+        tilFName= (TextInputLayout) rootview.findViewById(R.id.tilFName);
+        tilAideCompName = (TextInputLayout) rootview.findViewById(R.id.tilAideCompName);
+        tilDoctorName= (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
+        tilInsuaranceName= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
+        tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
+        tilOtherRelation= (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
+        tilOtherRelation.setHint("Other Relation");
+        txtWorkPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtInsuarancePhone.getText().toString().length();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int length = editable.length();
-                if ((prevL < length) && (length == 3 || length == 7)) {
-                    editable.append("-");
-                }
-            }
-        });
-        txtDoctorOfficePhone.addTextChangedListener(new TextWatcher() {
-            int prevL = 0;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtDoctorOfficePhone.getText().toString().length();
+                prevL = txtWorkPhone.getText().toString().length();
             }
 
             @Override
@@ -1532,51 +1397,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
         });
 
+        txtAddress = (TextView) rootview.findViewById(R.id.txtAddress);
+        txtPracticeName = (TextView) rootview.findViewById(R.id.txtPracticeName);
+        txtFax = (TextView) rootview.findViewById(R.id.txtFax);
+        txtNetwork = (TextView) rootview.findViewById(R.id.txtNetwork);
+        txtAffiliation = (TextView) rootview.findViewById(R.id.txtAffiliation);
+        txtDoctorNote = (TextView) rootview.findViewById(R.id.txtDoctorNote);
 
-        txtDoctorHourOfficePhone.addTextChangedListener(new TextWatcher() {
-            int prevL = 0;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtDoctorHourOfficePhone.getText().toString().length();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int length = editable.length();
-                if ((prevL < length) && (length == 3 || length == 7)) {
-                    editable.append("-");
-                }
-            }
-        });
-
-
-        txtDoctorOtherPhone.addTextChangedListener(new TextWatcher() {
-            int prevL = 0;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtDoctorOtherPhone.getText().toString().length();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int length = editable.length();
-                if ((prevL < length) && (length == 3 || length == 7)) {
-                    editable.append("-");
-                }
-            }
-        });
         txtPharmacyPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
@@ -1731,12 +1558,17 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 }
             }
         });
-        txtMobile.addTextChangedListener(new TextWatcher() {
+
+        txtFName = (TextView) rootview.findViewById(R.id.txtFName);
+        txtAids = (TextView) rootview.findViewById(R.id.txtAids);
+        txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
+        txtOther = (TextView) rootview.findViewById(R.id.txtOther);
+        txtDoctorOfficePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtMobile.getText().toString().length();
+                prevL = txtDoctorOfficePhone.getText().toString().length();
             }
 
             @Override
@@ -1753,7 +1585,164 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
         });
 
-        txtHomePhone.addTextChangedListener(new TextWatcher() {
+
+        txtDoctorHourOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorHourOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+        txtDoctorOtherPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorOtherPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+        rlConnection = (RelativeLayout) rootview.findViewById(R.id.rlConnection);
+        rlDoctor = (RelativeLayout) rootview.findViewById(R.id.rlDoctor);
+        rlInsurance = (RelativeLayout) rootview.findViewById(R.id.rlInsurance);
+        rlCommon = (RelativeLayout) rootview.findViewById(R.id.rlCommon);
+        rlAids = (RelativeLayout) rootview.findViewById(R.id.rlAids);
+        rlFinance = (RelativeLayout) rootview.findViewById(R.id.rlFinance);
+        rlPharmacy = (RelativeLayout) rootview.findViewById(R.id.rlPharmacy);
+      /*  txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtInsuarancePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });*/
+
+        txtInsuaranceName = (TextView) rootview.findViewById(R.id.txtInsuaranceName);
+        txtId = (TextView) rootview.findViewById(R.id.txtId);
+        txtGroup = (TextView) rootview.findViewById(R.id.txtGroup);
+        txtMember = (TextView) rootview.findViewById(R.id.txtMember);
+        txtInsuarancePhone = (TextView) rootview.findViewById(R.id.txtInsuarancePhone);
+
+        gridRelation = (StaggeredTextGridView) rootview.findViewById(R.id.gridRelation);
+        setRelationData();
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Relationship);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRelation.setAdapter(adapter1);
+        spinnerRelation.setHint("Relationship");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, healthSpeciality);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setHint("Specialty");
+
+        String sources=preferences.getString(PrefConstants.SOURCE);
+        if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
+            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerFinance.setAdapter(financeadapter);
+            spinnerFinance.setHint("Category");
+        }
+        else{
+            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerFinance.setAdapter(financeadapter);
+            spinnerFinance.setHint("Category");
+        }
+
+        ArrayAdapter<String> adapterInsuarance = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, insuaranceType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerInsuarance.setAdapter(adapterInsuarance);
+        spinnerInsuarance.setHint("Type of Insurance");
+
+        ArrayAdapter<String> adapterProxy = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, proxyType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProxy.setAdapter(adapterProxy);
+        spinnerProxy.setHint("Proxy Agent Priority");
+        txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
+
+        ArrayAdapter<String> adapterPriority= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, priorityType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPriority.setAdapter(adapterPriority);
+        spinnerPriority.setHint("Priority");
+        txtTitle.setAllCaps(true);
+        txtAdd.setAllCaps(true);
+
+        spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (parent.getItemAtPosition(position).toString().equals("Other"))
+            {
+                tilOtherRelation.setVisibility(View.VISIBLE);
+            }
+            else{
+                tilOtherRelation.setVisibility(View.GONE);
+            }
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    });
+
+        spinnerFinance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherCategory.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherCategory.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+       /* txtHomePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
@@ -1773,28 +1762,24 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     editable.append("-");
                 }
             }
-        });
-        txtWorkPhone.addTextChangedListener(new TextWatcher() {
-            int prevL = 0;
+        });*/
 
+        spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtWorkPhone.getText().toString().length();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int length = editable.length();
-                if ((prevL < length) && (length == 3 || length == 7)) {
-                    editable.append("-");
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherInsurance.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherInsurance.setVisibility(View.GONE);
                 }
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
+
 
     }
 
@@ -2300,7 +2285,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (email.equals("")) {
+            } /*else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
@@ -2309,24 +2294,24 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            } else if (address.equals("")) {
+            } /*else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
             } else if (relation.equals("")) {
                // txtAddress.setError("Please Enter Address");
                 showAlert("Please select relation", getActivity());
-            } else return true;
+            }*/ else return true;
         } else if (screen.equals("Speciality")) {
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (mobile.equals("")) {
+            } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             } else return true;
@@ -2335,8 +2320,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         {
            // int indexs=0;
             int indexs=spinnerPriority.getSelectedItemPosition();
-            relation=Relationship[indexValue-1];
-            priority=priorityType[indexs-1];
+            if(indexValue!=0) {
+                relation = Relationship[indexValue - 1];
+            }
+            if (indexs!=0) {
+                priority = priorityType[indexs - 1];
+            }
             otherRelation=txtOtherRelation.getText().toString();
             note=txtEmergencyNote.getText().toString().trim();
             if (priority.equals("Primary"))
@@ -2350,7 +2339,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } else if (email.equals("")) {
+            } /*else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
@@ -2359,11 +2348,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (mobile.length() < 10) {
+            }*/ else if (mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }
-            else if (phone.equals("")) {
+           /* else if (phone.equals("")) {
                 txtHomePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
             } else if (phone.length() < 10) {
@@ -2378,7 +2367,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
-            } else return true;
+            }*/ else return true;
         }
         else if(screen.equals("Proxy"))
         {
