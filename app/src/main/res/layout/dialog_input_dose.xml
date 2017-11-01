@@ -51,8 +51,11 @@
             android:layout_marginLeft="@dimen/dimension15dp"
             android:layout_marginRight="@dimen/dimension15dp"
             android:gravity="top"
-            />
-    <TextView
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
+        <TextView
             android:id="@+id/txtRX"
             style="@style/EmergencyCategory"
             android:layout_width="match_parent"
@@ -75,7 +78,10 @@
             android:layout_marginLeft="@dimen/dimension15dp"
             android:layout_marginRight="@dimen/dimension15dp"
             android:gravity="top"
-            />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
         <TextView
             android:id="@+id/txtDose"
             style="@style/EmergencyCategory"
@@ -98,7 +104,10 @@
             android:layout_marginLeft="@dimen/dimension15dp"
             android:layout_marginRight="@dimen/dimension15dp"
             android:gravity="top"
-            />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
         <TextView
             android:id="@+id/txtFrequency"
             style="@style/EmergencyCategory"
@@ -121,7 +130,10 @@
             android:layout_marginLeft="@dimen/dimension15dp"
             android:layout_marginRight="@dimen/dimension15dp"
             android:gravity="top"
-            />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
 
         <LinearLayout
             android:layout_width="match_parent"

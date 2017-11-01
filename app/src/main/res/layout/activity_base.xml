@@ -32,6 +32,15 @@ android:background="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimension15dp"
                     android:src="@drawable/ic_menus" />
+                <ImageView
+                    android:id="@+id/imgPdf"
+                    android:layout_width="@dimen/dimension40dp"
+                    android:layout_height="@dimen/dimension40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimension15dp"
+                    android:src="@drawable/pdf"
+                    android:layout_toRightOf="@+id/imgDrawer"
+                    />
                 <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/dimension75dp"
