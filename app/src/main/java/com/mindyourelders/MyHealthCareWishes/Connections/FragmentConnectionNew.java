@@ -35,7 +35,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     TextView txtAdd;
     //RelativeLayout llAddConn;
     TextView txtTitle,txtName;
-    ImageView imgNoti,imgProfile,imgLogo;
+    ImageView imgNoti,imgProfile,imgLogo,imgPdf;
     DBHelper dbHelper;
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
@@ -75,6 +75,8 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PROFILES");
+        imgPdf= (ImageView) getActivity().findViewById(R.id.imgPdf);
+        imgPdf.setVisibility(View.GONE);
         imgProfile= (ImageView) getActivity().findViewById(R.id.imgProfile);
         txtName= (TextView) getActivity().findViewById(R.id.txtName);
         txtName.setVisibility(View.GONE);
