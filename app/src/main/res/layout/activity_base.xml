@@ -40,6 +40,7 @@ android:background="@color/colorBlue"
                     android:layout_marginLeft="@dimen/dimension15dp"
                     android:src="@drawable/pdf"
                     android:layout_toRightOf="@+id/imgDrawer"
+                       android:visibility="gone"
                     />
                 <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                     android:id="@+id/imgProfile"

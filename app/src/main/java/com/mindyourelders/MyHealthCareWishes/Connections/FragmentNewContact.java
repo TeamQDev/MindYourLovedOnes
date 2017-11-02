@@ -2308,7 +2308,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }*/ else return true;
         } else if (screen.equals("Speciality")) {
             if (name.equals("")) {
-                txtName.setError("Please Enter Name");
+                txtName.setError("Please Enter Doctor Name");
                 showAlert("Please Enter Name", getActivity());
             } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
@@ -2443,8 +2443,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             note=txtDoctorNote.getText().toString();
 
             if (name.equals("")) {
-                txtName.setError("Please Enter Name");
-                showAlert("Please Enter Name", getActivity());
+                txtDoctorName.setError("Please Doctor Enter Name");
+                showAlert("Please Enter Doctor Name", getActivity());
             }
              /* if (mobile.equals("")) {
                   txtDoctorOfficePhone.setError("Please Enter Mobile");
@@ -2500,8 +2500,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             fax=txtAideFax.getText().toString();
             address=txtAideAddress.getText().toString();
             if (name.equals("")) {
-                txtAideCompName.setError("Please Enter Name");
-                showAlert("Please Enter Name", getActivity());
+                txtAideCompName.setError("Please Enter Name Of Company");
+                showAlert("Please Enter Name Of Company", getActivity());
             }
          /*   if (mobile.equals("")) {
                 txtAideOfficePhone.setError("Please Enter Mobile");
@@ -2537,6 +2537,20 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             website=txtFinanceWebsite.getText().toString();
             lastseen=txtLastSeen.getText().toString();
             otherCategory=txtOtherCategory.getText().toString();
+            int indexValuex = spinnerFinance.getSelectedItemPosition();
+            String sources=preferences.getString(PrefConstants.SOURCE);
+            if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
+                if (indexValue!=0) {
+                    speciality = financeType[indexValuex - 1];
+                }
+            }
+            else {
+                if (indexValue != 0) {
+                    speciality = HospitalType[indexValuex - 1];
+                }
+            }
+            practice_name=txtFinancePracticeName.getText().toString();
+            note=txtFinanceNote.getText().toString();
             if (name.equals("")) {
                 txtFName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -2564,43 +2578,30 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 showAlert("Mobile number should be 10 digits", getActivity());
             }*/
 
-            int indexValuex = spinnerFinance.getSelectedItemPosition();
-            String sources=preferences.getString(PrefConstants.SOURCE);
-            if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
-                if (indexValue!=0) {
-                    speciality = financeType[indexValuex - 1];
-                }
-            }
-            else {
-                if (indexValue != 0) {
-                    speciality = HospitalType[indexValuex - 1];
-                }
-            }
-            practice_name=txtFinancePracticeName.getText().toString();
-            note=txtFinanceNote.getText().toString();
-            return true;
+
+
         }
         else if (screen.equals("Insurance")) {
-            name=txtInsuaranceName.getText().toString();
-            phone=txtInsuarancePhone.getText().toString();
-            fax=txtInsuaranceFax.getText().toString();
-            address=txtAddress.getText().toString();
-            website=txtWebsite.getText().toString();
-            note=txtInsuaranceNote.getText().toString();
-            member=txtId.getText().toString();
-            group=txtGroup.getText().toString();
-            subscriber=txtSubscribe.getText().toString();
+            name = txtInsuaranceName.getText().toString();
+            phone = txtInsuarancePhone.getText().toString();
+            fax = txtInsuaranceFax.getText().toString();
+            address = txtAddress.getText().toString();
+            website = txtWebsite.getText().toString();
+            note = txtInsuaranceNote.getText().toString();
+            member = txtId.getText().toString();
+            group = txtGroup.getText().toString();
+            subscriber = txtSubscribe.getText().toString();
             int indexValuex = spinnerInsuarance.getSelectedItemPosition();
-            if (indexValue!=0) {
+            if (indexValue != 0) {
                 type = insuaranceType[indexValuex - 1];
             }
-            email=txtInsuaranceEmail.getText().toString();
-            otherInsurance=txtOtherInsurance.getText().toString();
+            email = txtInsuaranceEmail.getText().toString();
+            otherInsurance = txtOtherInsurance.getText().toString();
             if (name.equals("")) {
-                txtInsuaranceName.setError("Please Enter Name");
-                showAlert("Please Enter Name", getActivity());
+                txtInsuaranceName.setError("Please Enter Name of Insurance Company");
+                showAlert("Please Enter Name of Insurance Company", getActivity());
             } else return true;
-
+        }
             /*if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
@@ -2608,30 +2609,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 txtInsuarancePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }*/
-            txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
-                int prevL = 0;
 
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    prevL = txtInsuarancePhone.getText().toString().length();
-                }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    int length = editable.length();
-                    if ((prevL < length) && (length == 3 || length == 7)) {
-                        editable.append("-");
-                    }
-                }
-            });
-
-            return true;
-        }
         return false;
     }
 
