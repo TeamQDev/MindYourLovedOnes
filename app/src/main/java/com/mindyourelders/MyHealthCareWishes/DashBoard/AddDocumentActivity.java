@@ -52,14 +52,14 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     TextInputLayout tilDate,tilDoc;
     Document document;
     DBHelper dbHelper;
-    String name;
-    String type;
+    String name="";
+    String type="";
     String documentPath="";
-    String location;
-    String holder;
+    String location="";
+    String holder="";
     int photo;
-    String date;
-    String category;
+    String date="";
+    String category="";
     String Goto="";
     String path="";
 
@@ -557,25 +557,39 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         if (From.equals("AD"))
         {
             category="AD";
-            type=ADList[indexValue-1];
+            if (indexValue!=0) {
+                type = ADList[indexValue - 1];
+            }
         }else{
-            category=OtherList[indexValues-1];
+            if (indexValues!=0) {
+                category = OtherList[indexValues - 1];
+            }
             switch(category)
             {
                 case "Legal":
-                    type=LegalList[indexValue-1];
+                    if (indexValue!=0) {
+                        type = LegalList[indexValue - 1];
+                    }
                     break;
                 case "Financial":
-                    type=LegalList[indexValue-1];
+                    if (indexValue!=0) {
+                        type = LegalList[indexValue - 1];
+                    }
                     break;
                 case "Home Health":
-                    type=DocList[indexValue-1];
+                    if (indexValue!=0) {
+                        type = DocList[indexValue - 1];
+                    }
                     break;
                 case "Insurance":
-                    type=InsurancerList[indexValue-1];
+                    if (indexValue!=0) {
+                        type = InsurancerList[indexValue - 1];
+                    }
                     break;
                 case "Medical":
-                    type=DocList[indexValue-1];
+                    if (indexValue!=0) {
+                        type = DocList[indexValue - 1];
+                    }
                     break;
             }
         }
@@ -586,6 +600,12 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         holder=txtHolderName.getText().toString();
         date=txtDate.getText().toString();
         photo=R.drawable.pdf;
+        if (name.equals("")) {
+            txtName.setError("Please Enter Name");
+           Toast.makeText(context,"Enter Document Name",Toast.LENGTH_SHORT).show();
+        }else{
+            return true;
+        }
        /* switch (From)
         {
             case "AD":
@@ -619,7 +639,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
 */
-        return true;
+        return false;
     }
 
     public void onPDFClicked(String fileName) {

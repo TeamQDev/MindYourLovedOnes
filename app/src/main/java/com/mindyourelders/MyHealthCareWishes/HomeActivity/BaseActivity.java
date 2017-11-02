@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         imgNoti = (ImageView) findViewById(R.id.imgNoti);
         imgProfile = (ImageView) findViewById(R.id.imgProfile);
         imgPdf = (ImageView) findViewById(R.id.imgPdf);
-
+        imgPdf.setVisibility(View.GONE);
         imgLocationFeed = (ImageView) findViewById(R.id.imgLocationFeed);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         txtName = (TextView) findViewById(R.id.txtName);
@@ -216,5 +216,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             getFragmentManager().popBackStack();
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
