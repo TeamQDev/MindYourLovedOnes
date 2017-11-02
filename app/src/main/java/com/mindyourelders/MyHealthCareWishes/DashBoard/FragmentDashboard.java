@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -19,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mindyourelders.MyHealthCareWishes.HomeActivity.Individual;
+import com.mindyourelders.MyHealthCareWishes.HomeActivity.MessageString;
+import com.mindyourelders.MyHealthCareWishes.HomeActivity.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistsActivity;
@@ -28,8 +32,11 @@ import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+
+import java.io.File;
 
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergency;
 
@@ -39,14 +46,14 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergenc
 
 public class FragmentDashboard extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     FragmentOverview fragmentOverview;
-    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti,imgLogo;
+    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti,imgLogo,imgPdf;
     TextView txtName,txtAddress, txtRelation;
     RelativeLayout rlEmergencyContact, rlSpecialist, rlInsuranceCard, rlEmergencyEvent, rlPrescription, rlCarePlan;
     View rootview;
     boolean flag = false;
     TextView txtTitle;
     Preferences preferences;
-DBHelper dbHelper;
+    DBHelper dbHelper;
     PersonalInfo personalInfo;
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -178,6 +185,7 @@ DBHelper dbHelper;
         rlEmergencyEvent.setOnClickListener(this);
         rlPrescription.setOnClickListener(this);
         imgProfile.setOnClickListener(this);
+        imgPdf.setOnClickListener(this);
         //  rlInsurance.setOnClickListener(this);
         //  rlEmergency.setOnClickListener(this);
 //        imgShareLocation.setOnClickListener(this);
@@ -189,6 +197,8 @@ DBHelper dbHelper;
         txtTitle.setVisibility(View.GONE);
         txtTitle.setText("");
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
+        imgPdf = (ImageView) getActivity().findViewById(R.id.imgPdf);
+        imgPdf.setVisibility(View.VISIBLE);
         imgNoti.setVisibility(View.VISIBLE);
         imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
         imgLogo.setVisibility(View.GONE);
@@ -282,6 +292,67 @@ DBHelper dbHelper;
             /*case R.id.imgShareLocation:
                 ShowShareLocationDialog();
                 break;*/
+            case R.id.imgPdf:
+              /*  StringBuffer result = new StringBuffer();
+                result.append(new MessageString().getProfile());*/
+              /*  result.append(new MessageString().getMedicalMsg());
+                result.append(new MessageString().getInsuranceMsg());*/
+             /*   new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                    + "/mye/" + preferences.getString(PrefConstants.CONNECTED_USERID) + "_" +  preferences.getString(PrefConstants.USER_ID)
+                    + "/Mind Your Elders Summary Report.pdf",
+                    BaseActivity.this, result);*/
+
+
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Profile.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Personal & Medical Profile");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+                if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
+                    new Individual(personalInfo);
+                    }
+                    else{
+                        new Individual(connection);
+                    }
+               // new MessageString().getProfileProfile(connection);
+
+                Header.document.close();
+
+                if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
+                    StringBuffer result = new StringBuffer();
+                    result.append(new MessageString().getProfileUser());
+
+                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                            + "/Profile.pdf",
+                            getActivity(), result);
+
+                    System.out.println("\n" + result + "\n");
+                }else{
+                    StringBuffer result = new StringBuffer();
+                    result.append(new MessageString().getProfileProfile());
+
+                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                            + "/Profile.pdf",
+                            getActivity(), result);
+
+                    System.out.println("\n" + result + "\n");
+                 /* new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                            + "/Profile.pdf", getActivity(),
+                            new MessageString().getProfileProfile(connection));*/
+                }
+                break;
         }
     }
 

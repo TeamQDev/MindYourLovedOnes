@@ -193,6 +193,16 @@
             android:theme="@style/MyMaterialTheme" />
         <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity" />
         <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList"></activity>
+
+      <!--  <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            &lt;!&ndash;<meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>&ndash;&gt;
+        </provider>-->
     </application>
 
 </manifest>

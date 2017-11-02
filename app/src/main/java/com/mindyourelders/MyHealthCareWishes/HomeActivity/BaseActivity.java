@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -161,16 +160,21 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                drawerLayout.openDrawer(leftDrawer);
                 break;
 
-            case R.id.imgPdf:
-                StringBuffer result = new StringBuffer();
-                result.append(new MessageString().getProfile());
-              /*  result.append(new MessageString().getMedicalMsg());
-                result.append(new MessageString().getInsuranceMsg());*/
-                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+         /*   case R.id.imgPdf:
+              *//*  StringBuffer result = new StringBuffer();
+                result.append(new MessageString().getProfile());*//*
+              *//*  result.append(new MessageString().getMedicalMsg());
+                result.append(new MessageString().getInsuranceMsg());*//*
+             *//*   new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                     + "/mye/" + preferences.getString(PrefConstants.CONNECTED_USERID) + "_" +  preferences.getString(PrefConstants.USER_ID)
                     + "/Mind Your Elders Summary Report.pdf",
-                    BaseActivity.this, result);
-                break;
+                    BaseActivity.this, result);*//*
+
+                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                        + "/mye/" +  preferences.getString(PrefConstants.CONNECTED_USERID) + "_" +  preferences.getString(PrefConstants.USER_ID)
+                        + "/Profile.pdf", BaseActivity.this,
+                        new MessageString().getProfileData());
+                break;*/
 
             case R.id.imgNoti:
                 if (fragmentManager.findFragmentByTag("NOTIFICATION") == null) {
