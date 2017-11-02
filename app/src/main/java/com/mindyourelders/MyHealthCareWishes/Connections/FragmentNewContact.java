@@ -2316,6 +2316,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
+
             } else return true;
         }
         else if(screen.equals("Emergency"))
@@ -2600,6 +2601,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtInsuaranceName.setError("Please Enter Name of Insurance Company");
                 showAlert("Please Enter Name of Insurance Company", getActivity());
+
             } else return true;
         }
             /*if (phone.equals("")) {

@@ -72,6 +72,23 @@ public class AidesAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        if(AidesList.get(position).getOfficePhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+
+        if(AidesList.get(position).getAddress().equals(""))
+        {
+            holder.txtAddress.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtAddress.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(AidesList.get(position).getAidName());
         holder.txtAddress.setText(AidesList.get(position).getAddress());
         holder.txtPhone.setText(AidesList.get(position).getOfficePhone());

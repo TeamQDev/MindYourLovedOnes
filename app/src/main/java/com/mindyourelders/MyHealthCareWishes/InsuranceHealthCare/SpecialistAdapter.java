@@ -74,6 +74,22 @@ public class SpecialistAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        if(specialistList.get(position).getOfficePhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+        if(specialistList.get(position).getAddress().equals(""))
+        {
+            holder.txtAddress.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtAddress.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(specialistList.get(position).getName());
         holder.txtOfficePhone.setText(specialistList.get(position).getOtherPhone());
         holder.txtPhone.setText(specialistList.get(position).getOfficePhone());

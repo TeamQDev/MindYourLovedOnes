@@ -73,6 +73,23 @@ public class FinanceAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        if(FinanceList.get(position).getPhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+
+        if(FinanceList.get(position).getAddress().equals(""))
+        {
+            holder.txtAddress.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtAddress.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(FinanceList.get(position).getName());
         holder.txtAddress.setText(FinanceList.get(position).getAddress());
         holder.txtPhone.setText(FinanceList.get(position).getOfficePhone());

@@ -71,6 +71,15 @@ class PharmacyAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
+        if(pharmacyList.get(position).getPhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+
         holder.txtName.setText(pharmacyList.get(position).getName());
         holder.txtPhone.setText(pharmacyList.get(position).getPhone());
         byte[] photo=pharmacyList.get(position).getPhoto();

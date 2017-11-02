@@ -24,7 +24,7 @@
             android:layout_height="@dimen/dimension60dp"
             android:src="@drawable/ic_user_one"
             android:scaleType="fitXY"
-android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -60,6 +60,7 @@ android:layout_marginLeft="@dimen/dimension10dp"
                 android:gravity="top|left"
                 android:drawablePadding="@dimen/dimension5dp"
                 android:layout_marginTop="@dimen/dimension10dp"
+
                 />
         </RelativeLayout>
 

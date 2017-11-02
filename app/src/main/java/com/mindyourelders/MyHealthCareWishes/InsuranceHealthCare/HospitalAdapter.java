@@ -73,6 +73,23 @@ public class HospitalAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
+        if(hospitalList.get(position).getPhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+
+        if(hospitalList.get(position).getAddress().equals(""))
+        {
+            holder.txtAddress.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtAddress.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(hospitalList.get(position).getName());
         holder.txtAddress.setText(hospitalList.get(position).getAddress());
         holder.txtPhone.setText(hospitalList.get(position).getOfficePhone());
