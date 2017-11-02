@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
+import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAlert;
+
 
 public class AddAppointmentActivity extends AppCompatActivity implements View.OnClickListener{
     Context context=this;
@@ -184,18 +186,32 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 otherType=txtOtherSpecialist.getText().toString();
                 otherFrequency=txtOtherFrequency.getText().toString();
                 int indexValuex = spinnerType.getSelectedItemPosition();
-                String type=Type[indexValuex-1];
 
-                int indexValue = spinnerFrequency.getSelectedItemPosition();
-                String frequency=Frequency[indexValue-1];
 
-                Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,date,type,frequency,otherType,otherFrequency,dateList,unique);
-                if (flag == true) {
-                    Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
-                   finish();
-                } else {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                String type="";
+                String frequency ="";
+                if (indexValuex!=0) {
+                    type = Type[indexValuex - 1];
                 }
+
+                    int indexValue = spinnerFrequency.getSelectedItemPosition();
+                if (indexValue!=0) {
+                     frequency = Frequency[indexValue - 1];
+                }
+
+                if (name.equals("")) {
+                    txtName.setError("Please Enter Name");
+                    showAlert("Please Enter Name", AddAppointmentActivity.this);
+                } else {
+                    Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, date, type, frequency, otherType, otherFrequency, dateList, unique);
+                    if (flag == true) {
+                        Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
 
 
 
