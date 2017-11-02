@@ -224,7 +224,6 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 i.putExtra("AppointObject",appoint);
 
                 setResult(100,i);*/
-                finish();
                 break;
         }
     }
