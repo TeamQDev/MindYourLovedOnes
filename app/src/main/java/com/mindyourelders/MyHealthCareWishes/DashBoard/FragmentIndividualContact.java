@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -26,7 +27,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,15 +62,22 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 public class FragmentIndividualContact extends Fragment implements View.OnClickListener{
    
     TextView txtSignUp, txtLogin, txtForgotPassword;
-    ImageView imgEdit,imgProfile,imgDone;
-    TextView txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
-   TextInputLayout tilOtherRelation;
-    String name, email, phone, country, bdate,address,homePhone,workPhone,gender;
-String otherRelation;
+    ImageView imgEdit,imgProfile,imgDone,imgAddpet;
+    TextView txtHeight,txtWeight,txtProfession,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
+    TextInputLayout tilOtherRelation,tilId;
+    RelativeLayout rlPet;
+    String name="", email="", phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
+    String height="",weight="",profession="",employed="",religion="",idnumber="";
+    String pet="No",veteran="No";
+    String eyes,language,marital_status;
+    String otherRelation;
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
+    RadioGroup rgPet,rgVeteran;
+    RadioButton rbYes,rbNo,rbYesPet,rbNoPet;
+    public static final int REQUEST_PET= 400;
 
-    MySpinner spinner,spinnerRelation;
+    MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
 
     String imagepath = "";//
@@ -82,11 +92,12 @@ String otherRelation;
     ImageView imgBack;
     RelativeConnection connection;
     PersonalInfo personalInfo;
-    Spinner spinnerEyes;
 
     TextInputLayout tilBdate,tilName,tilWorkPhone;
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
+    String[] MaritalList = {"Single", "Married"};
+    String[] LangList = {"English", "Spanish", "French", "Russian", "Japanese", "Greek", "German", "Italian"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -119,6 +130,7 @@ String otherRelation;
         imgEdit.setOnClickListener(this);
         imgDone.setOnClickListener(this);
         txtGender.setOnClickListener(this);
+        imgAddpet.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -126,10 +138,13 @@ String otherRelation;
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
+        imgAddpet = (ImageView) rootview.findViewById(R.id.imgAddPet);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilOtherRelation = (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
         tilWorkPhone = (TextInputLayout) rootview.findViewById(R.id.tilWorkPhone);
+        tilId = (TextInputLayout) rootview.findViewById(R.id.tilId);
+        rlPet= (RelativeLayout) rootview.findViewById(R.id.rlPet);
         txtOtherRelation = (TextView) rootview.findViewById(R.id.txtOtherRelation);
         txtLogin = (TextView) rootview.findViewById(R.id.txtLogin);
         txtForgotPassword = (TextView) rootview.findViewById(R.id.txtForgotPassword);
@@ -150,14 +165,40 @@ String otherRelation;
         txtHomePhone = (TextView) rootview.findViewById(R.id.txtHomePhone);
         txtWorkPhone = (TextView) rootview.findViewById(R.id.txtWorkPhone);
 
-        spinner = (MySpinner) rootview.findViewById(R.id.spinner);
-        spinnerEyes = (Spinner) rootview.findViewById(R.id.spinnerEyes);
+        txtHeight = (TextView) rootview.findViewById(R.id.txtHeight);
+        txtWeight = (TextView) rootview.findViewById(R.id.txtWeight);
+        txtProfession = (TextView) rootview.findViewById(R.id.txtProfession);
+        txtEmployed = (TextView) rootview.findViewById(R.id.txtEmployedBy);
+        txtReligion = (TextView) rootview.findViewById(R.id.txtReligion);
+        txtIdNumber = (TextView) rootview.findViewById(R.id.txtId);
 
-        ArrayAdapter<String> adapters = new ArrayAdapter<String>(getActivity(),  android.R.layout.simple_spinner_item, EyesList);
+        rbYes = (RadioButton) rootview.findViewById(R.id.rbYes);
+        rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
+        rbYesPet = (RadioButton) rootview.findViewById(R.id.rbYesPet);
+        rbNoPet = (RadioButton) rootview.findViewById(R.id.rbNoPet);
+        rgPet= (RadioGroup) rootview.findViewById(R.id.rgPet);
+        rgVeteran= (RadioGroup) rootview.findViewById(R.id.rgVeteran);
+
+        spinner = (MySpinner) rootview.findViewById(R.id.spinner);
+        spinnerEyes = (MySpinner) rootview.findViewById(R.id.spinnerEyes);
+        spinnerLanguage= (MySpinner) rootview.findViewById(R.id.spinnerLanguage);
+        spinnerMarital= (MySpinner) rootview.findViewById(R.id.spinnerMarital);
+
+        ArrayAdapter<String> adapterm = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, MaritalList);
+        adapterm.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMarital.setAdapter(adapterm);
+        spinnerMarital.setHint("Marital Status");
+
+
+        ArrayAdapter<String> adapters = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, EyesList);
         adapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEyes.setAdapter(adapters);
-        spinnerEyes.setPrompt("Select Eyes Color");
+        spinnerEyes.setHint("Eyes Color");
 
+        ArrayAdapter<String> adapterl = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, LangList);
+        adapterl.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLanguage.setAdapter(adapterl);
+        spinnerLanguage.setHint("Language Spoken");
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, countryList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -168,6 +209,35 @@ String otherRelation;
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRelation.setAdapter(adapter1);
         spinnerRelation.setHint("Relationship");
+
+        rgPet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rbYesPet) {
+                    pet = "Yes";
+                    rlPet.setVisibility(View.VISIBLE);
+
+                } else if (checkedId == R.id.rbNoPet) {
+                    pet = "No";
+                    rlPet.setVisibility(View.GONE);
+
+
+                }
+            }
+        });
+
+        rgVeteran.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rbYes) {
+                    veteran = "Yes";
+                    tilId.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.rbNo) {
+                    veteran = "No";
+                    tilId.setVisibility(View.GONE);
+                }
+            }
+        });
 
         txtPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -265,7 +335,6 @@ String otherRelation;
             tilWorkPhone.setVisibility(View.GONE);
             txtHomePhone.setVisibility(View.VISIBLE);
             if (personalInfo != null) {
-
                 txtGender.setText(personalInfo.getGender());
                 txtName.setText(personalInfo.getName());
                 txtEmail.setText(personalInfo.getEmail());
@@ -286,6 +355,60 @@ String otherRelation;
                 }*/
                 txtPhone.setText(personalInfo.getPhone());
                 txtBdate.setText(personalInfo.getDob());
+
+                txtHeight.setText(personalInfo.getHeight());
+                txtWeight.setText(personalInfo.getWeight());
+                txtProfession.setText(personalInfo.getProfession());
+                txtEmployed.setText(personalInfo.getEmployed());
+                txtReligion.setText(personalInfo.getReligion());
+                txtIdNumber.setText(personalInfo.getIdnumber());
+
+                if (personalInfo.getEyes()!=null) {
+                    int index = 0;
+                    for (int i = 0; i < EyesList.length; i++) {
+                        if (personalInfo.getEyes().equalsIgnoreCase(EyesList[i])) {
+                            index = i;
+                        }
+                    }
+                    spinnerEyes.setSelection(index + 1);
+                }
+
+                if (personalInfo.getLanguage()!=null) {
+                    int indexs = 0;
+                    for (int i = 0; i < LangList.length; i++) {
+                        if (personalInfo.getLanguage().equalsIgnoreCase(LangList[i])) {
+                            indexs = i;
+                        }
+                    }
+                    spinnerLanguage.setSelection(indexs + 1);
+                }
+                if (personalInfo.getMarital_status()!=null) {
+                    int indexss = 0;
+                    for (int i = 0; i < MaritalList.length; i++) {
+                        if (personalInfo.getMarital_status().equalsIgnoreCase(MaritalList[i])) {
+                            indexss = i;
+                        }
+                    }
+                    spinnerMarital.setSelection(indexss + 1);
+                }
+                if (personalInfo.getVeteran()!=null) {
+                    if (personalInfo.getVeteran().equals("Yes")) {
+                        rbYes.setChecked(true);
+                        rbNo.setChecked(false);
+                    } else {
+                        rbYes.setChecked(false);
+                        rbNo.setChecked(true);
+                    }
+                }
+                if (personalInfo.getPet()!=null) {
+                    if (personalInfo.getPet().equals("Yes")) {
+                        rbYesPet.setChecked(true);
+                        rbNoPet.setChecked(false);
+                    } else {
+                        rbYesPet.setChecked(false);
+                        rbNoPet.setChecked(true);
+                    }
+                }
                 byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                imgProfile.setImageBitmap(bmp);
@@ -316,6 +439,62 @@ String otherRelation;
                 byte[] photo=connection.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                 imgProfile.setImageBitmap(bmp);
+
+
+                txtHeight.setText(connection.getHeight());
+                txtWeight.setText(connection.getWeight());
+                txtProfession.setText(connection.getProfession());
+                txtEmployed.setText(connection.getEmployed());
+                txtReligion.setText(connection.getReligion());
+                txtIdNumber.setText(connection.getIdnumber());
+                int indexd = 0;
+
+                if (connection.getEyes()!=null) {
+                    for (int i = 0; i < EyesList.length; i++) {
+                        if (connection.getEyes().equalsIgnoreCase(EyesList[i])) {
+                            indexd = i;
+                        }
+                    }
+                    spinnerEyes.setSelection(indexd + 1);
+                }
+
+                if (connection.getLanguage()!=null) {
+                    int indexs = 0;
+                    for (int i = 0; i < LangList.length; i++) {
+                        if (connection.getLanguage().equalsIgnoreCase(LangList[i])) {
+                            indexs = i;
+                        }
+                    }
+                    spinnerLanguage.setSelection(indexs + 1);
+                }
+
+                if (connection.getMarital_status()!=null) {
+                    int indexss = 0;
+                    for (int i = 0; i < MaritalList.length; i++) {
+                        if (connection.getMarital_status().equalsIgnoreCase(MaritalList[i])) {
+                            indexss = i;
+                        }
+                    }
+                    spinnerMarital.setSelection(indexss + 1);
+                }
+                if (connection.getVeteran()!=null) {
+                    if (connection.getVeteran().equals("Yes")) {
+                        rbYes.setChecked(true);
+                        rbNo.setChecked(false);
+                    } else {
+                        rbYes.setChecked(false);
+                        rbNo.setChecked(true);
+                    }
+                }
+                if (connection.getPet()!=null) {
+                    if (connection.getPet().equals("Yes")) {
+                        rbYesPet.setChecked(true);
+                        rbNoPet.setChecked(false);
+                    } else {
+                        rbYesPet.setChecked(false);
+                        rbNoPet.setChecked(true);
+                    }
+                }
             }
             }
         }
@@ -325,6 +504,11 @@ String otherRelation;
     public void onClick(View v) {
         switch (v.getId()) {
 
+            case R.id.imgAddPet:
+                Intent intent = new Intent(getActivity(), AddPetActivity.class);
+                startActivityForResult(intent, REQUEST_PET);
+                break;
+
             case R.id.imgDone:
 
                     Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
@@ -333,7 +517,7 @@ String otherRelation;
                     byte[] photo = baos.toByteArray();
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -344,9 +528,10 @@ String otherRelation;
                         }
                     }
                     else {
-                        if (validateConnection())
-                        editToConnection(photo);
-                        getActivity().finish();
+                        if (validateConnection()) {
+                            editToConnection(photo);
+                            getActivity().finish();
+                        }
                     }
 
 
@@ -514,7 +699,27 @@ String otherRelation;
         otherRelation=txtOtherRelation.getText().toString().trim();
         address=txtAddress.getText().toString().trim();
         int i= spinnerRelation.getSelectedItemPosition();
+        if (i!=0)
         relation=Relationship[i-1];
+
+        int i1= spinnerEyes.getSelectedItemPosition();
+        if (i1!=0)
+        eyes=EyesList[i1-1];
+        int i2= spinnerLanguage.getSelectedItemPosition();
+        if (i2!=0)
+        language=LangList[i2-1];
+        int i3= spinnerMarital.getSelectedItemPosition();
+        if (i3!=0)
+        marital_status=MaritalList[i3-1];
+
+
+
+        idnumber=txtIdNumber.getText().toString();
+        height=txtHeight.getText().toString();
+        weight=txtWeight.getText().toString();
+        profession=txtProfession.getText().toString();
+        employed=txtEmployed.getText().toString();
+        religion=txtReligion.getText().toString();
 
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
@@ -526,24 +731,24 @@ String otherRelation;
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
         }
-        else if (address.equals("")) {
+       /* else if (address.equals("")) {
             txtAddress.setError("Please Enter Address");
             showAlert("Please Enter Address",  getActivity());
         }
        else if (phone.equals("")) {
             txtPhone.setError("Please Enter Phone");
             showAlert("Please Enter Phone",  getActivity());
-        } else if (phone.length() < 10) {
+        }*/ else if (phone.length()!=0&&phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
         }
-        else if (homePhone.equals("")) {
+      /*  else if (homePhone.equals("")) {
             txtHomePhone.setError("Please Enter Phone");
             showAlert("Please Enter Phone",  getActivity());
-        } else if (homePhone.length() < 10) {
+        }else if (homePhone.length() < 10) {
             txtHomePhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
-        }
+        }*/
         else {
             return true;
         }
@@ -559,6 +764,7 @@ String otherRelation;
         bdate = txtBdate.getText().toString().trim();
         homePhone=txtHomePhone.getText().toString().trim();
         gender=txtGender.getText().toString().trim();
+        idnumber=txtIdNumber.getText().toString();
         if (spinner.getSelectedItem()!=null) {
             country = spinner.getSelectedItem().toString();
         }
@@ -566,6 +772,25 @@ String otherRelation;
             country="";
         }
         address=txtAddress.getText().toString().trim();
+
+        height=txtHeight.getText().toString();
+        weight=txtWeight.getText().toString();
+        profession=txtProfession.getText().toString();
+        employed=txtEmployed.getText().toString();
+        religion=txtReligion.getText().toString();
+
+        int indexValue = spinnerEyes.getSelectedItemPosition();
+        if (indexValue!=0)
+         eyes =EyesList[indexValue-1];
+
+        int indexValuex = spinnerLanguage.getSelectedItemPosition();
+        if (indexValuex!=0)
+        language =LangList[indexValuex-1];
+
+        int indexValues = spinnerMarital.getSelectedItemPosition();
+        if (indexValues!=0)
+        marital_status =MaritalList[indexValues-1];
+
 
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
@@ -577,7 +802,7 @@ String otherRelation;
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
         }
-        else if (address.equals("")) {
+       /* else if (address.equals("")) {
             txtAddress.setError("Please Enter Address");
             showAlert("Please Enter Address",  getActivity());
         }
@@ -587,13 +812,13 @@ String otherRelation;
         } else if (phone.equals("")) {
             txtPhone.setError("Please Enter Phone");
             showAlert("Please Enter Phone",  getActivity());
-        } else if (phone.length() < 10) {
+        }*/ else if (phone.length()!=0&&phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
-        } else if (bdate.equals("")) {
+        } /*else if (bdate.equals("")) {
             txtBdate.setError("Please Enter Birth date");
             showAlert("Please Enter Birth date",  getActivity());
-        } else {
+        }*/ else {
             return true;
         }
         return false;
@@ -601,7 +826,7 @@ String otherRelation;
 
     private void editToConnection(byte[] photo) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -611,7 +836,7 @@ String otherRelation;
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -628,11 +853,12 @@ String otherRelation;
         country=spinner.getSelectedItem().toString();
         address=txtAddress.getText().toString().trim();
         relation= spinnerRelation.getSelectedItem().toString();
-        
+
+
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
             showAlert("Please Enter Name", getActivity());
-        } else if (email.equals("")) {
+        }/* else if (email.equals("")) {
             txtEmail.setError("Please Enter email");
             showAlert("Please Enter email",  getActivity());
         } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
@@ -643,13 +869,13 @@ String otherRelation;
             txtAddress.setError("Please Enter Address");
             showAlert("Please Enter Address",  getActivity());
         }
-       /* else if (country.equals("")) {
+       *//* else if (country.equals("")) {
             spinner.setError("Please Select Country");
             showAlert("Please Select Country",  getActivity());
-        } */else if (phone.equals("")) {
+        } *//*else if (phone.equals("")) {
             txtPhone.setError("Please Enter Phone");
             showAlert("Please Enter Phone",  getActivity());
-        } else if (phone.length() < 10) {
+        } */else if (phone.length()!=0&&phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
         } /*else if (bdate.equals("")) {

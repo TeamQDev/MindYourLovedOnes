@@ -10,7 +10,102 @@ public class PersonalInfo {
     String email="";
     String address="";
     String phone="";
+    String height="";
+    String weight="";
+    String profession="";
+    String employed="";
+    String religion="";
+    String eyes="",language="",marital_status="",veteran="",pet="";
+    public String getEyes() {
+        return eyes;
+    }
 
+    public void setEyes(String eyes) {
+        this.eyes = eyes;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getMarital_status() {
+        return marital_status;
+    }
+
+    public void setMarital_status(String marital_status) {
+        this.marital_status = marital_status;
+    }
+
+    public String getVeteran() {
+        return veteran;
+    }
+
+    public void setVeteran(String veteran) {
+        this.veteran = veteran;
+    }
+
+    public String getPet() {
+        return pet;
+    }
+
+    public void setPet(String pet) {
+        this.pet = pet;
+    }
+
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getEmployed() {
+        return employed;
+    }
+
+    public void setEmployed(String employed) {
+        this.employed = employed;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    String idnumber="";
     public String getHomePhone() {
         return homePhone;
     }

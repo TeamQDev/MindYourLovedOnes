@@ -192,9 +192,10 @@
             android:label="@string/title_activity_medical_appoint"
             android:theme="@style/MyMaterialTheme" />
         <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity" />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList"></activity>
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList" />
 
-      <!--  <provider
+        <!--
+        <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
@@ -202,7 +203,9 @@
             &lt;!&ndash;<meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>&ndash;&gt;
-        </provider>-->
+        </provider>
+        -->
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPetActivity"></activity>
     </application>
 
 </manifest>

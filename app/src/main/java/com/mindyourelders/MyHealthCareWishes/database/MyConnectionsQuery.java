@@ -36,13 +36,31 @@ public class MyConnectionsQuery {
     public static final String COL_FLAG= "Flag";
     public static final String COL_ISPRIMARY= "IsPrimary";
 
+    public static final String COL_HEIGHT = "height";
+    public static final String COL_WEIGHT = "weight";
+    public static final String COL_PROFESSION = "profession";
+    public static final String COL_EMPLOYED= "employed";
+    public static final String COL_RELIGION= "religion";
+    public static final String COL_EYES= "eyes";
+    public static final String COL_LANG= "language";
+    public static final String COL_MARITAL= "marital_status";
+    public static final String COL_VETERAN= "veteran";
+    public static final String COL_PET= "pet";
+    public static final String COL_IDNUMBER= "IDNUmber";
+
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
         this.dbHelper=dbHelper;
     }
 
     public static String createMyConnectionsTable() {
-        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_USER_ID+" INTEGER, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_HOME_PHONE+" VARCHAR(20),"+COL_WORK_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_MOBILE+" VARCHAR(20),"+COL_RELATION+" VARCHAR(50),"+COL_OTHER_RELATION+" VARCHAR(50),"+COL_NOTE+" VARCHAR(100),"+COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+COL_PHOTO+" BLOB);";
+        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_USER_ID+" INTEGER, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_HOME_PHONE+" VARCHAR(20),"+
+                COL_WORK_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_MOBILE+" VARCHAR(20),"+COL_RELATION+" VARCHAR(50),"+COL_OTHER_RELATION+" VARCHAR(50),"+COL_NOTE+" VARCHAR(100),"+
+                COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+
+                COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
+                COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
+                COL_IDNUMBER+" VARCHAR(10),"+
+                COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
 
@@ -105,6 +123,20 @@ public class MyConnectionsQuery {
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                     connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+
+                    connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                    connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                    connection.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                    connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                    connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                    connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                    connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                    connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                    connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                    connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+                    connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+
                     connectionList.add(connection);
                 } while (c.moveToNext());
             }
@@ -146,6 +178,20 @@ public class MyConnectionsQuery {
                 connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                 connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                 connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+
+                connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                connection.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+                connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+
             } while (c.moveToNext());
         }
 
@@ -153,7 +199,7 @@ public class MyConnectionsQuery {
     }
 
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -171,6 +217,18 @@ public class MyConnectionsQuery {
         cv.put(COL_RELATION,relation);
         cv.put(COL_PHOTO,photo);
         cv.put(COL_OTHER_RELATION,otherRelation);
+
+        cv.put(COL_HEIGHT,height);
+        cv.put(COL_WEIGHT,weight);
+        cv.put(COL_PROFESSION,profession);
+        cv.put(COL_EMPLOYED,employed);
+        cv.put(COL_RELIGION,religion);
+        cv.put(COL_EYES,eyes);
+        cv.put(COL_LANG,language);
+        cv.put(COL_MARITAL,marital_status);
+        cv.put(COL_VETERAN,veteran);
+        cv.put(COL_PET,pet);
+        cv.put(COL_IDNUMBER,idnumber);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 

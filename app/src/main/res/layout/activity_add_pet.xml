@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension70dp"
+        android:background="@color/colorBlue">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:src="@drawable/backward_arrow" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_centerInParent="true"
+            android:text="Add Pet"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension22dp" />
+
+        <ImageView
+            android:id="@+id/imgDone"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/check_mark"
+            />
+    </RelativeLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/header"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:maxLength="30"
+            android:maxLines="1"
+
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilBreed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilName"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtBreed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Breed"
+            android:maxLength="30"
+            android:maxLines="1"
+
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilBreed"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Color"
+            android:maxLength="30"
+            android:maxLines="1"
+
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilChip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilColor"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Microchip number"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilNeed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilChip"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtNeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Special Needs"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilVeteran"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilChip"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtVeteran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Veterinarian name, address, phone"
+            android:maxLines="3"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilCare"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilVeteran"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtCare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Person(s) who will care for pet (name, address, phone, email) "
+            android:maxLines="3"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilCares"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension80dp"
+       
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/tilCare"
+        android:visibility="gone"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtCares"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Person(s) who will care for pet (name, address, phone, email) "
+            android:maxLines="3"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:background="@drawable/corner_gray_white_border"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+    </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimension10dp"
+            android:layout_below="@+id/tilCares"
+android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/btnYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Add"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/btnNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Cancel"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+</RelativeLayout>
+</ScrollView>

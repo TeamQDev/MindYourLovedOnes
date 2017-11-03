@@ -32,6 +32,18 @@ public class PersonalInfoQuery {
     public static final String COL_ID= "Id";
 
 
+    public static final String COL_HEIGHT = "height";
+    public static final String COL_WEIGHT = "weight";
+    public static final String COL_PROFESSION = "profession";
+    public static final String COL_EMPLOYED= "employed";
+    public static final String COL_RELIGION= "religion";
+    public static final String COL_EYES= "eyes";
+    public static final String COL_LANG= "language";
+    public static final String COL_MARITAL= "marital_status";
+    public static final String COL_VETERAN= "veteran";
+    public static final String COL_PET= "pet";
+    public static final String COL_IDNUMBER= "IDNUmber";
+
 
     public PersonalInfoQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -39,7 +51,10 @@ public class PersonalInfoQuery {
     }
 
     public static String createPersonalInfoTable() {
-        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+COL_PHOTO+" BLOB);";
+        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
+                COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
+                COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
+                COL_IDNUMBER+" VARCHAR(10),"+ COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
 
@@ -100,6 +115,19 @@ public class PersonalInfoQuery {
                             Person.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                             Person.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
                             Person.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
+
+                            Person.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                            Person.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                            Person.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                            Person.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                            Person.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                            Person.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                            Person.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                            Person.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                            Person.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                            Person.setPet(c.getString(c.getColumnIndex(COL_PET)));
+                            Person.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                             personList.add(Person);
                         }
                     }
@@ -128,6 +156,20 @@ public class PersonalInfoQuery {
                 connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
                 connection.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
                 connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
+
+                connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                connection.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+                connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+
             } while (c.moveToNext());
         }
 
@@ -150,7 +192,7 @@ public class PersonalInfoQuery {
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -164,6 +206,19 @@ public class PersonalInfoQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_PHONE,homephone);
         cv.put(COL_GENDER,gender);
+
+        cv.put(COL_HEIGHT,height);
+        cv.put(COL_WEIGHT,weight);
+        cv.put(COL_PROFESSION,profession);
+        cv.put(COL_EMPLOYED,employed);
+        cv.put(COL_RELIGION,religion);
+        cv.put(COL_EYES,eyes);
+        cv.put(COL_LANG,language);
+        cv.put(COL_MARITAL,marital_status);
+        cv.put(COL_VETERAN,veteran);
+        cv.put(COL_PET,pet);
+        cv.put(COL_IDNUMBER,idnumber);
+
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
