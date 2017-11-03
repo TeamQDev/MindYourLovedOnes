@@ -43,11 +43,11 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     View rootview;
     ImageView imgBack, imgDone;
     TextView txtTitle;
-     EditText etNote,etMouthNote;
+     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
     EditText etFt, etInch, etWeight, etAdditional, etPet;
-    ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid,tbMouth;
+    ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid,tbMouth,tbColor,tbSpeech,tbFeed,tbToilet,tbMedicate;
     RadioButton rbYes, rbNo;
-    String glass = "No", lense = "No", falses = "No", implants = "No", aid = "No", donor = "No",mouth="No";
+    String glass = "No", lense = "No", falses = "No", implants = "No", aid = "No", donor = "No",mouth="No",blind="No",speech="No",feed="No",toilet="No",medicate="No";
     String ft, inch, weight, color, lang1, lang2, blood, pet;
     RadioGroup rgDonor;
     TextView txtName;
@@ -58,8 +58,12 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     public static final int REQUEST_HISTORY = 200;
     public static final int REQUEST_IMPLANTS = 300;
     public static final int REQUEST_HOSPITAL = 400;
-String note="";
+    String note="";
     String mouthnote="";
+    String visionnote="";
+    String Aidenote="";
+    String functionnote="";
+    String dietnote="";
     ArrayList historList = new ArrayList();
 
     ArrayList hospitalList = new ArrayList();
@@ -106,6 +110,12 @@ String note="";
         tbFalse.setOnCheckedChangeListener(this);
         tbImplants.setOnCheckedChangeListener(this);
         tbHearingAid.setOnCheckedChangeListener(this);
+
+        tbSpeech.setOnCheckedChangeListener(this);
+        tbColor.setOnCheckedChangeListener(this);
+        tbMedicate.setOnCheckedChangeListener(this);
+        tbToilet.setOnCheckedChangeListener(this);
+        tbFeed.setOnCheckedChangeListener(this);
     }
 
     private void initUI() {
@@ -115,8 +125,12 @@ String note="";
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
-        etNote= (EditText) rootview.findViewById(R.id.etNote);
+        etPreNote= (EditText) rootview.findViewById(R.id.etNote);
         etMouthNote= (EditText) rootview.findViewById(R.id.etMouthNote);
+        etVisionNote= (EditText) rootview.findViewById(R.id.etVisionNote);
+        etAideNote= (EditText) rootview.findViewById(R.id.etAideNote);
+        etFunctionalNote= (EditText) rootview.findViewById(R.id.etFunctionalNote);
+        etDietNote= (EditText) rootview.findViewById(R.id.etDietNote);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
 
@@ -144,6 +158,12 @@ String note="";
         tbFalse = (ToggleButton) rootview.findViewById(R.id.tbFalse);
         tbImplants = (ToggleButton) rootview.findViewById(R.id.tbImplants);
         tbHearingAid = (ToggleButton) rootview.findViewById(R.id.tbHearingAid);
+
+        tbColor = (ToggleButton) rootview.findViewById(R.id.tbBlind);
+        tbSpeech = (ToggleButton) rootview.findViewById(R.id.tbSpeech);
+        tbFeed = (ToggleButton) rootview.findViewById(R.id.tbfeed);
+        tbToilet = (ToggleButton) rootview.findViewById(R.id.tbToileting);
+        tbMedicate = (ToggleButton) rootview.findViewById(R.id.tbMedicate);
 
         rbYes = (RadioButton) rootview.findViewById(R.id.rbYes);
         rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
@@ -192,8 +212,13 @@ String note="";
             etWeight.setText(medInfo.getWeight());
             etAdditional.setText(medInfo.getLang2());
             etPet.setText(medInfo.getPet());
-            etNote.setText(medInfo.getNote());
+            etPreNote.setText(medInfo.getNote());
             etMouthNote.setText(medInfo.getMouthnote());
+
+            etDietNote.setText(medInfo.getDietNote());
+            etVisionNote.setText(medInfo.getVisionNote());
+            etFunctionalNote.setText(medInfo.getFunctionnote());
+            etAideNote.setText(medInfo.getAideNote());
             int index = 0;
             for (int i = 0; i < EyesList.length; i++) {
                 if (medInfo.getColor().equals(EyesList[i])) {
@@ -220,6 +245,44 @@ String note="";
 
             etAdditional.setText(medInfo.getLang2());
 
+            if (medInfo.getMedicate().equals("Yes")) {
+                tbMedicate.setChecked(true);
+                medicate="Yes";
+            } else if (medInfo.getMedicate().equals("No")) {
+                tbMedicate.setChecked(false);
+                medicate="No";
+            }
+
+            if (medInfo.getToilet().equals("Yes")) {
+                tbToilet.setChecked(true);
+                toilet="Yes";
+            } else if (medInfo.getToilet().equals("No")) {
+                tbToilet.setChecked(false);
+                toilet="No";
+            }
+
+            if (medInfo.getFeed().equals("Yes")) {
+                tbFeed.setChecked(true);
+                feed="Yes";
+            } else if (medInfo.getFeed().equals("No")) {
+                tbFeed.setChecked(false);
+                feed="No";
+            }
+
+            if (medInfo.getSpeech().equals("Yes")) {
+                tbSpeech.setChecked(true);
+                speech="Yes";
+            } else if (medInfo.getSpeech().equals("No")) {
+                tbSpeech.setChecked(false);
+                speech="No";
+            }
+            if (medInfo.getBlind().equals("Yes")) {
+                tbColor.setChecked(true);
+                blind="Yes";
+            } else if (medInfo.getBlind().equals("No")) {
+                tbColor.setChecked(false);
+                blind="No";
+            }
             if (medInfo.getGlass().equals("Yes")) {
                 tbGlass.setChecked(true);
                 glass="Yes";
@@ -476,9 +539,15 @@ String note="";
                 lang2 = etAdditional.getText().toString();
                 blood = spinnerBlood.getSelectedItem().toString();
                 pet = etPet.getText().toString().trim();
-                note = etNote.getText().toString().trim();
+                note = etPreNote.getText().toString().trim();
                 mouthnote=etMouthNote.getText().toString().trim();
-                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote);
+
+                visionnote=etVisionNote.getText().toString().trim();
+                Aidenote=etAideNote.getText().toString().trim();
+                functionnote=etFunctionalNote.getText().toString().trim();
+                dietnote=etDietNote.getText().toString().trim();
+
+                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote,visionnote,Aidenote,functionnote,dietnote,blind,speech,medicate,toilet,feed);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Medical Profile Saved", Toast.LENGTH_SHORT).show();
                     getActivity().finish();
@@ -562,6 +631,39 @@ String note="";
                     glass = "Yes";
                 else
                     glass = "No";
+                break;
+
+            case R.id.tbBlind:
+                if (isChecked == true)
+                    blind = "Yes";
+                else
+                    blind = "No";
+                break;
+
+            case R.id.tbfeed:
+                if (isChecked == true)
+                    feed = "Yes";
+                else
+                    feed = "No";
+                break;
+
+            case R.id.tbToileting:
+                if (isChecked == true)
+                    toilet = "Yes";
+                else
+                    toilet = "No";
+                break;
+            case R.id.tbMedicate:
+                if (isChecked == true)
+                    medicate = "Yes";
+                else
+                    medicate = "No";
+                break;
+            case R.id.tbSpeech:
+                if (isChecked == true)
+                    speech = "Yes";
+                else
+                    speech = "No";
                 break;
 
             case R.id.tbMouth:

@@ -8,6 +8,91 @@ public class MedInfo {
     int id;
     int userId;
     String feet="";
+    String blind="No";
+    String speech="No";
+    String feed="No";
+    String toilet="No";
+
+    String aideNote="";
+
+    public String getAideNote() {
+        return aideNote;
+    }
+
+    public void setAideNote(String aideNote) {
+        this.aideNote = aideNote;
+    }
+
+    public String getVisionNote() {
+        return visionNote;
+    }
+
+    public void setVisionNote(String visionNote) {
+        this.visionNote = visionNote;
+    }
+
+    public String getFunctionnote() {
+        return functionnote;
+    }
+
+    public void setFunctionnote(String functionnote) {
+        this.functionnote = functionnote;
+    }
+
+    public String getDietNote() {
+        return dietNote;
+    }
+
+    public void setDietNote(String dietNote) {
+        this.dietNote = dietNote;
+    }
+
+    String visionNote="";
+    String functionnote="";
+    String dietNote="";
+
+    public String getBlind() {
+        return blind;
+    }
+
+    public void setBlind(String blind) {
+        this.blind = blind;
+    }
+
+    public String getSpeech() {
+        return speech;
+    }
+
+    public void setSpeech(String speech) {
+        this.speech = speech;
+    }
+
+    public String getFeed() {
+        return feed;
+    }
+
+    public void setFeed(String feed) {
+        this.feed = feed;
+    }
+
+    public String getToilet() {
+        return toilet;
+    }
+
+    public void setToilet(String toilet) {
+        this.toilet = toilet;
+    }
+
+    public String getMedicate() {
+        return medicate;
+    }
+
+    public void setMedicate(String medicate) {
+        this.medicate = medicate;
+    }
+
+    String medicate="No";
+
 
     public String getMouth() {
         return mouth;

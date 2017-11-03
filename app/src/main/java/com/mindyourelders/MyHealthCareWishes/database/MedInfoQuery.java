@@ -38,6 +38,15 @@ public class MedInfoQuery {
     public static final String COL_ORGANDONOR="OrganDonor";
     public static final String COL_PETS="Pets";
 
+    public static final String COL_SPEECH="Speech";
+    public static final String COL_FEED= "Feed";
+    public static final String COL_TOILET="Toilet";
+    public static final String COL_MEDICATE="Medicate";
+    public static final String COL_BLIND ="Blind";
+    public static final String COL_AIDE_NOTE="Aide_Note";
+    public static final String COL_FUNCTION_NOTE="FunctionNote";
+    public static final String COL_VISION_NOTE="VisionNote";
+    public static final String COL_DIET_NOTE="DietNote";
 
     public MedInfoQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -51,6 +60,9 @@ public class MedInfoQuery {
                 COL_LANG_SECONDORY+" VARCHAR(20),"+COL_EYE_GLASSES+" VARCHAR(20),"+COL_EYE_LENSE+" VARCHAR(20),"+
                 COL_TEETH_FALSE+" VARCHAR(20),"+COL_TEETH_IMPLANTS+" VARCHAR(20),"+COL_HEARING_AIDES+" VARCHAR(20),"+
                 COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_PETS+" VARCHAR(20),"+COL_NOTE+" VARCHAR(20),"+
+                COL_SPEECH+" VARCHAR(20),"+COL_FEED+" VARCHAR(20),"+COL_TOILET+" VARCHAR(20),"+
+                COL_MEDICATE+" VARCHAR(20),"+COL_BLIND+" VARCHAR(20),"+COL_AIDE_NOTE+" VARCHAR(20),"+
+                COL_FUNCTION_NOTE+" VARCHAR(20),"+COL_VISION_NOTE+" VARCHAR(20),"+COL_DIET_NOTE+" VARCHAR(20),"+
                 COL_MOUTH_NOTE+" VARCHAR(20),"+COL_TEETH_MOUTH+" VARCHAR(20)"+
                 ");";
         return createTableQuery;
@@ -61,7 +73,7 @@ public class MedInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote) {
+    public static Boolean insertMedInfoData(int userid, String ft, String inch, String weight, String color, String lang1, String lang2, String pet, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote, String visionnote, String aidenote, String functionnote, String dietnote, String blind, String speech, String medicate, String toilet, String feed) {
         boolean flag=false;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -83,6 +95,17 @@ public class MedInfoQuery {
         cv.put(COL_PETS,pet);
         cv.put(COL_MOUTH_NOTE,mouthnote);
         cv.put(COL_TEETH_MOUTH,mouth);
+
+        cv.put(COL_SPEECH,speech);
+        cv.put(COL_FEED,feed);
+        cv.put(COL_TOILET,toilet);
+        cv.put(COL_MEDICATE,medicate);
+        cv.put(COL_BLIND,blind);
+        cv.put(COL_AIDE_NOTE,aidenote);
+        cv.put(COL_FUNCTION_NOTE,functionnote);
+        cv.put(COL_VISION_NOTE,visionnote);
+        cv.put(COL_DIET_NOTE,dietnote);
+
        Cursor c = MedInfoQuery.fetchOneRecordCursor(userid);
         if (c.moveToFirst()) {
             int rowid=db.update(TABLE_NAME,cv,COL_USERID+"="+userid,null);
@@ -148,6 +171,17 @@ public class MedInfoQuery {
                 medInfo.setPet(c.getString(c.getColumnIndex(COL_PETS)));
                 medInfo.setMouth(c.getString(c.getColumnIndex(COL_TEETH_MOUTH)));
                 medInfo.setMouthnote(c.getString(c.getColumnIndex(COL_MOUTH_NOTE)));
+
+                medInfo.setSpeech(c.getString(c.getColumnIndex(COL_SPEECH)));
+                medInfo.setFeed(c.getString(c.getColumnIndex(COL_FEED)));
+                medInfo.setToilet(c.getString(c.getColumnIndex(COL_TOILET)));
+                medInfo.setMedicate(c.getString(c.getColumnIndex(COL_MEDICATE)));
+                medInfo.setBlind(c.getString(c.getColumnIndex(COL_BLIND)));
+                medInfo.setAideNote(c.getString(c.getColumnIndex(COL_AIDE_NOTE)));
+                medInfo.setFunctionnote(c.getString(c.getColumnIndex(COL_FUNCTION_NOTE)));
+                medInfo.setVisionNote(c.getString(c.getColumnIndex(COL_VISION_NOTE)));
+                medInfo.setDietNote(c.getString(c.getColumnIndex(COL_DIET_NOTE)));
+
             } while (c.moveToNext());
         }
         
