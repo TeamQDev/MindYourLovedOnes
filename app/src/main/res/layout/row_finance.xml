@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimension2dp"
         android:gravity="center_vertical"
-      >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
             android:id="@+id/imgProfile"

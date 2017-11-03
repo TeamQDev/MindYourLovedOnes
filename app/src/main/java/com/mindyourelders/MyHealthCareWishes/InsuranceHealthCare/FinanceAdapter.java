@@ -90,18 +90,17 @@ public class FinanceAdapter extends BaseAdapter {
         {
             holder.txtAddress.setVisibility(View.VISIBLE);
         }
-       /* if(FinanceList.get(position).getCategory().equals(""))
+        if(FinanceList.get(position).getCategory().equals(""))
         {
             holder.txtCategory.setVisibility(View.GONE);
         }
         else
         {
             holder.txtCategory.setVisibility(View.VISIBLE);
-        }*/
+        }
         holder.txtName.setText(FinanceList.get(position).getName());
         holder.txtAddress.setText(FinanceList.get(position).getAddress());
         holder.txtPhone.setText(FinanceList.get(position).getOfficePhone());
-        holder.txtType.setText(FinanceList.get(position).getName());
         holder.txtCategory.setText(FinanceList.get(position).getCategory());
         //holder.imgProfile.setImageResource(FinanceList.get(position).getImage());
         byte[] photo=FinanceList.get(position).getPhoto();

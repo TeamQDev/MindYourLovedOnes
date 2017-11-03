@@ -817,7 +817,7 @@ android:gravity="bottom"
                    ></View>
 
                <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
-                   android:id="@+id/ListAllergy"
+                   android:id="@+id/ListPet"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_below="@+id/viewBar"

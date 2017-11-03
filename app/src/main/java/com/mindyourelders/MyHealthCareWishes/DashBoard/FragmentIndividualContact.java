@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -38,7 +39,9 @@ import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -52,6 +55,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -78,6 +82,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     RadioGroup rgPet,rgVeteran;
     RadioButton rbYes,rbNo,rbYesPet,rbNoPet;
     public static final int REQUEST_PET= 400;
+    
+    ListView ListPet;
 
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
@@ -116,6 +122,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         dbHelper=new DBHelper(getActivity());
         PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
+        PetQuery p=new PetQuery(getActivity(),dbHelper);
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL)))
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL));
@@ -139,6 +146,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
+        ListPet= (ListView) rootview.findViewById(R.id.ListPet);
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
         imgAddpet = (ImageView) rootview.findViewById(R.id.imgAddPet);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
@@ -325,6 +333,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             }
 
         });
+        setPetData();
     }
 
     private void setValues() {
@@ -641,11 +650,6 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                       /* SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
-                        txtBdate.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
-                      String currentDateandTime = sdf.format(new Date());
-                        txtBdate.setText(currentDateandTime);*/
-
                         Calendar newDate = Calendar.getInstance();
                         newDate.set(year, month, dayOfMonth);
                         long selectedMilli = newDate.getTimeInMillis();
@@ -905,7 +909,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
  public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView profileImage = (ImageView) rootview.findViewById(R.id.imgProfile);
-        if (requestCode == RESULT_SELECT_PHOTO && null != data) {
+     if (REQUEST_PET == requestCode) {
+           /* String value=data.getExtras().getString("Value");
+            String reaction=data.getExtras().getString("Reaction");
+            String treatment=data.getExtras().getString("Treatment");
+            String allergy="Pet: "+value+"\nReaction: "+reaction+"\nTreatment: "+treatment;
+            allergyList.add(allergy);*/
+         setPetData();
+         ListPet.requestFocus();
+     } else
+     if (requestCode == RESULT_SELECT_PHOTO && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -961,5 +974,59 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
         }
 
+    }
+
+    private void setPetData() {
+        final ArrayList allergyList = new ArrayList();
+        final ArrayList<Pet> AllargyLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        if (AllargyLists.size() != 0) {
+            ListPet.setVisibility(View.VISIBLE);
+            for (int i = 0; i < AllargyLists.size(); i++) {
+                Pet a = AllargyLists.get(i);
+                String allergy = "Pet Name: " + a.getName() + "\nBreed: " + a.getBreed() + "\nColor: " + a.getColor()+ "\nVeterinarian: " + a.getVeterian()+ "\nGuard: " + a.getGuard();
+                allergyList.add(allergy);
+            }
+            if (allergyList.size() != 0) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, allergyList);
+                ListPet.setAdapter(adapter);
+                ListPet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        ImageView imgEdit= (ImageView) view.findViewById(R.id.imgEdit);
+                        ImageView imgDelete= (ImageView) view.findViewById(R.id.imgDelete);
+                       /* imgEdit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Pet a=AllargyLists.get(position);
+                                Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
+                                allergyIntent.putExtra("IsPet", true);
+                                allergyIntent.putExtra("ADD", "PetUpdate");
+                                allergyIntent.putExtra("Title", "Update Pet");
+                                allergyIntent.putExtra("Name", "Add Pet");
+                                allergyIntent.putExtra("PetObject",a);
+                                startActivityForResult(allergyIntent, REQUEST_ALLERGY);
+                            }
+                        });
+
+                        imgDelete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Pet a=AllargyLists.get(position);
+                                boolean flag= PetQuery.deleteRecord(a.getId());
+                                if(flag==true)
+                                {
+                                    Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+                                    setPetData();
+                                    ListPet.requestFocus();
+                                }
+                            }
+                        });*/
+                    }
+                });
+            }
+        }
+        else{
+            ListPet.setVisibility(View.GONE);
+        }
     }
 }

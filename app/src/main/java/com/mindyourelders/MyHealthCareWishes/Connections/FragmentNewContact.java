@@ -2287,13 +2287,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
-            } /*else if (email.equals("")) {
+            } else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
             } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                 txtEmail.setError("Please enter valid email");
                 showAlert("Please enter valid email", getActivity());
-            } else if (mobile.equals("")) {
+            } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
             }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
