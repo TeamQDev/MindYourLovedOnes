@@ -56,6 +56,7 @@
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_toLeftOf="@+id/imgForword"
             android:gravity="center_vertical"
+            android:layout_centerVertical="true"
             >
 
             <TextView
@@ -141,16 +142,17 @@
                 android:drawablePadding="@dimen/dimension5dp"
                 android:layout_toRightOf="@+id/txtPhone"
                 android:layout_below="@+id/txtType" />
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension25dp"
+                android:layout_height="@dimen/dimension25dp"
+                android:src="@drawable/ic_edit_blue"
+                android:layout_toRightOf="@+id/txtName"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imgEdit"
-            android:layout_width="@dimen/dimension25dp"
-            android:layout_height="@dimen/dimension25dp"
-            android:src="@drawable/ic_edit_blue"
-            android:layout_toRightOf="@+id/rlMain"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            />
+
 
         <ImageView
             android:id="@+id/imgForword"

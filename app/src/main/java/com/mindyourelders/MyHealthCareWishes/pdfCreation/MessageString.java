@@ -1,4 +1,4 @@
-package com.mindyourelders.MyHealthCareWishes.HomeActivity;
+package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 

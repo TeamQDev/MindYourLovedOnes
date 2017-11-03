@@ -20,9 +20,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mindyourelders.MyHealthCareWishes.HomeActivity.Individual;
-import com.mindyourelders.MyHealthCareWishes.HomeActivity.MessageString;
-import com.mindyourelders.MyHealthCareWishes.HomeActivity.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistsActivity;
@@ -138,6 +139,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         dbHelper=new DBHelper(getActivity());
         PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
+        MedInfoQuery mq=new MedInfoQuery(getActivity(),dbHelper);
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL)))
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL));
@@ -198,7 +200,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         txtTitle.setText("");
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgPdf = (ImageView) getActivity().findViewById(R.id.imgPdf);
-        imgPdf.setVisibility(View.VISIBLE);
+        imgPdf.setVisibility(View.GONE);
         imgNoti.setVisibility(View.VISIBLE);
         imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
         imgLogo.setVisibility(View.GONE);
@@ -319,6 +321,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
                 Header.addEmptyLine(2);
                 if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                     new Individual(personalInfo);
+
                     }
                     else{
                         new Individual(connection);

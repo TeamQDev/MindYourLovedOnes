@@ -74,6 +74,22 @@ public class ProxyAdapter extends BaseAdapter {
         else{
             holder= (ViewHolder) convertView.getTag();
         }
+        if(proxyList.get(position).getPhone().equals(""))
+        {
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+        if(proxyList.get(position).getWorkPhone().equals(""))
+        {
+            holder.txtTelePhone.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtTelePhone.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(proxyList.get(position).getName());
         holder.txtOfficePhone.setText(proxyList.get(position).getWorkPhone());
         holder.txtPhone.setText(proxyList.get(position).getMobile());
@@ -81,9 +97,9 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtType.setText("Primary Proxy");
         }else if (proxyList.get(position).getIsPrimary()==2)
-            {
-                holder.txtType.setText("Successor Proxy");
-            }
+        {
+            holder.txtType.setText("Successor Proxy");
+        }
 
         holder.txtTelePhone.setText(proxyList.get(position).getPhone());
         byte[] photo=proxyList.get(position).getPhoto();
@@ -99,6 +115,7 @@ public class ProxyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
+
         holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

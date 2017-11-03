@@ -404,99 +404,84 @@ android:gravity="bottom"
                 android:background="@drawable/corner_gray_white_border"
                 />
         </android.support.design.widget.TextInputLayout>
-
-       <!-- <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tilBdate"
-            android:paddingBottom="@dimen/dimension8dp"
-            android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            app:passwordToggleEnabled="true">
-            &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
-            <AutoCompleteTextView
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dimension10dp"
-                android:drawableRight="@drawable/show"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
-        </android.support.design.widget.TextInputLayout>-->
-        <!-- <LinearLayout
-             android:id="@+id/llPassword"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:layout_below="@+id/tilBdate"
-             >
-         <android.support.design.widget.TextInputLayout
-             android:id="@+id/tilPassword"
-             android:layout_width="@dimen/dimension0dp"
-             android:layout_height="wrap_content"
-             android:paddingBottom="@dimen/dimension8dp"
-             android:paddingLeft="@dimen/dimension30dp"
-             android:layout_weight="75"
-             >
-             &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
-             <AutoCompleteTextView
-                 android:id="@+id/txtPassword"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:hint="Password"
-                 android:inputType="textPassword"
-                 android:maxLength="10"
-                 android:maxLines="1"
-                 android:singleLine="true"
-                 android:textColor="@color/colorPrimaryDark"
-                 android:textSize="@dimen/dimension20dp"
-                 />
-         </android.support.design.widget.TextInputLayout>
-
-             <android.support.design.widget.TextInputLayout
-                 android:id="@+id/tilPasswordShow"
-                 android:layout_width="@dimen/dimension0dp"
-                 android:layout_height="wrap_content"
-                 android:paddingBottom="@dimen/dimension8dp"
-                 android:paddingRight="@dimen/dimension30dp"
-                 android:layout_weight="30"
-                 >
-                 &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
-                 <TextView
-                     android:id="@+id/txtPasswordShow"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="SHOW"
-                     android:gravity="right"
-                     android:maxLength="10"
-                     android:maxLines="1"
-                     android:singleLine="true"
-                     android:textColor="@color/colorPrimaryDark"
-                     android:textSize="@dimen/dimension20dp"
-                     />
-             </android.support.design.widget.TextInputLayout>
-         </LinearLayout>-->
-        <!-- <TextView
-             android:id="@+id/txtPolicy"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_below="@+id/tilPassword"
-             android:layout_marginLeft="@dimen/dimension60dp"
-             android:layout_marginRight="@dimen/dimension60dp"
-             android:layout_marginTop="@dimen/dimension30dp"
-             android:gravity="center"
-             android:text="@string/PolicyText"
-             android:textColor="@color/colorGrayPolicy"
-             android:textSize="@dimen/dimension16dp" />-->
-
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/tilHeight"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/dimension80dp"
+           android:layout_below="@+id/tilBdate"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp"
+           android:gravity="bottom"
+           >
+           <AutoCompleteTextView
+               android:id="@+id/txtHeight"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Height"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension10dp"
+               android:paddingBottom="@dimen/dimension10dp"
+               android:textColor="@color/colorPrimaryDark"
+               android:textSize="@dimen/dimension20dp"
+               android:background="@drawable/corner_gray_white_border"
+               />
+       </android.support.design.widget.TextInputLayout>
+       <android.support.design.widget.TextInputLayout
+           android:id="@+id/tilWeight"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/dimension80dp"
+           android:layout_below="@+id/tilHeight"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp"
+           android:gravity="bottom"
+           >
+           <AutoCompleteTextView
+               android:id="@+id/txtWeight"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Weight"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension10dp"
+               android:paddingBottom="@dimen/dimension10dp"
+               android:textColor="@color/colorPrimaryDark"
+               android:textSize="@dimen/dimension20dp"
+               android:background="@drawable/corner_gray_white_border"
+               />
+       </android.support.design.widget.TextInputLayout>
+       <TextView
+           android:id="@+id/txtEye"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/tilWeight"
+           android:layout_marginBottom="@dimen/dimension10dp"
+           android:layout_marginLeft="@dimen/dimension35dp"
+           android:layout_marginRight="@dimen/dimension30dp"
+           android:layout_marginTop="@dimen/dimension20dp"
+           android:text="Eyes Color"
+           android:textColor="@color/colorBlue"
+           android:textSize="@dimen/dimension20dp"
+           />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/txtEye"
+           android:layout_marginBottom="@dimen/dimension25dp"
+           android:layout_marginLeft="@dimen/dimension30dp"
+           android:layout_marginRight="@dimen/dimension30dp"
+           android:background="@drawable/corner_gray_white_border"
+          >
+           <Spinner
+               android:id="@+id/spinnerEyes"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@+id/imgEye"
+               android:paddingLeft="@dimen/dimension15dp"
+               android:paddingTop="@dimen/dimension15dp"
+               android:paddingBottom="@dimen/dimension15dp"
+               android:popupBackground="@android:color/transparent" />
+       </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>

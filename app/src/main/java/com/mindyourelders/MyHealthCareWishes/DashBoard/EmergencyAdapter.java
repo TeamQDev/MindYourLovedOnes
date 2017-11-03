@@ -90,6 +90,14 @@ public class EmergencyAdapter extends BaseAdapter {
         {
             holder.txtTelePhone.setVisibility(View.VISIBLE);
         }
+        if(emergencyList.get(position).getRelationType().equals(""))
+        {
+            holder.txtType.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtType.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(emergencyList.get(position).getName());
         holder.txtOfficePhone.setText(emergencyList.get(position).getWorkPhone());
         holder.txtPhone.setText(emergencyList.get(position).getMobile());

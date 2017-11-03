@@ -1,4 +1,4 @@
-package com.mindyourelders.MyHealthCareWishes.HomeActivity;
+package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;

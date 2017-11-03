@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,10 +82,11 @@ String otherRelation;
     ImageView imgBack;
     RelativeConnection connection;
     PersonalInfo personalInfo;
+    Spinner spinnerEyes;
 
     TextInputLayout tilBdate,tilName,tilWorkPhone;
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
-
+    String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -149,6 +151,12 @@ String otherRelation;
         txtWorkPhone = (TextView) rootview.findViewById(R.id.txtWorkPhone);
 
         spinner = (MySpinner) rootview.findViewById(R.id.spinner);
+        spinnerEyes = (Spinner) rootview.findViewById(R.id.spinnerEyes);
+
+        ArrayAdapter<String> adapters = new ArrayAdapter<String>(getActivity(),  android.R.layout.simple_spinner_item, EyesList);
+        adapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEyes.setAdapter(adapters);
+        spinnerEyes.setPrompt("Select Eyes Color");
 
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, countryList);
