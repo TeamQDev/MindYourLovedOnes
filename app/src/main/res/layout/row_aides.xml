@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/imgProfile"
             android:layout_marginLeft="@dimen/dimension25dp"
-            android:layout_toLeftOf="@+id/imgEdit"
+            android:layout_centerVertical="true"
             >
             <TextView
                 android:id="@+id/txtName"
@@ -81,17 +81,17 @@
                 android:drawablePadding="@dimen/dimension10dp"
                 android:layout_marginBottom="@dimen/dimension5dp"
                 />
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension25dp"
+                android:layout_height="@dimen/dimension25dp"
+                android:src="@drawable/ic_edit_blue"
+                android:layout_toRightOf="@+id/txtName"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imgEdit"
-            android:layout_width="@dimen/dimension25dp"
-            android:layout_height="@dimen/dimension25dp"
-            android:src="@drawable/ic_edit_blue"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimension5dp"
-            />
+
 
         <ImageView
             android:id="@+id/imgForword"

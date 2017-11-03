@@ -51,7 +51,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAlert;
 
@@ -639,7 +641,21 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        txtBdate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                       /* SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+                        txtBdate.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+                      String currentDateandTime = sdf.format(new Date());
+                        txtBdate.setText(currentDateandTime);*/
+
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, month, dayOfMonth);
+                        long selectedMilli = newDate.getTimeInMillis();
+
+                        Date datePickerDate = new Date(selectedMilli);
+                        String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                        DateClass d=new DateClass();
+                        d.setDate(reportDate);
+                        txtBdate.setText(reportDate);
                     }
                 }, year, month, day);
                 dpd.show();

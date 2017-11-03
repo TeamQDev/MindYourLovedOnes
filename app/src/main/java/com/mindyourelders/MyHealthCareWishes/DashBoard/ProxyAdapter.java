@@ -90,6 +90,14 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtTelePhone.setVisibility(View.VISIBLE);
         }
+        if(proxyList.get(position).getRelationType().equals(""))
+        {
+            holder.txtType.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtType.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(proxyList.get(position).getName());
         holder.txtOfficePhone.setText(proxyList.get(position).getWorkPhone());
         holder.txtPhone.setText(proxyList.get(position).getMobile());
@@ -100,6 +108,7 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtType.setText("Successor Proxy");
         }
+
 
         holder.txtTelePhone.setText(proxyList.get(position).getPhone());
         byte[] photo=proxyList.get(position).getPhoto();

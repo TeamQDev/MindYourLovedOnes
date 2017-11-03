@@ -90,6 +90,15 @@ public class HospitalAdapter extends BaseAdapter{
         {
             holder.txtAddress.setVisibility(View.VISIBLE);
         }
+
+        if(hospitalList.get(position).getCategory().equals(""))
+        {
+            holder.txtCategory.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtCategory.setVisibility(View.VISIBLE);
+        }
         holder.txtName.setText(hospitalList.get(position).getName());
         holder.txtAddress.setText(hospitalList.get(position).getAddress());
         holder.txtPhone.setText(hospitalList.get(position).getOfficePhone());

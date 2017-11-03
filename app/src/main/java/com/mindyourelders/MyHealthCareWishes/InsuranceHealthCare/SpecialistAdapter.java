@@ -90,6 +90,15 @@ public class SpecialistAdapter extends BaseAdapter {
         {
             holder.txtAddress.setVisibility(View.VISIBLE);
         }
+        if(specialistList.get(position).getType().equals(""))
+        {
+            holder.txtType.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.txtType.setVisibility(View.VISIBLE);
+        }
+
         holder.txtName.setText(specialistList.get(position).getName());
         holder.txtOfficePhone.setText(specialistList.get(position).getOtherPhone());
         holder.txtPhone.setText(specialistList.get(position).getOfficePhone());

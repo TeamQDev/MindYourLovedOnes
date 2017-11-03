@@ -82,6 +82,14 @@ public class InsuranceAdapter extends BaseAdapter {
         {
             holder.txtPhone.setVisibility(View.VISIBLE);
         }
+       /* if(insuranceList.get(position).getType().equals(""))
+        {
+            holder.txtType.setVisibility(View.GONE);
+        }else
+        {
+            holder.tx
+            tType.setVisibility(View.VISIBLE);
+        }*/
         holder.txtPhone.setText(insuranceList.get(position).getPhone());
       //  holder.imgProfile.setImageResource(insuranceList.get(position).getImage());
         byte[] photo=insuranceList.get(position).getPhoto();

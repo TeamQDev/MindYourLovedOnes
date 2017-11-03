@@ -54,6 +54,14 @@
                 android:drawablePadding="@dimen/dimension5dp"
                 android:layout_marginTop="@dimen/dimension10dp"
                 />
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension25dp"
+                android:layout_height="@dimen/dimension25dp"
+                android:src="@drawable/ic_edit_blue"
+                android:layout_toRightOf="@+id/txtName"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                />
         </RelativeLayout>
 
 
@@ -70,14 +78,7 @@
             android:layout_marginLeft="@dimen/dimension5dp"
             android:visibility="gone"
             />
-        <ImageView
-            android:id="@+id/imgEdit"
-            android:layout_width="@dimen/dimension25dp"
-            android:layout_height="@dimen/dimension25dp"
-            android:src="@drawable/ic_edit_blue"
-            android:layout_toRightOf="@+id/rlName"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            />
+
         <TextView
             android:id="@+id/txtId"
             android:layout_width="wrap_content"
