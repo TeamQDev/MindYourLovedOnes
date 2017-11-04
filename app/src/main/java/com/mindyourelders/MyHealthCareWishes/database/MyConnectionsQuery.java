@@ -47,6 +47,7 @@ public class MyConnectionsQuery {
     public static final String COL_VETERAN= "veteran";
     public static final String COL_PET= "pet";
     public static final String COL_IDNUMBER= "IDNUmber";
+    public static final String COL_MANGER_PHONE= "Manager_Phone";
 
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -59,7 +60,7 @@ public class MyConnectionsQuery {
                 COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
-                COL_IDNUMBER+" VARCHAR(10),"+
+                COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+
                 COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
@@ -136,6 +137,7 @@ public class MyConnectionsQuery {
                     connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
                     connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                     connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                    connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
 
                     connectionList.add(connection);
                 } while (c.moveToNext());
@@ -191,6 +193,7 @@ public class MyConnectionsQuery {
                 connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
                 connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
 
             } while (c.moveToNext());
         }
@@ -199,7 +202,7 @@ public class MyConnectionsQuery {
     }
 
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -229,6 +232,7 @@ public class MyConnectionsQuery {
         cv.put(COL_VETERAN,veteran);
         cv.put(COL_PET,pet);
         cv.put(COL_IDNUMBER,idnumber);
+        cv.put(COL_MANGER_PHONE,manager_phone);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 

@@ -36,6 +36,7 @@ public class PersonalInfoQuery {
     public static final String COL_WEIGHT = "weight";
     public static final String COL_PROFESSION = "profession";
     public static final String COL_EMPLOYED= "employed";
+    public static final String COL_MANGER_PHONE= "Manager_Phone";
     public static final String COL_RELIGION= "religion";
     public static final String COL_EYES= "eyes";
     public static final String COL_LANG= "language";
@@ -53,7 +54,7 @@ public class PersonalInfoQuery {
     public static String createPersonalInfoTable() {
         String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
-                COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
+                COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
                 COL_IDNUMBER+" VARCHAR(10),"+ COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
@@ -128,6 +129,7 @@ public class PersonalInfoQuery {
                             Person.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
                             Person.setPet(c.getString(c.getColumnIndex(COL_PET)));
                             Person.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                            Person.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
                             personList.add(Person);
                         }
                     }
@@ -169,6 +171,7 @@ public class PersonalInfoQuery {
                 connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
                 connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
 
             } while (c.moveToNext());
         }
@@ -192,7 +195,7 @@ public class PersonalInfoQuery {
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -218,6 +221,7 @@ public class PersonalInfoQuery {
         cv.put(COL_VETERAN,veteran);
         cv.put(COL_PET,pet);
         cv.put(COL_IDNUMBER,idnumber);
+        cv.put(COL_MANGER_PHONE,manager_phone);
 
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);

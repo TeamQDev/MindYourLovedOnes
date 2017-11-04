@@ -14,6 +14,26 @@ public class RelativeConnection {
     String employed="";
  String eyes="";
 
+    public String getInch() {
+        return inch;
+    }
+
+    public void setInch(String inch) {
+        this.inch = inch;
+    }
+
+    String inch="";
+
+    public String getManager_phone() {
+        return manager_phone;
+    }
+
+    public void setManager_phone(String manager_phone) {
+        this.manager_phone = manager_phone;
+    }
+
+    String manager_phone="";
+
     public String getEyes() {
         return eyes;
     }

@@ -10,6 +10,27 @@ public class PersonalInfo {
     String email="";
     String address="";
     String phone="";
+
+    public String getInch() {
+        return inch;
+    }
+
+    public void setInch(String inch) {
+        this.inch = inch;
+    }
+
+    String inch="";
+
+    public String getManager_phone() {
+        return manager_phone;
+    }
+
+    public void setManager_phone(String manager_phone) {
+        this.manager_phone = manager_phone;
+    }
+
+    String manager_phone="";
+
     String height="";
     String weight="";
     String profession="";
