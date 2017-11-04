@@ -83,6 +83,7 @@ public class PetQuery {
         if (c != null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
+
                     Pet allergy = new Pet();
                     allergy.setId(c.getInt(c.getColumnIndex(COL_ID)));
                     allergy.setUserId(c.getInt(c.getColumnIndex(COL_USERID)));

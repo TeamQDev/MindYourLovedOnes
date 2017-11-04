@@ -2602,15 +2602,22 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 txtInsuaranceName.setError("Please Enter Name of Insurance Company");
                 showAlert("Please Enter Name of Insurance Company", getActivity());
 
-            } else return true;
-        }
-            /*if (phone.equals("")) {
+            }
+            else if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
             } else if (phone.length() < 10) {
                 txtInsuarancePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }*/
+            }else return true;
+        }
+            /* (phone.equals("")) {
+                txtInsuarancePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+            txtInsuarancePhone.setError("Mobile number should be 10 digits");
+            showAlert("Mobile number should be 10 digits", getActivity());
+        }*/
 
 
         return false;
