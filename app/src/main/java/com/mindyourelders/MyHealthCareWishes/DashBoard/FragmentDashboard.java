@@ -20,24 +20,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistsActivity;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
-
-import java.io.File;
 
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergency;
 
@@ -305,56 +301,8 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
                     BaseActivity.this, result);*/
 
 
-                final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
-                File dirfile = new File(RESULT);
-                dirfile.mkdirs();
-                File file = new File(dirfile, "Profile.pdf");
-                if (file.exists()) {
-                    file.delete();
-                }
 
-                new Header().createPdfHeader(file.getAbsolutePath(),
-                        "Personal & Medical Profile");
 
-                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
-                if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-                    new Individual(personalInfo);
-
-                    }
-                    else{
-                        new Individual(connection);
-                    }
-               // new MessageString().getProfileProfile(connection);
-
-                Header.document.close();
-
-                if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-                    StringBuffer result = new StringBuffer();
-                    result.append(new MessageString().getProfileUser());
-
-                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                            + "/Profile.pdf",
-                            getActivity(), result);
-
-                    System.out.println("\n" + result + "\n");
-                }else{
-                    StringBuffer result = new StringBuffer();
-                    result.append(new MessageString().getProfileProfile());
-
-                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                            + "/Profile.pdf",
-                            getActivity(), result);
-
-                    System.out.println("\n" + result + "\n");
-                 /* new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                            + "/Profile.pdf", getActivity(),
-                            new MessageString().getProfileProfile(connection));*/
-                }
                 break;
         }
     }

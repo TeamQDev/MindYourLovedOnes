@@ -41,6 +41,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
+            android:src="@drawable/menudot"
             />
         <!--  <ImageView
               android:id="@+id/imgDone"
