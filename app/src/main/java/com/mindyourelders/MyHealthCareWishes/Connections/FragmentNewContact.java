@@ -1564,6 +1564,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
         });
 
+
         txtFName = (TextView) rootview.findViewById(R.id.txtFName);
         txtAids = (TextView) rootview.findViewById(R.id.txtAids);
         txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
@@ -1642,7 +1643,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         rlAids = (RelativeLayout) rootview.findViewById(R.id.rlAids);
         rlFinance = (RelativeLayout) rootview.findViewById(R.id.rlFinance);
         rlPharmacy = (RelativeLayout) rootview.findViewById(R.id.rlPharmacy);
-      /*  txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+
+
+        txtInsuaranceName = (TextView) rootview.findViewById(R.id.txtInsuaranceName);
+        txtId = (TextView) rootview.findViewById(R.id.txtId);
+        txtGroup = (TextView) rootview.findViewById(R.id.txtGroup);
+        txtMember = (TextView) rootview.findViewById(R.id.txtMember);
+        txtInsuarancePhone = (TextView) rootview.findViewById(R.id.txtInsuarancePhone);
+
+          txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
@@ -1662,14 +1671,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     editable.append("-");
                 }
             }
-        });*/
-
-        txtInsuaranceName = (TextView) rootview.findViewById(R.id.txtInsuaranceName);
-        txtId = (TextView) rootview.findViewById(R.id.txtId);
-        txtGroup = (TextView) rootview.findViewById(R.id.txtGroup);
-        txtMember = (TextView) rootview.findViewById(R.id.txtMember);
-        txtInsuarancePhone = (TextView) rootview.findViewById(R.id.txtInsuarancePhone);
-
+        });
         gridRelation = (StaggeredTextGridView) rootview.findViewById(R.id.gridRelation);
         setRelationData();
 
@@ -1747,27 +1749,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
         });
 
-       /* txtHomePhone.addTextChangedListener(new TextWatcher() {
-            int prevL = 0;
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL = txtHomePhone.getText().toString().length();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int length = editable.length();
-                if ((prevL < length) && (length == 3 || length == 7)) {
-                    editable.append("-");
-                }
-            }
-        });*/
 
         spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -2612,7 +2594,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             else if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
-            } else if (phone.length() < 10) {
+            } else if (phone.length()!=0 && phone.length() < 10) {
                 txtInsuarancePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }else return true;

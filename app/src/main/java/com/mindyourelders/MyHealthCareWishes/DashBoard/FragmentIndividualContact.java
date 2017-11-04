@@ -182,6 +182,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtReligion = (TextView) rootview.findViewById(R.id.txtReligion);
         txtIdNumber = (TextView) rootview.findViewById(R.id.txtId);
 
+
+
         rbYes = (RadioButton) rootview.findViewById(R.id.rbYes);
         rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
         rbYesPet = (RadioButton) rootview.findViewById(R.id.rbYesPet);
@@ -269,6 +271,27 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             }
         });
 
+        txttelephone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txttelephone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
         txtHomePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
@@ -313,6 +336,29 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             }
         });
 
+
+
+        txtHeight.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHeight.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 1 || length == 4)) {
+                    editable.append("-");
+                }
+            }
+        });
         setValues();
 
         spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -751,7 +797,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
-        }
+        } /*else if (height.length()!=0 && height.length()<5)
+        {
+            txtHeight.setError("Enter height");
+            showAlert("Enter correct height",  getActivity());
+        }*/
        /* else if (address.equals("")) {
             txtAddress.setError("Please Enter Address");
             showAlert("Please Enter Address",  getActivity());
@@ -762,6 +812,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }*/ else if (phone.length()!=0&&phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
+        }
+        else if (manager_phone.length()!=0 && manager_phone.length() < 10) {
+            txttelephone.setError("Mobile number should be 10 digits");
+            showAlert("Mobile number should be 10 digits", getActivity());
         }
       /*  else if (homePhone.equals("")) {
             txtHomePhone.setError("Please Enter Phone");
@@ -823,6 +877,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
+        } else if (height.length()!=0 && height.length()<5)
+        {
+            txtHeight.setError("Enter height");
+            showAlert("Enter correct height",  getActivity());
         }
        /* else if (address.equals("")) {
             txtAddress.setError("Please Enter Address");
@@ -831,13 +889,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else if (country.equals("")) {
             spinner.setError("Please Select Country");
             showAlert("Please Select Country",  getActivity());
-        } else if (phone.equals("")) {
-            txtPhone.setError("Please Enter Phone");
-            showAlert("Please Enter Phone",  getActivity());
-        }*/ else if (phone.length()!=0&&phone.length() < 10) {
+        }*/  else if (phone.length()!=0&&phone.length() < 10) {
             txtPhone.setError("Phone number should be 10 digits");
             showAlert("Phone number should be 10 digits",  getActivity());
-        } /*else if (bdate.equals("")) {
+        }
+        else if (manager_phone.length()!=0 && manager_phone.length() < 10) {
+            txttelephone.setError("Mobile number should be 10 digits");
+            showAlert("Mobile number should be 10 digits", getActivity());
+        }/*else if (bdate.equals("")) {
             txtBdate.setError("Please Enter Birth date");
             showAlert("Please Enter Birth date",  getActivity());
         }*/ else {
