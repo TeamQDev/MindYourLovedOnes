@@ -34,6 +34,7 @@ public class InsuranceQuery {
     public static final String COL_GROUP = "GroupId";
     public static final String COL_SUBSCRIBER = "Subscriber";
     public static final String COL_EMAIL = "Email";
+    public static final String COL_AGENT = "Agent";
 
 
     public InsuranceQuery(Context context, DBHelper dbHelper) {
@@ -45,7 +46,7 @@ public class InsuranceQuery {
     public static String createInsuranceTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50),"
-                + COL_TYPE + " VARCHAR(70)," +COL_OTHER_TYPE + " VARCHAR(70)," +  COL_OFFICE_PHONE + " VARCHAR(20),"+COL_FAX +
+                + COL_TYPE + " VARCHAR(70)," + COL_AGENT+ " VARCHAR(100)," +COL_OTHER_TYPE + " VARCHAR(70)," +  COL_OFFICE_PHONE + " VARCHAR(20),"+COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +COL_MEMBERID + " VARCHAR(50),"+
                 COL_SUBSCRIBER + " VARCHAR(50)," +COL_GROUP+" VARCHAR(50)," +COL_EMAIL+" VARCHAR(50)," +
                 COL_PHOTO + " BLOB);";
@@ -78,13 +79,14 @@ public class InsuranceQuery {
                     notes.setSubscriber(c.getString(c.getColumnIndex(COL_SUBSCRIBER)));
                     notes.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                     notes.setOtherInsurance(c.getString(c.getColumnIndex(COL_OTHER_TYPE)));
+                    notes.setAgent(c.getString(c.getColumnIndex(COL_AGENT)));
                     noteList.add(notes);
                 } while (c.moveToNext());
             }
         }
         return noteList;
     }
-    public static Boolean insertInsuranceData(int userid, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance) {
+    public static Boolean insertInsuranceData(int userid, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -102,6 +104,7 @@ public class InsuranceQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_SUBSCRIBER,subscriber);
         cv.put(COL_OTHER_TYPE,otherInsurance);
+        cv.put(COL_AGENT,agent);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -130,7 +133,7 @@ public class InsuranceQuery {
         return true;
     }
 
-    public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance) {
+    public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -148,6 +151,7 @@ public class InsuranceQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_SUBSCRIBER,subscriber);
         cv.put(COL_OTHER_TYPE,otherInsurance);
+        cv.put(COL_AGENT,agent);
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
         if (rowid==0)

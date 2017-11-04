@@ -1147,7 +1147,7 @@
                         android:id="@+id/txtId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Member ID #"
+                        android:hint="Member ID #(Policy Number)"
                         android:maxLength="30"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dimension15dp"
@@ -1199,7 +1199,7 @@
                         android:id="@+id/txtSubscribe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Primary Subscriber"
+                        android:hint="Name of Insured(Primary Subscriber)"
                         android:maxLength="30"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dimension15dp"
@@ -1308,12 +1308,35 @@
                         android:textSize="@dimen/dimension20dp"  android:imeOptions="actionNext"
                         /><requestFocus />
                 </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilAgent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilWebsite"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/txtAgent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Agent Name and Phone and Email"
+                        android:imeOptions="actionNext"
+                        android:maxLength="30"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                    <requestFocus />
+                </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilInsuaranceNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tilWebsite"
+                    android:layout_below="@+id/tilAgent"
                     android:paddingBottom="@dimen/dimension8dp"
                     android:paddingLeft="@dimen/dimension30dp"
                     android:paddingRight="@dimen/dimension30dp">

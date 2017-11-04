@@ -15,6 +15,16 @@ public class Insurance implements Serializable{
     int userid;
     String fax="";
 
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
+    }
+
+    String agent="";
+
     public String getOtherInsurance() {
         return OtherInsurance;
     }

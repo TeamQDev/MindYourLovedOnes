@@ -76,13 +76,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
-    TextView txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
+    TextView txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
     TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
     TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
     TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
     TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
+    String agent="";
 
     ImageView imgEdit, imgProfile;
     View rootview;
@@ -653,6 +654,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtGroup.setText(insurance.getGroup());
                     txtInsuaranceFax.setText(insurance.getFax());
                     txtInsuaranceEmail.setText(insurance.getEmail());
+                    txtAgent.setText(insurance.getAgent());
                     txtWebsite.setText(insurance.getWebsite());
                     txtInsuaranceNote.setText(insurance.getNote());
                     txtInsuaranceName.setText(insurance.getName());
@@ -688,6 +690,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtGroup.setText(insurance.getGroup());
                     txtInsuaranceFax.setText(insurance.getFax());
                     txtInsuaranceEmail.setText(insurance.getEmail());
+                    txtAgent.setText(insurance.getAgent());
                     txtWebsite.setText(insurance.getWebsite());
                     txtInsuaranceNote.setText(insurance.getNote());
                     txtInsuaranceName.setText(insurance.getName());
@@ -1105,6 +1108,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtGroup.setEnabled(false);
         txtInsuaranceFax.setEnabled(false);
         txtInsuaranceEmail.setEnabled(false);
+        txtAgent.setEnabled(false);
         txtWebsite.setEnabled(false);
         txtInsuaranceNote.setEnabled(false);
         txtInsuaranceName.setEnabled(false);
@@ -1291,6 +1295,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtSubscribe = (TextView) rootview.findViewById(R.id.txtSubscribe);
         txtInsuaranceFax = (TextView) rootview.findViewById(R.id.txtInsuaranceFax);
         txtInsuaranceEmail = (TextView) rootview.findViewById(R.id.txtInsuaranceEmail);
+        txtAgent= (TextView) rootview.findViewById(R.id.txtAgent);
         txtWebsite = (TextView) rootview.findViewById(R.id.txtWebsite);
         txtInsuaranceNote = (TextView) rootview.findViewById(R.id.txtInsuaranceNote);
 
@@ -2184,7 +2189,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance);
+                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
@@ -2205,7 +2210,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance);
+                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated insurance information successfully",Toast.LENGTH_SHORT).show();
@@ -2597,6 +2602,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 type = insuaranceType[indexValuex - 1];
             }
             email = txtInsuaranceEmail.getText().toString();
+            agent=txtAgent.getText().toString();
             otherInsurance = txtOtherInsurance.getText().toString();
             if (name.equals("")) {
                 txtInsuaranceName.setError("Please Enter Name of Insurance Company");
