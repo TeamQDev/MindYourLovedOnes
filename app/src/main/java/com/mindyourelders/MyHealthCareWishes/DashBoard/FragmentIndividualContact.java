@@ -354,7 +354,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             @Override
             public void afterTextChanged(Editable editable) {
                 int length = editable.length();
-                if ((prevL < length) && (length == 1 || length == 4)) {
+                if (length == 1) {
                     editable.append("-");
                 }
             }
@@ -877,11 +877,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
-        } else if (height.length()!=0 && height.length()<5)
+        }/* else if (height.length()!=0 && height.length()<5)
         {
             txtHeight.setError("Enter height");
             showAlert("Enter correct height",  getActivity());
-        }
+        }*/
        /* else if (address.equals("")) {
             txtAddress.setError("Please Enter Address");
             showAlert("Please Enter Address",  getActivity());
