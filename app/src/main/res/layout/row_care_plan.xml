@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtDocHeader"
             android:layout_toRightOf="@id/imgDocType"
-            android:text="08/09/2017  14:00"
+            android:text="08-Nov-2017"
             android:layout_toLeftOf="@+id/imgForword"
             />
 
