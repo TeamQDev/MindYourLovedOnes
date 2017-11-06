@@ -590,6 +590,7 @@ public class Individual {
         Header.addTable(organDonor);
         messageInfo3.add("Organ Donor :");
         messageInfo3.add(organDonor);
+        
 
         Header.addTable("Allergies :");
         Header.addTable("");
@@ -632,23 +633,43 @@ public class Individual {
         }
 
 
-        String Implants="";
+       // String Implants="";
         for (int i=0;i<implantsList.size();i++) {
-            Header.addTable("Allergy " + i + 1 + " :");
+            Header.addTable("Medical Implants " + i + 1 + " :");
             Header.addTable("");
-            messageInfo3.add("Allergy " + i + 1 + " :");
+            messageInfo3.add("Medical Implants " + i + 1 + " :");
             messageInfo3.add("");
 
-            Allergy a = allargyLists.get(i);
-            if (a.getAllergy() != null) {
-                allergy = medInfo.getDonor();
-            }
-            Header.addTable("Allergy :");
-            Header.addTable(allergy);
-            messageInfo3.add("Allergy :");
-            messageInfo3.add(allergy);
-        }
 
+            Header.addTable("Implants :");
+            Header.addTable(implantsList.get(i));
+            messageInfo3.add("Implants :");
+            messageInfo3.add(implantsList.get(i));
+        }
+        for (int i=0;i<hospitalList.size();i++) {
+            Header.addTable("Preferred Hospital " + i + 1 + " :");
+            Header.addTable("");
+            messageInfo3.add("Preferred Hospital " + i + 1 + " :");
+            messageInfo3.add("");
+
+
+            Header.addTable("Hospital :");
+            Header.addTable(hospitalList.get(i));
+            messageInfo3.add("Hospital :");
+            messageInfo3.add(hospitalList.get(i));
+        }
+        for (int i=0;i<historList.size();i++) {
+            Header.addTable("Medical History " + i + 1 + " :");
+            Header.addTable("");
+            messageInfo3.add("Medical History " + i + 1 + " :");
+            messageInfo3.add("");
+
+
+            Header.addTable("History :");
+            Header.addTable(historList.get(i));
+            messageInfo3.add("History :");
+            messageInfo3.add(historList.get(i));
+        }
 
 
 
