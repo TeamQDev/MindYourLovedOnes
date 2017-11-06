@@ -453,11 +453,45 @@ public class Individual {
         if (medInfo.getVisionNote() != null) {
             visionNote = medInfo.getVisionNote();
         }
-        Header.addTable("Notes:");
+        Header.addTable("Notes :");
         Header.addTable(visionNote);
         messageInfo3.add("Notes :");
         messageInfo3.add(visionNote);
-      //String blind="";String medicalNote="";String upper=""; String lower="";
+
+        Header.addTable("Hearing & Speech :");
+        Header.addTable("");
+        messageInfo3.add("Hearing & Speech :");
+        messageInfo3.add("");
+
+        String aid="";
+        if (medInfo.getAid() != null) {
+            aid = medInfo.getAid();
+        }
+        Header.addTable("Hearing Aids :");
+        Header.addTable(aid);
+        messageInfo3.add("Hearing Aids :");
+        messageInfo3.add(aid);
+
+        String speech="";
+        if (medInfo.getSpeech() != null) {
+            speech = medInfo.getSpeech();
+        }
+        Header.addTable("Speech Impaired :");
+        Header.addTable(speech);
+        messageInfo3.add("Speech Impaired :");
+        messageInfo3.add(speech);
+
+        String aidNote="";
+        if (medInfo.getAideNote() != null) {
+            aidNote = medInfo.getAideNote();
+        }
+        Header.addTable("Hearing Notes :");
+        Header.addTable(aidNote);
+        messageInfo3.add("Hearing Notes :");
+        messageInfo3.add(aidNote);
+
+
+        
 
         Header.table.setWidthPercentage(100f);
 
