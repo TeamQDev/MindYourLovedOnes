@@ -516,11 +516,102 @@ public class Individual {
         messageInfo3.add("Hearing Notes :");
         messageInfo3.add(aidNote);
 
+        Header.addTable("Functional Status :");
+        Header.addTable("");
+        messageInfo3.add("Functional Status :");
+        messageInfo3.add("");
+
+        String feeding="";
+        if (medInfo.getFeed() != null) {
+            feeding = medInfo.getFeed();
+        }
+        Header.addTable("Feeding :");
+        Header.addTable(feeding);
+        messageInfo3.add("Feeding :");
+        messageInfo3.add(feeding);
+
+        String toileting="";
+        if (medInfo.getToilet() != null) {
+            toileting = medInfo.getToilet();
+        }
+        Header.addTable("Toileting :");
+        Header.addTable(toileting);
+        messageInfo3.add("Toileting :");
+        messageInfo3.add(toileting);
+
+        String selfMedicate="";
+        if (medInfo.getMedicate() != null) {
+            selfMedicate = medInfo.getMedicate();
+        }
+        Header.addTable("Self Medicate :");
+        Header.addTable(selfMedicate);
+        messageInfo3.add("Self Medicate :");
+        messageInfo3.add(selfMedicate);
+
+        String functionNote="";
+        if (medInfo.getFunctionnote() != null) {
+            functionNote = medInfo.getFunctionnote();
+        }
+        Header.addTable("Function Notes :");
+        Header.addTable(functionNote);
+        messageInfo3.add("Function Notes :");
+        messageInfo3.add(functionNote);
+
+        Header.addTable("Diet :");
+        Header.addTable("");
+        messageInfo3.add("Diet :");
+        messageInfo3.add("");
+
+        String dietNote="";
+        if (medInfo.getDietNote() != null) {
+            dietNote = medInfo.getDietNote();
+        }
+        Header.addTable("Diet Notes :");
+        Header.addTable(dietNote);
+        messageInfo3.add("Diet Notes :");
+        messageInfo3.add(dietNote);
+
+        Header.addTable("Blood Type :");
+        Header.addTable("");
+        messageInfo3.add("Blood Type :");
+        messageInfo3.add("");
+
+        String bloodNote="";
+        if (medInfo.getBloodType() != null) {
+            bloodNote = medInfo.getBloodType();
+        }
+        Header.addTable("Blood Type :");
+        Header.addTable(bloodNote);
+        messageInfo3.add("Blood Type :");
+        messageInfo3.add(bloodNote);
+
+
+        String organDonor="";
+        if (medInfo.getDonor() != null) {
+            organDonor = medInfo.getDonor();
+        }
+        Header.addTable("Organ Donor :");
+        Header.addTable(organDonor);
+        messageInfo3.add("Organ Donor :");
+        messageInfo3.add(organDonor);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
         Header.table.setWidthPercentage(100f);
-
         try {
 
             Header.document.add(Header.table);
