@@ -227,6 +227,9 @@ Context context=this;
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());
+                                        result.append(new MessageString().getEmergencyInfo());
+                                        result.append(new MessageString().getPhysicianInfo());
+                                        result.append(new MessageString().getProxyInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                                 + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)

@@ -106,4 +106,61 @@ public class MessageString {
         return result;
 
     }
+
+    public StringBuffer getEmergencyInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Individual.messageEmergency.size() > 0) {
+            result.append(Individual.messageEmergency.get(0));
+            result.append("\n");
+            for (int i = 1; i < Individual.messageEmergency.size(); i++) {
+
+                result.append(Individual.messageEmergency.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getPhysicianInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Individual.messagePhysician.size() > 0) {
+            result.append(Individual.messagePhysician.get(0));
+            result.append("\n");
+            for (int i = 1; i < Individual.messagePhysician.size(); i++) {
+
+                result.append(Individual.messagePhysician.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getProxyInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Individual.messageProxy.size() > 0) {
+            result.append(Individual.messageProxy.get(0));
+            result.append("\n");
+            for (int i = 1; i < Individual.messageProxy.size(); i++) {
+
+                result.append(Individual.messageProxy.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }
