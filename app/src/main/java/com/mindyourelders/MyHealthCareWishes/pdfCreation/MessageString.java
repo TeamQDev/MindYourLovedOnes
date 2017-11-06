@@ -163,4 +163,99 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getDoctorsInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Specialty.messageDoctor.size() > 0) {
+            result.append(Specialty.messageDoctor.get(0));
+            result.append("\n");
+            for (int i = 1; i < Specialty.messageDoctor.size(); i++) {
+
+                result.append(Specialty.messageDoctor.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getHospitalInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Specialty.messageHospital.size() > 0) {
+            result.append(Specialty.messageHospital.get(0));
+            result.append("\n");
+            for (int i = 1; i < Specialty.messageHospital.size(); i++) {
+
+                result.append(Specialty.messageHospital.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getPharmacyInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Specialty.messagePharmacy.size() > 0) {
+            result.append(Specialty.messagePharmacy.get(0));
+            result.append("\n");
+            for (int i = 1; i < Specialty.messagePharmacy.size(); i++) {
+
+                result.append(Specialty.messagePharmacy.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getAideInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Specialty.messageAides.size() > 0) {
+            result.append(Specialty.messageAides.get(0));
+            result.append("\n");
+            for (int i = 1; i < Specialty.messageAides.size(); i++) {
+
+                result.append(Specialty.messageAides.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getFinanceInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Specialty.messageFinance.size() > 0) {
+            result.append(Specialty.messageFinance.get(0));
+            result.append("\n");
+            for (int i = 1; i < Specialty.messageFinance.size(); i++) {
+
+                result.append(Specialty.messageFinance.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

@@ -14,22 +14,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
+import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Finance;
+import com.mindyourelders.MyHealthCareWishes.model.Hospital;
+import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -39,7 +48,7 @@ import java.util.ArrayList;
 
 
 public class SpecialistsActivity extends AppCompatActivity {
-Context context=this;
+    Context context=this;
     String[] specialist;
     int[] profile;
     ListView listSpeciallist;
@@ -142,6 +151,35 @@ Context context=this;
             public void onClick(View v) {
 
                 if (from.equals("Speciality")) {
+                    final String RESULT = Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                    File dirfile = new File(RESULT);
+                    dirfile.mkdirs();
+                    File file = new File(dirfile, "Specialty.pdf");
+                    if (file.exists()) {
+                        file.delete();
+                    }
+
+                    new Header().createPdfHeader(file.getAbsolutePath(),
+                            "Specialty");
+
+                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(2);
+
+                    ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
+                    ArrayList<Hospital> HospitalList= HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Pharmacy> PharmacyList= PharmacyQuery.fetchAllPharmacyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Aides> AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Finance> financeList= FinanceQuery.fetchAllFinanceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+
+
+                    new Specialty("Hospital",HospitalList);
+                    new Specialty(specialistsList,"Doctors");
+                    new Specialty(PharmacyList);
+                    new Specialty(AidesList,1);
+                    new Specialty(1,financeList);
+
+                    Header.document.close();
 
                 }
                 else if (from.equals("Emergency"))
@@ -219,6 +257,19 @@ Context context=this;
                                 break;*/
                             case 0: // view
                                 if (from.equals("Speciality")) {
+                                       StringBuffer result = new StringBuffer();
+                                        result.append(new MessageString().getDoctorsInfo());
+                                        result.append(new MessageString().getHospitalInfo());
+                                        result.append(new MessageString().getPharmacyInfo());
+                                        result.append(new MessageString().getAideInfo());
+                                        result.append(new MessageString().getFinanceInfo());
+
+                                        new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                                + "/Specialty.pdf",
+                                                context, result);
+
+                                        System.out.println("\n" + result + "\n");
 
                                 }
                                 else if (from.equals("Emergency"))
@@ -240,6 +291,10 @@ Context context=this;
                                     }else{
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileProfile());
+                                        result.append(new MessageString().getMedicalInfo());
+                                        result.append(new MessageString().getEmergencyInfo());
+                                        result.append(new MessageString().getPhysicianInfo());
+                                        result.append(new MessageString().getProxyInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                                 + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
