@@ -65,7 +65,7 @@ public class DocumentAdapter extends BaseAdapter {
         }
 
         holder.txtDocHeader.setText(documentList.get(position).getName());
-        holder.txtDocTime.setText(documentList.get(position).getDate());
+        holder.txtDocTime.setText(documentList.get(position).getType());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

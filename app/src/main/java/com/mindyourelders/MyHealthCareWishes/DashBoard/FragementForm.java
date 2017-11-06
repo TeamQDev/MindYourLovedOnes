@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
 import com.mindyourelders.MyHealthCareWishes.model.Form;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     private void initComponent() {
         preferences = new Preferences(getActivity());
         dbHelper = new DBHelper(getActivity());
-        //InsuranceQuery i = new InsuranceQuery(getActivity(), dbHelper);
+        FormQuery i = new FormQuery(getActivity(), dbHelper);
     }
 
     private void setListData() {
@@ -92,8 +94,8 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     }
 
     private void getData() {
-     //   documentList = InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-      documentList=new ArrayList<>();
+        documentList = FormQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+    //  documentList=new ArrayList<>();
  /*
         Form f=new Form();
         f.setName("sdfds");

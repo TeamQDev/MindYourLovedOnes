@@ -54,6 +54,7 @@ public class DocumentsAdapter extends BaseAdapter {
            convertView=lf.inflate(R.layout.row_care_plan,parent,false);
            holder=new ViewHolder();
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
+            holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 
@@ -65,10 +66,11 @@ public class DocumentsAdapter extends BaseAdapter {
 
         holder.txtDocHeader.setText(documentList.get(position).getName());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
+        holder.txtDocTime.setVisibility(View.GONE);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(context,AddDocumentActivity.class);
+                Intent i=new Intent(context,AddFormActivity.class);
                 i.putExtra("GoTo","View");
                 /*if (position>3)
                 {

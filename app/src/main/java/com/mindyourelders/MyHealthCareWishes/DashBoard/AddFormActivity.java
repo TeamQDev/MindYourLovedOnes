@@ -17,10 +17,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
-import com.mindyourelders.MyHealthCareWishes.model.Document;
+import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Form;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.io.BufferedOutputStream;
@@ -38,13 +41,14 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
     String From;
     Preferences preferences;
     final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    Document document;
+    Form document;
     DBHelper dbHelper;
     String name="";
 
     String documentPath="";
     int photo;
     String path="";
+    String Goto="";
 
 
     @Override
@@ -77,116 +81,44 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
         imgDoc = (ImageView) findViewById(R.id.imgDoc);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
         txtName = (TextView) findViewById(R.id.txtName);
+
+        Intent i = getIntent();
+        if (i.getExtras() != null) {
+            Goto = i.getExtras().getString("GoTo");
+            //path=i.getExtras().getString("Path");
+        }
+
+        if (Goto.equals("View")) {
+            imgDot.setVisibility(View.VISIBLE);
+            imgDone.setVisibility(View.GONE);
+            imgAdd.setVisibility(View.GONE);
+
+            document = (Form) i.getExtras().getSerializable("FormObject");
+            txtName.setText(document.getName());
+            documentPath = document.getDocument();
+            imgDoc.setImageResource(document.getImage());
+
+        } else {
+            imgDot.setVisibility(View.GONE);
+            imgDone.setVisibility(View.VISIBLE);
+            imgAdd.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imgBack:
-                finish();
-                break;
-            case R.id.imgDoc:
-                if (!documentPath.equals(""))
-                {
-                    Uri uri=null;
-                    if (path.equals("No"))
-                    {
-                       /* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(intent);*/
-                       CopyReadAssetss(documentPath);
-                       /* uri= Uri.fromFile(getFileStreamPath("file:///android_asset/"+documentPath));
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        context.startActivity(intent);*/
-                    }
-                    else{
-                        uri= Uri.parse(documentPath);
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        context.startActivity(intent);
-                    }
-
-
-
-                }
-                break;
-
-            case R.id.imgDone:
-                /*if (validate()) {
-                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,photo,documentPath);
-                    if (flag == true) {
-                        Toast.makeText(context, "You have added proxy contact successfully", Toast.LENGTH_SHORT).show();
-                       finish();
-                    } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                }
-*/
-                break;
-
-            case R.id.imgAdd:
-                Intent i=new Intent(context,DocumentSdCardList.class);
-                startActivityForResult(i,100);
-                break;
-
-            case R.id.imgDot:
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-                builder.setTitle("");
-
-                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int itemPos) {
-
-                        switch (itemPos) {
-                            case 0: // email
-
-                       /* emailAttachement(item);
-
-                        ShearedValues.activityID = getApplicationContext();*/
-                                break;
-                            case 1: // email
-
-                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
-                                context);
-                        ShearedValues.activityID = getApplicationContext();*/
-
-                                break;
-                            case 2: // view
-                                Uri uri=null;
-                                if (path.equals("No"))
-                                {
-                                    CopyReadAssetss(documentPath);
-                                }
-                                else{
-                                    uri= Uri.parse(documentPath);
-                                    Intent intent = new Intent();
-                                    intent.setAction(Intent.ACTION_VIEW);
-                                    intent.setDataAndType(uri, "application/pdf");
-                                    context.startActivity(intent);
-                                }
-
-                                break;
-
-                        }
-                    }
-                });
-
-                builder.create().show();
-                // ((CarePlanActivity)context).CopyAssets();
-                break;
-
+    private boolean validate() {
+        photo=R.drawable.pdf;
+        name=txtName.getText().toString();
+        if (name.length()==0)
+        {
+            Toast.makeText(context,"Add Name of document",Toast.LENGTH_SHORT).show();
         }
+        else{
+            return true;
+        }
+        return false;
     }
 
     private void CopyReadAssetss(String documentPath) {
@@ -363,6 +295,112 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
             name=data.getExtras().getString("Name");
             documentPath=data.getExtras().getString("URI");
             txtName.setText(name);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgBack:
+                finish();
+                break;
+            case R.id.imgDoc:
+                if (!documentPath.equals(""))
+                {
+                    Uri uri=null;
+                  /*  if (path.equals("No"))
+                    {
+                       *//* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/pdf");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(intent);*//*
+                        CopyReadAssetss(documentPath);
+                       *//* uri= Uri.fromFile(getFileStreamPath("file:///android_asset/"+documentPath));
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/pdf");
+                        context.startActivity(intent);*//*
+                    }
+                    else{*/
+                        uri= Uri.parse(documentPath);
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/pdf");
+                        context.startActivity(intent);
+                  //  }
+
+
+
+                }
+                break;
+
+            case R.id.imgDone:
+                if (validate()) {
+                    Boolean flag = FormQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,photo,documentPath);
+                    if (flag == true) {
+                        Toast.makeText(context, "You have added form successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+
+            case R.id.imgAdd:
+                Intent i=new Intent(context,DocumentSdCardList.class);
+                startActivityForResult(i,100);
+                break;
+
+            case R.id.imgDot:
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                            case 0: // email
+
+                       /* emailAttachement(item);
+
+                        ShearedValues.activityID = getApplicationContext();*/
+                                break;
+                            case 1: // email
+
+                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
+                                context);
+                        ShearedValues.activityID = getApplicationContext();*/
+
+                                break;
+                            case 2: // view
+                                Uri uri=null;
+                               /* if (path.equals("No"))
+                                {*/
+                                    CopyReadAssetss(documentPath);
+                               /* }
+                                else{
+                                    uri= Uri.parse(documentPath);
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_VIEW);
+                                    intent.setDataAndType(uri, "application/pdf");
+                                    context.startActivity(intent);
+                                }*/
+
+                                break;
+
+                        }
+                    }
+                });
+
+                builder.create().show();
+                // ((CarePlanActivity)context).CopyAssets();
+                break;
+
         }
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
 
-    android:layout_marginBottom="@dimen/dimension10dp">
+   android:paddingBottom="@dimen/dimension10dp">
        <TextView
         android:id="@+id/txtdocuments"
         android:layout_width="match_parent"
