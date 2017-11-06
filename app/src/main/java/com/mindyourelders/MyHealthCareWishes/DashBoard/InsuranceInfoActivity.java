@@ -50,7 +50,7 @@ public class InsuranceInfoActivity extends AppCompatActivity implements View.OnC
                     break;
                 case "Insurance Form":
                     txtTitle.setText("INSURANCE FORMS");
-                    callFragment("FORM", fragementInsuarnceCard);
+                    callFragment("FORM", fragementform);
                     break;
             }
         }
@@ -65,6 +65,7 @@ public class InsuranceInfoActivity extends AppCompatActivity implements View.OnC
     private void fragmentData() {
         fragementInsuarnceCard = new FragementInsuarnceCard();
         fragmentInsurance=new FragmentInsurance();
+        fragementform=new FragementForm();
     }
 
     private void initListener() {

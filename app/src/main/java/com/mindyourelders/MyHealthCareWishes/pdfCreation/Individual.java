@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
@@ -379,7 +380,7 @@ public class Individual {
         Header.addEmptyLine(1);
     }
 
-    public Individual(MedInfo medInfo) {
+    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<String> historList, ArrayList<String> hospitalList) {
         String preNote="";String glass="";String lense="";String blind="";String upper=""; String lower="";String visionNote="";
         Header.addChank("Medical Profile");
         messageInfo3.add("Medical Profile");
@@ -571,11 +572,6 @@ public class Individual {
         messageInfo3.add("Diet Notes :");
         messageInfo3.add(dietNote);
 
-        Header.addTable("Blood Type :");
-        Header.addTable("");
-        messageInfo3.add("Blood Type :");
-        messageInfo3.add("");
-
         String bloodNote="";
         if (medInfo.getBloodType() != null) {
             bloodNote = medInfo.getBloodType();
@@ -595,10 +591,63 @@ public class Individual {
         messageInfo3.add("Organ Donor :");
         messageInfo3.add(organDonor);
 
+        Header.addTable("Allergies :");
+        Header.addTable("");
+        messageInfo3.add("Allergies :");
+        messageInfo3.add("");
+
+       String allergy="";String treatment="";String reaction="";
+        for (int i=0;i<allargyLists.size();i++)
+        {
+            Header.addTable("Allergy "+i+1+" :");
+            Header.addTable("");
+            messageInfo3.add("Allergy "+i+1+" :");
+            messageInfo3.add("");
+
+            Allergy a=allargyLists.get(i);
+            if (a.getAllergy() != null) {
+            allergy = a.getAllergy();
+              }
+            Header.addTable("Allergy :");
+            Header.addTable(allergy);
+            messageInfo3.add("Allergy :");
+            messageInfo3.add(allergy);
+
+            if (a.getReaction() != null) {
+                reaction = a.getReaction();
+            }
+            Header.addTable("Reaction :");
+            Header.addTable(reaction);
+            messageInfo3.add("Reaction :");
+            messageInfo3.add(reaction);
+
+            if (a.getTreatment() != null) {
+                treatment = a.getTreatment();
+            }
+            Header.addTable("Treatment :");
+            Header.addTable(treatment);
+            messageInfo3.add("Treatment :");
+            messageInfo3.add(treatment);
+
+        }
 
 
+        String Implants="";
+        for (int i=0;i<implantsList.size();i++) {
+            Header.addTable("Allergy " + i + 1 + " :");
+            Header.addTable("");
+            messageInfo3.add("Allergy " + i + 1 + " :");
+            messageInfo3.add("");
 
-
+            Allergy a = allargyLists.get(i);
+            if (a.getAllergy() != null) {
+                allergy = medInfo.getDonor();
+            }
+            Header.addTable("Allergy :");
+            Header.addTable(allergy);
+            messageInfo3.add("Allergy :");
+            messageInfo3.add(allergy);
+        }
 
 
 

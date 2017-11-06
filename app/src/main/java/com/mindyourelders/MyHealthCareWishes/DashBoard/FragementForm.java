@@ -7,21 +7,19 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
-import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.InsuranceAdapter;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Document;
+import com.mindyourelders.MyHealthCareWishes.model.Form;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
-import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
-import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -31,16 +29,21 @@ import java.util.ArrayList;
 
 public class FragementForm extends Fragment implements View.OnClickListener {
     View rootview;
-    SwipeMenuListView lvInsurance;
-    ArrayList<Insurance> insuranceList;
-    RelativeLayout llAddInsurance;
+    ListView lvDoc;
+    ArrayList<Form> documentList;
+    ArrayList<Document> documentListOld;
+    ImageView imgBack;
+    TextView txtTitle;
+    String From;
+    final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
+    RelativeLayout llAddDoc;
     Preferences preferences;
     DBHelper dbHelper;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.fragment_insurance, null);
+        rootview = inflater.inflate(R.layout.fragment_insurance_form, null);
         initComponent();
         getData();
         initUI();
@@ -52,52 +55,30 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     private void initComponent() {
         preferences = new Preferences(getActivity());
         dbHelper = new DBHelper(getActivity());
-        InsuranceQuery i = new InsuranceQuery(getActivity(), dbHelper);
+        //InsuranceQuery i = new InsuranceQuery(getActivity(), dbHelper);
     }
 
     private void setListData() {
-        if (insuranceList.size() != 0) {
-            InsuranceAdapter insuranceAdapter = new InsuranceAdapter(getActivity(), insuranceList);
-            lvInsurance.setAdapter(insuranceAdapter);
-            lvInsurance.setVisibility(View.VISIBLE);
+       if (documentList.size() != 0) {
+            DocumentsAdapter insuranceAdapter = new DocumentsAdapter(getActivity(), documentList);
+            lvDoc.setAdapter(insuranceAdapter);
+            lvDoc.setVisibility(View.VISIBLE);
         } else {
-            lvInsurance.setVisibility(View.GONE);
+            lvDoc.setVisibility(View.GONE);
         }
     }
 
     private void initListener() {
         //  imgADMTick.setOnClickListener(this);
-        llAddInsurance.setOnClickListener(this);
+        llAddDoc.setOnClickListener(this);
     }
 
     private void initUI() {
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
-        llAddInsurance = (RelativeLayout) rootview.findViewById(R.id.llAddInsurance);
-        lvInsurance = (SwipeMenuListView) rootview.findViewById(R.id.lvInsurance);
+        llAddDoc = (RelativeLayout) rootview.findViewById(R.id.llAddDoc);
+        lvDoc = (ListView) rootview.findViewById(R.id.lvDoc);
         setListData();
-
-        lvInsurance.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(getActivity());
-        lvInsurance.setMenuCreator(creator);
-        lvInsurance.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                Insurance item = insuranceList.get(position);
-                switch (index) {
-                    case 0:
-                        // open
-                        //  open(item);
-                        break;
-                    case 1:
-                        // delete
-                        deleteInsurance(item);
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     private void deleteInsurance(Insurance item) {
@@ -111,9 +92,13 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     }
 
     private void getData() {
-        insuranceList = InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-       /* insuranceList=new ArrayList<>();
-
+     //   documentList = InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+      documentList=new ArrayList<>();
+ /*
+        Form f=new Form();
+        f.setName("sdfds");
+        f.setImage(R.id.imgPdf);*/
+/*
         Insurance P1=new Insurance();
         P1.setName("Symphonix Health");
         P1.setId("4489");
@@ -162,11 +147,11 @@ public class FragementForm extends Fragment implements View.OnClickListener {
 
 
 
-        insuranceList.add(P1);
-        insuranceList.add(P2);
-        insuranceList.add(P3);
-        insuranceList.add(P4);
-        insuranceList.add(P5);
+        documentList.add(P1);
+        documentList.add(P2);
+        documentList.add(P3);
+        documentList.add(P4);
+        documentList.add(P5);
 
 */
     }
@@ -175,9 +160,9 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.llAddInsurance:
-                preferences.putString(PrefConstants.SOURCE, "Insurance");
-                Intent i = new Intent(getActivity(), GrabConnectionActivity.class);
+            case R.id.llAddDoc:
+                //preferences.putString(PrefConstants.SOURCE, "InsuranceForm");
+                Intent i = new Intent(getActivity(), AddFormActivity.class);
                 startActivity(i);
                 break;
         }

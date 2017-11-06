@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+
+    android:layout_marginBottom="@dimen/dimension10dp">
+       <TextView
+        android:id="@+id/txtdocuments"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:background="@color/colorSkyBlue"
+        android:gravity="center"
+        android:text="Advance care plan documents"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimension26dp"
+        android:layout_below="@+id/header"
+        android:visibility="gone"
+        />
+
+    <ListView
+        android:id="@+id/lvDoc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtdocuments"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:layout_above="@+id/llAddDoc"
+        android:background="@color/colorLightBlue"
+        ></ListView>
+
+    <RelativeLayout
+        android:id="@+id/llAddDoc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:layout_margin="@dimen/dimension15dp"
+        android:background="@color/colorGreen"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/adddoc"
+            />
+
+        <TextView
+            android:id="@+id/txtAdd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_toRightOf="@+id/imgAdd"
+            android:text="Add Insurance Form"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension26dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
+
