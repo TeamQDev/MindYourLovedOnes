@@ -634,6 +634,11 @@ public class Individual {
 
 
        // String Implants="";
+        Header.addTable("Medical Implants -");
+        Header.addTable("");
+        messageInfo3.add("Medical Implants -");
+        messageInfo3.add("");
+
         for (int i=0;i<implantsList.size();i++) {
             Header.addTable("Medical Implants " + i + 1 + " :");
             Header.addTable("");
@@ -646,6 +651,11 @@ public class Individual {
             messageInfo3.add("Implants :");
             messageInfo3.add(implantsList.get(i));
         }
+
+        Header.addTable("Preferred Hospital -");
+        Header.addTable("");
+        messageInfo3.add("Preferred Hospital -");
+        messageInfo3.add("");
         for (int i=0;i<hospitalList.size();i++) {
             Header.addTable("Preferred Hospital " + i + 1 + " :");
             Header.addTable("");
@@ -658,6 +668,11 @@ public class Individual {
             messageInfo3.add("Hospital :");
             messageInfo3.add(hospitalList.get(i));
         }
+
+        Header.addTable("Medical History -");
+        Header.addTable("");
+        messageInfo3.add("Medical History -:");
+        messageInfo3.add("");
         for (int i=0;i<historList.size();i++) {
             Header.addTable("Medical History " + i + 1 + " :");
             Header.addTable("");
