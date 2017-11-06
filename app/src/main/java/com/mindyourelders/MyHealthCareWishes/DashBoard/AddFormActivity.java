@@ -143,6 +143,7 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
             Log.e("tag", e.getMessage());
         }
         Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
+        Toast.makeText(context,"file://" + getFilesDir() +"/"+documentPath,Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "application/pdf");
@@ -308,6 +309,16 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
                 if (!documentPath.equals(""))
                 {
                     Uri uri=null;
+                   /* File f=new File(documentPath);
+                    uri= FileProvider.getUriForFile(context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            f);*/
+                   uri=Uri.parse(documentPath);
+
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri, "application/pdf");
+                    context.startActivity(intent);
                   /*  if (path.equals("No"))
                     {
                        *//* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
@@ -323,11 +334,12 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
                         context.startActivity(intent);*//*
                     }
                     else{*/
-                        uri= Uri.parse(documentPath);
+                   // CopyReadAssetss(documentPath);
+                       /* uri= Uri.parse(documentPath);
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.setDataAndType(uri, "application/pdf");
-                        context.startActivity(intent);
+                        context.startActivity(intent);*/
                   //  }
 
 
@@ -379,9 +391,15 @@ public class AddFormActivity extends AppCompatActivity implements View.OnClickLi
                                 break;
                             case 2: // view
                                 Uri uri=null;
+
+                                uri= Uri.parse(documentPath);
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setDataAndType(uri, "application/pdf");
+                                context.startActivity(intent);
                                /* if (path.equals("No"))
                                 {*/
-                                    CopyReadAssetss(documentPath);
+                                    //CopyReadAssetss(documentPath);
                                /* }
                                 else{
                                     uri= Uri.parse(documentPath);
