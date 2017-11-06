@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:background="@color/colorWhite"
+    android:longClickable="true"
     >
     <RelativeLayout
         android:id="@+id/rlEmergencyContact"

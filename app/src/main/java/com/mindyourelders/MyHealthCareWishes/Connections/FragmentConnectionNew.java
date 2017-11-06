@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.Connections;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +8,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -94,6 +98,49 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         {
             setListData();
         }
+        lvConnection.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+              //  Toast.makeText(getActivity(),"Long Pressed",Toast.LENGTH_SHORT).show();
+                if (position!=connectionList.size()) {
+                    if (position != 0) {
+                        final Dialog dialog = new Dialog(getActivity());
+                       dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dialog_common);
+                    /* LayoutInflater lf = (LayoutInflater) getActivity()
+                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    final View dialogview = lf.inflate(R.layout.dialog_common, null);*/
+                        TextView title = (TextView) dialog.findViewById(R.id.txtTitle);
+                        title.setText("Delete");
+                        TextView body = (TextView) dialog.findViewById(R.id.txtMsg);
+                        body.setText("Do you want to Delete " + connectionList.get(position).getName() + " profile?");
+
+                        TextView btnYes = (TextView) dialog
+                                .findViewById(R.id.btnYes);
+                        btnYes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                deleteConnection(connectionList.get(position).getId());
+                                dialog.dismiss();
+                            }
+                        });
+                        TextView btnNo = (TextView) dialog
+                                .findViewById(R.id.btnNo);
+                        btnNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+dialog.show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(),"You can not delete user profile",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return false;
+            }
+        });
 
         //lvConnection.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         //SwipeMenuCreation s=new SwipeMenuCreation();
@@ -223,5 +270,15 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         super.onResume();
          getData();
          setListData();
+    }
+
+    public void deleteConnection(int id) {
+        boolean flag= MyConnectionsQuery.deleteRecord(id);
+        if(flag==true)
+        {
+            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 }
