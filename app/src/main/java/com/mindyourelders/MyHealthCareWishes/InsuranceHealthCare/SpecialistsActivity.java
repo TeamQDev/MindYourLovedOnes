@@ -135,6 +135,10 @@ public class SpecialistsActivity extends AppCompatActivity {
         HistoryQuery o=new HistoryQuery(context,dbHelper);
         HospitalQuery h=new HospitalQuery(context,dbHelper);
         SpecialistQuery s=new SpecialistQuery(context,dbHelper);
+        HospitalHealthQuery hhh=new HospitalHealthQuery(context,dbHelper);
+        PharmacyQuery ph=new PharmacyQuery(context,dbHelper);
+        AideQuery ad=new AideQuery(context,dbHelper);
+        FinanceQuery f=new FinanceQuery(context,dbHelper);
     }
 
     private void initListener() {
