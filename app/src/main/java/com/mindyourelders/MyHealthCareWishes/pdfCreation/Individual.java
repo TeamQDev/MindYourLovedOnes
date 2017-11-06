@@ -380,7 +380,7 @@ public class Individual {
     }
 
     public Individual(MedInfo medInfo) {
-        String preNote="";String glass="";String lense="";String blind="";String medicalNote="";String upper=""; String lower="";String visionNote="";
+        String preNote="";String glass="";String lense="";String blind="";String upper=""; String lower="";String visionNote="";
         Header.addChank("Medical Profile");
         messageInfo3.add("Medical Profile");
         Header.addEmptyLine(1);
@@ -450,13 +450,39 @@ public class Individual {
         messageInfo3.add("Mouth ");
         messageInfo3.add("");
 
-        if (medInfo.getVisionNote() != null) {
-            visionNote = medInfo.getVisionNote();
+        if (medInfo.getFalses() != null) {
+            upper = medInfo.getFalses();
+        }
+        Header.addTable("Dentures- Removable Upper :");
+        Header.addTable(upper);
+        messageInfo3.add("Dentures- Removable Upper :");
+        messageInfo3.add(upper);
+
+        if (medInfo.getImplants() != null) {
+            lower = medInfo.getImplants();
+        }
+        Header.addTable("Dentures- Removable Lower :");
+        Header.addTable(lower);
+        messageInfo3.add("Dentures- Removable Lower :");
+        messageInfo3.add(lower);
+
+        String drymouth="";
+        if (medInfo.getMouth() != null) {
+            drymouth= medInfo.getMouth();
+        }
+        Header.addTable("Dry Mouth :");
+        Header.addTable(drymouth);
+        messageInfo3.add("Dry Mouth :");
+        messageInfo3.add(drymouth);
+
+        String mouthnote="";
+        if (medInfo.getMouthnote() != null) {
+            mouthnote = medInfo.getMouthnote();
         }
         Header.addTable("Notes :");
-        Header.addTable(visionNote);
+        Header.addTable(mouthnote);
         messageInfo3.add("Notes :");
-        messageInfo3.add(visionNote);
+        messageInfo3.add(mouthnote);
 
         Header.addTable("Hearing & Speech :");
         Header.addTable("");
@@ -491,7 +517,7 @@ public class Individual {
         messageInfo3.add(aidNote);
 
 
-        
+
 
         Header.table.setWidthPercentage(100f);
 
