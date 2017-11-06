@@ -705,8 +705,8 @@ public class Individual {
     }
 
    public Individual(String emergency, ArrayList<Emergency> emergencyList) {
-       Header.addChank("Medical Profile");
-       messageEmergency.add("Medical Profile");
+       Header.addChank("Emergency Contacts");
+       messageEmergency.add("Emergency Contacts");
        Header.addEmptyLine(1);
 
        Header.widths[0] = 0.15f;
@@ -715,25 +715,96 @@ public class Individual {
        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
        for (int i=0;i<emergencyList.size();i++) {
-           Header.addTable("Medical History " + i + 1 + " :");
+           Header.addTable("Emergency Contact " + i + 1 + " :");
            Header.addTable("");
-           messageEmergency.add("Medical History " + i + 1 + " :");
+           messageEmergency.add("Emergency Contact " + i + 1 + " :");
            messageEmergency.add("");
 
-           Emergency e=emergencyList.get(i);
+           Emergency e = emergencyList.get(i);
 
-          /* String name="";
-           if (a.getTreatment() != null) {
-               treatment = a.getTreatment();
+           String name = "";
+           if (e.getName() != null) {
+               name = e.getName();
            }
-           Header.addTable("History :");
-           Header.addTable(historList.get(i));
-           messageEmergency.add("History :");
-           messageEmergency.add(historList.get(i));*/
+           Header.addTable("Name :");
+           Header.addTable(name);
+           messageEmergency.add("Name :");
+           messageEmergency.add(name);
+
+           String reationType = "";
+           if (e.getRelationType() != null) {
+               reationType = e.getRelationType();
+           }
+           Header.addTable("Relation Type :");
+           Header.addTable(reationType);
+           messageEmergency.add("Relation Type :");
+           messageEmergency.add(reationType);
+
+           String priority = "";
+           if (e.getIsPrimary()==0) {
+               priority = "Primary";
+           }else
+           {
+               priority ="Secondary";
+           }
+           Header.addTable("Priority :");
+           Header.addTable(priority);
+           messageEmergency.add("Priority :");
+           messageEmergency.add(priority);
+
+           String officePhone = "";
+           if (e.getWorkPhone() != null) {
+               officePhone = e.getWorkPhone();
+           }
+           Header.addTable("Office Phone :");
+           Header.addTable(officePhone);
+           messageEmergency.add("Office Phone :");
+           messageEmergency.add(officePhone);
+
+           if (e.getMobile() != null) {
+               mPhone = e.getMobile();
+           }
+           Header.addTable("Mobile :");
+           Header.addTable(mPhone);
+           messageEmergency.add("Mobile :");
+           messageEmergency.add(mPhone);
+           String bdate = "";
+
+           if (e.getPhone() != null) {
+               hPhone = e.getPhone();
+           }
+           Header.addTable("Home Phone :");
+           Header.addTable(hPhone);
+           messageEmergency.add("Home Phone :");
+           messageEmergency.add(hPhone);
+
+          String email="";
+           if (e.getEmail() != null) {
+               email = e.getEmail();
+           }
+           Header.addTable("Email :");
+           Header.addTable(email);
+           messageEmergency.add("Email :");
+           messageEmergency.add(email);
+
+           if (e.getAddress() != null) {
+               address = e.getAddress();
+           }
+           Header.addTable("Address :");
+           Header.addTable(address);
+           messageEmergency.add("Address :");
+           messageEmergency.add(address);
+
+           String note="";
+           if (e.getNote() != null) {
+               note = e.getNote();
+           }
+           Header.addTable("Notes :");
+           Header.addTable(note);
+           messageEmergency.add("Notes :");
+           messageEmergency.add(note);
 
        }
-
-
        Header.table.setWidthPercentage(100f);
        try {
 
@@ -748,8 +819,8 @@ public class Individual {
 
     public Individual(ArrayList<Specialist> specialistsList, String physician) {
 
-        Header.addChank("Medical Profile");
-        messagePhysician.add("Medical Profile");
+        Header.addChank("Primary Physician");
+        messagePhysician.add("Primary Physician");
         Header.addEmptyLine(1);
 
         Header.widths[0] = 0.15f;
@@ -757,8 +828,132 @@ public class Individual {
         Header.table = new PdfPTable(Header.widths);
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
+        for (int i=0;i<specialistsList.size();i++) {
+            Header.addTable("Primary Physician " + i + 1 + " :");
+            Header.addTable("");
+            messagePhysician.add("Primary Physician " + i + 1 + " :");
+            messagePhysician.add("");
+
+            Specialist s = specialistsList.get(i);
+
+            String speciality = "";
+            if (""+s.getIsPhysician() != null) {
+                speciality = ""+s.getIsPhysician();
+            }
+            Header.addTable("Speciality :");
+            Header.addTable(speciality);
+            messagePhysician.add("Speciality :");
+            messagePhysician.add(speciality);
+
+            String name = "";
+            if (s.getName() != null) {
+                name = s.getName();
+            }
+            Header.addTable("Name :");
+            Header.addTable(name);
+            messagePhysician.add("Name :");
+            messagePhysician.add(name);
+
+            String officePhone = "";
+            if (s.getOfficePhone() != null) {
+                officePhone = s.getOfficePhone();
+            }
+            Header.addTable("Office Phone :");
+            Header.addTable(officePhone);
+            messagePhysician.add("Office Phone :");
+            messagePhysician.add(officePhone);
+
+            String afterHoursPhone = "";
+            if (s.getHourPhone() != null) {
+                afterHoursPhone = s.getHourPhone();
+            }
+            Header.addTable("Office Phone :");
+            Header.addTable(afterHoursPhone);
+            messagePhysician.add("Office Phone :");
+            messagePhysician.add(afterHoursPhone);
+
+            String otherPhone = "";
+            if (s.getOtherPhone() != null) {
+                otherPhone = s.getOtherPhone();
+            }
+            Header.addTable("Other Phone :");
+            Header.addTable(otherPhone);
+            messagePhysician.add("Other Phone :");
+            messagePhysician.add(otherPhone);
+
+            String officeFax = "";
+            if (s.getFax() != null) {
+                officeFax = s.getFax();
+            }
+            Header.addTable("Office Fax :");
+            Header.addTable(officeFax);
+            messagePhysician.add("Office Fax :");
+            messagePhysician.add(officeFax);
 
 
+            if (s.getAddress() != null) {
+                address = s.getAddress();
+            }
+            Header.addTable("Address :");
+            Header.addTable(address);
+            messagePhysician.add("Address :");
+            messagePhysician.add(address);
+
+            String website="";
+            if (s.getWebsite() != null) {
+                website = s.getWebsite();
+            }
+            Header.addTable("Website :");
+            Header.addTable(website);
+            messagePhysician.add("Website :");
+            messagePhysician.add(website);
+
+            String medicalPracticeName="";
+            if (s.getPracticeName() != null) {
+                medicalPracticeName = s.getPracticeName();
+            }
+            Header.addTable("Medical Practice Name :");
+            Header.addTable(medicalPracticeName);
+            messagePhysician.add("Medical Practice Name :");
+            messagePhysician.add(medicalPracticeName);
+
+            String hospitalAffiliations="";
+            if (s.getHospAffiliation() != null) {
+                hospitalAffiliations = s.getHospAffiliation();
+            }
+            Header.addTable("Hospital Affiliations :");
+            Header.addTable(hospitalAffiliations);
+            messagePhysician.add("Hospital Affiliations :");
+            messagePhysician.add(hospitalAffiliations);
+
+            String networkStatus="";
+            if (s.getNetwork() != null) {
+                networkStatus = s.getNetwork();
+            }
+            Header.addTable("In Network Status :");
+            Header.addTable(networkStatus);
+            messagePhysician.add("In Network Status :");
+            messagePhysician.add(networkStatus);
+
+            String lastSeen="";
+            if (s.getLastseen() != null) {
+                lastSeen = s.getLastseen();
+            }
+            Header.addTable("Last Seen :");
+            Header.addTable(lastSeen);
+            messagePhysician.add("Last Seen :");
+            messagePhysician.add(lastSeen);
+
+            String note="";
+            if (s.getNote() != null) {
+                note = s.getNote();
+            }
+            Header.addTable("Notes :");
+            Header.addTable(note);
+            messagePhysician.add("Notes :");
+            messagePhysician.add(note);
+
+        }
         Header.table.setWidthPercentage(100f);
         try {
 
@@ -773,8 +968,8 @@ public class Individual {
 
     public Individual(ArrayList<Proxy> proxyList) {
 
-        Header.addChank("Medical Profile");
-        messageProxy.add("Medical Profile");
+        Header.addChank("Health Care Proxy Agent");
+        messageProxy.add("Health Care Proxy Agent");
         Header.addEmptyLine(1);
 
         Header.widths[0] = 0.15f;
@@ -782,8 +977,90 @@ public class Individual {
         Header.table = new PdfPTable(Header.widths);
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
+        for (int i=0;i<proxyList.size();i++) {
+            Header.addTable("Health Care Proxy Agent " + i + 1 + " :");
+            Header.addTable("");
+            messageProxy.add("Health Care Proxy Agent " + i + 1 + " :");
+            messageProxy.add("");
 
+            Proxy p = proxyList.get(i);
 
+            String name = "";
+            if (p.getName() != null) {
+                name = p.getName();
+            }
+            Header.addTable("Name :");
+            Header.addTable(name);
+            messageProxy.add("Name :");
+            messageProxy.add(name);
+
+            String relationShip = "";
+            if (p.getRelationType() != null) {
+                relationShip = p.getRelationType();
+            }
+            Header.addTable("Relationship :");
+            Header.addTable(relationShip);
+            messageProxy.add("Relationship :");
+            messageProxy.add(relationShip);
+
+            String mobile = "";
+            if (p.getMobile() != null) {
+                mobile = p.getMobile();
+            }
+            Header.addTable("Mobile Number :");
+            Header.addTable(mobile);
+            messageProxy.add("Mobile Number :");
+            messageProxy.add(mobile);
+
+            String homePhone = "";
+            if (p.getWorkPhone() != null) {
+                homePhone = p.getWorkPhone();
+            }
+            Header.addTable("Home Phone :");
+            Header.addTable(homePhone);
+            messageProxy.add("Home Phone :");
+            messageProxy.add(homePhone);
+
+            String officePhone = "";
+            if (p.getPhone() != null) {
+                officePhone = p.getPhone();
+            }
+            Header.addTable("Office Phone :");
+            Header.addTable(officePhone);
+            messageProxy.add("Office Phone :");
+            messageProxy.add(officePhone);
+
+            String email = "";
+            if (p.getEmail() != null) {
+                email = p.getEmail();
+            }
+            Header.addTable("Email Address :");
+            Header.addTable(email);
+            messageProxy.add("Email Address :");
+            messageProxy.add(email);
+
+            String address = "";
+            if (p.getAddress() != null) {
+                address = p.getAddress();
+            }
+            Header.addTable("Address :");
+            Header.addTable(address);
+            messageProxy.add("Address :");
+            messageProxy.add(address);
+
+            String priority = "";
+            if (p.getIsPrimary()==0) {
+                priority = "Primary";
+            }else
+            {
+                priority ="Successor";
+            }
+            Header.addTable("Proxy Agent Priority :");
+            Header.addTable(priority);
+            messageProxy.add("Proxy Agent Priority :");
+            messageProxy.add(priority);
+
+        }
         Header.table.setWidthPercentage(100f);
         try {
 
