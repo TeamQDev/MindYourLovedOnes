@@ -22,7 +22,11 @@ import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
+import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Proxy;
+import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
@@ -121,6 +125,7 @@ Context context=this;
         MedicalImplantsQuery ml=new MedicalImplantsQuery(context,dbHelper);
         HistoryQuery o=new HistoryQuery(context,dbHelper);
         HospitalQuery h=new HospitalQuery(context,dbHelper);
+        SpecialistQuery s=new SpecialistQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -170,6 +175,14 @@ Context context=this;
                     final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                     new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);
+
+                    ArrayList<Emergency> emergencyList=MyConnectionsQuery.fetchAllEmergencyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
+                    ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
+                    ArrayList<Proxy> proxyList=MyConnectionsQuery.fetchAllProxyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),3);
+                    new Individual("Emergency",emergencyList);
+                    new Individual(specialistsList,"Physician");
+                    new Individual(proxyList);
+
                     Header.document.close();
 
                 }

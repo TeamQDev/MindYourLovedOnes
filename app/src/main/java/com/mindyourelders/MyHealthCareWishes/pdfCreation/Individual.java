@@ -4,9 +4,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
+import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
+import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.utility.Header;
 
 import java.util.ArrayList;
@@ -39,6 +42,9 @@ public class Individual {
     public static ArrayList<String> messageInfo = new ArrayList<String>();
     public static ArrayList<String> messageInfo2 = new ArrayList<String>();
     public static ArrayList<String> messageInfo3 = new ArrayList<String>();
+    public static ArrayList<String> messageEmergency = new ArrayList<String>();
+    public static ArrayList<String> messagePhysician = new ArrayList<String>();
+    public static ArrayList<String> messageProxy = new ArrayList<String>();
 
 
     public Individual(RelativeConnection connection) {
@@ -679,7 +685,6 @@ public class Individual {
             messageInfo3.add("Medical History " + i + 1 + " :");
             messageInfo3.add("");
 
-
             Header.addTable("History :");
             Header.addTable(historList.get(i));
             messageInfo3.add("History :");
@@ -687,12 +692,95 @@ public class Individual {
         }
 
 
+        Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
+    }
+
+   public Individual(String emergency, ArrayList<Emergency> emergencyList) {
+       Header.addChank("Medical Profile");
+       messageEmergency.add("Medical Profile");
+       Header.addEmptyLine(1);
+
+       Header.widths[0] = 0.15f;
+       Header.widths[1] = 0.85f;
+       Header.table = new PdfPTable(Header.widths);
+       Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+
+       for (int i=0;i<emergencyList.size();i++) {
+           Header.addTable("Medical History " + i + 1 + " :");
+           Header.addTable("");
+           messageEmergency.add("Medical History " + i + 1 + " :");
+           messageEmergency.add("");
+
+           Emergency e=emergencyList.get(i);
+
+          /* String name="";
+           if (a.getTreatment() != null) {
+               treatment = a.getTreatment();
+           }
+           Header.addTable("History :");
+           Header.addTable(historList.get(i));
+           messageEmergency.add("History :");
+           messageEmergency.add(historList.get(i));*/
+
+       }
+
+
+       Header.table.setWidthPercentage(100f);
+       try {
+
+           Header.document.add(Header.table);
+       } catch (DocumentException e) {
+           // TODO Auto-generated catch block
+           e.printStackTrace();
+       }
+
+       Header.addEmptyLine(1);
+    }
+
+    public Individual(ArrayList<Specialist> specialistsList, String physician) {
+
+        Header.addChank("Medical Profile");
+        messagePhysician.add("Medical Profile");
+        Header.addEmptyLine(1);
+
+        Header.widths[0] = 0.15f;
+        Header.widths[1] = 0.85f;
+        Header.table = new PdfPTable(Header.widths);
+        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
 
 
+        Header.table.setWidthPercentage(100f);
+        try {
 
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
+        Header.addEmptyLine(1);
+    }
 
+    public Individual(ArrayList<Proxy> proxyList) {
+
+        Header.addChank("Medical Profile");
+        messageProxy.add("Medical Profile");
+        Header.addEmptyLine(1);
+
+        Header.widths[0] = 0.15f;
+        Header.widths[1] = 0.85f;
+        Header.table = new PdfPTable(Header.widths);
+        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
 
 
