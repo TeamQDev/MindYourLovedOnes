@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
@@ -146,12 +147,14 @@ Context context=this;
                     Header.addEmptyLine(2);
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         new Individual(PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL)));
+
+
                     }
                     else{
                         new Individual(MyConnectionsQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL)));
                     }
                     // new MessageString().getProfileProfile(connection);
-
+                    new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)));
                     Header.document.close();
 
                 }
@@ -195,6 +198,7 @@ Context context=this;
                                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
+                                        result.append(new MessageString().getMedicalInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                                 + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)

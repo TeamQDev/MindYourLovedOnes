@@ -354,7 +354,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             @Override
             public void afterTextChanged(Editable editable) {
                 int length = editable.length();
-                if (length == 1) {
+                if ((prevL < length) && (length == 1)) {
                     editable.append("-");
                 }
             }

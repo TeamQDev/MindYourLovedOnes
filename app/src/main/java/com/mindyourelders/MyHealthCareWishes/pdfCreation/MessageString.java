@@ -88,4 +88,22 @@ public class MessageString {
         return result;
     }
 
+    public StringBuffer getMedicalInfo() {StringBuffer result = new StringBuffer();
+        if (Individual.messageInfo3.size() > 0) {
+            result.append(Individual.messageInfo3.get(0));
+            result.append("\n");
+            for (int i = 1; i < Individual.messageInfo3.size(); i++) {
+
+                result.append(Individual.messageInfo3.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+
+    }
 }

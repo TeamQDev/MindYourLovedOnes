@@ -59,31 +59,34 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
 
         if (convertView==null)
         {
+
             if (position!=connectionList.size()) {
                 convertView = lf.inflate(R.layout.row_connections, parent, false);
-                holder = new ViewHolder();
-                holder.txtConName = (TextView) convertView.findViewById(R.id.txtConName);
-                holder.txtConRelation = (TextView) convertView.findViewById(R.id.txtConRelation);
-                //   holder.txtAddress= (TextView) convertView.findViewById(R.id.txtAddress);
-                holder.imgConPhoto = (ImageView) convertView.findViewById(R.id.imgConPhoto);
-                //   holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
-                holder.txtConName.setText(connectionList.get(position).getName());
-                holder.txtConRelation.setText(connectionList.get(position).getRelationType());
-
-                byte[] photo=connectionList.get(position).getPhoto();
-                Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                holder.imgConPhoto.setImageBitmap(bmp);
             }
             else if(position==connectionList.size()){
                 convertView = lf.inflate(R.layout.row_connectionsadd, parent, false);
-                holder = new ViewHolder();
-                holder.txtConName = (TextView) convertView.findViewById(R.id.txtConName);
-                holder.imgConPhoto = (ImageView) convertView.findViewById(R.id.imgConPhoto);
+             /*   holder.txtConName = (TextView) convertView.findViewById(R.id.txtConName);
+                holder.imgConPhoto = (ImageView) convertView.findViewById(R.id.imgConPhoto);*/
             }
+            holder = new ViewHolder();
+            holder.txtConName = (TextView) convertView.findViewById(R.id.txtConName);
+            holder.txtConRelation = (TextView) convertView.findViewById(R.id.txtConRelation);
+            //   holder.txtAddress= (TextView) convertView.findViewById(R.id.txtAddress);
+            holder.imgConPhoto = (ImageView) convertView.findViewById(R.id.imgConPhoto);
+            //   holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
+
             convertView.setTag(holder);
         }
         else{
             holder= (ViewHolder) convertView.getTag();
+        }
+        if (position!=connectionList.size()) {
+            holder.txtConName.setText(connectionList.get(position).getName());
+            holder.txtConRelation.setText(connectionList.get(position).getRelationType());
+
+            byte[] photo = connectionList.get(position).getPhoto();
+            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            holder.imgConPhoto.setImageBitmap(bmp);
         }
 /*
 if (connectionList.get(position).getAddress().equals(""))
@@ -96,7 +99,15 @@ else {
 */
 
 
+convertView.setOnLongClickListener(new View.OnLongClickListener() {
+    @Override
+    public boolean onLongClick(View v) {
+        if (position==connectionList.size()) {
 
+        }
+        return true;
+    }
+});
 
       convertView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.Header;
@@ -36,6 +37,8 @@ public class Individual {
 
     public static ArrayList<String> messageInfo = new ArrayList<String>();
     public static ArrayList<String> messageInfo2 = new ArrayList<String>();
+    public static ArrayList<String> messageInfo3 = new ArrayList<String>();
+
 
     public Individual(RelativeConnection connection) {
         Header.addChank("Personal Profile");
@@ -363,6 +366,99 @@ public class Individual {
             Header.addTable(cellPhone);
             messageInfo.add("Preferred Hospital :");
             messageInfo.add(cellPhone);*/
+        Header.table.setWidthPercentage(100f);
+
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
+    }
+
+    public Individual(MedInfo medInfo) {
+        String preNote="";String glass="";String lense="";String blind="";String medicalNote="";String upper=""; String lower="";String visionNote="";
+        Header.addChank("Medical Profile");
+        messageInfo3.add("Medical Profile");
+        Header.addEmptyLine(1);
+
+        Header.widths[0] = 0.15f;
+        Header.widths[1] = 0.85f;
+        Header.table = new PdfPTable(Header.widths);
+        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+
+        if (medInfo.getNote() != null) {
+            preNote = medInfo.getNote();
+        }
+        Header.addTable("Pre Existing Note :");
+        Header.addTable(preNote);
+        messageInfo3.add("Pre Existing Note :");
+        messageInfo3.add(preNote);
+
+        if (medInfo.getNote() != null) {
+            preNote = medInfo.getNote();
+        }
+        Header.addTable("Pre Existing Note :");
+        Header.addTable(preNote);
+        messageInfo3.add("Pre Existing Note :");
+        messageInfo3.add(preNote);
+
+
+        Header.addTable("Vision :");
+        Header.addTable("");
+        messageInfo3.add("Vision :");
+        messageInfo3.add("");
+
+        if (medInfo.getGlass() != null) {
+            glass = medInfo.getGlass();
+        }
+        Header.addTable("Glasses :");
+        Header.addTable(glass);
+        messageInfo3.add("Glasses :");
+        messageInfo3.add(glass);
+
+        if (medInfo.getLense() != null) {
+            lense = medInfo.getLense();
+        }
+        Header.addTable("Contact Lense :");
+        Header.addTable(lense);
+        messageInfo3.add("Contact Lense :");
+        messageInfo3.add(lense);
+
+        if (medInfo.getBlind() != null) {
+            blind = medInfo.getBlind();
+        }
+        Header.addTable("Color Blind :");
+        Header.addTable(blind);
+        messageInfo3.add("Color Blind :");
+        messageInfo3.add(blind);
+
+        if (medInfo.getVisionNote() != null) {
+            visionNote = medInfo.getVisionNote();
+        }
+        Header.addTable("Notes:");
+        Header.addTable(visionNote);
+        messageInfo3.add("Notes :");
+        messageInfo3.add(visionNote);
+
+
+        Header.addTable("Mouth ");
+        Header.addTable("");
+        messageInfo3.add("Mouth ");
+        messageInfo3.add("");
+
+        if (medInfo.getVisionNote() != null) {
+            visionNote = medInfo.getVisionNote();
+        }
+        Header.addTable("Notes:");
+        Header.addTable(visionNote);
+        messageInfo3.add("Notes :");
+        messageInfo3.add(visionNote);
+      //String blind="";String medicalNote="";String upper=""; String lower="";
+
         Header.table.setWidthPercentage(100f);
 
         try {
