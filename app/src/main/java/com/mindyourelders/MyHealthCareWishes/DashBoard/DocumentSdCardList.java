@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 
 public class DocumentSdCardList extends AppCompatActivity {
+    private static final int RESULTCODE = 200;
     Context context=this;
     ArrayAdapter adapter;
     int clickCounter=0;
@@ -29,7 +30,7 @@ public class DocumentSdCardList extends AppCompatActivity {
     ArrayList listItems=new ArrayList();
     private File[] imagelist;
     String[] pdflist;
-    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 400;
     ImageView imgBack;
     /** Called when the activity is first created. */
     @Override
@@ -37,7 +38,7 @@ public class DocumentSdCardList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_sd_card_list);
 
-      //  checkRuntimePermission();
+        checkRuntimePermission();
         lvDoc= (ListView) findViewById(R.id.lvDoc);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +145,6 @@ public class DocumentSdCardList extends AppCompatActivity {
         i.putExtra("Name",name);
         i.putExtra("URI",uri);
 
-        setResult(100,i);
+        setResult(RESULTCODE,i);
     }
 }

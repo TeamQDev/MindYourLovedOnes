@@ -50,6 +50,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     MySpinner spinnerDoc,spinnerType;
     TextView txtName, txtDate, txtLocation,txtHolderName,txtDist,txtDoc;
     String From;
+    private static final int RESULTCODE = 200;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
     TextInputLayout tilDate,tilDoc;
@@ -352,12 +353,14 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             tilDoc.setVisibility(View.VISIBLE);
             imgDone.setVisibility(View.GONE);
             imgDot.setVisibility(View.VISIBLE);
+            imgDoc.setClickable(true);
         }
         else{
             imgDot.setVisibility(View.GONE);
             tilDoc.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
+            imgDoc.setClickable(false);
         }
 
        /* switch (From)
@@ -466,7 +469,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgAdd:
                 Intent i=new Intent(context,DocumentSdCardList.class);
-                startActivityForResult(i,100);
+                startActivityForResult(i,RESULTCODE);
                 break;
 
             case R.id.imgDot:
@@ -781,11 +784,13 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==100 && data!=null)
+        if (requestCode==RESULTCODE && data!=null)
         {
             name=data.getExtras().getString("Name");
             documentPath=data.getExtras().getString("URI");
             txtName.setText(name);
+            imgDoc.setClickable(false);
         }
     }
+
 }

@@ -70,7 +70,7 @@ public class DocumentsAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(context,AddFormActivity.class);
+                Intent i=new Intent(context,AddInsuranceFormActivity.class);
                 i.putExtra("GoTo","View");
                 /*if (position>3)
                 {

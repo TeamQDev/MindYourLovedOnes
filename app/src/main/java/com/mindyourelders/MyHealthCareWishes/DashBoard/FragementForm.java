@@ -164,7 +164,8 @@ public class FragementForm extends Fragment implements View.OnClickListener {
 
             case R.id.llAddDoc:
                 //preferences.putString(PrefConstants.SOURCE, "InsuranceForm");
-                Intent i = new Intent(getActivity(), AddFormActivity.class);
+                Intent i = new Intent(getActivity(), AddInsuranceFormActivity.class);
+                i.putExtra("GoTo","Add");
                 startActivity(i);
                 break;
         }

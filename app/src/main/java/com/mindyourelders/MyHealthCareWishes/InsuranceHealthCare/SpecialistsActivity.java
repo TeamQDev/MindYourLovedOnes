@@ -18,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
@@ -145,6 +146,8 @@ public class SpecialistsActivity extends AppCompatActivity {
         PharmacyQuery ph=new PharmacyQuery(context,dbHelper);
         AideQuery ad=new AideQuery(context,dbHelper);
         FinanceQuery f=new FinanceQuery(context,dbHelper);
+        AppointmentQuery df=new AppointmentQuery(context,dbHelper);
+        DateQuery da=new DateQuery(context,dbHelper);
     }
 
     private void initListener() {

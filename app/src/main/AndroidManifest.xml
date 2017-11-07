@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS_CONTACTS" />
 
-
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -23,7 +22,6 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/MyMaterialTheme">
         <activity
             android:name=".SplashActivity"
@@ -105,12 +103,12 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
@@ -190,29 +188,28 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivity"
+            android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:label="@string/title_activity_medical_appoint"
+            android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DocumentSdCardList"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity"
-            android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPetActivity"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPetActivity" />
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInsuranceFormActivity"></activity>
     </application>
 
 </manifest>
