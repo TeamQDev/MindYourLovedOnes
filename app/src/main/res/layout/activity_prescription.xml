@@ -35,7 +35,7 @@
             android:textSize="@dimen/dimension22dp"
             android:layout_toLeftOf="@+id/imgRight"
             />
-        
+
         <ImageView
             android:id="@+id/imgRight"
             android:layout_width="@dimen/dimension40dp"

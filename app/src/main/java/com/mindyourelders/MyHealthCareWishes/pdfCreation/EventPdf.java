@@ -3,6 +3,8 @@ package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
+import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.utility.Header;
 
@@ -58,6 +60,26 @@ public class EventPdf {
             Header.addTable(frequency);
             messageAppoint.add("Frequency :");
             messageAppoint.add(frequency);
+
+            ArrayList<DateClass> datelist= DateQuery.fetchAllDosageRecord(appointList.get(i).getUserid(),appointList.get(i).getUnique());
+            for(int j=0;j<datelist.size();j++)
+            {
+                Header.addTable("Date Completed" + j + 1 + " :");
+                Header.addTable("");
+                messageAppoint.add("Date Completed " + j + 1 + " :");
+                messageAppoint.add("");
+
+                DateClass d = datelist.get(j);
+
+                String date = "";
+                if (d.getDate() != null) {
+                    date = d.getDate();
+                }
+                Header.addTable("Date :");
+                Header.addTable(date);
+                messageAppoint.add("Date :");
+                messageAppoint.add(date);
+            }
 
         }
 
