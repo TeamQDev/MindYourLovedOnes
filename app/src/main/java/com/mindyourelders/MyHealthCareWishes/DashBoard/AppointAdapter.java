@@ -61,6 +61,7 @@ class AppointAdapter extends BaseAdapter {
             holder.txtDate= (TextView) convertView.findViewById(txtDate);
             holder.imgForward= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.llDate= (LinearLayout) convertView.findViewById(R.id.llDate);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -111,12 +112,13 @@ class AppointAdapter extends BaseAdapter {
             datetime.setText("Completion Date:  "+ dates.get(i).getDate());
         }
         //holder.imgProfile.setImageResource(student.getImgid());
-        convertView.setOnClickListener(new View.OnClickListener() {
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Appoint a=noteList.get(position);
                 Intent intent=new Intent(context,AddAppointmentActivity.class);
                 intent.putExtra("FROM","View");
-                intent.putExtra("AppointObject",noteList.get(position));
+                intent.putExtra("AppointObject",a);
                 context.startActivity(intent);
             }
         });
@@ -143,7 +145,7 @@ class AppointAdapter extends BaseAdapter {
     private class Holder {
         TextView txtDoctor, txtDateTime, txtFrequency,txtType,txtDate;
         LinearLayout llDate;
-        ImageView imgForward;
+        ImageView imgForward,imgEdit;
     }
 
 }

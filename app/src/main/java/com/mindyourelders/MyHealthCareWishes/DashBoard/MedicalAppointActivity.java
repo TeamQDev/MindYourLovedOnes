@@ -203,6 +203,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.imgAdd:
             Intent i=new Intent(context,AddAppointmentActivity.class);
+                i.putExtra("FROM","Add");
                 startActivity(i);
                 break;
         }

@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import java.io.Serializable;
+
 /**
  * Created by welcome on 10/28/2017.
  */
 
-public class DateClass {
+public class DateClass implements Serializable {
     public int getUnique() {
         return unique;
     }

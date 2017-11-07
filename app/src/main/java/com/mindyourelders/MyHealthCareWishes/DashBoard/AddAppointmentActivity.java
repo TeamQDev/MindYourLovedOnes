@@ -37,7 +37,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class AddAppointmentActivity extends AppCompatActivity implements View.OnClickListener{
     Context context=this;
-    TextView txtName,txtDate,txtOtherSpecialist,txtOtherFrequency;
+    TextView txtName,txtDate,txtOtherSpecialist,txtOtherFrequency,txtAdd;
     Preferences preferences;
     MySpinner spinnerType,spinnerFrequency;
     DBHelper dbHelper;
@@ -50,6 +50,8 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     String otherFrequency="";
     String otherType="";
     String status="No";
+    boolean isUpdate=false;
+    Appoint p;
 
     String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
             "Hypothyroid Blood test", "Glucose Test","Other"};
@@ -90,6 +92,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         spinnerFrequency= (MySpinner) findViewById(R.id.spinnerFrequency);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         llAddConn= (RelativeLayout) findViewById(R.id.llAddConn);
+        txtAdd= (TextView) findViewById(R.id.txtAdd);
 
         rgCompleted= (RadioGroup) findViewById(R.id.rgCompleted);
         rbYes= (RadioButton) findViewById(R.id.rbYes);
@@ -164,13 +167,41 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         {
             if (i.getExtras().get("FROM").equals("View"))
             {
+                txtAdd.setText("Update Appointment");
+                isUpdate=true;
                 Appoint a= (Appoint) i.getExtras().getSerializable("AppointObject");
+                p= (Appoint) i.getExtras().getSerializable("AppointObject");
                 if (a.getDoctor()!=null) {
                     txtName.setText(a.getDoctor());
                 }
-                
+                if (a.getFrequency()!=null)
+                {
+                    int index = 0;
+                    for (int j = 0; j < Frequency.length; j++) {
+                        if (a.getFrequency().equals(Frequency[j])) {
+                            index = j;
+                        }
+                    }
+                    spinnerFrequency.setSelection(index+1);
+                }
+                if (a.getType()!=null)
+                {
+                    int index = 0;
+                    for (int j = 0; j < Type.length; j++) {
+                        if (a.getType().equals(Type[j])) {
+                            index = j;
+                        }
+                    }
+                    spinnerType.setSelection(index+1);
+                }
+
             }
+            else if (i.getExtras().get("FROM").equals("Add")){
+                txtAdd.setText("Add Appointment");
+                isUpdate=false;
+                }
         }
+
     }
 
     @Override
@@ -218,12 +249,23 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                     txtName.setError("Please Enter Name");
                     showAlert("Please Enter Name", AddAppointmentActivity.this);
                 } else {
-                    Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, date, type, frequency, otherType, otherFrequency, dateList, unique);
-                    if (flag == true) {
-                        Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    if (isUpdate==false) {
+                        Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, date, type, frequency, otherType, otherFrequency, dateList, unique);
+                        if (flag == true) {
+                            Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if (isUpdate==true){
+                        Boolean flag = AppointmentQuery.updateAppointmentData(p.getId(), name, date, type, frequency, otherType, otherFrequency, dateList, p.getUnique());
+                        if (flag == true) {
+                            Toast.makeText(context, "Appointment updated succesfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 

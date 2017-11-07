@@ -145,6 +145,34 @@ if (dateList!=null) {
         return null;
     }
 
+    public static Boolean updateAppointmentData(int id, String name, String date, String type, String frequency, String otherType, String otherFrequency, ArrayList<DateClass> dateList, int unique) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_ID, id);
+        cv.put(COL_TYPE, type);
+        cv.put(COL_FREQUENCY, frequency);
+        cv.put(COL_DOCTORNAME, name);
+        cv.put(COL_DATE_TIME, date);
+        cv.put(COL_OTHER_COCTOR, otherType);
+        cv.put(COL_OTHER_FREQUENCY, otherFrequency);
+        cv.put(COL_UNIQUE, unique);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+        }
+
+        return flag;
+    }
+
    /* public static Boolean updateEvent(int id, String note, String date) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
