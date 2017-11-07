@@ -63,12 +63,27 @@ public class AddPetActivity extends AppCompatActivity {
                 isUpdate=true;
                 Pet p= (Pet) i.getExtras().getSerializable("PetObject");
                 pet=p;
-                txtName.setText(p.getName());
-                txtBreed.setText(p.getBreed());
-                txtColor.setText(p.getColor());
-                txtChip.setText(p.getChip());
-                txtVeterian.setText(p.getVeterian());
-                txtCare.setText(p.getGuard());
+                if (p.getName()!=null) {
+                    txtName.setText(p.getName());
+                }
+                if (p.getBreed()!=null)
+                {
+                    txtBreed.setText(p.getBreed());
+                }
+             if (p.getColor()!=null)
+             {
+                 txtColor.setText(p.getColor());
+             }
+             if (p.getVeterian()!=null)
+             {
+                 txtVeterian.setText(p.getVeterian());
+             }
+               if (p.getChip()!=null) {
+                   txtChip.setText(p.getChip());
+               }
+               if (p.getGuard()!=null) {
+                   txtCare.setText(p.getGuard());
+               }
 
             }
             else{

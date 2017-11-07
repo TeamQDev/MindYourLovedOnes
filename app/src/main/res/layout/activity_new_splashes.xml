@@ -84,7 +84,7 @@
             android:layout_marginLeft="@dimen/dimension5dp"
             android:layout_marginRight="@dimen/dimension1dp"
             android:layout_marginBottom="@dimen/dimension1dp"
-            android:src="@drawable/s_one" />
+            android:src="@drawable/mye_img" />
 
         <ImageView
             android:id="@+id/img2"
