@@ -258,4 +258,23 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getInsuranceInfo() {
+        StringBuffer result = new StringBuffer();
+        if (InsurancePdf.messageInsurance.size() > 0) {
+            result.append(InsurancePdf.messageInsurance.get(0));
+            result.append("\n");
+            for (int i = 1; i < InsurancePdf.messageInsurance.size(); i++) {
+
+                result.append(InsurancePdf.messageInsurance.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

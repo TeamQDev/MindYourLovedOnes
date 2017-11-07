@@ -21,6 +21,7 @@ import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
+import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
@@ -32,10 +33,12 @@ import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
+import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
@@ -230,7 +233,26 @@ public class SpecialistsActivity extends AppCompatActivity {
                 }
                 else if (from.equals("Insurance"))
                 {
+                    final String RESULT = Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                    File dirfile = new File(RESULT);
+                    dirfile.mkdirs();
+                    File file = new File(dirfile, "Insurance.pdf");
+                    if (file.exists()) {
+                        file.delete();
+                    }
 
+                    new Header().createPdfHeader(file.getAbsolutePath(),
+                            "Insurance");
+
+                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(2);
+
+                    ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+
+                    new InsurancePdf(insuranceList);
+
+                    Header.document.close();
                 }
                 else if (from.equals("Event"))
                 {
@@ -314,7 +336,16 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 else if (from.equals("Insurance"))
                                 {
+                                    StringBuffer result = new StringBuffer();
+                                    result.append(new MessageString().getInsuranceInfo());
 
+
+                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Insurance.pdf",
+                                            context, result);
+
+                                    System.out.println("\n" + result + "\n");
                                 }
                                 else if (from.equals("Event"))
                                 {

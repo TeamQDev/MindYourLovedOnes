@@ -162,6 +162,8 @@ public class Specialty {
             messageDoctor.add(note);
 
         }
+
+
         Header.table.setWidthPercentage(100f);
         try {
 
@@ -175,6 +177,7 @@ public class Specialty {
     }
 
     public Specialty(String hospital, ArrayList<Hospital> hospitalList) {
+
         Header.addChank("Hospitals And Other Health Professionals");
         messageHospital.add("Hospitals And Other Health Professionals");
         Header.addEmptyLine(1);
@@ -294,6 +297,17 @@ public class Specialty {
 
         }
 
+        Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
+
     }
 
     public Specialty(ArrayList<Pharmacy> pharmacyList) {
@@ -370,6 +384,16 @@ public class Specialty {
             messagePharmacy.add(note);
 
         }
+        Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
 
     }
 
@@ -475,6 +499,17 @@ public class Specialty {
             messageAides.add(note);
 
         }
+
+        Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
 
     }
 
@@ -597,5 +632,16 @@ public class Specialty {
             messageFinance.add(note);
 
         }
+
+        Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
     }
 }
