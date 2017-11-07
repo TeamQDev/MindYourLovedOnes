@@ -1,8 +1,11 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,17 +20,22 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.PrescriptionQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PrescriptionPdf;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class PrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
     SwipeMenuListView lvPrescription;
    // ListView lvPrescription;
-    ImageView imgBack;
+    ImageView imgBack,imgRight;
     ArrayList<Prescription> PrescriptionList;
     RelativeLayout llAddPrescription;
     TextView txtView;
@@ -35,6 +43,9 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     Preferences preferences;
     DBHelper dbHelper;
     boolean isEdit;
+
+    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
+    final CharSequence[] dialog_items = {"View" };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +80,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
         lvPrescription= (SwipeMenuListView) findViewById(R.id.lvPrescription);
        // lvPrescription= (ListView)findViewById(R.id.lvPrescription);
         txtView= (TextView) findViewById(R.id.txtView);
-
+        imgRight= (ImageView)findViewById(R.id.imgRight);
 
         lvPrescription.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
@@ -90,6 +101,79 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                         break;
                 }
                 return false;
+            }
+        });
+
+        imgRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Prescription.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Prescription");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+
+                ArrayList<Prescription> prescriptionList= PrescriptionQuery.fetchAllPrescrptionRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+           //     ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),);
+
+                new PrescriptionPdf(prescriptionList);
+
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                        /*    case 0: // email
+
+                       *//* emailAttachement(item);
+
+                        ShearedValues.activityID = getApplicationContext();*//*
+                                break;
+                            case 1: // email
+
+                       *//* bluetoothAttachement(new File(item.getAbsolutePath()),
+                                context);
+                        ShearedValues.activityID = getApplicationContext();*//*
+
+                                break;*/
+                            case 0: // view
+
+
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getInsuranceInfo());
+
+
+                                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/Prescription.pdf",
+                                        context, result);
+
+                                System.out.println("\n" + result + "\n");
+
+                                break;
+                        }
+
+
+                    }
+                });
+
+                builder.create().show();
+                // ((CarePlanActivity)context).CopyAssets();
             }
         });
 
