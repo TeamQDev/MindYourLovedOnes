@@ -277,4 +277,23 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getAppointInfo() {
+        StringBuffer result = new StringBuffer();
+        if (EventPdf.messageAppoint.size() > 0) {
+            result.append(EventPdf.messageAppoint.get(0));
+            result.append("\n");
+            for (int i = 1; i < EventPdf.messageAppoint.size(); i++) {
+
+                result.append(EventPdf.messageAppoint.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

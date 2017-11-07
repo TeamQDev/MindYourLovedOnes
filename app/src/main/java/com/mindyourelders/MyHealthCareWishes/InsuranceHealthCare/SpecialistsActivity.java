@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
+import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
@@ -30,6 +31,7 @@ import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
+import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
@@ -37,6 +39,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
@@ -256,7 +259,26 @@ public class SpecialistsActivity extends AppCompatActivity {
                 }
                 else if (from.equals("Event"))
                 {
+                    final String RESULT = Environment.getExternalStorageDirectory()
+                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                    File dirfile = new File(RESULT);
+                    dirfile.mkdirs();
+                    File file = new File(dirfile, "Event.pdf");
+                    if (file.exists()) {
+                        file.delete();
+                    }
 
+                    new Header().createPdfHeader(file.getAbsolutePath(),
+                            "Appointment Checklist");
+
+                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(2);
+
+                    ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+
+                    new EventPdf(AppointList);
+
+                    Header.document.close();
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -349,7 +371,16 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 else if (from.equals("Event"))
                                 {
+                                    StringBuffer result = new StringBuffer();
+                                    result.append(new MessageString().getAppointInfo());
 
+
+                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Event.pdf",
+                                            context, result);
+
+                                    System.out.println("\n" + result + "\n");
                                 }
                                 break;
 
