@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,8 +107,17 @@ class PdfAdapter extends BaseAdapter {
               textOption1.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      String uri=Uri.fromFile(imagelist[(int) position].getAbsoluteFile()).toString();
-                      ((DocumentSdCardList)context).getData(pdfList[position],uri);
+                      File targetFile = new File(String.valueOf(imagelist[(int) position].getAbsoluteFile()));
+                      Uri uri=null;
+                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+                        //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                          uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                      } else {
+                          uri = Uri.fromFile(targetFile);
+                      }
+                     //uri=Uri.fromFile(imagelist[(int) position].getAbsoluteFile()).toString();
+                      ((DocumentSdCardList)context).getData(pdfList[position], String.valueOf(uri));
                        dialog.dismiss();
                       ((DocumentSdCardList) context).finish();
                   }
@@ -121,7 +132,15 @@ class PdfAdapter extends BaseAdapter {
                       if (list.size() > 0 && imagelist[(int) position].isFile()) {
                           Intent intent = new Intent();
                           intent.setAction(Intent.ACTION_VIEW);
-                          Uri uri = Uri.fromFile(imagelist[(int) position].getAbsoluteFile());
+                         // Uri uri = Uri.fromFile(imagelist[(int) position].getAbsoluteFile());
+                          File targetFile = new File(String.valueOf(imagelist[(int) position].getAbsoluteFile()));
+                          Uri uri=null;
+                          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                               intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                              uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                          } else {
+                              uri = Uri.fromFile(targetFile);
+                          }
                           intent.setDataAndType(uri, "application/pdf");
                           context.startActivity(intent);
                       }
