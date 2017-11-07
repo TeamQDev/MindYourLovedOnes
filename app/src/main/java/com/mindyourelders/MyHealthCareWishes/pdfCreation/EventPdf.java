@@ -79,6 +79,7 @@ public class EventPdf {
                 Header.addTable(date);
                 messageAppoint.add("Date :");
                 messageAppoint.add(date);
+                
             }
 
         }
