@@ -109,6 +109,7 @@ android:visibility="gone"
             android:src="@drawable/forword_arrow"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/dimension5dp"
+            android:visibility="gone"
             />
     </RelativeLayout>
 

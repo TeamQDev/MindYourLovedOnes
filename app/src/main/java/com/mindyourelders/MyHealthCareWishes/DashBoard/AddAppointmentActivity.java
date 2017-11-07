@@ -2,6 +2,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
@@ -23,6 +24,7 @@ import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -156,6 +158,19 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 }
             }
         });
+
+        Intent i=getIntent();
+        if (i.getExtras()!=null)
+        {
+            if (i.getExtras().get("FROM").equals("View"))
+            {
+                Appoint a= (Appoint) i.getExtras().getSerializable("AppointObject");
+                if (a.getDoctor()!=null) {
+                    txtName.setText(a.getDoctor());
+                }
+                
+            }
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,12 +111,13 @@ class AppointAdapter extends BaseAdapter {
             datetime.setText("Completion Date:  "+ dates.get(i).getDate());
         }
         //holder.imgProfile.setImageResource(student.getImgid());
-        holder.imgForward.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent=new Intent(context,ViewEventActivity.class);
+                Intent intent=new Intent(context,AddAppointmentActivity.class);
+                intent.putExtra("FROM","View");
                 intent.putExtra("AppointObject",noteList.get(position));
-                context.startActivity(intent);*/
+                context.startActivity(intent);
             }
         });
        /* holder.txtDate.setOnClickListener(new View.OnClickListener() {
