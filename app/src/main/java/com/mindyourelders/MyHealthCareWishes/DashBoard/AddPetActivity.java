@@ -12,20 +12,25 @@ import android.widget.Toast;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
+import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import static com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity.RESULT_ALLERGY;
 
 public class AddPetActivity extends AppCompatActivity {
-    Context context=this;
-    TextView txtName,txtBreed,txtColor,txtChip,txtVeterian,txtCare;
-  String name="",breed="",color="",veterain="",care="",chip="";
-    ImageView imgBack,imgDone;
-    public static final int REQUEST_PET= 400;
+    Context context = this;
+    TextView txtName, txtBreed, txtColor, txtChip, txtVeterian, txtCare;
+    String name = "", breed = "", color = "", veterain = "", care = "", chip = "";
+    ImageView imgBack, imgDone;
+    public static final int REQUEST_PET = 400;
+    boolean isUpdate=false;
 
     Preferences preferences;
     DBHelper dbHelper;
+
+    Pet pet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,35 +44,64 @@ public class AddPetActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        PetQuery a=new PetQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        PetQuery a = new PetQuery(context, dbHelper);
 
-      imgBack= (ImageView) findViewById(R.id.imgBack);
-        imgDone= (ImageView) findViewById(R.id.imgDone);
-        txtName= (TextView) findViewById(R.id.txtName);
-        txtBreed= (TextView) findViewById(R.id.txtBreed);
-        txtColor= (TextView) findViewById(R.id.txtColor);
-        txtChip= (TextView) findViewById(R.id.txtChip);
-        txtVeterian= (TextView) findViewById(R.id.txtVeteran);
-        txtCare= (TextView) findViewById(R.id.txtCare);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgDone = (ImageView) findViewById(R.id.imgDone);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtBreed = (TextView) findViewById(R.id.txtBreed);
+        txtColor = (TextView) findViewById(R.id.txtColor);
+        txtChip = (TextView) findViewById(R.id.txtChip);
+        txtVeterian = (TextView) findViewById(R.id.txtVeteran);
+        txtCare = (TextView) findViewById(R.id.txtCare);
 
+        Intent i = getIntent();
+        if (i.getExtras() != null) {
+            if (i.getExtras().get("FROM").equals("Update")) {
+                isUpdate=true;
+                Pet p= (Pet) i.getExtras().getSerializable("PetObject");
+                pet=p;
+                txtName.setText(p.getName());
+                txtBreed.setText(p.getBreed());
+                txtColor.setText(p.getColor());
+                txtChip.setText(p.getChip());
+                txtVeterian.setText(p.getVeterian());
+                txtCare.setText(p.getGuard());
+
+            }
+            else{
+                isUpdate=false;
+            }
+
+        }
 
         imgDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name=txtName.getText().toString();
-                breed=txtBreed.getText().toString();
-                color=txtColor.getText().toString();
-                chip=txtChip.getText().toString();
-                veterain=txtVeterian.getText().toString();
-                care=txtCare.getText().toString();
+                name = txtName.getText().toString();
+                breed = txtBreed.getText().toString();
+                color = txtColor.getText().toString();
+                chip = txtChip.getText().toString();
+                veterain = txtVeterian.getText().toString();
+                care = txtCare.getText().toString();
+                if (isUpdate==false) {
+                    Boolean flag = PetQuery.insertPetData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, breed, color, chip, veterain, care);
+                    if (flag == true) {
+                        Toast.makeText(context, "Pet Added Succesfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if (isUpdate==true) {
+                    Boolean flag = PetQuery.updatePetData(pet.getId(), name, breed, color, chip, veterain, care);
+                    if (flag == true) {
+                        Toast.makeText(context, "Pet updated Succesfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
 
-                Boolean flag = PetQuery.insertPetData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,breed,color,chip,veterain,care);
-                if (flag == true) {
-                    Toast.makeText(context, "Pet Added Succesfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                 }
 
                 Intent intentAllergy = new Intent();

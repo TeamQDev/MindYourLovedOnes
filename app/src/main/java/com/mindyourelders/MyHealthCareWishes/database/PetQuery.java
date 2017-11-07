@@ -138,4 +138,30 @@ public class PetQuery {
         return true;
     }
 
+    public static Boolean updatePetData(int id, String name, String breed, String color, String chip, String veterain, String care) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_ID, id);
+        cv.put(COL_BREED, breed);
+        cv.put(COL_COLOR, color);
+        cv.put(COL_VETERIAN, veterain);
+        cv.put(COL_GUARD, care);
+        cv.put(COL_CHIP, chip);
+        cv.put(COL_NAME, name);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+        }
+
+        return flag;
+    }
 }

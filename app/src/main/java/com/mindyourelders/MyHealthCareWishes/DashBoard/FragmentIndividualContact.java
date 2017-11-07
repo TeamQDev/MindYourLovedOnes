@@ -563,6 +563,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
             case R.id.imgAddPet:
                 Intent intent = new Intent(getActivity(), AddPetActivity.class);
+                intent.putExtra("FROM","Update");
                 startActivityForResult(intent, REQUEST_PET);
                 break;
 
@@ -1060,7 +1061,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                             public void onClick(View v) {
                                 Pet a=AllargyLists.get(position);
                                 Intent allergyIntent = new Intent(getActivity(), AddPetActivity.class);
-
+                                allergyIntent.putExtra("FROM","Update");
                                 allergyIntent.putExtra("PetObject",a);
                                 startActivityForResult(allergyIntent, REQUEST_PET);
                             }
