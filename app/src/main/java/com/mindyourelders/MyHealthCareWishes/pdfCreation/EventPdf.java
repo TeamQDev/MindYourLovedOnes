@@ -27,9 +27,10 @@ public class EventPdf {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<appointList.size();i++) {
-            Header.addTable("Appointment Checklist " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Appointment Checklist " +k + " :");
             Header.addTable("");
-            messageAppoint.add("Appointment Checklist " + i + 1 + " :");
+            messageAppoint.add("Appointment Checklist " +k + " :");
             messageAppoint.add("");
 
             Appoint s = appointList.get(i);
@@ -64,9 +65,10 @@ public class EventPdf {
             ArrayList<DateClass> datelist= DateQuery.fetchAllDosageRecord(appointList.get(i).getUserid(),appointList.get(i).getUnique());
             for(int j=0;j<datelist.size();j++)
             {
-                Header.addTable("Date Completed" + j + 1 + " :");
+                k=j+1;
+                Header.addTable("Date Completed" +k + " :");
                 Header.addTable("");
-                messageAppoint.add("Date Completed " + j + 1 + " :");
+                messageAppoint.add("Date Completed " + k + " :");
                 messageAppoint.add("");
 
                 DateClass d = datelist.get(j);

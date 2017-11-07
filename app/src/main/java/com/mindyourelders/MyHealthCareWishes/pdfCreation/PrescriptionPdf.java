@@ -10,8 +10,6 @@ import com.mindyourelders.MyHealthCareWishes.utility.Header;
 
 import java.util.ArrayList;
 
-import static com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty.messageDoctor;
-
 /**
  * Created by welcome on 11/7/2017.
  */
@@ -23,8 +21,8 @@ public class PrescriptionPdf {
 
     public PrescriptionPdf(ArrayList<Prescription> prescriptionList) {
 
-        Header.addChank("Prescription");
-        messagePrescription.add("Prescription");
+        Header.addChank("Prescription Tracker");
+        messagePrescription.add("Prescription Tracker");
         Header.addEmptyLine(1);
 
         Header.widths[0] = 0.15f;
@@ -33,143 +31,106 @@ public class PrescriptionPdf {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<prescriptionList.size();i++) {
-            Header.addTable("Doctors " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Prescription Tracker " +k + " :");
             Header.addTable("");
-            messageDoctor.add("Doctors " + i + 1 + " :");
-            messageDoctor.add("");
+            messagePrescription.add("Prescription Tracker " +k + " :");
+            messagePrescription.add("");
 
             Prescription s = prescriptionList.get(i);
 
-
-
-           /* String speciality = "";
-            if (s.getType() != null) {
-                speciality = s.getType();
+            String doctor = "";
+            if (s.getDoctor() != null) {
+                doctor = s.getDoctor();
             }
-            Header.addTable("Speciality :");
-            Header.addTable(speciality);
-            messageDoctor.add("Speciality :");
-            messageDoctor.add(speciality);
+            Header.addTable("Prescribing Doctor :");
+            Header.addTable(doctor);
+            messagePrescription.add("Prescribing Doctor :");
+            messagePrescription.add(doctor);
 
-            String name = "";
-            if (s.getName() != null) {
-                name = s.getName();
+            String counter = "";
+            if (s.getPre() != null) {
+                counter = s.getPre();
             }
-            Header.addTable("Name :");
-            Header.addTable(name);
-            messageDoctor.add("Name :");
-            messageDoctor.add(name);
+            Header.addTable("Over-the-counter :");
+            Header.addTable(counter);
+            messagePrescription.add("Over-the-counter :");
+            messagePrescription.add(counter);
 
-            String officePhone = "";
-            if (s.getOfficePhone() != null) {
-                officePhone = s.getOfficePhone();
+            String date = "";
+            if (s.getDates() != null) {
+                date = s.getDates();
             }
-            Header.addTable("Office Phone :");
-            Header.addTable(officePhone);
-            messageDoctor.add("Office Phone :");
-            messageDoctor.add(officePhone);
+            Header.addTable("Date of Prescription :");
+            Header.addTable(date);
+            messagePrescription.add("Date of Prescription :");
+            messagePrescription.add(date);
 
-            String afterHoursPhone = "";
-            if (s.getHourPhone() != null) {
-                afterHoursPhone = s.getHourPhone();
+            String treatment = "";
+            if (s.getPurpose() != null) {
+                treatment = s.getPurpose();
             }
-            Header.addTable("After Hours Phone :");
-            Header.addTable(afterHoursPhone);
-            messageDoctor.add("After Hours Phone :");
-            messageDoctor.add(afterHoursPhone);
+            Header.addTable("Treatment For :");
+            Header.addTable(treatment);
+            messagePrescription.add("Treatment For :");
+            messagePrescription.add(treatment);
 
-            String otherPhone = "";
-            if (s.getOtherPhone() != null) {
-                otherPhone = s.getOtherPhone();
-            }
-            Header.addTable("Other Phone :");
-            Header.addTable(otherPhone);
-            messageDoctor.add("Other Phone :");
-            messageDoctor.add(otherPhone);
-
-            String officeFax = "";
-            if (s.getFax() != null) {
-                officeFax = s.getFax();
-            }
-            Header.addTable("Office Fax :");
-            Header.addTable(officeFax);
-            messageDoctor.add("Office Fax :");
-            messageDoctor.add(officeFax);
-
-
-            String address="";
-            if (s.getAddress() != null) {
-                address = s.getAddress();
-            }
-            Header.addTable("Address :");
-            Header.addTable(address);
-            messageDoctor.add("Address :");
-            messageDoctor.add(address);
-
-            String website="";
-            if (s.getWebsite() != null) {
-                website = s.getWebsite();
-            }
-            Header.addTable("Website :");
-            Header.addTable(website);
-            messageDoctor.add("Website :");
-            messageDoctor.add(website);
-
-            String medicalPracticeName="";
-            if (s.getPracticeName() != null) {
-                medicalPracticeName = s.getPracticeName();
-            }
-            Header.addTable("Medical Practice Name :");
-            Header.addTable(medicalPracticeName);
-            messageDoctor.add("Medical Practice Name :");
-            messageDoctor.add(medicalPracticeName);
-
-            String hospitalAffiliations="";
-            if (s.getHospAffiliation() != null) {
-                hospitalAffiliations = s.getHospAffiliation();
-            }
-            Header.addTable("Hospital Affiliations :");
-            Header.addTable(hospitalAffiliations);
-            messageDoctor.add("Hospital Affiliations :");
-            messageDoctor.add(hospitalAffiliations);
-
-            String networkStatus="";
-            if (s.getNetwork() != null) {
-                networkStatus = s.getNetwork();
-            }
-            Header.addTable("In Network Status :");
-            Header.addTable(networkStatus);
-            messageDoctor.add("In Network Status :");
-            messageDoctor.add(networkStatus);
-
-            String lastSeen="";
-            if (s.getLastseen() != null) {
-                lastSeen = s.getLastseen();
-            }
-
-            Header.addTable("Last Seen :");
-            Header.addTable(lastSeen);
-            messageDoctor.add("Last Seen :");
-            messageDoctor.add(lastSeen);
-
-            String note="";
+            String notes = "";
             if (s.getNote() != null) {
-                note = s.getNote();
+                notes = s.getNote();
             }
             Header.addTable("Notes :");
-            Header.addTable(note);
-            messageDoctor.add("Notes :");
-            messageDoctor.add(note);
- */
+            Header.addTable(notes);
+            messagePrescription.add("Notes :");
+            messagePrescription.add(notes);
+
 
             ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(prescriptionList.get(i).getUserid(),prescriptionList.get(i).getUnique());
             for(int j=0;j<DosageList.size();j++){
-                Header.addTable("Dosage " + j + 1 + " :");
+                k=j+1;
+                Header.addTable("Medicine and Dosage " +k + " :");
                 Header.addTable("");
-                messagePrescription.add("Dosage " + j + 1 + " :");
+                messagePrescription.add("Medicine and Dosage " +k + " :");
                 messagePrescription.add("");
 
                 Dosage d = DosageList.get(j);
+
+                String medicineName = "";
+                if (d.getMedicine() != null) {
+                    medicineName = d.getMedicine();
+                }
+                Header.addTable("Medicine Name :");
+                Header.addTable(medicineName);
+                messagePrescription.add("Medicine Name :");
+                messagePrescription.add(medicineName);
+
+                String RX = "";
+                if (d.getRx() != null) {
+                    RX = d.getRx();
+                }
+                Header.addTable("RX :");
+                Header.addTable(RX);
+                messagePrescription.add("RX :");
+                messagePrescription.add(RX);
+
+                String Dose = "";
+                if (d.getDose() != null) {
+                    Dose = d.getDose();
+                }
+                Header.addTable("Dose :");
+                Header.addTable(Dose);
+                messagePrescription.add("Dose :");
+                messagePrescription.add(Dose);
+
+                String frequency = "";
+                if (d.getFrequency() != null) {
+                    frequency = d.getFrequency();
+                }
+                Header.addTable("Frequency :");
+                Header.addTable(frequency);
+                messagePrescription.add("Frequency :");
+                messagePrescription.add(frequency);
+
                 
 
             }

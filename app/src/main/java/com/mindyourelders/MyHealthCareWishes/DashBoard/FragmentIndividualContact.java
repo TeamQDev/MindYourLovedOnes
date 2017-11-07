@@ -1055,17 +1055,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         ImageView imgEdit= (ImageView) view.findViewById(R.id.imgEdit);
                         ImageView imgDelete= (ImageView) view.findViewById(R.id.imgDelete);
-                       /* imgEdit.setOnClickListener(new View.OnClickListener() {
+                        imgEdit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Pet a=AllargyLists.get(position);
-                                Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
-                                allergyIntent.putExtra("IsPet", true);
-                                allergyIntent.putExtra("ADD", "PetUpdate");
-                                allergyIntent.putExtra("Title", "Update Pet");
-                                allergyIntent.putExtra("Name", "Add Pet");
+                                Intent allergyIntent = new Intent(getActivity(), AddPetActivity.class);
+
                                 allergyIntent.putExtra("PetObject",a);
-                                startActivityForResult(allergyIntent, REQUEST_ALLERGY);
+                                startActivityForResult(allergyIntent, REQUEST_PET);
                             }
                         });
 
@@ -1081,7 +1078,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                                     ListPet.requestFocus();
                                 }
                             }
-                        });*/
+                        });
                     }
                 });
             }

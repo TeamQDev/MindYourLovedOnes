@@ -36,9 +36,10 @@ public class Specialty {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<specialistsList.size();i++) {
-            Header.addTable("Doctors " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Doctors " +k + " :");
             Header.addTable("");
-            messageDoctor.add("Doctors " + i + 1 + " :");
+            messageDoctor.add("Doctors " +k + " :");
             messageDoctor.add("");
 
             Specialist s = specialistsList.get(i);
@@ -188,9 +189,10 @@ public class Specialty {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<hospitalList.size();i++) {
-            Header.addTable("Hospitals And Other Health Professionals " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Hospitals And Other Health Professionals " +k + " :");
             Header.addTable("");
-            messageHospital.add("Hospitals And Other Health Professionals " + i + 1 + " :");
+            messageHospital.add("Hospitals And Other Health Professionals " +k + " :");
             messageHospital.add("");
 
             Hospital h = hospitalList.get(i);
@@ -321,9 +323,10 @@ public class Specialty {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<pharmacyList.size();i++) {
-            Header.addTable("Pharmacies And Home Medical Equipment " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Pharmacies And Home Medical Equipment " +k + " :");
             Header.addTable("");
-            messagePharmacy.add("Pharmacies And Home Medical Equipment " + i + 1 + " :");
+            messagePharmacy.add("Pharmacies And Home Medical Equipment " +k + " :");
             messagePharmacy.add("");
 
             Pharmacy p = pharmacyList.get(i);
@@ -409,9 +412,10 @@ public class Specialty {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for ( i=0;i<aidesList.size();i++) {
-            Header.addTable("Home Health Services" + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Home Health Services" +k + " :");
             Header.addTable("");
-            messageAides.add("Home Health Services" + i + 1 + " :");
+            messageAides.add("Home Health Services" +k + " :");
             messageAides.add("");
 
             Aides a = aidesList.get(i);
@@ -524,9 +528,10 @@ public class Specialty {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (i=0;i<financeList.size();i++) {
-            Header.addTable("Finance,Insurance,Legal " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Finance,Insurance,Legal " +k + " :");
             Header.addTable("");
-            messageFinance.add("Finance,Insurance,Legal " + i + 1 + " :");
+            messageFinance.add("Finance,Insurance,Legal " +k + " :");
             messageFinance.add("");
 
             Finance f = financeList.get(i);

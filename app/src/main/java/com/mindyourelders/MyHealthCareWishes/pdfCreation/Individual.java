@@ -606,9 +606,10 @@ public class Individual {
        String allergy="";String treatment="";String reaction="";
         for (int i=0;i<allargyLists.size();i++)
         {
-            Header.addTable("Allergy "+i+1+" :");
+            int k=i+1;
+            Header.addTable("Allergy "+k + " :");
             Header.addTable("");
-            messageInfo3.add("Allergy "+i+1+" :");
+            messageInfo3.add("Allergy "+k + " :");
             messageInfo3.add("");
 
             Allergy a=allargyLists.get(i);
@@ -646,9 +647,10 @@ public class Individual {
         messageInfo3.add("");
 
         for (int i=0;i<implantsList.size();i++) {
-            Header.addTable("Medical Implants " + i + 1 + " :");
+           int  k=i+1;
+            Header.addTable("Medical Implants " +k + " :");
             Header.addTable("");
-            messageInfo3.add("Medical Implants " + i + 1 + " :");
+            messageInfo3.add("Medical Implants " +k + " :");
             messageInfo3.add("");
 
 
@@ -663,9 +665,10 @@ public class Individual {
         messageInfo3.add("Preferred Hospital -");
         messageInfo3.add("");
         for (int i=0;i<hospitalList.size();i++) {
-            Header.addTable("Preferred Hospital " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Preferred Hospital " +k + " :");
             Header.addTable("");
-            messageInfo3.add("Preferred Hospital " + i + 1 + " :");
+            messageInfo3.add("Preferred Hospital " +k + " :");
             messageInfo3.add("");
 
 
@@ -680,9 +683,10 @@ public class Individual {
         messageInfo3.add("Medical History -:");
         messageInfo3.add("");
         for (int i=0;i<historList.size();i++) {
-            Header.addTable("Medical History " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Medical History " +k + " :");
             Header.addTable("");
-            messageInfo3.add("Medical History " + i + 1 + " :");
+            messageInfo3.add("Medical History " +k + " :");
             messageInfo3.add("");
 
             Header.addTable("History :");
@@ -715,9 +719,10 @@ public class Individual {
        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
        for (int i=0;i<emergencyList.size();i++) {
-           Header.addTable("Emergency Contact " + i + 1 + " :");
+           int k=i+1;
+           Header.addTable("Emergency Contact " +k + " :");
            Header.addTable("");
-           messageEmergency.add("Emergency Contact " + i + 1 + " :");
+           messageEmergency.add("Emergency Contact " +k + " :");
            messageEmergency.add("");
 
            Emergency e = emergencyList.get(i);
@@ -829,9 +834,10 @@ public class Individual {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<specialistsList.size();i++) {
-            Header.addTable("Primary Physician " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Primary Physician " +k + " :");
             Header.addTable("");
-            messagePhysician.add("Primary Physician " + i + 1 + " :");
+            messagePhysician.add("Primary Physician " +k + " :");
             messagePhysician.add("");
 
             Specialist s = specialistsList.get(i);
@@ -978,9 +984,10 @@ public class Individual {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<proxyList.size();i++) {
-            Header.addTable("Health Care Proxy Agent " + i + 1 + " :");
+            int k=i+1;
+            Header.addTable("Health Care Proxy Agent " +k + " :");
             Header.addTable("");
-            messageProxy.add("Health Care Proxy Agent " + i + 1 + " :");
+            messageProxy.add("Health Care Proxy Agent " +k + " :");
             messageProxy.add("");
 
             Proxy p = proxyList.get(i);
