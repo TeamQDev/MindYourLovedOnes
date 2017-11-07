@@ -8,8 +8,6 @@ import com.mindyourelders.MyHealthCareWishes.utility.Header;
 
 import java.util.ArrayList;
 
-import static com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty.messageDoctor;
-
 /**
  * Created by welcome on 11/7/2017.
  */
@@ -21,8 +19,8 @@ public class InsurancePdf {
 
     public InsurancePdf(ArrayList<Insurance> insuranceList) {
 
-        Header.addChank("Doctors");
-        messageDoctor.add("Doctors");
+        Header.addChank("Insurance Information");
+        messageInsurance.add("Insurance Information");
         Header.addEmptyLine(1);
 
         Header.widths[0] = 0.15f;
@@ -31,131 +29,112 @@ public class InsurancePdf {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (int i=0;i<insuranceList.size();i++) {
-            Header.addTable("Doctors " + i + 1 + " :");
+            Header.addTable("Insurance Information " + i + 1 + " :");
             Header.addTable("");
-            messageDoctor.add("Doctors " + i + 1 + " :");
-            messageDoctor.add("");
+            messageInsurance.add("Insurance Information " + i + 1 + " :");
+            messageInsurance.add("");
 
             Insurance s = insuranceList.get(i);
-
-           /* String speciality = "";
-            if (s.getType() != null) {
-                speciality = s.getType();
-            }
-            Header.addTable("Speciality :");
-            Header.addTable(speciality);
-            messageDoctor.add("Speciality :");
-            messageDoctor.add(speciality);
 
             String name = "";
             if (s.getName() != null) {
                 name = s.getName();
             }
-            Header.addTable("Name :");
+            Header.addTable("Name of Insurance Company:");
             Header.addTable(name);
-            messageDoctor.add("Name :");
-            messageDoctor.add(name);
+            messageInsurance.add("Name of Insurance Company:");
+            messageInsurance.add(name);
 
-            String officePhone = "";
-            if (s.getOfficePhone() != null) {
-                officePhone = s.getOfficePhone();
+            String type = "";
+            if (s.getType() != null) {
+                type = s.getType();
             }
-            Header.addTable("Office Phone :");
-            Header.addTable(officePhone);
-            messageDoctor.add("Office Phone :");
-            messageDoctor.add(officePhone);
+            Header.addTable("Type of Insurance :");
+            Header.addTable(type);
+            messageInsurance.add("Type of Insurance :");
+            messageInsurance.add(type);
 
-            String afterHoursPhone = "";
-            if (s.getHourPhone() != null) {
-                afterHoursPhone = s.getHourPhone();
+            String memberId = "";
+            if (s.getMember() != null) {
+                memberId = s.getMember();
             }
-            Header.addTable("After Hours Phone :");
-            Header.addTable(afterHoursPhone);
-            messageDoctor.add("After Hours Phone :");
-            messageDoctor.add(afterHoursPhone);
+            Header.addTable("Member ID(Policy Number) :");
+            Header.addTable(memberId);
+            messageInsurance.add("Member ID(Policy Number) :");
+            messageInsurance.add(memberId);
 
-            String otherPhone = "";
-            if (s.getOtherPhone() != null) {
-                otherPhone = s.getOtherPhone();
+            String group = "";
+            if (""+s.getGroup() != null) {
+                group = ""+s.getGroup();
             }
-            Header.addTable("Other Phone :");
-            Header.addTable(otherPhone);
-            messageDoctor.add("Other Phone :");
-            messageDoctor.add(otherPhone);
+            Header.addTable("Group :");
+            Header.addTable(group);
+            messageInsurance.add("Group :");
+            messageInsurance.add(group);
 
-            String officeFax = "";
+            String nameofInsured = "";
+            if (""+s.getSubscriber() != null) {
+                nameofInsured = ""+s.getSubscriber();
+            }
+            Header.addTable("Name of Insured(Primary Subsriber) :");
+            Header.addTable(nameofInsured);
+            messageInsurance.add("Name of Insured(Primary Subsriber) :");
+            messageInsurance.add(nameofInsured);
+
+            String providerPhone = "";
+            if (s.getPhone() != null) {
+                providerPhone = s.getPhone();
+            }
+            Header.addTable("Provider Phone :");
+            Header.addTable(providerPhone);
+            messageInsurance.add("Provider Phone :");
+            messageInsurance.add(providerPhone);
+
+            String providerFax = "";
             if (s.getFax() != null) {
-                officeFax = s.getFax();
+                providerFax = s.getFax();
             }
-            Header.addTable("Office Fax :");
-            Header.addTable(officeFax);
-            messageDoctor.add("Office Fax :");
-            messageDoctor.add(officeFax);
+            Header.addTable("Provider Fax :");
+            Header.addTable(providerFax);
+            messageInsurance.add("Provider Fax :");
+            messageInsurance.add(providerFax);
 
-
-            String address="";
-            if (s.getAddress() != null) {
-                address = s.getAddress();
+            String providerEmail = "";
+            if (s.getEmail() != null) {
+                providerEmail = s.getEmail();
             }
-            Header.addTable("Address :");
-            Header.addTable(address);
-            messageDoctor.add("Address :");
-            messageDoctor.add(address);
+            Header.addTable("Provider Email :");
+            Header.addTable(providerEmail);
+            messageInsurance.add("Provider Email :");
+            messageInsurance.add(providerEmail);
 
-            String website="";
+            String website = "";
             if (s.getWebsite() != null) {
                 website = s.getWebsite();
             }
             Header.addTable("Website :");
             Header.addTable(website);
-            messageDoctor.add("Website :");
-            messageDoctor.add(website);
+            messageInsurance.add("Website :");
+            messageInsurance.add(website);
 
-            String medicalPracticeName="";
-            if (s.getPracticeName() != null) {
-                medicalPracticeName = s.getPracticeName();
+            String agentname = "";
+            if (s.getAgent() != null) {
+                agentname = s.getAgent();
             }
-            Header.addTable("Medical Practice Name :");
-            Header.addTable(medicalPracticeName);
-            messageDoctor.add("Medical Practice Name :");
-            messageDoctor.add(medicalPracticeName);
+            Header.addTable("Agent Name and Phone and Email :");
+            Header.addTable(agentname);
+            messageInsurance.add("Agent Name and Phone and Email :");
+            messageInsurance.add(agentname);
 
-            String hospitalAffiliations="";
-            if (s.getHospAffiliation() != null) {
-                hospitalAffiliations = s.getHospAffiliation();
-            }
-            Header.addTable("Hospital Affiliations :");
-            Header.addTable(hospitalAffiliations);
-            messageDoctor.add("Hospital Affiliations :");
-            messageDoctor.add(hospitalAffiliations);
-
-            String networkStatus="";
-            if (s.getNetwork() != null) {
-                networkStatus = s.getNetwork();
-            }
-            Header.addTable("In Network Status :");
-            Header.addTable(networkStatus);
-            messageDoctor.add("In Network Status :");
-            messageDoctor.add(networkStatus);
-
-            String lastSeen="";
-            if (s.getLastseen() != null) {
-                lastSeen = s.getLastseen();
-            }
-            Header.addTable("Last Seen :");
-            Header.addTable(lastSeen);
-            messageDoctor.add("Last Seen :");
-            messageDoctor.add(lastSeen);
-
-            String note="";
+            String notes = "";
             if (s.getNote() != null) {
-                note = s.getNote();
+                notes = s.getNote();
             }
             Header.addTable("Notes :");
-            Header.addTable(note);
-            messageDoctor.add("Notes :");
-            messageDoctor.add(note);
-*/
+            Header.addTable(notes);
+            messageInsurance.add("Notes :");
+            messageInsurance.add(notes);
+
         }
 
 
