@@ -24,23 +24,25 @@ public class PersonalInfoQuery {
     public static final String COL_ADDRESS = "Address";
     public static final String COL_COUNTRY= "Country";
     public static final String COL_MOBILE= "Mobile";
+
     public static final String COL_PHONE= "Phone";
     public static final String COL_GENDER= "Gender";
     public static final String COL_DOB= "DOB";
     public static final String COL_PASS= "Password";
     public static final String COL_PHOTO= "Photo";
+
     public static final String COL_ID= "Id";
-
-
     public static final String COL_HEIGHT = "height";
     public static final String COL_WEIGHT = "weight";
     public static final String COL_PROFESSION = "profession";
     public static final String COL_EMPLOYED= "employed";
+
     public static final String COL_MANGER_PHONE= "Manager_Phone";
     public static final String COL_RELIGION= "religion";
     public static final String COL_EYES= "eyes";
     public static final String COL_LANG= "language";
     public static final String COL_MARITAL= "marital_status";
+
     public static final String COL_VETERAN= "veteran";
     public static final String COL_PET= "pet";
     public static final String COL_IDNUMBER= "IDNUmber";
@@ -52,10 +54,12 @@ public class PersonalInfoQuery {
     }
 
     public static String createPersonalInfoTable() {
-        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
+        String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_MOBILE+" VARCHAR(20),"+COL_PHONE+" VARCHAR(20),"+
+                COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
-                COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
-                COL_IDNUMBER+" VARCHAR(10),"+ COL_PHOTO+" BLOB);";
+                COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+
+                COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+ COL_PHOTO+" BLOB);";
+
         return createTableQuery;
     }
 
@@ -105,24 +109,26 @@ public class PersonalInfoQuery {
                     if (username.equals(c.getString(c.getColumnIndex(COL_EMAIL))) && password.equals(c.getString(c.getColumnIndex(COL_PASS)))) {
                         {
                             PersonalInfo Person = new PersonalInfo();
+
                             Person.setName(c.getString(c.getColumnIndex(COL_NAME)));
                             Person.setId(c.getInt(c.getColumnIndex(COL_ID)));
                             Person.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                             Person.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                             Person.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
+
                             Person.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
                             Person.setPassword(c.getString(c.getColumnIndex(COL_PASS)));
                             Person.setDob(c.getString(c.getColumnIndex(COL_DOB)));
                             Person.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                             Person.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
-                            Person.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
 
+                            Person.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
                             Person.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
                             Person.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
                             Person.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
                             Person.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
-                            Person.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
 
+                            Person.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
                             Person.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
                             Person.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
                             Person.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
@@ -153,6 +159,7 @@ public class PersonalInfoQuery {
                 connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                 connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                 connection.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
+
                 connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                 connection.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
                 connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
@@ -170,6 +177,7 @@ public class PersonalInfoQuery {
                 connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
                 connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
                 connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
 

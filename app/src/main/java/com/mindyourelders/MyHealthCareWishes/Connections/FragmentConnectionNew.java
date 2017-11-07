@@ -190,7 +190,7 @@ dialog.show();
     }
 
     private void getProfile() {
-     personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.USER_EMAIL));
+        personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.USER_EMAIL));
         preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
     }
 
