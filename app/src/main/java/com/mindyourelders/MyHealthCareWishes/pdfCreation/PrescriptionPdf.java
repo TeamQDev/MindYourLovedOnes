@@ -161,6 +161,7 @@ public class PrescriptionPdf {
             messageDoctor.add("Notes :");
             messageDoctor.add(note);
  */
+
             ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(prescriptionList.get(i).getUserid(),prescriptionList.get(i).getUnique());
             for(int j=0;j<DosageList.size();j++){
                 Header.addTable("Dosage " + j + 1 + " :");

@@ -125,6 +125,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                 ArrayList<Prescription> prescriptionList= PrescriptionQuery.fetchAllPrescrptionRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
            //     ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),);
 
+
                 new PrescriptionPdf(prescriptionList);
 
                 Header.document.close();
