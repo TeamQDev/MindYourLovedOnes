@@ -570,7 +570,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                     Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                     byte[] photo = baos.toByteArray();
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {

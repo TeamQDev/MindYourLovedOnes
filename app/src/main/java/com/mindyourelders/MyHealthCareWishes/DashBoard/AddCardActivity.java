@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,19 +35,21 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AddCardActivity extends AppCompatActivity implements View.OnClickListener {
-    Context context=this;
-    TextView txtName,txttype;
+    Context context = this;
+    TextView txtName, txttype;
     TextInputLayout tilTitle;
-    ImageView imgDone,imgBack,imgEdit1,imgEdit2,imgfrontCard,imgBackCard;
+    Bitmap bitmap1,bitmap2;
+    ImageView imgDone, imgBack, imgEdit1, imgEdit2, imgfrontCard, imgBackCard;
     private static int RESULT_CAMERA_IMAGE1 = 1;
     private static int RESULT_SELECT_PHOTO1 = 2;
     private static int RESULT_CAMERA_IMAGE2 = 3;
-    private static int RESULT_SELECT_PHOTO2= 4;
+    private static int RESULT_SELECT_PHOTO2 = 4;
     String imagepath = "";//
-    String name,type;
+    String name, type;
 
     Preferences preferences;
     DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +60,9 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initComponent() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        CardQuery c=new CardQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        CardQuery c = new CardQuery(context, dbHelper);
     }
 
     private void initListener() {
@@ -72,16 +73,16 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initUI() {
-        imgDone= (ImageView)findViewById(R.id.imgDone);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
-        imgEdit1= (ImageView)findViewById(R.id.imgEdit1);
-        imgEdit2= (ImageView) findViewById(R.id.imgEdit2);
-        imgfrontCard= (ImageView) findViewById(R.id.imgFrontCard);
-        imgBackCard= (ImageView) findViewById(R.id.imgBackCard);
+        imgDone = (ImageView) findViewById(R.id.imgDone);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgEdit1 = (ImageView) findViewById(R.id.imgEdit1);
+        imgEdit2 = (ImageView) findViewById(R.id.imgEdit2);
+        imgfrontCard = (ImageView) findViewById(R.id.imgFrontCard);
+        imgBackCard = (ImageView) findViewById(R.id.imgBackCard);
 
-        txtName= (TextView) findViewById(R.id.txtName);
-        txttype= (TextView) findViewById(R.id.txtType);
-        tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txttype = (TextView) findViewById(R.id.txtType);
+        tilTitle = (TextInputLayout) findViewById(R.id.tilTitle);
         tilTitle.setHintEnabled(false);
         txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -97,42 +98,64 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.imgDone:
-                name=txtName.getText().toString();
-                type=txttype.getText().toString();
-                Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
+                name = txtName.getText().toString();
+                type = txttype.getText().toString();
+               // Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap1.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
+                bitmap1.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+               /* int newHeight = bitmap1.getHeight();
+                int newWidth = bitmap1.getWidth();
+                int ratio = bitmap1.getWidth() / bitmap1.getHeight();
+                if (ratio==0)
+                {
+                    ratio=1;
+                }
+                if (bitmap1.getWidth() > 800) {
+                    newWidth = 800;
+                    newHeight = ratio * newWidth;
+                }
+                Bitmap.createBitmap(bitmap1,bitmap1.getWidth()-100,bitmap1.getHeight()-100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos);
+*/
                 byte[] photo1 = baos.toByteArray();
-                Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
+             //   Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-                bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos2);
+                bitmap2.compress(Bitmap.CompressFormat.JPEG, 40, baos2);
+               /* newHeight = bitmap2.getHeight();
+                newWidth = bitmap2.getWidth();
+                ratio = bitmap2.getWidth() / bitmap2.getHeight();
+                if (ratio==0)
+                {
+                    ratio=1;
+                }
+                if (bitmap2.getWidth() > 800) {
+                    newWidth =800;
+                    newHeight = ratio * newWidth;
+                }
+                Bitmap.createBitmap(bitmap2,bitmap2.getWidth()+100, bitmap2.getHeight()+100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos2);
+*/
                 byte[] photo2 = baos2.toByteArray();
 
-                Boolean flag= CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,type,photo1,photo2);
-                if (flag==true)
-                {
-                    Toast.makeText(context,"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
-                      finish();
+                boolean flag = CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, type, photo1, photo2);
+                if (flag) {
+                    Toast.makeText(context, "You have added insurance information successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.imgBack:
                 finish();
                 break;
             case R.id.imgEdit1:
-                showDialogs(RESULT_CAMERA_IMAGE1,RESULT_SELECT_PHOTO1);
+                showDialogs(RESULT_CAMERA_IMAGE1, RESULT_SELECT_PHOTO1);
 
                 break;
             case R.id.imgEdit2:
-                showDialogs(RESULT_CAMERA_IMAGE2,RESULT_SELECT_PHOTO2);
+                showDialogs(RESULT_CAMERA_IMAGE2, RESULT_SELECT_PHOTO2);
                 break;
 
 
@@ -207,7 +230,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private File createImageFile()throws IOException {
+    private File createImageFile() throws IOException {
         // Create an image file name
         String imageFileName = "JPEG_PROFILE";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -221,6 +244,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
         imagepath = image.getAbsolutePath();
         return image;
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imgfrontCard = (ImageView) findViewById(R.id.imgFrontCard);
@@ -230,6 +254,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                bitmap1=selectedImage;
                 imgfrontCard.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -279,12 +304,12 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             }
 
 
-        }
-else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
+        } else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                bitmap2=selectedImage;
                 imgBackCard.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -294,6 +319,7 @@ else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
 
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+
             imgBackCard.setImageBitmap(imageBitmap);
             // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
 

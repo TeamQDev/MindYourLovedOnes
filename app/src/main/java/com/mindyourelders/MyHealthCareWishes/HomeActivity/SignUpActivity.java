@@ -206,7 +206,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     } else {
                         Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                         byte[] photo = baos.toByteArray();
                         Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, mobile, bdate, password, photo,"","");
                         if (flag == true) {
@@ -319,7 +319,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void saveToConnection(int id) {
         Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] photo = baos.toByteArray();
         Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",photo," ",1,2, "");
         if (flag==true)

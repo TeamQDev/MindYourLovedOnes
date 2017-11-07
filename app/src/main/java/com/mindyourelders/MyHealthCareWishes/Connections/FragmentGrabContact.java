@@ -268,7 +268,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                                 Drawable drawable = res.getDrawable(R.drawable.profile);
                                 Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                                 photo = stream.toByteArray();
                             }
                         } finally {

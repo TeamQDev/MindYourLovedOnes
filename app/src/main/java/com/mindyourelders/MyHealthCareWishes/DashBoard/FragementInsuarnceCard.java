@@ -34,22 +34,26 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgBack;
  * Created by welcome on 9/22/2017.
  */
 
-public class FragementInsuarnceCard extends Fragment implements View.OnClickListener{
-Preferences preferences;
+public class FragementInsuarnceCard extends Fragment implements View.OnClickListener {
+    Preferences preferences;
     View rootview;
     SwipeMenuListView lvCard;
 
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
     TextView txtView;
-    public static final int REQUEST_PRES=100;
+    public static final int REQUEST_PRES = 100;
     DBHelper dbHelper;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.activity_insurance_card, null);
-      initComponent();
-        getData();
+        initComponent();
+        try {
+            getData();
+        } catch (Exception e) {
+        }
         initUI();
         initListener();
         setCardData();
@@ -57,13 +61,14 @@ Preferences preferences;
     }
 
     private void initComponent() {
-        preferences=new Preferences(getActivity());
-        dbHelper=new DBHelper(getActivity());
-        CardQuery c=new CardQuery(getActivity(),dbHelper);
+        preferences = new Preferences(getActivity());
+
     }
 
     private void getData() {
-        CardList= CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        dbHelper = new DBHelper(getActivity());
+        CardQuery c = new CardQuery(getActivity(), dbHelper);
+        CardList = CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
        /* CardList=new ArrayList<>();
 
         Card c1=new Card();
@@ -88,9 +93,9 @@ Preferences preferences;
     }
 
     private void initUI() {
-        llAddCard= (RelativeLayout) rootview.findViewById(R.id.llAddCard);
-        lvCard= (SwipeMenuListView) rootview.findViewById(R.id.lvCard);
-        txtView= (TextView) rootview.findViewById(R.id.txtView);
+        llAddCard = (RelativeLayout) rootview.findViewById(R.id.llAddCard);
+        lvCard = (SwipeMenuListView) rootview.findViewById(R.id.lvCard);
+        txtView = (TextView) rootview.findViewById(R.id.txtView);
     }
 
     private void setCardData() {
@@ -102,7 +107,7 @@ Preferences preferences;
             txtView.setVisibility(View.VISIBLE);
             lvCard.setVisibility(View.GONE);
         }*/
-        if (CardList.size()!=0) {
+        if (CardList.size() != 0) {
             lvCard.setVisibility(View.VISIBLE);
             CardAdapter adapter = new CardAdapter(getActivity(), CardList);
             lvCard.setAdapter(adapter);
@@ -117,7 +122,7 @@ Preferences preferences;
                     imgFront.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            byte[] photo=CardList.get(position).getImgFront();
+                            byte[] photo = CardList.get(position).getImgFront();
                             Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                             imgCard.setImageBitmap(bmp);
                             imgPre.setImageResource(R.drawable.white_dot);
@@ -127,7 +132,7 @@ Preferences preferences;
                     imgPre.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            byte[] photo1=CardList.get(position).getImgBack();
+                            byte[] photo1 = CardList.get(position).getImgBack();
                             Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
                             imgCard.setImageBitmap(bmp1);
                             imgPre.setImageResource(R.drawable.blue_dot);
@@ -145,14 +150,14 @@ Preferences preferences;
                     });
                 }
             });
-        } else{
+        } else {
             lvCard.setVisibility(View.GONE);
         }
 
 
         lvCard.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(getActivity());
+        SwipeMenuCreation s = new SwipeMenuCreation();
+        SwipeMenuCreator creator = s.createMenu(getActivity());
         lvCard.setMenuCreator(creator);
         lvCard.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
@@ -174,10 +179,9 @@ Preferences preferences;
     }
 
     private void deleteInsuranceCard(Card item) {
-        boolean flag= CardQuery.deleteRecord(item.getId(), 1);
-        if(flag==true)
-        {
-            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+        boolean flag = CardQuery.deleteRecord(item.getId(), 1);
+        if (flag == true) {
+            Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
             getData();
             setCardData();
         }
@@ -189,8 +193,8 @@ Preferences preferences;
         switch (v.getId()) {
             case R.id.llAddCard:
                 // preferences.putString(PrefConstants.SOURCE,"Card");
-                Intent i=new Intent(getActivity(),AddCardActivity.class);
-                startActivityForResult(i,REQUEST_PRES);
+                Intent i = new Intent(getActivity(), AddCardActivity.class);
+                startActivityForResult(i, REQUEST_PRES);
                 break;
         }
     }

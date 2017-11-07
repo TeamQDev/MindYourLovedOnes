@@ -25,7 +25,7 @@ public class CardQuery {
     public static final String COL_FRONT = "FrontPhoto";
     public static final String COL_BACK = "BackPhoto";
     public static final String COL_ID = "Id";
-  
+
     public CardQuery(Context context, DBHelper dbHelper) {
         this.context = context;
         this.dbHelper = dbHelper;
@@ -45,26 +45,30 @@ public class CardQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertInsuranceCardData(int userid, String name, String type, byte[] photo1, byte[] photo2) {
-        boolean flag;
-        SQLiteDatabase db=dbHelper.getWritableDatabase();
+    public static boolean insertInsuranceCardData(int userid, String name, String type, byte[] photo1, byte[] photo2) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        boolean flag=false;
+        try {
 
-        ContentValues cv=new ContentValues();
-        cv.put(COL_USER_ID,userid);
-        cv.put(COL_NAME,name);
-        cv.put(COL_TYPE,type);
-        cv.put(COL_FRONT,photo1);
-        cv.put(COL_BACK,photo2);
+            ContentValues cv = new ContentValues();
+            cv.put(COL_USER_ID, userid);
+            cv.put(COL_NAME, name);
+            cv.put(COL_TYPE, type);
+            cv.put(COL_FRONT, photo1);
+            cv.put(COL_BACK, photo2);
 
-        long rowid=db.insert(TABLE_NAME,null,cv);
+            long rowid = db.insert(TABLE_NAME, null, cv);
 
-        if (rowid==0)
+            if (rowid == 0) {
+                flag = false;
+            } else {
+                flag = true;
+            }
+        }catch (Exception e)
         {
-            flag=false;
-        }
-        else
-        {
-            flag=true;
+            e.printStackTrace();
+        }finally {
+            db.close();
         }
 
         return flag;
