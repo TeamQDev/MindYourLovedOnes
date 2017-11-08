@@ -45,6 +45,7 @@ import java.util.Date;
 
 
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int RQUESTCODE = 600;
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
@@ -66,9 +67,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String category="";
     String Goto="";
     String path="";
-
+    final CharSequence[] alert_items = { "SD Card", "Dropbox" };
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
-    final CharSequence[] dialog_items = {"Print", "Fax", "View" };
+    final CharSequence[] dialog_items = {"View", "Email", "Fax" };
     String[] DocList = {"Health Care Proxy/Living Will","Health Care Proxy", "Living Will", "Non-Hospital DNR", "HIPAA Form", "Power of Attorney"," Ethical Will","Other Documents"};
 
     String[] ADList={"Living Will","Health Care Proxy","Living Will/Health Care Proxy","HIPAA Authorization"," Non-Hospital DNR Order"," Ethical Will"};
@@ -468,36 +469,49 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.imgAdd:
-                Intent i=new Intent(context,DocumentSdCardList.class);
-                startActivityForResult(i,RESULTCODE);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddDocumentActivity.this);
+
+                builder.setTitle("");
+                builder.setItems(alert_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                            case 0:
+                                Intent i=new Intent(context,DocumentSdCardList.class);
+                                startActivityForResult(i,RESULTCODE);
+                                break;
+                            case 1:
+                                /*Intent intent=new Intent(context,DropboxList.class);
+                                intent.putExtra("ISPATH", "TRUE");
+                                startActivityForResult(intent,RQUESTCODE);*/
+                                break;
+
+                        }
+
+                    }
+
+                });
+
+                builder.create().show();
+
+
                 break;
 
             case R.id.imgDot:
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                AlertDialog.Builder builders = new AlertDialog.Builder(context);
 
-                builder.setTitle("");
+                builders.setTitle("");
 
-                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+                builders.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
 
                         switch (itemPos) {
                             case 0: // email
-
-                       /* emailAttachement(item);
-
-                        ShearedValues.activityID = getApplicationContext();*/
-                                break;
-                            case 1: // email
-
-                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
-                                context);
-                        ShearedValues.activityID = getApplicationContext();*/
-
-                                break;
-                            case 2: // view
                                 Uri uri=null;
                                 if (path.equals("No"))
                                 {
@@ -512,12 +526,22 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                 }
 
                                 break;
+                            case 1: // email
+
+                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
+                                context);
+                        ShearedValues.activityID = getApplicationContext();*/
+
+                                break;
+                            case 2: // view
+
+                                break;
 
                         }
                     }
                 });
 
-                builder.create().show();
+                builders.create().show();
                 // ((CarePlanActivity)context).CopyAssets();
                 break;
 
@@ -670,11 +694,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             public void onClick(DialogInterface dialog, int itemPos) {
 
                 switch (itemPos) {
-                    case 0: // email
+                    case 0: // View
+                        if (!documentPath.equals(""))
+                        {
+                            Uri uri= Uri.parse(documentPath);
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_VIEW);
+                            intent.setDataAndType(uri, "application/pdf");
+                            context.startActivity(intent);
 
-                       /* emailAttachement(item);
-
-                        ShearedValues.activityID = getApplicationContext();*/
+                        }
                         break;
                     case 1: // email
 
@@ -685,15 +714,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         break;
                     case 2: // view
 
-                        if (!documentPath.equals(""))
-                        {
-                            Uri uri= Uri.parse(documentPath);
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_VIEW);
-                            intent.setDataAndType(uri, "application/pdf");
-                            context.startActivity(intent);
 
-                        }
                         break;
 
                 }

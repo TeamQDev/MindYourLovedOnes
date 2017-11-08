@@ -254,7 +254,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                             "Insurance");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                   Header.addEmptyLine(2);
+                   // Header.addEmptyLine(2);
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
