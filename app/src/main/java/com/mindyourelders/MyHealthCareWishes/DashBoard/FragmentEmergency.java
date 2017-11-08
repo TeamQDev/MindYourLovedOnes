@@ -1,17 +1,9 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +21,7 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -120,45 +113,111 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
         String mobile=item.getMobile();
         String hphone=item.getPhone();
         String wPhone=item.getWorkPhone();
-        if (mobile.length()!=0)
+
+        if (mobile.length()!=0||hphone.length()!=0||wPhone.length()!=0)
         {
-           showCallDialog(getActivity(),mobile);
+            CallDialog c=new CallDialog();
+            c.showCallDialog(getActivity(),mobile,hphone,wPhone);
         }
         else{
             Toast.makeText(getActivity(),"You have not added phone number for call",Toast.LENGTH_SHORT).show();
         }
-
     }
-    private void showCallDialog(final Context context, final String title) {
-           String text=title;
-            if (text.contains("-")) {
-                text = text.replaceAll("-", "");
+   /* private void showCallDialog(final Context context, String mobile, String hphone, String wphone) {
+        //   String text=mobile;
+            if (mobile.contains("-")) {
+                mobile = mobile.replaceAll("-", "");
             }
-            System.out.println("" + text);
+            if (hphone.contains("-")) {
+                hphone = hphone.replaceAll("-", "");
+           }
+            if (wphone.contains("-")) {
+                wphone = wphone.replaceAll("-", "");
+            }
+           // System.out.println("" + text);
             try {
-                Double.parseDouble(text);
+                Double.parseDouble(mobile);
+                Double.parseDouble(hphone);
+                Double.parseDouble(wphone);
             } catch (NumberFormatException ex) {
                 System.out.println("Some Mistake");
             }
-          finalText = text;
-        new AlertDialog.Builder(context)
-                    .setTitle("Calling Alert")
-                    .setMessage("Do you want to call this number? " + finalText)
-                    .setPositiveButton("Call",
-                            new DialogInterface.OnClickListener() {
+         String[] num={mobile,hphone,wphone};
+         final ArrayList<String> a=new ArrayList();
+        *//*final String finalMobile = mobile;
+        final String finalHphone = hphone;
+        final String finalWphone = wphone;*//*
+        for (int i=0;i<num.length;i++)
+        {
+            if (num[i].length()!=0)
+            {
+                a.add(num[i]);
+            }
 
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    onCall();
-                                 }
-                            })
-                    .setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
+        }
+     if (a.size()==1)
+     {
+         String value=a.get(0);
+         new AlertDialog.Builder(context)
+                 .setTitle("Calling Alert")
+                 .setMessage("Do you want to call this number? ")
+                 .setPositiveButton(a.get(0),
+                         new DialogInterface.OnClickListener() {
 
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    arg0.dismiss();
-                                }
-                            }).setCancelable(true).show();
-    }
+                             public void onClick(DialogInterface arg0, int arg1) {
+                                 onCall(a.get(0));
+                             }
+                         })
+                 .setCancelable(true).show();
+     }
+     else if(a.size()==2)
+     {
+         new AlertDialog.Builder(context)
+                 .setTitle("Calling Alert")
+                 .setMessage("Do you want to call this number? ")
+                 .setPositiveButton(a.get(0),
+                         new DialogInterface.OnClickListener() {
+
+                             public void onClick(DialogInterface arg0, int arg1) {
+                                 onCall(a.get(0));
+                             }
+                         })
+
+                 .setNegativeButton(a.get(1),
+                         new DialogInterface.OnClickListener() {
+
+                             public void onClick(DialogInterface arg0, int arg1) {
+                                 onCall(a.get(1));
+                             }
+                         }).setCancelable(true).show();
+     }
+     else if (a.size()==3) {
+         new AlertDialog.Builder(context)
+                 .setTitle("Calling Alert")
+                 .setMessage("Do you want to call this number? ")
+                 .setPositiveButton(a.get(0),
+                         new DialogInterface.OnClickListener() {
+
+                             public void onClick(DialogInterface arg0, int arg1) {
+                                 onCall(a.get(0));
+                             }
+                         })
+                 .setNeutralButton(a.get(1), new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialog, int which) {
+                         onCall(a.get(1));
+                     }
+                 })
+                 .setNegativeButton(a.get(2),
+                         new DialogInterface.OnClickListener() {
+
+                             public void onClick(DialogInterface arg0, int arg1) {
+                                 onCall(a.get(2));
+                             }
+                         }).setCancelable(true).show();
+     }
+
+    }*/
 
     private void deleteEmergency(Emergency item) {
       boolean flag= MyConnectionsQuery.deleteRecord(item.getId());
@@ -215,7 +274,7 @@ emergencyList=new ArrayList<>();
         setListData();
     }
 
-    private void onCall() {
+    /*private void onCall(String finalMobile) {
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
 
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -224,7 +283,7 @@ emergencyList=new ArrayList<>();
                     new String[]{Manifest.permission.CALL_PHONE},
                     123);
         } else {
-            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + finalText)));
+            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + finalMobile)));
         }
-    }
+    }*/
 }
