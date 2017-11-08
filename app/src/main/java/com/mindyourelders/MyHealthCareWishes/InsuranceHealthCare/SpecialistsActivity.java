@@ -388,6 +388,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     System.out.println("\n" + result + "\n");
                                 }
                                 break;
+                            
                             case 1: // email
                                 if (from.equals("Speciality")) {
                                     File f =new File(Environment.getExternalStorageDirectory()

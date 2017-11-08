@@ -270,7 +270,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
 
                 Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileprovider", targetFile);
             intent.setDataAndType(contentUri, "application/pdf");
