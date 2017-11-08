@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -65,7 +66,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     boolean isEmergency,isInsurance;
     RelativeLayout header;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View" };
+    final CharSequence[] dialog_items = {"View","Email","Fax" };
     Preferences preferences;
     DBHelper dbHelper;
 
@@ -148,6 +149,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         FinanceQuery f=new FinanceQuery(context,dbHelper);
         AppointmentQuery df=new AppointmentQuery(context,dbHelper);
         DateQuery da=new DateQuery(context,dbHelper);
+        InsuranceQuery i=new InsuranceQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -252,7 +254,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                             "Insurance");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                   Header.addEmptyLine(2);
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
@@ -386,6 +388,29 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     System.out.println("\n" + result + "\n");
                                 }
                                 break;
+                            case 1: // email
+                                if (from.equals("Speciality")) {
+                                    File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Specialty.pdf");
+                                    emailAttachement(f);
+                                } else if (from.equals("Emergency")) {
+                                    File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Profile.pdf");
+                                    emailAttachement(f);
+                                } else if (from.equals("Insurance")) {
+                                    File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Insurance.pdf");
+                                    emailAttachement(f);
+                                } else if (from.equals("Event")) {
+                                    File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Event.pdf");
+                                    emailAttachement(f);
+                                }
+                                break;
 
                         }
                     }
@@ -396,7 +421,23 @@ public class SpecialistsActivity extends AppCompatActivity {
             }
         });
     }
+    private void emailAttachement(File f) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+
+        emailIntent.setType("application/email");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
     private void initUi() {
         //header= (RelativeLayout) findViewById(R.id.header);
         imgBack = (ImageView) findViewById(R.id.imgBack);

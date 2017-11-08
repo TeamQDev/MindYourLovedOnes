@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     boolean isEdit;
 
     // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View" };
+    final CharSequence[] dialog_items = {"View","Email","Share","Fax" };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +168,22 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                                 System.out.println("\n" + result + "\n");
 
                                 break;
+
+                            case 1: // email
+                                File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Prescription.pdf");
+                                    emailAttachement(f);
+
+                                break;
+                            case 2: // email
+                                File fil =new File(Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/Prescription.pdf");
+                                shareAttachement(fil);
+
+                                break;
+
                         }
 
 
@@ -178,6 +195,36 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
+    }
+
+    private void shareAttachement(File fil) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,  "MIND YOUR ELDERS"); // Body
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(fil));
+        emailIntent.setType("application/text");
+                startActivity(Intent.createChooser(emailIntent, "Send file..."));
+    }
+
+    private void emailAttachement(File f) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+
+        emailIntent.setType("application/email");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
     private void deletePrescription(Prescription item) {
