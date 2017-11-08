@@ -74,7 +74,7 @@ public class ProxyAdapter extends BaseAdapter {
         else{
             holder= (ViewHolder) convertView.getTag();
         }
-        if(proxyList.get(position).getPhone().equals(""))
+        if(proxyList.get(position).getMobile().equals(""))
         {
             holder.txtPhone.setVisibility(View.GONE);
         }
@@ -82,7 +82,7 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtPhone.setVisibility(View.VISIBLE);
         }
-        if(proxyList.get(position).getWorkPhone().equals(""))
+        if(proxyList.get(position).getPhone().equals(""))
         {
             holder.txtTelePhone.setVisibility(View.GONE);
         }

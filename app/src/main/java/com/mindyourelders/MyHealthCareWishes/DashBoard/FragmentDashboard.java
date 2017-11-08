@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -29,8 +29,6 @@ import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -55,6 +53,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int REQUEST_WRITE_PERMISSION = 200;
+    private static final int REQUEST_CALL_PERMISSION = 300;
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
 
     @Nullable
@@ -62,7 +61,8 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_dashboard_news, null);
         preferences=new Preferences(getActivity());
-        checkRuntimePermission();
+        //checkRuntimePermission();
+        accessPermission();
         //requestPermission();
         initUI();
         initListener();
@@ -70,6 +70,30 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
 
         return rootview;
     }
+
+
+        private void accessPermission() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                    ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                    &&
+                    ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    &&
+                    ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                }, REQUEST_CALL_PERMISSION);
+
+            } else {
+               // checkForRegistration();
+            }
+        }
+
+
     private boolean requestPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -361,5 +385,26 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         initComponent();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CALL_PERMISSION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                  //  checkForRegistration();
+
+                } else {
+
+                   accessPermission();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'switch' lines to check for other
+            // permissions this app might request
+        }
+    }
 }

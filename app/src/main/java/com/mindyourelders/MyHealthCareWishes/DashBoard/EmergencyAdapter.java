@@ -74,7 +74,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        if(emergencyList.get(position).getPhone().equals(""))
+        if(emergencyList.get(position).getMobile().equals(""))
         {
             holder.txtPhone.setVisibility(View.GONE);
         }
@@ -82,7 +82,7 @@ public class EmergencyAdapter extends BaseAdapter {
         {
             holder.txtPhone.setVisibility(View.VISIBLE);
         }
-        if(emergencyList.get(position).getWorkPhone().equals(""))
+        if(emergencyList.get(position).getPhone().equals(""))
         {
             holder.txtTelePhone.setVisibility(View.GONE);
         }

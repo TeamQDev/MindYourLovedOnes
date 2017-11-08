@@ -1,9 +1,17 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +51,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
     EmergencyAdapter emergencyAdapter;
-
+     String finalText="";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +104,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
                     case 0:
                         // open
                         //  open(item);
+                        callUser(item);
                         break;
                     case 1:
                         // delete
@@ -105,6 +114,50 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
                 return false;
             }
         });
+    }
+
+    private void callUser(Emergency item) {
+        String mobile=item.getMobile();
+        String hphone=item.getPhone();
+        String wPhone=item.getWorkPhone();
+        if (mobile.length()!=0)
+        {
+           showCallDialog(getActivity(),mobile);
+        }
+        else{
+            Toast.makeText(getActivity(),"You have not added phone number for call",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    private void showCallDialog(final Context context, final String title) {
+           String text=title;
+            if (text.contains("-")) {
+                text = text.replaceAll("-", "");
+            }
+            System.out.println("" + text);
+            try {
+                Double.parseDouble(text);
+            } catch (NumberFormatException ex) {
+                System.out.println("Some Mistake");
+            }
+          finalText = text;
+        new AlertDialog.Builder(context)
+                    .setTitle("Calling Alert")
+                    .setMessage("Do you want to call this number? " + finalText)
+                    .setPositiveButton("Call",
+                            new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    onCall();
+                                 }
+                            })
+                    .setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    arg0.dismiss();
+                                }
+                            }).setCancelable(true).show();
     }
 
     private void deleteEmergency(Emergency item) {
@@ -160,5 +213,18 @@ emergencyList=new ArrayList<>();
         super.onResume();
         getData();
         setListData();
+    }
+
+    private void onCall() {
+        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                   getActivity(),
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    123);
+        } else {
+            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + finalText)));
+        }
     }
 }
