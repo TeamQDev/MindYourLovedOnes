@@ -18,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
+import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -88,6 +89,7 @@ DBHelper dbHelper;
                     case 0:
                         // open
                         //  open(item);
+                        callUser(item);
                         break;
                     case 1:
                         // delete
@@ -98,7 +100,20 @@ DBHelper dbHelper;
             }
         });
     }
+    private void callUser(Aides item) {
+        String mobile=item.getOfficePhone();
+        String hphone=item.getHourPhone();
+        String wPhone=item.getOtherPhone();
 
+        if (mobile.length()!=0||hphone.length()!=0||wPhone.length()!=0)
+        {
+            CallDialog c=new CallDialog();
+            c.showCallDialog(getActivity(),mobile,hphone,wPhone);
+        }
+        else{
+            Toast.makeText(getActivity(),"You have not added phone number for call",Toast.LENGTH_SHORT).show();
+        }
+    }
     private void deleteAides(Aides item) {
         boolean flag= AideQuery.deleteRecord(item.getId());
         if(flag==true)

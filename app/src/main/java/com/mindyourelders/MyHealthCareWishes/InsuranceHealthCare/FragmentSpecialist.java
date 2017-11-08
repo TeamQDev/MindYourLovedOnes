@@ -18,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
+import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -91,6 +92,7 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
                     case 0:
                         // open
                         //  open(item);
+                        callUser(item);
                         break;
                     case 1:
                         // delete
@@ -101,6 +103,21 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
             }
         });
 
+    }
+
+    private void callUser(Specialist item) {
+        String mobile=item.getOfficePhone();
+        String hphone=item.getHourPhone();
+        String wPhone=item.getOtherPhone();
+
+        if (mobile.length()!=0||hphone.length()!=0||wPhone.length()!=0)
+        {
+            CallDialog c=new CallDialog();
+            c.showCallDialog(getActivity(),mobile,hphone,wPhone);
+        }
+        else{
+            Toast.makeText(getActivity(),"You have not added phone number for call",Toast.LENGTH_SHORT).show();
+        }
     }
     private void deleteSpecialist(Specialist item) {
         boolean flag= SpecialistQuery.deleteRecord(item.getId(),2);

@@ -2631,6 +2631,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile.getAbsolutePath());
                 startActivityForResult(takePictureIntent, RESULT_CAMERA_IMAGE);
             }
+
         }
     }
 
