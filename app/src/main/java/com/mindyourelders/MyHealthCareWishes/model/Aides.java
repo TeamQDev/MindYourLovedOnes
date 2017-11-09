@@ -12,6 +12,14 @@ public class Aides implements Serializable {
     int image;
     String fax="";
     String website="";
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
 
 
     public String getFax() {

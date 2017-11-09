@@ -14,6 +14,14 @@ public class Insurance implements Serializable{
     int id;
     int userid;
     String fax="";
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
 
     public String getAgent() {
         return agent;

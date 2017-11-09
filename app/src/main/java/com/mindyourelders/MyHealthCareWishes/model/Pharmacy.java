@@ -10,7 +10,14 @@ public class Pharmacy implements Serializable {
     public byte[] getPhoto() {
         return photo;
     }
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
 
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }

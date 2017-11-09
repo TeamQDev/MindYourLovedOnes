@@ -68,7 +68,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 public class FragmentIndividualContact extends Fragment implements View.OnClickListener{
    
     TextView txtSignUp, txtLogin, txtForgotPassword;
-    ImageView imgEdit,imgProfile,imgDone,imgAddpet;
+    ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
     TextInputLayout tilOtherRelation,tilId;
     RelativeLayout rlPet;
@@ -79,6 +79,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     String otherRelation;
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
+    private static int RESULT_CAMERA_IMAGE_CARD = 3;
+    private static int RESULT_SELECT_PHOTO_CARD = 4;
     RadioGroup rgPet,rgVeteran;
     RadioButton rbYes,rbNo,rbYesPet,rbNoPet;
     public static final int REQUEST_PET= 400;
@@ -136,6 +138,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         imgBack.setOnClickListener(this);
         txtBdate.setOnClickListener(this);
         imgEdit.setOnClickListener(this);
+        imgEditCard.setOnClickListener(this);
         imgDone.setOnClickListener(this);
         txtGender.setOnClickListener(this);
         imgAddpet.setOnClickListener(this);
@@ -147,6 +150,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle.setText("PERSONAL PROFILE");
         ListPet= (ListView) rootview.findViewById(R.id.ListPet);
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
+        imgCard= (ImageView) rootview.findViewById(R.id.imgCard);
+        imgEditCard = (ImageView) rootview.findViewById(R.id.imgEditCard);
         imgAddpet = (ImageView) rootview.findViewById(R.id.imgAddPet);
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
@@ -468,6 +473,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                imgProfile.setImageBitmap(bmp);
+
+                if (personalInfo.getPhotoCard()!=null) {
+                    byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                    imgCard.setImageBitmap(bmps);
+                }
             }
         }
         else{
@@ -495,6 +506,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 byte[] photo=connection.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                 imgProfile.setImageBitmap(bmp);
+
+                if (personalInfo.getPhotoCard()!=null) {
+                    byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                    imgCard.setImageBitmap(bmps);
+                }
 
 
                 txtHeight.setText(connection.getHeight());
@@ -570,16 +587,22 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             case R.id.imgDone:
 
                     Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
-                    byte[] photo = baos.toByteArray();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+                byte[] photo = baos.toByteArray();
+
+                Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+                ByteArrayOutputStream baoss = new ByteArrayOutputStream();
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
+                byte[] photoCard = baoss.toByteArray();
+
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
-                                editToConnection(photo);
+                                editToConnection(photo,photoCard);
                             } else {
                                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
@@ -587,7 +610,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     }
                     else {
                         if (validateConnection()) {
-                            editToConnection(photo);
+                            editToConnection(photo,photoCard);
                             getActivity().finish();
                         }
                     }
@@ -644,48 +667,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                 break;
             case R.id.imgEdit:
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                LayoutInflater lf = (LayoutInflater) getActivity()
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialogview = lf.inflate(R.layout.dialog_gender, null);
-                final TextView textOption1 = (TextView) dialogview.findViewById(R.id.txtOption1);
-                final TextView textOption2 = (TextView) dialogview.findViewById(R.id.txtOption2);
-                TextView textCancel = (TextView) dialogview.findViewById(R.id.txtCancel);
-                textOption1.setText("Take Picture");
-                textOption2.setText("Gallery");
-                dialog.setContentView(dialogview);
-                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                lp.copyFrom(dialog.getWindow().getAttributes());
-                int width = (int) (getActivity().getResources().getDisplayMetrics().widthPixels * 0.80);
-                lp.width = width;
-                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                lp.gravity = Gravity.CENTER;
-                dialog.getWindow().setAttributes(lp);
-                dialog.show();
-                textOption1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                       dispatchTakePictureIntent();
-                        dialog.dismiss();
-                    }
-                });
-                textOption2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                        photoPickerIntent.setType("image/*");
-                        startActivityForResult(photoPickerIntent, RESULT_SELECT_PHOTO);
-                        dialog.dismiss();
-                    }
-                });
-                textCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+               showCardDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO);
+
+                break;
+            case R.id.imgEditCard:
+                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
 
                 break;
 
@@ -719,7 +705,52 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
     }
 
-    private void dispatchTakePictureIntent() {
+    private void showCardDialog(final int resultCameraImage, final int resultSelectPhoto) {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        LayoutInflater lf = (LayoutInflater) getActivity()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogview = lf.inflate(R.layout.dialog_gender, null);
+        final TextView textOption1 = (TextView) dialogview.findViewById(R.id.txtOption1);
+        final TextView textOption2 = (TextView) dialogview.findViewById(R.id.txtOption2);
+        TextView textCancel = (TextView) dialogview.findViewById(R.id.txtCancel);
+        textOption1.setText("Take Picture");
+        textOption2.setText("Gallery");
+        dialog.setContentView(dialogview);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        int width = (int) (getActivity().getResources().getDisplayMetrics().widthPixels * 0.80);
+        lp.width = width;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
+        textOption1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent(resultCameraImage);
+                dialog.dismiss();
+            }
+        });
+        textOption2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, resultSelectPhoto);
+                dialog.dismiss();
+            }
+        });
+        textCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void dispatchTakePictureIntent(int resultCameraImage) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -737,7 +768,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         "com.infidigi.fotobuddies.fileprovider",
                         photoFile);*/
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile.getAbsolutePath());
-                startActivityForResult(takePictureIntent, RESULT_CAMERA_IMAGE);
+                startActivityForResult(takePictureIntent, resultCameraImage);
             }
         }
     }
@@ -906,9 +937,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         return false;
     }
 
-    private void editToConnection(byte[] photo) {
+    private void editToConnection(byte[] photo, byte[] photoCard) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -918,7 +949,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -971,6 +1002,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
  public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView profileImage = (ImageView) rootview.findViewById(R.id.imgProfile);
+     ImageView profileCard = (ImageView) rootview.findViewById(R.id.imgCard);
      if (REQUEST_PET == requestCode) {
            /* String value=data.getExtras().getString("Value");
             String reaction=data.getExtras().getString("Reaction");
@@ -1035,7 +1067,62 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
 
         }
+     else
+     if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
+         try {
+             final Uri imageUri = data.getData();
+             final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+             profileCard.setImageBitmap(selectedImage);
+         } catch (FileNotFoundException e) {
+             e.printStackTrace();
+         }
 
+     } else if (requestCode == RESULT_CAMERA_IMAGE_CARD && null != data) {
+
+         Bundle extras = data.getExtras();
+         Bitmap imageBitmap = (Bitmap) extras.get("data");
+         profileCard.setImageBitmap(imageBitmap);
+         // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
+
+         FileOutputStream outStream = null;
+         File file = new File(Environment.getExternalStorageDirectory(),
+                 "/MHCWProfile/");
+         String path = file.getAbsolutePath();
+         if (!file.exists()) {
+             file.mkdirs();
+         }
+
+
+         if (file.isDirectory()) {
+             String[] children = file.list();
+             for (int i = 0; i < children.length; i++) {
+                 new File(file, children[i]).delete();
+             }
+         }
+         try {
+
+             imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())
+                     + ".jpg";
+             // Write to SD Card
+             outStream = new FileOutputStream(imagepath);
+             ByteArrayOutputStream stream = new ByteArrayOutputStream();
+             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+             byte[] byteArray = stream.toByteArray();
+             outStream.write(byteArray);
+             outStream.close();
+
+
+         } catch (FileNotFoundException e) {
+             e.printStackTrace();
+         } catch (IOException e) {
+             e.printStackTrace();
+         } finally {
+
+         }
+
+
+     }
     }
 
     private void setPetData() {

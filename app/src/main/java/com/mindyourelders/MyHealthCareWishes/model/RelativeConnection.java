@@ -13,6 +13,14 @@ public class RelativeConnection {
     String profession="";
     String employed="";
  String eyes="";
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
 
     public String getInch() {
         return inch;

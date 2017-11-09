@@ -50,6 +50,7 @@
                 android:layout_height="@dimen/dimension50dp"
                 android:layout_marginTop="@dimen/dimension10dp"
                 android:src="@drawable/cards"
+                android:adjustViewBounds="true"
 
                 />
 

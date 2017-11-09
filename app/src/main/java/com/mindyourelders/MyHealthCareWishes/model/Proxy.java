@@ -7,7 +7,14 @@ import java.io.Serializable;
  */
 
 public class Proxy implements Serializable {
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
 
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
     public String getProxy() {
         return Proxy;
     }

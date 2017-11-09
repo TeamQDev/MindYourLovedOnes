@@ -9,7 +9,14 @@ import java.io.Serializable;
 public class Specialist implements Serializable {
     String lastseen="";
     String website="";
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
 
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
 
     public String getLastseen() {
         return lastseen;

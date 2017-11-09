@@ -5,6 +5,15 @@ package com.mindyourelders.MyHealthCareWishes.model;
  */
 
 public class PersonalInfo {
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
+
     int id;
     String name="";
     String email="";

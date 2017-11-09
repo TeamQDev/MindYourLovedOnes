@@ -11,6 +11,7 @@ public class Emergency implements Serializable {
     String email="";
     String mobile="";
 
+
     public String getOtherRelation() {
         return OtherRelation;
     }
@@ -102,6 +103,16 @@ public class Emergency implements Serializable {
     String name="";
     String phone="";
     byte[] photo;
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
+
+
 
     public String getName() {
         return name;

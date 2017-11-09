@@ -46,6 +46,7 @@ public class PersonalInfoQuery {
     public static final String COL_VETERAN= "veteran";
     public static final String COL_PET= "pet";
     public static final String COL_IDNUMBER= "IDNUmber";
+    public static final String COL_PHOTOCARD= "PhotoCard";
 
 
     public PersonalInfoQuery(Context context, DBHelper dbHelper) {
@@ -58,7 +59,8 @@ public class PersonalInfoQuery {
                 COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+
-                COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+ COL_PHOTO+" BLOB);";
+                COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" BLOB,"+
+                COL_PHOTO+" BLOB);";
 
         return createTableQuery;
     }
@@ -136,6 +138,8 @@ public class PersonalInfoQuery {
                             Person.setPet(c.getString(c.getColumnIndex(COL_PET)));
                             Person.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                             Person.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                            Person.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+
                             personList.add(Person);
                         }
                     }
@@ -180,6 +184,8 @@ public class PersonalInfoQuery {
 
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+
 
             } while (c.moveToNext());
         }
@@ -203,7 +209,7 @@ public class PersonalInfoQuery {
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -230,6 +236,8 @@ public class PersonalInfoQuery {
         cv.put(COL_PET,pet);
         cv.put(COL_IDNUMBER,idnumber);
         cv.put(COL_MANGER_PHONE,manager_phone);
+        cv.put(COL_PHOTOCARD,photoCard);
+
 
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);

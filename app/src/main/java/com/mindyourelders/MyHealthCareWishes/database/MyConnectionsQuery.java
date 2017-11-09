@@ -48,6 +48,7 @@ public class MyConnectionsQuery {
     public static final String COL_PET= "pet";
     public static final String COL_IDNUMBER= "IDNUmber";
     public static final String COL_MANGER_PHONE= "Manager_Phone";
+    public static final String COL_PHOTOCARD= "PhotoCard";
 
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -60,7 +61,7 @@ public class MyConnectionsQuery {
                 COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
-                COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+
+                COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" BLOB,"+
                 COL_PHOTO+" BLOB);";
         return createTableQuery;
     }
@@ -70,7 +71,7 @@ public class MyConnectionsQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMyConnectionsData(int id, String name, String email, String address, String mobile, String phone, String workphone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation) {
+    public static Boolean insertMyConnectionsData(int id, String name, String email, String address, String mobile, String phone, String workphone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, byte[] photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -87,6 +88,7 @@ public class MyConnectionsQuery {
         cv.put(COL_ISPRIMARY,isPrimary);
         cv.put(COL_RELATION,relation);
         cv.put(COL_PHOTO,photo);
+        cv.put(COL_PHOTOCARD,photoCard);
         cv.put(COL_OTHER_RELATION,otherRelation);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
@@ -138,6 +140,7 @@ public class MyConnectionsQuery {
                     connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                     connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                     connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
 
                     connectionList.add(connection);
                 } while (c.moveToNext());
@@ -194,6 +197,7 @@ public class MyConnectionsQuery {
                 connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
 
             } while (c.moveToNext());
         }
@@ -202,7 +206,7 @@ public class MyConnectionsQuery {
     }
 
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -233,6 +237,7 @@ public class MyConnectionsQuery {
         cv.put(COL_PET,pet);
         cv.put(COL_IDNUMBER,idnumber);
         cv.put(COL_MANGER_PHONE,manager_phone);
+        cv.put(COL_PHOTOCARD,photoCard);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
@@ -272,6 +277,8 @@ public class MyConnectionsQuery {
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                     connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+
                     connectionList.add(connection);
 
 
@@ -303,6 +310,8 @@ public class MyConnectionsQuery {
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                     connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+
                     connectionList.add(connection);
 
 

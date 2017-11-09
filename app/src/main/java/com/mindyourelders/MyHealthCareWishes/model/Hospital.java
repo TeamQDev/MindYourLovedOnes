@@ -17,6 +17,14 @@ public class Hospital implements Serializable {
 
     String Fax;
     String practiceName;
+    byte[] photoCard;
+    public byte[] getPhotoCard() {
+        return photoCard;
+    }
+
+    public void setPhotoCard(byte[] photoCard) {
+        this.photoCard = photoCard;
+    }
 
     public String getOtherCategory() {
         return OtherCategory;
