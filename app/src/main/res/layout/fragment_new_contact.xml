@@ -34,6 +34,35 @@
                 android:src="@drawable/ic_edit_blue" />
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/llCard"
+            android:layout_width="@dimen/dimension80dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_below="@+id/llProfile"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimension20dp"
+         >
+
+            <ImageView
+                android:id="@+id/imgCard"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:src="@drawable/cards"
+
+                />
+
+            <ImageView
+                android:id="@+id/imgEditCard"
+                android:layout_width="@dimen/dimension30dp"
+                android:layout_height="@dimen/dimension30dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:src="@drawable/ic_edit_blue" />
+
+        </RelativeLayout>
         <!--<view
             android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -46,7 +75,7 @@
             android:id="@+id/rlInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/llProfile"
+            android:layout_below="@+id/llCard"
 
             >
 

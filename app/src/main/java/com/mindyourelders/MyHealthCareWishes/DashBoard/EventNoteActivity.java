@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     TextView txtView;
     Preferences preferences;
     DBHelper dbHelper;
-
+RelativeLayout header;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initUI() {
+        header= (RelativeLayout) findViewById(R.id.header);
+        header.setBackgroundResource(R.color.colorFour);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);

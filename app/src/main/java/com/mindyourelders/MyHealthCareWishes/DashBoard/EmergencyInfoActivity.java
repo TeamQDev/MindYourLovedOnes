@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -24,7 +25,7 @@ public class EmergencyInfoActivity extends AppCompatActivity implements View.OnC
     FragmentPhysician fragmentPhysician=null;
 ImageView imgBack;
     TextView txtTitle;
-
+RelativeLayout header;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +82,8 @@ ImageView imgBack;
     }
 
     private void initUI() {
+        header= (RelativeLayout) findViewById(R.id.header);
+        header.setBackgroundResource(R.color.colorOne);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         txtTitle.setText("PERSONAL AND MEDICAL PROFILE AND EMERGENCY CONTACTS");
         imgBack= (ImageView) findViewById(R.id.imgBack);

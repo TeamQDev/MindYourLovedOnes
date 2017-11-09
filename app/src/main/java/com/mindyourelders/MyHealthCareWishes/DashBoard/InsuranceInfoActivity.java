@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -22,6 +23,7 @@ public class InsuranceInfoActivity extends AppCompatActivity implements View.OnC
     FragementForm fragementform=null;
     ImageView imgBack;
     TextView txtTitle;
+    RelativeLayout header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class InsuranceInfoActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initUI() {
+        header= (RelativeLayout) findViewById(R.id.header);
+        header.setBackgroundResource(R.color.colorFive);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         txtTitle.setText("INSURANCE");
         imgBack= (ImageView) findViewById(R.id.imgBack);

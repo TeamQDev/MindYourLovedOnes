@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ TextView txtTitle;
     Spinner spinner;
 
     ImageView imgBack;
-
+RelativeLayout header;
 
   //  String[] specialist = { "Insurance", "DOCTORS", "HOME HEALTH SERVICES", "FINANCE, INSURANCE & LEGAL" };
 
@@ -111,6 +112,8 @@ TextView txtTitle;
     }
 
     private void initUI() {
+        header= (RelativeLayout) findViewById(R.id.header);
+        header.setBackgroundResource(R.color.colorThree);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
        // spinner=(Spinner) findViewById(R.id.spinner);

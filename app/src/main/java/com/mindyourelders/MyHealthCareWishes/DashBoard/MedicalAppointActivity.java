@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     Preferences preferences;
     ArrayList<DateClass> dateList;
     DBHelper dbHelper;
+    RelativeLayout header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     }
 
     private void initUI() {
+        header= (RelativeLayout) findViewById(R.id.header);
+        header.setBackgroundResource(R.color.colorFour);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
