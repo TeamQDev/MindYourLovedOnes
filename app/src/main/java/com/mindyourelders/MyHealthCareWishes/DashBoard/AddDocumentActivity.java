@@ -483,9 +483,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                 startActivityForResult(i,RESULTCODE);
                                 break;
                             case 1:
-                                /*Intent intent=new Intent(context,DropboxList.class);
+                                Intent intent=new Intent(context,DropboxLoginActivity.class);
                                 intent.putExtra("ISPATH", "TRUE");
-                                startActivityForResult(intent,RQUESTCODE);*/
+                                startActivityForResult(intent,RQUESTCODE);
                                 break;
 
                         }
