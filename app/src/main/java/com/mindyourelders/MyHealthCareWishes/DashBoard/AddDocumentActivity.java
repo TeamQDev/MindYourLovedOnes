@@ -406,7 +406,6 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDot:
 
-
                 AlertDialog.Builder builders = new AlertDialog.Builder(context);
 
                 builders.setTitle("");

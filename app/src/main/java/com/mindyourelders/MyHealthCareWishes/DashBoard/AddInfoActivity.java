@@ -27,14 +27,14 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     Context context=this;
     ImageView imgBack;
     RelativeLayout llAddConn;
-    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd;
-    TextInputLayout tilTitle,tilReaction,tilTreatment;
+    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone;
+    TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone;
     public static final int RESULT_ALLERGY=100;
     public static final int RESULT_HISTORY=200;
     public static final int RESULT_IMPLANTS=300;
     public static final int RESULT_HOSPITAL=400;
     String from,name,title;
-    Boolean isAllergy;
+    Boolean isAllergy,isHistory;
     Preferences preferences;
     DBHelper dbHelper;
     int id;
@@ -75,6 +75,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
             });
 
             isAllergy=i.getExtras().getBoolean("IsAllergy");
+            isHistory=i.getExtras().getBoolean("IsHistory");
             if (isAllergy==true)
             {
                 tilTreatment.setVisibility(View.VISIBLE);
@@ -84,6 +85,17 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 tilTreatment.setVisibility(View.GONE);
                 tilReaction.setVisibility(View.GONE);
             }
+
+          /*  if (isHistory==true)
+            {
+                tilDone.setVisibility(View.VISIBLE);
+                tilDoctor.setVisibility(View.VISIBLE);
+                tilDate.setVisibility(View.VISIBLE);
+            }else{
+                tilDone.setVisibility(View.GONE);
+                tilDoctor.setVisibility(View.GONE);
+                tilDate.setVisibility(View.G);
+            }*/
             switch (from) {
                 case "AllergyUpdate":
                     Allergy allergy= (Allergy) i.getExtras().getSerializable("AllergyObject");
@@ -129,8 +141,16 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         txtReaction= (TextView) findViewById(R.id.txtReaction);
         txtAdd= (TextView) findViewById(R.id.txtAdd);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
+
+        txtDate= (TextView) findViewById(R.id.txtDate);
+        txtDoctor= (TextView) findViewById(R.id.txtDoctor);
+        txtDone= (TextView) findViewById(R.id.txtDone);
         tilTreatment= (TextInputLayout) findViewById(R.id.tilTreatment);
         txtTreatment= (TextView) findViewById(R.id.txtTreatment);
+
+        tilDate= (TextInputLayout) findViewById(R.id.tilDate);
+        tilDoctor= (TextInputLayout) findViewById(R.id.tilDoctor);
+        tilDone= (TextInputLayout) findViewById(R.id.tilDone);
 
     }
 
