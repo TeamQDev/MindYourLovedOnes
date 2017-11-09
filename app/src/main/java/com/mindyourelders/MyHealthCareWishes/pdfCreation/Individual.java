@@ -405,14 +405,6 @@ public class Individual {
         messageInfo3.add("Pre Existing Note :");
         messageInfo3.add(preNote);
 
-        if (medInfo.getNote() != null) {
-            preNote = medInfo.getNote();
-        }
-        Header.addTable("Pre Existing Note :");
-        Header.addTable(preNote);
-        messageInfo3.add("Pre Existing Note :");
-        messageInfo3.add(preNote);
-
 
         Header.addTable("Vision :");
         Header.addTable("");

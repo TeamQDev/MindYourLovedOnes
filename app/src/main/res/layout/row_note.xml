@@ -25,7 +25,7 @@
             android:layout_toLeftOf="@+id/imgForword"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textStyle="bold"
+
             />
 
         <TextView
