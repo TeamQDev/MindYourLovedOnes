@@ -141,7 +141,8 @@ public class DocumentSdCardList extends AppCompatActivity {
    // }
 
     public void getData(String name, String uri) {
-        Intent i=new Intent();
+
+    Intent i=new Intent();
         i.putExtra("Name",name);
         i.putExtra("URI",uri);
 

@@ -107,18 +107,37 @@ class PdfAdapter extends BaseAdapter {
               textOption1.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      File targetFile = new File(String.valueOf(imagelist[(int) position].getAbsoluteFile()));
-                      Uri uri=null;
-                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                      PackageManager packageManager = context.getPackageManager();
+                      Intent testIntent = new Intent(Intent.ACTION_VIEW);
+                      testIntent.setType("application/pdf");
+                      List list = packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                      if (list.size() > 0 && imagelist[(int) position].isFile()) {
+                         // Intent intent = new Intent();
+                         // intent.setAction(Intent.ACTION_VIEW);
+                          // Uri uri = Uri.fromFile(imagelist[(int) position].getAbsoluteFile());
+                          File targetFile = new File(String.valueOf(imagelist[(int) position].getPath()));
+                          Uri uri=null;
+                          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                             // intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                              uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                          } else {
+                              uri = Uri.fromFile(targetFile);
+                          }
+                        //  intent.setDataAndType(uri, "application/pdf");
+                        //  context.startActivity(intent);
+                          ((DocumentSdCardList)context).getData(pdfList[position], String.valueOf(uri));
+                          dialog.dismiss();
 
+                      }
+                    /*  File targetFile = new File(String.valueOf(imagelist[(int) position].getAbsoluteFile()));
+                      Uri uri=null;
+                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                           uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
                       } else {
                           uri = Uri.fromFile(targetFile);
-                      }
+                      }*/
                      //uri=Uri.fromFile(imagelist[(int) position].getAbsoluteFile()).toString();
-                      ((DocumentSdCardList)context).getData(pdfList[position], String.valueOf(uri));
-                       dialog.dismiss();
                       ((DocumentSdCardList) context).finish();
                   }
               });
@@ -133,9 +152,9 @@ class PdfAdapter extends BaseAdapter {
                           Intent intent = new Intent();
                           intent.setAction(Intent.ACTION_VIEW);
                          // Uri uri = Uri.fromFile(imagelist[(int) position].getAbsoluteFile());
-                          File targetFile = new File(String.valueOf(imagelist[(int) position].getAbsoluteFile()));
+                          File targetFile = new File(String.valueOf(imagelist[(int) position].getPath()));
                           Uri uri=null;
-                          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                               uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
                           } else {

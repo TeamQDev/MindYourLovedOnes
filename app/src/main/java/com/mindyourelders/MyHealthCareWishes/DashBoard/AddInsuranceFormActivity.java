@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -100,17 +101,28 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
             case R.id.imgDoc:
                 if (!documentPath.equals(""))
                 {
-                    Uri uri=null;
+                    Uri uris= Uri.parse(documentPath);
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        //  uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                    } else {
+                        //  uri = Uri.fromFile(targetFile);
+                    }
+                    intent.setDataAndType(uris, "application/pdf");
+                    context.startActivity(intent);
+                   // Uri uri=null;
                    /* File f=new File(documentPath);
                     uri= FileProvider.getUriForFile(context,
                             BuildConfig.APPLICATION_ID + ".provider",
                             f);*/
-                    uri=Uri.parse(documentPath);
+                   /* uri=Uri.parse(documentPath);
 
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.setDataAndType(uri, "application/pdf");
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
                   /*  if (path.equals("No"))
                     {
                        *//* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
@@ -184,17 +196,27 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
 
                                 break;
                             case 2: // view
-                                Uri uri=null;
+                                Uri uris= Uri.parse(documentPath);
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                    //  uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                                } else {
+                                    //  uri = Uri.fromFile(targetFile);
+                                }
+                                intent.setDataAndType(uris, "application/pdf");
+                                context.startActivity(intent);
                               /*  if (path.equals("No"))
                                 {
                                     CopyReadAssetss(documentPath);
                                 }
                                 else{
-*/                                    uri= Uri.parse(documentPath);
+*/                                  /*  uri= Uri.parse(documentPath);
                                     Intent intent = new Intent();
                                     intent.setAction(Intent.ACTION_VIEW);
                                     intent.setDataAndType(uri, "application/pdf");
-                                    context.startActivity(intent);
+                                    context.startActivity(intent);*/
                                // }
 
                                 break;
