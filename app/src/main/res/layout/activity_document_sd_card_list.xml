@@ -43,15 +43,17 @@
               />-->
     </RelativeLayout>
 
+
     <ListView
-        android:id="@+id/lvDoc"
+        android:id="@+id/lvSd"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/header"
         android:scrollbars="none"
         android:divider="@null"
         android:background="@color/colorLightBlue"
        ></ListView>
+
 </RelativeLayout>
 
 

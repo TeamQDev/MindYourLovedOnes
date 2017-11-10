@@ -20,16 +20,20 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 
+import static android.os.Environment.getExternalStorageState;
+
 
 public class DocumentSdCardList extends AppCompatActivity {
     private static final int RESULTCODE = 200;
     Context context=this;
     ArrayAdapter adapter;
     int clickCounter=0;
-    ListView lvDoc;
+    ListView lvSd,lvDownload;
     ArrayList listItems=new ArrayList();
-    private File[] imagelist;
-    String[] pdflist;
+    public File[] imagelist;
+    private File[] imagelist1;
+    String[] pdflist,pdflist1;
+    File[] downloadList;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 400;
     ImageView imgBack;
     /** Called when the activity is first created. */
@@ -39,7 +43,8 @@ public class DocumentSdCardList extends AppCompatActivity {
         setContentView(R.layout.activity_document_sd_card_list);
 
         checkRuntimePermission();
-        lvDoc= (ListView) findViewById(R.id.lvDoc);
+        lvSd= (ListView) findViewById(R.id.lvSd);
+        lvDownload= (ListView) findViewById(R.id.lvDownload);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,25 +57,81 @@ public class DocumentSdCardList extends AppCompatActivity {
     }
 
     private void showFile() {
-        File images = Environment.getExternalStorageDirectory();
-        imagelist = images.listFiles(new FilenameFilter(){
+        Boolean isSDPresent = getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
+        File Pdfs=null;
+        if(isSDSupportedDevice && isSDPresent)
+        {
+            String path = getExternalStorageState();
+             Pdfs=new File(path);
+        }
+        else
+        {
+            Pdfs=Environment.getExternalStorageDirectory();
+        }
+
+        imagelist = Pdfs.listFiles(new FilenameFilter(){
+            public boolean accept(File dir, String name)
+            {
+                return ((name.endsWith(".pdf")));
+            }
+        });
+     
+       /* if (imagelist!=null) {
+            pdflist = new String[imagelist.length];
+            for (int i = 0; i < imagelist.length; i++) {
+                pdflist[i] = imagelist[i].getName();
+            }
+            PdfAdapter adapter=new PdfAdapter(context,pdflist,imagelist);
+            lvSd.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(context,"No Files Available in Sdcard",Toast.LENGTH_SHORT).show();
+        }*/
+
+        File download=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        downloadList = download.listFiles(new FilenameFilter(){
             public boolean accept(File dir, String name)
             {
                 return ((name.endsWith(".pdf")));
             }
         });
 
-        if (imagelist!=null) {
-            pdflist = new String[imagelist.length];
-            for (int i = 0; i < imagelist.length; i++) {
-                pdflist[i] = imagelist[i].getName();
+        int size=imagelist.length+downloadList.length;
+        int s=imagelist.length;
+        imagelist1=new File[size];
+        for(int i=0;i<imagelist.length;i++)
+        {
+            imagelist1[i]=imagelist[i];
+        }
+        for(int i=0;i<downloadList.length;i++)
+        {
+            imagelist1[s]=downloadList[i];
+            s++;
+        }
+        if (imagelist1!=null) {
+            pdflist = new String[imagelist1.length];
+            for (int i = 0; i < imagelist1.length; i++) {
+                pdflist[i] = imagelist1[i].getName();
             }
-            PdfAdapter adapter=new PdfAdapter(context,pdflist,imagelist);
-            lvDoc.setAdapter(adapter);
+            PdfAdapter adapter=new PdfAdapter(context,pdflist,imagelist1);
+            lvSd.setAdapter(adapter);
         }
         else{
-            Toast.makeText(context,"No Files Available in Sdcard",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"No Files Available in Download",Toast.LENGTH_SHORT).show();
         }
+        /*if (downloadList!=null) {
+            pdflist1 = new String[downloadList.length];
+            for (int i = 0; i < downloadList.length; i++) {
+                pdflist1[i] = downloadList[i].getName();
+            }
+            PdfAdapter adapter=new PdfAdapter(context,pdflist1,downloadList);
+            lvDownload.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(context,"No Files Available in Download",Toast.LENGTH_SHORT).show();
+        }*/
+
     }
 
     private boolean checkRuntimePermission() {

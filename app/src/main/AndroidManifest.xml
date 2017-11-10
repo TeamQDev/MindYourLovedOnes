@@ -223,26 +223,26 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPetActivity"
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPetActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInsuranceFormActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInsuranceFormActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DropboxLoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.DropboxLoginActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>
