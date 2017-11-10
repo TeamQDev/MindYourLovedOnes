@@ -27,8 +27,10 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.MedicalConditionQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
+import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -40,6 +42,7 @@ import java.util.ArrayList;
  */
 
 public class FragmentMedicalInfo extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    private static final int REQUEST_CONDITION = 500;
     View rootview;
     ImageView imgBack, imgDone;
     TextView txtTitle;
@@ -52,8 +55,8 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     RadioGroup rgDonor;
     TextView txtName;
     Spinner spinnerEyes, spinnerBlood, spinnerLang;
-    ImageView imgAddAllergy, imgAddImplants, imgAddHospital, imgAddHistory;
-    ListView ListHistory, ListAllergy, ListImplants, ListHospital;
+    ImageView imgAddAllergy, imgAddImplants, imgAddHospital, imgAddHistory,imgAddCondition;
+    ListView ListHistory, ListAllergy, ListImplants, ListHospital,ListCondition;
     public static final int REQUEST_ALLERGY = 100;
     public static final int REQUEST_HISTORY = 200;
     public static final int REQUEST_IMPLANTS = 300;
@@ -91,6 +94,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         MedInfoQuery p = new MedInfoQuery(getActivity(), dbHelper);
         AllergyQuery a = new AllergyQuery(getActivity(), dbHelper);
         MedicalImplantsQuery m=new MedicalImplantsQuery(getActivity(),dbHelper);
+        MedicalConditionQuery f=new MedicalConditionQuery(getActivity(),dbHelper);
         HospitalQuery h = new HospitalQuery(getActivity(), dbHelper);
         HistoryQuery hi=new HistoryQuery(getActivity(),dbHelper);
     }
@@ -102,6 +106,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         imgAddHistory.setOnClickListener(this);
         imgAddHospital.setOnClickListener(this);
         imgAddImplants.setOnClickListener(this);
+        imgAddCondition.setOnClickListener(this);
 
         tbGlass.setOnCheckedChangeListener(this);
         tbMouth.setOnCheckedChangeListener(this);
@@ -138,12 +143,14 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         spinnerLang = (Spinner) rootview.findViewById(R.id.spinnerPrimary);
         imgAddAllergy = (ImageView) rootview.findViewById(R.id.imgAddAllergy);
         imgAddImplants = (ImageView) rootview.findViewById(R.id.imgAddImplants);
+        imgAddCondition = (ImageView) rootview.findViewById(R.id.imgAddCondition);
         imgAddHospital = (ImageView) rootview.findViewById(R.id.imgAddHospital);
         imgAddHistory = (ImageView) rootview.findViewById(R.id.imgAddHistory);
         ListHistory = (ListView) rootview.findViewById(R.id.ListHistory);
         ListAllergy = (ListView) rootview.findViewById(R.id.ListAllergy);
         ListImplants = (ListView) rootview.findViewById(R.id.ListImplants);
         ListHospital = (ListView) rootview.findViewById(R.id.ListHospital);
+        ListCondition = (ListView) rootview.findViewById(R.id.ListCondtion);
 
         etFt = (EditText) rootview.findViewById(R.id.etFt);
         etInch = (EditText) rootview.findViewById(R.id.etInch);
@@ -198,9 +205,57 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         setMedInfo();
         setAllergyData();
         setImplantData();
+        setConditionData();
+
         setHistoryData();
         setHospitalData();
 
+    }
+
+    private void setConditionData() {
+        final ArrayList<String> implantsList = MedicalConditionQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        if (implantsList.size() != 0) {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, implantsList);
+            ListCondition.setAdapter(adapter);
+            ListCondition.setVisibility(View.VISIBLE);
+            ListCondition.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    ImageView imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
+                    ImageView imgDelete = (ImageView) view.findViewById(R.id.imgDelete);
+                    imgEdit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String value=implantsList.get(position);
+                            Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
+                            allergyIntent.putExtra("IsAllergy", false);
+                            allergyIntent.putExtra("IsHistory", false);
+
+                            allergyIntent.putExtra("ADD", "ConditionUpdate");
+                            allergyIntent.putExtra("Title", "Update Medical Condition");
+                            allergyIntent.putExtra("Name", "Add Medical Condition");
+                            allergyIntent.putExtra("ConditionObject", value);
+                            startActivityForResult(allergyIntent, REQUEST_CONDITION);
+                        }
+                    });
+
+                    imgDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            boolean flag = MedicalConditionQuery.deleteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),implantsList.get(position));
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
+                                setConditionData();
+                                ListCondition.requestFocus();
+                            }
+                        }
+                    });
+                }
+            });
+        } else {
+            ListCondition.setVisibility(View.GONE);
+        }
     }
 
     private void setMedInfo() {
@@ -358,6 +413,8 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                            String value=implantsList.get(position);
                             Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
                             allergyIntent.putExtra("IsAllergy", false);
+                            allergyIntent.putExtra("IsHistory", false);
+
                             allergyIntent.putExtra("ADD", "ImplantUpdate");
                             allergyIntent.putExtra("Title", "Update Implant");
                             allergyIntent.putExtra("Name", "Add Implant");
@@ -385,45 +442,57 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     }
 
     private void setHistoryData() {
-        final ArrayList<String> historList = HistoryQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-        if (historList.size() != 0) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, historList);
-            ListHistory.setAdapter(adapter);
+        final ArrayList allergyList = new ArrayList();
+        final ArrayList<History> HistoryLists = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        if (HistoryLists.size() != 0) {
             ListHistory.setVisibility(View.VISIBLE);
-            ListHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                    ImageView imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
-                    ImageView imgDelete = (ImageView) view.findViewById(R.id.imgDelete);
-                    imgEdit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String value=historList.get(position);
-                            Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
-                            allergyIntent.putExtra("IsAllergy", false);
-                            allergyIntent.putExtra("ADD", "HistoryUpdate");
-                            allergyIntent.putExtra("Title", "Update History");
-                            allergyIntent.putExtra("Name", "Add Medical History");
-                            allergyIntent.putExtra("HistoryObject", value);
-                            startActivityForResult(allergyIntent, REQUEST_HISTORY);
-                        }
-                    });
+            for (int i = 0; i < HistoryLists.size(); i++) {
+                History a = HistoryLists.get(i);
+                String allergy = "History: " + a.getName() + "\nDate: " + a.getDate() + "\nDoctor: " + a.getDoctor() + "\nDone At: " + a.getDone();
+                allergyList.add(allergy);
+            }
 
-                    imgDelete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            boolean flag = HistoryQuery.deleteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),historList.get(position));
-                            if (flag == true) {
-                                Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
-                                setHistoryData();
-                                ListHistory.requestFocus();
+           // final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+            if (allergyList.size() != 0) {
+                ArrayAdapter<History> adapter = new ArrayAdapter<History>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, allergyList);
+                ListHistory.setAdapter(adapter);
+                ListHistory.setVisibility(View.VISIBLE);
+                ListHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        ImageView imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
+                        ImageView imgDelete = (ImageView) view.findViewById(R.id.imgDelete);
+                        imgEdit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                History value = HistoryLists.get(position);
+                                Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
+                                allergyIntent.putExtra("IsAllergy", false);
+                                allergyIntent.putExtra("IsHistory", true);
+                                allergyIntent.putExtra("ADD", "HistoryUpdate");
+                                allergyIntent.putExtra("Title", "Update History");
+                                allergyIntent.putExtra("Name", "Add Medical History");
+                                allergyIntent.putExtra("HistoryObject", value);
+                                startActivityForResult(allergyIntent, REQUEST_HISTORY);
                             }
-                        }
-                    });
-                }
-            });
-        } else {
-            ListHistory.setVisibility(View.GONE);
+                        });
+
+                        imgDelete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                boolean flag = HistoryQuery.deleteRecord(HistoryLists.get(position).getId());
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
+                                    setHistoryData();
+                                    ListHistory.requestFocus();
+                                }
+                            }
+                        });
+                    }
+                });
+            } else {
+                ListHistory.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -444,6 +513,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                             String value=hospitalList.get(position);
                             Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
                             allergyIntent.putExtra("IsAllergy", false);
+                            allergyIntent.putExtra("IsHistory", false);
                             allergyIntent.putExtra("ADD", "HospitalUpdate");
                             allergyIntent.putExtra("Title", "Update Hospital");
                             allergyIntent.putExtra("Name", "Add Hospital");
@@ -494,6 +564,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                                 Allergy a=AllargyLists.get(position);
                                 Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
                                 allergyIntent.putExtra("IsAllergy", true);
+                                allergyIntent.putExtra("IsHistory", false);
                                 allergyIntent.putExtra("ADD", "AllergyUpdate");
                                 allergyIntent.putExtra("Title", "Update Allergy");
                                 allergyIntent.putExtra("Name", "Add Allergy");
@@ -561,6 +632,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             case R.id.imgAddAllergy:
                 Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
                 allergyIntent.putExtra("IsAllergy", true);
+                allergyIntent.putExtra("IsHistory", false);
                 allergyIntent.putExtra("ADD", "Allergy");
                 allergyIntent.putExtra("Title", "Add Allergy");
                 allergyIntent.putExtra("Name", "Add Allergy");
@@ -569,14 +641,25 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             case R.id.imgAddImplants:
                 Intent implantsIntent = new Intent(getActivity(), AddInfoActivity.class);
                 implantsIntent.putExtra("IsAllergy", false);
+                implantsIntent.putExtra("IsHistory", false);
                 implantsIntent.putExtra("ADD", "Implants");
                 implantsIntent.putExtra("Title", "Add Implants");
                 implantsIntent.putExtra("Name", "Add Implantaion you have done");
                 startActivityForResult(implantsIntent, REQUEST_IMPLANTS);
                 break;
+            case R.id.imgAddCondition:
+                Intent implantsIntents = new Intent(getActivity(), AddInfoActivity.class);
+                implantsIntents.putExtra("IsAllergy", false);
+                implantsIntents.putExtra("IsHistory", false);
+                implantsIntents.putExtra("ADD", "Condition");
+                implantsIntents.putExtra("Title", "Add Medical Condition");
+                implantsIntents.putExtra("Name", "Add Pre existing Medical Condtion");
+                startActivityForResult(implantsIntents, REQUEST_CONDITION);
+                break;
             case R.id.imgAddHospital:
                 Intent hospIntent = new Intent(getActivity(), AddInfoActivity.class);
                 hospIntent.putExtra("IsAllergy", false);
+                hospIntent.putExtra("IsHistory", false);
                 hospIntent.putExtra("ADD", "Hospital");
                 hospIntent.putExtra("Title", "Add Hospital");
                 hospIntent.putExtra("Name", "Add hospital preferences");
@@ -585,6 +668,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             case R.id.imgAddHistory:
                 Intent historyIntent = new Intent(getActivity(), AddInfoActivity.class);
                 historyIntent.putExtra("IsAllergy", false);
+                historyIntent.putExtra("IsHistory", true);
                 historyIntent.putExtra("ADD", "History");
                 historyIntent.putExtra("Title", "Add Medical History");
                 historyIntent.putExtra("Name", "Add Medical History");
@@ -609,6 +693,11 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             implantsList.add(value);*/
             setImplantData();
             ListImplants.requestFocus();
+        } else if (REQUEST_CONDITION == requestCode) {
+            /*String value=data.getExtras().getString("Value");
+            implantsList.add(value);*/
+            setConditionData();
+            ListCondition.requestFocus();
         } else if (REQUEST_HOSPITAL == requestCode && data != null) {
            /* String value = data.getExtras().getString("Value");
             hospitalList.add(value);*/

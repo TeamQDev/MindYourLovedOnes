@@ -37,6 +37,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Implants Table
         db.execSQL(MedicalImplantsQuery.createImplantsTable());
+        db.execSQL(MedicalConditionQuery.createImplantsTable());
+
 
         //Hsopital Table
         db.execSQL(HospitalQuery.createHospitalTable());
@@ -86,6 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Implants Table
         db.execSQL(MedicalImplantsQuery.dropTable());
+        db.execSQL(MedicalConditionQuery.dropTable());
 
         //Hospital Table
         db.execSQL(HospitalQuery.dropTable());

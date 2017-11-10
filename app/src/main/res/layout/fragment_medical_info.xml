@@ -300,13 +300,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgPre"
+                android:layout_toLeftOf="@+id/imgAddCondition"
                 android:text="Pre-existing Medical Conditions" />
+
+            <ImageView
+                android:id="@+id/imgAddCondition"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListCondtion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPreHeader"
+                android:layout_toRightOf="@+id/imgPre"
+                android:divider="@null" />
             <EditText
                 android:id="@+id/etNote"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtPreHeader"
+                android:layout_below="@+id/ListCondtion"
                 android:layout_margin="@dimen/dimension15dp"
                 android:background="@drawable/darkgray_white_border"
                 android:gravity="top"
