@@ -532,8 +532,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                 imgProfile.setImageBitmap(bmp);
 
-                if (personalInfo.getPhotoCard()!=null) {
-                    byte[] photoCard = personalInfo.getPhotoCard();
+                if (connection.getPhotoCard()!=null) {
+                    byte[] photoCard = connection.getPhotoCard();
                     Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                     imgCard.setImageBitmap(bmps);
                 }
