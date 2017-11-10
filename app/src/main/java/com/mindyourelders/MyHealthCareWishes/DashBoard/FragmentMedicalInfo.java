@@ -470,7 +470,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                                 allergyIntent.putExtra("IsAllergy", false);
                                 allergyIntent.putExtra("IsHistory", true);
                                 allergyIntent.putExtra("ADD", "HistoryUpdate");
-                                allergyIntent.putExtra("Title", "Update History");
+                                allergyIntent.putExtra("Title", "Update Medical History");
                                 allergyIntent.putExtra("Name", "Add Medical History");
                                 allergyIntent.putExtra("HistoryObject", value);
                                 startActivityForResult(allergyIntent, REQUEST_HISTORY);

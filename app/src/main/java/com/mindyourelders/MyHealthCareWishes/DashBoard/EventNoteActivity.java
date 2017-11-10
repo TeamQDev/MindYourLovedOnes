@@ -114,7 +114,7 @@ RelativeLayout header;
     }
 
     private void initComponent() {
-preferences=new Preferences(context);
+        preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
         EventNoteQuery e=new EventNoteQuery(context,dbHelper);
     }

@@ -45,7 +45,7 @@
             android:layout_height="@dimen/dimension40dp"
             android:layout_centerVertical="true"
             android:padding="@dimen/dimension5dp"
-            android:src="@drawable/forword_arrow"
+            android:src="@drawable/ic_edit_blue"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/dimension5dp"
             />

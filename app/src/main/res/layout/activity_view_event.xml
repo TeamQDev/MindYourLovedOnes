@@ -84,7 +84,7 @@
         android:id="@+id/imgEdit"
         android:layout_width="@dimen/dimension40dp"
         android:layout_height="@dimen/dimension40dp"
-        android:src="@drawable/edit"
+        android:src="@drawable/save"
         android:layout_alignParentRight="true"
         android:scaleType="fitXY"
         />

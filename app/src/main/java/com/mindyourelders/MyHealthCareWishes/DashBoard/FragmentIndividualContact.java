@@ -663,12 +663,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 dialogs.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 LayoutInflater lf1 = (LayoutInflater) getActivity()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialogview1 = lf1.inflate(R.layout.dialog_gender, null);
+                View dialogview1 = lf1.inflate(R.layout.dialog_gender1, null);
                 final TextView textOptions1 = (TextView) dialogview1.findViewById(R.id.txtOption1);
                 final TextView textOptions2 = (TextView) dialogview1.findViewById(R.id.txtOption2);
+                final TextView textOptions3 = (TextView) dialogview1.findViewById(R.id.txtOption3);
                 TextView textCancels = (TextView) dialogview1.findViewById(R.id.txtCancel);
                 textOptions1.setText("Male");
                 textOptions2.setText("Female");
+                textOptions3.setText("Trans");
                 dialogs.setContentView(dialogview1);
                 WindowManager.LayoutParams lps = new WindowManager.LayoutParams();
                 lps.copyFrom(dialogs.getWindow().getAttributes());
@@ -689,6 +691,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     @Override
                     public void onClick(View v) {
                         txtGender.setText("Female");
+                        dialogs.dismiss();
+                    }
+                });
+
+                textOptions3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        txtGender.setText("Trans");
                         dialogs.dismiss();
                     }
                 });
