@@ -14,6 +14,15 @@ public class RelativeConnection {
     String employed="";
  String eyes="";
     byte[] photoCard;
+    public String getEnglish() {
+        return english;
+    }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
+
+    String english="";
     public byte[] getPhotoCard() {
         return photoCard;
     }

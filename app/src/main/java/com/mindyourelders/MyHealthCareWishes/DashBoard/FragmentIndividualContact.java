@@ -74,15 +74,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     RelativeLayout rlPet;
     String name="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
     String height="",weight="",profession="",employed="",religion="",idnumber="";
-    String pet="No",veteran="No";
+    String pet="No",veteran="No",english="No";
     String eyes,language,marital_status;
     String otherRelation;
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
     private static int RESULT_CAMERA_IMAGE_CARD = 3;
     private static int RESULT_SELECT_PHOTO_CARD = 4;
-    RadioGroup rgPet,rgVeteran;
-    RadioButton rbYes,rbNo,rbYesPet,rbNoPet;
+    RadioGroup rgPet,rgVeteran,rgUnderstand;
+    RadioButton rbYes,rbNo,rbYesPet,rbNoPet,rbYess,rbNoo;
     public static final int REQUEST_PET= 400;
     
     ListView ListPet;
@@ -106,7 +106,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     TextInputLayout tilBdate,tilName,tilWorkPhone;
     String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
-    String[] MaritalList = {"Single", "Married"};
+    String[] MaritalList = {"Single", "Married", "Domestic Partner", "Widowed", "Divorced", "Separated"};
     String[] LangList = {"English", "Spanish", "French", "Russian", "Japanese", "Greek", "German", "Italian"};
     @Nullable
     @Override
@@ -193,8 +193,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
         rbYesPet = (RadioButton) rootview.findViewById(R.id.rbYesPet);
         rbNoPet = (RadioButton) rootview.findViewById(R.id.rbNoPet);
+
+        rbYess = (RadioButton) rootview.findViewById(R.id.rbYess);
+        rbNoo = (RadioButton) rootview.findViewById(R.id.rbNoo);
+
         rgPet= (RadioGroup) rootview.findViewById(R.id.rgPet);
         rgVeteran= (RadioGroup) rootview.findViewById(R.id.rgVeteran);
+        rgUnderstand= (RadioGroup) rootview.findViewById(R.id.rgUnderstand);
 
         spinner = (MySpinner) rootview.findViewById(R.id.spinner);
         spinnerEyes = (MySpinner) rootview.findViewById(R.id.spinnerEyes);
@@ -253,7 +258,18 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 }
             }
         });
-
+        rgUnderstand.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rbYess) {
+                    english = "Yes";
+                    //tilId.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.rbNoo) {
+                    english = "No";
+                    //tilId.setVisibility(View.GONE);
+                }
+            }
+        });
         txtPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
@@ -461,6 +477,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         rbNo.setChecked(true);
                     }
                 }
+                if (personalInfo.getEnglish()!=null) {
+                    if (personalInfo.getEnglish().equals("Yes")) {
+                        rbYess.setChecked(true);
+                        rbNoo.setChecked(false);
+                    } else {
+                        rbYess.setChecked(false);
+                        rbNoo.setChecked(true);
+                    }
+                }
                 if (personalInfo.getPet()!=null) {
                     if (personalInfo.getPet().equals("Yes")) {
                         rbYesPet.setChecked(true);
@@ -560,6 +585,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         rbNo.setChecked(true);
                     }
                 }
+                if (connection.getEnglish()!=null) {
+                    if (connection.getEnglish().equals("Yes")) {
+                        rbYess.setChecked(true);
+                        rbNoo.setChecked(false);
+                    } else {
+                        rbYess.setChecked(false);
+                        rbNoo.setChecked(true);
+                    }
+                }
                 if (connection.getPet()!=null) {
                     if (connection.getPet().equals("Yes")) {
                         rbYesPet.setChecked(true);
@@ -598,7 +632,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -939,7 +973,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void editToConnection(byte[] photo, byte[] photoCard) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard,english);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -949,7 +983,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard, english);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
