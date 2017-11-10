@@ -67,7 +67,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre;
     EditText etNote;
     MySpinner spinner;
-    String[] FormList = {"Tablet", "Capsule", "Pills", "Powder", "Liquid", "Syrup", "Cream", "Gel", "Lotion", "Drops", "Other"};
+    String[] FormList = {"Capsule","Cream","Drops","Gel","Liquid","Lotion","Pills","Powder","Syrup","Tablet", "Other"};
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
     String imagepath = "";//

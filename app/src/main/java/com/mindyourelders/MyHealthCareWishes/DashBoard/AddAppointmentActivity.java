@@ -53,10 +53,9 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     boolean isUpdate=false;
     Appoint p;
 
-    String[] Type = { "Dermatologist", "Dermatologist – Face", "Gynecologist", "Internist", "Ophthalmologist", "Pulmonologist", "Cardiologist","Mammogram", "Colonoscopy", "Psychiatrist", "CT Scan","Thyroid Scan",
-            "Hypothyroid Blood test", "Glucose Test","Other"};
+    String[] Type = { "CT Scan","Cardiologist","Colonoscopy","Dermatologist – Face","Dermatologist","Glucose Test","Gynecologist","Hypothyroid Blood test","Internist","Mammogram","Ophthalmologist","Psychiatrist","Pulmonologist","Thyroid Scan","Other"};
 
-    String[] Frequency = { "Daily", "Weekly", "Monthly", "Quarterly","Semi-Annual", "Annual", "Every 5 Years","Other"};
+    String[] Frequency = {"Annual","Daily","Every 5 Years","Monthly","Quarterly","Semi-Annual","Weekly","Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

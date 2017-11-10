@@ -67,15 +67,15 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     final CharSequence[] alert_items = { "SD Card", "Dropbox" };
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
-    String[] DocList = {"Health Care Proxy/Living Will","Health Care Proxy", "Living Will", "Non-Hospital DNR", "HIPAA Form", "Power of Attorney"," Ethical Will","Other Documents"};
+    String[] DocList = {" Ethical Will","HIPAA Form","Health Care Proxy","Health Care Proxy/Living Will","Living Will","Non-Hospital DNR","Power of Attorney","Other Documents"};
 
-    String[] ADList={"Living Will","Health Care Proxy","Living Will/Health Care Proxy","HIPAA Authorization"," Non-Hospital DNR Order"," Ethical Will"};
+    String[] ADList={"Ethical Will","Non-Hospital DNR Order","HIPAA Authorization","Health Care Proxy","Living Will","Living Will/Health Care Proxy"};
 
-    String[] LegalList={"Durable Power of Attorney","Bank Durable Power of Attorney","Brokerage Firm Durable Power of Attorney","Trust","Will"};
+    String[] LegalList={"Bank Durable Power of Attorney","Brokerage Firm Durable Power of Attorney","Trust","Will","Durable Power of Attorney"};
 
-    String[] InsurancerList={"Insurance Form – Medical","Insurance Form – Dental","Long Term Care"};
+    String[] InsurancerList={"Insurance Form – Dental","Insurance Form – Medical","Long Term Care"};
 
-    String[] OtherList={"Legal","Financial","Home Health","Insurance","Medical"};
+    String[] OtherList={"Financial","Home Health","Insurance","Legal","Medical"};
 
     String[] Others={"Other"};
 

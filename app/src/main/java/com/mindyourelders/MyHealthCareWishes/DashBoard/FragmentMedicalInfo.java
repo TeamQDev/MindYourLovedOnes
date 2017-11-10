@@ -70,9 +70,9 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     ArrayList historList = new ArrayList();
     ArrayList hospitalList = new ArrayList();
 
-    String[] LangList = {"English", "Spanish", "French", "Russian", "Japanese", "Greek", "German", "Italian"};
+    String[] LangList = {"English","French","German","Greek","Italian","Japanese","Russian","Spanish"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
-    String[] BloodList = {"","O-positive", "O-negative", "A-positive", "A-negative", "B-positive", "B-negative", "AB-positive", "AB-negative","I dont know"};
+    String[] BloodList = {"","A-negative","A-positive","AB-negative","AB-positive","B-negative","B-positive","O-negative","O-positive","I dont know"};
 
     Preferences preferences;
     DBHelper dbHelper;

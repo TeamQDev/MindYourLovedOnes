@@ -104,10 +104,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     PersonalInfo personalInfo;
 
     TextInputLayout tilBdate,tilName,tilWorkPhone;
-    String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
+    String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
-    String[] MaritalList = {"Single", "Married", "Domestic Partner", "Widowed", "Divorced", "Separated"};
-    String[] LangList = {"English", "Spanish", "French", "Russian", "Japanese", "Greek", "German", "Italian"};
+    String[] MaritalList = {"Divorced","Domestic Partner","Married","Separated","Single","Widowed"};
+    String[] LangList = {"English","French","German","Greek","Italian","Japanese","Russian","Spanish"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

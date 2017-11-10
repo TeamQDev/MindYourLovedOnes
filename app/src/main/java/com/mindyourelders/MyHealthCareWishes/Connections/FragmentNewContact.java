@@ -123,7 +123,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     String imagepath = "";
 
-    String[] Relationship = {"Mom", "Dad", "Wife", "Husband", "Daughter", "Son", "Sister", "Brother", "Friend", "GrandFather", "GrandMother", "GrandSon", "GrandDaughter","Aunt","Uncle","Niece","Nephew","Cousin","Mother-in-law","Father-in-law","Neighbor", "Other"};
+    String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
 
     String[] healthSpeciality = {"CARDIOLOGIST","ENDOCRINOLOGIST","FAMILY PRACTICE PHYSICIAN","GERIATRIC PSYCHIATRIST","GERIATRICIAN","GYNECOLOGIST","INTERNIST","NEPHROLOGIST","NEUROLOGIST","ONCOLOGIST","OPHTHALMOLOGIST","ORTHOPEDIC","PHYSICAL THERAPIST","PULMONOLOGIST","RHEUMATOLOGIST","UROLOGIST"};
 
