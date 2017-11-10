@@ -44,7 +44,6 @@ public class DocumentSdCardList extends AppCompatActivity {
 
         checkRuntimePermission();
         lvSd= (ListView) findViewById(R.id.lvSd);
-        lvDownload= (ListView) findViewById(R.id.lvDownload);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +75,7 @@ public class DocumentSdCardList extends AppCompatActivity {
                 return ((name.endsWith(".pdf")));
             }
         });
-     
+
        /* if (imagelist!=null) {
             pdflist = new String[imagelist.length];
             for (int i = 0; i < imagelist.length; i++) {

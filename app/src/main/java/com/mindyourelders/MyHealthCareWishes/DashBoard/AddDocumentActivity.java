@@ -42,7 +42,7 @@ import java.util.Date;
 
 
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final int RQUESTCODE = 600;
+    private static final int RQUESTCODE = 400;
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
@@ -389,7 +389,6 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                 break;
                             case 1:
                                 Intent intent=new Intent(context,DropboxLoginActivity.class);
-                                intent.putExtra("ISPATH", "TRUE");
                                 startActivityForResult(intent,RQUESTCODE);
                                 break;
 
@@ -594,6 +593,28 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtName.setText(name);
             imgDoc.setClickable(false);
         }
+        else  if (requestCode==RQUESTCODE && data!=null)
+        {
+            name=data.getExtras().getString("Name");
+            documentPath=data.getExtras().getString("URI");
+            txtName.setText(name);
+            imgDoc.setClickable(false);
+        }
+
     }
+
+ /*   public void getData(Uri uri, String ext) {
+        TextView txtName= (TextView) findViewById(R.id.txtName);
+        name=ext;
+        documentPath=uri.toString();
+        txtName.setText(ext);
+        imgDoc.setClickable(false);
+        *//*PackageManager manager = getPackageManager();
+        List<ResolveInfo> resolveInfo = manager.queryIntentActivities(intent, 0);
+        if (resolveInfo.size() > 0) {
+            startActivity(intent);
+        }*//*
+    }
+*/
 
 }

@@ -18,7 +18,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -28,7 +27,10 @@ import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.FolderMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
+import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -44,6 +46,7 @@ public class FilesActivity extends DropboxActivity {
     private String mPath;
     private FilesAdapter mFilesAdapter;
     private FileMetadata mSelectedFile;
+    Preferences preferences;
 
     public static Intent getIntent(Context context, String path) {
         Intent filesIntent = new Intent(context, FilesActivity.class);
@@ -54,13 +57,13 @@ public class FilesActivity extends DropboxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        preferences = new Preferences();
         String path = getIntent().getStringExtra(EXTRA_PATH);
         mPath = path == null ? "" : path;
 
         setContentView(R.layout.activity_files);
 
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +112,7 @@ public class FilesActivity extends DropboxActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int actionCode, @NonNull String [] permissions, @NonNull int [] grantResults) {
+    public void onRequestPermissionsResult(int actionCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         FileAction action = FileAction.fromCode(actionCode);
 
         boolean granted = true;
@@ -145,7 +148,7 @@ public class FilesActivity extends DropboxActivity {
     }
 
     private void performAction(FileAction action) {
-        switch(action) {
+        switch (action) {
             case UPLOAD:
                 launchFilePicker();
                 break;
@@ -174,11 +177,9 @@ public class FilesActivity extends DropboxActivity {
             @Override
             public void onDataLoaded(ListFolderResult result) {
                 dialog.dismiss();
-                ArrayList<Metadata> resultList=new ArrayList<Metadata>();
-                for (int i=0;i<result.getEntries().size();i++)
-                {
-                    if (result.getEntries().get(i).getName().endsWith(".pdf"))
-                    {
+                ArrayList<Metadata> resultList = new ArrayList<Metadata>();
+                for (int i = 0; i < result.getEntries().size(); i++) {
+                    if (result.getEntries().get(i).getName().endsWith(".pdf")) {
                         resultList.add(result.getEntries().get(i));
                     }
                 }
@@ -212,7 +213,36 @@ public class FilesActivity extends DropboxActivity {
                 dialog.dismiss();
 
                 if (result != null) {
-                    viewFileInExternalApp(result);
+                   // viewFileInExternalApp(result);
+
+
+                    AddDocumentActivity a = new AddDocumentActivity();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    MimeTypeMap mime = MimeTypeMap.getSingleton();
+                    String ext = result.getName().substring(result.getName().indexOf(".") + 1);
+                    String type = mime.getMimeTypeFromExtension(ext);
+
+                    Uri contentUri = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", result);
+                    } else {
+                        contentUri = Uri.fromFile(result);
+                    }
+
+                    intent.setDataAndType(contentUri, type);
+
+                    // Check for a handler first to avoid a crash
+                   /* PackageManager manager = getPackageManager();
+                    List<ResolveInfo> resolveInfo = manager.queryIntentActivities(intent, 0);
+                    if (resolveInfo.size() > 0) {
+                        startActivity(intent);
+                    }
+                    */
+                    preferences=new Preferences(FilesActivity.this);
+                    preferences.putString(PrefConstants.URI, contentUri.toString());
+                    preferences.putString(PrefConstants.RESULT, result.getName());
+                    finish();
                 }
             }
 
@@ -236,12 +266,12 @@ public class FilesActivity extends DropboxActivity {
         String ext = result.getName().substring(result.getName().indexOf(".") + 1);
         String type = mime.getMimeTypeFromExtension(ext);
 
-        Uri contentUri= null;
+        Uri contentUri = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.example.welcome.selfdemo.fileprovider", result);
+            contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", result);
         } else {
-            contentUri=Uri.fromFile(result);
+            contentUri = Uri.fromFile(result);
         }
 
         intent.setDataAndType(contentUri, type);
@@ -342,11 +372,11 @@ public class FilesActivity extends DropboxActivity {
         DOWNLOAD(Manifest.permission.WRITE_EXTERNAL_STORAGE),
         UPLOAD(Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        private static final FileAction [] values = values();
+        private static final FileAction[] values = values();
 
-        private final String [] permissions;
+        private final String[] permissions;
 
-        FileAction(String ... permissions) {
+        FileAction(String... permissions) {
             this.permissions = permissions;
         }
 
@@ -354,7 +384,7 @@ public class FilesActivity extends DropboxActivity {
             return ordinal();
         }
 
-        public String [] getPermissions() {
+        public String[] getPermissions() {
             return permissions;
         }
 

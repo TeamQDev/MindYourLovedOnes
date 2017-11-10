@@ -48,4 +48,11 @@ public abstract class DropboxActivity extends AppCompatActivity {
         String accessToken = prefs.getString("access-token", null);
         return accessToken != null;
     }
+    protected void removeToken(DropboxClientFactory.CallBack callback) {
+        SharedPreferences prefs = getSharedPreferences("dropbox-sample", MODE_PRIVATE);
+        prefs.edit().remove("access-token").apply();
+        com.dropbox.core.android.AuthActivity.result = null;
+        DropboxClientFactory.revokeClient(callback);
+    }
+
 }

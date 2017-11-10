@@ -18,4 +18,6 @@ public class PrefConstants {
 
     public static final String USER_NAME ="username" ;
     public static final String USER_PROFILEIMAGE ="userImage" ;
+    public static final String URI = "FileUri";
+    public static final String RESULT = "FileName";
 }

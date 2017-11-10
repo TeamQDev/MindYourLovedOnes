@@ -1,6 +1,8 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,32 +19,66 @@ import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxClientFactory;
 import com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.GetCurrentAccountTask;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
+import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 
 public class DropboxLoginActivity extends DropboxActivity {
+    private static final int RESULTCODE = 400;
+    Context context=this;
     private static final String APP_KEY = "428h5i4dsj95eeh";
     private static final String APP_SECRET = "6vlowskz2x12xil";
     private static final int REQUEST_CALL_PERMISSION = 100;
-    Button btnLogin;
+    private static final int REQUESTRESULT =200 ;
+    Button btnLogin,btnAdd;
     Button btnFiles;
-    TextView txtName;
+    TextView txtName,txtFile;
+    static boolean isLogin=false;
+    Preferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dropbox);
+        preferences=new Preferences(context);
+        preferences.putString(PrefConstants.RESULT,"");
+        preferences.putString(PrefConstants.URI,"");
         accessPermission();
         btnLogin= (Button) findViewById(R.id.btnLogin);
+        btnAdd= (Button) findViewById(R.id.btnAdd);
         txtName= (TextView) findViewById(R.id.txtLogin);
+        txtFile= (TextView) findViewById(R.id.txtfile);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auth.startOAuth2Authentication(DropboxLoginActivity.this,APP_KEY);
+              //  if (isLogin==false) {
+                    Auth.startOAuth2Authentication(DropboxLoginActivity.this, APP_KEY);
+               //     isLogin=true;
+                //}
+               // else if (isLogin==true){
+
+              //  }
+            }
+        });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent();
+                i.putExtra("Name",preferences.getString(PrefConstants.RESULT));
+                i.putExtra("URI",preferences.getString(PrefConstants.URI));
+                setResult(RESULTCODE,i);
+                finish();
             }
         });
         btnFiles = (Button)findViewById(R.id.btnFiles);
         btnFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               /* removeToken(new DropboxClientFactory.CallBack() {
+                    @Override
+                    public void onRevoke() {
+                        onResume();
+                    }
+                });*/
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
@@ -84,5 +120,20 @@ public class DropboxLoginActivity extends DropboxActivity {
                 Log.e(getClass().getName(), "Failed to get account details.", e);
             }
         }).execute();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       if (preferences.getString(PrefConstants.URI).equals("")&&preferences.getString(PrefConstants.RESULT).equals(""))
+       {
+           btnAdd.setVisibility(View.GONE);
+           txtFile.setVisibility(View.GONE);
+       }else
+        {
+            btnAdd.setVisibility(View.VISIBLE);
+            txtFile.setVisibility(View.VISIBLE);
+            txtFile.setText("Click on Add File for Add "+preferences.getString(PrefConstants.RESULT)+" File to your documents");
+        }
     }
 }
