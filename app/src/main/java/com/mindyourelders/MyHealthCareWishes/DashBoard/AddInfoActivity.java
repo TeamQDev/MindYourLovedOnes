@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +25,10 @@ import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class AddInfoActivity extends AppCompatActivity  implements View.OnClickListener{
@@ -134,6 +140,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     txtDoctor.setText(history.getDoctor());
                     id=history.getId();
                     break;
+
             }
 
         }
@@ -142,6 +149,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     private void initListener() {
         imgBack.setOnClickListener(this);
         llAddConn.setOnClickListener(this);
+        txtDate.setOnClickListener(this);
     }
 
     private void initUi() {
@@ -172,6 +180,28 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         {
             case R.id.imgBack:
                 finish();
+                break;
+            case R.id.txtDate:
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, month, dayOfMonth);
+                        long selectedMilli = newDate.getTimeInMillis();
+
+                        Date datePickerDate = new Date(selectedMilli);
+                        String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                        DateClass d=new DateClass();
+                        d.setDate(reportDate);
+                        txtDate.setText(reportDate);
+                    }
+                }, year, month, day);
+                dpd.show();
                 break;
             case R.id.llAddConn:
                 String value=txtName.getText().toString().trim();
