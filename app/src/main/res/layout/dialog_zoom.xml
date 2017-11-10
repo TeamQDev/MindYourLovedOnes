@@ -44,7 +44,8 @@
         android:layout_marginLeft="@dimen/dimension15dp"
         android:layout_marginBottom="@dimen/dimension10dp"
         android:src="@drawable/deletes"
-        android:textSize="@dimen/dimension15dp" />
+        android:textSize="@dimen/dimension15dp"
+        />
     <ImageView
         android:id="@+id/imgPrint"
         android:layout_width="@dimen/dimension30dp"

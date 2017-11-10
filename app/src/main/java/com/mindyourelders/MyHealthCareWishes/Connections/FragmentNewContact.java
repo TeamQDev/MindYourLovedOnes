@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
@@ -188,7 +189,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             byte[] image = bundle.getByteArray("Photo");
             Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
             byte[] imageCard = bundle.getByteArray("PhotoCard");
-            Bitmap photoCard = BitmapFactory.decodeByteArray(image, 0, imageCard.length);
+            Bitmap photoCard = BitmapFactory.decodeByteArray(imageCard, 0, imageCard.length);
 
             imgProfile.setImageBitmap(photo);
             imgCard.setImageBitmap(photoCard);
@@ -1333,6 +1334,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtAdd.setOnClickListener(this);
         imgEdit.setOnClickListener(this);
         imgEditCard.setOnClickListener(this);
+        imgCard.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -2306,8 +2308,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 break;
             case R.id.imgEditCard:
                 ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
-
                 break;
+            case R.id.imgCard:
+                Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+                ByteArrayOutputStream baoss = new ByteArrayOutputStream();
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
+                photoCard = baoss.toByteArray();
+                Intent i=new Intent(getActivity(), AddFormActivity.class);
+                i.putExtra("Image",photoCard);
+                startActivity(i);
+                break;
+
+
         }
     }
 
