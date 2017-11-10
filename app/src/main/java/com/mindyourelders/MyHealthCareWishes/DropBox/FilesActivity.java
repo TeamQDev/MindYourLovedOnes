@@ -95,6 +95,12 @@ public class FilesActivity extends DropboxActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            //   contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", result);
+        } else {
+            //contentUri = Uri.fromFile(result);
+        }
         startActivityForResult(intent, PICKFILE_REQUEST_CODE);
     }
 
@@ -285,6 +291,8 @@ public class FilesActivity extends DropboxActivity {
     }
 
     private void uploadFile(String fileUri) {
+       // Uri contentUri = null;
+
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);

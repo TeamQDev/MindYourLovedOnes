@@ -441,7 +441,23 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
                                 break;
                             case 1: // email
+                                if (path.equals("No"))
+                                {
+                                    File file=new File(getExternalFilesDir(null),documentPath);
+                                    Uri urifile=null;
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                                        urifile = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", file);
+                                    } else {
+                                        urifile = Uri.fromFile(file);
+                                    }
+
+                                    emailAttachement(urifile);
+                                }
+                                else {
+                                    Uri uris = Uri.parse(documentPath);
+                                    emailAttachement(uris);
+                                }
                        /* bluetoothAttachement(new File(item.getAbsolutePath()),
                                 context);
                         ShearedValues.activityID = getApplicationContext();*/
@@ -460,6 +476,32 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 break;
 
         }
+    }
+
+    private void emailAttachement(Uri f) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+         // Uri uri=null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+           // uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", f);
+        } else {
+             // uri = Uri.fromFile(f);
+        }
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, f);
+
+        emailIntent.setType("application/email");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
     public void CopyReadAssetss(String documentPath) {

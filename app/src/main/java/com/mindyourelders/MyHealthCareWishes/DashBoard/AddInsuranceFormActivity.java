@@ -28,7 +28,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
     TextView txtName;
     String From;
     Preferences preferences;
-    final CharSequence[] dialog_items = {"Print", "Fax", "View" };
+    final CharSequence[] dialog_items = {"View", "Email", "Fax" };
     Form document;
     DBHelper dbHelper;
     String name="";
@@ -112,39 +112,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                     }
                     intent.setDataAndType(uris, "application/pdf");
                     context.startActivity(intent);
-                   // Uri uri=null;
-                   /* File f=new File(documentPath);
-                    uri= FileProvider.getUriForFile(context,
-                            BuildConfig.APPLICATION_ID + ".provider",
-                            f);*/
-                   /* uri=Uri.parse(documentPath);
 
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setDataAndType(uri, "application/pdf");
-                    context.startActivity(intent);*/
-                  /*  if (path.equals("No"))
-                    {
-                       *//* uri =  Uri.parse("android.resource://"+getPackageName()+"/raw/"+documentPath);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(intent);*//*
-                        CopyReadAssetss(documentPath);
-                       *//* uri= Uri.fromFile(getFileStreamPath("file:///android_asset/"+documentPath));
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        context.startActivity(intent);*//*
-                    }
-                    else{*/
-                    // CopyReadAssetss(documentPath);
-                       /* uri= Uri.parse(documentPath);
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        context.startActivity(intent);*/
-                    //  }
 
 
 
@@ -182,20 +150,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                     public void onClick(DialogInterface dialog, int itemPos) {
 
                         switch (itemPos) {
-                            case 0: // email
-
-                       /* emailAttachement(item);
-
-                        ShearedValues.activityID = getApplicationContext();*/
-                                break;
-                            case 1: // email
-
-                       /* bluetoothAttachement(new File(item.getAbsolutePath()),
-                                context);
-                        ShearedValues.activityID = getApplicationContext();*/
-
-                                break;
-                            case 2: // view
+                            case 0: //view
                                 Uri uris= Uri.parse(documentPath);
                                 Intent intent = new Intent();
                                 intent.setAction(Intent.ACTION_VIEW);
@@ -207,17 +162,12 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                                 }
                                 intent.setDataAndType(uris, "application/pdf");
                                 context.startActivity(intent);
-                              /*  if (path.equals("No"))
-                                {
-                                    CopyReadAssetss(documentPath);
-                                }
-                                else{
-*/                                  /*  uri= Uri.parse(documentPath);
-                                    Intent intent = new Intent();
-                                    intent.setAction(Intent.ACTION_VIEW);
-                                    intent.setDataAndType(uri, "application/pdf");
-                                    context.startActivity(intent);*/
-                               // }
+                                break;
+                            case 1: //email
+                                    Uri uris1 = Uri.parse(documentPath);
+                                    emailAttachement(uris1);
+                                break;
+                            case 2: // fax
 
                                 break;
 
@@ -231,6 +181,32 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
 
         }
         }
+
+    private void emailAttachement(Uri f) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+        // Uri uri=null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            // uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", f);
+        } else {
+            // uri = Uri.fromFile(f);
+        }
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, f);
+
+        emailIntent.setType("application/email");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
 
     private boolean validate() {
         photo=R.drawable.pdf;
