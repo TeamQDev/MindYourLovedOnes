@@ -350,6 +350,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                     break;
@@ -378,6 +379,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -431,6 +433,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = rel.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -479,6 +482,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = rel.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -544,6 +548,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = rel.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -587,6 +592,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = rel.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -643,6 +649,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -687,6 +694,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -736,6 +744,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = insurance.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -779,6 +788,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = insurance.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -817,6 +827,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = aides.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -852,6 +863,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = aides.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -909,6 +921,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -952,6 +965,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -996,6 +1010,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -1040,6 +1055,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         byte[] photoCard = specialist.getPhotoCard();
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;

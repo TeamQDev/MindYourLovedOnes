@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -65,7 +67,8 @@ class PharmacyAdapter extends BaseAdapter {
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
-            convertView.setTag(holder);
+            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+                        convertView.setTag(holder);
         }
         else{
             holder= (ViewHolder) convertView.getTag();
@@ -87,6 +90,27 @@ class PharmacyAdapter extends BaseAdapter {
         holder.imgProfile.setImageBitmap(bmp);
      // holder.txtAddress.setText(pharmacyList.get(position).getAddress());
        // holder.imgProfile.setImageResource(pharmacyList.get(position).getImage());
+
+        if (pharmacyList.get(position).getPhotoCard()!=null) {
+            byte[] photoCard = pharmacyList.get(position).getPhotoCard();
+            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.imgForword.setVisibility(View.GONE);
+        }
+
+
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, AddFormActivity.class);
+                i.putExtra("Image",pharmacyList.get(position).getPhotoCard());
+                context.startActivity(i);
+            }
+        });
+
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +126,7 @@ class PharmacyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+        holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
@@ -119,6 +143,7 @@ class PharmacyAdapter extends BaseAdapter {
     {
         TextView txtName, txtAddress, txtPhone, txtGroup;
         ImageView imgProfile,imgForword,imgEdit;
+        RelativeLayout rlMain;
         SwipeRevealLayout swipeLayout;
     }
 }

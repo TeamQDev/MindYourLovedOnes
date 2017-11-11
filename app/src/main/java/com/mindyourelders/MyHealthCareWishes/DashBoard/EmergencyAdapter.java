@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
@@ -67,6 +68,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
+            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
 //            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         }
@@ -109,6 +111,16 @@ public class EmergencyAdapter extends BaseAdapter {
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
 
+        if (emergencyList.get(position).getPhotoCard()!=null) {
+            byte[] photoCard = emergencyList.get(position).getPhotoCard();
+            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.imgForword.setVisibility(View.GONE);
+        }
+
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,12 +130,21 @@ public class EmergencyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+        holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.SOURCE,"EmergencyView");
                 Intent i=new Intent(context,GrabConnectionActivity.class);
                 i.putExtra("EmergencyObject",emergencyList.get(position));
+                context.startActivity(i);
+            }
+        });
+
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, AddFormActivity.class);
+                i.putExtra("Image",emergencyList.get(position).getPhotoCard());
                 context.startActivity(i);
             }
         });
@@ -135,6 +156,7 @@ public class EmergencyAdapter extends BaseAdapter {
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
         ImageView imgProfile,imgEdit,imgForword;
+        RelativeLayout rlMain;
        // SwipeRevealLayout swipeLayout;
     }
 }

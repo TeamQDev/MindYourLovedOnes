@@ -34,6 +34,7 @@
 -->
 
     <RelativeLayout
+        android:id="@+id/rlView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimension2dp"
@@ -53,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/imgProfile"
-            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension5dp"
             android:layout_toLeftOf="@+id/imgForword"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
@@ -152,16 +153,16 @@
                 />
         </RelativeLayout>
 
-
-
         <ImageView
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"
-            android:layout_height="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension5dp"
-            android:src="@drawable/forword_arrow"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/busi_card"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             />
 
         <View

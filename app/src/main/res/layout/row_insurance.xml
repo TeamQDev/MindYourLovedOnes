@@ -16,28 +16,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension60dp"
             android:layout_height="@dimen/dimension60dp"
             android:src="@drawable/ic_user_one"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_margin="@dimen/dimension10dp"
+            android:layout_centerVertical="true"/>
         <RelativeLayout
-            android:id="@+id/rlName"
+            android:id="@+id/rlMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imgProfile"
-            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginLeft="@dimen/dimension5dp"
+            android:layout_marginRight="@dimen/dimension10dp"
             android:layout_toLeftOf="@+id/imgForword"
-            android:paddingBottom="@dimen/dimension10dp"
-            android:paddingTop="@dimen/dimension10dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
             >
 
             <TextView
@@ -81,7 +80,7 @@
             android:text= "Cfklj kj ouio "
             android:textColor="@color/colorDarkBlue"
             android:textSize="@dimen/dimension20dp"
-            android:layout_toRightOf="@+id/rlName"
+            android:layout_toRightOf="@+id/rlMain"
             android:layout_toLeftOf="@+id/imgForword"
             android:layout_marginLeft="@dimen/dimension5dp"
 android:visibility="gone"
@@ -91,7 +90,7 @@ android:visibility="gone"
          android:id="@+id/txtId"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_below="@+id/rlName"
+         android:layout_below="@+id/rlMain"
          android:layout_toRightOf="@+id/imgProfile"
          android:layout_marginLeft="@dimen/dimension35dp"
          android:layout_marginTop="@dimen/dimension7dp"
@@ -108,7 +107,7 @@ android:visibility="gone"
             android:id="@+id/txtGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlName"
+            android:layout_below="@+id/rlMain"
             android:layout_toRightOf="@+id/txtId"
             android:layout_marginLeft="@dimen/dimension25dp"
             android:layout_marginTop="@dimen/dimension7dp"
@@ -138,12 +137,13 @@ android:visibility="gone"
         <ImageView
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"
-            android:layout_height="@dimen/dimension40dp"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/dimension5dp"
-            android:src="@drawable/forword_arrow"
+            android:layout_height="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension5dp"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/busi_card"
             android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/dimension5dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
             />
 
         <View

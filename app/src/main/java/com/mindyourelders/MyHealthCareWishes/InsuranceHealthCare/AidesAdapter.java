@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -67,6 +69,9 @@ public class AidesAdapter extends BaseAdapter {
 //            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.imgForword = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
+            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -97,6 +102,28 @@ public class AidesAdapter extends BaseAdapter {
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
 
+        if (AidesList.get(position).getPhotoCard()!=null) {
+            byte[] photoCard = AidesList.get(position).getPhotoCard();
+            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.imgForword.setVisibility(View.GONE);
+        }
+
+
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, AddFormActivity.class);
+                i.putExtra("Image",AidesList.get(position).getPhotoCard());
+                context.startActivity(i);
+            }
+        });
+
+
+
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +134,7 @@ public class AidesAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        holder.imgForword.setOnClickListener(new View.OnClickListener() {
+        holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
@@ -125,6 +152,7 @@ public class AidesAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView txtName, txtAddress, txtPhone, txtType;
         ImageView imgProfile, imgForword,imgEdit;
+        RelativeLayout rlMain;
         SwipeRevealLayout swipeLayout;
     }
 }

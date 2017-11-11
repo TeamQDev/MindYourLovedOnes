@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -67,13 +69,15 @@ public class HospitalAdapter extends BaseAdapter{
             holder.imgProfile = (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgForward = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
+            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+
 //            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        if(hospitalList.get(position).getPhone().equals(""))
+        if(hospitalList.get(position).getOfficePhone().equals(""))
         {
             holder.txtPhone.setVisibility(View.GONE);
         }
@@ -109,6 +113,27 @@ public class HospitalAdapter extends BaseAdapter{
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
 
+        if (hospitalList.get(position).getPhotoCard()!=null) {
+            byte[] photoCard = hospitalList.get(position).getPhotoCard();
+            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+            holder.imgForward.setImageBitmap(bmpCard);
+            holder.imgForward.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.imgForward.setVisibility(View.GONE);
+        }
+
+
+        holder.imgForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, AddFormActivity.class);
+                i.putExtra("Image",hospitalList.get(position).getPhotoCard());
+                context.startActivity(i);
+            }
+        });
+
+
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +144,7 @@ public class HospitalAdapter extends BaseAdapter{
                 context.startActivity(i);
             }
         });
-        holder.imgForward.setOnClickListener(new View.OnClickListener() {
+        holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -137,6 +162,8 @@ public class HospitalAdapter extends BaseAdapter{
     public class ViewHolder {
         TextView txtName, txtAddress, txtPhone, txtType, txtCategory;
         ImageView imgProfile, imgForward,imgEdit;
+        RelativeLayout rlMain;
+
         SwipeRevealLayout swipeLayout;
     }
 
