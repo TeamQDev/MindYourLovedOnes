@@ -71,7 +71,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  */
 
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
-    byte[] photoCard;
+    byte[] photoCard=null;
     String Cname = "";
     String Cemail ="";
     String Cphone ="";
@@ -188,11 +188,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             Cphone = bundle.getString("Phone");
             byte[] image = bundle.getByteArray("Photo");
             Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
-            byte[] imageCard = bundle.getByteArray("PhotoCard");
-            Bitmap photoCard = BitmapFactory.decodeByteArray(imageCard, 0, imageCard.length);
+
+            /*byte[] imageCard = bundle.getByteArray("PhotoCard");
+            Bitmap photoCard = BitmapFactory.decodeByteArray(imageCard, 0, imageCard.length);*/
 
             imgProfile.setImageBitmap(photo);
-            imgCard.setImageBitmap(photoCard);
+          //  imgCard.setImageBitmap(photoCard);
             source = preferences.getString(PrefConstants.SOURCE);
             switch(source)
             {
@@ -344,9 +345,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                     break;
 
@@ -370,9 +374,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -421,9 +427,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = rel.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (rel.getPhotoCard()!=null) {
+                        byte[] photoCard = rel.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -467,9 +475,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = rel.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (rel.getPhotoCard()!=null) {
+                        byte[] photoCard = rel.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
 
                 break;
@@ -530,9 +540,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = rel.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (rel.getPhotoCard()!=null) {
+                        byte[] photoCard = rel.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
 
                 }
                 break;
@@ -571,9 +583,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = rel.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (rel.getPhotoCard()!=null) {
+                        byte[] photoCard = rel.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
 
                 }
                 break;
@@ -625,9 +639,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
 
                 }
                 break;
@@ -667,9 +683,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
 
                 }
                 break;
@@ -714,9 +732,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = insurance.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (insurance.getPhotoCard()!=null) {
+                        byte[] photoCard = insurance.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -755,9 +775,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = insurance.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (insurance.getPhotoCard()!=null) {
+                        byte[] photoCard = insurance.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -791,9 +813,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = aides.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (aides.getPhotoCard()!=null) {
+                        byte[] photoCard = aides.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
 
                 break;
@@ -824,9 +848,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
 
                     //Change Class Name
-                    byte[] photoCard = aides.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (aides.getPhotoCard()!=null) {
+                        byte[] photoCard = aides.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
 
                 break;
@@ -879,9 +905,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
             case "HospitalViewData":
@@ -920,9 +948,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -962,9 +992,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -1004,9 +1036,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     imgProfile.setImageBitmap(bmp);
 
                     //Change Class Name
-                    byte[] photoCard = specialist.getPhotoCard();
-                    Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmpCard);
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                    }
                 }
                 break;
 
@@ -1909,7 +1943,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                                 Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                                 byte[] photo = baos.toByteArray();
                                 Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID),name,email,address,mobile,phone,workphone,relation,photo,"",1,2,otherRelation,photoCard);
                                 if (flag==true)
@@ -1935,7 +1969,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                         Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                         byte[] photo = baos.toByteArray();
 
                         Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,prior, otherRelation, photoCard);
@@ -1957,7 +1991,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
 
                             Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior,otherRelation,"", "", "", "", "", "", "", "", "", "", "", "",photoCard, "");
@@ -1979,7 +2013,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,3,prox, otherRelation, photoCard);
                             if (flag==true)
@@ -2001,7 +2035,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox,otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", photoCard, "");
                             if (flag==true)
@@ -2023,7 +2057,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                        if (validate("Physician")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1,lastseen,photoCard);
                             if (flag==true)
@@ -2045,7 +2079,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Physician")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,2,lastseen, photoCard);
                             if (flag==true)
@@ -2067,7 +2101,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             if (isPhysician==1) {
                                 Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 1, lastseen,photoCard);
@@ -2099,7 +2133,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Pharmacy")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= PharmacyQuery.insertPharmacyData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,phone,photo,fax,note,photoCard);
                             if (flag==true)
@@ -2120,7 +2154,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Pharmacy")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= PharmacyQuery.updatePharmacyData(id,name,website,address,phone,photo,fax,note,photoCard);
                             if (flag==true)
@@ -2142,7 +2176,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Aides")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= AideQuery.insertAidesData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,email,mobile,phone,workphone,photo,fax,note,address,photoCard);
                             if (flag==true)
@@ -2163,7 +2197,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Aides")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= AideQuery.updateAideData(id,name,website,email,mobile,phone,workphone,photo,fax,note,address,photoCard);
                             if (flag==true)
@@ -2185,7 +2219,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Finance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
                             if (flag==true)
@@ -2205,7 +2239,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Finance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
                             if (flag==true)
@@ -2224,7 +2258,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Finance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
                             if (flag==true)
@@ -2243,7 +2277,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Finance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
                             if (flag==true)
@@ -2262,7 +2296,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Insurance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent,photoCard);
                             if (flag==true)
@@ -2283,7 +2317,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         if (validate("Insurance")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
                             Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent,photoCard);
                             if (flag==true)
@@ -2372,7 +2406,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
         ByteArrayOutputStream baoss = new ByteArrayOutputStream();
         bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
-        photoCard = baoss.toByteArray();
+        if (imgCard.getVisibility()==View.VISIBLE)
+        {
+            photoCard = baoss.toByteArray();
+        }else if(imgCard.getVisibility()==View.GONE){
+            photoCard = null;
+        }
+
         name = txtName.getText().toString().trim();
         email = txtEmail.getText().toString().trim();
         mobile = txtMobile.getText().toString().trim();
@@ -2812,7 +2852,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 // Write to SD Card
                 outStream = new FileOutputStream(imagepath);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
                 byte[] byteArray = stream.toByteArray();
                 outStream.write(byteArray);
                 outStream.close();
@@ -2833,6 +2873,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 profileCard.setImageBitmap(selectedImage);
+                imgCard.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -2842,6 +2883,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profileCard.setImageBitmap(imageBitmap);
+            imgCard.setVisibility(View.VISIBLE);
             // imageLoader.displayImage(imageBitmap,profileCard,displayImageOptions);
 
             FileOutputStream outStream = null;

@@ -59,35 +59,37 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootview=inflater.inflate(R.layout.fragment_grab_contact,null);
+        rootview = inflater.inflate(R.layout.fragment_grab_contact, null);
         initComponent();
         initUI();
         initListener();
         getOfflineContacts();
         setOfflineContacts();
-        if (offcontactList.size()==0) {
+        if (offcontactList.size() == 0) {
             showContacts();
         }
         return rootview;
     }
+
     private void initComponent() {
-        dbHelper=new DBHelper(getActivity());
-        ContactTableQuery s=new ContactTableQuery(getActivity(),dbHelper);
+        dbHelper = new DBHelper(getActivity());
+        ContactTableQuery s = new ContactTableQuery(getActivity(), dbHelper);
     }
+
     private void setOfflineContacts() {
-        if (offcontactList.size()!=0) {
+        if (offcontactList.size() != 0) {
             rlSearch.setVisibility(View.VISIBLE);
             contactAdapter = new ContactAdapter(getActivity(), offcontactList);
             lvContact.setAdapter(contactAdapter);
-           // contactAdapter.getFilter().filter(etSearch.getText().toString());
+            // contactAdapter.getFilter().filter(etSearch.getText().toString());
         }
 
-       //
+        //
     }
 
     private void getOfflineContacts() {
-        offcontactList=new ArrayList<>();
-        offcontactList= ContactTableQuery.fetchAllContactDetails();
+        offcontactList = new ArrayList<>();
+        offcontactList = ContactTableQuery.fetchAllContactDetails();
     }
 
     private void initListener() {
@@ -95,10 +97,10 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
     }
 
     private void initUI() {
-        lvContact= (ListView) rootview.findViewById(R.id.lvContact);
-        etSearch= (EditText) rootview.findViewById(R.id.etSearch);
-        imgRefresh=(ImageView)getActivity().findViewById(R.id.imgRefresh);
-        rlSearch= (RelativeLayout) rootview.findViewById(R.id.rlSearch);
+        lvContact = (ListView) rootview.findViewById(R.id.lvContact);
+        etSearch = (EditText) rootview.findViewById(R.id.etSearch);
+        imgRefresh = (ImageView) getActivity().findViewById(R.id.imgRefresh);
+        rlSearch = (RelativeLayout) rootview.findViewById(R.id.rlSearch);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,7 +109,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-               contactAdapter.getFilter().filter(s.toString());
+                contactAdapter.getFilter().filter(s.toString());
             }
 
             @Override
@@ -131,6 +133,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
 
         }
     }
+
     private boolean checkRuntimePermission() {
         if (ContextCompat.checkSelfPermission(getActivity(),
                 android.Manifest.permission.READ_CONTACTS)
@@ -190,8 +193,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.imgRefresh)
-        {
+        if (v.getId() == R.id.imgRefresh) {
             showContacts();
         }
     }
@@ -199,20 +201,21 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
     class LoadContacts extends AsyncTask<Object, Object, ArrayList> {
         ProgressDialog pd;
         ArrayList contactList;
+
         protected void onPreExecute() {
             super.onPreExecute();
-         pd=new ProgressDialog(getActivity());
-            pd.setMessage("Refreshing Contacts");
-         pd.setCancelable(false);
+            pd = new ProgressDialog(getActivity());
+            pd.setMessage("Refreshing Contacts \nIt will take some time, Please wait");
+            pd.setCancelable(false);
             pd.show();
         }
 
         @Override
         protected ArrayList doInBackground(Object... voids) {
             // Get Contact list from Phone
-            contactList=new ArrayList<>();
+            contactList = new ArrayList<>();
 
-            final String[] PROJECTION = new String[] {
+            final String[] PROJECTION = new String[]{
                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                     ContactsContract.Contacts.DISPLAY_NAME,
                     ContactsContract.CommonDataKinds.Phone.NUMBER
@@ -226,9 +229,9 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                     final int nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                     final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                     final int idIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID);
-                   // final int photoIndex = cursor.getColumnIndex(ContactsContract.Contacts.Photo.PHOTO);
+                    // final int photoIndex = cursor.getColumnIndex(ContactsContract.Contacts.Photo.PHOTO);
 
-                    String name, number,id;
+                    String name, number, id;
 
 
                     while (cursor.moveToNext()) {
@@ -236,7 +239,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                         byte[] photo = new byte[0];
                         Bitmap profile = null;
 
-                        id=cursor.getString(idIndex);
+                        id = cursor.getString(idIndex);
                         name = cursor.getString(nameIndex);
                         number = cursor.getString(numberIndex);
 
@@ -249,10 +252,10 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                         }
                         contactLookupCursor.close();
 
-                        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,phoneContactID);
+                        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, phoneContactID);
                         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
                         Cursor curs = getActivity().getContentResolver().query(photoUri,
-                                new String[] {ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
+                                new String[]{ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
                         if (curs == null) {
                             return null;
                         }
@@ -262,11 +265,10 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                             /*    if (data != null) {
                                     profile=BitmapFactory.decodeStream(new ByteArrayInputStream(data));
                                 }*/
-                            }
-                            else{
+                            } else {
                                 Resources res = getResources();
                                 Drawable drawable = res.getDrawable(R.drawable.profile);
-                                Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+                                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                                 photo = stream.toByteArray();
@@ -274,10 +276,10 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                         } finally {
                             curs.close();
                         }
-                      //  photo=getBytes(profile);
-                        
-                        
-                        String email="";
+                        //  photo=getBytes(profile);
+
+
+                        String email = "";
                         Cursor emailCur = cr.query(
                                 ContactsContract.CommonDataKinds.Email.CONTENT_URI,
                                 null,
@@ -312,12 +314,11 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                         byte[] image = getBytes(photo);*/
 
 
-                        
                         Contact objContact = new Contact();
                         objContact.setName(name);
                         objContact.setPhone(number);
-                       //if (photo!=null||photo.length!=0) {
-                            objContact.setImage(photo);
+                        //if (photo!=null||photo.length!=0) {
+                        objContact.setImage(photo);
                         /*    Log.v("IMAGE",name+" "+photo);
                         }
                         else{
@@ -332,7 +333,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                     cursor.close();
                 }
             }
-                    return contactList;
+            return contactList;
         }
 
         @Override
@@ -341,8 +342,8 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
             if (pd.isShowing()) {
                 pd.dismiss();
             }
-           // contactAdapter=new ContactAdapter(getActivity(),contactList);
-          //  lvContact.setAdapter(contactAdapter);
+            // contactAdapter=new ContactAdapter(getActivity(),contactList);
+            //  lvContact.setAdapter(contactAdapter);
 
             if (null != contactList && contactList.size() != 0) {
                 Collections.sort(contactList, new Comparator<Contact>() {
@@ -354,25 +355,26 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                 });
 
             } else {
-                Toast.makeText(getActivity(),"No Contact Found!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Contact Found!!!", Toast.LENGTH_SHORT).show();
             }
-             saveToTable(contactList);
-           // contactAdapter.getFilter().filter(etSearch.getText().toString());
+            saveToTable(contactList);
+            // contactAdapter.getFilter().filter(etSearch.getText().toString());
 
         }
     }
 
     private void saveToTable(ArrayList<Contact> contactList) {
         ContactTableQuery.deleteContactData();
-        for (int i=0;i<contactList.size();i++) {
-            Contact contect=contactList.get(i);
-            boolean flag = ContactTableQuery.insertContactData(contect.getId(), contect.getName(), contect.getPhone(), contect.getEmail(),contect.getImage());
+        for (int i = 0; i < contactList.size(); i++) {
+            Contact contect = contactList.get(i);
+            boolean flag = ContactTableQuery.insertContactData(contect.getId(), contect.getName(), contect.getPhone(), contect.getEmail(), contect.getImage());
         }
 
         getOfflineContacts();
         setOfflineContacts();
         contactAdapter.getFilter().filter(etSearch.getText().toString());
     }
+
     public static byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);

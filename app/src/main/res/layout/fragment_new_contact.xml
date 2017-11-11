@@ -40,9 +40,11 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimension60dp"
             android:layout_below="@+id/llProfile"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginRight="@dimen/dimension20dp"
             android:background="@color/colorWhite"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension10dp"
          >
             <TextView
                 android:id="@+id/txtDate"
@@ -50,34 +52,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Add Business Card"
-                android:textColor="@color/colorBlue"
+                android:textColor="@color/colorDarkGray"
                 android:padding="@dimen/dimension10dp"
+                android:paddingRight="@dimen/dimension20dp"
                 android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/dimension10dp"
-                android:layout_toLeftOf="@+id/imgCard"
-                android:layout_marginRight="@dimen/dimension10dp"
                 />
             <ImageView
                 android:id="@+id/imgCard"
                 android:layout_width="@dimen/dimension80dp"
                 android:layout_height="@dimen/dimension50dp"
-                android:layout_marginTop="@dimen/dimension10dp"
-                android:src="@drawable/bcard"
+                android:src="@drawable/busi_card"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imgEditCard"
                 android:layout_marginRight="@dimen/dimension20dp"
                 android:background="@android:color/transparent"
+                android:visibility="gone"
                 />
 
             <ImageView
                 android:id="@+id/imgEditCard"
                 android:layout_width="@dimen/dimension30dp"
                 android:layout_height="@dimen/dimension30dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="@dimen/dimension10dp"
-                android:src="@drawable/ic_edit_blue" />
+                android:layout_marginRight="@dimen/dimension20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/txtDate"
+                android:src="@drawable/edit" />
 
         </RelativeLayout>
         <!--<view
@@ -93,7 +95,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/llCard"
-            android:layout_marginTop="@dimen/dimension10dp"
 
             >
 
