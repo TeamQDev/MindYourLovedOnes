@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
@@ -67,7 +66,7 @@ class PharmacyAdapter extends BaseAdapter {
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
                         convertView.setTag(holder);
         }
         else{
@@ -126,7 +125,7 @@ class PharmacyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        holder.rlMain.setOnClickListener(new View.OnClickListener() {
+        holder.imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
@@ -143,7 +142,7 @@ class PharmacyAdapter extends BaseAdapter {
     {
         TextView txtName, txtAddress, txtPhone, txtGroup;
         ImageView imgProfile,imgForword,imgEdit;
-        RelativeLayout rlMain;
+        ImageView imgNext;
         SwipeRevealLayout swipeLayout;
     }
 }

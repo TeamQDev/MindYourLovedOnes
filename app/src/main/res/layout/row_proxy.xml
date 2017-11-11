@@ -56,8 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/imgProfile"
             android:layout_marginLeft="@dimen/dimension5dp"
-            android:layout_marginRight="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension5dp"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgForword"
             >
             <TextView
                 android:id="@+id/txtName"
@@ -87,6 +88,8 @@
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
                 android:maxLength="12"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:drawableLeft="@drawable/tele"
                 android:gravity="top|left"
                 android:drawablePadding="@dimen/dimension10dp"
@@ -133,8 +136,9 @@
                 android:id="@+id/txtPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8789-879-78"
+                android:text="8789-879-785"
                 android:textColor="@color/colorDarkGray"
+                android:layout_marginRight="@dimen/dimension3dp"
                 android:textSize="@dimen/dimension16dp"
                 android:layout_below="@+id/txtType"
                 android:drawableLeft="@drawable/phone"
@@ -154,17 +158,23 @@
         </RelativeLayout>
 
 
-
         <ImageView
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension5dp"
-            android:layout_marginRight="@dimen/dimension5dp"
             android:src="@drawable/busi_card"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgNext"
+            />
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/forword_arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:visibility="gone"
             />
 
 

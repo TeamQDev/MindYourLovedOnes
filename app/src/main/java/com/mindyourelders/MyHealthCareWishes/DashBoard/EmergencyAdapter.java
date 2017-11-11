@@ -69,6 +69,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
 //            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
         }
@@ -130,7 +131,7 @@ public class EmergencyAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        holder.rlMain.setOnClickListener(new View.OnClickListener() {
+        holder.imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.SOURCE,"EmergencyView");
@@ -155,7 +156,7 @@ public class EmergencyAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
-        ImageView imgProfile,imgEdit,imgForword;
+        ImageView imgProfile,imgEdit,imgForword,imgNext;
         RelativeLayout rlMain;
        // SwipeRevealLayout swipeLayout;
     }

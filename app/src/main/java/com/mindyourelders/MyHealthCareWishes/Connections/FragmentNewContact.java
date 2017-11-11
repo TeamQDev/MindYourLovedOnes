@@ -71,10 +71,13 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  */
 
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
+    private static final int REQUEST_CARD =50 ;
     byte[] photoCard=null;
     String Cname = "";
     String Cemail ="";
     String Cphone ="";
+    RelativeLayout rlCard;
+    TextView txtCard;
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
@@ -351,6 +354,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                     break;
@@ -380,6 +390,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -434,6 +451,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -483,6 +507,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -549,8 +580,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
 
+                    }
                 }
                 break;
 
@@ -593,6 +631,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -650,6 +695,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -695,6 +747,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -745,6 +804,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -789,6 +855,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -828,6 +901,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -864,6 +944,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -922,6 +1009,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -966,6 +1060,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -1011,6 +1112,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -1056,6 +1164,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                         imgCard.setImageBitmap(bmpCard);
                         imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -1385,10 +1500,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         imgEdit.setOnClickListener(this);
         imgEditCard.setOnClickListener(this);
         imgCard.setOnClickListener(this);
+        txtCard.setOnClickListener(this);
     }
 
     private void initUI() {
 
+       rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
+       txtCard= (TextView) rootview.findViewById(R.id.txtCard);
         //Doctor
         txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
         txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
@@ -2359,6 +2477,11 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             case R.id.imgEditCard:
                 ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
                 break;
+
+            case R.id.txtCard:
+                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                break;
+
             case R.id.imgCard:
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
@@ -2366,7 +2489,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 photoCard = baoss.toByteArray();
                 Intent i=new Intent(getActivity(), AddFormActivity.class);
                 i.putExtra("Image",photoCard);
-                startActivity(i);
+                i.putExtra("IsDelete",true);
+                startActivityForResult(i,REQUEST_CARD);
                 break;
 
 
@@ -2784,6 +2908,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     private void dispatchTakePictureIntent(int resultCameraImageCard) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create the File where the photo should go
@@ -2829,7 +2954,12 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         ImageView profileImage = (ImageView) rootview.findViewById(R.id.imgProfile);
         ImageView profileCard = (ImageView) rootview.findViewById(R.id.imgCard);
-        if (requestCode == RESULT_SELECT_PHOTO && null != data) {
+        if (requestCode == REQUEST_CARD && null != data) {
+            rlCard.setVisibility(View.GONE);
+            imgCard.setVisibility(View.GONE);
+            txtCard.setVisibility(View.VISIBLE);
+            photoCard=null;
+        }else if (requestCode == RESULT_SELECT_PHOTO && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -2889,7 +3019,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 profileCard.setImageBitmap(selectedImage);
+                rlCard.setVisibility(View.VISIBLE);
                 imgCard.setVisibility(View.VISIBLE);
+                txtCard.setVisibility(View.GONE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -2899,7 +3031,10 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profileCard.setImageBitmap(imageBitmap);
+
+            rlCard.setVisibility(View.VISIBLE);
             imgCard.setVisibility(View.VISIBLE);
+            txtCard.setVisibility(View.GONE);
             // imageLoader.displayImage(imageBitmap,profileCard,displayImageOptions);
 
             FileOutputStream outStream = null;

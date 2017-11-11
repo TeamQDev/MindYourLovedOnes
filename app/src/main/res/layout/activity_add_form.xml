@@ -68,4 +68,15 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_margin="@dimen/dimension20dp"/>
+      <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="@dimen/dimension40dp"
+        android:layout_height="@dimen/dimension40dp"
+        android:src="@drawable/delete_icon"
+        android:layout_margin="@dimen/dimension20dp"
+          android:layout_below="@+id/imgDoc"
+          android:layout_centerHorizontal="true"
+          android:visibility="gone"
+          />
+
     </RelativeLayout>

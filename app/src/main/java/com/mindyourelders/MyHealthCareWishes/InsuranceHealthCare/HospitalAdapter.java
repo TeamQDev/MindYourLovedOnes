@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
@@ -69,7 +68,7 @@ public class HospitalAdapter extends BaseAdapter{
             holder.imgProfile = (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgForward = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
 
 //            holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             convertView.setTag(holder);
@@ -144,7 +143,7 @@ public class HospitalAdapter extends BaseAdapter{
                 context.startActivity(i);
             }
         });
-        holder.rlMain.setOnClickListener(new View.OnClickListener() {
+        holder.imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -162,7 +161,7 @@ public class HospitalAdapter extends BaseAdapter{
     public class ViewHolder {
         TextView txtName, txtAddress, txtPhone, txtType, txtCategory;
         ImageView imgProfile, imgForward,imgEdit;
-        RelativeLayout rlMain;
+        ImageView imgNext;
 
         SwipeRevealLayout swipeLayout;
     }

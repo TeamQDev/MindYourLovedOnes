@@ -71,7 +71,7 @@ public class SpecialistAdapter extends BaseAdapter {
           //  holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.imgForword = (ImageView) convertView.findViewById(R.id.imgForword);
             holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
 
             convertView.setTag(holder);
         } else {
@@ -150,7 +150,7 @@ public class SpecialistAdapter extends BaseAdapter {
             }
         });
 
-        holder.rlMain.setOnClickListener(new View.OnClickListener() {
+        holder.imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
@@ -167,7 +167,7 @@ public class SpecialistAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
-        ImageView imgProfile, imgForword,imgEdit;
+        ImageView imgProfile, imgForword,imgEdit,imgNext;
         RelativeLayout rlMain;
         SwipeRevealLayout swipeLayout;
     }

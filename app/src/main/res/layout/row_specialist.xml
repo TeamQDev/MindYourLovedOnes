@@ -39,7 +39,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimension2dp"
         android:gravity="center_vertical"
-      >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
             android:id="@+id/imgProfile"
@@ -135,7 +137,9 @@
                 android:layout_width="@dimen/dimension140dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimension5dp"
-                android:text="8789-879-78"
+                android:text="8789-879-787"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
                 android:drawableLeft="@drawable/tele"
@@ -157,12 +161,18 @@
             android:id="@+id/imgForword"
             android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension5dp"
-            android:layout_marginRight="@dimen/dimension5dp"
             android:src="@drawable/busi_card"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgNext"
+            />
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/forword_arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:visibility="gone"
             />
 
         <View

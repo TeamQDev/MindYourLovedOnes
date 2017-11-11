@@ -66,7 +66,8 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  */
 
 public class FragmentIndividualContact extends Fragment implements View.OnClickListener{
-   
+    private static final int REQUEST_CARD = 50;
+    byte[] photoCard=null;
     TextView txtSignUp, txtLogin, txtForgotPassword;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
@@ -86,7 +87,6 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     public static final int REQUEST_PET= 400;
     
     ListView ListPet;
-
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
 
@@ -95,6 +95,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
+    RelativeLayout rlCard;
+    TextView txtCard;
 
     DBHelper dbHelper;
     View rootview;
@@ -108,6 +110,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
     String[] MaritalList = {"Divorced","Domestic Partner","Married","Separated","Single","Widowed"};
     String[] LangList = {"English","French","German","Greek","Italian","Japanese","Russian","Spanish"};
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -139,12 +143,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtBdate.setOnClickListener(this);
         imgEdit.setOnClickListener(this);
         imgEditCard.setOnClickListener(this);
+        imgCard.setOnClickListener(this);
+        txtCard.setOnClickListener(this);
         imgDone.setOnClickListener(this);
         txtGender.setOnClickListener(this);
         imgAddpet.setOnClickListener(this);
     }
 
     private void initUI() {
+        rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
+        txtCard= (TextView) rootview.findViewById(R.id.txtCard);
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
@@ -503,6 +511,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     byte[] photoCard = personalInfo.getPhotoCard();
                     Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                     imgCard.setImageBitmap(bmps);
+                    imgCard.setVisibility(View.VISIBLE);
+                    rlCard.setVisibility(View.VISIBLE);
+                    txtCard.setVisibility(View.GONE);
+                }
+                else{
+                    imgCard.setVisibility(View.GONE);
+                    rlCard.setVisibility(View.GONE);
+                    txtCard.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -536,6 +552,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     byte[] photoCard = connection.getPhotoCard();
                     Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
                     imgCard.setImageBitmap(bmps);
+                    imgCard.setVisibility(View.VISIBLE);
+                    rlCard.setVisibility(View.VISIBLE);
+                    txtCard.setVisibility(View.GONE);
+                }
+                else{
+                    imgCard.setVisibility(View.GONE);
+                    rlCard.setVisibility(View.GONE);
+                    txtCard.setVisibility(View.VISIBLE);
                 }
 
 
@@ -628,7 +652,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
                 bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
-                byte[] photoCard = baoss.toByteArray();
+                if (imgCard.getVisibility()==View.VISIBLE)
+                {
+                    photoCard = baoss.toByteArray();
+                }else if(imgCard.getVisibility()==View.GONE){
+                    photoCard = null;
+                }
+
 
                     if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
                         if (validateUser()) {
@@ -717,6 +747,20 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             case R.id.imgEditCard:
                 showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
 
+                break;
+            case R.id.txtCard:
+                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                break;
+
+            case R.id.imgCard:
+                Bitmap bitma = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bitma.compress(Bitmap.CompressFormat.JPEG, 40, bao);
+                photoCard = bao.toByteArray();
+                Intent i=new Intent(getActivity(), AddFormActivity.class);
+                i.putExtra("Image",photoCard);
+                i.putExtra("IsDelete",true);
+                startActivityForResult(i,REQUEST_CARD);
                 break;
 
             case R.id.txtBdate:
@@ -1118,6 +1162,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
              final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
              final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
              profileCard.setImageBitmap(selectedImage);
+             rlCard.setVisibility(View.VISIBLE);
+             imgCard.setVisibility(View.VISIBLE);
+             txtCard.setVisibility(View.GONE);
          } catch (FileNotFoundException e) {
              e.printStackTrace();
          }
@@ -1127,6 +1174,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
          Bundle extras = data.getExtras();
          Bitmap imageBitmap = (Bitmap) extras.get("data");
          profileCard.setImageBitmap(imageBitmap);
+         rlCard.setVisibility(View.VISIBLE);
+         imgCard.setVisibility(View.VISIBLE);
+         txtCard.setVisibility(View.GONE);
          // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
 
          FileOutputStream outStream = null;
@@ -1167,7 +1217,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
 
      }
-    }
+     if (requestCode == REQUEST_CARD && null != data) {
+         rlCard.setVisibility(View.GONE);
+         imgCard.setVisibility(View.GONE);
+         txtCard.setVisibility(View.VISIBLE);
+         photoCard=null;
+     }
+ }
 
     private void setPetData() {
         final ArrayList allergyList = new ArrayList();

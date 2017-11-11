@@ -74,7 +74,6 @@
             android:text= "Cfklj kj ouio "
             android:textColor="@color/colorDarkBlue"
             android:textSize="@dimen/dimension20dp"
-            android:layout_toRightOf="@+id/rlName"
             android:layout_toLeftOf="@+id/imgForword"
             android:layout_marginLeft="@dimen/dimension5dp"
             android:visibility="gone"
@@ -84,7 +83,6 @@
             android:id="@+id/txtId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlName"
             android:layout_toRightOf="@+id/imgProfile"
             android:layout_marginLeft="@dimen/dimension35dp"
             android:layout_marginTop="@dimen/dimension7dp"
@@ -101,7 +99,6 @@
             android:id="@+id/txtGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlName"
             android:layout_toRightOf="@+id/txtId"
             android:layout_marginLeft="@dimen/dimension25dp"
             android:layout_marginTop="@dimen/dimension7dp"
@@ -133,12 +130,20 @@
             android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension5dp"
-            android:layout_marginRight="@dimen/dimension5dp"
             android:src="@drawable/busi_card"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgNext"
+            />
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/forword_arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:visibility="gone"
             />
+
 
 
         <View

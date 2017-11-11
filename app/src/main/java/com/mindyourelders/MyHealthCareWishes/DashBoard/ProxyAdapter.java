@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
@@ -70,7 +69,7 @@ public class ProxyAdapter extends BaseAdapter {
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
-            holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
 
 
             convertView.setTag(holder);
@@ -150,7 +149,7 @@ public class ProxyAdapter extends BaseAdapter {
             }
         });
 
-        holder.rlMain.setOnClickListener(new View.OnClickListener() {
+        holder.imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.SOURCE,"ProxyUpdateView");
@@ -167,7 +166,7 @@ public class ProxyAdapter extends BaseAdapter {
     {
         TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
         ImageView imgProfile,imgEdit,imgForword;
-        RelativeLayout rlMain;
+        ImageView imgNext;
      //   SwipeRevealLayout swipeLayout;
     }
 }
