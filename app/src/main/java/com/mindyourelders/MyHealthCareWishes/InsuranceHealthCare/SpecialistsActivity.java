@@ -213,13 +213,13 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(2);
-                    if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-                        new Individual(PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL)));
+                    if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                        new Individual(PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)));
 
 
                     }
                     else{
-                        new Individual(MyConnectionsQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL)));
+                        new Individual(MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)));
                     }
                     // new MessageString().getProfileProfile(connection);
                     final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -327,7 +327,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 else if (from.equals("Emergency"))
                                 {
-                                    if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
+                                    if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());

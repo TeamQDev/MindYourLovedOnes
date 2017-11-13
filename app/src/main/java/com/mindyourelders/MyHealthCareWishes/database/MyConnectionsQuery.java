@@ -167,10 +167,10 @@ public class MyConnectionsQuery {
         return true;
     }
 
-    public static RelativeConnection fetchEmailRecord(String email) {
+    public static RelativeConnection fetchEmailRecord(int email) {
         RelativeConnection connection=new RelativeConnection();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_EMAIL + "='" + email + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + email + "';", null);
 
         if (c.moveToFirst()) {
             do {

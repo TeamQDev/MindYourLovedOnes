@@ -153,10 +153,10 @@ public class PersonalInfoQuery {
     }
 
 
-    public static PersonalInfo fetchEmailRecord(String email) {
+    public static PersonalInfo fetchEmailRecord(int email) {
         PersonalInfo connection=new PersonalInfo();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_EMAIL + "='" + email + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + email + "';", null);
 
         if (c.moveToFirst()) {
             do {
@@ -256,5 +256,49 @@ public class PersonalInfoQuery {
         }
 
         return flag;
+    }
+
+    public static PersonalInfo fetchProfile(String email) {
+        PersonalInfo connection=new PersonalInfo();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_EMAIL + "='" + email + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                connection.setName(c.getString(c.getColumnIndex(COL_NAME)));
+                connection.setId(c.getInt(c.getColumnIndex(COL_ID)));
+                connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
+                connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
+                connection.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
+
+                connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                connection.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
+                connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
+                connection.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
+                connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
+
+                connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                connection.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+
+                connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
+
+
+            } while (c.moveToNext());
+        }
+
+        return connection;
+
     }
 }

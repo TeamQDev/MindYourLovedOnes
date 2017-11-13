@@ -160,9 +160,9 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
         MedInfoQuery mq=new MedInfoQuery(getActivity(),dbHelper);
-        if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL)))
+        if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
         {
-            personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL));
+            personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
             String name =personalInfo.getName();
             String address=personalInfo.getAddress();
             String relation = "Self";
@@ -175,7 +175,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             imgProfile.setImageBitmap(bmp);
         }
         else {
-            connection = MyConnectionsQuery.fetchEmailRecord(preferences.getString(PrefConstants.CONNECTED_USEREMAIL));
+            connection = MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
             String name =connection.getName();
             String address=connection.getAddress();
             String relation=connection.getRelationType();

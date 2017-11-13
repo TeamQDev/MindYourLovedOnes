@@ -214,7 +214,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Intent signupIntent = new Intent(context, BaseActivity.class);
                             preferences.putString(PrefConstants.USER_EMAIL, email);
 
-                            PersonalInfo personalInfo=PersonalInfoQuery.fetchEmailRecord(email);
+                            PersonalInfo personalInfo=PersonalInfoQuery.fetchProfile(email);
                             preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
                             preferences.putString(PrefConstants.USER_NAME, personalInfo.getName());
                             String saveThis = Base64.encodeToString( personalInfo.getPhoto(), Base64.DEFAULT);
@@ -222,11 +222,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             preferences.setREGISTERED(true);
                             preferences.setLogin(true);
                             startActivity(signupIntent);
-                            finish();
+
                             SplashNewActivity s=new SplashNewActivity();
                             s.finish();
                             saveToConnection(personalInfo.getId());
-
+                            finish();
                         } else {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                         }
