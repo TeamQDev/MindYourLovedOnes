@@ -156,7 +156,7 @@
             /><requestFocus />
         <FrameLayout
             android:id="@+id/flFront"
-            android:layout_width="@dimen/dimension200dp"
+            android:layout_width="@dimen/dimension210dp"
             android:layout_height="@dimen/dimension160dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtFront"
@@ -166,7 +166,7 @@
                 android:id="@+id/imgFrontCard"
                 android:layout_width="@dimen/dimension200dp"
                 android:layout_height="@dimen/dimension155dp"
-                android:src="@drawable/cards"
+                android:src="@drawable/ins_card"
                 android:scaleType="fitXY"
                 />
 
@@ -190,7 +190,7 @@
             />
         <FrameLayout
             android:id="@+id/flBack"
-            android:layout_width="@dimen/dimension200dp"
+            android:layout_width="@dimen/dimension210dp"
             android:layout_height="@dimen/dimension160dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtBack"
@@ -202,7 +202,7 @@
                 android:id="@+id/imgBackCard"
                 android:layout_width="@dimen/dimension200dp"
                 android:layout_height="@dimen/dimension150dp"
-                android:src="@drawable/cards"
+                android:src="@drawable/ins_card"
                 android:scaleType="fitXY"
                 />
             <ImageView

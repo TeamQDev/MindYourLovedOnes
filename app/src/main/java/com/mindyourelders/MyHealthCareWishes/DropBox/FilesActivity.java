@@ -29,6 +29,7 @@ import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -91,17 +92,23 @@ public class FilesActivity extends DropboxActivity {
     }
 
     private void launchFilePicker() {
+        DBHelper dbHelper=new DBHelper(FilesActivity.this);
+
+        File path=FilesActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
+        //uploadFile(data.getData().toString());
         // Launch intent to pick file for upload
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //   contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", result);
-        } else {
-            //contentUri = Uri.fromFile(result);
-        }
-        startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+     //   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+       // intent.addCategory(Intent.CATEGORY_OPENABLE);
+       // intent.setType("*/*");
+        Uri contentUri=null;
+      /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+              contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", path);
+        } else {*/
+            contentUri = Uri.fromFile(path);
+      //  }
+        uploadFile(contentUri.toString());
+       // startActivityForResult(intent, PICKFILE_REQUEST_CODE);*/
     }
 
     @Override
@@ -186,6 +193,7 @@ public class FilesActivity extends DropboxActivity {
                 ArrayList<Metadata> resultList = new ArrayList<Metadata>();
                 for (int i = 0; i < result.getEntries().size(); i++) {
                     if (result.getEntries().get(i).getName().endsWith(".pdf")) {
+                   // if (result.getEntries().get(i).getName().endsWith(".pdf")||result.getEntries().get(i).getName().endsWith(".db")) {
                         resultList.add(result.getEntries().get(i));
                     }
                 }

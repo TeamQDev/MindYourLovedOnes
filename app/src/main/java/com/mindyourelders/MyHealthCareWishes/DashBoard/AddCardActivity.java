@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -102,7 +103,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imgDone:
                 name = txtName.getText().toString();
                 type = txttype.getText().toString();
-               // Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
+                Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap1.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                /* int newHeight = bitmap1.getHeight();
@@ -119,7 +120,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 Bitmap.createBitmap(bitmap1,bitmap1.getWidth()-100,bitmap1.getHeight()-100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos);
 */
                 byte[] photo1 = baos.toByteArray();
-             //   Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
+               Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
                 bitmap2.compress(Bitmap.CompressFormat.JPEG, 40, baos2);
                /* newHeight = bitmap2.getHeight();
