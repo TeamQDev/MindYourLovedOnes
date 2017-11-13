@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,18 +51,32 @@ public class DropboxLoginActivity extends DropboxActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  if (isLogin==false) {
-                    Auth.startOAuth2Authentication(DropboxLoginActivity.this, APP_KEY);
-               //     isLogin=true;
-                //}
-               // else if (isLogin==true){
 
-              //  }
+                SharedPreferences prefs = getSharedPreferences("dropbox-sample", MODE_PRIVATE);
+                if (prefs.contains("access-token"))
+                {
+                    prefs.edit().remove("access-token").apply();
+                    com.dropbox.core.android.AuthActivity.result = null;
+                    DropboxClientFactory.revokeClient(new DropboxClientFactory.CallBack() {
+                        @Override
+                        public void onRevoke() {
+                            Auth.startOAuth2Authentication(DropboxLoginActivity.this, APP_KEY);
+                          // onResume();
+                        }
+                    });
+                }
+                else{
+                    Auth.startOAuth2Authentication(DropboxLoginActivity.this, APP_KEY);
+                }
+
+
+
             }
         });
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i=new Intent();
                 i.putExtra("Name",preferences.getString(PrefConstants.RESULT));
                 i.putExtra("URI",preferences.getString(PrefConstants.URI));
@@ -110,6 +125,9 @@ public class DropboxLoginActivity extends DropboxActivity {
 
                 String value="You have Logged in with " + result.getName().getDisplayName();
                 txtName.setText(value);
+                btnFiles.setVisibility(View.VISIBLE);
+                btnLogin.setText("Login With Different User");
+
               //  Toast.makeText(DropboxLoginActivity.this,,Toast.LENGTH_SHORT).show();
                 /*((TextView) findViewById(R.id.email_text)).setText(result.getEmail());
                 ((TextView) findViewById(R.id.name_text)).setText(result.getName().getDisplayName());
