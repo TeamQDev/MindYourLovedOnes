@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     public static FragmentManager fragmentManager;
     public FragmentTransaction fragmentTransaction;
     FragmentDashboard fragmentDashboard = null;
+    FragmentResources fragmentResources=null;
+    FragmentMarketPlace fragmentMarketPlace=null;
+    FragmentVideos fragmentVideos=null;
     FragmentConnectionNew fragmentConnection = null;
     FragmentNotification fragmentNotification=null;
     FragmentOverview fragmentOverview = null;
@@ -37,6 +41,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
     Preferences preferences;
+    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
      //   imgNoti.setOnClickListener(this);
         rlLogOutt.setOnClickListener(this);
         imgLocationFeed.setOnClickListener(this);
+        rlHome.setOnClickListener(this);
+        rlSupport.setOnClickListener(this);
+        rlResources.setOnClickListener(this);
+        rlMarketPlace.setOnClickListener(this);
+        rlVideos.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -92,6 +102,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         imgDrawerProfile.setImageBitmap(bmp);
+
+        rlHome= (RelativeLayout) leftDrawer.findViewById(R.id.rlHome);
+        rlSupport= (RelativeLayout) leftDrawer.findViewById(R.id.rlSupport);
+        rlResources= (RelativeLayout) leftDrawer.findViewById(R.id.rlResources);
+        rlMarketPlace= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketPlace);
+        rlVideos= (RelativeLayout) leftDrawer.findViewById(R.id.rlVideos);
     }
 
     private void fragmentData() {
@@ -100,6 +116,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         fragmentOverview = new FragmentOverview();
         fragmentConnection=new FragmentConnectionNew();
         fragmentNotification=new FragmentNotification();
+        fragmentResources=new FragmentResources();
+        fragmentMarketPlace=new FragmentMarketPlace();
+        fragmentVideos=new FragmentVideos();
     }
 
     public void callFragment(String fragName, Fragment fragment) {
@@ -160,6 +179,43 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                drawerLayout.openDrawer(leftDrawer);
                 break;
 
+            case R.id.rlHome:
+                if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
+                    callFragment("CONNECTION", fragmentConnection);
+                }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.rlSupport:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("http://www.myhealthcarewishes.com/support.html"));
+                startActivity(intent);
+                break;
+
+            case R.id.rlResources:
+                if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
+                    callFragment("RESOURCES", fragmentResources);
+                }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.rlMarketPlace:
+                if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                    callFragment("MARKET", fragmentMarketPlace);
+                }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.rlVideos:
+                if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
+                    callFragment("VIDEOS", fragmentVideos);
+                }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+
          /*   case R.id.imgPdf:
               *//*  StringBuffer result = new StringBuffer();
                 result.append(new MessageString().getProfile());*//*
@@ -205,7 +261,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;*/
         }
     }
-    @Override
+  /*  @Override
     public void onBackPressed() {
 
         int count = getFragmentManager().getBackStackEntryCount();
@@ -216,7 +272,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             getFragmentManager().popBackStack();
         }
 
-    }
+    }*/
 
     @Override
     protected void onResume() {

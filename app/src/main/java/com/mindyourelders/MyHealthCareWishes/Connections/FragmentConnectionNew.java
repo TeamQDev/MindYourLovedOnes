@@ -2,6 +2,8 @@ package com.mindyourelders.MyHealthCareWishes.Connections;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -70,6 +72,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     private void initListener() {
         //  imgADMTick.setOnClickListener(this);
         //llAddConn.setOnClickListener(this);
+        imgLogo.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -253,7 +256,13 @@ dialog.show();
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.imgLogo:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("http://www.myhealthcarewishes.com/"));
+                startActivity(intent);
+                break;
         }
     }
 

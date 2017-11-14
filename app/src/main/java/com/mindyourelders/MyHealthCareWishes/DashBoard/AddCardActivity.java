@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,11 +32,12 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class AddCardActivity extends AppCompatActivity implements View.OnClickListener {
+    ContentValues values;
+    Uri imageUri;
     Context context = this;
     TextView txtName, txttype;
     TextInputLayout tilTitle;
@@ -187,7 +189,15 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent(resultCameraImage);
+                values = new ContentValues();
+                values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                imageUri = getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, resultCameraImage);
+               // dispatchTakePictureIntent(resultCameraImage);
                 dialog.dismiss();
             }
         });
@@ -262,7 +272,16 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             }
 
         } else if (requestCode == RESULT_CAMERA_IMAGE1 && null != data) {
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                      getContentResolver(), imageUri);
+                imgfrontCard.setImageBitmap(thumbnail);
+                //  String imageurl = getRealPathFromURI(imageUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+          /*
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imgfrontCard.setImageBitmap(imageBitmap);
@@ -303,7 +322,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             } finally {
 
             }
-
+*/
 
         } else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
             try {
@@ -317,8 +336,15 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             }
 
         } else if (requestCode == RESULT_CAMERA_IMAGE2 && null != data) {
-
-            Bundle extras = data.getExtras();
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getContentResolver(), imageUri);
+                imgBackCard.setImageBitmap(thumbnail);
+                //  String imageurl = getRealPathFromURI(imageUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+           /* Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             imgBackCard.setImageBitmap(imageBitmap);
@@ -360,7 +386,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
 
             }
 
-
+*/
         }
 
     }

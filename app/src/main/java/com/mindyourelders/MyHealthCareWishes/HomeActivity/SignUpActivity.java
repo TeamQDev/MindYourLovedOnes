@@ -144,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy5= (TextView) findViewById(R.id.txtPolicy5);
         txtPolicy2.setClickable(true);
         txtPolicy2.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='http://www.myhealthcarewishes.com'> Private Policy </a>";
+        String text = "<a href='http://www.americanbar.org/utility/privacy.html'> Private Policy </a>";
         txtPolicy2.setText(Html.fromHtml(text));
 
         txtPolicy4.setClickable(true);

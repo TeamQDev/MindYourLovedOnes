@@ -162,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlSupport"
             android:background="@color/colorWhite"
+            android:visibility="gone"
             >
             <ImageView
                 android:id="@+id/imgContact"
@@ -230,6 +231,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlLogOut"
             android:background="@color/colorWhite"
+            android:visibility="gone"
             >
             <ImageView
                 android:id="@+id/imgDataInput"
