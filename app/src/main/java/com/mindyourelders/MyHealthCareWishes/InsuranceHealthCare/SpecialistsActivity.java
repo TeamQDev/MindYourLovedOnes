@@ -66,7 +66,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     boolean isEmergency,isInsurance;
     RelativeLayout header;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View","Email","Fax" };
+    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
     Preferences preferences;
     DBHelper dbHelper;
 
