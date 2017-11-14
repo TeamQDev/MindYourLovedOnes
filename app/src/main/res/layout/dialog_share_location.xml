@@ -73,27 +73,23 @@
         android:layout_margin="@dimen/dimension15dp"
         >
     <LinearLayout
-        android:id="@+id/llOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <TextView
-            android:id="@+id/btnPain"
             android:text="Pain"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
             style="@style/relationButton"
             ></TextView>
         <TextView
-            android:id="@+id/btnBreath"
             android:text="Breathless"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
             style="@style/relationButton"
             ></TextView>
         <TextView
-            android:id="@+id/btnAccident"
             android:text="Accident"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
@@ -101,27 +97,23 @@
             ></TextView>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/llTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <TextView
-            android:id="@+id/btnAnxiety"
             android:text="Anxiety"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
             style="@style/relationButton"
             ></TextView>
         <TextView
-            android:id="@+id/btnSweating"
             android:text="Sweating"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
             style="@style/relationButton"
             ></TextView>
         <TextView
-            android:id="@+id/btnSon"
             android:text="Son"
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
@@ -130,7 +122,6 @@
             ></TextView>
 
         <TextView
-            android:id="@+id/btnShowMore"
             android:text="Show More.."
             android:layout_width="@dimen/dimension0dp"
             android:layout_height="@dimen/dimension40dp"
@@ -186,7 +177,6 @@
 
         />
     <LinearLayout
-        android:id="@+id/llfooter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

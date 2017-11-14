@@ -12,7 +12,6 @@
     tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity"
     >
     <RelativeLayout
-        android:id="@+id/activity_add_document"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorLightBlue"

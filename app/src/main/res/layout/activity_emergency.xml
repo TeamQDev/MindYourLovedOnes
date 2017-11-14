@@ -96,7 +96,6 @@
             android:layout_margin="@dimen/dimension10dp"
             />
         <ImageView
-            android:id="@+id/imgOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu"
@@ -189,7 +188,6 @@
 
 
         <ImageView
-            android:id="@+id/imgVideo"
             android:layout_width="@dimen/dimension25dp"
             android:layout_height="@dimen/dimension25dp"
             android:layout_toRightOf="@+id/txtDate"
@@ -203,14 +201,12 @@
 
     </RelativeLayout>
     <LinearLayout
-        android:id="@+id/llNear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/rlMessage"
         >
         <RelativeLayout
-            android:id="@+id/rlHospitals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension15dp"
@@ -239,7 +235,6 @@
                 />
 
             <TextView
-                android:id="@+id/txtHospitalDesc"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,7 +258,6 @@
                 />
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/rlEmergencys"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension15dp"
@@ -293,7 +287,6 @@
                 />
 
             <TextView
-                android:id="@+id/txtEmergencyDesc"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -368,7 +361,6 @@
             android:layout_below="@+id/lvEmergency"
             >
             <TextView
-                android:id="@+id/txtPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension60dp"
                 android:background="@color/colorSkyBlue"
@@ -502,7 +494,6 @@
                 android:text="Preferred Hospital" />
 
             <TextView
-                android:id="@+id/txtHospital"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -539,7 +530,6 @@
                 android:text="Blood Type" />
 
             <TextView
-                android:id="@+id/txtBlood"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -575,7 +565,6 @@
                 android:text="Allergies" />
 
             <TextView
-                android:id="@+id/txtAllergy"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -678,7 +667,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rlPets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlMedical"
@@ -743,7 +731,6 @@
                 android:text="Medical History" />
 
             <EditText
-                android:id="@+id/txtMedical"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension100dp"

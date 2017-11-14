@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">MindYourElders</string>
-    <string name="headerText">jhdfs kljsd fkjkfds kljjfds kljuodfs kl</string>
-    <string name="PolicyText">By creating an account, you agree to MHCW <a href="http://www.myhealthcarewishes.com"><b>Private Policy</b></a> and <a href="http://www.myhealthcarewishes.com"><b>Terms of Use</b></a>.</string>
-    <string name="title_activity_events">EventsActivity</string>
     <string name="title_activity_medical_appoint">MedicalAppointActivity</string>
-    <string name="header_title"><font size="35">M</font><font size="25">IND</font> <font size="35">Y</font><font size="25">OUR </font><font size="35">E</font><font size="25">LDERS</font></string>
-    <string name="adv_title">&amp; Adavanced Directives</string>
+    <string name="header_title"> </string>
     <string name="msg">Mobile Tech for Seniors and their Families<html></html></string>
     <string name="msgstay">Stay Connected<html></html></string>
 

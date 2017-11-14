@@ -56,7 +56,6 @@
                 android:visibility="gone"
                 >
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilSpinnerSpecialist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/dimension8dp"
@@ -66,7 +65,6 @@
                     >
 
                     <AutoCompleteTextView
-                        android:id="@+id/txtSpinnerSpecialist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Category"
@@ -88,7 +86,6 @@
                     >
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/tilSpinnerFinance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/dimension8dp"
@@ -99,7 +96,6 @@
                         >
 
                         <AutoCompleteTextView
-                            android:id="@+id/txtSpinnerFInance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Category"
@@ -481,7 +477,6 @@
 
                     <AutoCompleteTextView
                         android:visibility="gone"
-                        android:id="@+id/txtSpinnerInsurance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Category"
@@ -565,7 +560,6 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilMember"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tilGroup"
@@ -641,7 +635,6 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilOther"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tilSchedule"

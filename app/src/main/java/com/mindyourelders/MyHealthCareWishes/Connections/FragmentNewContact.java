@@ -2,6 +2,7 @@ package com.mindyourelders.MyHealthCareWishes.Connections;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -72,6 +73,8 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CARD =50 ;
+    ContentValues values;
+    Uri imageUri;
     byte[] photoCard=null;
     String Cname = "";
     String Cemail ="";
@@ -2521,7 +2524,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent(resultCameraImageCard);
+               // dispatchTakePictureIntent(resultCameraImageCard);
+                values = new ContentValues();
+                values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                imageUri = getActivity().getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, resultCameraImageCard);
                 dialog.dismiss();
             }
         });
@@ -2545,7 +2556,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     private boolean validate(String screen) {
         Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
         ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-        bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
+        bitmaps.compress(Bitmap.CompressFormat.JPEG,40, baoss);
         if (imgCard.getVisibility()==View.VISIBLE)
         {
             photoCard = baoss.toByteArray();
@@ -2958,8 +2969,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             rlCard.setVisibility(View.GONE);
             imgCard.setVisibility(View.GONE);
             txtCard.setVisibility(View.VISIBLE);
-            photoCard=null;
-        }else if (requestCode == RESULT_SELECT_PHOTO && null != data) {
+            photoCard = null;
+        } else if (requestCode == RESULT_SELECT_PHOTO && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -3012,8 +3023,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             }
 
-        }else
-        if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
+        } else if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -3027,6 +3037,18 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
 
         } else if (requestCode == RESULT_CAMERA_IMAGE_CARD && null != data) {
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), imageUri);
+                profileCard.setImageBitmap(thumbnail);
+                //  String imageurl = getRealPathFromURI(imageUri);
+                rlCard.setVisibility(View.VISIBLE);
+                imgCard.setVisibility(View.VISIBLE);
+                txtCard.setVisibility(View.GONE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }/*{
 
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -3046,12 +3068,13 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
 
 
-            /*if (file.isDirectory()) {
+            */
+        /*if (file.isDirectory()) {
                 String[] children = file.list();
                 for (int i = 0; i < children.length; i++) {
                     new File(file, children[i]).delete();
                 }
-            }*/
+            }*//*
             try {
 
                 imagepath = path + "/MHCWContact_" + String.valueOf(System.currentTimeMillis())
@@ -3059,7 +3082,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 // Write to SD Card
                 outStream = new FileOutputStream(imagepath);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 outStream.write(byteArray);
                 outStream.close();
@@ -3073,10 +3096,10 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
             }
 
-        }
+        }*/
+
 
     }
-
     public void callRelation(String relationship) {
         relation=relationship;
     }

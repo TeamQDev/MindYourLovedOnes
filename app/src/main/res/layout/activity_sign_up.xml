@@ -160,7 +160,6 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilCountry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tilAddres"
@@ -359,7 +358,6 @@
             android:textSize="@dimen/dimension16dp" />
 
         <RelativeLayout
-            android:id="@+id/rlPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtPolicy1"

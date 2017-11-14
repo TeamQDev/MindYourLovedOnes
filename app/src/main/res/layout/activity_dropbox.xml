@@ -67,7 +67,6 @@
             android:layout_margin="@dimen/dimension20dp"
             />
         <TextView
-            android:id="@+id/txtDrop"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_toRightOf="@+id/imgDrop"
@@ -86,24 +85,9 @@
             android:background="@color/colorBlue"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dimension20dp"
-
             android:layout_marginTop="@dimen/dimension20dp"
             android:padding="@dimen/dimension10dp"
             />
-        <Button
-            android:id="@+id/btnFiles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Files"
-            android:layout_below="@+id/btnLogin"
-            android:background="@color/colorBlue"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dimension20dp"
-            android:layout_marginTop="@dimen/dimension20dp"
-            android:padding="@dimen/dimension10dp"
-            android:visibility="gone"
-            />
-
         <TextView
             android:id="@+id/txtLogin"
             android:layout_width="wrap_content"
@@ -115,38 +99,57 @@
             android:layout_margin="@dimen/dimension20dp"
             android:text="Log In With Dropbox account to Access Files"
             />
+        <RelativeLayout
+            android:id="@+id/rlView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btnLogin"
+            >
+        <Button
+            android:id="@+id/btnFiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Files"
+            android:background="@color/colorBlue"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:padding="@dimen/dimension10dp"
+            android:visibility="gone"
+            />
+            <TextView
+                android:id="@+id/txtfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+             android:layout_above="@+id/btnAdd"
+                android:gravity="center"
+                android:textSize="@dimen/dimension20dp"
+                android:textColor="@color/colorBlackDark"
+                android:layout_margin="@dimen/dimension10dp"
+                android:text="Click on Add File for Add File to your documents"
+android:visibility="gone"
+                />
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Files"
+                android:background="@color/colorBlue"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:padding="@dimen/dimension10dp"
+                android:layout_marginBottom="@dimen/dimension10dp"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:layout_marginRight="@dimen/dimension20dp"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                />
+
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/txtfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlDrop"
-        android:gravity="center"
-        android:textSize="@dimen/dimension20dp"
-        android:textColor="@color/colorBlackDark"
-        android:layout_margin="@dimen/dimension10dp"
-        android:visibility="gone"
-        android:text="Click on Add File for Add File to your documents"
-
-        />
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Files"
-        android:layout_below="@+id/txtfile"
-        android:background="@color/colorBlue"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dimension20dp"
-        android:padding="@dimen/dimension10dp"
-        android:layout_marginBottom="@dimen/dimension10dp"
-        android:layout_marginLeft="@dimen/dimension20dp"
-        android:layout_marginRight="@dimen/dimension20dp"
-        android:visibility="gone"
-        />
 
 
+    </RelativeLayout>
 
 
 </RelativeLayout>

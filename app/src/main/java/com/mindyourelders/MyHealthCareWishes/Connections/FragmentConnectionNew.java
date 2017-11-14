@@ -2,7 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.Connections;
 
 import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
-
-import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.llAddConn;
 
 /**
  * Created by varsha on 8/26/2017.
@@ -256,11 +253,6 @@ dialog.show();
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-            case llAddConn:
-                Intent i = new Intent(getActivity(), AddConnectionActivity.class);
-                startActivity(i);
-                break;
 
         }
     }

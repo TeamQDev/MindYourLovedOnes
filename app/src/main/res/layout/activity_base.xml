@@ -12,7 +12,6 @@
         android:layout_height="match_parent">
         <!--MAIN Layout-->
         <RelativeLayout
-            android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 android:background="@color/colorBlue"
@@ -107,7 +106,6 @@ android:background="@color/colorBlue"
                    android:visibility="gone"
                     />
                 <ImageView
-                    android:id="@+id/imgLogout"
                     android:layout_width="@dimen/dimension30dp"
                     android:layout_height="@dimen/dimension30dp"
                     android:layout_alignParentRight="true"

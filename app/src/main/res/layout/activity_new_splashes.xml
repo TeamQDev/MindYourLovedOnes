@@ -214,7 +214,6 @@
         android:layout_alignParentBottom="true"
         >
         <TextView
-            android:id="@+id/txtCourtesy"
             android:layout_width="match_parent"
             android:gravity="center|bottom"
             android:layout_height="@dimen/dimension40dp"

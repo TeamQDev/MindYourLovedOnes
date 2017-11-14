@@ -11,8 +11,6 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mindyourelders.MyHealthCareWishes.Connections.AddConnectionActivity;
-import com.mindyourelders.MyHealthCareWishes.Connections.FragmentConnection;
 import com.mindyourelders.MyHealthCareWishes.Connections.FragmentNewContact;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentDashboard;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.OverviewActivity;
@@ -26,7 +24,6 @@ import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentSpecial
 public class DialogManager {
     FragmentDashboard fragmentDashboard;
     FragmentSpecialist fragmentSpecialist;
-    FragmentConnection fragmentConnection;
     FragmentNewContact fragmentNewContact;
 
     public DialogManager(FragmentDashboard fragmentDashboard)
@@ -34,9 +31,6 @@ public class DialogManager {
         this.fragmentDashboard=fragmentDashboard;
     }
 
-    public DialogManager(FragmentConnection fragmentConnection) {
-        this.fragmentConnection=fragmentConnection;
-    }
 
     public DialogManager(FragmentNewContact fragmentNewContact) {
         this.fragmentNewContact=fragmentNewContact;
@@ -127,9 +121,6 @@ public class DialogManager {
                         fragmentNewContact.postCommonDialog();
                         break;
 
-                    case "SEND_REQUEST":
-                        ((AddConnectionActivity)context).postCommonDialog();
-                        break;
 
                     case "SAVE_OVERVIEW":
                         ((OverviewActivity)context).postCommonDialog();

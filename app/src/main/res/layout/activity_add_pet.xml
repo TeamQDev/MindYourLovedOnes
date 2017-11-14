@@ -180,7 +180,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilNeed"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension80dp"
        
@@ -195,7 +194,6 @@
         >
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
-            android:id="@+id/txtNeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Special Needs"
@@ -292,7 +290,6 @@
         >
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
-            android:id="@+id/txtCares"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Person(s) who will care for pet (name, address, phone, email) "

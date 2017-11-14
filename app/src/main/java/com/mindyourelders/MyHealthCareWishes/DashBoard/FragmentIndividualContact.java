@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -67,6 +68,8 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class FragmentIndividualContact extends Fragment implements View.OnClickListener{
     private static final int REQUEST_CARD = 50;
+    ContentValues values;
+    Uri imageUri;
     byte[] photoCard=null;
     TextView txtSignUp, txtLogin, txtForgotPassword;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
@@ -651,7 +654,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-                bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 100, baoss);
                 if (imgCard.getVisibility()==View.VISIBLE)
                 {
                     photoCard = baoss.toByteArray();
@@ -817,7 +820,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent(resultCameraImage);
+               // dispatchTakePictureIntent(resultCameraImage);
+                values = new ContentValues();
+                values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                imageUri = getActivity().getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, resultCameraImage);
                 dialog.dismiss();
             }
         });
@@ -1171,7 +1182,21 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
      } else if (requestCode == RESULT_CAMERA_IMAGE_CARD && null != data) {
 
-         Bundle extras = data.getExtras();
+             try {
+                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                         getActivity().getContentResolver(), imageUri);
+                 profileCard.setImageBitmap(thumbnail);
+               //  String imageurl = getRealPathFromURI(imageUri);
+                 rlCard.setVisibility(View.VISIBLE);
+                 imgCard.setVisibility(View.VISIBLE);
+                 txtCard.setVisibility(View.GONE);
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+
+
+
+        /* Bundle extras = data.getExtras();
          Bitmap imageBitmap = (Bitmap) extras.get("data");
          profileCard.setImageBitmap(imageBitmap);
          rlCard.setVisibility(View.VISIBLE);
@@ -1213,7 +1238,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
              e.printStackTrace();
          } finally {
 
-         }
+         }*/
 
 
      }

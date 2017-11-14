@@ -38,7 +38,6 @@ RelativeLayout header;
   //  String[] specialist = { "Insurance", "DOCTORS", "HOME HEALTH SERVICES", "FINANCE, INSURANCE & LEGAL" };
 
 
-    // FragmentConnection fragmentConnection = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -89,7 +89,6 @@
                 android:padding="@dimen/dimension8dp" />
 
             <TextView
-                android:id="@+id/txtInch"
                 style="@style/EmergencyDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,7 +144,6 @@
                 android:padding="@dimen/dimension8dp" />
 
             <TextView
-                android:id="@+id/txtPound"
                 style="@style/EmergencyDesc"
                 android:layout_width="@dimen/dimension60dp"
                 android:layout_height="wrap_content"
@@ -265,7 +263,6 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/txtCondition"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension45dp"
             android:layout_below="@+id/rlLang"
@@ -413,7 +410,6 @@
                 android:layout_toRightOf="@+id/imgEyes">
 
                 <TextView
-                    android:id="@+id/txtGlass"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -444,7 +440,6 @@
                 android:layout_toRightOf="@+id/imgEyes">
 
                 <TextView
-                    android:id="@+id/txtLense"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -473,7 +468,6 @@
                 android:layout_toRightOf="@+id/imgEyes">
 
                 <TextView
-                    android:id="@+id/txtBlind"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -546,7 +540,6 @@
                 android:layout_toRightOf="@+id/imgTeeth">
 
                 <TextView
-                    android:id="@+id/txtFalse"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension60dp"
@@ -579,7 +572,6 @@
                 android:layout_toRightOf="@+id/imgTeeth">
 
                 <TextView
-                    android:id="@+id/txtMouth"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension60dp"
@@ -610,7 +602,6 @@
                 android:layout_toRightOf="@+id/imgTeeth">
 
                 <TextView
-                    android:id="@+id/txtImplants"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension60dp"
@@ -684,7 +675,6 @@
                 android:layout_toRightOf="@+id/imgAides">
 
                 <TextView
-                    android:id="@+id/txtHearingAid"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -713,7 +703,6 @@
                 android:layout_toRightOf="@+id/imgAides">
 
                 <TextView
-                    android:id="@+id/txtSpeech"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -784,7 +773,6 @@
                 android:layout_toRightOf="@+id/imgFunctional">
 
                 <TextView
-                    android:id="@+id/txtFeed"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -817,7 +805,6 @@
                 android:layout_toRightOf="@+id/imgFunctional">
 
                 <TextView
-                    android:id="@+id/txtMedicate"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -848,7 +835,6 @@
                 android:layout_toRightOf="@+id/imgFunctional">
 
                 <TextView
-                    android:id="@+id/txtToileting"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -1168,7 +1154,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/txtYes"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -1177,7 +1162,6 @@
                     android:text="Yes" />
 
                 <ToggleButton
-                    android:id="@+id/tbYes"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -1192,7 +1176,6 @@
 
 
             <RelativeLayout
-                android:id="@+id/rlNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlYes"
@@ -1200,7 +1183,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/txtNo"
                     style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
@@ -1209,7 +1191,6 @@
                     android:text="No" />
 
                 <ToggleButton
-                    android:id="@+id/tbNo"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"

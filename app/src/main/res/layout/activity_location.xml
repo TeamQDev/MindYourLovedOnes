@@ -80,7 +80,6 @@
             android:layout_margin="@dimen/dimension10dp"
             />
         <ImageView
-            android:id="@+id/imgOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/menu"
@@ -175,7 +174,6 @@
 
 
         <ImageView
-            android:id="@+id/imgVideo"
             android:layout_width="@dimen/dimension25dp"
             android:layout_height="@dimen/dimension25dp"
             android:layout_toRightOf="@+id/txtDate"
@@ -189,14 +187,12 @@
 
     </RelativeLayout>
     <LinearLayout
-        android:id="@+id/llNear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/rlMessage"
         >
         <RelativeLayout
-            android:id="@+id/rlHosp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimension15dp"
@@ -225,7 +221,6 @@
                 />
 
             <TextView
-                android:id="@+id/txtHospDesc"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -278,7 +273,6 @@
                 />
 
             <TextView
-                android:id="@+id/txtEmergencyDesc"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

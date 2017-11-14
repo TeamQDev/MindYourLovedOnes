@@ -8,12 +8,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/land"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
     <ImageView
-        android:id="@+id/imgSynch"
         android:layout_width="@dimen/dimension30dp"
         android:layout_height="@dimen/dimension30dp"
         android:src="@drawable/synch"
@@ -154,7 +152,6 @@
 
 
         <RelativeLayout
-            android:id="@+id/rlBack"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension90dp"
             android:background="@color/colorBlue"
@@ -162,7 +159,6 @@
             ></RelativeLayout>
     <!--RoW One-->
         <ScrollView
-            android:id="@+id/rlBox"
             android:layout_below="@+id/rlProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -199,7 +195,6 @@
             >
 
             <ImageView
-                android:id="@+id/imgECCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_marginTop="@dimen/dimension20dp"
@@ -250,7 +245,6 @@
 
             >
             <ImageView
-                android:id="@+id/imgCPCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:src="@drawable/ic_check"
@@ -312,7 +306,6 @@
             android:elevation="@dimen/dimension10dp">
 
             <ImageView
-                android:id="@+id/imgSpecialistCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_marginTop="@dimen/dimension20dp"
@@ -361,7 +354,6 @@
         android:layout_weight="1"
         >
         <ImageView
-            android:id="@+id/imgInsuranceCardCount"
             android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension40dp"
             android:src="@drawable/ic_check"
@@ -420,7 +412,6 @@
             android:layout_weight="1"
             >
             <ImageView
-                android:id="@+id/imgEventCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:src="@drawable/ic_check"
@@ -468,7 +459,6 @@
             android:elevation="@dimen/dimension10dp">
 
             <ImageView
-                android:id="@+id/imgPrescriptionCount"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_marginTop="@dimen/dimension20dp"

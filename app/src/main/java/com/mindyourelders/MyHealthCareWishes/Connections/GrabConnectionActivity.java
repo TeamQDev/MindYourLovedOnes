@@ -30,7 +30,7 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
     String source;
     LinearLayout llGrab;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-    // FragmentConnection fragmentConnection = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

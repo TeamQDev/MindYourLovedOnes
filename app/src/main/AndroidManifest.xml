@@ -84,11 +84,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.mindyourelders.MyHealthCareWishes.Connections.AddConnectionActivity"
-            android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name="com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
@@ -98,8 +93,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDnrL_uVeAP-fquYaVGWrWViUce4BGinCY" />
-
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.Connections.GridActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

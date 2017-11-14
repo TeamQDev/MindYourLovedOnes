@@ -392,7 +392,6 @@ android:visibility="gone"
             android:layout_below="@+id/llSendRequest"
             />
         <RelativeLayout
-            android:id="@+id/llGrabContact"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension60dp"
             android:layout_marginTop="@dimen/dimension5dp"

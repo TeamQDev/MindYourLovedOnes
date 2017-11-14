@@ -71,7 +71,6 @@
                 android:layout_marginLeft="@dimen/dimension15dp"
                 />
             <TextView
-                android:id="@+id/txtLegal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Legal and Financial Documents"
@@ -86,7 +85,6 @@
                 android:layout_toRightOf="@+id/imgLegal"
                 />
             <ImageView
-                android:id="@+id/imgForword2"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
@@ -132,7 +130,6 @@
                 android:layout_toRightOf="@+id/imgHome"
                 />
             <ImageView
-                android:id="@+id/imgForword3"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
@@ -162,7 +159,6 @@
                 android:layout_marginLeft="@dimen/dimension15dp"
                 />
             <TextView
-                android:id="@+id/txtInsurance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Insurance Documents"
@@ -177,7 +173,6 @@
                 android:layout_toRightOf="@+id/imgInsurance"
                 />
             <ImageView
-                android:id="@+id/imgForword4"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
@@ -207,7 +202,6 @@
                 android:layout_marginLeft="@dimen/dimension15dp"
                 />
             <TextView
-                android:id="@+id/txtMedical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Medical Documents"
@@ -222,7 +216,6 @@
                 android:layout_toRightOf="@+id/imgMedical"
                 />
             <ImageView
-                android:id="@+id/imgForword5"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
@@ -266,7 +259,6 @@
                 android:layout_toRightOf="@+id/imgOther"
                 />
             <ImageView
-                android:id="@+id/imgForword6"
                 android:layout_width="@dimen/dimension40dp"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_centerVertical="true"
@@ -276,6 +268,49 @@
                 android:layout_margin="@dimen/dimension5dp"
                 />
         </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlMedicalRecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimension10dp"
+        android:background="@color/colorTwoBar"
+        android:layout_below="@id/rlOther"
+        >
+
+        <ImageView
+            android:id="@+id/imgRecord"
+            android:layout_width="@dimen/dimension45dp"
+            android:layout_height="@dimen/dimension45dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/docus"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            />
+        <TextView
+            android:id="@+id/txtRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medical Records"
+            android:padding="@dimen/dimension15dp"
+            android:textSize="@dimen/dimension20dp"
+            android:paddingLeft="@dimen/dimension20dp"
+            android:layout_margin="@dimen/dimension10dp"
+            android:gravity="center_vertical"
+            android:textAllCaps="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorBlackDark"
+            android:layout_toRightOf="@+id/imgRecord"
+            />
+        <ImageView
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimension5dp"
+            android:src="@drawable/forword"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension5dp"
+            />
+    </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/header"
@@ -320,7 +355,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rlOther"
+        android:layout_below="@+id/rlMedicalRecord"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -367,7 +402,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlOne"

@@ -303,7 +303,6 @@
             android:imeOptions="actionNext"
             /><requestFocus />
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilPharmacyNote1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/etNote"
@@ -313,7 +312,6 @@
             android:visibility="gone">
 
             <AutoCompleteTextView
-                android:id="@+id/txtPharmacyNote1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Notes"
