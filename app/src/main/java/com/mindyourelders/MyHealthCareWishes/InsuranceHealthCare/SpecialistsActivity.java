@@ -65,6 +65,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     String from;
     boolean isEmergency,isInsurance;
     RelativeLayout header;
+    TextView txtName;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
     final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
     Preferences preferences;
@@ -84,6 +85,8 @@ public class SpecialistsActivity extends AppCompatActivity {
         Intent i=getIntent();
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         header= (RelativeLayout) findViewById(R.id.header);
+        txtName=(TextView) findViewById(R.id.txtName);
+        txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
      //   imgRight= (ImageView) findViewById(R.id.imgRight);
         if (i.getExtras()!=null)
         {
@@ -91,6 +94,7 @@ public class SpecialistsActivity extends AppCompatActivity {
             if (from.equals("Speciality"))
             {
                 txtTitle.setText("SPECIALITY");
+
               //  imgRight.setVisibility(View.VISIBLE);
                 header.setBackgroundResource(R.color.colorThree);
                 profile=new int[]{R.drawable.physician,R.drawable.hosp_icon,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
@@ -443,6 +447,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         //header= (RelativeLayout) findViewById(R.id.header);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgRight=(ImageView) findViewById(R.id.imgRight);
+        txtName= (TextView) findViewById(R.id.txtName);
         listSpeciallist= (ListView) findViewById(R.id.listSpecialist);
         SpecialistContactAdapter adapter=new SpecialistContactAdapter(context,specialist,profile,isEmergency,isInsurance,from);
         listSpeciallist.setAdapter(adapter);

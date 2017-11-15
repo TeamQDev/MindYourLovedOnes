@@ -45,7 +45,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
 
     RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal;
 
-    TextView txtOne,txtTwo;
+    TextView txtOne,txtTwo,txtUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,8 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initUI() {
+        txtUserName=(TextView) findViewById(R.id.txtUserName);
+        txtUserName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         imgBack= (ImageView) findViewById(R.id.imgBack);
         rlAD= (RelativeLayout) findViewById(R.id.rlAD);
         rlLegal= (RelativeLayout) findViewById(R.id.rlLegal);

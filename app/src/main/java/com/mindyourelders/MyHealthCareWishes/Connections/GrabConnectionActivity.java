@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -30,6 +31,7 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
     String source;
     LinearLayout llGrab;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    RelativeLayout header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,112 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
                 llGrab.setVisibility(View.VISIBLE);
                 txtTitle.setVisibility(View.VISIBLE);
             }
+
+        switch (source){
+            case "Connection":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "Pharmacy":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "PharmacyData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "PharmacyDataView":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "Proxy":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "ProxyUpdate":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "ProxyUpdateView":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "Emergency":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "EmergencyUpdate":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "EmergencyView":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "Speciality":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "Physician":
+                header.setBackgroundColor(getResources().getColor(R.color.colorOne));
+                break;
+
+            case "SpecialistData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "SpecialistViewData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "Insurance":
+                header.setBackgroundResource(R.color.colorFive);
+                break;
+
+            case "InsuranceData":
+                header.setBackgroundResource(R.color.colorFive);
+                break;
+
+            case "InsuranceViewData":
+                header.setBackgroundResource(R.color.colorFive);
+                break;
+
+            case "Aides":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "AidesData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "AidesViewData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "Finance":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "Hospital":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "HospitalData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+            case "HospitalViewData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+
+            case "FinanceData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+
+            case "FinanceViewData":
+                header.setBackgroundResource(R.color.colorThree);
+                break;
+        }
 
         callFragment("NEWCONTACT", fragmentNewContact);
         // }
@@ -139,6 +247,7 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
         imgGoogle = (ImageView) findViewById(R.id.imgGoogle);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgRefresh=(ImageView) findViewById(R.id.imgRefresh);
+        header= (RelativeLayout) findViewById(R.id.header);
     }
 
 

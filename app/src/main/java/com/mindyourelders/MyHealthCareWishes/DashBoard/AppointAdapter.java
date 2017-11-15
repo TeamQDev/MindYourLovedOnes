@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
@@ -53,7 +54,18 @@ class AppointAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = lf.inflate(R.layout.row_appoint, parent, false);
+
+          /*  RelativeLayout rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
+            if (position%2==0)
+            {
+                rlMain.setBackgroundColor(context.getResources().getColor(R.color.colorTwoBar));
+            }
+            else{
+                rlMain.setBackgroundColor(context.getResources().getColor(R.color.colorOneBar));
+            }*/
+
             holder = new Holder();
+
             holder.txtDoctor = (TextView) convertView.findViewById(R.id.txtDoctor);
             holder.txtDateTime = (TextView) convertView.findViewById(txtDateTime);
             holder.txtFrequency = (TextView) convertView.findViewById(R.id.txtFrequency);
@@ -110,6 +122,13 @@ class AppointAdapter extends BaseAdapter {
             holder.llDate.addView(helperview);
             TextView datetime= (TextView) helperview.findViewById(R.id.txtDateTime);
             datetime.setText("Completion Date:  "+ dates.get(i).getDate());
+            if (i%2==0)
+            {
+                datetime.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+            }
+            else{
+                datetime.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+            }
         }
         //holder.imgProfile.setImageResource(student.getImgid());
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +163,7 @@ class AppointAdapter extends BaseAdapter {
 
     private class Holder {
         TextView txtDoctor, txtDateTime, txtFrequency,txtType,txtDate;
+        RelativeLayout rlMain;
         LinearLayout llDate;
         ImageView imgForward,imgEdit;
     }

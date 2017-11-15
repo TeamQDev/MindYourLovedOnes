@@ -82,7 +82,18 @@
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension45dp"
+        android:background="@color/colorSkyBlue"
+        android:gravity="center"
+        android:text="XYZ XYZ"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimension22dp"
+        android:layout_below="@+id/header"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvPrescription"
@@ -92,7 +103,7 @@
         android:divider="@null"
         android:scrollbars="none"
         android:paddingTop="@dimen/dimension10dp"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/txtName"
         android:visibility="gone"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
     <TextView

@@ -44,6 +44,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     Preferences preferences;
     DBHelper dbHelper;
     boolean isEdit;
+    TextView txtName;
 
     // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
     final CharSequence[] dialog_items = {"View","Email","Share","Fax" };
@@ -75,6 +76,8 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initUI() {
+        txtName=(TextView) findViewById(R.id.txtName);
+        txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         PrescriptionList=new ArrayList<>();
         imgBack= (ImageView)findViewById(R.id.imgBack);
         llAddPrescription= (RelativeLayout) findViewById(R.id.llAddPrescription);
