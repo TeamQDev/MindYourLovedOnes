@@ -180,9 +180,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlHome:
-                if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
+             //   if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
                     callFragment("CONNECTION", fragmentConnection);
-                }
+               // }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
@@ -195,23 +195,23 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlResources:
-                if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
+               // if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
                     callFragment("RESOURCES", fragmentResources);
-                }
+              //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.rlMarketPlace:
-                if (fragmentManager.findFragmentByTag("MARKET") == null) {
+             //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
                     callFragment("MARKET", fragmentMarketPlace);
-                }
+              //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.rlVideos:
-                if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
+               // if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
                     callFragment("VIDEOS", fragmentVideos);
-                }
+              //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
@@ -261,7 +261,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;*/
         }
     }
-  /*  @Override
+   @Override
     public void onBackPressed() {
 
         int count = getFragmentManager().getBackStackEntryCount();
@@ -272,7 +272,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             getFragmentManager().popBackStack();
         }
 
-    }*/
+    }
 
     @Override
     protected void onResume() {

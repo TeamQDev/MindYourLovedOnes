@@ -68,7 +68,7 @@ View rootview;
     private void initUI() {
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("MARKET PLACES");
+        txtTitle.setText("MARKETPLACE");
         imgPdf= (ImageView) getActivity().findViewById(R.id.imgPdf);
         imgPdf.setVisibility(View.GONE);
         imgProfile= (ImageView) getActivity().findViewById(R.id.imgProfile);
