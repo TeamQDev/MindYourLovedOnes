@@ -412,7 +412,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension10dp"
-                android:src="@drawable/videos" />
+                android:src="@drawable/backup1" />
             <TextView
                 android:id="@+id/txtBackup"
                 android:layout_width="match_parent"

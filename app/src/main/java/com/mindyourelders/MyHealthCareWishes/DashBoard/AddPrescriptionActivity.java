@@ -48,8 +48,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -225,7 +227,16 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        txtDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, month, dayOfMonth);
+                        long selectedMilli = newDate.getTimeInMillis();
+
+                        Date datePickerDate = new Date(selectedMilli);
+                        String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                        DateClass d=new DateClass();
+                        d.setDate(reportDate);
+                        txtDate.setText(reportDate);
                     }
                 }, year, month, day);
                 dpd.show();
