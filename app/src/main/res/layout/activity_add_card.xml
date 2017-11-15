@@ -154,26 +154,27 @@
             /><requestFocus />
         <FrameLayout
             android:id="@+id/flFront"
-            android:layout_width="@dimen/dimension210dp"
-            android:layout_height="@dimen/dimension160dp"
+            android:layout_width="250dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtFront"
             >
 
             <ImageView
                 android:id="@+id/imgFrontCard"
-                android:layout_width="@dimen/dimension200dp"
+                android:layout_width="240dp"
                 android:layout_height="@dimen/dimension155dp"
                 android:src="@drawable/ins_card"
                 android:scaleType="fitXY"
+                android:layout_gravity="bottom"
                 />
 
             <ImageView
                 android:id="@+id/imgEdit1"
-                android:layout_width="@dimen/dimension45dp"
-                android:layout_height="@dimen/dimension45dp"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
                 android:layout_gravity="top|right"
-                android:src="@drawable/ic_edit_blue" />
+                android:src="@drawable/addblue" />
         </FrameLayout>
         <TextView
             android:id="@+id/txtBack"
@@ -187,8 +188,8 @@
             android:layout_below="@+id/flFront"
             />
         <FrameLayout
-            android:layout_width="@dimen/dimension210dp"
-            android:layout_height="@dimen/dimension160dp"
+            android:layout_width="250dp"
+            android:layout_height="@dimen/dimension165dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/txtBack"
             >
@@ -197,17 +198,18 @@
 
             <ImageView
                 android:id="@+id/imgBackCard"
-                android:layout_width="@dimen/dimension200dp"
+                android:layout_width="240dp"
                 android:layout_height="@dimen/dimension150dp"
+                android:layout_gravity="bottom"
                 android:src="@drawable/ins_card"
                 android:scaleType="fitXY"
                 />
             <ImageView
                 android:id="@+id/imgEdit2"
-                android:layout_width="@dimen/dimension45dp"
-                android:layout_height="@dimen/dimension45dp"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
                 android:layout_gravity="top|right"
-                android:src="@drawable/ic_edit_blue" />
+                android:src="@drawable/addblue" />
         </FrameLayout>
 
     </RelativeLayout>

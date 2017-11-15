@@ -20,4 +20,5 @@ public class PrefConstants {
     public static final String USER_PROFILEIMAGE ="userImage" ;
     public static final String URI = "FileUri";
     public static final String RESULT = "FileName";
+    public static final String STORE = "Store";
 }

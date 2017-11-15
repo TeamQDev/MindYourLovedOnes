@@ -530,7 +530,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgTeeth"
-                android:text="Mouth" />
+                android:text="Dental" />
 
             <RelativeLayout
                 android:id="@+id/rlFalse"

@@ -19,6 +19,8 @@ import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 
 import java.util.ArrayList;
 
+import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.txt;
+
 /**
  * Created by welcome on 9/18/2017.
  */
@@ -81,8 +83,21 @@ class PrescriptionAdapter extends BaseAdapter {
                 {
                     LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View v = vi.inflate(R.layout.row_txt, null);
-                    TextView textView = (TextView) v.findViewById(R.id.txt);
-                    textView.setText(""+DosageList.get(i).getMedicine()+" : "+DosageList.get(i).getDose()+", "+DosageList.get(i).getFrequency());
+
+                    TextView textView = (TextView) v.findViewById(txt);
+                    TextView textViewName = (TextView) v.findViewById(R.id.txtName);
+                    textViewName.setText(DosageList.get(i).getMedicine());
+                    textView.setText(DosageList.get(i).getDose()+", "+DosageList.get(i).getFrequency());
+                    /*if (i%2==0)
+                    {*/
+                      /*  v.setBackgroundResource(R.color.colorLightGray);
+                        textViewName.setBackgroundResource(R.color.colorLightGray);
+                        textView.setBackgroundResource(R.color.colorLightGray);*/
+                  /*  }else{
+                        v.setBackgroundResource(R.color.colorWhite);
+                        textViewName.setBackgroundResource(R.color.colorWhite);
+                        textView.setBackgroundResource(R.color.colorWhite);
+                    }*/
                     holder.llPrescription.addView(v);
                 }
             }

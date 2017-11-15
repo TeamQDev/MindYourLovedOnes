@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -21,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.dropbox.core.v2.files.FileMetadata;
@@ -48,6 +48,7 @@ public class FilesActivity extends DropboxActivity {
     private FilesAdapter mFilesAdapter;
     private FileMetadata mSelectedFile;
     Preferences preferences;
+    RelativeLayout rlBackup;
 
     public static Intent getIntent(Context context, String path) {
         Intent filesIntent = new Intent(context, FilesActivity.class);
@@ -58,19 +59,25 @@ public class FilesActivity extends DropboxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = new Preferences();
+        preferences = new Preferences(FilesActivity.this);
         String path = getIntent().getStringExtra(EXTRA_PATH);
         mPath = path == null ? "" : path;
 
         setContentView(R.layout.activity_files);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        rlBackup= (RelativeLayout) findViewById(R.id.rlBackup);
+        rlBackup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 performWithPermissions(FileAction.UPLOAD);
             }
         });
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.files_list);
         mFilesAdapter = new FilesAdapter(PicassoClient.getPicasso(), new FilesAdapter.Callback() {
@@ -89,9 +96,19 @@ public class FilesActivity extends DropboxActivity {
         recyclerView.setAdapter(mFilesAdapter);
 
         mSelectedFile = null;
+
+        String from=preferences.getString(PrefConstants.STORE);
+        if (from.equals("Document"))
+        {
+            rlBackup.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }else if(from.equals("Backup")){
+            rlBackup.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 
-    private void launchFilePicker() {
+    public void launchFilePicker() {
         DBHelper dbHelper=new DBHelper(FilesActivity.this);
 
         File path=FilesActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);

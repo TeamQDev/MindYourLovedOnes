@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.Connections.FragmentConnectionNew;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.DropboxLoginActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentDashboard;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentNotification;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
@@ -32,6 +33,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     FragmentResources fragmentResources=null;
     FragmentMarketPlace fragmentMarketPlace=null;
     FragmentVideos fragmentVideos=null;
+    FragmentBackup fragmentBackup=null;
     FragmentConnectionNew fragmentConnection = null;
     FragmentNotification fragmentNotification=null;
     FragmentOverview fragmentOverview = null;
@@ -41,7 +43,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
     Preferences preferences;
-    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos;
+    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos,rlBackup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlResources.setOnClickListener(this);
         rlMarketPlace.setOnClickListener(this);
         rlVideos.setOnClickListener(this);
+        rlBackup.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -108,6 +112,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlResources= (RelativeLayout) leftDrawer.findViewById(R.id.rlResources);
         rlMarketPlace= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketPlace);
         rlVideos= (RelativeLayout) leftDrawer.findViewById(R.id.rlVideos);
+        rlBackup= (RelativeLayout) leftDrawer.findViewById(R.id.rlBackup);
     }
 
     private void fragmentData() {
@@ -119,6 +124,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         fragmentResources=new FragmentResources();
         fragmentMarketPlace=new FragmentMarketPlace();
         fragmentVideos=new FragmentVideos();
+        fragmentBackup=new FragmentBackup();
     }
 
     public void callFragment(String fragName, Fragment fragment) {
@@ -214,6 +220,17 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
               //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
+
+            case R.id.rlBackup:
+                Intent i=new Intent(BaseActivity.this, DropboxLoginActivity.class);
+                i.putExtra("FROM","Backup");
+                startActivity(i);
+                // if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
+               // callFragment("VIDEOS", fragmentBackup);
+                //  }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
 
 
          /*   case R.id.imgPdf:

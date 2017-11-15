@@ -1,29 +1,53 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
       <android.support.design.widget.CoordinatorLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/files_list" />
+            android:id="@+id/files_list"
+            android:visibility="gone"
+            />
 
-        <android.support.design.widget.FloatingActionButton
+          <RelativeLayout
+              android:id="@+id/rlBackup"
+              android:layout_width="@dimen/dimension150dp"
+              android:layout_height="@dimen/dimension150dp"
+              android:layout_weight="1"
+              android:background="@drawable/cir"
+              android:layout_margin="@dimen/dimension10dp"
+              android:gravity="center"
+              android:layout_gravity="center"
+              android:visibility="gone"
+              >
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Backup"
+                  android:textSize="@dimen/dimension25dp"
+                  android:textStyle="bold"
+                  android:textColor="@color/colorWhite"
+                  android:layout_centerInParent="true"
+                  />
+          </RelativeLayout>
+        <ImageView
             android:id="@+id/fab"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="center"
             app:borderWidth="0dp"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/pdf"/>
+            android:src="@drawable/backup"
+            android:background="@color/colorWhite"
+            />
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

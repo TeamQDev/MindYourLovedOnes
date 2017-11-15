@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dropbox.core.android.Auth;
@@ -32,10 +33,12 @@ public class DropboxLoginActivity extends DropboxActivity {
     private static final int REQUEST_CALL_PERMISSION = 100;
     private static final int REQUESTRESULT =200 ;
     Button btnLogin,btnAdd;
-    Button btnFiles;
+    Button btnFiles,btnBackup;
     TextView txtName,txtFile;
     static boolean isLogin=false;
     Preferences preferences;
+    String from="";
+    RelativeLayout rlBackup,rlView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +47,31 @@ public class DropboxLoginActivity extends DropboxActivity {
         preferences.putString(PrefConstants.RESULT,"");
         preferences.putString(PrefConstants.URI,"");
         accessPermission();
+
+
+
         btnLogin= (Button) findViewById(R.id.btnLogin);
         btnAdd= (Button) findViewById(R.id.btnAdd);
         txtName= (TextView) findViewById(R.id.txtLogin);
         txtFile= (TextView) findViewById(R.id.txtfile);
+        btnBackup= (Button) findViewById(R.id.btnBackup);
+        rlView= (RelativeLayout) findViewById(R.id.rlView);
+        rlBackup= (RelativeLayout) findViewById(R.id.rlBackup);
+        btnFiles = (Button)findViewById(R.id.btnFiles);
+
+        Intent intent=getIntent();
+        if (intent.getExtras()!=null) {
+            from =intent.getExtras().getString("FROM");
+            if (from.equals("Document"))
+            {
+                rlBackup.setVisibility(View.GONE);
+                rlView.setVisibility(View.VISIBLE);
+            }else if (from.equals("Backup"))
+            {
+                rlBackup.setVisibility(View.VISIBLE);
+                rlView.setVisibility(View.GONE);
+            }
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,9 +92,6 @@ public class DropboxLoginActivity extends DropboxActivity {
                 else{
                     Auth.startOAuth2Authentication(DropboxLoginActivity.this, APP_KEY);
                 }
-
-
-
             }
         });
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +105,7 @@ public class DropboxLoginActivity extends DropboxActivity {
                 finish();
             }
         });
-        btnFiles = (Button)findViewById(R.id.btnFiles);
+
         btnFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +115,15 @@ public class DropboxLoginActivity extends DropboxActivity {
                         onResume();
                     }
                 });*/
+               preferences.putString(PrefConstants.STORE,"Document");
+                startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
+            }
+        });
+        btnBackup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferences.putString(PrefConstants.STORE,"Backup");
+
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
@@ -125,8 +155,17 @@ public class DropboxLoginActivity extends DropboxActivity {
 
                 String value="You have Logged in with " + result.getName().getDisplayName();
                 txtName.setText(value);
-                btnFiles.setVisibility(View.VISIBLE);
                 btnLogin.setText("Login With Different User");
+                if (from.equals("Document"))
+                {
+                    btnFiles.setVisibility(View.VISIBLE);
+                    btnBackup.setVisibility(View.GONE);
+                }else if (from.equals("Backup"))
+                {
+                    btnBackup.setVisibility(View.VISIBLE);
+                    btnFiles.setVisibility(View.GONE);
+                }
+
 
               //  Toast.makeText(DropboxLoginActivity.this,,Toast.LENGTH_SHORT).show();
                 /*((TextView) findViewById(R.id.email_text)).setText(result.getEmail());

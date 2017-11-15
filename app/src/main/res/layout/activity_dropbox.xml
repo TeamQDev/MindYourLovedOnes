@@ -104,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/btnLogin"
+            android:visibility="gone"
             >
         <Button
             android:id="@+id/btnFiles"
@@ -147,7 +148,29 @@ android:visibility="gone"
 
     </RelativeLayout>
 
-
+        <RelativeLayout
+            android:id="@+id/rlBackup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btnLogin"
+            android:visibility="gone"
+            >
+            <Button
+                android:id="@+id/btnBackup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Backup"
+                android:background="@color/colorBlue"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:padding="@dimen/dimension10dp"
+                android:layout_marginBottom="@dimen/dimension10dp"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:layout_marginRight="@dimen/dimension20dp"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                />
+            </RelativeLayout>
 
     </RelativeLayout>
 

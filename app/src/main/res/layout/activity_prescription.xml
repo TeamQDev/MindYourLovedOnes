@@ -102,7 +102,6 @@
         android:layout_above="@+id/llAddPrescription"
         android:divider="@null"
         android:scrollbars="none"
-        android:paddingTop="@dimen/dimension10dp"
         android:layout_below="@+id/txtName"
         android:visibility="gone"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>

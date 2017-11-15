@@ -15,6 +15,7 @@
         android:text="Apex Hospital"
         android:layout_toLeftOf="@+id/txtDate"
         android:layout_below="@+id/llPrescription"
+        android:visibility="gone"
         />
 
     <TextView
@@ -23,10 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="7/08/1235 45:52"
-        android:layout_marginRight="@dimen/dimension5dp"
-        android:layout_toLeftOf="@+id/imgForword"
         android:layout_below="@+id/llPrescription"
-        />
+        android:layout_toLeftOf="@+id/imgForword"
+        android:layout_toStartOf="@+id/imgForword"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/llPrescription"
@@ -43,6 +44,7 @@
         android:orientation="horizontal"
         android:background="@color/colorWhite"
         android:layout_marginBottom="@dimen/dimension5dp"
+        android:visibility="gone"
         >
 
        <!-- <ImageView
