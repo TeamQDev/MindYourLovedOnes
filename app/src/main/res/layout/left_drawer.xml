@@ -367,7 +367,7 @@
             android:id="@+id/rlLogOutt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlVideos"
+            android:layout_below="@+id/rlBackup"
             android:background="@color/colorWhite"
             >
             <ImageView
@@ -394,6 +394,41 @@
                 android:background="@color/colorLightGray"
                 android:layout_below="@+id/txtLogOut"
                 android:layout_toRightOf="@id/imgLogOut"
+                ></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlBackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:layout_below="@+id/rlVideos"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/imgBackup"
+                android:layout_width="@dimen/dimension50dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension10dp"
+                android:src="@drawable/videos" />
+            <TextView
+                android:id="@+id/txtBackup"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="BACKUP"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/imgBackup"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_below="@+id/txtBackup"
+                android:layout_toRightOf="@id/imgBackup"
                 ></View>
         </RelativeLayout>
     </RelativeLayout>
