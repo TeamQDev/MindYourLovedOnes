@@ -28,16 +28,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtheader"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            >
 
             <TextView
                 android:id="@+id/txtFaxnumber"
                 android:layout_width="@dimen/dimension0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="Fax Number:"
+                android:text="Fax no:"
                 android:textSize="@dimen/dimension19dp"
+                android:paddingLeft="@dimen/dimension20dp"
                 android:textColor="@color/colorBlackDark"/>
 
             <EditText
@@ -54,16 +57,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/llFaxNumber"
-            android:layout_marginBottom="@dimen/dimension15dp">
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:gravity="center"
+            >
 
             <TextView
                 android:id="@+id/txtFaxto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llFaxNumber"
-                android:layout_marginLeft="@dimen/dimension80dp"
-                android:layout_marginTop="@dimen/dimension10dp"
                 android:maxLines="1"
+                android:layout_gravity="center"
                 android:text="Fax to U.S. only!(area code &amp; fax number)"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension18dp" />
@@ -75,7 +79,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/llFaxto"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            >
 
             <TextView
                 android:id="@+id/txtTo"
@@ -101,7 +108,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/llTo"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            >
 
             <TextView
                 android:id="@+id/txtFrom"
@@ -127,7 +137,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/llFrom"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            >
 
             <TextView
                 android:id="@+id/txtSubject"
@@ -162,6 +175,7 @@
             android:textSize="@dimen/dimension20dp"
             android:textColor="@color/colorBlackDark"
             android:padding="@dimen/dimension20dp"
+            android:gravity="center"
             />
             <View
                 android:layout_width="match_parent"
@@ -208,7 +222,7 @@
                 android:background="@drawable/selector_button"
                 android:gravity="center"
                 android:padding="@dimen/dimension15dp"
-                android:text="Cancel"
+                android:text="CANCEL"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimension20dp"
                 android:textStyle="bold" />

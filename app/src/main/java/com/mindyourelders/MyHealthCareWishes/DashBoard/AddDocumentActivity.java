@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
@@ -464,7 +465,29 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         ShearedValues.activityID = getApplicationContext();*/
 
                                 break;
-                            case 2: // view
+                            case 2: // Fax
+                                if (path.equals("No"))
+                                {
+                                    File file=new File(getExternalFilesDir(null),documentPath);
+                                    Uri urifile=null;
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                                        urifile = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", file);
+                                    } else {
+                                        urifile = Uri.fromFile(file);
+                                    }
+                                    String path=urifile.getPath();
+                                    serverAttachement(urifile);
+                                   // emailAttachement(urifile);
+                                }
+                                else {
+
+                                    Uri uris = Uri.parse(documentPath);
+                                    String path=uris.getPath();
+                                    serverAttachement(uris);
+                                 //  emailAttachement(uris);
+                                }
+
 
                                 break;
 
@@ -477,6 +500,12 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 break;
 
         }
+    }
+    private void serverAttachement(Uri path) {
+        String urlPath=path.getPath();
+        System.out.println("Path of the file    "+path);
+        //WebService.sendPDFToFax(convertFileToByteArray(file));
+        new FaxCustomDialog(AddDocumentActivity.this, urlPath).show();;
     }
 
     private void emailAttachement(Uri f) {

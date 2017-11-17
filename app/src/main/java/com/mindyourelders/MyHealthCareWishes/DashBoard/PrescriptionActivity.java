@@ -18,6 +18,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.PrescriptionQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
@@ -47,7 +48,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     TextView txtName;
 
     // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View","Email","Share","Fax" };
+    final CharSequence[] dialog_items = {"View","Email","Fax" };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,12 +180,10 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                                     emailAttachement(f);
 
                                 break;
-                            case 2: // email
-                                File fil =new File(Environment.getExternalStorageDirectory()
+                            case 2: // Fax
+                                serverAttachement(Environment.getExternalStorageDirectory()
                                         + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/Prescription.pdf");
-                                shareAttachement(fil);
-
                                 break;
 
                         }
@@ -199,7 +198,11 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
-
+    private void serverAttachement(String path) {
+        System.out.println("Path of the file    "+path);
+        //WebService.sendPDFToFax(convertFileToByteArray(file));
+        new FaxCustomDialog(PrescriptionActivity.this, path).show();;
+    }
     private void shareAttachement(File fil) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 

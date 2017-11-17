@@ -419,6 +419,9 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                             case 2:
                                 if (from.equals("Speciality")) {
+                                    serverAttachement(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Specialty.pdf");
                                   /*  File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Specialty.pdf");
@@ -432,11 +435,17 @@ public class SpecialistsActivity extends AppCompatActivity {
                                             + "/Profile.pdf");
                                     emailAttachement(f);*/
                                 } else if (from.equals("Insurance")) {
+                                    serverAttachement(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Insurance.pdf");
                                     /*File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf");*/
                                    // emailAttachement(f);
                                 } else if (from.equals("Event")) {
+                                    serverAttachement(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Event.pdf");
                                   /*  File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf");

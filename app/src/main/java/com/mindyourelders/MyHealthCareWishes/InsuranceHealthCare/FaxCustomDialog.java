@@ -24,7 +24,7 @@ import org.json.JSONObject;
  * Created by welcome on 11/17/2017.
  */
 
-class FaxCustomDialog extends Dialog implements
+public class FaxCustomDialog extends Dialog implements
         android.view.View.OnClickListener {
     TextView textmsg;
     private TextView btn_ok;
