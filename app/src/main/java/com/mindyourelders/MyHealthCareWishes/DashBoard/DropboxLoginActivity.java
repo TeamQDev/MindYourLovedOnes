@@ -1,12 +1,15 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +27,16 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.FileChannel;
+
+import static com.mindyourelders.MyHealthCareWishes.utility.PrefConstants.URI;
+
 
 public class DropboxLoginActivity extends DropboxActivity {
     private static final int RESULTCODE = 400;
@@ -33,7 +46,7 @@ public class DropboxLoginActivity extends DropboxActivity {
     private static final int REQUEST_CALL_PERMISSION = 100;
     private static final int REQUESTRESULT =200 ;
     Button btnLogin,btnAdd;
-    Button btnFiles,btnBackup;
+    Button btnFiles,btnBackup,btnRestore;
     TextView txtName,txtFile;
     static boolean isLogin=false;
     Preferences preferences;
@@ -45,7 +58,7 @@ public class DropboxLoginActivity extends DropboxActivity {
         setContentView(R.layout.activity_dropbox);
         preferences=new Preferences(context);
         preferences.putString(PrefConstants.RESULT,"");
-        preferences.putString(PrefConstants.URI,"");
+        preferences.putString(URI,"");
         accessPermission();
 
 
@@ -55,6 +68,7 @@ public class DropboxLoginActivity extends DropboxActivity {
         txtName= (TextView) findViewById(R.id.txtLogin);
         txtFile= (TextView) findViewById(R.id.txtfile);
         btnBackup= (Button) findViewById(R.id.btnBackup);
+        btnRestore= (Button) findViewById(R.id.btnRestore);
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rlBackup= (RelativeLayout) findViewById(R.id.rlBackup);
         btnFiles = (Button)findViewById(R.id.btnFiles);
@@ -100,7 +114,7 @@ public class DropboxLoginActivity extends DropboxActivity {
 
                 Intent i=new Intent();
                 i.putExtra("Name",preferences.getString(PrefConstants.RESULT));
-                i.putExtra("URI",preferences.getString(PrefConstants.URI));
+                i.putExtra("URI",preferences.getString(URI));
                 setResult(RESULTCODE,i);
                 finish();
             }
@@ -127,6 +141,15 @@ public class DropboxLoginActivity extends DropboxActivity {
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
+        btnRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferences.putString(PrefConstants.STORE,"Restore");
+
+                startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
+            }
+        });
+
     }
     private void accessPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
@@ -160,10 +183,12 @@ public class DropboxLoginActivity extends DropboxActivity {
                 {
                     btnFiles.setVisibility(View.VISIBLE);
                     btnBackup.setVisibility(View.GONE);
-                }else if (from.equals("Backup"))
+                    btnRestore.setVisibility(View.GONE);
+                }else if (from.equals("Backup")||from.equals("Restore"))
                 {
                     btnBackup.setVisibility(View.VISIBLE);
                     btnFiles.setVisibility(View.GONE);
+                    btnRestore.setVisibility(View.VISIBLE);
                 }
 
 
@@ -182,15 +207,78 @@ public class DropboxLoginActivity extends DropboxActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       if (preferences.getString(PrefConstants.URI).equals("")&&preferences.getString(PrefConstants.RESULT).equals(""))
+       if (preferences.getString(URI).equals("")&&preferences.getString(PrefConstants.RESULT).equals(""))
        {
            btnAdd.setVisibility(View.GONE);
            txtFile.setVisibility(View.GONE);
        }else
         {
-            btnAdd.setVisibility(View.VISIBLE);
-            txtFile.setVisibility(View.VISIBLE);
-            txtFile.setText("Click on Add File for Add "+preferences.getString(PrefConstants.RESULT)+" File to your documents");
+            if (preferences.getString(PrefConstants.STORE).equals("Document")) {
+                btnAdd.setVisibility(View.VISIBLE);
+                txtFile.setVisibility(View.VISIBLE);
+                txtFile.setText("Click on Add File for Add " + preferences.getString(PrefConstants.RESULT) + " File to your documents");
+            }
+            else if (preferences.getString(PrefConstants.STORE).equals("Restore")){
+                final AlertDialog.Builder alert=new AlertDialog.Builder(context);
+                alert.setTitle("Restore?");
+                alert.setMessage("Do you want to restore "+preferences.getString(PrefConstants.RESULT)+" database?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        copydb(context);
+                        dialog.dismiss();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                    }
+                });
+                alert.show();
+            }
+        }
+    }
+
+    private void copydb(Context context) {
+       // String sd = Environment.getExternalStorageDirectory().getAbsolutePath(); ;
+       // Log.e("", sd);
+        String sd=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+
+        /*Uri uris= Uri.parse(URI);
+        String path=uris.getPath();*/
+        File data = Environment.getDataDirectory();
+        Log.e("", data.getAbsolutePath());
+        FileChannel source = null;
+        FileChannel destination = null;
+        String currentDBPath = "//data//com.mindyourelders.MyHealthCareWishes.HomeActivity"
+                + "//databases//" + "MYE.db";
+      //  String backupDBPath = "/Download/" + "CONTACTS.db";
+        File currentDB = new File(data, currentDBPath);
+        File backupDB = new File(sd,"MYE.db");
+        try {
+            copy(backupDB,currentDB);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void copy(File backupDB, File currentDB)throws IOException {
+        InputStream in = new FileInputStream(backupDB);
+        try {
+            OutputStream out = new FileOutputStream(currentDB);
+            try {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
         }
     }
 }

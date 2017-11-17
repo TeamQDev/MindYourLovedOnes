@@ -417,6 +417,34 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 break;
 
+                            case 2:
+                                if (from.equals("Speciality")) {
+                                  /*  File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Specialty.pdf");
+                                    emailAttachement(f);*/
+                                } else if (from.equals("Emergency")) {
+                                    serverAttachement(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Profile.pdf");
+                                  /*  File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Profile.pdf");
+                                    emailAttachement(f);*/
+                                } else if (from.equals("Insurance")) {
+                                    /*File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Insurance.pdf");*/
+                                   // emailAttachement(f);
+                                } else if (from.equals("Event")) {
+                                  /*  File f =new File(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Event.pdf");
+                                    emailAttachement(f);*/
+                                }
+
+                                break;
+
                         }
                     }
                 });
@@ -426,6 +454,13 @@ public class SpecialistsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void serverAttachement(String path) {
+        System.out.println("Path of the file    "+path);
+        //WebService.sendPDFToFax(convertFileToByteArray(file));
+        new FaxCustomDialog(SpecialistsActivity.this, path).show();;
+    }
+
     private void emailAttachement(File f) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 

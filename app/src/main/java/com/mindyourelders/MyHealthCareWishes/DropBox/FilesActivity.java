@@ -65,6 +65,17 @@ public class FilesActivity extends DropboxActivity {
 
         setContentView(R.layout.activity_files);
         rlBackup= (RelativeLayout) findViewById(R.id.rlBackup);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.files_list);
+
+        String from=preferences.getString(PrefConstants.STORE);
+        if (from.equals("Document")||from.equals("Restore"))
+        {
+            rlBackup.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }else if(from.equals("Backup")){
+            rlBackup.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
         rlBackup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +90,7 @@ public class FilesActivity extends DropboxActivity {
             }
         });*/
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.files_list);
+
         mFilesAdapter = new FilesAdapter(PicassoClient.getPicasso(), new FilesAdapter.Callback() {
             @Override
             public void onFolderClicked(FolderMetadata folder) {
@@ -97,15 +108,7 @@ public class FilesActivity extends DropboxActivity {
 
         mSelectedFile = null;
 
-        String from=preferences.getString(PrefConstants.STORE);
-        if (from.equals("Document"))
-        {
-            rlBackup.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }else if(from.equals("Backup")){
-            rlBackup.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
+
     }
 
     public void launchFilePicker() {
@@ -114,10 +117,10 @@ public class FilesActivity extends DropboxActivity {
         File path=FilesActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
         //uploadFile(data.getData().toString());
         // Launch intent to pick file for upload
-     //   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+       //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
        // intent.addCategory(Intent.CATEGORY_OPENABLE);
        // intent.setType("*/*");
-        Uri contentUri=null;
+         Uri contentUri=null;
       /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
           //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
               contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", path);
@@ -209,9 +212,18 @@ public class FilesActivity extends DropboxActivity {
                 dialog.dismiss();
                 ArrayList<Metadata> resultList = new ArrayList<Metadata>();
                 for (int i = 0; i < result.getEntries().size(); i++) {
-                    if (result.getEntries().get(i).getName().endsWith(".pdf")) {
-                   // if (result.getEntries().get(i).getName().endsWith(".pdf")||result.getEntries().get(i).getName().endsWith(".db")) {
-                        resultList.add(result.getEntries().get(i));
+                    if (preferences.getString(PrefConstants.STORE).equals("Document")) {
+                        if (result.getEntries().get(i).getName().endsWith(".pdf")) {
+                            // if (result.getEntries().get(i).getName().endsWith(".pdf")||result.getEntries().get(i).getName().endsWith(".db")) {
+                            resultList.add(result.getEntries().get(i));
+                        }
+                    }
+                    else if(preferences.getString(PrefConstants.STORE).equals("Restore"))
+                    {
+                        if (result.getEntries().get(i).getName().endsWith(".db")) {
+                            // if (result.getEntries().get(i).getName().endsWith(".pdf")||result.getEntries().get(i).getName().endsWith(".db")) {
+                            resultList.add(result.getEntries().get(i));
+                        }
                     }
                 }
 
@@ -244,7 +256,7 @@ public class FilesActivity extends DropboxActivity {
                 dialog.dismiss();
 
                 if (result != null) {
-                   // viewFileInExternalApp(result);
+                   //viewFileInExternalApp(result);
 
 
                     AddDocumentActivity a = new AddDocumentActivity();

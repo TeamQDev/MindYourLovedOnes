@@ -122,13 +122,13 @@
                 android:id="@+id/txtfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-             android:layout_above="@+id/btnAdd"
+                android:layout_above="@+id/btnAdd"
                 android:gravity="center"
                 android:textSize="@dimen/dimension20dp"
                 android:textColor="@color/colorBlackDark"
                 android:layout_margin="@dimen/dimension10dp"
                 android:text="Click on Add File for Add File to your documents"
-android:visibility="gone"
+                android:visibility="gone"
                 />
             <Button
                 android:id="@+id/btnAdd"
@@ -155,6 +155,21 @@ android:visibility="gone"
             android:layout_below="@+id/btnLogin"
             android:visibility="gone"
             >
+            <Button
+            android:id="@+id/btnRestore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Restore"
+            android:background="@color/colorBlue"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dimension20dp"
+            android:padding="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginRight="@dimen/dimension20dp"
+            android:layout_above="@+id/btnBackup"
+                android:visibility="gone"
+            />
             <Button
                 android:id="@+id/btnBackup"
                 android:layout_width="match_parent"

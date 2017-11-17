@@ -549,7 +549,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "application/pdf");
         context.startActivity(intent);
-        
+
     }
 
     private void copyFiles(InputStream in, OutputStream out) throws IOException
