@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxClientFactory;
 import com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.GetCurrentAccountTask;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -48,6 +50,7 @@ public class DropboxLoginActivity extends DropboxActivity {
     Button btnLogin,btnAdd;
     Button btnFiles,btnBackup,btnRestore;
     TextView txtName,txtFile;
+    ImageView imgBack;
     static boolean isLogin=false;
     Preferences preferences;
     String from="";
@@ -72,6 +75,14 @@ public class DropboxLoginActivity extends DropboxActivity {
         rlView= (RelativeLayout) findViewById(R.id.rlView);
         rlBackup= (RelativeLayout) findViewById(R.id.rlBackup);
         btnFiles = (Button)findViewById(R.id.btnFiles);
+        imgBack= (ImageView) findViewById(R.id.imgBack);
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent=getIntent();
         if (intent.getExtras()!=null) {
@@ -241,21 +252,22 @@ public class DropboxLoginActivity extends DropboxActivity {
     }
 
     private void copydb(Context context) {
-       // String sd = Environment.getExternalStorageDirectory().getAbsolutePath(); ;
-       // Log.e("", sd);
-        String sd=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        // String sd = Environment.getExternalStorageDirectory().getAbsolutePath(); ;
+        // Log.e("", sd);
+        String sd= Environment.getExternalStorageDirectory().getAbsolutePath();
 
         /*Uri uris= Uri.parse(URI);
         String path=uris.getPath();*/
-        File data = Environment.getDataDirectory();
+        //File data = Environment.getDataDirectory();
+        File data=DropboxLoginActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
         Log.e("", data.getAbsolutePath());
         FileChannel source = null;
         FileChannel destination = null;
         String currentDBPath = "//data//com.mindyourelders.MyHealthCareWishes.HomeActivity"
                 + "//databases//" + "MYE.db";
-      //  String backupDBPath = "/Download/" + "CONTACTS.db";
-        File currentDB = new File(data, currentDBPath);
-        File backupDB = new File(sd,"MYE.db");
+        String backupDBPath = "/Download/" + "MYE.db";;
+        File currentDB = new File( data.getAbsolutePath());
+        File backupDB = new File(sd,backupDBPath);
         try {
             copy(backupDB,currentDB);
         } catch (IOException e) {
@@ -274,11 +286,22 @@ public class DropboxLoginActivity extends DropboxActivity {
                 while ((len = in.read(buf)) > 0) {
                     out.write(buf, 0, len);
                 }
-            } finally {
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally {
                 out.close();
             }
-        } finally {
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
             in.close();
         }
     }
+
+
 }

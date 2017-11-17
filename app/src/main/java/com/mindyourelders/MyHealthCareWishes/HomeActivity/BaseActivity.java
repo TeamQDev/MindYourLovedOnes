@@ -183,6 +183,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.imgDrawer:
                drawerLayout.openDrawer(leftDrawer);
+               // copydb(context);
                 break;
 
             case R.id.rlHome:
@@ -278,7 +279,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;*/
         }
     }
-   @Override
+
+
+
+    @Override
     public void onBackPressed() {
 
         int count = getFragmentManager().getBackStackEntryCount();
