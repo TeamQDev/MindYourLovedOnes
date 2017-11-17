@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:gravity="center"
+            android:text="Mind Your Elders"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/dimension26dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llFaxNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtheader"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/txtFaxnumber"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Fax Number:"
+                android:textSize="@dimen/dimension19dp"
+                android:textColor="@color/colorBlackDark"/>
+
+            <EditText
+                android:id="@+id/etFaxnumber"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="Enter fax number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFaxto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llFaxNumber"
+            android:layout_marginBottom="@dimen/dimension15dp">
+
+            <TextView
+                android:id="@+id/txtFaxto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llFaxNumber"
+                android:layout_marginLeft="@dimen/dimension80dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:maxLines="1"
+                android:text="Fax to U.S. only!(area code &amp; fax number)"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llFaxto"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/txtTo"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="To:"
+                android:textColor="@color/colorBlackDark"
+                android:textSize="@dimen/dimension19dp"
+                android:paddingLeft="@dimen/dimension20dp"/>
+
+            <EditText
+                android:id="@+id/etTo"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llTo"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/txtFrom"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="From:"
+                android:textColor="@color/colorBlackDark"
+                android:textSize="@dimen/dimension19dp"
+                android:paddingLeft="@dimen/dimension20dp"/>
+
+            <EditText
+                android:id="@+id/etFrom"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llFrom"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/txtSubject"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Subject:"
+                android:textSize="@dimen/dimension19dp"
+                android:textColor="@color/colorBlackDark"
+                android:paddingLeft="@dimen/dimension20dp"/>
+
+            <EditText
+                android:id="@+id/etSubject"
+                android:layout_width="@dimen/dimension0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/llSending"
+            android:layout_below="@+id/llSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtSending"
+            android:layout_below="@+id/llSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sending via FAX should be used during an Emergency!"
+            android:textSize="@dimen/dimension20dp"
+            android:textColor="@color/colorBlackDark"
+            android:padding="@dimen/dimension20dp"
+            />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorDarkGray">
+
+            </View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimension10dp"
+            android:layout_below="@+id/llSending"
+            >
+
+            <TextView
+                android:id="@+id/btnYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension15dp"
+                android:text="OK"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/btnNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension15dp"
+                android:text="Cancel"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

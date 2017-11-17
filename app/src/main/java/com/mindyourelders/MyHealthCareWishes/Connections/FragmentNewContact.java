@@ -1516,6 +1516,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtDoctorHourOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorHourOfficePhone);
         txtDoctorOtherPhone = (TextView) rootview.findViewById(R.id.txtDoctorOtherPhone);
         txtDoctorFax = (TextView) rootview.findViewById(R.id.txtDoctorFax);
+
+        txtDoctorFax.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtDoctorFax.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
         txtDoctorWebsite = (TextView) rootview.findViewById(R.id.txtDoctorWebsite);
         txtDoctorAddress = (TextView) rootview.findViewById(R.id.txtDoctorAddress);
         txtDoctorLastSeen = (TextView) rootview.findViewById(R.id.txtDoctorLastSeen);
@@ -1542,6 +1564,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtAideNote = (TextView) rootview.findViewById(R.id.txtAideNote);
         txtAideAddress= (TextView) rootview.findViewById(R.id.txtAideAddress);
 
+        txtAideFax.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtAideFax.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
         //Finance
         txtFinanceOfficePhone = (TextView) rootview.findViewById(R.id.txtFinanceOfficePhone);
         txtFinanceMobilePhone = (TextView) rootview.findViewById(R.id.txtFinanceMobilePhone);
@@ -1553,6 +1597,28 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtLastSeen = (TextView) rootview.findViewById(R.id.txtLastSeen);
         txtFinanceNote= (TextView) rootview.findViewById(R.id.txtFinanceNote);
 
+        txtFinanceFax.addTextChangedListener(new TextWatcher() {
+            int prevL=0;
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL=txtFinanceFax.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length=editable.length();
+                if ((prevL<length) && (length==3 || length==7))
+                {
+                    editable.append("-");
+                }
+            }
+        });
+
         // Insurance
         txtSubscribe = (TextView) rootview.findViewById(R.id.txtSubscribe);
         txtInsuaranceFax = (TextView) rootview.findViewById(R.id.txtInsuaranceFax);
@@ -1560,6 +1626,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         txtAgent= (TextView) rootview.findViewById(R.id.txtAgent);
         txtWebsite = (TextView) rootview.findViewById(R.id.txtWebsite);
         txtInsuaranceNote = (TextView) rootview.findViewById(R.id.txtInsuaranceNote);
+
+
 
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
@@ -1856,6 +1924,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         });
 
 
+
         txtDoctorHourOfficePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
@@ -1921,6 +1990,51 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 prevL = txtInsuarancePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtInsuaranceFax.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtInsuaranceFax.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+        txtPharmacyFax.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtPharmacyFax.getText().toString().length();
             }
 
             @Override
@@ -2726,7 +2840,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             address=txtDoctorAddress.getText().toString();
             website=txtDoctorWebsite.getText().toString();
             lastseen=txtDoctorLastSeen.getText().toString();
-            fax=txtDoctorFax.getText().toString();
+          //  fax=txtDoctorFax.getText().toString();
             int indexValuex = spinner.getSelectedItemPosition();
             if (indexValuex!=0) {
                 speciality = healthSpeciality[indexValuex - 1];
@@ -2746,7 +2860,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
                   txtDoctorOfficePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }else return true;
+            }
+            else return true;
            /* else if (phone.equals("")) {
                   txtDoctorHourOfficePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
