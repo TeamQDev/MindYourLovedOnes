@@ -25,4 +25,14 @@ public class Links implements Serializable{
 
     String name="";
     String url="";
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    int image;
 }

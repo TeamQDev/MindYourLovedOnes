@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ View rootview;
     }
 
     private void setData() {
-        ArrayAdapter adapter=new ArrayAdapter(getActivity(),R.layout.row_resources,R.id.txtName,Datalist);
+        LinkAdapter adapter=new LinkAdapter(getActivity(),UrlList);
         list.setAdapter(adapter);
     }
 
@@ -54,11 +53,25 @@ View rootview;
         Links l1=new Links();
         l1.setName("ABA - Elder Law");
         l1.setUrl("https://www.americanbar.org/groups/senior_lawyers/elder_law.html");
+        l1.setImage(R.drawable.aba_market);
+
+        Links l2=new Links();
+        l2.setName("Caring Info - all 50 states ");
+        l2.setUrl("http://www.caringinfo.org/i4a/pages/index.cfm?pageid=1");
+        l2.setImage(R.drawable.aba_market);
+
+        Links l3=new Links();
+        l3.setName("Aging with Dignity - all 50 states");
+        l3.setUrl("https://www.agingwithdignity.org/");
+        l3.setImage(R.drawable.aba_market);
+
         UrlList.add(l1);
+        UrlList.add(l2);
+        UrlList.add(l3);
 
         //Fol show
-        Datalist=new ArrayList<>();
-        Datalist.add("ABA - Elder Law");
+       // Datalist=new ArrayList<>();
+        //Datalist.add("ABA - Elder Law");
     }
 
     private void initListener() {
@@ -87,17 +100,15 @@ View rootview;
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       if (Datalist.get(position).equals(UrlList.get(position).getName()))
-                       {
+                     /*  if (Datalist.get(position).equals(UrlList.get(position).getName()))
+                       {*/
                            Intent intent = new Intent();
                            intent.setAction(Intent.ACTION_VIEW);
                            intent.addCategory(Intent.CATEGORY_BROWSABLE);
                            intent.setData(Uri.parse(UrlList.get(position).getUrl()));
                            startActivity(intent);
-                       }
+                   //    }
             }
         });
     }
-
-
 }
