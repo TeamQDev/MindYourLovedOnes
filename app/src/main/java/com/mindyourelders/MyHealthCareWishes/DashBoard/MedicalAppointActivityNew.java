@@ -1,21 +1,17 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -23,17 +19,17 @@ import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
-import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
-public class MedicalAppointActivity extends AppCompatActivity implements View.OnClickListener {
+public class MedicalAppointActivityNew extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
-    SwipeMenuListView lvNote;
     ArrayList<Appoint> noteList=new ArrayList<>();
     ImageView imgBack,imgAdd,imgEdit;
     TextView txtView;
@@ -41,16 +37,22 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     ArrayList<DateClass> dateList;
     DBHelper dbHelper;
     RelativeLayout header;
-    ExpandableListView listview;
+    ExpandableListView lvNote;
+
+    List<Appoint> listDataHeader;
+    ProgressDialog pd;
+    HashMap<String, String> listDataDesc;
+    HashMap<String, List<DateClass>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_appoint);
+        setContentView(R.layout.activity_medical_appointnew);
         initComponent();
-        //getData();
+      //  getData();
         initUI();
         initListener();
+      //  setNoteData();
     }
 
     private void initListener() {
@@ -64,9 +66,19 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
-        lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
+        lvNote= (ExpandableListView) findViewById(R.id.lvNote);
+        lvNote.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousItem = -1;
 
-       /* lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousItem)
+                    lvNote.collapseGroup(previousItem);
+                previousItem = groupPosition;
+            }
+        });
+
+      /*  lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final Appoint a=noteList.get(position);
@@ -118,13 +130,13 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
 
             }
         });
-*/
+
 
         txtView= (TextView) findViewById(R.id.txtView);
         if (noteList.size()!=0) {
             setNoteData();
-        }
-        lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        }*/
+     /*   lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
         SwipeMenuCreator creator=s.createMenu(context);
         lvNote.setMenuCreator(creator);
@@ -144,7 +156,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                 }
                 return false;
             }
-        });
+        });*/
     }
     public static String getFormattedDate(Date date) {
         Calendar cal = Calendar.getInstance();
@@ -174,20 +186,39 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     }
 
     private void setNoteData() {
-        if (noteList.size()!=0)
+        ExpandableAdapter adapter = new ExpandableAdapter(context,
+                listDataHeader, listDataChild);
+        lvNote.setAdapter(adapter);
+        /*if (noteList.size()!=0)
         {
             lvNote.setVisibility(View.VISIBLE);
             txtView.setVisibility(View.GONE);
-        }else{
+       }else{
             txtView.setVisibility(View.VISIBLE);
             lvNote.setVisibility(View.GONE);
         }
         AppointAdapter adapter = new AppointAdapter(context,noteList);
-        lvNote.setAdapter(adapter);
+        lvNote.setAdapter(adapter);*/
     }
 
     private void getData() {
        noteList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        listDataHeader = new ArrayList<Appoint>();
+        listDataChild = new HashMap<String, List<DateClass>>();
+
+        for (int i=0;i<noteList.size();i++) {
+            listDataHeader.add(noteList.get(i));
+        }
+
+        List<DateClass> childList = new ArrayList<>();
+
+        for (int i=0;i<noteList.size();i++) {
+            childList = DateQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID), noteList.get(i).getId());
+            for (int j = 0; j < childList.size(); j++) {
+                listDataChild.put("" + listDataHeader.get(i).getId(), childList);
+            }
+        }
+
      //   noteList=new ArrayList<>();
     }
 
@@ -286,45 +317,5 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         super.onResume();
         getData();
         setNoteData();
-    }
-
-    public void SetDate(final Appoint a, final int position) {
-        final ArrayList<DateClass> list=new ArrayList<DateClass>();
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-               int id=a.getId();
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, month, dayOfMonth);
-                long selectedMilli = newDate.getTimeInMillis();
-
-                Date datePickerDate = new Date(selectedMilli);
-                String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
-
-                DateClass d=new DateClass();
-                d.setDate(reportDate);
-                list.add(d);
-
-                ArrayList<DateClass> ds= DateQuery.fetchAllDosageRecord(a.getUserid(),a.getUnique());
-                Boolean flag= DateQuery.insertDosageData(a.getUserid(),list,a.getUnique());
-
-                if (flag==true)
-                {
-                    Toast.makeText(context,"You have inserted date successfully",Toast.LENGTH_SHORT).show();
-                    getData();
-                    setNoteData();
-                }
-                else{
-                    Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
-                }
-
-                noteList.get(position).setDate(dayOfMonth + "/" + (month + 1) + "/" + year);
-            }
-        }, year, month, day);
-        dpd.show();
     }
 }

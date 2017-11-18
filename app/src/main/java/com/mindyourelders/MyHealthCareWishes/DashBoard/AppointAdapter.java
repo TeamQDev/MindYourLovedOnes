@@ -28,6 +28,7 @@ class AppointAdapter extends BaseAdapter {
     ArrayList<Appoint> noteList;
     LayoutInflater lf;
     Holder holder;
+    boolean flag;
 
     public AppointAdapter(Context context, ArrayList noteList) {
         this.context = context;
@@ -96,7 +97,35 @@ class AppointAdapter extends BaseAdapter {
         else{
             holder.txtFrequency.setText(noteList.get(position).getFrequency());
         }
-        ArrayList<DateClass> dates=a.getDateList();
+        final ArrayList<DateClass> dates=a.getDateList();
+        for (int i=0;i<dates.size()+1;i++)
+        {
+
+            View helperview = lf.inflate(R.layout.date_row, null);
+            holder.llDate.addView(helperview);
+            TextView datetime= (TextView) helperview.findViewById(R.id.txtDateTime);
+
+            if (i==dates.size())
+            {
+                datetime.setText("Add +");
+                datetime.setTextColor(context.getResources().getColor(R.color.colorBlue));
+                datetime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((MedicalAppointActivity)context).SetDate(noteList.get(position),position);
+                    }
+                });
+            }
+          else {
+                datetime.setText("Completion Date:  " + dates.get(i).getDate());
+                if (i % 2 == 0) {
+                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                } else {
+                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+                }
+            }
+
+        }
       /*  ArrayList<Date> datesliST=new ArrayList<>();
         {
             for (int i=0;i<dates.size();i++) {
@@ -116,21 +145,26 @@ class AppointAdapter extends BaseAdapter {
                 return date1.after(date2);
             }
         });*/
-        for (int i=0;i<dates.size();i++)
-        {
-            View helperview = lf.inflate(R.layout.date_row, null);
-            holder.llDate.addView(helperview);
-            TextView datetime= (TextView) helperview.findViewById(R.id.txtDateTime);
-            datetime.setText("Completion Date:  "+ dates.get(i).getDate());
-            if (i%2==0)
-            {
-                datetime.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
-            }
-            else{
-                datetime.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
-            }
-        }
+
         //holder.imgProfile.setImageResource(student.getImgid());
+        final View finalConvertView = convertView;
+        holder.txtDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout ll= (LinearLayout) finalConvertView.findViewById(R.id.llDate);
+
+                if ( ll.getVisibility() == View.GONE)
+                {
+                    //expandedChildList.set(arg2, true);
+                    ll.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    //expandedChildList.set(arg2, false);
+                    ll.setVisibility(View.GONE);
+                }
+            }
+        });
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

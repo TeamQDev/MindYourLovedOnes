@@ -33,25 +33,24 @@
             android:textStyle="bold"
             android:drawableLeft="@drawable/test"
             android:drawablePadding="@dimen/dimension10dp"
-            android:layout_weight="45"
+            android:layout_weight="50"
             />
 
-        <TextView
-            android:id="@+id/txtDoctor"
-            style="@style/EmergencyDesc"
-            android:layout_width="@dimen/dimension0dp"
-            android:layout_height="wrap_content"
-            android:text="jksdffs "
-            android:singleLine="true"
-            android:textColor="@color/colorBlack"
-            android:layout_toRightOf="@+id/txtType"
-            android:layout_toLeftOf="@+id/imgForword"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            android:drawableLeft="@drawable/lab"
-            android:drawablePadding="@dimen/dimension10dp"
-            android:layout_weight="45"
-            />
-        <ImageView
+    <TextView
+        android:id="@+id/txtDoctor"
+        style="@style/EmergencyDesc"
+        android:layout_width="@dimen/dimension0dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imgForword"
+        android:layout_toRightOf="@+id/txtType"
+        android:layout_weight="40"
+        android:drawableLeft="@drawable/lab"
+        android:drawablePadding="@dimen/dimension10dp"
+        android:singleLine="true"
+        android:text="jksdffs "
+        android:textColor="@color/colorBlack" />
+
+    <ImageView
             android:id="@+id/imgEdit"
             android:layout_width="@dimen/dimension25dp"
             android:layout_height="@dimen/dimension25dp"
@@ -98,7 +97,7 @@ android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:padding="@dimen/dimension10dp"
             android:gravity="center_vertical"
-            android:drawableRight="@drawable/add_event"
+            android:drawableRight="@drawable/ic_droupdown_arrow"
             android:drawablePadding="@dimen/dimension10dp"
             android:layout_alignParentRight="true"
             />
@@ -109,6 +108,7 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rltype"
             android:orientation="vertical"
+            android:visibility="gone"
             ></LinearLayout>
         <View
             android:id="@+id/view"
@@ -117,7 +117,7 @@ android:visibility="gone"
             android:background="@color/colorDarkGray"
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_marginRight="@dimen/dimension20dp"
-            android:layout_marginTop="@dimen/dimension5dp"
+            android:layout_marginTop="@dimen/dimension10dp"
             android:layout_marginBottom="@dimen/dimension5dp"
             android:layout_below="@+id/rltype"
             android:visibility="gone"

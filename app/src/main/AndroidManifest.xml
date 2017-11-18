@@ -201,6 +201,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivityNew"
+            android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_medical_appoint"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.AddAppointmentActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by welcome on 10/28/2017.
@@ -172,4 +173,26 @@ public class DateQuery {
     }
 
 
+    public static List<DateClass> fetchAllDosageRecords(int userid) {
+        ArrayList<DateClass> noteList=new ArrayList<>();
+        SQLiteDatabase db=dbHelper.getReadableDatabase();
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid+"';",null);
+        //  Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid+"';",null);
+        if(c!=null && c.getCount() > 0) {
+            if (c.moveToFirst()) {
+                do {
+                    DateClass notes = new DateClass();
+                    notes.setId(c.getInt(c.getColumnIndex(COL_ID)));
+                    notes.setPreid(c.getInt(c.getColumnIndex(COL_PREID)));
+                    notes.setUserid(c.getInt(c.getColumnIndex(COL_USERID)));
+                    notes.setPreid(c.getInt(c.getColumnIndex(COL_PREID)));
+                    notes.setDate(c.getString(c.getColumnIndex(COL_DATE)));
+
+                    noteList.add(notes);
+                } while (c.moveToNext());
+            }
+        }
+
+        return noteList;
+    }
 }
