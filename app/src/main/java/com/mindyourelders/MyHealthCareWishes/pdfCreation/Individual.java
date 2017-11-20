@@ -196,6 +196,68 @@ public class Individual {
         messageInfo.add("Pets :");
         messageInfo.add(Pets);
 
+        String name="";String breed="";String color="";String microchip="";String veterian="";String person="";
+        for (int i=0;i<Petlist.size();i++)
+        {
+            int k=i+1;
+            Header.addTable("Pets "+k + " :");
+            Header.addTable("");
+            messageInfo3.add("Pets "+k + " :");
+            messageInfo3.add("");
+
+            Pet a=Petlist.get(i);
+            if (a.getName() != null) {
+                name = a.getName();
+            }
+            Header.addTable("Name :");
+            Header.addTable(name);
+            messageInfo3.add("Name :");
+            messageInfo3.add(name);
+
+            if (a.getBreed() != null) {
+                breed = a.getBreed();
+            }
+            Header.addTable("Breed :");
+            Header.addTable(breed);
+            messageInfo3.add("Breed :");
+            messageInfo3.add(breed);
+
+            if (a.getColor() != null) {
+                color = a.getColor();
+            }
+            Header.addTable("Color :");
+            Header.addTable(color);
+            messageInfo3.add("Color :");
+            messageInfo3.add(color);
+
+            if (a.getChip() != null) {
+                microchip = a.getChip();
+            }
+            Header.addTable("Microchip number :");
+            Header.addTable(microchip);
+            messageInfo3.add("Microchip number :");
+            messageInfo3.add(microchip);
+
+
+            if (a.getVeterian() != null) {
+                veterian = a.getVeterian();
+            }
+            Header.addTable("Veterinarian name,address,person :");
+            Header.addTable(veterian);
+            messageInfo3.add("Veterinarian name,address,person :");
+            messageInfo3.add(veterian);
+
+
+            if (a.getGuard() != null) {
+                person = a.getGuard();
+            }
+            Header.addTable("Person(s) who will care for pet :");
+            Header.addTable(person);
+            messageInfo3.add("Person(s) who will care for pet :");
+            messageInfo3.add(person);
+
+        }
+
           /*  if (connection.get == null) {
                 oPhone = "";
             }
@@ -368,7 +430,75 @@ public class Individual {
         messageInfo2.add("Id Number :");
         messageInfo2.add(idNumber);
 
+        if (connection.getPet() != null) {
+            Pets = connection.getPet();
+        }
+        Header.addTable("Pets :");
+        Header.addTable(Pets);
+        messageInfo2.add("Pets :");
+        messageInfo2.add(Pets);
 
+        String name="";String breed="";String color="";String microchip="";String veterian="";String person="";
+        for (int i=0;i<PetList.size();i++)
+        {
+            int k=i+1;
+            Header.addTable("Pets "+k + " :");
+            Header.addTable("");
+            messageInfo3.add("Pets "+k + " :");
+            messageInfo3.add("");
+
+            Pet a=PetList.get(i);
+            if (a.getName() != null) {
+                name = a.getName();
+            }
+            Header.addTable("Name :");
+            Header.addTable(name);
+            messageInfo3.add("Name :");
+            messageInfo3.add(name);
+
+            if (a.getBreed() != null) {
+                breed = a.getBreed();
+            }
+            Header.addTable("Breed :");
+            Header.addTable(breed);
+            messageInfo3.add("Breed :");
+            messageInfo3.add(breed);
+
+            if (a.getColor() != null) {
+                color = a.getColor();
+            }
+            Header.addTable("Color :");
+            Header.addTable(color);
+            messageInfo3.add("Color :");
+            messageInfo3.add(color);
+
+            if (a.getChip() != null) {
+                microchip = a.getChip();
+            }
+            Header.addTable("Microchip number :");
+            Header.addTable(microchip);
+            messageInfo3.add("Microchip number :");
+            messageInfo3.add(microchip);
+
+
+            if (a.getVeterian() != null) {
+                veterian = a.getVeterian();
+            }
+            Header.addTable("Veterinarian name,address,person :");
+            Header.addTable(veterian);
+            messageInfo3.add("Veterinarian name,address,person :");
+            messageInfo3.add(veterian);
+
+
+            if (a.getGuard() != null) {
+                person = a.getGuard();
+            }
+            Header.addTable("Person(s) who will care for pet :");
+            Header.addTable(person);
+            messageInfo3.add("Person(s) who will care for pet :");
+            messageInfo3.add(person);
+
+        }
 
           /*  if (connection.get == null) {
                 oPhone = "";

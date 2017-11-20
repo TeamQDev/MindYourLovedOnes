@@ -35,20 +35,21 @@
             android:drawablePadding="@dimen/dimension10dp"
             android:layout_weight="50"
             />
-
     <TextView
-        android:id="@+id/txtDoctor"
+        android:id="@+id/txtFrequency"
         style="@style/EmergencyDesc"
         android:layout_width="@dimen/dimension0dp"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/imgForword"
         android:layout_toRightOf="@+id/txtType"
         android:layout_weight="40"
-        android:drawableLeft="@drawable/lab"
+        android:drawableLeft="@drawable/frequency"
         android:drawablePadding="@dimen/dimension10dp"
         android:singleLine="true"
         android:text="jksdffs "
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        />
+
 
     <ImageView
             android:id="@+id/imgEdit"
@@ -76,17 +77,17 @@ android:visibility="gone"
     android:layout_below="@+id/llTop"
     >
 
-        <TextView
-            android:id="@+id/txtFrequency"
-            style="@style/EmergencyDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="jksdffs "
-            android:textColor="@color/colorBlack"
-            android:drawableLeft="@drawable/frequency"
-            android:drawablePadding="@dimen/dimension10dp"
-            />
 
+    <TextView
+        android:id="@+id/txtDoctor"
+        style="@style/EmergencyDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jksdffs "
+        android:textColor="@color/colorBlack"
+        android:drawableLeft="@drawable/lab"
+        android:drawablePadding="@dimen/dimension10dp"
+        android:singleLine="true" />
         <TextView
             android:id="@+id/txtDate"
             style="@style/EmergencyCategory"

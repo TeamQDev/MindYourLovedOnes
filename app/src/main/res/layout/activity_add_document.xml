@@ -315,7 +315,6 @@
             android:maxLines="2"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
             android:imeOptions="actionNext"
