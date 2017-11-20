@@ -91,7 +91,7 @@
                 android:ellipsize="end"
                 android:drawableLeft="@drawable/tele"
                 android:gravity="top|left"
-                android:drawablePadding="@dimen/dimension10dp"
+                android:drawablePadding="@dimen/dimension5dp"
                 android:layout_alignBaseline="@+id/txtPhone"
                 android:layout_alignBottom="@+id/txtPhone"
                 android:layout_toRightOf="@+id/txtPhone"
@@ -137,13 +137,14 @@
                 android:layout_height="wrap_content"
                 android:text="8789-879-785"
                 android:textColor="@color/colorDarkGray"
-                android:layout_marginRight="@dimen/dimension3dp"
+                android:layout_marginRight="@dimen/dimension7dp"
                 android:textSize="@dimen/dimension16dp"
                 android:layout_below="@+id/txtType"
-                android:drawableLeft="@drawable/phone"
+                android:drawableLeft="@drawable/mobile"
                 android:gravity="top|left"
-                android:drawablePadding="@dimen/dimension10dp"
+                android:drawablePadding="@dimen/dimension5dp"
                 android:layout_marginBottom="@dimen/dimension5dp"
+
                 />
             <ImageView
                 android:id="@+id/imgEdit"

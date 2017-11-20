@@ -101,7 +101,7 @@
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
                 android:layout_below="@+id/txtType"
-                android:drawableLeft="@drawable/mobile"
+                android:drawableLeft="@drawable/tele"
                 android:gravity="center_vertical|left"
                 android:drawablePadding="@dimen/dimension5dp"
                 />

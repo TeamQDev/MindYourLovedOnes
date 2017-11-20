@@ -140,7 +140,7 @@
                 android:singleLine="true"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
-                android:drawableLeft="@drawable/tele"
+                android:drawableLeft="@drawable/ofcphone"
                 android:gravity="top|left"
                 android:drawablePadding="@dimen/dimension5dp"
                 android:layout_toRightOf="@+id/txtPhone"

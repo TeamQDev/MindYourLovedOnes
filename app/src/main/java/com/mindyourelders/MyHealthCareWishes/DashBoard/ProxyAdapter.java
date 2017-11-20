@@ -85,7 +85,7 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtPhone.setVisibility(View.VISIBLE);
         }
-        if(proxyList.get(position).getPhone().equals(""))
+        if(proxyList.get(position).getWorkPhone().equals(""))
         {
             holder.txtTelePhone.setVisibility(View.GONE);
         }
@@ -113,7 +113,7 @@ public class ProxyAdapter extends BaseAdapter {
         }
 
 
-        holder.txtTelePhone.setText(proxyList.get(position).getPhone());
+        holder.txtTelePhone.setText(proxyList.get(position).getWorkPhone());
         byte[] photo=proxyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
