@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_centerInParent="true"
-            android:text="Add Document"
+            android:text="Advance Directives"
             android:textColor="#FFFFFF"
             android:textAllCaps="true"
             android:textSize="@dimen/dimension22dp" />
@@ -110,6 +110,7 @@
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
         android:layout_below="@+id/rlDocument"
+
         />
 
     <RelativeLayout
@@ -218,12 +219,10 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Document Name"
-            android:maxLength="30"
+            android:hint="Name of Principal"
             android:maxLines="1"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
             /><requestFocus />
@@ -249,11 +248,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Distributed to"
-            android:maxLength="30"
             android:maxLines="1"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
             /><requestFocus />
