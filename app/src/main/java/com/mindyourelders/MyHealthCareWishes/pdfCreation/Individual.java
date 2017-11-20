@@ -36,6 +36,7 @@ public class Individual {
     String religionNote="";
     String profession="";
     String Veteran="";
+    String Pets="";
     String idNumber="";
 
 
@@ -184,6 +185,15 @@ public class Individual {
         Header.addTable(idNumber);
         messageInfo.add("Id Number :");
         messageInfo.add(idNumber);
+
+
+        if (connection.getPet() != null) {
+            Pets = connection.getPet();
+        }
+        Header.addTable("Pets :");
+        Header.addTable(Pets);
+        messageInfo.add("Pets :");
+        messageInfo.add(Pets);
 
           /*  if (connection.get == null) {
                 oPhone = "";
