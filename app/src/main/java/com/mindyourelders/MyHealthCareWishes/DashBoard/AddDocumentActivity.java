@@ -70,7 +70,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
     String[] DocList = {" Ethical Will","HIPAA Form","Health Care Proxy","Health Care Proxy/Living Will","Living Will","Non-Hospital DNR","Power of Attorney","Other Documents"};
 
-    String[] ADList={"Ethical Will","Non-Hospital DNR Order","HIPAA Authorization","Health Care Proxy","Living Will","Living Will/Health Care Proxy"};
+    String[] ADList={"Ethical Will","Non-Hospital DNR Order","HIPAA Authorization","Health Care Proxy","Living Will","Living Will/Health Care Proxy","MOLST","POLST"};
 
     String[] LegalList={"Bank Durable Power of Attorney","Brokerage Firm Durable Power of Attorney","Trust","Will","Durable Power of Attorney"};
 
