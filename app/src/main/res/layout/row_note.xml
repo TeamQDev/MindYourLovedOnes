@@ -6,6 +6,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_white_border"
@@ -49,4 +50,5 @@
             android:layout_margin="@dimen/dimension5dp"
             />
     </RelativeLayout>
+
 </RelativeLayout>

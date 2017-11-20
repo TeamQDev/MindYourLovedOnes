@@ -97,7 +97,7 @@ DBHelper dbHelper;
                 txtTitle.setText("Advance Directives");
                 break;
             case "Other":
-                txtTitle.setText("Other");
+                txtTitle.setText("Other Documents");
                 break;
             case "Legal":
                 txtTitle.setText("Legal and Financial Documents");

@@ -554,6 +554,16 @@ public class Specialty {
             messageFinance.add("Name :");
             messageFinance.add(name);
 
+            String email = "";
+            if (f.getEmail() != null) {
+                email = f.getEmail();
+            }
+            Header.addTable("Email :");
+            Header.addTable(email);
+            messageFinance.add("Email :");
+            messageFinance.add(email);
+
+
             String officePhone = "";
             if (f.getOfficePhone() != null) {
                 officePhone = f.getOfficePhone();
@@ -580,6 +590,15 @@ public class Specialty {
             Header.addTable(otherPhone);
             messageFinance.add("Other Phone :");
             messageFinance.add(otherPhone);
+
+            String location = "";
+            if (f.getLocation() != null) {
+                location = f.getLocation();
+            }
+            Header.addTable("Location :");
+            Header.addTable(location);
+            messageFinance.add("Location :");
+            messageFinance.add(location);
 
             String officeFax = "";
             if (f.getFax() != null) {
@@ -611,7 +630,7 @@ public class Specialty {
 
             String companyName="";
             if (f.getPracticeName() != null) {
-                companyName = f.getPracticeName();
+                companyName = f.getFirm();
             }
             Header.addTable("Company Name :");
             Header.addTable(companyName);
