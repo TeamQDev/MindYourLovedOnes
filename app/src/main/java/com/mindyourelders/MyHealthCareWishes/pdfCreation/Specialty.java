@@ -225,8 +225,8 @@ public class Specialty {
             messageHospital.add(officePhone);
 
             String mobile = "";
-            if (h.getMobile() != null) {
-                mobile = h.getMobile();
+            if (h.getHourPhone() != null) {
+                mobile = h.getHourPhone();
             }
             Header.addTable("Mobile Phone :");
             Header.addTable(mobile);
@@ -271,8 +271,8 @@ public class Specialty {
             messageHospital.add(website);
 
             String companyName="";
-            if (h.getFirm() != null) {
-                companyName = h.getFirm();
+            if (h.getPracticeName() != null) {
+                companyName = h.getPracticeName();
             }
             Header.addTable("Company Name :");
             Header.addTable(companyName);
@@ -564,8 +564,8 @@ public class Specialty {
             messageFinance.add(officePhone);
 
             String mobile = "";
-            if (f.getMobile() != null) {
-                mobile = f.getMobile();
+            if (f.getHourPhone() != null) {
+                mobile = f.getHourPhone();
             }
             Header.addTable("Mobile Phone :");
             Header.addTable(mobile);
@@ -610,8 +610,8 @@ public class Specialty {
             messageFinance.add(website);
 
             String companyName="";
-            if (f.getFirm() != null) {
-                companyName = f.getFirm();
+            if (f.getPracticeName() != null) {
+                companyName = f.getPracticeName();
             }
             Header.addTable("Company Name :");
             Header.addTable(companyName);
