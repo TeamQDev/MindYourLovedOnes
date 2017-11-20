@@ -20,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
+import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
@@ -39,6 +40,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
+import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
@@ -95,7 +97,7 @@ public class SpecialistsActivity extends AppCompatActivity {
             from=i.getExtras().getString("FROM");
             if (from.equals("Speciality"))
             {
-                txtTitle.setText("SPECIALITY");
+                txtTitle.setText("SPECIALITY CONTACTS");
 
               //  imgRight.setVisibility(View.VISIBLE);
                 header.setBackgroundResource(R.color.colorThree);
@@ -281,14 +283,16 @@ public class SpecialistsActivity extends AppCompatActivity {
                     }
 
                     new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Appointment Checklist");
+                            "Event And Appointment Checklist");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(2);
 
                     ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                     new EventPdf(AppointList);
+                    new EventPdf(NoteList,1);
 
                     Header.document.close();
                 }
@@ -385,6 +389,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getAppointInfo());
+                                    result.append(new MessageString().getEventInfo());
 
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()

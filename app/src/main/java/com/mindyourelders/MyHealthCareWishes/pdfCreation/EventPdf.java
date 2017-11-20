@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
+import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.utility.Header;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 
 public class EventPdf {
     public static ArrayList<String> messageAppoint = new ArrayList<String>();
+    public static ArrayList<String> messageEvent = new ArrayList<String>();
+
     public EventPdf(ArrayList<Appoint> appointList) {
         Header.addChank("Appointment Checklist");
         messageAppoint.add("Appointment Checklist");
@@ -97,5 +100,9 @@ public class EventPdf {
         }
 
         Header.addEmptyLine(1);
+    }
+
+    public EventPdf(ArrayList<Note> noteList, int i) {
+
     }
 }

@@ -115,7 +115,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String otherCategory="";
     String otherInsurance="";
     int prior;
-    int prox;
+    int prox=0;
     int connectionFlag;
     boolean inPrimary;
     MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority;
@@ -2791,7 +2791,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
             if (proxy.equals("Primary")) {
                 prox=0;
-            }else
+            } else if (proxy.equals("Successor"))
             {
                 prox=1;
             }

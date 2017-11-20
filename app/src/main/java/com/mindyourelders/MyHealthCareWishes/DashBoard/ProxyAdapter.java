@@ -59,7 +59,7 @@ public class ProxyAdapter extends BaseAdapter {
         if (convertView==null)
         {
            convertView=lf.inflate(R.layout.row_proxy,parent,false);
-           holder=new ViewHolder();
+            holder=new ViewHolder();
             holder.txtName= (TextView) convertView.findViewById(R.id.txtName);
             holder.txtAddress= (TextView) convertView.findViewById(R.id.txtAddress);
             holder.txtOfficePhone= (TextView) convertView.findViewById(R.id.txtOfficePhone);
@@ -93,21 +93,21 @@ public class ProxyAdapter extends BaseAdapter {
         {
             holder.txtTelePhone.setVisibility(View.VISIBLE);
         }
-        if(proxyList.get(position).getRelationType().equals(""))
+        /*if(proxyList.get(position).getRelationType().equals(""))
         {
             holder.txtType.setVisibility(View.GONE);
         }
         else
         {
             holder.txtType.setVisibility(View.VISIBLE);
-        }
+        }*/
         holder.txtName.setText(proxyList.get(position).getName());
         holder.txtOfficePhone.setText(proxyList.get(position).getWorkPhone());
         holder.txtPhone.setText(proxyList.get(position).getMobile());
-        if (proxyList.get(position).getIsPrimary()==1)
+        if (proxyList.get(position).getIsPrimary()==0)
         {
             holder.txtType.setText("Primary Proxy");
-        }else if (proxyList.get(position).getIsPrimary()==2)
+        }else if (proxyList.get(position).getIsPrimary()==1)
         {
             holder.txtType.setText("Successor Proxy");
         }

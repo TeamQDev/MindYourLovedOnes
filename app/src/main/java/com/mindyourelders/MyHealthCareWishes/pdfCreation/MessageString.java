@@ -296,4 +296,23 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getEventInfo() {
+        StringBuffer result = new StringBuffer();
+        if (EventPdf.messageEvent.size() > 0) {
+            result.append(EventPdf.messageEvent.get(0));
+            result.append("\n");
+            for (int i = 1; i < EventPdf.messageEvent.size(); i++) {
+
+                result.append(EventPdf.messageEvent.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }
