@@ -177,18 +177,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
+            </RelativeLayout>
 
-
-
-
-    </RelativeLayout>
-    <View
-        android:id="@+id/view1"
-        android:layout_height="@dimen/dimension20dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/dimension15dp"
-        android:layout_marginTop="@dimen/dimension15dp"
-        android:background="@color/colorLightGray"
-        android:layout_below="@+id/rlFix"
-        ></View>
 </RelativeLayout>

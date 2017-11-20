@@ -106,7 +106,13 @@ public class HospitalAdapter extends BaseAdapter{
         holder.txtAddress.setText(hospitalList.get(position).getAddress());
         holder.txtPhone.setText(hospitalList.get(position).getOfficePhone());
         holder.txtType.setText(hospitalList.get(position).getName());
-        holder.txtCategory.setText(hospitalList.get(position).getCategory());
+        if (hospitalList.get(position).getCategory().equals("Other"))
+        {
+            holder.txtCategory.setText(hospitalList.get(position).getCategory()+"-"+hospitalList.get(position).getOtherCategory());
+        }
+        else {
+            holder.txtCategory.setText(hospitalList.get(position).getCategory());
+        }
         //holder.imgProfile.setImageResource(FinanceList.get(position).getImage());
         byte[] photo=hospitalList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);

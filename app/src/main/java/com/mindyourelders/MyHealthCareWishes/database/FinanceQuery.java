@@ -184,7 +184,6 @@ public class FinanceQuery {
                 db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
             } while (c.moveToNext());
         }
-
         return true;
     }
 }
