@@ -648,7 +648,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                     Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] photo = baos.toByteArray();
 
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();

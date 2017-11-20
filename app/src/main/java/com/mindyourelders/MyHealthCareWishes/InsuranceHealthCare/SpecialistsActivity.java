@@ -29,6 +29,7 @@ import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
@@ -38,6 +39,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
+import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
@@ -218,12 +220,13 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(2);
                     if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
-                        new Individual(PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)));
+                        final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
-
+                        new Individual((PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetLists);
                     }
                     else{
-                        new Individual(MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)));
+                        final ArrayList<Pet> PetList = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                        new Individual((MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetList);
                     }
                     // new MessageString().getProfileProfile(connection);
                     final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));

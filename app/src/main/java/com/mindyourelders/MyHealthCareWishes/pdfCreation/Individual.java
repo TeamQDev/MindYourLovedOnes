@@ -7,6 +7,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
@@ -48,7 +49,7 @@ public class Individual {
     public static ArrayList<String> messageProxy = new ArrayList<String>();
 
 
-    public Individual(RelativeConnection connection) {
+    public Individual(RelativeConnection connection,ArrayList<Pet> Petlist) {
         Header.addChank("Personal Profile");
         messageInfo.add("Personal Profile");
         Header.addEmptyLine(1);
@@ -222,7 +223,7 @@ public class Individual {
         Header.addEmptyLine(1);
     }
 
-    public Individual(PersonalInfo connection) {
+    public Individual(PersonalInfo connection, ArrayList<Pet> PetList) {
         Header.addChank("Personal Profile");
         messageInfo2.add("Personal Profile");
         Header.addEmptyLine(1);
