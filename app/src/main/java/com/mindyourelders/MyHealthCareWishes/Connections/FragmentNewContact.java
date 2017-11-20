@@ -83,7 +83,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
 
-    TextView txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
+    TextView txtFinanceEmail,txtFinanceLocation,txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
     TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
     TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
     TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
@@ -104,7 +104,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     private static int RESULT_SELECT_PHOTO_CARD = 4;
 
 
-
+String location="";
     String name="", email="", mobile="", speciality="",phone="",address="",workphone="",note="",member="",group="",subscriber="",type="";
     String network="",affil="",practice_name="",website="",lastseen="";
     String fax="";
@@ -1085,6 +1085,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     Finance specialist = (Finance) financeIntent.getExtras().getSerializable("FinanceObject");
 
                     txtFName.setText(specialist.getName());
+                    txtFinanceLocation.setText(specialist.getLocation());
+                    txtFinanceEmail.setText(specialist.getEmail());
                     txtFinanceOtherPhone.setText(specialist.getOtherPhone());
                     txtLastSeen.setText(specialist.getLastseen());
                     txtFinanceAddress.setText(specialist.getAddress());
@@ -1138,6 +1140,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
                     txtFName.setText(specialist.getName());
                     txtFinanceOtherPhone.setText(specialist.getOtherPhone());
+                    txtFinanceEmail.setText(specialist.getEmail());
+                    txtFinanceLocation.setText(specialist.getLocation());
                     txtLastSeen.setText(specialist.getLastseen());
                     txtFinanceAddress.setText(specialist.getAddress());
                     txtFinanceWebsite.setText(specialist.getWebsite());
@@ -1327,6 +1331,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     private void disableFinance() {
         txtFName.setEnabled(false);
+        txtFinanceEmail.setEnabled(false);
+        txtFinanceLocation.setEnabled(false);
         txtFinanceOtherPhone.setEnabled(false);
         txtLastSeen.setEnabled(false);
         txtFinanceAddress.setEnabled(false);
@@ -1898,6 +1904,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
 
         txtFName = (TextView) rootview.findViewById(R.id.txtFName);
+        txtFinanceEmail = (TextView) rootview.findViewById(R.id.txtFinanceEmail);
+        txtFinanceLocation = (TextView) rootview.findViewById(R.id.txtFinanceLocation);
         txtAids = (TextView) rootview.findViewById(R.id.txtAids);
         txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
         txtOther = (TextView) rootview.findViewById(R.id.txtOther);
@@ -2511,7 +2519,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
+                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
@@ -2530,7 +2538,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
+                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
@@ -2938,6 +2946,8 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
         else if (screen.equals("Finance")) {
 
             name=txtFName.getText().toString();
+            email=txtFinanceEmail.getText().toString();
+            location=txtFinanceLocation.getText().toString();
             mobile=txtFinanceOfficePhone.getText().toString();
             phone=txtFinanceMobilePhone.getText().toString();
             workphone=txtFinanceOtherPhone.getText().toString();

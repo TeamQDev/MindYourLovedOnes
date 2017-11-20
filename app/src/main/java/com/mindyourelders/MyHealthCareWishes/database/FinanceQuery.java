@@ -31,6 +31,8 @@ public class FinanceQuery {
     public static final String COL_WEBSITE = "Website";
     public static final String COL_PRACTICENAME = "PracticeName";
     public static final String COL_NOTE = "Note";
+    public static final String COL_EMAIL = "Email";
+    public static final String COL_LOCATION = "Location";
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
     public static final String COL_LASTSEEN = "LastSeen";
@@ -68,6 +70,10 @@ public class FinanceQuery {
                     connection.setOtherCategory(c.getString(c.getColumnIndex(COL_OTHER_CATEGORY)));
                     connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
 
+                    connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
+                    connection.setLocation(c.getString(c.getColumnIndex(COL_LOCATION)));
+
+
                     connectionList.add(connection);
 
                 } while (c.moveToNext());
@@ -76,7 +82,7 @@ public class FinanceQuery {
 
         return connectionList;
     }
-    public static Boolean insertFinanceData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard) {
+    public static Boolean insertFinanceData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -96,6 +102,8 @@ public class FinanceQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_OTHER_CATEGORY,otherCategory);
         cv.put(COL_PHOTOCARD,photoCard);
+        cv.put(COL_EMAIL,email);
+        cv.put(COL_LOCATION,location);
 
 
         long rowid=db.insert(TABLE_NAME,null,cv);
@@ -117,7 +125,7 @@ public class FinanceQuery {
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50)," + COL_LASTSEEN + " VARCHAR(50),"+
                 COL_MOBILE_PHONE + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
                 COL_OFFICE_PHONE + " VARCHAR(20)," + COL_CATEGORY + " VARCHAR(50)," + COL_OTHER_CATEGORY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
-                " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
+                " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +COL_EMAIL + " VARCHAR(50)," +COL_LOCATION+ " VARCHAR(50)," +
                 COL_PHOTOCARD+" BLOB,"+
                 COL_PHOTO + " BLOB);";
         return createTableQuery;
@@ -128,7 +136,7 @@ public class FinanceQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updateFinanceData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard) {
+    public static Boolean updateFinanceData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -148,6 +156,8 @@ public class FinanceQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_OTHER_CATEGORY,otherCategory);
         cv.put(COL_PHOTOCARD,photoCard);
+        cv.put(COL_EMAIL,email);
+        cv.put(COL_LOCATION,location);
 
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);

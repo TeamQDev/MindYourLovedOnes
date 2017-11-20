@@ -96,7 +96,7 @@
                 android:text="8789-879-78"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
-                android:drawableLeft="@drawable/phone"
+                android:drawableLeft="@drawable/tele"
                 android:gravity="top|left"
                 android:drawablePadding="@dimen/dimension10dp"
                 android:layout_below="@+id/txtAddress"
