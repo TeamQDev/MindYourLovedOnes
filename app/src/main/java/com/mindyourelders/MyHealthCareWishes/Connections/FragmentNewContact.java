@@ -59,7 +59,6 @@ import com.riontech.staggeredtextgridview.StaggeredTextGridView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -3098,6 +3097,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
         } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
 
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), imageUri);
+                profileImage.setImageBitmap(thumbnail);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+/*
+
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profileImage.setImageBitmap(imageBitmap);
@@ -3112,12 +3120,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             }
 
 
-            /*if (file.isDirectory()) {
+            */
+/*if (file.isDirectory()) {
                 String[] children = file.list();
                 for (int i = 0; i < children.length; i++) {
                     new File(file, children[i]).delete();
                 }
-            }*/
+            }*//*
+
             try {
 
                 imagepath = path + "/MHCWContact_" + String.valueOf(System.currentTimeMillis())
@@ -3138,6 +3148,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             } finally {
 
             }
+*/
 
         } else if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
             try {

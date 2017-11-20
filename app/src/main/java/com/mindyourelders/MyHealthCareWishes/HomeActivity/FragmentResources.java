@@ -58,12 +58,12 @@ View rootview;
         Links l2=new Links();
         l2.setName("Caring Info - all 50 states ");
         l2.setUrl("http://www.caringinfo.org/i4a/pages/index.cfm?pageid=1");
-        l2.setImage(R.drawable.aba_market);
+        l2.setImage(R.drawable.care);
 
         Links l3=new Links();
         l3.setName("Aging with Dignity - all 50 states");
         l3.setUrl("https://www.agingwithdignity.org/");
-        l3.setImage(R.drawable.aba_market);
+        l3.setImage(R.drawable.aging);
 
         UrlList.add(l1);
         UrlList.add(l2);

@@ -52,7 +52,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -91,7 +90,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     
     ListView ListPet;
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
-    String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
+    String[] countryList = {"Canada", "Mexico", "USA", "UK", "California", "India"};
 
     String imagepath = "";//
     String relation;
@@ -112,7 +111,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
     String[] MaritalList = {"Divorced","Domestic Partner","Married","Separated","Single","Widowed"};
-    String[] LangList = {"English","French","German","Greek","Italian","Japanese","Russian","Spanish"};
+    String[] LangList = {"Arabic","Chinese","English","French","German","Greek","Hebrew","Hindi","Italian","Japanese","Korean","Russian","Spanish","Other"};
 
 
     @Nullable
@@ -703,7 +702,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 TextView textCancels = (TextView) dialogview1.findViewById(R.id.txtCancel);
                 textOptions1.setText("Male");
                 textOptions2.setText("Female");
-                textOptions3.setText("Trans");
+                textOptions3.setText("Trans*");
                 dialogs.setContentView(dialogview1);
                 WindowManager.LayoutParams lps = new WindowManager.LayoutParams();
                 lps.copyFrom(dialogs.getWindow().getAttributes());
@@ -731,7 +730,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 textOptions3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        txtGender.setText("Trans");
+                        txtGender.setText("Trans*");
                         dialogs.dismiss();
                     }
                 });
@@ -1123,7 +1122,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
         } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
 
-            Bundle extras = data.getExtras();
+         try {
+             Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                     getActivity().getContentResolver(), imageUri);
+             profileImage.setImageBitmap(thumbnail);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+           /* Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profileImage.setImageBitmap(imageBitmap);
             // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
@@ -1164,7 +1170,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
             }
 
-
+*/
         }
      else
      if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
@@ -1257,7 +1263,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             ListPet.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Pet a = AllargyLists.get(i);
-                String allergy = "Pet Name: " + a.getName() + "\nBreed: " + a.getBreed() + "\nColor: " + a.getColor()+ "\nVeterinarian: " + a.getVeterian()+ "\nGuard: " + a.getGuard();
+                String allergy = "Pet Name: " + a.getName() + "\nBreed: " + a.getBreed() + "\nColor: " + a.getColor()+ "\nVeterinarian: " + a.getVeterian()+ "\nCaretaker: " + a.getGuard();
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {

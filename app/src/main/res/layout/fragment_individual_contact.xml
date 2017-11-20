@@ -203,7 +203,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:paddingLeft="@dimen/dimension15dp"
-                android:singleLine="true"
                 android:paddingTop="@dimen/dimension10dp"
                 android:paddingBottom="@dimen/dimension10dp"
                 android:textColor="@color/colorPrimaryDark"
