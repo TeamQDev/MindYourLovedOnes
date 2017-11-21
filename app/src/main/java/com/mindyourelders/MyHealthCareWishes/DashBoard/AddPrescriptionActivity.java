@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -20,11 +21,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,10 +71,13 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre;
     EditText etNote;
     MySpinner spinner;
+    RadioGroup rgCounter;
+    RadioButton rbYes, rbNo;
     String[] FormList = {"Capsule","Cream","Drops","Gel","Liquid","Lotion","Pills","Powder","Syrup","Tablet", "Other"};
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
     String imagepath = "";//
+    String counter="No";
 
     Preferences preferences;
     DBHelper dbHelper;
@@ -105,6 +110,17 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         imgDone.setOnClickListener(this);
         txtDate.setOnClickListener(this);
 
+        rgCounter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rbYes) {
+                    pre = "Yes";
+                } else if (checkedId == R.id.rbNo) {
+                    pre = "No";
+                }
+            }
+        });
+
     }
 
     private void initUI() {
@@ -114,6 +130,9 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         txtPre = (TextView) findViewById(R.id.txtPre);
         txtRX= (TextView) findViewById(R.id.txtRX);
         tbPre= (ToggleButton) findViewById(R.id.tbPre);
+        rgCounter = (RadioGroup) findViewById(R.id.rgCounter);
+        rbYes = (RadioButton) findViewById(R.id.rbYes);
+        rbNo = (RadioButton) findViewById(R.id.rbNo);
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         imgBack = (ImageView) findViewById(R.id.imgBack);
@@ -126,7 +145,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         etNote= (EditText) findViewById(R.id.etNote);
         txtNote=(TextView) findViewById(R.id.txtNote);
 
-        tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      /*  tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true)
@@ -135,7 +154,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     pre = "No";
             }
         });
-
+*/
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, FormList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

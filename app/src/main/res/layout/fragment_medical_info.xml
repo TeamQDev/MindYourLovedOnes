@@ -1311,14 +1311,6 @@
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/donor" />
 
-            <TextView
-                android:id="@+id/txtDonorHeader"
-                style="@style/EmergencyCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension40dp"
-                android:layout_toRightOf="@+id/imgDonor"
-                android:text="Organ Donor" />
-
             <RelativeLayout
                 android:id="@+id/rlRadio"
                 android:layout_width="match_parent"
@@ -1327,30 +1319,30 @@
                 android:layout_toRightOf="@+id/imgDonor">
 
                 <RadioGroup
-                    android:id="@+id/rgDonor"
-                    android:layout_width="match_parent"
+                android:id="@+id/rgDonor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbYes"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/dimension10dp"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Yes"
+                    android:textSize="@dimen/dimension18dp"
 
-                    <RadioButton
-                        android:id="@+id/rbYes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimension10dp"
-                        android:layout_marginRight="@dimen/dimension10dp"
-                        android:text="Yes"
-                        android:textSize="@dimen/dimension18dp"
+                    />
 
-                        />
-
-                    <RadioButton
-                        android:id="@+id/rbNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="No"
-                        android:textSize="@dimen/dimension18dp" />
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rbNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="@dimen/dimension18dp" />
+            </RadioGroup>
             </RelativeLayout>
 
             <RelativeLayout
@@ -1424,6 +1416,16 @@
 Transplant, Therapy, Research, Education
 "
                 android:textSize="@dimen/dimension17dp" />
+
+            <TextView
+                android:id="@+id/txtDonorHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:text="Organ Donor"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/txtNote"
+                android:layout_alignEnd="@+id/txtNote" />
         </RelativeLayout>
 
         <RelativeLayout

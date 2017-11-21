@@ -51,7 +51,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
         android:scrollbars="none"
-        android:divider="@null"
+        android:dividerHeight="@dimen/dimension20dp"
+        android:divider="@color/colorLightGray"
         android:background="@color/colorLightBlue"
         android:visibility="gone"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>

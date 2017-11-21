@@ -91,6 +91,7 @@
         android:background="@color/colorBlack"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/dimension5dp"
+        android:visibility="gone"
 ></View>
 </RelativeLayout>
 

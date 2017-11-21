@@ -100,6 +100,33 @@
             android:textSize="@dimen/dimension20dp"
             android:text="Over-the-counter" />
 
+        <RadioGroup
+            android:id="@+id/rgCounter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/txtPre">
+
+            <RadioButton
+                android:id="@+id/rbYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:text="Yes"
+                android:textSize="@dimen/dimension18dp"
+
+                />
+
+            <RadioButton
+                android:id="@+id/rbNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="No"
+                android:textSize="@dimen/dimension18dp" />
+        </RadioGroup>
+
         <ToggleButton
             android:id="@+id/tbPre"
             android:layout_width="@dimen/dimension50dp"
@@ -111,7 +138,8 @@
             android:gravity="center_vertical"
             android:text=""
             android:textOff=""
-            android:textOn="" />
+            android:textOn=""
+            android:visibility="gone"/>
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilDate"
@@ -132,12 +160,10 @@
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:focusable="false"
             android:hint="Date of Prescription."
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
             android:imeOptions="actionNext"
@@ -162,11 +188,9 @@
             android:id="@+id/txtPurpose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:hint="Treatment For"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
             android:imeOptions="actionNext"
@@ -299,7 +323,6 @@
             android:background="@drawable/darkgray_white_border"
             android:gravity="top"
             android:padding="@dimen/dimension8dp"
-
             android:imeOptions="actionNext"
             /><requestFocus />
         <android.support.design.widget.TextInputLayout

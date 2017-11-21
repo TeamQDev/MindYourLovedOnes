@@ -1377,7 +1377,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Website"
-                        android:maxLength="30"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
@@ -1401,11 +1400,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Agent Name and Phone and Email"
                         android:imeOptions="actionNext"
-                        android:maxLength="30"
-                        android:maxLines="3"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
-                        android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp" />
                     <requestFocus />
@@ -1424,11 +1420,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Notes"
                         android:imeOptions="actionNext"
-                        android:maxLength="30"
-                        android:maxLines="3"
                         android:paddingLeft="@dimen/dimension15dp"
                         android:paddingTop="@dimen/dimension2dp"
-                        android:singleLine="true"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp" />
                     <requestFocus />

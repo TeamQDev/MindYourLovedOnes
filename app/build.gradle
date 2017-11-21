@@ -55,4 +55,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/itextpdf-5.2.1.jar')
     compile files('libs/httpmime-4.0.3.jar')
+    compile files('libs/httpmime-4.0.3.jar')
 }

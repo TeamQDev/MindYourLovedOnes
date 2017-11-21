@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension40dp"
             android:layout_below="@+id/txtAdd"
-            android:text="Medicine Name"
+            android:text="Name of Medication or Supplement"
             android:textSize="@dimen/dimension20dp"
             android:layout_margin="@dimen/dimension15dp"
             />
@@ -84,17 +84,6 @@
             android:singleLine="true"
             android:imeOptions="actionNext"
             /><requestFocus />
-
-        <TextView
-            android:id="@+id/txtDose"
-            style="@style/EmergencyCategory"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension40dp"
-            android:text="Dose"
-            android:textSize="@dimen/dimension20dp"
-            android:layout_below="@+id/etRX"
-          android:layout_margin="@dimen/dimension15dp"
-            />
 
         <EditText
             android:id="@+id/etDose"
@@ -180,6 +169,18 @@
                 android:textSize="@dimen/dimension20dp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDose"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:text="Dosage"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/etRX"
+            android:layout_alignLeft="@+id/etDose"
+            android:layout_alignStart="@+id/etDose" />
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>

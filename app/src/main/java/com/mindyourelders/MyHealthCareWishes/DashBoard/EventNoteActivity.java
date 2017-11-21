@@ -1,11 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -25,6 +27,7 @@ import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EventNoteActivity extends AppCompatActivity implements View.OnClickListener {
@@ -143,6 +146,7 @@ RelativeLayout header;
         customDialog.setContentView(R.layout.dialog_input);
         customDialog.setCancelable(false);
         final EditText etNote= (EditText) customDialog.findViewById(R.id.etNote);
+        final EditText etDate= (EditText) customDialog.findViewById(R.id.etdate);
         TextView btnAdd = (TextView) customDialog.findViewById(R.id.btnYes);
         TextView btnCancel = (TextView) customDialog.findViewById(R.id.btnNo);
 
@@ -158,10 +162,37 @@ RelativeLayout header;
             public void onClick(View v) {
 
                 String note=etNote.getText().toString();
-                SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
-                String currentDateandTime = sdf.format(new Date());
+                String date=etDate.getText().toString();
+
+                etDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar calendar = Calendar.getInstance();
+                        int year = calendar.get(Calendar.YEAR);
+                        int month = calendar.get(Calendar.MONTH);
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                Calendar newDate = Calendar.getInstance();
+                                newDate.set(year, month, dayOfMonth);
+                                long selectedMilli = newDate.getTimeInMillis();
+
+                                Date datePickerDate = new Date(selectedMilli);
+                                String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                                DateClass d=new DateClass();
+                                d.setDate(reportDate);
+                                etDate.setText(reportDate);
+                            }
+                        }, year, month, day);
+                        dpd.show();
+                    }
+                });
+              /*  SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+                String currentDateandTime = sdf.format(new Date());*/
                 if (note.length()!=0) {
-                    Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID),note,currentDateandTime);
+                    Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID),note,date);
                     if (flag == true) {
                         Toast.makeText(context, "Event Note Added Succesfully", Toast.LENGTH_SHORT).show();
                         getData();
