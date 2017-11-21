@@ -1,6 +1,8 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,7 +38,10 @@ import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by welcome on 9/14/2017.
@@ -46,7 +52,9 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     View rootview;
     ImageView imgBack, imgDone;
     TextView txtTitle;
-     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
+    EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
+    ImageView imgAddPneumonia,imgAddFlueShot,imgAddHPV,imgAddRubella,imgAddVaricella,imgAddShingles,imgAddTetanus,imgAddHepatitis,imgAddFlue,imgAddFlueNH,imgAddPneumococcal;
+    TextView txtFlueShotDate,txtPneumoniaDate,txtHPVDate,txtRubellaDate,txtVaricellaDate,txtShinglesDate,txtTetanusDate,txtHepatitisDate,txtFlueDate,txtFlueNHDate,txtPneumococcalDate;
     EditText etFt, etInch, etWeight, etAdditional, etPet;
     ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid,tbMouth,tbColor,tbSpeech,tbFeed,tbToilet,tbMedicate;
     RadioButton rbYes, rbNo;
@@ -108,6 +116,19 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         imgAddImplants.setOnClickListener(this);
         imgAddCondition.setOnClickListener(this);
 
+
+        imgAddPneumonia.setOnClickListener(this);
+        imgAddFlueShot.setOnClickListener(this);
+        imgAddHPV.setOnClickListener(this);
+        imgAddRubella.setOnClickListener(this);
+        imgAddVaricella.setOnClickListener(this);
+        imgAddShingles.setOnClickListener(this);
+        imgAddTetanus.setOnClickListener(this);
+        imgAddHepatitis.setOnClickListener(this);
+        imgAddFlue.setOnClickListener(this);
+        imgAddFlueNH.setOnClickListener(this);
+        imgAddPneumococcal.setOnClickListener(this);
+
         tbGlass.setOnCheckedChangeListener(this);
         tbMouth.setOnCheckedChangeListener(this);
         tbLense.setOnCheckedChangeListener(this);
@@ -126,6 +147,32 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("MEDICAL PROFILE");
+
+        txtFlueShotDate = (TextView) rootview.findViewById(R.id.txtFlueShotDate);
+        txtPneumoniaDate = (TextView) rootview.findViewById(R.id.txtPneumoniaDate);
+        txtHPVDate = (TextView) rootview.findViewById(R.id.txtHPVDate);
+        txtRubellaDate = (TextView) rootview.findViewById(R.id.txtRubellaDate);
+        txtVaricellaDate = (TextView) rootview.findViewById(R.id.txtVaricellaDate);
+        txtShinglesDate = (TextView) rootview.findViewById(R.id.txtShinglesDate);
+        txtTetanusDate = (TextView) rootview.findViewById(R.id.txtTetanusDate);
+        txtHepatitisDate = (TextView) rootview.findViewById(R.id.txtHepatitisDate);
+        txtFlueDate = (TextView) rootview.findViewById(R.id.txtFlueDate);
+        txtFlueNHDate = (TextView) rootview.findViewById(R.id.txtFlueNHDate);
+        txtPneumococcalDate = (TextView) rootview.findViewById(R.id.txtPneumococcalDate);
+
+
+        imgAddPneumonia = (ImageView)rootview.findViewById(R.id.imgAddPneumonia);
+        imgAddFlueShot = (ImageView) rootview.findViewById(R.id.imgAddFlueShot);
+        imgAddHPV = (ImageView) rootview.findViewById(R.id.imgAddHPV);
+        imgAddRubella = (ImageView) rootview.findViewById(R.id.imgAddRubella);
+        imgAddVaricella = (ImageView)rootview.findViewById(R.id.imgAddVaricella);
+        imgAddShingles = (ImageView)rootview.findViewById(R.id.imgAddShingles);
+        imgAddTetanus = (ImageView) rootview.findViewById(R.id.imgAddTetanus);
+        imgAddHepatitis = (ImageView) rootview.findViewById(R.id.imgAddHepatitis);
+        imgAddFlue = (ImageView) rootview.findViewById(R.id.imgAddFlue);
+        imgAddFlueNH = (ImageView) rootview.findViewById(R.id.imgAddFlueNH);
+        imgAddPneumococcal = (ImageView) rootview.findViewById(R.id.imgAddPneumococcal);
+
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
@@ -600,6 +647,52 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         switch (v.getId()) {
 
             //  String ft,inch,weight,color,lang1,lang2,blood,pet;
+
+            case R.id.imgAddPneumonia:
+                getDate(getActivity(),txtPneumoniaDate);
+                break;
+
+            case R.id.imgAddFlueShot:
+                getDate(getActivity(),txtFlueShotDate);
+                break;
+
+            case R.id.imgAddHPV:
+                getDate(getActivity(),txtHPVDate);
+                break;
+
+            case R.id.imgAddRubella:
+                getDate(getActivity(),txtRubellaDate);
+                break;
+
+            case R.id.imgAddVaricella:
+                getDate(getActivity(),txtVaricellaDate);
+                break;
+
+            case R.id.imgAddShingles:
+                getDate(getActivity(),txtShinglesDate);
+                break;
+
+            case R.id.imgAddTetanus:
+                getDate(getActivity(),txtTetanusDate);
+                break;
+
+            case R.id.imgAddHepatitis:
+                getDate(getActivity(),txtHepatitisDate);
+                break;
+
+            case R.id.imgAddFlue:
+                getDate(getActivity(),txtFlueDate);
+                break;
+
+            case R.id.imgAddFlueNH:
+                getDate(getActivity(),txtFlueNHDate);
+                break;
+
+            case R.id.imgAddPneumococcal:
+                getDate(getActivity(),txtPneumococcalDate);
+                break;
+
+
             case R.id.imgDone:
                 ft = etFt.getText().toString().trim();
                 inch = etInch.getText().toString().trim();
@@ -675,6 +768,30 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 startActivityForResult(historyIntent, REQUEST_HISTORY);
                 break;
         }
+    }
+
+    private void getDate(Context context, final TextView txtview) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, month, dayOfMonth);
+                long selectedMilli = newDate.getTimeInMillis();
+
+                Date datePickerDate = new Date(selectedMilli);
+                String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                DateClass d=new DateClass();
+                d.setDate(reportDate);
+                txtview.setText(reportDate);
+                txtview.setVisibility(View.VISIBLE);
+            }
+        }, year, month, day);
+        dpd.show();
     }
 
     @Override
@@ -786,4 +903,6 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 break;
         }
     }
+
+
 }

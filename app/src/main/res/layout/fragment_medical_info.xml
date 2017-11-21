@@ -295,7 +295,7 @@
                 android:id="@+id/txtPreHeader"
                 style="@style/EmergencyCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension60dp"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgPre"
                 android:layout_toLeftOf="@+id/imgAddCondition"
                 android:text="Pre-existing Medical Conditions" />
@@ -1081,6 +1081,517 @@
                 android:layout_toRightOf="@+id/imgFunctional"
                 />
         </RelativeLayout>
+        <!---->
+        <RelativeLayout
+            android:id="@+id/rlVaccine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlFunctional"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgVaccine"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/vaccine" />
+
+            <TextView
+                android:id="@+id/txtVaccineHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:text="Immunizations/Vaccines" />
+
+            <RelativeLayout
+                android:id="@+id/rlFlueShot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVaccineHeader"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtFlueShot"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Flue Shot"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFlueShotDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtFlueShot"
+                    android:layout_toLeftOf="@+id/imgAddFlueShot"/>
+
+                <ImageView
+                    android:id="@+id/imgAddFlueShot"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlPneumonia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFlueShot"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtPneumonia"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Pneumonia"
+                    />
+
+                <TextView
+                    android:id="@+id/txtPneumoniaDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtPneumonia"
+                    android:layout_toLeftOf="@+id/imgAddPneumonia"/>
+
+                <ImageView
+                    android:id="@+id/imgAddPneumonia"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlHPV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlPneumonia"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtHPV"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="HPV(9-26)"
+                    />
+
+                <TextView
+                    android:id="@+id/txtHPVDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtHPV"
+                    android:layout_toLeftOf="@+id/imgAddHPV"/>
+
+                <ImageView
+                    android:id="@+id/imgAddHPV"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlRubella"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlHPV"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtRubella"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Rubella"
+                    />
+
+                <TextView
+                    android:id="@+id/txtRubellaDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtRubella"
+                    android:layout_toLeftOf="@+id/imgAddRubella"/>
+
+                <ImageView
+                    android:id="@+id/imgAddRubella"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlVaricella"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlRubella"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtVaricella"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Varicella"
+                    />
+
+                <TextView
+                    android:id="@+id/txtVaricellaDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtVaricella"
+                    android:layout_toLeftOf="@+id/imgAddVaricella"/>
+
+                <ImageView
+                    android:id="@+id/imgAddVaricella"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlShingles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlVaricella"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtShingles"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Shingles"
+                    />
+
+                <TextView
+                    android:id="@+id/txtShinglesDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtShingles"
+                    android:layout_toLeftOf="@+id/imgAddShingles"/>
+
+                <ImageView
+                    android:id="@+id/imgAddShingles"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlTetanus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlShingles"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtTetanus"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="TetanusbTdap"
+                    />
+
+                <TextView
+                    android:id="@+id/txtTetanusDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtTetanus"
+                    android:layout_toLeftOf="@+id/imgAddTetanus"/>
+
+                <ImageView
+                    android:id="@+id/imgAddTetanus"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlHepatitis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlTetanus"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtHepatitis"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Hepatitis B"
+                    />
+
+                <TextView
+                    android:id="@+id/txtHepatitisDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtHepatitis"
+                    android:layout_toLeftOf="@+id/imgAddHepatitis"/>
+
+                <ImageView
+                    android:id="@+id/imgAddHepatitis"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+            android:id="@+id/rlFlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHepatitis"
+            android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+            <TextView
+                android:id="@+id/txtFlue"
+                style="@style/EmergencyDesc"
+                android:layout_width="@dimen/dimension140dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dimension5dp"
+                android:text="Flue Shot"
+                />
+
+            <TextView
+                android:id="@+id/txtFlueDate"
+                style="@style/EmergencyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimension50dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension5dp"
+                android:text="15-Nov-2017"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/txtFlue"
+                android:layout_toLeftOf="@+id/imgAddFlue"/>
+
+            <ImageView
+                android:id="@+id/imgAddFlue"
+                android:layout_width="@dimen/dimension35dp"
+                android:layout_height="@dimen/dimension35dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/calendar" />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFlueNH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFlue"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtFlueNH"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Flue N1H1"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFlueNHDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtFlueNH"
+                    android:layout_toLeftOf="@+id/imgAddFlueNH"/>
+
+                <ImageView
+                    android:id="@+id/imgAddFlueNH"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlPneumococcal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFlueNH"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/txtPneumococcal"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="@dimen/dimension140dp"
+                    android:layout_height="@dimen/dimension55dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Pneumococcal/Vaccine"
+                    />
+
+                <TextView
+                    android:id="@+id/txtPneumococcalDate"
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlue"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="15-Nov-2017"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/txtPneumococcal"
+                    android:layout_toLeftOf="@+id/imgAddPneumococcal"/>
+
+                <ImageView
+                    android:id="@+id/imgAddPneumococcal"
+                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_height="@dimen/dimension35dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+           <!-- <EditText
+                android:id="@+id/etVisionNote"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlBlind"
+                android:layout_margin="@dimen/dimension15dp"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Note"
+                android:layout_toRightOf="@+id/imgEyes"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension8dp" />-->
+
+        </RelativeLayout>
+<!---->
         <RelativeLayout
             android:id="@+id/rlDiet"
             android:layout_width="match_parent"
@@ -1088,7 +1599,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp"
-            android:layout_below="@+id/rlFunctional"
+            android:layout_below="@+id/rlVaccine"
             >
 
             <ImageView
