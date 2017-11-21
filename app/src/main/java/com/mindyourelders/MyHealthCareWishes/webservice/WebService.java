@@ -4,10 +4,18 @@ import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -20,17 +28,17 @@ import java.net.URL;
  */
 
 public class WebService {
-   /* private final String CREATE_PROFILE_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/user/createProfile";
+    private final String CREATE_PROFILE_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/user/createProfile";
 
     private final String GET_PROFILE_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/user/getProfile";
 
     private final String EDIT_PROFILE_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/user/editProfile";
 
     private final String UNSSUBSCRIBE_ME_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/user/unRegister";
-*/
+
     private final static String POST_PDF_URL = "http://www.myhealthcarewishes.com/MHCW/index.php/webservices/fax/sendFax";
 
-   /* public String createProfile(String firstName, String lastName,
+    public String createProfile(String firstName, String lastName,
                                 String state, String mail, String password, String deviceUdid,
                                 String deviceType) {
 
@@ -72,9 +80,6 @@ public class WebService {
         return result;
 
     }
-
-*/
-
 
 
 
@@ -196,7 +201,7 @@ public class WebService {
         return result;
     }
 
-   /* public String getProfile(String userId) {
+    public String getProfile(String userId) {
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(GET_PROFILE_URL);
@@ -227,7 +232,7 @@ public class WebService {
 
         return result;
 
-    }*/
+    }
 
    /* public String unSubscribeMe(String userId) {
 
@@ -262,7 +267,7 @@ public class WebService {
 
     }
 */
-    /*public String editProfile(String id, String firstName, String lastName,
+    public String editProfile(String id, String firstName, String lastName,
                               String state, String email, String password, String userId) {
 
         HttpClient httpclient = new DefaultHttpClient();
@@ -303,7 +308,7 @@ public class WebService {
         return result;
 
     }
-*/
+
     public static String decodeResponse(InputStream is) {
 
         String result = "";

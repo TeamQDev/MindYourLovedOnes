@@ -24,7 +24,9 @@ android {
     dexOptions {
         javaMaxHeapSize = "4g"
     }
-
+    android {
+        useLibrary 'org.apache.http.legacy'
+    }
 }
 
 dependencies {
@@ -52,4 +54,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.5'
     testCompile 'junit:junit:4.12'
     compile files('libs/itextpdf-5.2.1.jar')
+    compile files('libs/httpmime-4.0.3.jar')
 }
