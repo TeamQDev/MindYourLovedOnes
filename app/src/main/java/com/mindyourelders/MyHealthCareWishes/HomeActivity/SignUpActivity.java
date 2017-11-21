@@ -2,17 +2,20 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,13 +42,19 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.webservice.WebService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,6 +64,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 
+import static com.google.android.gms.drive.metadata.CustomPropertyKey.fromJson;
 import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAlert;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -242,7 +253,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.txtForgotPassword:
+               // if (validate()) {
+                    /*CreateUserAsynk asynkTask = new CreateUserAsynk(name, email, password);
+                    asynkTask.execute();*/
+/*
+                    UpdateUserAsynk asynkTask = new UpdateUserAsynk(name, email, password);
+                    asynkTask.execute();*/
 
+
+                    GetUserAsynk asynkTask = new GetUserAsynk();
+                    asynkTask.execute();
+              //  }
                 break;
 
             case R.id.imgBack:
@@ -474,6 +495,454 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
 
 
+        }
+
+    }
+
+    class CreateUserAsynk extends AsyncTask<Void, Void, String> {
+String name;
+        String email;
+        String password;
+        ProgressDialog pd;
+
+        private String deviceUdId = "";
+
+        private String deviceType = "Android";
+
+        public CreateUserAsynk(String name, String email, String password) {
+            this.name=name;
+            this.email=email;
+            this.password=password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            deviceUdId = Settings.Secure.getString(getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+
+            pd = ProgressDialog.show(context, "", "Please Wait..");
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            WebService webService = new WebService();
+
+            Log.e("URL parameter", name + " " + "" + " " + email
+                    + " " + password + " " + deviceUdId + " " + deviceType);
+            String result = webService.createProfile(name, "-",
+                    "-", email, password, deviceUdId, deviceType);
+            // String result = webService.getProfile("35");
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            // Toast.makeText(getApplicationContext(), result + "",
+            // Toast.LENGTH_LONG).show();
+            if (pd != null) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+            }
+
+            if (!result.equals("")) {
+
+                if (result.equals("Exception")) {
+                   // ErrorDialog.errorDialog(context);
+                    DialogManager.showAlert("Error",context);
+                }
+
+                else {
+                    Log.e("CreateUserAsynk", result);
+
+                    String errorCode = parseResponse(result);
+
+                    if (errorCode.equals("0")) {
+                        DialogManager.showAlert("000",context);
+                    /*{
+
+                        if (ByPrefrenceActivity_FLAG) {
+                            finish();
+                        } else {
+
+                            if (PreferenceConnector.readString(SignUpForm.this,
+                                    PreferenceConnector.YESNO, "NO").equals(
+                                    "YES")) {
+                                Intent viewDataIntent = new Intent(
+                                        SignUpForm.this,
+                                        MainUserListActivity.class);
+                                ShearedValues.activitysplash = 1;
+                                startActivity(viewDataIntent);
+                                if (firstUserAdded) {
+                                    startActivity(new Intent(SignUpForm.this,
+                                            MainUserListActivity.class)
+                                            .putExtra("GLOBAL_USER_ID", ""));
+                                } else {
+
+                                    launchIndividualActivity();
+                                }
+
+                                InformationSreen.informationActivity.finish();
+
+                                // TermsAndConditions.termsConditionsActivity
+                                // .finish();
+                                finish();
+                            } else {
+                                InformationSreen.informationActivity.finish();
+
+                                // TermsAndConditions.termsConditionsActivity
+                                // .finish();
+
+                                launchIndividualActivity();
+                                PreferenceConnector.writeString(
+                                        SignUpForm.this,
+                                        PreferenceConnector.YESNO, "YES");
+                                finish();
+                            }
+                        }
+                    }*/
+                    } else {
+                        // Toast.makeText(context,
+                        // "Registration Failed, Try again",
+                        // Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+            super.onPostExecute(result);
+        }
+
+    }
+
+    /*private void launchIndividualActivity() {
+        Intent i = new Intent(context, IndividualContactActivity.class);
+        // i.setFlags(Intent.)
+        i.putExtra("GLOBAL_USER_ID", "");
+        i.putExtra("Activity", "SignUpForm");
+        i.putExtra("Name", firstName + " " + lastName);
+        i.putExtra("EmailId", eMail);
+        i.putExtra("States", state);
+        startActivity(i);
+    }*/
+
+    public String parseResponse(String result) {
+
+        Log.e("Response", result);
+        JSONObject job = null;
+
+        String errorCode = "";
+
+        try {
+            job = new JSONObject(result);
+
+            JSONObject job1 = job.getJSONObject("response");
+
+            errorCode = job1.getString("errorCode");
+
+            String message = "";
+
+            if (errorCode.equals("0")) {
+                message = job1.getString("respMsg");
+                JSONObject job2 = job1.getJSONObject("respData");
+
+                String userId = job2.getString("user_id");
+
+             /* PreferenceConnector.writeString(context,
+                        PreferenceConnector.USERID, userId);
+                PreferenceConnector.writeString(getApplicationContext(),
+                        PreferenceConnector.REGISTERED, "YES");*/
+
+                Log.e("SuccessFullRegisterd", "UserId= " + userId);
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
+                return errorCode;
+            }
+
+            else {
+                message = job1.getString("errorMsg");
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
+                return errorCode;
+            }
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+            return "Exception";
+        }
+
+    }
+
+
+
+
+    class UpdateUserAsynk extends AsyncTask<Void, Void, String> {
+
+        ProgressDialog pd;
+
+        private String userId = "";
+
+        private String deviceType = "Android";
+        String name;
+        String email;
+        String password;
+
+        public UpdateUserAsynk(String name, String email, String password) {
+            this.name=name;
+            this.email=email;
+            this.password=password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pd = ProgressDialog.show(context, "", "Please Wait..");
+
+         /*   SharedPreferences mPref = context.getSharedPreferences(
+                    "UserDetails", Context.MODE_PRIVATE);*/
+
+         //   userId = mPref.getString("userId", "");
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            WebService webService = new WebService();
+
+            Log.e("URL parameter", name + " " + "-" + " " + email
+                    + " " + password + " " + " " + deviceType);
+            String result = webService.editProfile("4985",
+                    name, "-", "-", email, password,userId);
+            // String result = webService.getProfile("35");
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            // Toast.makeText(getApplicationContext(), result + "",
+            // Toast.LENGTH_LONG).show();
+            if (pd != null) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+            }
+
+            if (!result.equals("")) {
+
+                if (result.equals("Exception")) {
+                   // ErrorDialog.errorDialog(context);
+                }
+
+                else {
+                    Log.e("CreateUserAsynk", result);
+
+                    String errorCode = parseResponses(result);
+                    //
+                    if (errorCode.equals("0")) {
+
+                        setResult(RESULT_OK);
+
+                        finish();
+                        // Intent i = new Intent(context,
+                        // IndividualContactActivity.class);
+                        // // i.setFlags(Intent.)
+                        // i.putExtra("GLOBAL_USER_ID", "");
+                        // startActivity(i);
+
+                    } else {
+                        Toast.makeText(context, "Updation Failed, Try again",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+            super.onPostExecute(result);
+        }
+
+    }
+
+    public String parseResponses(String result) {
+
+        JSONObject job = null;
+
+        String errorCode = "";
+
+        try {
+            job = new JSONObject(result);
+
+            JSONObject job1 = job.getJSONObject("response");
+
+            errorCode = job1.getString("errorCode");
+
+            String message = "";
+
+            if (errorCode.equals("0")) {
+                try {
+                    message = job1.getString("errorMsg");
+                    Toast.makeText(context, "" + message, Toast.LENGTH_LONG)
+                            .show();
+                } catch (JSONException jop) {
+
+                }
+
+                return errorCode;
+            }
+
+            else {
+
+                message = job1.getString("errorMsg");
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
+                return errorCode;
+            }
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+            return "Exception";
+        }
+
+    }
+
+
+    class GetUserAsynk extends AsyncTask<Void, Void, String> {
+
+        ProgressDialog pd;
+
+        String userId = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            pd = ProgressDialog.show(context, "", "Please Wait..");
+
+           /* userId = PreferenceConnector.readString(context,
+                    PreferenceConnector.USERID, "-1");
+*/
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            WebService webService = new WebService();
+
+            String result = webService.getProfile("4985");
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if (pd != null) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+            }
+
+            if (!result.equals("")) {
+
+                if (result.equals("Exception")) {
+
+                    //ErrorDialog.errorDialog(context);
+
+                }
+
+                else {
+                    Log.e("CreateUserAsynk", result);
+                    String errorCode = parseResponseg(result);
+
+                    if (errorCode.equals("0")) {
+
+                    } else {
+                        Toast.makeText(context, "No details", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+
+            }
+            super.onPostExecute(result);
+        }
+
+    }
+
+    public String parseResponseg(String result) {
+
+        JSONObject job = null;
+
+        String errorCode = "";
+
+        try {
+            job = new JSONObject(result);
+
+            JSONObject job1 = job.getJSONObject("response");
+
+            errorCode = job1.getString("errorCode");
+
+            // String message = "";
+
+            if (errorCode.equals("0")) {
+
+                // message = job1.getString("resp");
+
+                JSONArray array2 = job1.getJSONArray("respData");
+
+                JSONObject job2 = array2.getJSONObject(0);
+
+                // String id = job2.getString("id");
+                //
+                // String status = job2.getString("status");
+                //
+                // String user_name = job2.getString("user_name");
+                //
+                // String user_type = job2.getString("user_type");
+
+                String state = job2.getString("state");
+
+                String email = job2.getString("email");
+
+                String first_name = job2.getString("first_name");
+
+                String last_name = job2.getString("last_name");
+
+                // String password = job2.getString("password");
+                //
+                // String created_date = job2.getString("created_date");
+                //
+                // String device_type = job2.getString("device_type");
+                //
+                // String updated_date = job2.getString("updated_date");
+                //
+                // String deviceUdid = job2.getString("deviceUdid");
+
+               // updateUI(first_name, last_name, state, email);
+
+                fromJson(job2);
+
+                return errorCode;
+
+            }
+
+            else {
+                // message = job1.getString("errorMsg");
+
+                Toast.makeText(context, "" + "No details", Toast.LENGTH_LONG)
+                        .show();
+                return errorCode;
+            }
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+            return "Exception";
         }
 
     }

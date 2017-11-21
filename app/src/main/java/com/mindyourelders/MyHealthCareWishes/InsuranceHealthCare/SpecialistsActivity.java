@@ -158,6 +158,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         AppointmentQuery df=new AppointmentQuery(context,dbHelper);
         DateQuery da=new DateQuery(context,dbHelper);
         InsuranceQuery i=new InsuranceQuery(context,dbHelper);
+        PetQuery pet=new PetQuery(context,dbHelper);
     }
 
     private void initListener() {
