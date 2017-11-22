@@ -1,12 +1,16 @@
 package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -18,28 +22,36 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Created by V@iBh@V on 10/23/2017.
  */
 
-public class FragmentHospital extends Fragment implements View.OnClickListener{
+public class FragmentHospital extends Fragment implements View.OnClickListener {
+    ImageView imgRight;
     View rootview;
     SwipeMenuListView lvHospital;
     ArrayList<Hospital> hospitalList;
     RelativeLayout llAddHospital;
     Preferences preferences;
     DBHelper dbHelper;
+    final String dialog_items[] = {"View", "Email", "Fax", "Print"};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootview=inflater.inflate(R.layout.fragment_hospital,null);
+        rootview = inflater.inflate(R.layout.fragment_hospital, null);
         initComponent();
         getData();
         initUI();
@@ -50,17 +62,16 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
 
     private void initComponent() {
         preferences = new Preferences(getActivity());
-        dbHelper=new DBHelper(getActivity());
-        HospitalHealthQuery f=new HospitalHealthQuery(getActivity(),dbHelper);
+        dbHelper = new DBHelper(getActivity());
+        HospitalHealthQuery f = new HospitalHealthQuery(getActivity(), dbHelper);
     }
 
     private void setListData() {
-        if (hospitalList.size()!=0) {
-            HospitalAdapter hospitalAdapter=new HospitalAdapter(getActivity(),hospitalList);
+        if (hospitalList.size() != 0) {
+            HospitalAdapter hospitalAdapter = new HospitalAdapter(getActivity(), hospitalList);
             lvHospital.setAdapter(hospitalAdapter);
             lvHospital.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             lvHospital.setVisibility(View.GONE);
         }
     }
@@ -68,17 +79,19 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
 
     private void initListener() {
         llAddHospital.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
+        imgRight = (ImageView) getActivity().findViewById(R.id.imgRight);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
-        llAddHospital= (RelativeLayout) rootview.findViewById(R.id.llAddHospital);
+        llAddHospital = (RelativeLayout) rootview.findViewById(R.id.llAddHospital);
         lvHospital = (SwipeMenuListView) rootview.findViewById(R.id.lvHospital);
         setListData();
 
         lvHospital.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(getActivity());
+        SwipeMenuCreation s = new SwipeMenuCreation();
+        SwipeMenuCreator creator = s.createMenu(getActivity());
         lvHospital.setMenuCreator(creator);
         lvHospital.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
@@ -101,32 +114,29 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
     }
 
     private void callUser(Hospital item) {
-        String mobile=item.getOfficePhone();
-        String hphone=item.getMobile();
-        String wPhone=item.getOtherPhone();
+        String mobile = item.getOfficePhone();
+        String hphone = item.getMobile();
+        String wPhone = item.getOtherPhone();
 
-        if (mobile.length()!=0||hphone.length()!=0||wPhone.length()!=0)
-        {
-            CallDialog c=new CallDialog();
-            c.showCallDialog(getActivity(),mobile,hphone,wPhone);
-        }
-        else{
-            Toast.makeText(getActivity(),"You have not added phone number for call",Toast.LENGTH_SHORT).show();
+        if (mobile.length() != 0 || hphone.length() != 0 || wPhone.length() != 0) {
+            CallDialog c = new CallDialog();
+            c.showCallDialog(getActivity(), mobile, hphone, wPhone);
+        } else {
+            Toast.makeText(getActivity(), "You have not added phone number for call", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void deleteHospital(Hospital item) {
-        boolean flag= HospitalHealthQuery.deleteRecord(item.getId());
-        if(flag==true)
-        {
-            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+        boolean flag = HospitalHealthQuery.deleteRecord(item.getId());
+        if (flag == true) {
+            Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
             getData();
             setListData();
         }
     }
 
     private void getData() {
-        hospitalList= HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        hospitalList = HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
        /* FinanceList=new ArrayList<>();
 
         Finance P1=new Finance();
@@ -167,9 +177,63 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.llAddHospital:
-                preferences.putString(PrefConstants.SOURCE,"Hospital");
-                Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
+                preferences.putString(PrefConstants.SOURCE, "Hospital");
+                Intent i = new Intent(getActivity(), GrabConnectionActivity.class);
                 startActivity(i);
+                break;
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Hospital.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Hospitals and other health professionals");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+
+                ArrayList<Hospital> HospitalList = HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new Specialty("Hospital", HospitalList);
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+
+                            case 0: // view
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getHospitalInfo());
+
+                                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/Hospital.pdf",
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+
+                                break;
+                            case 1://Email
+                                break;
+                            case 2://fax
+                                break;
+                            case 3: //Print
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
         }
     }
@@ -181,4 +245,5 @@ public class FragmentHospital extends Fragment implements View.OnClickListener{
         setListData();
     }
 }
+
 

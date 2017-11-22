@@ -1,12 +1,16 @@
 package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -18,11 +22,16 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +39,14 @@ import java.util.ArrayList;
  */
 
 public class FragmentAids extends Fragment implements View.OnClickListener{
+    ImageView imgRight;
     View rootview;
     SwipeMenuListView lvAides;
     ArrayList<Aides> AidesList;
     RelativeLayout llAddAides;
     Preferences preferences;
 DBHelper dbHelper;
+    final String dialog_items[]={"View","Email","Fax","Print"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -68,10 +79,11 @@ DBHelper dbHelper;
 
     private void initListener() {
         llAddAides.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
-
+        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddAides= (RelativeLayout) rootview.findViewById(R.id.llAddAides);
         lvAides = (SwipeMenuListView) rootview.findViewById(R.id.lvAides);
@@ -168,6 +180,59 @@ DBHelper dbHelper;
                 Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
                 startActivity(i);
                 break;
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Aides.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Home health services");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+
+                ArrayList<Aides> AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new Specialty(AidesList,1);
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+
+                            case 0: // view
+                                    StringBuffer result = new StringBuffer();
+
+                                    result.append(new MessageString().getAideInfo());
+
+                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/Aides.pdf",
+                                            getActivity(), result);
+
+                                    System.out.println("\n" + result + "\n");
+                            break;
+                            case 1://Email
+                                break;
+                            case 2://fax
+                                break;
+                            case 3: //Print
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
         }
     }
 

@@ -1,12 +1,16 @@
 package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -18,11 +22,16 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +39,14 @@ import java.util.ArrayList;
  */
 
 public class FragmentSpecialist extends Fragment implements View.OnClickListener{
+    ImageView imgRight;
     View rootview;
     SwipeMenuListView lvSpecialist;
     ArrayList<Specialist> specialistList;
     RelativeLayout llAddSpecialist;
     Preferences preferences;
     DBHelper dbHelper;
+    final String dialog_items[]={"View","Email","Fax","Print"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -69,10 +80,12 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
     private void initListener() {
         //  imgADMTick.setOnClickListener(this);
         llAddSpecialist.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
 
+        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);
         lvSpecialist= (SwipeMenuListView) rootview.findViewById(R.id.lvSpecialist);
@@ -170,6 +183,60 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
                 startActivity(i);
                // DialogManager dialogManager=new DialogManager(new FragmentSpecialist());
                // dialogManager.showCommonDialog("Add?","Do you want to add new specialist?",getActivity(),"ADD_SPECIALIST",null);
+                break;
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Doctor.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Doctor");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+
+                ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
+                new Specialty(specialistsList,"Doctors");
+                Header.document.close();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                            case 0: //View
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getDoctorsInfo());
+
+                                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/Doctor.pdf",
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+
+                                break;
+                            case 1://Email
+                                break;
+                            case 2://fax
+                                break;
+                            case 3: //Print
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
         }
     }
