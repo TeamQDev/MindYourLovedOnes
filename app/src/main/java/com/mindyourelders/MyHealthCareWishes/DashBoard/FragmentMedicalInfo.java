@@ -51,9 +51,9 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private static final int REQUEST_CONDITION = 500;
     View rootview;
     ImageView imgBack, imgDone;
-    TextView txtTitle;
+    TextView txtTitle,imgAddFlueShot;
     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
-    ImageView imgAddPneumonia,imgAddFlueShot,imgAddHPV,imgAddRubella,imgAddVaricella,imgAddShingles,imgAddTetanus,imgAddHepatitis,imgAddFlue,imgAddFlueNH,imgAddPneumococcal;
+    TextView imgAddPneumonia,imgAddHPV,imgAddRubella,imgAddVaricella,imgAddShingles,imgAddTetanus,imgAddHepatitis,imgAddFlue,imgAddFlueNH,imgAddPneumococcal;
     TextView txtFlueShotDate,txtPneumoniaDate,txtHPVDate,txtRubellaDate,txtVaricellaDate,txtShinglesDate,txtTetanusDate,txtHepatitisDate,txtFlueDate,txtFlueNHDate,txtPneumococcalDate;
     EditText etFt, etInch, etWeight, etAdditional, etPet;
     ToggleButton tbGlass, tbLense, tbFalse, tbImplants, tbHearingAid,tbMouth,tbColor,tbSpeech,tbFeed,tbToilet,tbMedicate;
@@ -161,17 +161,17 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         txtPneumococcalDate = (TextView) rootview.findViewById(R.id.txtPneumococcalDate);
 
 
-        imgAddPneumonia = (ImageView)rootview.findViewById(R.id.imgAddPneumonia);
-        imgAddFlueShot = (ImageView) rootview.findViewById(R.id.imgAddFlueShot);
-        imgAddHPV = (ImageView) rootview.findViewById(R.id.imgAddHPV);
-        imgAddRubella = (ImageView) rootview.findViewById(R.id.imgAddRubella);
-        imgAddVaricella = (ImageView)rootview.findViewById(R.id.imgAddVaricella);
-        imgAddShingles = (ImageView)rootview.findViewById(R.id.imgAddShingles);
-        imgAddTetanus = (ImageView) rootview.findViewById(R.id.imgAddTetanus);
-        imgAddHepatitis = (ImageView) rootview.findViewById(R.id.imgAddHepatitis);
-        imgAddFlue = (ImageView) rootview.findViewById(R.id.imgAddFlue);
-        imgAddFlueNH = (ImageView) rootview.findViewById(R.id.imgAddFlueNH);
-        imgAddPneumococcal = (ImageView) rootview.findViewById(R.id.imgAddPneumococcal);
+        imgAddPneumonia = (TextView)rootview.findViewById(R.id.imgAddPneumonia);
+        imgAddFlueShot = (TextView) rootview.findViewById(R.id.imgAddFlueShot);
+        imgAddHPV = (TextView) rootview.findViewById(R.id.imgAddHPV);
+        imgAddRubella = (TextView) rootview.findViewById(R.id.imgAddRubella);
+        imgAddVaricella = (TextView)rootview.findViewById(R.id.imgAddVaricella);
+        imgAddShingles = (TextView)rootview.findViewById(R.id.imgAddShingles);
+        imgAddTetanus = (TextView) rootview.findViewById(R.id.imgAddTetanus);
+        imgAddHepatitis = (TextView) rootview.findViewById(R.id.imgAddHepatitis);
+        imgAddFlue = (TextView) rootview.findViewById(R.id.imgAddFlue);
+        imgAddFlueNH = (TextView) rootview.findViewById(R.id.imgAddFlueNH);
+        imgAddPneumococcal = (TextView) rootview.findViewById(R.id.imgAddPneumococcal);
 
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);

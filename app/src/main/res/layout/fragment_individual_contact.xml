@@ -313,7 +313,7 @@
            android:paddingBottom="@dimen/dimension8dp"
            android:paddingLeft="@dimen/dimension30dp"
            android:paddingRight="@dimen/dimension30dp"
-android:gravity="bottom"
+           android:gravity="bottom"
            android:visibility="gone"
            >
            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
@@ -540,11 +540,143 @@ android:gravity="bottom"
            android:layout_below="@+id/spinnerEyes"
            >
        </View>
+       <TextView
+           android:id="@+id/txtLiving"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:layout_marginLeft="@dimen/dimension10dp"
+           android:paddingRight="@dimen/dimension30dp"
+           android:paddingTop="@dimen/dimension8dp"
+           android:text="Do you live alone?"
+           android:textColor="@color/colorPrimary"
+           android:textSize="@dimen/dimension20dp"
+           android:layout_below="@+id/view3"
+           />
+       <RadioGroup
+           android:id="@+id/rgLive"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/txtLiving"
+           android:paddingBottom="@dimen/dimension8dp"
+           android:paddingLeft="@dimen/dimension30dp"
+           android:paddingRight="@dimen/dimension30dp"
+           android:paddingTop="@dimen/dimension8dp"
+           android:orientation="horizontal"
+           >
+           <RadioButton
+               android:id="@+id/rbYesLive"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Yes"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_marginLeft="@dimen/dimension20dp"
+               />
+           <RadioButton
+               android:id="@+id/rbNoLive"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="No"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_marginLeft="@dimen/dimension20dp"
+               />
+       </RadioGroup>
+       <RelativeLayout
+           android:id="@+id/rlLive"
+           android:layout_below="@+id/rgLive"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/dimension50dp"
+           android:visibility="gone"
+           >
+       <CheckBox
+           android:id="@+id/chkChild"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Children"
+           android:textSize="@dimen/dimension20dp"
+           />
+           <CheckBox
+               android:id="@+id/chkFriend"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Friend"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_below="@+id/chkChild"
+               />
+           <CheckBox
+               android:id="@+id/chkGrandParent"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Grand Parents"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_below="@+id/chkFriend"
+               />
+           <CheckBox
+               android:id="@+id/chkParent"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Parents"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_below="@+id/chkGrandParent"
+               />
+           <CheckBox
+               android:id="@+id/chkSpouse"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Spouse"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_below="@+id/chkParent"
+               />
+           <CheckBox
+               android:id="@+id/chkOther"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Significant Other"
+               android:textSize="@dimen/dimension20dp"
+               android:layout_below="@+id/chkSpouse"
+               />
+           <android.support.design.widget.TextInputLayout
+               android:id="@+id/tilOther"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/chkOther"
+               android:paddingBottom="@dimen/dimension8dp"
+               android:paddingLeft="@dimen/dimension30dp"
+               android:paddingRight="@dimen/dimension30dp"
+               android:gravity="bottom"
+               android:visibility="gone"
+               >
+               <AutoCompleteTextView
+                   android:id="@+id/txtOther"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Other(Specify)"
+                   android:paddingLeft="@dimen/dimension15dp"
+                   android:paddingTop="@dimen/dimension10dp"
+                   android:paddingBottom="@dimen/dimension10dp"
+                   android:textColor="@color/colorPrimaryDark"
+                   android:textSize="@dimen/dimension20dp"
+                   android:imeOptions="actionNext"
+                   /><requestFocus />
+           </android.support.design.widget.TextInputLayout>
+       </RelativeLayout>
+       <View
+           android:id="@+id/view12"
+           android:layout_height="@dimen/dimension20dp"
+           android:layout_width="match_parent"
+           android:layout_marginBottom="@dimen/dimension15dp"
+           android:layout_marginTop="@dimen/dimension15dp"
+           android:background="@color/colorLightGray"
+           android:layout_below="@+id/rlLive"
+           >
+       </View>
        <android.support.design.widget.TextInputLayout
            android:id="@+id/tilProfession"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_below="@+id/view3"
+           android:layout_below="@+id/view12"
            android:paddingBottom="@dimen/dimension8dp"
            android:paddingLeft="@dimen/dimension30dp"
            android:paddingRight="@dimen/dimension30dp"

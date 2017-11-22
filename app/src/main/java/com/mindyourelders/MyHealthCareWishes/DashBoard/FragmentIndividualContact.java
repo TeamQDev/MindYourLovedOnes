@@ -26,6 +26,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -70,23 +72,24 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     ContentValues values;
     Uri imageUri;
     byte[] photoCard=null;
-    TextView txtSignUp, txtLogin, txtForgotPassword;
+    TextView txtSignUp, txtLogin, txtForgotPassword,txtOther;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
-    TextInputLayout tilOtherRelation,tilId;
-    RelativeLayout rlPet;
+    TextInputLayout tilOtherRelation,tilId,tilOther;
+    RelativeLayout rlPet,rlLive;
     String name="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
     String height="",weight="",profession="",employed="",religion="",idnumber="";
-    String pet="No",veteran="No",english="No";
+    String pet="No",veteran="No",english="No",live="No";
     String eyes,language,marital_status;
     String otherRelation;
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
     private static int RESULT_CAMERA_IMAGE_CARD = 3;
     private static int RESULT_SELECT_PHOTO_CARD = 4;
-    RadioGroup rgPet,rgVeteran,rgUnderstand;
-    RadioButton rbYes,rbNo,rbYesPet,rbNoPet,rbYess,rbNoo;
+    RadioGroup rgPet,rgVeteran,rgUnderstand,rgLive;
+    RadioButton rbYes,rbNo,rbYesPet,rbNoPet,rbYess,rbNoo,rbYesLive,rbNoLive;
     public static final int REQUEST_PET= 400;
+    CheckBox chkOther;
     
     ListView ListPet;
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
@@ -154,10 +157,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void initUI() {
         rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
+        rlLive= (RelativeLayout) rootview.findViewById(R.id.rlLive);
         txtCard= (TextView) rootview.findViewById(R.id.txtCard);
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
+        chkOther= (CheckBox) rootview.findViewById(R.id.chkOther);
         ListPet= (ListView) rootview.findViewById(R.id.ListPet);
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
         imgCard= (ImageView) rootview.findViewById(R.id.imgCard);
@@ -196,13 +201,17 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txttelephone= (TextView) rootview.findViewById(R.id.txttelephone);
         txtReligion = (TextView) rootview.findViewById(R.id.txtReligion);
         txtIdNumber = (TextView) rootview.findViewById(R.id.txtId);
-
-
+        txtOther = (TextView) rootview.findViewById(R.id.txtOther);
+        tilOther= (TextInputLayout) rootview.findViewById(R.id.tilOther);
 
         rbYes = (RadioButton) rootview.findViewById(R.id.rbYes);
         rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
         rbYesPet = (RadioButton) rootview.findViewById(R.id.rbYesPet);
         rbNoPet = (RadioButton) rootview.findViewById(R.id.rbNoPet);
+
+        rgLive= (RadioGroup) rootview.findViewById(R.id.rgLive);
+        rbYesLive= (RadioButton) rootview.findViewById(R.id.rbYesLive);
+        rbNoLive = (RadioButton) rootview.findViewById(R.id.rbNoLive);
 
         rbYess = (RadioButton) rootview.findViewById(R.id.rbYess);
         rbNoo = (RadioButton) rootview.findViewById(R.id.rbNoo);
@@ -242,6 +251,17 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         spinnerRelation.setAdapter(adapter1);
         spinnerRelation.setHint("Relationship");
 
+        chkOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked==true) {
+                    tilOther.setVisibility(View.VISIBLE);
+
+                } else if (isChecked==false) {
+                    tilOther.setVisibility(View.GONE);
+                }
+            }
+        });
         rgPet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -265,6 +285,19 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 } else if (checkedId == R.id.rbNo) {
                     veteran = "No";
                     tilId.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        rgLive.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rbYesLive) {
+                    live = "Yes";
+                    rlLive.setVisibility(View.GONE);
+                } else if (checkedId == R.id.rbNoLive) {
+                    live = "No";
+                    rlLive.setVisibility(View.VISIBLE);
                 }
             }
         });

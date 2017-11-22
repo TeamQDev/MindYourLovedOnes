@@ -331,12 +331,18 @@
 
         </RelativeLayout>
 
-
+        <View
+            android:id="@+id/view2"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlHistory"
+            />
         <RelativeLayout
             android:id="@+id/rlAllergis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHistory"
+            android:layout_below="@+id/view2"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -375,12 +381,18 @@
                 android:divider="@null" />
 
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view3"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlAllergis"
+            />
         <RelativeLayout
             android:id="@+id/rlEyes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlAllergis"
+            android:layout_below="@+id/view3"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -389,7 +401,6 @@
                 android:id="@+id/imgEyes"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/eye" />
@@ -504,12 +515,18 @@
                 android:padding="@dimen/dimension8dp" />
 
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view4"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlEyes"
+            />
         <RelativeLayout
             android:id="@+id/rlTeeth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlEyes"
+            android:layout_below="@+id/view4"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -518,7 +535,6 @@
                 android:id="@+id/imgTeeth"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/teeth"
@@ -640,12 +656,18 @@
                 android:layout_toRightOf="@+id/imgTeeth"
                 />
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view5"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlTeeth"
+            />
         <RelativeLayout
             android:id="@+id/rlAides"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlTeeth"
+            android:layout_below="@+id/view5"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -654,7 +676,6 @@
                 android:id="@+id/imgAides"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/aide" />
@@ -737,12 +758,18 @@
                 android:textColor="@color/colorBlue"
                 android:padding="@dimen/dimension8dp" />
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view6"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlAides"
+            />
         <RelativeLayout
             android:id="@+id/rlFunctional"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlAides"
+            android:layout_below="@+id/view6"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -751,7 +778,7 @@
                 android:id="@+id/imgFunctional"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
+
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/functional"
@@ -1082,11 +1109,18 @@
                 />
         </RelativeLayout>
         <!---->
+        <View
+            android:id="@+id/view7"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlFunctional"
+            />
         <RelativeLayout
             android:id="@+id/rlVaccine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlFunctional"
+            android:layout_below="@+id/view7"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1095,7 +1129,6 @@
                 android:id="@+id/imgVaccine"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/vaccine" />
@@ -1112,9 +1145,9 @@
                 android:id="@+id/rlFlueShot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtVaccineHeader"
-                android:layout_toRightOf="@+id/imgVaccine"
                 android:gravity="center_vertical"
+                android:layout_below="@+id/imgVaccine"
+               android:layout_toRightOf="@+id/imgVaccine"
                 >
 
                 <TextView
@@ -1133,19 +1166,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtFlueShot"
                     android:layout_toLeftOf="@+id/imgAddFlueShot"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddFlueShot"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1156,8 +1191,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlFlueShot"
-                android:layout_toRightOf="@+id/imgVaccine"
+
                 android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/imgVaccine"
                 >
 
                 <TextView
@@ -1176,19 +1212,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtPneumonia"
                     android:layout_toLeftOf="@+id/imgAddPneumonia"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddPneumonia"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1197,8 +1235,9 @@
                 android:id="@+id/rlHPV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlPneumonia"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlPneumonia"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1218,20 +1257,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtHPV"
                     android:layout_toLeftOf="@+id/imgAddHPV"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddHPV"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
                     android:layout_centerVertical="true"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:src="@drawable/calendar" />
 
             </RelativeLayout>
@@ -1241,6 +1282,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlHPV"
                 android:layout_toRightOf="@+id/imgVaccine"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1260,19 +1302,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtRubella"
                     android:layout_toLeftOf="@+id/imgAddRubella"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddRubella"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1282,8 +1326,9 @@
                 android:id="@+id/rlVaricella"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlRubella"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlRubella"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1303,19 +1348,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtVaricella"
                     android:layout_toLeftOf="@+id/imgAddVaricella"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddVaricella"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1325,8 +1372,9 @@
                 android:id="@+id/rlShingles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlVaricella"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlVaricella"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1346,19 +1394,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtShingles"
                     android:layout_toLeftOf="@+id/imgAddShingles"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddShingles"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1367,8 +1417,9 @@
                 android:id="@+id/rlTetanus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlShingles"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlShingles"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1388,19 +1439,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtTetanus"
                     android:layout_toLeftOf="@+id/imgAddTetanus"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddTetanus"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1409,8 +1462,9 @@
                 android:id="@+id/rlHepatitis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlTetanus"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlTetanus"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1430,19 +1484,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtHepatitis"
                     android:layout_toLeftOf="@+id/imgAddHepatitis"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddHepatitis"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1453,7 +1509,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlHepatitis"
-            android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccine"
                 android:gravity="center_vertical"
                 >
 
@@ -1464,7 +1520,7 @@
                 android:layout_height="@dimen/dimension50dp"
                 android:gravity="center_vertical"
                 android:padding="@dimen/dimension5dp"
-                android:text="Flue Shot"
+                android:text="Flue"
                 />
 
             <TextView
@@ -1473,19 +1529,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimension50dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorBlue"
+                android:textColor="@color/colorBlackDark"
                 android:padding="@dimen/dimension5dp"
                 android:text="15-Nov-2017"
                 android:visibility="gone"
                 android:layout_toRightOf="@id/txtFlue"
                 android:layout_toLeftOf="@+id/imgAddFlue"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/imgAddFlue"
-                android:layout_width="@dimen/dimension35dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimension35dp"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/dimension5dp"
+                android:text="Add Date +"
+                android:textColor="@color/colorBlue"
                 android:layout_centerVertical="true"
                 android:src="@drawable/calendar" />
 
@@ -1495,8 +1553,9 @@
                 android:id="@+id/rlFlueNH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlFlue"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlFlue"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1516,19 +1575,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtFlueNH"
                     android:layout_toLeftOf="@+id/imgAddFlueNH"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddFlueNH"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1538,8 +1599,9 @@
                 android:id="@+id/rlPneumococcal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlFlueNH"
                 android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/rlFlueNH"
+
                 android:gravity="center_vertical"
                 >
 
@@ -1559,19 +1621,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
                     android:text="15-Nov-2017"
                     android:visibility="gone"
                     android:layout_toRightOf="@id/txtPneumococcal"
                     android:layout_toLeftOf="@+id/imgAddPneumococcal"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imgAddPneumococcal"
-                    android:layout_width="@dimen/dimension35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
+                    android:text="Add Date +"
+                    android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
 
@@ -1592,6 +1656,13 @@
 
         </RelativeLayout>
 <!---->
+        <View
+            android:id="@+id/view8"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlVaccine"
+            />
         <RelativeLayout
             android:id="@+id/rlDiet"
             android:layout_width="match_parent"
@@ -1599,7 +1670,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp"
-            android:layout_below="@+id/rlVaccine"
+            android:layout_below="@+id/view8"
             >
 
             <ImageView
@@ -1634,12 +1705,18 @@
 
         </RelativeLayout>
 
-
+        <View
+            android:id="@+id/view9"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlDiet"
+            />
         <RelativeLayout
             android:id="@+id/rlImplants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlDiet"
+            android:layout_below="@+id/view9"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1678,12 +1755,18 @@
                 android:divider="@null" />
 
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view10"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlImplants"
+            />
         <RelativeLayout
             android:id="@+id/rlHospital"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlImplants"
+            android:layout_below="@+id/view10"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1722,12 +1805,20 @@
                 android:divider="@null" />
 
         </RelativeLayout>
+        <View
+            android:id="@+id/view11"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlHospital"
+            />
+
 
         <RelativeLayout
             android:id="@+id/rlBlood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHospital"
+            android:layout_below="@+id/view11"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1759,12 +1850,18 @@
                 android:layout_toRightOf="@+id/imgBlood"
                 android:popupBackground="@android:color/transparent" />
         </RelativeLayout>
-
+        <View
+            android:id="@+id/viewPre"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlPre"
+            />
         <RelativeLayout
             android:id="@+id/rlHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlPre"
+            android:layout_below="@+id/viewPre"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1803,12 +1900,18 @@
                 android:divider="@null" />
 
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view12"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlBlood"
+            />
         <RelativeLayout
             android:id="@+id/rlDonor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlBlood"
+            android:layout_below="@+id/view12"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1938,12 +2041,18 @@ Transplant, Therapy, Research, Education
                 android:layout_alignRight="@+id/txtNote"
                 android:layout_alignEnd="@+id/txtNote" />
         </RelativeLayout>
-
+        <View
+            android:id="@+id/view13"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlDonor"
+            />
         <RelativeLayout
             android:id="@+id/rlPet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlDonor"
+            android:layout_below="@+id/view13"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp"
