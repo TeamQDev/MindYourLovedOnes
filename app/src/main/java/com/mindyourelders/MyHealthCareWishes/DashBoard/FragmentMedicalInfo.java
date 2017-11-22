@@ -649,47 +649,47 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             //  String ft,inch,weight,color,lang1,lang2,blood,pet;
 
             case R.id.imgAddPneumonia:
-                getDate(getActivity(),txtPneumoniaDate);
+                getDate(getActivity(),imgAddPneumonia);
                 break;
 
             case R.id.imgAddFlueShot:
-                getDate(getActivity(),txtFlueShotDate);
+                getDate(getActivity(),imgAddFlueShot);
                 break;
 
             case R.id.imgAddHPV:
-                getDate(getActivity(),txtHPVDate);
+                getDate(getActivity(),imgAddHPV);
                 break;
 
             case R.id.imgAddRubella:
-                getDate(getActivity(),txtRubellaDate);
+                getDate(getActivity(),imgAddRubella);
                 break;
 
             case R.id.imgAddVaricella:
-                getDate(getActivity(),txtVaricellaDate);
+                getDate(getActivity(),imgAddVaricella);
                 break;
 
             case R.id.imgAddShingles:
-                getDate(getActivity(),txtShinglesDate);
+                getDate(getActivity(),imgAddShingles);
                 break;
 
             case R.id.imgAddTetanus:
-                getDate(getActivity(),txtTetanusDate);
+                getDate(getActivity(),imgAddTetanus);
                 break;
 
             case R.id.imgAddHepatitis:
-                getDate(getActivity(),txtHepatitisDate);
+                getDate(getActivity(),imgAddHepatitis);
                 break;
 
             case R.id.imgAddFlue:
-                getDate(getActivity(),txtFlueDate);
+                getDate(getActivity(),imgAddFlue);
                 break;
 
             case R.id.imgAddFlueNH:
-                getDate(getActivity(),txtFlueNHDate);
+                getDate(getActivity(),imgAddFlueNH);
                 break;
 
             case R.id.imgAddPneumococcal:
-                getDate(getActivity(),txtPneumococcalDate);
+                getDate(getActivity(),imgAddPneumococcal);
                 break;
 
 

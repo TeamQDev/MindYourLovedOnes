@@ -276,12 +276,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 LayoutInflater lf = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialogview = lf.inflate(R.layout.dialog_gender, null);
+                View dialogview = lf.inflate(R.layout.dialog_gender1, null);
                 final TextView textOption1 = (TextView) dialogview.findViewById(R.id.txtOption1);
                 final TextView textOption2 = (TextView) dialogview.findViewById(R.id.txtOption2);
+                final TextView textOption3 = (TextView) dialogview.findViewById(R.id.txtOption3);
                 TextView textCancel = (TextView) dialogview.findViewById(R.id.txtCancel);
                 textOption1.setText("Take Picture");
                 textOption2.setText("Gallery");
+                textOption3.setText("Remove Picture");
                 dialog.setContentView(dialogview);
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(dialog.getWindow().getAttributes());
@@ -304,6 +306,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                         photoPickerIntent.setType("image/*");
                         startActivityForResult(photoPickerIntent, RESULT_SELECT_PHOTO);
+                        dialog.dismiss();
+                    }
+                });
+                textOption3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       imgProfile.setImageResource(R.drawable.ic_profile_defaults);
                         dialog.dismiss();
                     }
                 });

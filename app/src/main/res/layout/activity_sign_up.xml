@@ -31,7 +31,7 @@
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/dimension100dp"
                 android:layout_height="@dimen/dimension100dp"
-                android:src="@drawable/ic_profile_default" />
+                android:src="@drawable/ic_profile_defaults" />
 
             <ImageView
                 android:id="@+id/imgEdit"

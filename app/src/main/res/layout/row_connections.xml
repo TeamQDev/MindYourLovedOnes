@@ -25,7 +25,7 @@
             android:id="@+id/imgConPhoto"
             android:layout_width="@dimen/dimension65dp"
             android:layout_height="@dimen/dimension65dp"
-            android:src="@drawable/ic_profile_default"
+            android:src="@drawable/ic_profile_defaults"
             android:background="@color/colorWhite"
             android:layout_margin="@dimen/dimension8dp"
              android:layout_centerHorizontal="true"

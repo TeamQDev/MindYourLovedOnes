@@ -1179,7 +1179,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1225,7 +1227,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1271,7 +1275,9 @@
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
                     android:layout_centerVertical="true"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:src="@drawable/calendar" />
 
@@ -1315,7 +1321,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1361,7 +1369,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1407,7 +1417,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1452,7 +1464,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1497,7 +1511,9 @@
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1542,7 +1558,9 @@
                 android:layout_height="@dimen/dimension35dp"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/dimension5dp"
-                android:text="Add Date +"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:text="Add Date"
+                android:drawableRight="@drawable/ic_edit_blue"
                 android:textColor="@color/colorBlue"
                 android:layout_centerVertical="true"
                 android:src="@drawable/calendar" />
@@ -1587,8 +1605,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension10dp"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
@@ -1617,9 +1637,8 @@
 
                 <TextView
                     android:id="@+id/txtPneumococcalDate"
-                    style="@style/EmergencyDesc"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension35dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlackDark"
                     android:padding="@dimen/dimension5dp"
@@ -1633,8 +1652,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimension35dp"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension10dp"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Add Date +"
+                    android:text="Add Date"
+                    android:drawableRight="@drawable/ic_edit_blue"
                     android:textColor="@color/colorBlue"
                     android:layout_centerVertical="true"
                     android:src="@drawable/calendar" />
