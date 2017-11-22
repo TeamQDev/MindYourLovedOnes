@@ -156,13 +156,9 @@ RelativeLayout header;
                 customDialog.dismiss();
             }
         });
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String note=etNote.getText().toString();
-                String date=etDate.getText().toString();
 
                 etDate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -189,6 +185,16 @@ RelativeLayout header;
                         dpd.show();
                     }
                 });
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String note=etNote.getText().toString();
+                String date=etDate.getText().toString();
+
               /*  SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
                 String currentDateandTime = sdf.format(new Date());*/
                 if (note.length()!=0) {

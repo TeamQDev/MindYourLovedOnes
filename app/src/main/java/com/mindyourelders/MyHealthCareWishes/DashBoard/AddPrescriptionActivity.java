@@ -184,9 +184,11 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 txtDate.setText(p.getDates());
                 etNote.setText(p.getNote());
                 if (p.getPre().equals("Yes")) {
-                    tbPre.setChecked(true);
+                    //tbPre.setChecked(true);
+                    rbYes.setChecked(true);
                 } else if (p.getPre().equals("No")) {
-                    tbPre.setChecked(false);
+                    rbNo.setChecked(true);
+                    //tbPre.setChecked(false);
                 }
                 txtRX.setText(p.getRX());
                 txtPurpose.setText(p.getPurpose());

@@ -23,7 +23,7 @@ public class EmergencyInfoActivity extends AppCompatActivity implements View.OnC
     FragmentEmergency fragmentEmergency=null;
     FragmentMedicalInfo fragmentMedicalInfo=null;
     FragmentPhysician fragmentPhysician=null;
-ImageView imgBack;
+ImageView imgBack,imgRight;
     TextView txtTitle;
 RelativeLayout header;
     @Override
@@ -45,18 +45,24 @@ RelativeLayout header;
             {
                 case "Individual":
                     callFragment("INDIVIDUAL", fragmentIndividualContact);
+                    imgRight.setVisibility(View.GONE);
                     break;
                 case "Information":
                     callFragment("INFORMATION", fragmentMedicalInfo);
+                    imgRight.setVisibility(View.GONE);
                     break;
                 case "Emergency":
                     callFragment("EMERGENCY", fragmentEmergency);
+                    imgRight.setVisibility(View.VISIBLE);
                     break;
                 case "Physician":
                     callFragment("PHYSICIAN", fragmentPhysician);
+                    imgRight.setVisibility(View.VISIBLE);
+
                     break;
                 case "Proxy":
                     callFragment("PROXY", fragmentProxy);
+                    imgRight.setVisibility(View.VISIBLE);
                     break;
             }
         }
@@ -84,6 +90,7 @@ RelativeLayout header;
     private void initUI() {
         header= (RelativeLayout) findViewById(R.id.header);
         header.setBackgroundResource(R.color.colorOne);
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         txtTitle.setText("PERSONAL AND MEDICAL PROFILE AND EMERGENCY CONTACTS");
         imgBack= (ImageView) findViewById(R.id.imgBack);

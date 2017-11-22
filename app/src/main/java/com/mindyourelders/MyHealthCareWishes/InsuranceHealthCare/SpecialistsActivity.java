@@ -426,7 +426,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 break;
 
-                            case 2:
+                            case 2://Fax
                                 if (from.equals("Speciality")) {
                                     serverAttachement(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
