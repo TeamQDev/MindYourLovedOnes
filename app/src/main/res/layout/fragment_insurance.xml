@@ -35,9 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llAddInsurance"
-        android:divider="@null"
+        android:dividerHeight="@dimen/dimension20dp"
+        android:divider="@color/colorLightGray"
         android:scrollbars="none"
-
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>

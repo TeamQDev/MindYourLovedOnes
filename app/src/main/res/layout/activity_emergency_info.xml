@@ -56,7 +56,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
             android:src="@drawable/menudot"
-            android:visibility="gone"
+            android:visibility="visible"
             />
     </RelativeLayout>
     <!-- <Spinner
