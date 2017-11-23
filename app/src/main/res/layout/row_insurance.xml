@@ -45,6 +45,7 @@
                 android:text= "Cfklj kj ouio "
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension20dp"
+                android:layout_toLeftOf="@+id/imgEdit"
                 />
             <TextView
                 android:id="@+id/txtPhone"

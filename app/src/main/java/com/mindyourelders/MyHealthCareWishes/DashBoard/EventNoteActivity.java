@@ -3,10 +3,12 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,14 +33,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class EventNoteActivity extends AppCompatActivity implements View.OnClickListener {
-    Context context=this;
+    Context context = this;
     SwipeMenuListView lvNote;
-    ArrayList<Note> noteList=new ArrayList<>();
-    ImageView imgBack,imgAdd,imgEdit;
+    ArrayList<Note> noteList = new ArrayList<>();
+    ImageView imgBack, imgAdd, imgEdit;
     TextView txtView;
     Preferences preferences;
     DBHelper dbHelper;
-RelativeLayout header;
+    RelativeLayout header;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,23 +55,66 @@ RelativeLayout header;
     private void initListener() {
         imgAdd.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+        //txtDateTime.setOnClickListener(this);
 
     }
 
     private void initUI() {
-        header= (RelativeLayout) findViewById(R.id.header);
+        header = (RelativeLayout) findViewById(R.id.header);
         header.setBackgroundResource(R.color.colorFour);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
-        imgAdd= (ImageView) findViewById(R.id.imgAdd);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgAdd = (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
-        lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
-        txtView= (TextView) findViewById(R.id.txtView);
-        if (noteList.size()!=0) {
+        lvNote = (SwipeMenuListView) findViewById(R.id.lvNote);
+
+        lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                TextView txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
+                ImageView imgForward = (ImageView) findViewById(R.id.imgForword);
+                imgForward.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, ViewEventActivity.class);
+                        intent.putExtra("NoteObject", noteList.get(position));
+                        context.startActivity(intent);
+                    }
+                });
+                txtDateTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar calendar = Calendar.getInstance();
+                        int year = calendar.get(Calendar.YEAR);
+                        int month = calendar.get(Calendar.MONTH);
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                Calendar newDate = Calendar.getInstance();
+                                newDate.set(year, month, dayOfMonth);
+                                long selectedMilli = newDate.getTimeInMillis();
+
+                                Date datePickerDate = new Date(selectedMilli);
+                                String reportDate = new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+
+                                DateClass d = new DateClass();
+                                d.setDate(reportDate);
+                                noteList.get(position).setTxtDate(reportDate);
+                                setNoteData();
+                            }
+                        }, year, month, day);
+                        dpd.show();
+                    }
+                });
+            }
+        });
+        txtView = (TextView) findViewById(R.id.txtView);
+        if (noteList.size() != 0) {
             setNoteData();
         }
         lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(context);
+        SwipeMenuCreation s = new SwipeMenuCreation();
+        SwipeMenuCreator creator = s.createMenu(context);
         lvNote.setMenuCreator(creator);
         lvNote.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
@@ -90,63 +136,63 @@ RelativeLayout header;
     }
 
     private void deleteNote(Note item) {
-        boolean flag= EventNoteQuery.deleteRecord(item.getId());
-        if(flag==true)
-        {
-            Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+        boolean flag = EventNoteQuery.deleteRecord(item.getId());
+        if (flag == true) {
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
             getData();
             setNoteData();
         }
     }
 
     private void setNoteData() {
-        if (noteList.size()!=0)
-        {
+        if (noteList.size() != 0) {
             lvNote.setVisibility(View.VISIBLE);
             txtView.setVisibility(View.GONE);
-        }else{
+        } else {
             txtView.setVisibility(View.VISIBLE);
             lvNote.setVisibility(View.GONE);
         }
-       NoteAdapter adapter = new NoteAdapter(context,noteList);
+        NoteAdapter adapter = new NoteAdapter(context, noteList);
         lvNote.setAdapter(adapter);
     }
 
     private void getData() {
-      noteList=EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        noteList = EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
     }
 
     private void initComponent() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        EventNoteQuery e=new EventNoteQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        EventNoteQuery e = new EventNoteQuery(context, dbHelper);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.imgBack:
                 finish();
                 break;
             case R.id.imgAdd:
-               showInputDialog(context);
+                showInputDialog(context);
                 break;
+            /*case R.id.txtDateTime:
+
+                break;*/
+
         }
     }
 
     private void showInputDialog(final Context context) {
         final Dialog customDialog;
 
-       // LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
-      //  View customView = inflater.inflate(R.layout.dialog_input, null);
+        // LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+        //  View customView = inflater.inflate(R.layout.dialog_input, null);
         // Build the dialog
-      customDialog = new Dialog(context);
+        customDialog = new Dialog(context);
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         customDialog.setContentView(R.layout.dialog_input);
         customDialog.setCancelable(false);
-        final EditText etNote= (EditText) customDialog.findViewById(R.id.etNote);
-        final EditText etDate= (EditText) customDialog.findViewById(R.id.etdate);
+        final EditText etNote = (EditText) customDialog.findViewById(R.id.etNote);
         TextView btnAdd = (TextView) customDialog.findViewById(R.id.btnYes);
         TextView btnCancel = (TextView) customDialog.findViewById(R.id.btnNo);
 
@@ -156,7 +202,7 @@ RelativeLayout header;
                 customDialog.dismiss();
             }
         });
-        etDate.setOnClickListener(new View.OnClickListener() {
+      /*  etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -186,19 +232,19 @@ RelativeLayout header;
                     }
                 });
             }
-        });
+        });*/
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String note=etNote.getText().toString();
-                String date=etDate.getText().toString();
+                String note = etNote.getText().toString();
+                //   String date=etDate.getText().toString();
 
-              /*  SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
-                String currentDateandTime = sdf.format(new Date());*/
-                if (note.length()!=0) {
-                    Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID),note,date);
+                SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+                String currentDateandTime = sdf.format(new Date());
+                if (note.length() != 0) {
+                    Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID), note, currentDateandTime);
                     if (flag == true) {
                         Toast.makeText(context, "Event Note Added Succesfully", Toast.LENGTH_SHORT).show();
                         getData();
@@ -213,9 +259,8 @@ RelativeLayout header;
                     noteList.add(notes);
                     customDialog.dismiss();
                     setNoteData();*/
-                }
-                else {
-                    Toast.makeText(context,"Enter Note",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Enter Note", Toast.LENGTH_SHORT).show();
                 }
 
             }

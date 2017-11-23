@@ -291,9 +291,9 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-
-                    new EventPdf(AppointList);
                     new EventPdf(NoteList,1);
+                    new EventPdf(AppointList);
+
 
                     Header.document.close();
                 }
@@ -389,8 +389,9 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 else if (from.equals("Event"))
                                 {
                                     StringBuffer result = new StringBuffer();
-                                    result.append(new MessageString().getAppointInfo());
                                     result.append(new MessageString().getEventInfo());
+                                    result.append(new MessageString().getAppointInfo());
+
 
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()

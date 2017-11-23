@@ -1,7 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,14 +60,7 @@ public class NoteAdapter extends BaseAdapter {
         holder.txtNote.setText(noteList.get(position).getTxtNote());
         holder.txtDateTime.setText(noteList.get(position).getTxtDate());
         //holder.imgProfile.setImageResource(student.getImgid());
-        holder.imgForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context,ViewEventActivity.class);
-                intent.putExtra("NoteObject",noteList.get(position));
-                context.startActivity(intent);
-            }
-        });
+
         return convertView;
     }
 

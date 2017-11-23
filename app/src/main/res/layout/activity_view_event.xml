@@ -77,7 +77,7 @@
         android:id="@+id/imgDelete"
         android:layout_width="@dimen/dimension40dp"
         android:layout_height="@dimen/dimension40dp"
-        android:src="@drawable/deletes"
+        android:src="@drawable/delete_icon"
         android:scaleType="fitXY"
         />
     <ImageView

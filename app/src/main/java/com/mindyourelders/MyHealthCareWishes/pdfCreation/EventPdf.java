@@ -16,8 +16,9 @@ import java.util.ArrayList;
  */
 
 public class EventPdf {
-    public static ArrayList<String> messageAppoint = new ArrayList<String>();
+
     public static ArrayList<String> messageEvent = new ArrayList<String>();
+    public static ArrayList<String> messageAppoint = new ArrayList<String>();
 
     public EventPdf(ArrayList<Appoint> appointList) {
         Header.addChank("Appointment Checklist");
@@ -42,18 +43,18 @@ public class EventPdf {
             if (s.getType() != null) {
                 speciality = s.getType();
             }
-            Header.addTable("Specialist to see OR Type Test :");
+            Header.addTable("Specialist or Type Test :");
             Header.addTable(speciality);
-            messageAppoint.add("Specialist to see OR Type Test :");
+            messageAppoint.add("Specialist or Type Test :");
             messageAppoint.add(speciality);
 
             String name = "";
             if (s.getDoctor() != null) {
                 name = s.getDoctor();
             }
-            Header.addTable("Name of Dr associated(if any) :");
+            Header.addTable("Name of Doctor(if aplicable) :");
             Header.addTable(name);
-            messageAppoint.add("Name of Dr associated(if any) :");
+            messageAppoint.add("Name of Doctor(if aplicable) :");
             messageAppoint.add(name);
 
             String frequency = "";
