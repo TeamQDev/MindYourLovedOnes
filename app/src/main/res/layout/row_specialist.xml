@@ -82,7 +82,20 @@
                 android:layout_marginBottom="@dimen/dimension5dp"
                 android:layout_below="@+id/txtName"
                 />
-
+            <TextView
+                android:id="@+id/txtState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dimension10dp"
+                android:text= "Primary Proxy"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/dimension17dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:layout_below="@+id/txtName"
+                android:layout_toRightOf="@+id/txtType"
+                android:layout_alignParentRight="true"
+                />
             <TextView
                 android:id="@+id/txtOfficePhone"
                 android:layout_width="@dimen/dimension140dp"

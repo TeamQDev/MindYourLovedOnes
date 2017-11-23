@@ -63,6 +63,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtName= (TextView) convertView.findViewById(R.id.txtName);
             holder.txtOfficePhone= (TextView) convertView.findViewById(R.id.txtOfficePhone);
             holder.txtPhone= (TextView) convertView.findViewById(R.id.txtPhone);
+            holder.txtState= (TextView) convertView.findViewById(R.id.txtState);
             holder.txtTelePhone= (TextView) convertView.findViewById(R.id.txtTelePhone);
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
@@ -101,6 +102,14 @@ public class EmergencyAdapter extends BaseAdapter {
         {
             holder.txtType.setVisibility(View.VISIBLE);
         }
+        if (emergencyList.get(position).getIsPrimary()==0)
+        {
+            holder.txtState.setText("Primary");
+        }else if (emergencyList.get(position).getIsPrimary()==1)
+        {
+            holder.txtState.setText("Secondary");
+        }
+
         holder.txtName.setText(emergencyList.get(position).getName());
         holder.txtOfficePhone.setText(emergencyList.get(position).getWorkPhone());
         holder.txtPhone.setText(emergencyList.get(position).getMobile());
@@ -155,7 +164,7 @@ public class EmergencyAdapter extends BaseAdapter {
 
     public class ViewHolder
     {
-        TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone;
+        TextView txtName, txtAddress, txtPhone, txtType,txtTelePhone,txtOfficePhone,txtState;
         ImageView imgProfile,imgEdit,imgForword,imgNext;
         RelativeLayout rlMain;
        // SwipeRevealLayout swipeLayout;

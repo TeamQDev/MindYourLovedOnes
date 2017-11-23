@@ -137,8 +137,12 @@ public class SpecialistAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
-                preferences.putString(PrefConstants.SOURCE, "SpecialistData");
                 Specialist insurance = specialistList.get(position);
+                if (insurance.getIsPhysician()==1) {
+                    preferences.putString(PrefConstants.SOURCE, "PhysicianData");
+                }else if (insurance.getIsPhysician()==2) {
+                    preferences.putString(PrefConstants.SOURCE, "SpecialistData");
+                }
                /* i.putExtra("Name", insurance.getName());
                 i.putExtra("Type", insurance.getType());
                 i.putExtra("Address", insurance.getAddress());
@@ -154,8 +158,12 @@ public class SpecialistAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GrabConnectionActivity.class);
-                preferences.putString(PrefConstants.SOURCE, "SpecialistViewData");
                 Specialist insurance = specialistList.get(position);
+                if (insurance.getIsPhysician()==1) {
+                    preferences.putString(PrefConstants.SOURCE, "PhysicianViewData");
+                }else if (insurance.getIsPhysician()==2) {
+                    preferences.putString(PrefConstants.SOURCE, "SpecialistViewData");
+                }
                 i.putExtra("SpecialistObject",insurance);
                 i.putExtra("IsPhysician",insurance.getIsPhysician());
                 context.startActivity(i);

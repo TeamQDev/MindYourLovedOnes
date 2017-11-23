@@ -279,7 +279,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp"
-            android:layout_below="@+id/txtName"
+            android:layout_below="@+id/view3"
             >
 
             <ImageView
@@ -342,7 +342,7 @@
             android:id="@+id/rlAllergis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view2"
+            android:layout_below="@+id/txtName"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -392,7 +392,7 @@
             android:id="@+id/rlEyes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view3"
+            android:layout_below="@+id/view13"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -526,7 +526,7 @@
             android:id="@+id/rlTeeth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view4"
+            android:layout_below="@+id/view12"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -667,7 +667,7 @@
             android:id="@+id/rlAides"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view5"
+            android:layout_below="@+id/view9"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1691,7 +1691,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp"
-            android:layout_below="@+id/view8"
+            android:layout_below="@+id/view5"
             >
 
             <ImageView
@@ -1737,7 +1737,7 @@
             android:id="@+id/rlImplants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view9"
+            android:layout_below="@+id/viewPre"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1787,7 +1787,7 @@
             android:id="@+id/rlHospital"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view10"
+            android:layout_below="@+id/view2"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1882,7 +1882,7 @@
             android:id="@+id/rlHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/viewPre"
+            android:layout_below="@+id/view10"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -1902,7 +1902,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgHistory"
-                android:text="Past Surgical History" />
+                android:text="Surgical History" />
 
             <ImageView
                 android:id="@+id/imgAddHistory"
@@ -1932,7 +1932,7 @@
             android:id="@+id/rlDonor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view12"
+            android:layout_below="@+id/view8"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
             android:padding="@dimen/dimension5dp">
@@ -2047,9 +2047,7 @@
                 android:layout_toRightOf="@+id/imgDonor"
                 android:gravity="center_vertical"
                 android:padding="@dimen/dimension5dp"
-                android:text="If yes see Drivers Lic or Health Care Proxy
-Transplant, Therapy, Research, Education
-"
+                android:text=" If yes, see Drivers License or Health Care Proxy"
                 android:textSize="@dimen/dimension17dp" />
 
             <TextView

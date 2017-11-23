@@ -44,7 +44,7 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
         fragmentData();
         //  if (fragmentManager.findFragmentByTag("INSURANCE") == null) {
         source = preferences.getString(PrefConstants.SOURCE);
-            if (source.equals("HospitalViewData")||source.equals("PharmacyDataView")||source.equals("ProxyUpdateView")||source.equals("EmergencyView")||source.equals("SpecialistViewData")||source.equals("FinanceViewData")||source.equals("InsuranceViewData")||source.equals("AidesViewData"))
+            if (source.equals("PhysicianViewData")||source.equals("HospitalViewData")||source.equals("PharmacyDataView")||source.equals("ProxyUpdateView")||source.equals("EmergencyView")||source.equals("SpecialistViewData")||source.equals("FinanceViewData")||source.equals("InsuranceViewData")||source.equals("AidesViewData"))
             {
                 llGrab.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.GONE);
@@ -96,6 +96,8 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
                 header.setBackgroundColor(getResources().getColor(R.color.colorOne));
                 break;
 
+
+
             case "Speciality":
                 header.setBackgroundResource(R.color.colorThree);
                 break;
@@ -104,6 +106,13 @@ public class GrabConnectionActivity extends AppCompatActivity implements View.On
                 header.setBackgroundColor(getResources().getColor(R.color.colorOne));
                 break;
 
+            case "PhysicianData":
+                header.setBackgroundResource(R.color.colorOne);
+                break;
+
+            case "PhysicianViewData":
+                header.setBackgroundResource(R.color.colorOne);
+                break;
             case "SpecialistData":
                 header.setBackgroundResource(R.color.colorThree);
                 break;

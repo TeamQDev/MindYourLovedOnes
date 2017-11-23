@@ -138,7 +138,7 @@ String location="";
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
     String[] HospitalType = {"Hospital", "Rehabilitation Center", "Physical Therapist", "Speech Pathologist","Other"};
 
-    String[] proxyType = {"Primary", "Successor"};
+    String[] proxyType = {"Primary - Health Care Proxy Agent", "Successor - Health Care Proxy Agent"};
     String[] priorityType = {"Primary", "Secondary"};
 
     Boolean isEdit;
@@ -708,6 +708,58 @@ String location="";
 
                 }
                 break;
+            case "PhysicianData":
+
+                visiSpecialist();
+                txtAdd.setText("Update Physician");
+                txtTitle.setText("Update Physician");
+                Intent specialistIntent1 = getActivity().getIntent();
+                if (specialistIntent1.getExtras() != null) {
+                    Specialist specialist= (Specialist) specialistIntent1.getExtras().getSerializable("SpecialistObject");
+                    txtDoctorName.setText(specialist.getName());
+                    txtDoctorOtherPhone.setText(specialist.getOtherPhone());
+                    txtDoctorLastSeen.setText(specialist.getLastseen());
+                    txtDoctorAddress.setText(specialist.getAddress());
+                    txtDoctorWebsite.setText(specialist.getWebsite());
+                    txtDoctorFax.setText(specialist.getFax());
+                    txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
+                    txtDoctorOfficePhone.setText(specialist.getOfficePhone());
+                    txtAffiliation.setText(specialist.getHospAffiliation());
+                    txtPracticeName.setText(specialist.getPracticeName());
+                    txtNetwork.setText(specialist.getNetwork());
+                    txtDoctorNote.setText(specialist.getNote());
+                    id=specialist.getId();
+                    isPhysician=specialist.getIsPhysician();
+                    int index = 0;
+                    for (int i = 0; i < healthSpeciality.length; i++) {
+                        if (specialist.getType().equals(healthSpeciality[i])) {
+                            index = i;
+                        }
+                    }
+                    spinner.setSelection(index+1);
+
+                    byte[] photo=specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+
+                    //Change Class Name
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
+                    }
+
+                }
+                break;
+
 
             case "SpecialistViewData":
                 visiSpecialist();
@@ -760,6 +812,58 @@ String location="";
 
                 }
                 break;
+            case "PhysicianViewData":
+                visiSpecialist();
+                disableSpecialist();
+                txtTitle.setText("Primary Physician");
+                txtTitle.setVisibility(View.VISIBLE);
+                Intent specialistIntents4 = getActivity().getIntent();
+                if (specialistIntents4.getExtras() != null) {
+                    Specialist specialist= (Specialist) specialistIntents4.getExtras().getSerializable("SpecialistObject");
+                    txtDoctorName.setText(specialist.getName());
+                    txtDoctorOtherPhone.setText(specialist.getOtherPhone());
+                    txtDoctorLastSeen.setText(specialist.getLastseen());
+                    txtDoctorAddress.setText(specialist.getAddress());
+                    txtDoctorWebsite.setText(specialist.getWebsite());
+                    txtDoctorFax.setText(specialist.getFax());
+                    txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
+                    txtDoctorOfficePhone.setText(specialist.getOfficePhone());
+                    txtAffiliation.setText(specialist.getHospAffiliation());
+                    txtPracticeName.setText(specialist.getPracticeName());
+                    txtNetwork.setText(specialist.getNetwork());
+                    txtDoctorNote.setText(specialist.getNote());
+                    id=specialist.getId();
+                    isPhysician=specialist.getIsPhysician();
+                    int index = 0;
+                    for (int i = 0; i < healthSpeciality.length; i++) {
+                        if (specialist.getType().equals(healthSpeciality[i])) {
+                            index = i;
+                        }
+                    }
+                    spinner.setSelection(index+1);
+
+                    byte[] photo=specialist.getPhoto();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);
+
+                    //Change Class Name
+                    if (specialist.getPhotoCard()!=null) {
+                        byte[] photoCard = specialist.getPhotoCard();
+                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);
+                        imgCard.setVisibility(View.VISIBLE);
+                        rlCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        imgCard.setVisibility(View.GONE);
+                        rlCard.setVisibility(View.GONE);
+                        txtCard.setVisibility(View.VISIBLE);
+                    }
+
+                }
+                break;
+
 
             case "Insurance":
                 visiInsurance();
@@ -2807,9 +2911,9 @@ String location="";
             if (indexValues!=0) {
                 proxy = proxyType[indexValues - 1];
             }
-            if (proxy.equals("Primary")) {
+            if (proxy.equals("Primary - Health Care Proxy Agent")) {
                 prox=0;
-            } else if (proxy.equals("Successor"))
+            } else if (proxy.equals("Successor - Health Care Proxy Agent"))
             {
                 prox=1;
             }

@@ -106,10 +106,10 @@ public class ProxyAdapter extends BaseAdapter {
         holder.txtPhone.setText(proxyList.get(position).getMobile());
         if (proxyList.get(position).getIsPrimary()==0)
         {
-            holder.txtType.setText("Primary Proxy");
+            holder.txtType.setText("Primary - Health Care Proxy Agent");
         }else if (proxyList.get(position).getIsPrimary()==1)
         {
-            holder.txtType.setText("Successor Proxy");
+            holder.txtType.setText("Successor - Health Care Proxy Agent");
         }
 
 

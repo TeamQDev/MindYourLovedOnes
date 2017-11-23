@@ -160,7 +160,6 @@
                 android:id="@+id/txtDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension2dp"
@@ -207,7 +206,7 @@
             android:layout_below="@+id/tilDoctor"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
-            android:hint="Done at"
+            android:hint="Treatment Location"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
@@ -258,5 +257,53 @@
             android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimension10dp"
+        android:background="@drawable/darkgray_white_border"
+        android:layout_below="@+id/llAddConn"
+        android:layout_marginTop="@dimen/dimension40dp"
+        android:layout_marginLeft="@dimen/dimension10dp"
+        android:layout_marginRight="@dimen/dimension10dp"
+        android:layout_centerHorizontal="true">]
+        <TextView
+            android:id="@+id/txtHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pdf For Reference"
+            android:textStyle="italic|bold"
+            android:textSize="@dimen/dimension20dp"
+            android:textColor="@color/colorBlackDark"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            ></TextView>
+        <RelativeLayout
+            android:id="@+id/rlOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHeader"
+            android:layout_marginTop="@dimen/dimension10dp"
+            >
+            <ImageView
+                android:id="@+id/imgOne"
+                android:layout_width="@dimen/dimension20dp"
+                android:layout_height="@dimen/dimension17dp"
+                android:src="@drawable/checkbullet"
+                android:layout_marginTop="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Types of Reaction"
+                android:textSize="@dimen/dimension19dp"
+                android:textColor="@color/colorBlue"
+                android:layout_toRightOf="@+id/imgOne"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                ></TextView>
+        </RelativeLayout>
+
     </RelativeLayout>
 </RelativeLayout>

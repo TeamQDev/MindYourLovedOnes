@@ -1,6 +1,5 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,10 +24,6 @@ import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 
 public class AddInfoActivity extends AppCompatActivity  implements View.OnClickListener{
     private static final int RESULT_CONDITION =500 ;
@@ -43,11 +37,12 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     public static final int RESULT_IMPLANTS=300;
     public static final int RESULT_HOSPITAL=400;
     String from,name,title;
-    Boolean isAllergy,isHistory;
+    Boolean isAllergy,isHistory,isImplant;
     Preferences preferences;
     DBHelper dbHelper;
     int id;
     String data="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +80,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
             isAllergy=i.getExtras().getBoolean("IsAllergy");
             isHistory=i.getExtras().getBoolean("IsHistory");
+            isImplant=i.getExtras().getBoolean("IsImplant");
             if (isAllergy==true)
             {
                 tilTreatment.setVisibility(View.VISIBLE);
@@ -99,12 +95,19 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
             {
                 tilDone.setVisibility(View.VISIBLE);
                 tilDoctor.setVisibility(View.VISIBLE);
-                tilDate.setVisibility(View.VISIBLE);
+               // tilDate.setVisibility(View.VISIBLE);
             }else{
                 tilDone.setVisibility(View.GONE);
                 tilDoctor.setVisibility(View.GONE);
+                //tilDate.setVisibility(View.GONE);
+            }
+            if (isImplant==true||isHistory==true)
+            {
+                tilDate.setVisibility(View.VISIBLE);
+            }else{
                 tilDate.setVisibility(View.GONE);
             }
+
             switch (from) {
                 case "AllergyUpdate":
                     Allergy allergy= (Allergy) i.getExtras().getSerializable("AllergyObject");
@@ -181,7 +184,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
             case R.id.imgBack:
                 finish();
                 break;
-            case R.id.txtDate:
+           /* case R.id.txtDate:
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
@@ -202,7 +205,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     }
                 }, year, month, day);
                 dpd.show();
-                break;
+                break;*/
             case R.id.llAddConn:
                 String value=txtName.getText().toString().trim();
                 if (value.length()!=0) {
