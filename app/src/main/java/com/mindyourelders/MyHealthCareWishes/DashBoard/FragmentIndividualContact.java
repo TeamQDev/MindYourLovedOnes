@@ -681,12 +681,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                     Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                 byte[] photo = baos.toByteArray();
 
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-                bitmaps.compress(Bitmap.CompressFormat.JPEG, 100, baoss);
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
                 if (imgCard.getVisibility()==View.VISIBLE)
                 {
                     photoCard = baoss.toByteArray();
@@ -776,15 +776,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                 break;
             case R.id.imgEdit:
-               showCardDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO);
+               showCardDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO,imgProfile,"Profile");
 
                 break;
             case R.id.imgEditCard:
-                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,imgCard,"Card");
 
                 break;
             case R.id.txtCard:
-                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                showCardDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,imgCard,"Card");
                 break;
 
             case R.id.imgCard:
@@ -828,7 +828,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
     }
 
-    private void showCardDialog(final int resultCameraImage, final int resultSelectPhoto) {
+    private void showCardDialog(final int resultCameraImage, final int resultSelectPhoto, final ImageView imgProfile, final String from) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -878,7 +878,17 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         textOption3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                if (from.equals("Profile"))
+                {
+                    imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                }
+                else if(from.equals("Card"))
+                {
+                    imgCard.setVisibility(View.GONE);
+                    rlCard.setVisibility(View.GONE);
+                    txtCard.setVisibility(View.VISIBLE);
+                    photoCard = null;
+                }
                 dialog.dismiss();
             }
         });

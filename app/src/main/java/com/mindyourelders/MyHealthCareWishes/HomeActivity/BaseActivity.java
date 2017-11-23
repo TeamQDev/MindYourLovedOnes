@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.mindyourelders.MyHealthCareWishes.Connections.FragmentConnectionNew;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.DropboxLoginActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentDashboard;
@@ -49,6 +50,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+
+        //I'm also creating a log message, which we'll look at in more detail later//
+        FirebaseCrash.log("MainActivity started");
+
+        //Crashlytics.getInstance().crash(); // Force a crash
         initComponent();
         initUI();
         initListener();

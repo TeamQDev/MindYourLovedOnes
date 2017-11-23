@@ -136,6 +136,7 @@ public class PersonalInfoQuery {
                             Person.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
                             Person.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
                             Person.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+
                             Person.setPet(c.getString(c.getColumnIndex(COL_PET)));
                             Person.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                             Person.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));

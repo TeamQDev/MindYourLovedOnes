@@ -12,8 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+
+import io.fabric.sdk.android.Fabric;
 
 public class SplashNewActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
@@ -31,6 +34,11 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         initUI();
         initListener();
         init();
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)           // Enables Crashlytics debugger
+                .build();
+        Fabric.with(fabric);
 
     }
 
