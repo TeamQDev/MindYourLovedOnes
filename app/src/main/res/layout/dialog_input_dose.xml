@@ -37,7 +37,7 @@
             android:id="@+id/txtMedicine"
             style="@style/EmergencyCategory"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtAdd"
             android:text="Name of Medication or Supplement"
             android:textSize="@dimen/dimension20dp"
