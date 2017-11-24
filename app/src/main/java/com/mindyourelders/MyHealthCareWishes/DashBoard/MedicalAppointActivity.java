@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,7 +40,6 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     ArrayList<DateClass> dateList;
     DBHelper dbHelper;
     RelativeLayout header;
-    ExpandableListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,18 +124,15 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         }
         lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(context);
+        SwipeMenuCreator creator=s.createSingleMenu(context);
         lvNote.setMenuCreator(creator);
         lvNote.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Appoint item = noteList.get(position);
                 switch (index) {
+
                     case 0:
-                        // open
-                        //  open(item);
-                        break;
-                    case 1:
                         // delete
                         deleteNote(item);
                         break;

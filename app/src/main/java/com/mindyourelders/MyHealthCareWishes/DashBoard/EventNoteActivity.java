@@ -124,18 +124,18 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         }
         lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s = new SwipeMenuCreation();
-        SwipeMenuCreator creator = s.createMenu(context);
+        SwipeMenuCreator creator = s.createSingleMenu(context);
         lvNote.setMenuCreator(creator);
         lvNote.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Note item = noteList.get(position);
                 switch (index) {
-                    case 0:
+                   /* case 0:
                         // open
                         //  open(item);
-                        break;
-                    case 1:
+                        break;*/
+                    case 0:
                         // delete
                         deleteNote(item);
                         break;
