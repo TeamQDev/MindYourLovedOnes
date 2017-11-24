@@ -182,6 +182,7 @@ public class DialogManager {
     }
     public static void showAlert(String msg, Context context) {
     Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
-
     }
+
+
 }

@@ -1,6 +1,5 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +18,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -50,10 +50,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 
@@ -68,7 +65,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     ToggleButton tbPre;
     TextInputLayout tilTitle;
     public static final int RESULT_PRES = 100;
-    TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre;
+    TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre,txtMedicine,txtDose,txtFrequency;
     EditText etNote;
     MySpinner spinner;
     RadioGroup rgCounter;
@@ -129,6 +126,10 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         txtPurpose= (TextView) findViewById(R.id.txtPurpose);
         txtPre = (TextView) findViewById(R.id.txtPre);
         txtRX= (TextView) findViewById(R.id.txtRX);
+        txtMedicine= (TextView) findViewById(R.id.txtMedicine);
+        txtDose= (TextView) findViewById(R.id.txtDose);
+        txtFrequency= (TextView) findViewById(R.id.txtFrequency);
+
         tbPre= (ToggleButton) findViewById(R.id.tbPre);
         rgCounter = (RadioGroup) findViewById(R.id.rgCounter);
         rbYes = (RadioButton) findViewById(R.id.rbYes);
@@ -145,7 +146,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         etNote= (EditText) findViewById(R.id.etNote);
         txtNote=(TextView) findViewById(R.id.txtNote);
 
-      /*  tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true)
@@ -154,7 +155,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     pre = "No";
             }
         });
-*/
+
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, FormList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -184,14 +185,17 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 txtDate.setText(p.getDates());
                 etNote.setText(p.getNote());
                 if (p.getPre().equals("Yes")) {
-                    //tbPre.setChecked(true);
-                    rbYes.setChecked(true);
+                    tbPre.setChecked(true);
+                    //rbYes.setChecked(true);
                 } else if (p.getPre().equals("No")) {
-                    rbNo.setChecked(true);
-                    //tbPre.setChecked(false);
+                    //rbNo.setChecked(true);
+                    tbPre.setChecked(false);
                 }
                 txtRX.setText(p.getRX());
                 txtPurpose.setText(p.getPurpose());
+                txtDose.setText(p.getDose());
+                txtFrequency.setText(p.getFrequency());
+                txtMedicine.setText(p.getMedicine());
                 dosageList = p.getDosageList();
                 imageList = p.getPrescriptionImageList();
                 setDosageData();
@@ -240,7 +244,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             case R.id.imgBack:
                 finish();
                 break;
-            case R.id.txtDate:
+           /* case R.id.txtDate:
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
@@ -261,7 +265,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     }
                 }, year, month, day);
                 dpd.show();
-                break;
+                break;*/
 
             case R.id.imgDone:
                 unique=generateRandom();
@@ -270,18 +274,33 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String note=etNote.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
                 String rx=txtRX.getText().toString().trim();
+                String dose=txtDose.getText().toString().trim();
+                String frequency=txtFrequency.getText().toString().trim();
+                String medicine=txtMedicine.getText().toString().trim();
                 if (isEdit==false) {
-                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx);
+                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx,dose,frequency,medicine);
                     if (flag == true) {
                         Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                        try {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
-                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx);
+                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx,dose,frequency,medicine);
                     if (flag == true) {
-                        Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
+                        try {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }

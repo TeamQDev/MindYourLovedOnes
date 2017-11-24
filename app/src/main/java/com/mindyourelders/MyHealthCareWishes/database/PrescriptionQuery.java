@@ -32,6 +32,9 @@ public class PrescriptionQuery {
     public static final String COL_DATE_TIME = "DateTime";
     public static final String COL_PRE = "Prescription";
     public static final String COL_RX = "RX";
+    public static final String COL_MEDICINE= "MedicineName";
+    public static final String COL_FREQUENCY= "Frequency";
+    public static final String COL_DOSE = "Dose";
 
     public PrescriptionQuery(Context context, DBHelper dbHelper) {
         this.context = context;
@@ -41,7 +44,7 @@ public class PrescriptionQuery {
     }
 
     public static String createPrescriptionTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_UNIQUE + " INTEGER," + COL_NOTE + " VARCHAR(20)," + COL_DOCTOR + " VARCHAR(20)," + COL_PURPOSE + " VARCHAR(20)," + COL_PRE + " VARCHAR(20)," +COL_RX + " VARCHAR(20)," +COL_DATE_TIME + " VARCHAR(10));";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER,"+ COL_UNIQUE + " INTEGER," + COL_NOTE + " VARCHAR(20)," + COL_DOCTOR + " VARCHAR(20)," + COL_MEDICINE + " VARCHAR(20)," + COL_DOSE+ " VARCHAR(10),"+COL_FREQUENCY+ " VARCHAR(10),"+ COL_PURPOSE + " VARCHAR(20)," + COL_PRE + " VARCHAR(20)," +COL_RX + " VARCHAR(20)," +COL_DATE_TIME + " VARCHAR(10));";
         return createTableQuery;
     }
 
@@ -50,7 +53,7 @@ public class PrescriptionQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertPrescriptionData(int userid, String doctor, String purpose, String notes, String dt, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int unique, String pre, String rx) {
+    public static Boolean insertPrescriptionData(int userid, String doctor, String purpose, String notes, String dt, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int unique, String pre, String rx, String dose, String frequency, String medicine) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -63,6 +66,10 @@ public class PrescriptionQuery {
         cv.put(COL_UNIQUE, unique);
         cv.put(COL_RX, rx);
         cv.put(COL_PRE, pre);
+        cv.put(COL_MEDICINE, medicine);
+        cv.put(COL_DOSE, dose);
+        cv.put(COL_FREQUENCY, frequency);
+
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -106,6 +113,9 @@ public class PrescriptionQuery {
                     notes.setUnique(c.getInt(c.getColumnIndex(COL_UNIQUE)));
                     notes.setPre(c.getString(c.getColumnIndex(COL_PRE)));
                     notes.setRX(c.getString(c.getColumnIndex(COL_RX)));
+                    notes.setMedicine(c.getString(c.getColumnIndex(COL_MEDICINE)));
+                    notes.setDose(c.getString(c.getColumnIndex(COL_DOSE)));
+                    notes.setFrequency(c.getString(c.getColumnIndex(COL_FREQUENCY)));
                     ArrayList<Dosage> Dosagelist = DosageQuery.fetchAllDosageRecord(c.getInt(c.getColumnIndex(COL_USERID)),c.getInt(c.getColumnIndex(COL_UNIQUE)));
                     if (Dosagelist.size()!=0)
                     {
@@ -139,7 +149,7 @@ public class PrescriptionQuery {
             return true;
     }
 
-    public static Boolean updatePrescriptionData(int colid, int id, String doctor, String purpose, String note, String date, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int userid, String pre, String rx) {
+    public static Boolean updatePrescriptionData(int colid, int id, String doctor, String purpose, String note, String date, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int userid, String pre, String rx, String dose, String frequency, String medicine) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -152,6 +162,9 @@ public class PrescriptionQuery {
         cv.put(COL_PURPOSE, purpose);
         cv.put(COL_PRE, pre);
         cv.put(COL_RX, rx);
+        cv.put(COL_MEDICINE, medicine);
+        cv.put(COL_DOSE, dose);
+        cv.put(COL_FREQUENCY, frequency);
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+colid,null);
 
         if (rowid==0)

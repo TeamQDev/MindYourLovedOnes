@@ -8,6 +8,59 @@ import java.util.ArrayList;
  */
 
 public class Prescription implements Serializable {
+
+    public String getRx() {
+        return rx;
+    }
+
+    public void setRx(String rx) {
+        this.rx = rx;
+    }
+
+    String rx="";
+
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    String frequency="";
+
+
+
+    public int getPreid() {
+        return preid;
+    }
+
+    public void setPreid(int preid) {
+        this.preid = preid;
+    }
+
+
+    int preid;
+    public String getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(String medicine) {
+        this.medicine = medicine;
+    }
+
+    String medicine="";
+    public String getDose() {
+        return dose;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
+
+    String dose="";
+
     public int getUnique() {
         return unique;
     }

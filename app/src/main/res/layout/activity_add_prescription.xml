@@ -47,6 +47,120 @@
             android:src="@drawable/check_mark"
             />
     </RelativeLayout>
+
+    <!---->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilMedicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/rlDosage"
+        android:layout_marginTop="@dimen/dimension20dp"
+      >
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name of Medication or Supplement"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilDose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilMedicine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtDose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dosage"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilFrequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilDose"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Frequency"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilRX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilFrequency"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtRX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="RX#"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
     android:id="@+id/tilTitle"
     android:layout_width="match_parent"
@@ -56,7 +170,7 @@
     android:paddingLeft="@dimen/dimension30dp"
     android:paddingRight="@dimen/dimension30dp"
     android:paddingTop="@dimen/dimension8dp"
-    android:layout_below="@+id/rlDosage"
+    android:layout_below="@+id/rlPre"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true">
 
@@ -84,7 +198,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/tilTitle"
+        android:layout_below="@+id/tilRX"
         android:layout_toRightOf="@+id/imgAides">
 
         <TextView
@@ -105,7 +219,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/txtPre">
+            android:layout_below="@+id/txtPre"
+            android:visibility="gone"
+            >
 
             <RadioButton
                 android:id="@+id/rbYes"
@@ -139,7 +255,7 @@
             android:text=""
             android:textOff=""
             android:textOn=""
-            android:visibility="gone"/>
+          />
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilDate"
@@ -151,7 +267,7 @@
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
         android:paddingTop="@dimen/dimension8dp"
-        android:layout_below="@+id/rlPre"
+        android:layout_below="@+id/tilTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -160,8 +276,7 @@
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:hint="Date of Prescription."
+            android:hint="Date of Prescription"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:textColor="@color/colorPrimaryDark"
@@ -199,7 +314,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilRX"
+        android:id="@+id/tilRX1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
@@ -215,7 +330,7 @@
 
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
-            android:id="@+id/txtRX"
+            android:id="@+id/txtRX1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
@@ -232,7 +347,7 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilRX"
+        android:layout_below="@+id/tilRX1"
         android:layout_marginLeft="@dimen/dimension35dp"
         android:layout_marginRight="@dimen/dimension35dp"
         app:ms_arrowColor="@color/colorBlue"
@@ -244,6 +359,7 @@
         custom:ms_hintColor="@color/colorDarkGray"
         android:visibility="gone"
         />
+
     <RelativeLayout
         android:id="@+id/rlDosage"
         android:layout_width="match_parent"
@@ -254,6 +370,7 @@
         android:padding="@dimen/dimension5dp"
         android:layout_marginTop="33dp"
         android:layout_marginBottom="@dimen/dimension10dp"
+        android:visibility="gone"
         >
 
         <TextView

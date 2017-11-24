@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,11 +24,13 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 public class AddInsuranceFormActivity extends AppCompatActivity  implements View.OnClickListener{
     private static final int RESULTCODE = 200;
+    private static final int RQUESTCODE =400 ;
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     TextView txtName;
     String From;
     Preferences preferences;
+    final CharSequence[] alert_items = { "SD Card", "Dropbox" };
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
     Form document;
     DBHelper dbHelper;
@@ -134,18 +137,42 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                 break;
 
             case R.id.imgAdd:
-                Intent i=new Intent(context,DocumentSdCardList.class);
-                startActivityForResult(i,RESULTCODE);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddInsuranceFormActivity.this);
+
+                builder.setTitle("");
+                builder.setItems(alert_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+
+                        switch (itemPos) {
+                            case 0:
+                                Intent i=new Intent(context,DocumentSdCardList.class);
+                                startActivityForResult(i,RESULTCODE);
+                                break;
+                            case 1:
+                                Intent intent=new Intent(context,DropboxLoginActivity.class);
+                                intent.putExtra("FROM","Document");
+                                startActivityForResult(intent,RQUESTCODE);
+                                break;
+
+                        }
+
+                    }
+
+                });
+
+                builder.create().show();
+
                 break;
 
             case R.id.imgDot:
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
-                builder.setTitle("");
+                alert.setTitle("");
 
-                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+                alert.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
 
@@ -175,7 +202,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                     }
                 });
 
-                builder.create().show();
+                alert.create().show();
                 // ((CarePlanActivity)context).CopyAssets();
                 break;
 
@@ -229,6 +256,21 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
             name=data.getExtras().getString("Name");
             documentPath=data.getExtras().getString("URI");
             txtName.setText(name);
+            String text="You Have selected <b>"+name +"</b> Document";
+            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            imgDoc.setClickable(false);
+            imgDoc.setImageResource(R.drawable.pdf);
+        }
+        else  if (requestCode==RQUESTCODE && data!=null)
+        {
+            name=data.getExtras().getString("Name");
+            documentPath=data.getExtras().getString("URI");
+            txtName.setText(name);
+            String text="You Have selected <b>"+name +"</b> Document";
+            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            imgDoc.setImageResource(R.drawable.pdf);
+            imgDoc.setClickable(false);
+
         }
     }
 

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -665,6 +666,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             documentPath=data.getExtras().getString("URI");
             txtName.setText(name);
             imgDoc.setClickable(false);
+            String text="You Have selected <b>"+name +"</b> Document";
+            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            imgDoc.setImageResource(R.drawable.pdf);
         }
         else  if (requestCode==RQUESTCODE && data!=null)
         {
@@ -672,6 +676,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             documentPath=data.getExtras().getString("URI");
             txtName.setText(name);
             imgDoc.setClickable(false);
+            String text="You Have selected <b>"+name +"</b> Document";
+            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            imgDoc.setImageResource(R.drawable.pdf);
         }
 
     }

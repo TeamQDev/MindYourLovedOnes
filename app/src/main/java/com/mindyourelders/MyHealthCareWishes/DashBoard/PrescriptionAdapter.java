@@ -2,8 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
-import com.mindyourelders.MyHealthCareWishes.model.Dosage;
 import com.mindyourelders.MyHealthCareWishes.model.PrescribeImage;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 
 import java.util.ArrayList;
-
-import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.txt;
 
 /**
  * Created by welcome on 9/18/2017.
@@ -59,11 +54,13 @@ class PrescriptionAdapter extends BaseAdapter {
             holder = new Holder();
             holder.txtDoctor = (TextView) convertView.findViewById(R.id.txtDoctor);
             holder.txtDate = (TextView) convertView.findViewById(R.id.txtDate);
+            holder.txt = (TextView) convertView.findViewById(R.id.txt);
+            holder.txtName = (TextView) convertView.findViewById(R.id.txtName);
             holder.llImg = (LinearLayout) convertView.findViewById(R.id.llImg);
             holder.llPrescription= (LinearLayout) convertView.findViewById(R.id.llPrescription);
             holder.imgForward = (ImageView) convertView.findViewById(R.id.imgForword);
             ArrayList<PrescribeImage> PrescriptionImageList;
-           if (prescriptionList.get(position).getPrescriptionImageList()!=null) {
+          /* if (prescriptionList.get(position).getPrescriptionImageList()!=null) {
                 PrescriptionImageList = prescriptionList.get(position).getPrescriptionImageList();
                 for (int i=0;i<PrescriptionImageList.size();i++)
                 {
@@ -75,8 +72,8 @@ class PrescriptionAdapter extends BaseAdapter {
                     imgView.setImageBitmap(bmp);
                     holder.llImg.addView(v);
                 }
-            }
-            if (prescriptionList.get(position).getDosageList()!=null)
+            }*/
+      /*      if (prescriptionList.get(position).getDosageList()!=null)
             {
                 ArrayList<Dosage> DosageList = prescriptionList.get(position).getDosageList();
                 for (int i = 0; i<DosageList.size(); i++)
@@ -88,19 +85,19 @@ class PrescriptionAdapter extends BaseAdapter {
                     TextView textViewName = (TextView) v.findViewById(R.id.txtName);
                     textViewName.setText(DosageList.get(i).getMedicine());
                     textView.setText(DosageList.get(i).getDose()+", "+DosageList.get(i).getFrequency());
-                    /*if (i%2==0)
-                    {*/
-                      /*  v.setBackgroundResource(R.color.colorLightGray);
+                    *//*if (i%2==0)
+                    {*//*
+                      *//*  v.setBackgroundResource(R.color.colorLightGray);
                         textViewName.setBackgroundResource(R.color.colorLightGray);
-                        textView.setBackgroundResource(R.color.colorLightGray);*/
-                  /*  }else{
+                        textView.setBackgroundResource(R.color.colorLightGray);*//*
+                  *//*  }else{
                         v.setBackgroundResource(R.color.colorWhite);
                         textViewName.setBackgroundResource(R.color.colorWhite);
                         textView.setBackgroundResource(R.color.colorWhite);
-                    }*/
+                    }*//*
                     holder.llPrescription.addView(v);
                 }
-            }
+            }*/
 
             convertView.setTag(holder);
         } else {
@@ -108,7 +105,8 @@ class PrescriptionAdapter extends BaseAdapter {
         }
         holder.txtDoctor.setText(prescriptionList.get(position).getDoctor());
         holder.txtDate.setText(prescriptionList.get(position).getDates());
-
+        holder.txt.setText(prescriptionList.get(position).getDose()+", "+prescriptionList.get(position).getFrequency());
+        holder.txtName.setText(prescriptionList.get(position).getMedicine());
 
         holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +125,7 @@ class PrescriptionAdapter extends BaseAdapter {
     }
 
     private class Holder {
-        TextView txtDoctor, txtDate, txtTime;
+        TextView txtDoctor, txtDate, txtTime,txt,txtName;
         LinearLayout llImg,llPrescription;
         ImageView imgForward;
     }
