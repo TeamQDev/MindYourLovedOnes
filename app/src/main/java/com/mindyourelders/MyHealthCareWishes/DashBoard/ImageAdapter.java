@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ class ImageAdapter  extends BaseAdapter {
         byte[] imageData=imageList.get(position).getImage();
         Bitmap bm= BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
         holder.img.setImageBitmap(bm);
+
         //holder.imgProfile.setImageResource(student.getImgid());
        /* holder.imgForward.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.utility;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentDashboard;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.OverviewActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FragmentSpecialist;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by varsha on 8/21/2017.
@@ -26,14 +30,13 @@ public class DialogManager {
     FragmentSpecialist fragmentSpecialist;
     FragmentNewContact fragmentNewContact;
 
-    public DialogManager(FragmentDashboard fragmentDashboard)
-    {
-        this.fragmentDashboard=fragmentDashboard;
+    public DialogManager(FragmentDashboard fragmentDashboard) {
+        this.fragmentDashboard = fragmentDashboard;
     }
 
 
     public DialogManager(FragmentNewContact fragmentNewContact) {
-        this.fragmentNewContact=fragmentNewContact;
+        this.fragmentNewContact = fragmentNewContact;
     }
 
     public DialogManager() {
@@ -41,7 +44,7 @@ public class DialogManager {
     }
 
     public DialogManager(FragmentSpecialist fragmentSpecialist) {
-        this.fragmentSpecialist=fragmentSpecialist;
+        this.fragmentSpecialist = fragmentSpecialist;
     }
 
     public void showErrorDialog(String titles, String msg, final Context context, final String flag, final Object o) {
@@ -55,8 +58,7 @@ public class DialogManager {
         if (titles.equals("")) {
             //title.setText(titles);
             // title.setVisibility(View.GONE);
-        }else
-        {
+        } else {
             title.setText(titles);
             title.setVisibility(View.VISIBLE);
         }
@@ -95,8 +97,7 @@ public class DialogManager {
         if (titles.equals("")) {
             title.setText(titles);
             title.setVisibility(View.GONE);
-        }else
-        {
+        } else {
             title.setText(titles);
             title.setVisibility(View.VISIBLE);
         }
@@ -123,7 +124,7 @@ public class DialogManager {
 
 
                     case "SAVE_OVERVIEW":
-                        ((OverviewActivity)context).postCommonDialog();
+                        ((OverviewActivity) context).postCommonDialog();
                         break;
 
                     case "ADD_SPECIALIST":
@@ -180,9 +181,19 @@ public class DialogManager {
         toast.setView(layout);
         toast.show();
     }
+
     public static void showAlert(String msg, Context context) {
-    Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
+
+    public static void closeKeyboard(Activity context) {
+        try {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
 
 }

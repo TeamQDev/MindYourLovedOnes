@@ -18,7 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -53,9 +52,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.closeKeyboard;
+
 
 public class AddPrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_CARD =50 ;
     Context context = this;
+    byte[] currentImage=null;
     ImageView imgBack, imgAddDosage, imgAddPhoto,imgDone;
     ListView ListDosage, ListPhoto;
     ArrayList<Dosage> dosageList = new ArrayList<>();
@@ -145,6 +148,16 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         imgDone = (ImageView) findViewById(R.id.imgDone);
         etNote= (EditText) findViewById(R.id.etNote);
         txtNote=(TextView) findViewById(R.id.txtNote);
+
+         ListPhoto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                         Intent i=new Intent(context,ViewImageActivity.class);
+                         i.putExtra("Image",imageList.get(position).getImage());
+                 currentImage=imageList.get(position).getImage();
+                         startActivityForResult(i,REQUEST_CARD);
+             }
+         });
 
         tbPre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -242,6 +255,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBack:
+                closeKeyboard(AddPrescriptionActivity.this);
                 finish();
                 break;
            /* case R.id.txtDate:
@@ -278,29 +292,19 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String frequency=txtFrequency.getText().toString().trim();
                 String medicine=txtMedicine.getText().toString().trim();
                 if (isEdit==false) {
-                    Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx,dose,frequency,medicine);
-                    if (flag == true) {
-                        Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
-                        try {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
-                    } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                    }
+                Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx,dose,frequency,medicine);
+                if (flag == true) {
+                    Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                    closeKeyboard(AddPrescriptionActivity.this);
+                } else {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                 }
+            }
                 else{
                     Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx,dose,frequency,medicine);
                     if (flag == true) {
                         Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
-                        try {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
+                        closeKeyboard(AddPrescriptionActivity.this);
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
@@ -514,7 +518,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                selectedImage.compress(Bitmap.CompressFormat.PNG, 40, stream);
                 byte[] byteArray = stream.toByteArray();
                 PrescribeImage p = new PrescribeImage();
                 p.setImage(byteArray);
@@ -530,7 +534,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream streams = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, streams);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 40, streams);
             byte[] byteArrays = streams.toByteArray();
             PrescribeImage p = new PrescribeImage();
             p.setImage(byteArrays);
@@ -566,7 +570,6 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 outStream.write(byteArray);
                 outStream.close();
 
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -574,14 +577,19 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             } finally {
 
             }
-
-
         }
-
+        else if(requestCode == REQUEST_CARD )
+        {
+              imageList.remove(currentImage);
+            setImageListData();
+        }
     }
 
     private void setImageListData() {
         ImageAdapter adapter = new ImageAdapter(context, imageList);
         ListPhoto.setAdapter(adapter);
     }
+
+
+
 }

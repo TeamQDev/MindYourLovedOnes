@@ -8,14 +8,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 
 
-public class AddFormActivity extends AppCompatActivity  {
+public class ViewImageActivity extends AppCompatActivity  {
     private static final int RESULT_CARD = 50;
     ImageView imgDoc,imgBack,imgDelete;
     boolean IsDelete=false;
+    byte[] photo=null;
+    TextView txtTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,21 +36,23 @@ public class AddFormActivity extends AppCompatActivity  {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgDoc= (ImageView) findViewById(R.id.imgDoc);
         imgDelete= (ImageView) findViewById(R.id.imgDelete);
+        txtTitle= (TextView) findViewById(R.id.txtTitle);
+        txtTitle.setText("Prescription");
 
         Intent i=getIntent();
         if (i.getExtras()!=null) {
-            byte[] photo = i.getExtras().getByteArray("Image");
+            photo = i.getExtras().getByteArray("Image");
             Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);
             imgDoc.setImageBitmap(photoCard);
 
-            if (i.getExtras().containsKey("IsDelete")) {
+          /*  if (i.getExtras().containsKey("IsDelete")) {
                 IsDelete = i.getExtras().getBoolean("IsDelete");
                 if (IsDelete == true) {
                     imgDelete.setVisibility(View.VISIBLE);
                 } else {
                     imgDelete.setVisibility(View.GONE);
                 }
-            }
+            }*/
         }
 
 
@@ -61,8 +67,8 @@ public class AddFormActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent();
-                i.putExtra("Card","Delete");
-
+                i.putExtra("Prescription","Delete");
+                i.putExtra("Photo",photo);
                 setResult(RESULT_CARD,i);
                 finish();
             }
