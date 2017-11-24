@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,6 +129,14 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                     Boolean flag = FormQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,photo,documentPath);
                     if (flag == true) {
                         Toast.makeText(context, "You have added form successfully", Toast.LENGTH_SHORT).show();
+                        try
+                        {
+                            InputMethodManager inm= (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                            inm.hideSoftInputFromWindow(AddInsuranceFormActivity.this.getCurrentFocus().getWindowToken(),0);
+                        }catch (Exception e)
+                        {
+                            //Todo: handle exception
+                        }
                         finish();
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();

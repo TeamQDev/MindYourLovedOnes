@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -72,7 +73,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 TextView txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
-                ImageView imgForward = (ImageView)view.findViewById(R.id.imgForword);
+                ImageView imgForward = (ImageView) view.findViewById(R.id.imgForword);
                 imgForward.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -101,7 +102,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                                 DateClass d = new DateClass();
                                 d.setDate(reportDate);
 
-                                Boolean flag = EventNoteQuery.updateNoteDate(noteList.get(position).getId(),reportDate);
+                                Boolean flag = EventNoteQuery.updateNoteDate(noteList.get(position).getId(), reportDate);
 
                                 if (flag == true) {
                                     Toast.makeText(context, "Event Note Date Updated Succesfully", Toast.LENGTH_SHORT).show();
@@ -185,15 +186,6 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.imgAdd:
                 showInputDialog(context);
-                try
-                {
-                    InputMethodManager inm= (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
-                    inm.hideSoftInputFromWindow(EventNoteActivity.this.getCurrentFocus().getWindowToken(),0);
-                }
-                catch (Exception e)
-                {
-                    //Todo: handle Exception
-                }
                 break;
             /*case R.id.txtDateTime:
 
@@ -266,6 +258,12 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 if (note.length() != 0) {
                     Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID), note, currentDateandTime);
                     if (flag == true) {
+                        try {
+                            InputMethodManager inm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                            inm.hideSoftInputFromWindow(EventNoteActivity.this.getCurrentFocus().getWindowToken(), 0);
+                        } catch (Exception e) {
+                            //Todo:Handle Exception
+                        }
                         Toast.makeText(context, "Event Note Added Succesfully", Toast.LENGTH_SHORT).show();
                         getData();
                         setNoteData();
@@ -294,5 +292,14 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         super.onResume();
         getData();
         setNoteData();
+    }
+
+    public static void closeKeyboard(Activity context) {
+        try {
+            InputMethodManager inm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+//Todo:Handle Exception
+        }
     }
 }

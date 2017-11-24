@@ -91,7 +91,7 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
 
         lvInsurance.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createSingleMenu(getActivity());
+        SwipeMenuCreator creator=s.createMenu(getActivity());
         lvInsurance.setMenuCreator(creator);
         lvInsurance.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
