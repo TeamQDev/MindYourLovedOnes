@@ -120,4 +120,25 @@ public class EventNoteQuery {
 
         return flag;
     }
+
+    public static Boolean updateNoteDate(int id, String reportDate) {
+        boolean flag;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_DATE_TIME, reportDate);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid==0)
+        {
+            flag=false;
+        }
+        else
+        {
+            flag=true;
+        }
+
+        return flag;
+    }
 }

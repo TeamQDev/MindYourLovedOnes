@@ -32,14 +32,14 @@
             android:textSize="@dimen/dimension22dp" />
 
         <ImageView
-            android:id="@+id/imgAdd"
+            android:id="@+id/imgEdit"
             android:layout_width="@dimen/dimension30dp"
             android:layout_height="@dimen/dimension30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
             android:src="@drawable/check_mark"
-            android:visibility="gone"
+
             />
     </RelativeLayout>
 <TextView
@@ -79,14 +79,16 @@
         android:layout_height="@dimen/dimension40dp"
         android:src="@drawable/delete_icon"
         android:scaleType="fitXY"
+        android:layout_centerInParent="true"
         />
     <ImageView
-        android:id="@+id/imgEdit"
+        android:id="@+id/imgEdits"
         android:layout_width="@dimen/dimension40dp"
         android:layout_height="@dimen/dimension40dp"
         android:src="@drawable/save"
         android:layout_alignParentRight="true"
         android:scaleType="fitXY"
+        android:visibility="gone"
         />
     </RelativeLayout>
 </RelativeLayout>

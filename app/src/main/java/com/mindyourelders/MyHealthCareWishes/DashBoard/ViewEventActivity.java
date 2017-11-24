@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,6 +75,12 @@ public class ViewEventActivity extends AppCompatActivity implements View.OnClick
                 if (flag==true)
                 {
                     Toast.makeText(context,"You have updated event successfully",Toast.LENGTH_SHORT).show();
+                    try {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
                     finish();
                 }
                 else{
