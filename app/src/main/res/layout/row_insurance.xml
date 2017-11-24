@@ -10,8 +10,6 @@
     >
 
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +38,7 @@
 
             <TextView
                 android:id="@+id/txtName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text= "Cfklj kj ouio "
                 android:textColor="@color/colorDarkBlue"
@@ -66,8 +64,7 @@
                 android:layout_width="@dimen/dimension25dp"
                 android:layout_height="@dimen/dimension25dp"
                 android:src="@drawable/ic_edit_blue"
-                android:layout_toRightOf="@+id/txtName"
-                android:layout_marginLeft="@dimen/dimension10dp"
+               android:layout_alignParentRight="true"
                 />
         </RelativeLayout>
 

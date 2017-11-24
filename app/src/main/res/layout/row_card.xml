@@ -29,7 +29,7 @@
             android:background="@color/colorWhite"
             android:padding="@dimen/dimension5dp"
             android:text="Provider Name :"
-            android:textColor="@color/colorBlue"
+            android:textColor="@color/colorBlackDark"
             android:textSize="@dimen/dimension18dp" />
         <TextView
             android:id="@+id/txtProviderValue"
@@ -48,7 +48,7 @@
             android:layout_below="@+id/txtProvider"
             android:padding="@dimen/dimension5dp"
             android:text="Type :"
-            android:textColor="@color/colorBlue"
+            android:textColor="@color/colorBlackDark"
             android:textSize="@dimen/dimension18dp" />
         <TextView
             android:id="@+id/txtTypeValue"
@@ -61,6 +61,14 @@
             android:textColor="@color/colorDarkGray"
             android:textSize="@dimen/dimension18dp"
             android:layout_marginBottom="@dimen/dimension5dp"
+            />
+        <ImageView
+            android:id="@+id/imgEdit"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:src="@drawable/ic_edit_blue"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimension10dp"
             />
     </RelativeLayout>
             <ImageView
