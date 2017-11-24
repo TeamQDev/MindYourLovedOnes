@@ -89,18 +89,15 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
 
         lvPrescription.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(context);
+        SwipeMenuCreator creator=s.createSingleMenu(context);
         lvPrescription.setMenuCreator(creator);
         lvPrescription.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Prescription item = PrescriptionList.get(position);
                 switch (index) {
+
                     case 0:
-                        // open
-                        //  open(item);
-                        break;
-                    case 1:
                         // delete
                         deletePrescription(item);
                         break;

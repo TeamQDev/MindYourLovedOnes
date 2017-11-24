@@ -91,19 +91,15 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
 
         lvInsurance.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
-        SwipeMenuCreator creator=s.createMenu(getActivity());
+        SwipeMenuCreator creator=s.createSingleMenu(getActivity());
         lvInsurance.setMenuCreator(creator);
         lvInsurance.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Insurance item = insuranceList.get(position);
                 switch (index) {
+
                     case 0:
-                        // open
-                        //  open(item);
-                        callUser(item);
-                        break;
-                    case 1:
                         // delete
                         deleteInsurance(item);
                         break;
