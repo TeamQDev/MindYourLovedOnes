@@ -276,6 +276,7 @@ emergencyList=new ArrayList<>();
                 preferences.putString(PrefConstants.SOURCE,"Emergency");
                 Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
                 startActivity(i);
+
                 break;
 
             case R.id.imgRight:
@@ -354,6 +355,7 @@ emergencyList=new ArrayList<>();
         getData();
         setListData();
     }
+
 
     /*private void onCall(String finalMobile) {
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);

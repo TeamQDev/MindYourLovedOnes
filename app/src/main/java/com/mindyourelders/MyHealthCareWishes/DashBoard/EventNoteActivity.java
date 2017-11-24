@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -184,6 +185,15 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.imgAdd:
                 showInputDialog(context);
+                try
+                {
+                    InputMethodManager inm= (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(EventNoteActivity.this.getCurrentFocus().getWindowToken(),0);
+                }
+                catch (Exception e)
+                {
+                    //Todo: handle Exception
+                }
                 break;
             /*case R.id.txtDateTime:
 

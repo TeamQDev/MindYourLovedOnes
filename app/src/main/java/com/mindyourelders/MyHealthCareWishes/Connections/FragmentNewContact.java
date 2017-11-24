@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -63,6 +64,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.txtPhone;
 import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAlert;
 
@@ -2299,6 +2301,15 @@ String location="";
                 break;
             case R.id.txtAdd:
                 //Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
+                try
+                    {
+                        InputMethodManager inm= (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                       inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+                    }
+                    catch (Exception e)
+            {
+             //TODO: handle exception
+                }
                 switch (source)
                 {
                     case "Connection":
