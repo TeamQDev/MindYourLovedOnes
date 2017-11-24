@@ -145,13 +145,13 @@
 
 
 
-        <View
+        <!--<View
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension1dp"
             android:background="@color/colorDarkGray"
             android:layout_alignParentBottom="true"
             android:paddingTop="@dimen/dimension10dp"
-            ></View>
+            ></View>-->
     </RelativeLayout>
 </RelativeLayout>

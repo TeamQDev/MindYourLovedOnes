@@ -3139,7 +3139,7 @@ String location="";
             /*else if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (phone.length()!=0 && phone.length() < 10) {
+            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
                 txtInsuarancePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }else return true;
