@@ -113,8 +113,8 @@ public class SpecialistsActivity extends AppCompatActivity {
                 header.setBackgroundResource(R.color.colorOne);
                 isEmergency=true;
                 isInsurance=false;
-                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
+                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
+                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE","ACTIVITIES OF DAILY LIVING", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
 
             }
             else if (from.equals("Insurance"))

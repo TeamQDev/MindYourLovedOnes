@@ -84,7 +84,13 @@
         <item name="android:textColor">@color/colorDarkGray</item>
 
     </style>
+    <style name="EmergencyDescs">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/dimension18dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
 
+    </style>
     <style name="MyButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/colorLightBlue</item>
         <item name="colorButtonNormal">@color/colorBlue</item>

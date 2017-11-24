@@ -23,6 +23,7 @@ public class EmergencyInfoActivity extends AppCompatActivity implements View.OnC
     FragmentEmergency fragmentEmergency=null;
     FragmentMedicalInfo fragmentMedicalInfo=null;
     FragmentPhysician fragmentPhysician=null;
+    FragmentLiving fragmentLiving=null;
 ImageView imgBack,imgRight;
     TextView txtTitle;
 RelativeLayout header;
@@ -60,6 +61,11 @@ RelativeLayout header;
                     imgRight.setVisibility(View.VISIBLE);
 
                     break;
+                case "Functional":
+                    callFragment("FUNCTIONAL", fragmentLiving);
+                    imgRight.setVisibility(View.GONE);
+
+                    break;
                 case "Proxy":
                     callFragment("PROXY", fragmentProxy);
                     imgRight.setVisibility(View.VISIBLE);
@@ -80,7 +86,7 @@ RelativeLayout header;
         fragmentMedicalInfo=new FragmentMedicalInfo();
         fragmentPhysician=new FragmentPhysician();
         fragmentProxy=new FragmentProxy();
-
+fragmentLiving=new FragmentLiving();
     }
 
     private void initListener() {

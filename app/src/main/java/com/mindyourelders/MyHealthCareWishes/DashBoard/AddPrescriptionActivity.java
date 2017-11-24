@@ -529,7 +529,6 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 e.printStackTrace();
             }
 
-            
         } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
 
             Bundle extras = data.getExtras();

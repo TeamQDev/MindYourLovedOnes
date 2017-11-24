@@ -20,7 +20,49 @@
             android:text="XYZ XYZ"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/dimension22dp" />
+        <RelativeLayout
+            android:id="@+id/rlAllergis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtName"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
 
+            <ImageView
+                android:id="@+id/imgAllergy"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/allergies" />
+
+            <TextView
+                android:id="@+id/txtAllergyHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:text="Allergies" />
+
+            <ImageView
+                android:id="@+id/imgAddAllergy"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListAllergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAllergyHeader"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:divider="@null" />
+
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rlHeight"
             android:layout_width="match_parent"
@@ -270,7 +312,9 @@
             android:gravity="center"
             android:text="Pre-existing Medical Conditions"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension22dp" />
+            android:textSize="@dimen/dimension22dp"
+            android:visibility="gone"
+            />
 
         <RelativeLayout
             android:id="@+id/rlPre"
@@ -338,49 +382,7 @@
             android:background="@color/colorLightGray"
             android:layout_below="@+id/rlHistory"
             />
-        <RelativeLayout
-            android:id="@+id/rlAllergis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtName"
-            android:layout_margin="@dimen/dimension10dp"
-            android:background="@drawable/gray_white_border"
-            android:padding="@dimen/dimension5dp">
-
-            <ImageView
-                android:id="@+id/imgAllergy"
-                android:layout_width="@dimen/dimension70dp"
-                android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimension10dp"
-                android:padding="@dimen/dimension6dp"
-                android:src="@drawable/allergies" />
-
-            <TextView
-                android:id="@+id/txtAllergyHeader"
-                style="@style/EmergencyCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension40dp"
-                android:layout_toRightOf="@+id/imgAllergy"
-                android:text="Allergies" />
-
-            <ImageView
-                android:id="@+id/imgAddAllergy"
-                android:layout_width="@dimen/dimension40dp"
-                android:layout_height="@dimen/dimension40dp"
-                android:layout_alignParentRight="true"
-                android:padding="@dimen/dimension5dp"
-                android:src="@drawable/add_square" />
-
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
-                android:id="@+id/ListAllergy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtAllergyHeader"
-                android:layout_toRightOf="@+id/imgAllergy"
-                android:divider="@null" />
-
-        </RelativeLayout>
+       
         <View
             android:id="@+id/view3"
             android:layout_height="@dimen/dimension20dp"
@@ -764,6 +766,7 @@
             android:layout_width="match_parent"
             android:background="@color/colorLightGray"
             android:layout_below="@+id/rlAides"
+            android:visibility="gone"
             />
         <RelativeLayout
             android:id="@+id/rlFunctional"
@@ -772,7 +775,9 @@
             android:layout_below="@+id/view6"
             android:layout_margin="@dimen/dimension10dp"
             android:background="@drawable/gray_white_border"
-            android:padding="@dimen/dimension5dp">
+            android:padding="@dimen/dimension5dp"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:id="@+id/imgFunctional"
@@ -1129,6 +1134,51 @@
                 android:id="@+id/imgVaccine"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/vaccine" />
+
+            <TextView
+                android:id="@+id/txtVaccinesHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:text="Immunizations/Vaccines" />
+
+            <ImageView
+                android:id="@+id/imgAddVaccine"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListVaccine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVaccinesHeader"
+                android:layout_toRightOf="@+id/imgVaccine"
+                android:divider="@null" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlVaccines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view7"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/imgVaccines"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/vaccine" />
@@ -1138,7 +1188,7 @@
                 style="@style/EmergencyCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:text="Immunizations/Vaccines" />
 
             <RelativeLayout
@@ -1146,8 +1196,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_below="@+id/imgVaccine"
-               android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_below="@+id/imgVaccines"
+               android:layout_toRightOf="@+id/imgVaccines"
                 >
 
                 <TextView
@@ -1195,7 +1245,7 @@
                 android:layout_below="@+id/rlFlueShot"
 
                 android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 >
 
                 <TextView
@@ -1239,7 +1289,7 @@
                 android:id="@+id/rlHPV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlPneumonia"
 
                 android:gravity="center_vertical"
@@ -1287,7 +1337,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlHPV"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
 
                 android:gravity="center_vertical"
                 >
@@ -1334,7 +1384,7 @@
                 android:id="@+id/rlVaricella"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlRubella"
 
                 android:gravity="center_vertical"
@@ -1382,7 +1432,7 @@
                 android:id="@+id/rlShingles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlVaricella"
 
                 android:gravity="center_vertical"
@@ -1429,7 +1479,7 @@
                 android:id="@+id/rlTetanus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlShingles"
 
                 android:gravity="center_vertical"
@@ -1476,7 +1526,7 @@
                 android:id="@+id/rlHepatitis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlTetanus"
 
                 android:gravity="center_vertical"
@@ -1525,7 +1575,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlHepatitis"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:gravity="center_vertical"
                 >
 
@@ -1571,7 +1621,7 @@
                 android:id="@+id/rlFlueNH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlFlue"
 
                 android:gravity="center_vertical"
@@ -1619,7 +1669,7 @@
                 android:id="@+id/rlPneumococcal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgVaccine"
+                android:layout_toRightOf="@+id/imgVaccines"
                 android:layout_below="@+id/rlFlueNH"
 
                 android:gravity="center_vertical"

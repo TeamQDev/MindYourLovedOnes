@@ -134,6 +134,10 @@ class SpecialistContactAdapter extends BaseAdapter {
                         fragment="Hospitals";
                         break;
 
+                    case "ACTIVITIES OF DAILY LIVING":
+                        fragment="Functional";
+                        break;
+
                     case "DOCTORS":
                         fragment = "Doctors";
                         break;
