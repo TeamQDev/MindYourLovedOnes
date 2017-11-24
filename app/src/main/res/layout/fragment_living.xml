@@ -361,6 +361,263 @@
                 android:layout_toRightOf="@+id/imgFunctional"
                 />
         </RelativeLayout>
+        <View
+            android:id="@+id/view3"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlFunctional"
+            />
+        <RelativeLayout
+            android:id="@+id/rlInstrumental"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view3"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgInstrumental"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/functional"
+                />
+
+            <TextView
+                android:id="@+id/txtInstrumentalHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imgInstrumental"
+                android:text="Instrumental Activities of Daily Living (IADL)" />
+          <!--  <RelativeLayout
+                android:id="@+id/rlBathing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFunctionalHeader"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Bathing"
+                    android:layout_toLeftOf="@+id/tbBathing"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbBathing"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlContinence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlBathing"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Continence"
+                    android:layout_toLeftOf="@+id/tbContinence"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbContinence"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDressing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlContinence"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Dressing"
+                    android:layout_toLeftOf="@+id/tbDressing"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbDressing"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFeeding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlDressing"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:layout_alignParentLeft="true"
+                    android:text="Eating"
+                    android:layout_toLeftOf="@+id/tbfeed"/>
+
+                <ToggleButton
+                    android:id="@+id/tbfeed"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlToileting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFeeding"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Toileting"
+                    android:layout_toLeftOf="@+id/tbToileting"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbToileting"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlTranfering"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlToileting"
+                android:layout_toRightOf="@+id/imgFunctional">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Tranfering"
+                    android:layout_toLeftOf="@+id/tbTranfering"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbTranfering"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etOtherFunction"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlTranfering"
+                android:layout_margin="@dimen/dimension15dp"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Other - specify"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension8dp"
+                android:layout_toRightOf="@+id/imgFunctional"
+                />
+
+            <EditText
+                android:id="@+id/etFunctionalNote"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etOtherFunction"
+                android:layout_margin="@dimen/dimension15dp"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Note"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension8dp"
+                android:layout_toRightOf="@+id/imgFunctional"
+                />-->
+        </RelativeLayout>
+
     </RelativeLayout>
 </ScrollView>
            <!-- <RelativeLayout
