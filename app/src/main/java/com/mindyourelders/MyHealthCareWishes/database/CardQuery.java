@@ -108,4 +108,31 @@ public class CardQuery {
 
         return true;
     }
+
+    public static boolean updateInsuranceCardData(int id, String name, String type, byte[] photo1, byte[] photo2) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        boolean flag=false;
+
+            ContentValues cv = new ContentValues();
+            cv.put(COL_NAME, name);
+            cv.put(COL_TYPE, type);
+            cv.put(COL_FRONT, photo1);
+            cv.put(COL_BACK, photo2);
+
+            int rowid=db.update(TABLE_NAME,
+                    cv,
+                    COL_ID + " = "+id,
+                    null);
+
+            if (rowid==0)
+            {
+                flag=false;
+            }
+            else
+            {
+                flag=true;
+            }
+
+            return flag;
+    }
 }

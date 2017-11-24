@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.CardQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -39,7 +40,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     ContentValues values;
     Uri imageUri;
     Context context = this;
-    TextView txtName, txttype;
+    TextView txtName, txttype,txtTitle;
     TextInputLayout tilTitle;
     Bitmap bitmap1,bitmap2;
     ImageView imgDone, imgBack, imgEdit1, imgEdit2, imgfrontCard, imgBackCard;
@@ -49,6 +50,8 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     private static int RESULT_SELECT_PHOTO2 = 4;
     String imagepath = "";//
     String name, type;
+    Boolean isEdit=false;
+    int id;
 
     Preferences preferences;
     DBHelper dbHelper;
@@ -76,6 +79,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initUI() {
+        txtTitle= (TextView) findViewById(R.id.txtTitle);
         imgDone = (ImageView) findViewById(R.id.imgDone);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgEdit1 = (ImageView) findViewById(R.id.imgEdit1);
@@ -96,6 +100,27 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 return false;
             }
         });
+
+        Intent i=getIntent();
+        if (i.getExtras()!=null)
+        {
+            txtTitle.setText("Update Insurance Card");
+            if (i.getExtras().getBoolean("IsEdit")==true)
+            {
+                isEdit=true;
+            }
+            Card card= (Card) i.getExtras().getSerializable("CardObject");
+            txtName.setText(card.getName());
+            txttype.setText(card.getType());
+            id=card.getId();
+            byte[] photo=card.getImgFront();
+            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+           imgfrontCard.setImageBitmap(bmp);
+
+            byte[] photo1=card.getImgBack();
+            Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
+            imgBackCard.setImageBitmap(bmp1);
+        }
 
     }
 
@@ -139,15 +164,26 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 Bitmap.createBitmap(bitmap2,bitmap2.getWidth()+100, bitmap2.getHeight()+100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos2);
 */
                 byte[] photo2 = baos2.toByteArray();
-
-                boolean flag = CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, type, photo1, photo2);
-                if (flag) {
-                    Toast.makeText(context, "You have added insurance information successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+if (isEdit==false) {
+    boolean flag = CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, type, photo1, photo2);
+    if (flag) {
+        Toast.makeText(context, "You have added insurance information successfully", Toast.LENGTH_SHORT).show();
+        finish();
+    } else {
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+    }
+    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+}else if (isEdit==true)
+{
+    boolean flag = CardQuery.updateInsuranceCardData(id, name, type, photo1, photo2);
+    if (flag) {
+        Toast.makeText(context, "You have updated insurance information successfully", Toast.LENGTH_SHORT).show();
+        finish();
+    } else {
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+    }
+    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+}
                 break;
 
             case R.id.imgBack:
