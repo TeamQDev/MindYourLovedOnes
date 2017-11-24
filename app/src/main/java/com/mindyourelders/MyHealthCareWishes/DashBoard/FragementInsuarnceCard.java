@@ -157,18 +157,18 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
 
         lvCard.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s = new SwipeMenuCreation();
-        SwipeMenuCreator creator = s.createMenu(getActivity());
+        SwipeMenuCreator creator = s.createSingleMenu(getActivity());
         lvCard.setMenuCreator(creator);
         lvCard.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Card item = CardList.get(position);
                 switch (index) {
-                    case 0:
+                 /*   case 0:
                         // open
                         //  open(item);
-                        break;
-                    case 1:
+                        break;*/
+                    case 0:
                         // delete
                         deleteInsuranceCard(item);
                         break;
