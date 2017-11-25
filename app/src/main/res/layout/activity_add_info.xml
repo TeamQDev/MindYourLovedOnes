@@ -45,13 +45,21 @@
             android:src="@drawable/check_mark"
             android:visibility="gone" />
     </RelativeLayout>
-
+<ImageView
+    android:layout_width="@dimen/dimension30dp"
+    android:layout_height="@dimen/dimension30dp"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/header"
+    android:id="@+id/imgInfo"
+    android:src="@drawable/info"
+    android:layout_margin="@dimen/dimension10dp"
+    />
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
-        android:layout_marginTop="@dimen/dimension40dp"
+        android:layout_below="@+id/imgInfo"
+        android:layout_marginTop="@dimen/dimension10dp"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/dimension8dp"
@@ -268,7 +276,9 @@
         android:layout_marginTop="@dimen/dimension40dp"
         android:layout_marginLeft="@dimen/dimension10dp"
         android:layout_marginRight="@dimen/dimension10dp"
-        android:layout_centerHorizontal="true">]
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        >]
         <TextView
             android:id="@+id/txtHeader"
             android:layout_width="match_parent"
