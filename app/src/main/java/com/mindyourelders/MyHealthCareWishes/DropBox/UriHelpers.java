@@ -1,12 +1,8 @@
 package com.mindyourelders.MyHealthCareWishes.DropBox;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 
 import java.io.File;
 
@@ -29,7 +25,7 @@ public final class UriHelpers {
     public static File getFileForUri(final Context context, final Uri uri) {
         String path = null;
         // DocumentProvider
-        if (DocumentsContract.isDocumentUri(context, uri)) {
+        /*if (DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -71,7 +67,7 @@ public final class UriHelpers {
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             // MediaStore (and general)
             path = getDataColumn(context, uri, null, null);
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+        } else*/ if ("file".equalsIgnoreCase(uri.getScheme())) {
             // File
             path = uri.getPath();
         }

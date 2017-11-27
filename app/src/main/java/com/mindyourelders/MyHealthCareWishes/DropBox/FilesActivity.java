@@ -329,7 +329,6 @@ public class FilesActivity extends DropboxActivity {
 
     private void uploadFile(String fileUri) {
        // Uri contentUri = null;
-
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(false);
@@ -348,6 +347,8 @@ public class FilesActivity extends DropboxActivity {
 
                 // Reload the folder
                 loadData();
+
+                finish();
             }
 
             @Override
