@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -72,6 +73,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     ContentValues values;
     Uri imageUri;
     byte[] photoCard=null;
+    RelativeLayout llIndividual;
     TextView txtSignUp, txtLogin, txtForgotPassword,txtOther;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
@@ -156,6 +158,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     }
 
     private void initUI() {
+        llIndividual= (RelativeLayout) rootview.findViewById(R.id.llIndividual);
         rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
         rlLive= (RelativeLayout) rootview.findViewById(R.id.rlLive);
         txtCard= (TextView) rootview.findViewById(R.id.txtCard);
@@ -310,6 +313,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 } else if (checkedId == R.id.rbNoo) {
                     english = "No";
                     //tilId.setVisibility(View.GONE);
+                }
+            }
+        });
+        llIndividual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity().getCurrentFocus() != null) {
+                    InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
                 }
             }
         });

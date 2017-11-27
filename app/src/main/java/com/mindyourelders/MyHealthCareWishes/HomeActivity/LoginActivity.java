@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
+    RelativeLayout rlLogin;
     TextView txtSignIn, txtNew, txtForgotPassword;
     ImageView imgFbSignup, imgGoogleSignup;
     TextView txtUserName, txtPassword;
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initComponent() {
-        preferences=new Preferences(context);
+        preferences = new Preferences(context);
         dbHelper = new DBHelper(context);
         PersonalInfoQuery p = new PersonalInfoQuery(context, dbHelper);
     }
@@ -58,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initUI() {
+        rlLogin = (RelativeLayout) findViewById(R.id.rlLogin);
         txtSignIn = (TextView) findViewById(R.id.txtSignIn);
         txtNew = (TextView) findViewById(R.id.txtNew);
         txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
@@ -65,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imgGoogleSignup = (ImageView) findViewById(R.id.imgGoogleSignup);
         txtUserName = (TextView) findViewById(R.id.txtUserName);
         txtPassword = (TextView) findViewById(R.id.txtPassword);
-        tilUserName= (TextInputLayout) findViewById(R.id.tilUserName);
+        tilUserName = (TextInputLayout) findViewById(R.id.tilUserName);
         tilUserName.setHintEnabled(false);
         txtUserName.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -76,39 +80,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return false;
             }
         });
-
+        rlLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
     }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.txtSignIn:
-       if (validate()) {
-                 ArrayList<PersonalInfo> PersonList = PersonalInfoQuery.fetchOneRecord(username, password);
-                 if (PersonList.size() != 0) {
-                     for (int i = 0; i < PersonList.size(); i++) {
-                         if (username.equals(PersonList.get(i).getEmail()) && password.equals(PersonList.get(i).getPassword())) {
-                             Toast.makeText(context, "You have Logged in Successfully", Toast.LENGTH_SHORT).show();
-                             preferences.putString(PrefConstants.USER_EMAIL, PersonList.get(i).getEmail());
-                             preferences.putString(PrefConstants.USER_NAME, PersonList.get(i).getName());
-                             String saveThis = Base64.encodeToString( PersonList.get(i).getPhoto(), Base64.DEFAULT);
-                             preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
-                             preferences.putInt(PrefConstants.USER_ID, PersonList.get(i).getId());
-                             preferences.setREGISTERED(true);
-                             preferences.setLogin(true);
-                             Intent signinIntent = new Intent(context, BaseActivity.class);
-                             startActivity(signinIntent);
-                             finish();
-                         }
-                     }
-                 } else {
-                     Toast.makeText(context, "Enter correct Username or Password", Toast.LENGTH_SHORT).show();
-                     txtUserName.setText("");
-                     txtPassword.setText("");
-                 }
+                if (validate()) {
+                    ArrayList<PersonalInfo> PersonList = PersonalInfoQuery.fetchOneRecord(username, password);
+                    if (PersonList.size() != 0) {
+                        for (int i = 0; i < PersonList.size(); i++) {
+                            if (username.equals(PersonList.get(i).getEmail()) && password.equals(PersonList.get(i).getPassword())) {
+                                Toast.makeText(context, "You have Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                preferences.putString(PrefConstants.USER_EMAIL, PersonList.get(i).getEmail());
+                                preferences.putString(PrefConstants.USER_NAME, PersonList.get(i).getName());
+                                String saveThis = Base64.encodeToString(PersonList.get(i).getPhoto(), Base64.DEFAULT);
+                                preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
+                                preferences.putInt(PrefConstants.USER_ID, PersonList.get(i).getId());
+                                preferences.setREGISTERED(true);
+                                preferences.setLogin(true);
+                                Intent signinIntent = new Intent(context, BaseActivity.class);
+                                startActivity(signinIntent);
+                                finish();
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Enter correct Username or Password", Toast.LENGTH_SHORT).show();
+                        txtUserName.setText("");
+                        txtPassword.setText("");
+                    }
 
-             }
+                }
 
                /* Intent signinIntent = new Intent(context, BaseActivity.class);
                 startActivity(signinIntent);
@@ -153,4 +163,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return false;
     }
+    public void hideSoftKeyboard()
+    {
+        if (getCurrentFocus()!=null)
+        {
+        InputMethodManager inm= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        }
+}
 }

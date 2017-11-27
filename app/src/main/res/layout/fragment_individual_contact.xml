@@ -8,7 +8,10 @@
     android:background="@color/colorLightBlue"
     android:layout_marginBottom="@dimen/dimension20dp"
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
-
+<RelativeLayout
+    android:id="@+id/llIndividual"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -1054,4 +1057,5 @@
            </RelativeLayout>
 
     </RelativeLayout>
+</RelativeLayout>
 </ScrollView>

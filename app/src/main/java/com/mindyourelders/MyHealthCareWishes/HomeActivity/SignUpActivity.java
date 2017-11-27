@@ -31,9 +31,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
+    RelativeLayout llSignUp;
     TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4,txtPolicy5;
     ImageView imgBack, imgEdit,imgProfile;
     TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
@@ -135,6 +138,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initUI() {
+        llSignUp= (RelativeLayout) findViewById(R.id.llSignUp);
         imgProfile= (ImageView) findViewById(R.id.imgProfile);
         txtSignUp = (TextView) findViewById(R.id.txtSignUp);
         txtLogin = (TextView) findViewById(R.id.txtLogin);
@@ -172,6 +176,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setHint("Country");
+
+        llSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
 
         txtPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -954,5 +965,11 @@ String name;
             return "Exception";
         }
 
+    }
+    public void hideSoftKeyboard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

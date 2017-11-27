@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -205,6 +206,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBack:
+                hideSoftKeyboard();
                 finish();
                 break;
 
@@ -223,6 +225,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.llAddConn:
+                hideSoftKeyboard();
                 int unique=generateRandom();
                 String name=txtName.getText().toString().trim();
                 String date=txtDate.getText().toString().trim();
@@ -249,6 +252,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                     if (isUpdate==false) {
                         Boolean flag = AppointmentQuery.insertAppointmentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, date, type, frequency, otherType, otherFrequency, dateList, unique);
                         if (flag == true) {
+                            hideSoftKeyboard();
                             Toast.makeText(context, "Appointment added succesfully", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
@@ -258,6 +262,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                     else if (isUpdate==true){
                         Boolean flag = AppointmentQuery.updateAppointmentData(p.getId(), name, date, type, frequency, otherType, otherFrequency, dateList, p.getUnique());
                         if (flag == true) {
+                            hideSoftKeyboard();
                             Toast.makeText(context, "Appointment updated succesfully", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
@@ -287,5 +292,10 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         int randomNumber = r.nextInt(500);
 
         return randomNumber;
+    }
+    public void hideSoftKeyboard()
+    {
+        InputMethodManager inm= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
 }
