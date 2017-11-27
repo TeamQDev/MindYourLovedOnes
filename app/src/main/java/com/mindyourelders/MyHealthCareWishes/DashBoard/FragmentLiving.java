@@ -1,11 +1,15 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,12 +24,13 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
  */
 
 public class FragmentLiving extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
     View rootview;
     ImageView imgBack, imgDone;
     Preferences preferences;
     TextView txtTitle, txtName;
     DBHelper dbHelper;
-
+    ImageView imgInfoF,imgInfoI;
 
     @Nullable
     @Override
@@ -41,6 +46,8 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
     private void initListener() {
         imgDone.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+        imgInfoF.setOnClickListener(this);
+        imgInfoI.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -53,6 +60,9 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
+
+        imgInfoF = (ImageView) rootview.findViewById(R.id.imgInfoF);
+        imgInfoI = (ImageView) rootview.findViewById(R.id.imgInfoI);
     }
 
     private void initComponent() {
@@ -63,6 +73,19 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.imgInfoF:
+                String msg="<b>Bathing.</b> <i>The ability to clean oneself and perform grooming activities like shaving and brushing teeth.</i>  <br><br>" +
+                        "<b>Dressing.</b> <i> The ability to get dressed by oneself without struggling with buttons and zippers.</i><br><br>" +
+                        "<b>Eating.</b> <i> The ability to feed oneself.</i><br><br>" +
+                        "<b>Transferring.</b> <i> Being able to either walk or move oneself from a bed to a wheelchair and back again.</i><br><br>" +
+                        "<b>Toileting.</b> <i> The ability to get on and off the toilet.</i><br><br>" +
+                        "<b>Continence.</b> <i> The ability to control one's bladder and bowel functions.</i>";
+                String title="Activities of Daily Living";
+                showViewDialog(getActivity(),msg,title);
+                break;
+            case R.id.imgInfoI:
+
+                break;
             case R.id.imgDone:
       /*  ft = etFt.getText().toString().trim();
         inch = etInch.getText().toString().trim();
@@ -93,6 +116,30 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
                 getActivity().finish();
                 break;
         }
+    }
+
+    private void showViewDialog(Context context,String Message,String title) {
+            final Dialog customDialog;
+
+            // LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+            //  View customView = inflater.inflate(R.layout.dialog_input, null);
+            // Build the dialog
+            customDialog = new Dialog(context);
+            customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            customDialog.setContentView(R.layout.dialog_living);
+            customDialog.setCancelable(false);
+            TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+            txtNotes.setText(Html.fromHtml(Message));
+            TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+            txtNoteHeader.setText(title);
+            TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+             btnYes.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     customDialog.dismiss();
+                 }
+             });
+        customDialog.show();
     }
 
     @Override

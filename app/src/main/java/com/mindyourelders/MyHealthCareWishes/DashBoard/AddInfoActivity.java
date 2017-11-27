@@ -1,12 +1,15 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,16 +22,19 @@ import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalConditionQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
+import com.mindyourelders.MyHealthCareWishes.database.VaccineQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
+import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 
 public class AddInfoActivity extends AppCompatActivity  implements View.OnClickListener{
     private static final int RESULT_CONDITION =500 ;
+    private static final int RESULT_VACCINE =700 ;
     Context context=this;
-    ImageView imgBack;
+    ImageView imgBack,imgInfo;
     RelativeLayout llAddConn;
     TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone;
     TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone;
@@ -42,6 +48,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     DBHelper dbHelper;
     int id;
     String data="";
+    String header="";
+            String msg="";
 
 
     @Override
@@ -77,7 +85,51 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     return false;
                 }
             });
+            switch (from) {
+                case "Allergy":
+                  imgInfo.setVisibility(View.VISIBLE);
+                    break;
 
+                case "AllergyUpdate":
+                    imgInfo.setVisibility(View.VISIBLE);
+                    break;
+                case "Implants":
+                    imgInfo.setVisibility(View.VISIBLE);
+                    break;
+
+                case "ImplantUpdate":
+                    imgInfo.setVisibility(View.VISIBLE);
+                    break;
+                case "Condition":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+
+                case "ConditionUpdate":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+                case "Hospital":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+
+                case "HospitalUpdate":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+                case "History":
+                    imgInfo.setVisibility(View.VISIBLE);
+                    break;
+
+                case "HistoryUpdate":
+                    imgInfo.setVisibility(View.VISIBLE);
+                    break;
+
+                case "Vaccine":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+
+                case "VaccineUpdate":
+                    imgInfo.setVisibility(View.GONE);
+                    break;
+            }
             isAllergy=i.getExtras().getBoolean("IsAllergy");
             isHistory=i.getExtras().getBoolean("IsHistory");
             isImplant=i.getExtras().getBoolean("IsImplant");
@@ -123,6 +175,13 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     data=value;
                     break;
 
+                case "VaccineUpdate":
+                    Vaccine vaccine= (Vaccine) i.getExtras().getSerializable("VaccineObject");
+                    txtName.setText(vaccine.getName());
+                    txtDate.setText(vaccine.getDate());
+                    id=vaccine.getId();
+                    break;
+
                 case "ConditionUpdate":
                     String valuef= i.getExtras().getString("ConditionObject");
                     txtName.setText(valuef);
@@ -151,12 +210,14 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
     private void initListener() {
         imgBack.setOnClickListener(this);
+        imgInfo.setOnClickListener(this);
         llAddConn.setOnClickListener(this);
         txtDate.setOnClickListener(this);
     }
 
     private void initUi() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgInfo= (ImageView) findViewById(R.id.imgInfo);
         llAddConn= (RelativeLayout) findViewById(R.id.llAddConn);
         tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
         txtName= (TextView) findViewById(R.id.txtName);
@@ -183,6 +244,145 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         {
             case R.id.imgBack:
                 finish();
+                break;
+
+            case R.id.imgInfo:
+                switch (from) {
+                    case "Allergy":
+                         header="Allergy";
+                         msg="<b>Types of Reaction :</b><br>"+
+                                "Anaphylaxis<br>" +
+                                "Difficulty Breathing<br>" +
+                                "Hives<br>" +
+                                "Nausea<br>" +
+                                "Rash<br>" +
+                                "Vomiting <br>";
+                        showViewDialog(context,msg,header);
+                        break;
+
+                    case "AllergyUpdate":
+                        header="Allergy";
+                      msg="<b>Types of Reaction :</b><br>"+
+                                "Anaphylaxis<br>" +
+                                "Difficulty Breathing<br>" +
+                                "Hives<br>" +
+                                "Nausea<br>" +
+                                "Rash<br>" +
+                                "Vomiting <br>";
+                        showViewDialog(context,msg,header);
+                        break;
+                    case "Implants":
+                        header="Medical Implants";
+                        msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                                "<li>Artifical Limbs</li>" +
+                                "<li>Artificial Heart Value</li>" +
+                                "<li>Body Art</li>" +
+                                "<li>Body Piercing </li>" +
+                                "<li>Coronary Stents (Drug Coated/Bare Methal/Unknown)</li>" +
+                                "<li>Gastric Band</li>" +
+                                "<li>Implanted Cardio Defibrilator (ICD)</li>" +
+                                "<li>Implanted Devices/Pumps/Stimulator</li>" +
+                                "<li>Joint Replacements (specify)______</li>" +
+                                "<li>Lens Implants</li>" +
+                                "<li>Metal Implants</li>" +
+                                "<li>Middle Ear Prosthesis</li>" +
+                                "<li>Pacemaker</li>" +
+                                "<li>Penile Implant</li>" +
+                                "<li>Pins/Rods/Screws (specify)</li>" +
+                                "<li>Prosthetic Eye</li>" +
+                                "<li>Renal or other Stents</li>" +
+                                "<li>Tracheotomy</li></ul>";
+                        showViewDialog(context,msg,header);
+                        break;
+
+                    case "ImplantUpdate":
+                        header="Medical Implants";
+                        msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                                "<li>Artifical Limbs</li>" +
+                                "<li>Artificial Heart Value</li>" +
+                                "<li>Body Art</li>" +
+                                "<li>Body Piercing </li>" +
+                                "<li>Coronary Stents (Drug Coated/Bare Methal/Unknown)</li>" +
+                                "<li>Gastric Band</li>" +
+                                "<li>Implanted Cardio Defibrilator (ICD)</li>" +
+                                "<li>Implanted Devices/Pumps/Stimulator</li>" +
+                                "<li>Joint Replacements (specify)______</li>" +
+                                "<li>Lens Implants</li>" +
+                                "<li>Metal Implants</li>" +
+                                "<li>Middle Ear Prosthesis</li>" +
+                                "<li>Pacemaker</li>" +
+                                "<li>Penile Implant</li>" +
+                                "<li>Pins/Rods/Screws (specify)</li>" +
+                                "<li>Prosthetic Eye</li>" +
+                                "<li>Renal or other Stents</li>" +
+                                "<li>Tracheotomy</li></ul>";
+                        showViewDialog(context,msg,header);
+                        break;
+                    case "Condition":
+
+                        break;
+
+                    case "ConditionUpdate":
+
+                        break;
+                    case "Hospital":
+
+                        break;
+
+                    case "HospitalUpdate":
+
+                        break;
+                    case "History":
+                        header="Surgical History";
+                        msg="<ul><li>Appendix</li>" +
+                                "<li>Breast Biopsy/Mastectomy</li>" +
+                                "<li>Cataract</li>" +
+                                "<li>Colon</li>" +
+                                "<li>Gallbladder</li>" +
+                                "<li>Heart, Angio/Stent</li>" +
+                                "<li>Heart, Bypass</li>" +
+                                "<li>Heart, Valve</li>" +
+                                "<li>Hernia</li>" +
+                                "<li>Hip Replacement</li>" +
+                                "<li>Hysterectomy</li>" +
+                                "<li>Metal Implants</li>" +
+                                "<li>Middle Ear Prosthesis</li>" +
+                                "<li>Knee Surgery/Replacement</li>" +
+                                "<li>Lasik Surgery</li>" +
+                                "<li>Spine Surgery</li>" +
+                                "<li>Thyroid Surgery</li>" +
+                                "<li>Tonsils</li>" +
+                                "<li>Vascular Surgery</li>" +
+                                "<li>Wisdom Teeth</li></ul>";
+                        showViewDialog(context,msg,header);
+                        break;
+
+                    case "HistoryUpdate":
+                        header="Surgical History";
+                        msg="<ul><li>Appendix</li>" +
+                                "<li>Breast Biopsy/Mastectomy</li>" +
+                                "<li>Cataract</li>" +
+                                "<li>Colon</li>" +
+                                "<li>Gallbladder</li>" +
+                                "<li>Heart, Angio/Stent</li>" +
+                                "<li>Heart, Bypass</li>" +
+                                "<li>Heart, Valve</li>" +
+                                "<li>Hernia</li>" +
+                                "<li>Hip Replacement</li>" +
+                                "<li>Hysterectomy</li>" +
+                                "<li>Metal Implants</li>" +
+                                "<li>Middle Ear Prosthesis</li>" +
+                                "<li>Knee Surgery/Replacement</li>" +
+                                "<li>Lasik Surgery</li>" +
+                                "<li>Spine Surgery</li>" +
+                                "<li>Thyroid Surgery</li>" +
+                                "<li>Tonsils</li>" +
+                                "<li>Vascular Surgery</li>" +
+                                "<li>Wisdom Teeth</li></ul>";
+                        showViewDialog(context,msg,header);
+                        break;
+                }
+
                 break;
            /* case R.id.txtDate:
                 Calendar calendar = Calendar.getInstance();
@@ -256,6 +456,36 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             Intent intentImplants = new Intent();
                            // intentImplants.putExtra("Value", value);
                             setResult(RESULT_IMPLANTS, intentImplants);
+                            finish();
+                            break;
+
+                        case "Vaccine":
+                            String datev=txtDate.getText().toString();
+                            Boolean flagr = VaccineQuery.insertVaccineData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,datev);
+                            if (flagr == true) {
+                                Toast.makeText(context, "Vaccine Added Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentVaccine = new Intent();
+                            // intentImplants.putExtra("Value", value);
+                            setResult(RESULT_VACCINE, intentVaccine);
+                            finish();
+                            break;
+
+                        case "VaccineUpdate":
+                            String dates=txtDate.getText().toString();
+                            Boolean flagf = VaccineQuery.updateVaccineData(id,value,dates);
+                            if (flagf == true) {
+                                Toast.makeText(context, "Vaccine Updated Succesfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                            Intent intentVaccinef = new Intent();
+                            // intentImplants.putExtra("Value", value);
+                            setResult(RESULT_VACCINE, intentVaccinef);
                             finish();
                             break;
 
@@ -344,10 +574,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             break;
 
                         case "HistoryUpdate":
-                            String dates=txtDate.getText().toString();
+                            String dateu=txtDate.getText().toString();
                             String doctors=txtDoctor.getText().toString();
                             String dones=txtDone.getText().toString();
-                            Boolean flag3s= HistoryQuery.updateHistoryData(id,value,dates,doctors,dones);
+                            Boolean flag3s= HistoryQuery.updateHistoryData(id,value,dateu,doctors,dones);
                             if (flag3s == true) {
                                 Toast.makeText(context, "History updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -367,4 +597,29 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 }
         }
     }
+    private void showViewDialog(Context context,String Message,String title) {
+        final Dialog customDialog;
+
+        // LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+        //  View customView = inflater.inflate(R.layout.dialog_input, null);
+        // Build the dialog
+        customDialog = new Dialog(context);
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        customDialog.setContentView(R.layout.dialog_living);
+        customDialog.setCancelable(false);
+        TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+        txtNotes.setText(Html.fromHtml(Message));
+        TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+        txtNoteHeader.setText(title);
+        TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialog.dismiss();
+            }
+        });
+        customDialog.show();
+    }
+
+
 }

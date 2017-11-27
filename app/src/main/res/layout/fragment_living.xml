@@ -42,10 +42,20 @@
             <TextView
                 android:id="@+id/txtFunctionalHeader"
                 style="@style/EmergencyCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgFunctional"
-                android:text="Activities of Daily Living (ADL)" />
+                android:layout_toLeftOf="@+id/imgInfoF"
+                android:text="Activities of Daily Living (ADL)"
+                />
+            <ImageView
+                android:id="@+id/imgInfoF"
+                android:layout_width="@dimen/dimension35dp"
+                android:layout_height="@dimen/dimension35dp"
+                android:src="@drawable/info_blue"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
             <RelativeLayout
                 android:id="@+id/rlBathing"
                 android:layout_width="match_parent"
@@ -65,7 +75,7 @@
                     android:text="Bathing"
                     android:layout_toLeftOf="@+id/tbBathing"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorBlue"
+                    
                     />
                 <TextView
                     style="@style/EmergencyDescs"
@@ -77,6 +87,7 @@
                     android:layout_below="@+id/txtBathing"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
+                    android:visibility="gone"
                     />
                 <ToggleButton
                     android:id="@+id/tbBathing"
@@ -98,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlBathing"
                 android:layout_toRightOf="@+id/imgFunctional"
-               android:layout_marginTop="@dimen/dimension10dp"
+
                 >
 
                 <TextView
@@ -111,7 +122,7 @@
                     android:text="Continence"
                     android:layout_toLeftOf="@+id/tbContinence"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorBlue"
+                    
                     />
                 <TextView
                     style="@style/EmergencyDescs"
@@ -123,7 +134,7 @@
                     android:layout_below="@+id/txtC"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
-
+                    android:visibility="gone"
                     />
                 <ToggleButton
                     android:id="@+id/tbContinence"
@@ -145,8 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlContinence"
                 android:layout_toRightOf="@+id/imgFunctional"
-               android:layout_marginTop="@dimen/dimension10dp"
-                >
+              >
 
                 <TextView
 
@@ -159,7 +169,7 @@
                     android:layout_toLeftOf="@+id/tbDressing"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/txtD"
-                    android:textColor="@color/colorBlue"
+
                     />
                 <TextView
                     style="@style/EmergencyDescs"
@@ -171,7 +181,7 @@
                     android:layout_below="@+id/txtD"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
-
+                    android:visibility="gone"
                     />
                 <ToggleButton
                     android:id="@+id/tbDressing"
@@ -193,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlDressing"
                 android:layout_toRightOf="@+id/imgFunctional"
-               android:layout_marginTop="@dimen/dimension10dp"
+
                 >
 
                 <TextView
@@ -202,12 +212,12 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:layout_alignParentLeft="true"
                     android:text="Eating"
-                    android:layout_toLeftOf="@+id/tbfeed"
                     android:id="@+id/txtF"
-                    android:textColor="@color/colorBlue"
-                    />
+
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/textView"
+                    android:layout_toEndOf="@+id/textView" />
                 <TextView
                     style="@style/EmergencyDescs"
                     android:layout_width="match_parent"
@@ -218,8 +228,8 @@
                     android:layout_below="@+id/txtF"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
-
-                    />
+                    android:visibility="gone"
+                    android:id="@+id/textView" />
                 <ToggleButton
                     android:id="@+id/tbfeed"
                     android:layout_width="@dimen/dimension50dp"
@@ -241,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlFeeding"
                 android:layout_toRightOf="@+id/imgFunctional"
-               android:layout_marginTop="@dimen/dimension10dp"
+
                 >
 
                 <TextView
@@ -254,7 +264,7 @@
                     android:layout_toLeftOf="@+id/tbToileting"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/txtT"
-                    android:textColor="@color/colorBlue"
+
                     />
                 <TextView
                     style="@style/EmergencyDescs"
@@ -266,7 +276,7 @@
                     android:layout_below="@+id/txtT"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
-
+                    android:visibility="gone"
                     />
                 <ToggleButton
                     android:id="@+id/tbToileting"
@@ -289,7 +299,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlToileting"
                 android:layout_toRightOf="@+id/imgFunctional"
-               android:layout_marginTop="@dimen/dimension10dp"
+
                 >
 
                 <TextView
@@ -302,7 +312,7 @@
                     android:layout_toLeftOf="@+id/tbTranfering"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/txtDf"
-                    android:textColor="@color/colorBlue"
+
                     />
                 <TextView
                     style="@style/EmergencyDescs"
@@ -314,7 +324,7 @@
                     android:layout_below="@+id/txtDf"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/dimension16dp"
-
+                    android:visibility="gone"
                     />
 
                 <ToggleButton
@@ -393,13 +403,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgInstrumental"
+                android:layout_toLeftOf="@+id/imgInfoI"
                 android:text="Instrumental Activities of Daily Living (IADL)" />
-          <!--  <RelativeLayout
-                android:id="@+id/rlBathing"
+            <ImageView
+                android:id="@+id/imgInfoI"
+                android:layout_width="@dimen/dimension35dp"
+                android:layout_height="@dimen/dimension35dp"
+                android:src="@drawable/info_blue"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimension5dp"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rlTransport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtFunctionalHeader"
-                android:layout_toRightOf="@+id/imgFunctional">
+                android:layout_below="@+id/txtInstrumentalHeader"
+                android:layout_toRightOf="@+id/imgInstrumental">
 
                 <TextView
                     style="@style/EmergencyDesc"
@@ -407,13 +427,13 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Bathing"
-                    android:layout_toLeftOf="@+id/tbBathing"
+                    android:text="Accessing transportation"
+                    android:layout_toLeftOf="@+id/tbTransport"
                     android:layout_alignParentLeft="true"
                     />
 
                 <ToggleButton
-                    android:id="@+id/tbBathing"
+                    android:id="@+id/tbTransport"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -427,11 +447,11 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlContinence"
+                android:id="@+id/rlPets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlBathing"
-                android:layout_toRightOf="@+id/imgFunctional">
+                android:layout_below="@+id/rlTransport"
+                android:layout_toRightOf="@+id/imgInstrumental">
 
                 <TextView
                     style="@style/EmergencyDesc"
@@ -439,13 +459,13 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Continence"
-                    android:layout_toLeftOf="@+id/tbContinence"
+                    android:text="Caring for pets"
+                    android:layout_toLeftOf="@+id/tbPets"
                     android:layout_alignParentLeft="true"
                     />
 
                 <ToggleButton
-                    android:id="@+id/tbContinence"
+                    android:id="@+id/tbPets"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -459,11 +479,11 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlDressing"
+                android:id="@+id/rlDriving"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlContinence"
-                android:layout_toRightOf="@+id/imgFunctional">
+                android:layout_below="@+id/rlPets"
+                android:layout_toRightOf="@+id/imgInstrumental">
 
                 <TextView
                     style="@style/EmergencyDesc"
@@ -471,13 +491,13 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Dressing"
-                    android:layout_toLeftOf="@+id/tbDressing"
+                    android:text="Driving"
+                    android:layout_toLeftOf="@+id/tbDriving"
                     android:layout_alignParentLeft="true"
                     />
 
                 <ToggleButton
-                    android:id="@+id/tbDressing"
+                    android:id="@+id/tbDriving"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -491,11 +511,11 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlFeeding"
+                android:id="@+id/rlKeeping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlDressing"
-                android:layout_toRightOf="@+id/imgFunctional">
+                android:layout_below="@+id/rlDriving"
+                android:layout_toRightOf="@+id/imgInstrumental">
 
                 <TextView
                     style="@style/EmergencyDesc"
@@ -504,44 +524,11 @@
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
                     android:layout_alignParentLeft="true"
-                    android:text="Eating"
-                    android:layout_toLeftOf="@+id/tbfeed"/>
+                    android:text="Housekeeping"
+                    android:layout_toLeftOf="@+id/tbKeeping"/>
 
                 <ToggleButton
-                    android:id="@+id/tbfeed"
-                    android:layout_width="@dimen/dimension50dp"
-                    android:layout_height="@dimen/dimension50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dimension15dp"
-                    android:background="@drawable/toggle_selector"
-                    android:checked="false"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn="" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/rlToileting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rlFeeding"
-                android:layout_toRightOf="@+id/imgFunctional">
-
-                <TextView
-                    style="@style/EmergencyDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimension50dp"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dimension5dp"
-                    android:text="Toileting"
-                    android:layout_toLeftOf="@+id/tbToileting"
-                    android:layout_alignParentLeft="true"
-                    />
-
-                <ToggleButton
-                    android:id="@+id/tbToileting"
+                    android:id="@+id/tbKeeping"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -556,11 +543,11 @@
 
 
             <RelativeLayout
-                android:id="@+id/rlTranfering"
+                android:id="@+id/rlMedication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlToileting"
-                android:layout_toRightOf="@+id/imgFunctional">
+                android:layout_below="@+id/rlKeeping"
+                android:layout_toRightOf="@+id/imgInstrumental">
 
                 <TextView
                     style="@style/EmergencyDesc"
@@ -568,13 +555,13 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Tranfering"
-                    android:layout_toLeftOf="@+id/tbTranfering"
+                    android:text="Managing medications"
+                    android:layout_toLeftOf="@+id/tbMedication"
                     android:layout_alignParentLeft="true"
                     />
 
                 <ToggleButton
-                    android:id="@+id/tbTranfering"
+                    android:id="@+id/tbMedication"
                     android:layout_width="@dimen/dimension50dp"
                     android:layout_height="@dimen/dimension50dp"
                     android:layout_alignParentRight="true"
@@ -586,36 +573,164 @@
                     android:textOff=""
                     android:textOn="" />
             </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlFinances"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlMedication"
+                android:layout_toRightOf="@+id/imgInstrumental">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Managing personal finances"
+                    android:layout_toLeftOf="@+id/tbFinances"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbFinances"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlPreparing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFinances"
+                android:layout_toRightOf="@+id/imgInstrumental">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Preparing meals"
+                    android:layout_toLeftOf="@+id/tbPreparing"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbPreparing"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlShopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlPreparing"
+                android:layout_toRightOf="@+id/imgInstrumental">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Shopping for groceries or clothes"
+                    android:layout_toLeftOf="@+id/tbShopping"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbShopping"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlUsing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlShopping"
+                android:layout_toRightOf="@+id/imgInstrumental">
+
+                <TextView
+                    style="@style/EmergencyDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="Using a telephone"
+                    android:layout_toLeftOf="@+id/tbUsing"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/tbUsing"
+                    android:layout_width="@dimen/dimension50dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </RelativeLayout>v
 
             <EditText
-                android:id="@+id/etOtherFunction"
+                android:id="@+id/etOtherInstrument"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlTranfering"
+                android:layout_below="@+id/rlUsing"
                 android:layout_margin="@dimen/dimension15dp"
                 android:background="@drawable/darkgray_white_border"
                 android:gravity="top"
                 android:hint="Other - specify"
                 android:textColor="@color/colorBlue"
                 android:padding="@dimen/dimension8dp"
-                android:layout_toRightOf="@+id/imgFunctional"
+                android:layout_toRightOf="@+id/imgInstrumental"
                 />
 
             <EditText
-                android:id="@+id/etFunctionalNote"
+                android:id="@+id/etInstrumentalNote"
                 style="@style/EmergencyDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etOtherFunction"
+                android:layout_below="@+id/etOtherInstrument"
                 android:layout_margin="@dimen/dimension15dp"
                 android:background="@drawable/darkgray_white_border"
                 android:gravity="top"
                 android:hint="Note"
                 android:textColor="@color/colorBlue"
                 android:padding="@dimen/dimension8dp"
-                android:layout_toRightOf="@+id/imgFunctional"
-                />-->
+                android:layout_toRightOf="@+id/imgInstrumental"
+                />
         </RelativeLayout>
 
     </RelativeLayout>

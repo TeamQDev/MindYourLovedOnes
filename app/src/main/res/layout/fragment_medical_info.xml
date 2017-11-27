@@ -33,7 +33,6 @@
                 android:id="@+id/imgAllergy"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/allergies" />
@@ -330,7 +329,6 @@
                 android:id="@+id/imgPre"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/medical" />
@@ -1134,7 +1132,7 @@
                 android:id="@+id/imgVaccine"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
+
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/vaccine" />
@@ -1748,7 +1746,7 @@
                 android:id="@+id/imgDiet"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
+
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/allergies" />
@@ -1796,7 +1794,6 @@
                 android:id="@+id/imgImplants"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/implants" />
@@ -1846,7 +1843,6 @@
                 android:id="@+id/imgHospital"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/hospital" />
@@ -1898,7 +1894,6 @@
                 android:id="@+id/imgBlood"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/bloodtype" />
@@ -1941,7 +1936,6 @@
                 android:id="@+id/imgHistory"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/history" />
@@ -1991,7 +1985,6 @@
                 android:id="@+id/imgDonor"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/donor" />
@@ -2106,9 +2099,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:text="Organ Donor"
-                android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/txtNote"
-                android:layout_alignEnd="@+id/txtNote" />
+                android:layout_toRightOf="@+id/imgDonor"
+               />
         </RelativeLayout>
         <View
             android:id="@+id/view13"
@@ -2132,7 +2124,6 @@
                 android:id="@+id/imgPet"
                 android:layout_width="@dimen/dimension70dp"
                 android:layout_height="@dimen/dimension70dp"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension6dp"
                 android:src="@drawable/pet" />

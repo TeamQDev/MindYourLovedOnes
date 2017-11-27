@@ -46,11 +46,12 @@
             android:visibility="gone" />
     </RelativeLayout>
 <ImageView
+    android:id="@+id/imgInfo"
     android:layout_width="@dimen/dimension30dp"
     android:layout_height="@dimen/dimension30dp"
     android:layout_alignParentRight="true"
     android:layout_below="@+id/header"
-    android:id="@+id/imgInfo"
+
     android:src="@drawable/info"
     android:layout_margin="@dimen/dimension10dp"
     />
