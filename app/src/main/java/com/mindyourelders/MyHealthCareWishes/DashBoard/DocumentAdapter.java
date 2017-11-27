@@ -51,10 +51,10 @@ public class DocumentAdapter extends BaseAdapter {
 
         if (convertView==null)
         {
-           convertView=lf.inflate(R.layout.row_care_plan,parent,false);
-           holder=new ViewHolder();
+           convertView=lf.inflate(R.layout.row_care_plan_new,parent,false);
+            holder=new ViewHolder();
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
-           holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
+            holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
 
@@ -64,8 +64,8 @@ public class DocumentAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        holder.txtDocHeader.setText(documentList.get(position).getName());
-        holder.txtDocTime.setText(documentList.get(position).getType());
+        holder.txtDocHeader.setText(documentList.get(position).getType());
+        holder.txtDocTime.setText(documentList.get(position).getPerson());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

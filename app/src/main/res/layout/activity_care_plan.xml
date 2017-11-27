@@ -67,18 +67,29 @@
             android:layout_below="@+id/header"
             android:visibility="gone"
             />
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lvDoc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:background="@color/colorLightBlue"
+        android:layout_below="@+id/header"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/llAddDoc"
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
+     <!--   <ListView
 
-        <ListView
-            android:id="@+id/lvDoc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/txtdocuments"
             android:scrollbars="none"
             android:divider="@null"
-            android:layout_above="@+id/llAddDoc"
-           android:background="@color/colorLightBlue"
-            ></ListView>
-
+            android:background="@color/colorLightBlue"
+            android:layout_below="@+id/header"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"></ListView>
+-->
         <RelativeLayout
             android:id="@+id/llAddDoc"
             android:layout_width="match_parent"

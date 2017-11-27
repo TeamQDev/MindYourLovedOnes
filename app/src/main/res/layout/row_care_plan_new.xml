@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:id="@+id/rlFix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dimension2dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+        >
+
+        <ImageView
+            android:id="@+id/imgDocType"
+            android:layout_width="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:src="@drawable/word"
+            android:layout_margin="@dimen/dimension10dp"
+            android:layout_centerVertical="true"
+            />
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgDocType"
+            android:layout_marginLeft="@dimen/dimension5dp"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgNext"
+            >
+            <TextView
+                android:id="@+id/txtDocHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:text= "Cfklj kj ouio "
+                android:textColor="@color/colorDarkBlue"
+                android:textSize="@dimen/dimension20dp"
+                />
+            <TextView
+                android:id="@+id/txtDocTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:text= "Primary Proxy"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/dimension17dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:layout_below="@+id/txtDocHeader"
+                android:layout_marginTop="@dimen/dimension10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="@dimen/dimension25dp"
+                android:layout_height="@dimen/dimension25dp"
+                android:src="@drawable/ic_edit_blue"
+                android:layout_toRightOf="@+id/txtDocHeader"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+
+                />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:src="@drawable/forword_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+
+            />
+    </RelativeLayout>
+    <View
+        android:id="@+id/view2"
+        android:layout_height="@dimen/dimension20dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dimension15dp"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:background="@color/colorLightGray"
+        android:layout_below="@+id/rlFix"
+        />
+</RelativeLayout>

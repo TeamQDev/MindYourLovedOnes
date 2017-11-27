@@ -16,16 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -40,7 +43,7 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.drawable.pdf;
 
 public class CarePlanListActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
-    ListView lvDoc;
+    SwipeMenuListView lvDoc;
     ArrayList<Document> documentList;
     ArrayList<Document> documentListOld;
     ImageView imgBack;
@@ -85,7 +88,24 @@ DBHelper dbHelper;
 
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
-        lvDoc= (ListView) findViewById(R.id.lvDoc);
+        lvDoc= (SwipeMenuListView) findViewById(R.id.lvDoc);
+        lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createSingleMenu(context);
+        lvDoc.setMenuCreator(creator);
+        lvDoc.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Document item = documentListOld.get(position);
+                switch (index) {
+                    case 0:
+                        // delete
+                        deleteDocument(item);
+                        break;
+                }
+                return false;
+            }
+        });
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         txtTitle.setAllCaps(true);
@@ -112,6 +132,10 @@ DBHelper dbHelper;
                 txtTitle.setText("Medical Documents");
                 break;
         }
+    }
+
+    private void deleteDocument(Document item) {
+
     }
 
     private void getDocuments() {
@@ -167,7 +191,7 @@ DBHelper dbHelper;
                 Document P1=new Document();
                 P1.setName("Aging Care - Care Plan Guide");
                 P1.setImage(pdf);
-                P1.setType("Other Documents");
+                P1.setType("Aging Care - Care Plan Guide");
                 P1.setDate("10/10/2017");
                 P1.setLocation("Locker");
                 P1.setImage(pdf);
@@ -177,7 +201,7 @@ DBHelper dbHelper;
                 Document P4i=new Document();
                 P4i.setName("Medical Claim Form");
                 P4i.setImage(pdf);
-                P4i.setType("Other Documents");
+                P4i.setType("Medical Claim Form");
                 P4i.setDate("10/10/2017");
                 P4i.setLocation("Locker");
                 P4i.setImage(pdf);
@@ -187,7 +211,7 @@ DBHelper dbHelper;
                 Document P5i=new Document();
                 P5i.setName("Dental Claim Form");
                 P5i.setImage(pdf);
-                P5i.setType("Other Documents");
+                P5i.setType("Dental Claim Form");
                 P5i.setDate("10/10/2017");
                 P5i.setLocation("Locker");
                 P5i.setImage(pdf);
@@ -197,7 +221,7 @@ DBHelper dbHelper;
                 Document P3=new Document();
                 P3.setName("Clinical Flow Sheet");
                 P3.setImage(pdf);
-                P3.setType("Other Documents");
+                P3.setType("Clinical Flow Sheet");
                 P3.setDate("10/10/2017");
                 P3.setLocation("Locker");
                 P3.setImage(pdf);

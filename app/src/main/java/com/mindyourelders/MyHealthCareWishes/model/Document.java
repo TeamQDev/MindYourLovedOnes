@@ -45,6 +45,25 @@ public class Document implements Serializable {
     int userid;
     String type="";
     String date="";
+    String person="";
+
+    public String getPerson() {
+        return person;
+    }
+
+    public void setPerson(String person) {
+        this.person = person;
+    }
+
+    public String getPrinciple() {
+        return principle;
+    }
+
+    public void setPrinciple(String principle) {
+        this.principle = principle;
+    }
+
+    String principle="";
 
     public String getType() {
         return type;

@@ -89,7 +89,19 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension15dp"
             android:layout_toRightOf="@+id/imgDoc"
-            android:src="@drawable/addplus" />
+            android:src="@drawable/addplus"
+            />
+        <TextView
+            android:id="@+id/txtAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select File"
+            android:layout_toRightOf="@id/imgAdd"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dimension18dp"
+            android:textColor="@color/colorBlue"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            />
 
     </RelativeLayout>
 
@@ -130,10 +142,9 @@
         app:ms_multiline="true"
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
-
-
+android:visibility="gone"
         />
-        <android.support.design.widget.TextInputLayout
+      <android.support.design.widget.TextInputLayout
             android:id="@+id/tilDoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,17 +163,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Document Type"
-        android:maxLength="30"
-        android:maxLines="1"
         android:paddingLeft="@dimen/dimension15dp"
         android:paddingTop="@dimen/dimension2dp"
         android:singleLine="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/dimension20dp"
         android:drawableRight="@drawable/rsz_blue_drop"
+
         />
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilDocType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/txtDocType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Document Type"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp"
+                />
+        </android.support.design.widget.TextInputLayout>
     </RelativeLayout>
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilPName"
         android:layout_width="match_parent"
@@ -184,8 +222,8 @@
             android:id="@+id/txtPName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name of Principal"
-            android:maxLines="1"
+            android:hint="Name of Person"
+
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:textColor="@color/colorPrimaryDark"
@@ -193,9 +231,8 @@
             /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilDate"
+        android:id="@+id/tilFName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
@@ -212,12 +249,42 @@
 
 
         <AutoCompleteTextView
+            android:id="@+id/txtFName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name of File"
+            android:enabled="false"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilFName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+        <AutoCompleteTextView
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date Signed"
-            android:maxLength="30"
-            android:maxLines="1"
+
+
             android:focusable="false"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
@@ -250,7 +317,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name of Principal"
-            android:maxLines="1"
+
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:textColor="@color/colorPrimaryDark"
@@ -306,8 +373,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Document Name"
-            android:maxLength="30"
-            android:maxLines="1"
+
+
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:singleLine="true"
