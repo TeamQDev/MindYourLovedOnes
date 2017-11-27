@@ -80,7 +80,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String Cname = "";
     String Cemail ="";
     String Cphone ="";
-    RelativeLayout rlCard;
+    RelativeLayout rlCard,rlContact;
     TextView txtCard;
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
@@ -1618,7 +1618,7 @@ String location="";
     }
 
     private void initUI() {
-
+        rlContact= (RelativeLayout) rootview.findViewById(R.id.rlContact);
        rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
        txtCard= (TextView) rootview.findViewById(R.id.txtCard);
         //Doctor
@@ -1627,6 +1627,16 @@ String location="";
         txtDoctorHourOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorHourOfficePhone);
         txtDoctorOtherPhone = (TextView) rootview.findViewById(R.id.txtDoctorOtherPhone);
         txtDoctorFax = (TextView) rootview.findViewById(R.id.txtDoctorFax);
+
+        rlContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity().getCurrentFocus() != null) {
+                    InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                }
+            }
+        });
 
         txtDoctorFax.addTextChangedListener(new TextWatcher() {
             int prevL = 0;

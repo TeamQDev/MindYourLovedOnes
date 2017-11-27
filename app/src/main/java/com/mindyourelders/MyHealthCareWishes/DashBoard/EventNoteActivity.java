@@ -71,7 +71,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                hideSoftKeyboard();
+               // hideSoftKeyboard();
                 TextView txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
                 ImageView imgForward = (ImageView) view.findViewById(R.id.imgForword);
                 imgForward.setOnClickListener(new View.OnClickListener() {

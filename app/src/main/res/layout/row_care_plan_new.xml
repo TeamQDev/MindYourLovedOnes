@@ -80,7 +80,7 @@
 
             />
     </RelativeLayout>
-    <View
+   <!-- <View
         android:id="@+id/view2"
         android:layout_height="@dimen/dimension20dp"
         android:layout_width="match_parent"
@@ -88,5 +88,5 @@
         android:layout_marginTop="@dimen/dimension15dp"
         android:background="@color/colorLightGray"
         android:layout_below="@+id/rlFix"
-        />
+        />-->
 </RelativeLayout>

@@ -2,7 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -188,7 +186,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.llAddSpecialist:
-                hideSoftKeyboard();
+               // hideSoftKeyboard();
                 preferences.putString(PrefConstants.SOURCE,"Physician");
                 Intent i=new Intent(getActivity(),GrabConnectionActivity.class);
                 startActivity(i);
@@ -275,10 +273,5 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
         super.onResume();
         getData();
         setListData();
-    }
-    public void hideSoftKeyboard()
-    {
-        InputMethodManager inm= (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
 }
