@@ -80,8 +80,6 @@ View rootview;
         imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
         imgLogo.setVisibility(View.GONE);
 
-
-
         list= (ListView) rootview.findViewById(R.id.list);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

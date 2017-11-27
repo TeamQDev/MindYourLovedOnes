@@ -4,7 +4,10 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:id="@+id/rlMedical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:custom="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -2150,4 +2153,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
+</RelativeLayout>
 </ScrollView>

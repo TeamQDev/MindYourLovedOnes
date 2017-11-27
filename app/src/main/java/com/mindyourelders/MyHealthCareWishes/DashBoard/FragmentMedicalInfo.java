@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +55,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private static final int REQUEST_CONDITION = 500;
     private static final int REQUEST_VACCINE =700 ;
     View rootview;
+    RelativeLayout rlMedical;
     ImageView imgBack, imgDone;
     TextView txtTitle,imgAddFlueShot;
     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
@@ -149,6 +152,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     }
 
     private void initUI() {
+        rlMedical= (RelativeLayout) rootview.findViewById(R.id.rlMedical);
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("MEDICAL PROFILE");
@@ -228,6 +232,16 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         rbYes = (RadioButton) rootview.findViewById(R.id.rbYes);
         rbNo = (RadioButton) rootview.findViewById(R.id.rbNo);
         rgDonor = (RadioGroup) rootview.findViewById(R.id.rgDonor);
+
+        rlMedical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity().getCurrentFocus() != null) {
+                    InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                }
+            }
+        });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, EyesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

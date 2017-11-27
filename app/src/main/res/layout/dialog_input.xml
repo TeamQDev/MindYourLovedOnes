@@ -81,7 +81,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimension20dp"
                 android:textStyle="bold"
-
+                android:imeOptions="actionDone"
                 />
 
             <TextView

@@ -1,6 +1,5 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -72,6 +71,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                hideSoftKeyboard();
                 TextView txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
                 ImageView imgForward = (ImageView) view.findViewById(R.id.imgForword);
                 imgForward.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +182,8 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBack:
-                finish();
+                hideSoftKeyboard();
+               finish();
                 break;
             case R.id.imgAdd:
                 showInputDialog(context);
@@ -212,6 +213,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 customDialog.dismiss();
+                hideSoftKeyboard();
             }
         });
       /*  etDate.setOnClickListener(new View.OnClickListener() {
@@ -258,15 +260,11 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 if (note.length() != 0) {
                     Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID), note, currentDateandTime);
                     if (flag == true) {
-                        try {
-                            InputMethodManager inm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
-                            inm.hideSoftInputFromWindow(EventNoteActivity.this.getCurrentFocus().getWindowToken(), 0);
-                        } catch (Exception e) {
-                            //Todo:Handle Exception
-                        }
+
                         Toast.makeText(context, "Event Note Added Succesfully", Toast.LENGTH_SHORT).show();
                         getData();
                         setNoteData();
+                        hideSoftKeyboard();
                         customDialog.dismiss();
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
@@ -294,12 +292,20 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         setNoteData();
     }
 
-    public static void closeKeyboard(Activity context) {
+   /* public static void closeKeyboard(Activity context) {
         try {
             InputMethodManager inm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
 //Todo:Handle Exception
         }
-    }
+    }*/
+   public void hideSoftKeyboard() {
+       if(getCurrentFocus()!=null) {
+           InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+           inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+       }
+   }
+
+
 }

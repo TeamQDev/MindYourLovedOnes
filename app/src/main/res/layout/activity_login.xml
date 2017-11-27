@@ -8,7 +8,10 @@
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.LoginActivity"
     android:fitsSystemWindows="true"
     >
-
+<RelativeLayout
+    android:id="@+id/rlLogin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="@dimen/dimension100dp"
@@ -192,4 +195,5 @@
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/dimension16dp" />
     </LinearLayout>
+</RelativeLayout>
 </RelativeLayout>

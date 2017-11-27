@@ -9,6 +9,7 @@
     tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
 
     <RelativeLayout
+        android:id="@+id/llSignUp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
