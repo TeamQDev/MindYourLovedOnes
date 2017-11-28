@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -135,7 +136,28 @@ DBHelper dbHelper;
     }
 
     private void deleteDocument(Document item) {
+        boolean flag = DocumentQuery.deleteRecord(item.getId());
+        if (flag == true) {
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+            getData();
+           setDocuments();
+        }
+    }
 
+   /* private void setDocumentData() {
+        if (documentList.size() != 0) {
+            lvDoc.setVisibility(View.VISIBLE);
+            //txtView.setVisibility(View.GONE);
+        } else {
+           // txtView.setVisibility(View.VISIBLE);
+            lvDoc.setVisibility(View.GONE);
+        }
+        DocumentAdapter adapter = new DocumentAdapter(context, documentList);
+        lvDoc.setAdapter(adapter);
+    }
+*/
+    private void getData() {
+        documentList = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
     }
 
     private void getDocuments() {
@@ -234,7 +256,7 @@ DBHelper dbHelper;
                 documentListOld.add(P3);
                 break;
         }
-        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
         documentListOld.addAll(documentList);
        /* switch (From)
         {
@@ -542,6 +564,7 @@ DBHelper dbHelper;
     @Override
     protected void onResume() {
         super.onResume();
+        getData();
         getDocuments();
         setDocuments();
     }

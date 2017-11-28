@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity">
 
-
+<RelativeLayout
+    android:id="@+id/rlEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -68,4 +71,5 @@
       android:gravity="center"
       android:textSize="@dimen/dimension18dp"
       />
+</RelativeLayout>
 </RelativeLayout>

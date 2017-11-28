@@ -55,10 +55,10 @@ public class DocumentQuery {
         return dropTableQuery;
     }
 
-    public static ArrayList<Document> fetchAllDocumentRecord(int userid,String from) {
+    public static ArrayList<Document> fetchAllDocumentRecord(int userid) {
         ArrayList<Document> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "' and "+COL_FROM + "='" + from + "';",null);
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {

@@ -10,6 +10,7 @@ import android.text.Html;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     private static final int RESULT_VACCINE =700 ;
     Context context=this;
     ImageView imgBack,imgInfo;
-    RelativeLayout llAddConn;
+    RelativeLayout llAddConn,rlInfo;
     TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone;
     TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone;
     public static final int RESULT_ALLERGY=100;
@@ -236,6 +237,14 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         tilDoctor= (TextInputLayout) findViewById(R.id.tilDoctor);
         tilDone= (TextInputLayout) findViewById(R.id.tilDone);
 
+        rlInfo= (RelativeLayout) findViewById(R.id.rlInfo);
+        rlInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              hideSoftKeyboard();
+            }
+        });
+
     }
 
     @Override
@@ -243,6 +252,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         switch (v.getId())
         {
             case R.id.imgBack:
+                hideSoftKeyboard();
                 finish();
                 break;
 
@@ -621,5 +631,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         customDialog.show();
     }
 
-
+public void hideSoftKeyboard() {
+    if (getCurrentFocus() != null) {
+        InputMethodManager inm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+}
 }

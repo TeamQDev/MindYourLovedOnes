@@ -41,7 +41,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     TextView txtView;
     Preferences preferences;
     DBHelper dbHelper;
-    RelativeLayout header;
+    RelativeLayout header,rlEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +61,19 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initUI() {
+        rlEvent= (RelativeLayout) findViewById(R.id.rlEvent);
         header = (RelativeLayout) findViewById(R.id.header);
         header.setBackgroundResource(R.color.colorFour);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
         lvNote = (SwipeMenuListView) findViewById(R.id.lvNote);
+        rlEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
 
         lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
