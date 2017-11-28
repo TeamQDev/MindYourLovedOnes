@@ -77,7 +77,7 @@ class DownloadFileTask extends AsyncTask<FileMetadata, Void, File> {
             Uri contentUri=null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                contentUri = FileProvider.getUriForFile(mContext, "com.example.welcome.selfdemo.fileprovider", file);
+                contentUri = FileProvider.getUriForFile(mContext, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", file);
             } else {
                 contentUri = Uri.fromFile(file);
             }

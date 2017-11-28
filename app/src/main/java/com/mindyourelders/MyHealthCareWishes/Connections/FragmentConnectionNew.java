@@ -89,8 +89,9 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         imgNoti.setVisibility(View.GONE);
         imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
         imgLogo.setVisibility(View.VISIBLE);
-
-
+        String deviceName = android.os.Build.MODEL;
+        String deviceMan = android.os.Build.MANUFACTURER;
+Toast.makeText(getActivity(),deviceMan+" "+deviceName,Toast.LENGTH_LONG).show();
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         //llAddConn = (RelativeLayout) rootview.findViewById(llAddConn);
         lvConnection = (GridView) rootview.findViewById(R.id.lvConnection);

@@ -43,6 +43,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+
+
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RQUESTCODE = 400;
     Context context = this;
@@ -53,7 +55,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     private static final int RESULTCODE = 200;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
-    TextInputLayout tilDate,tilOther,tilDocType,tilHosp,tilName;
+    TextInputLayout tilDate,tilOther,tilDocType,tilHosp,tilName,tilPName;
     Document document;
     DBHelper dbHelper;
     String name="";
@@ -120,6 +122,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         txtDocTYpe= (TextView) findViewById(R.id.txtDocType);
        tilOther= (TextInputLayout) findViewById(R.id.tilOther);
         tilName= (TextInputLayout) findViewById(R.id.tilName);
+        tilPName= (TextInputLayout) findViewById(R.id.tilPName);
         tilHosp= (TextInputLayout) findViewById(R.id.tilHosp);
         tilDocType= (TextInputLayout) findViewById(R.id.tilDocType);
         txtPName= (TextView) findViewById(R.id.txtPName);
@@ -183,8 +186,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtHosp.setVisibility(View.GONE);
             txtName.setVisibility(View.GONE);
             tilName.setVisibility(View.GONE);
-            txtPName.setHint("Name of Person");
-            txtDate.setHint("Date Signed");
+
+            tilPName.setHint("Name of Person");
+            tilDate.setHint("Date Signed");
         }
         else if(From.equals("Other")){
             spinnerDoc.setVisibility(View.GONE);
@@ -192,8 +196,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtHosp.setVisibility(View.GONE);
             txtName.setVisibility(View.GONE);
             tilName.setVisibility(View.GONE);
-            txtPName.setHint("Name of Person");
-            txtDate.setHint("Date Signed");
+
+            tilPName.setHint("Name of Person");
+            tilDate.setHint("Date Signed");
         }
         else if(From.equals("Record"))
         {
@@ -205,8 +210,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtHosp.setVisibility(View.VISIBLE);
             txtName.setVisibility(View.GONE);
             tilName.setVisibility(View.GONE);
-            txtPName.setHint("Name on Document");
-            txtDate.setHint("Date of Document");
+
+            tilPName.setHint("Name on Document");
+            tilDate.setHint("Date of Document");
         }
         switch (From) {
             case "AD":

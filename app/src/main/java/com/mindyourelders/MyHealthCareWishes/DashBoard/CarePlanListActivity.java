@@ -79,6 +79,9 @@ DBHelper dbHelper;
         if (documentListOld.size()!=0) {
             DocumentAdapter documentAdapter = new DocumentAdapter(context, documentListOld);
             lvDoc.setAdapter(documentAdapter);
+            lvDoc.setVisibility(View.VISIBLE);
+        }else{
+            lvDoc.setVisibility(View.GONE);
         }
     }
 
