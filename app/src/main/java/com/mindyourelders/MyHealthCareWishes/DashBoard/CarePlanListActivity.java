@@ -117,6 +117,9 @@ DBHelper dbHelper;
             case "AD":
                 txtTitle.setText("Advance Directives");
                 break;
+            case "Record":
+                txtTitle.setText("Medical Records");
+                break;
             case "Other":
                 txtTitle.setText("Other Documents");
                 break;

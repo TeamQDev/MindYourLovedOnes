@@ -43,7 +43,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     RelativeLayout llAddDoc;
     Preferences preferences;
 
-    RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal;
+    RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal,rlMedicalRecord;
 
     TextView txtOne,txtTwo,txtUserName;
 
@@ -72,6 +72,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     private void initListener() {
         imgBack.setOnClickListener(this);
         rlAD.setOnClickListener(this);
+        rlMedicalRecord.setOnClickListener(this);
         rlLegal.setOnClickListener(this);
         rlHome.setOnClickListener(this);
         rlMedical.setOnClickListener(this);
@@ -85,6 +86,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
         txtUserName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         imgBack= (ImageView) findViewById(R.id.imgBack);
         rlAD= (RelativeLayout) findViewById(R.id.rlAD);
+        rlMedicalRecord= (RelativeLayout) findViewById(R.id.rlMedicalRecord);
         rlLegal= (RelativeLayout) findViewById(R.id.rlLegal);
         rlHome= (RelativeLayout) findViewById(R.id.rlHome);
         rlMedical= (RelativeLayout) findViewById(R.id.rlMedical);
@@ -178,6 +180,11 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
                 Intent i4=new Intent(context,CarePlanListActivity.class);
                 preferences.putString(PrefConstants.FROM,"AD");
                 startActivity(i4);
+                break;
+            case R.id.rlMedicalRecord:
+                Intent intent=new Intent(context,CarePlanListActivity.class);
+                preferences.putString(PrefConstants.FROM,"Record");
+                startActivity(intent);
                 break;
 
             case R.id.rlLegal:
