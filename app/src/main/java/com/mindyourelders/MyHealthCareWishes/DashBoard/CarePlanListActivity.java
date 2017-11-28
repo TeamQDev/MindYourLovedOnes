@@ -48,7 +48,7 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     ArrayList<Document> documentList;
     ArrayList<Document> documentListOld;
     ImageView imgBack;
-    TextView txtTitle;
+    TextView txtTitle,txtAdd;
     String From;
     final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     RelativeLayout llAddDoc;
@@ -117,6 +117,7 @@ DBHelper dbHelper;
         });
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
+        txtAdd= (TextView) findViewById(R.id.txtAdd);
         txtTitle.setAllCaps(true);
 
         From=preferences.getString(PrefConstants.FROM);
@@ -124,12 +125,15 @@ DBHelper dbHelper;
         {
             case "AD":
                 txtTitle.setText("Advance Directives");
+                txtAdd.setText("Add Advance Directives");
                 break;
             case "Record":
                 txtTitle.setText("Medical Records");
+                txtAdd.setText("Add Medical Records");
                 break;
             case "Other":
                 txtTitle.setText("Other Documents");
+                txtAdd.setText("Add Other Documents");
                 break;
             case "Legal":
                 txtTitle.setText("Legal and Financial Documents");
