@@ -160,7 +160,7 @@ DBHelper dbHelper;
     }
 */
     private void getData() {
-        documentList = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        documentList = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
     }
 
     private void getDocuments() {
@@ -206,10 +206,10 @@ DBHelper dbHelper;
                 P4d.setHolder("Husband");
                 P4d.setDocument("dnr.pdf");
 
-                documentListOld.add(P1d);
-                documentListOld.add(P2d);
-                documentListOld.add(P3d);
-                documentListOld.add(P4d);
+               // documentListOld.add(P1d);
+              //  documentListOld.add(P2d);
+               // documentListOld.add(P3d);
+               // documentListOld.add(P4d);
                 break;
             case "Other":
                 //   txtTitle.setText("Other");
@@ -253,13 +253,13 @@ DBHelper dbHelper;
                 P3.setHolder("Husband");
                 P3.setDocument("dm_chf.pdf");
 
-                documentListOld.add(P4i);
-                documentListOld.add(P5i);
-                documentListOld.add(P1);
-                documentListOld.add(P3);
+              //  documentListOld.add(P4i);
+               // documentListOld.add(P5i);
+              //  documentListOld.add(P1);
+               // documentListOld.add(P3);
                 break;
         }
-        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
         documentListOld.addAll(documentList);
        /* switch (From)
         {

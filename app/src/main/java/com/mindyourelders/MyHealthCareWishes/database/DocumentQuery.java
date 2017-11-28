@@ -27,7 +27,7 @@ public class DocumentQuery {
     public static final String COL_LOCATION= "Location";
     public static final String COL_DOCUMENT= "Document";
     public static final String COL_CATEGORY= "Category";
-    public static final String COL_PERSON= "PersonName";
+    public static final String COL_PERSON= "Person";
     public static final String COL_PRINCIPLE= "Principle";
     public static final String COL_FROM= "Froms";
     public static final String COL_PHOTO = "Photo";
@@ -43,9 +43,9 @@ public class DocumentQuery {
     public static String createDocumentTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_DATE + " VARCHAR(50),"
-                + COL_TYPE + " VARCHAR(100)," + COL_HOLDER + " VARCHAR(50),"+COL_LOCATION +
-                " VARCHAR(50),"+COL_CATEGORY + " VARCHAR(50),"+COL_FROM + " VARCHAR(50),"+COL_PERSON +
-                " VARCHAR(50),"+COL_PRINCIPLE + " VARCHAR(50)," + COL_DOCUMENT + " VARCHAR(100),"+
+                + COL_TYPE + " VARCHAR(100)," + COL_HOLDER + " VARCHAR(50),"+COL_LOCATION + " VARCHAR(50),"+
+                COL_CATEGORY +" VARCHAR(50),"+COL_FROM + " VARCHAR(50)," +COL_PERSON +" VARCHAR(50),"+COL_PRINCIPLE + " VARCHAR(50)," +
+                COL_DOCUMENT + " VARCHAR(100),"+
                 COL_PHOTO + " INTEGER);";
         return createTableQuery;
     }
@@ -55,10 +55,10 @@ public class DocumentQuery {
         return dropTableQuery;
     }
 
-    public static ArrayList<Document> fetchAllDocumentRecord(int userid) {
+    public static ArrayList<Document> fetchAllDocumentRecord(int userid,String from) {
         ArrayList<Document> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "';",null);
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "' and "+COL_FROM + "='" + from + "';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
@@ -75,8 +75,8 @@ public class DocumentQuery {
                     notes.setCategory(c.getString(c.getColumnIndex(COL_CATEGORY)));
                     notes.setImage(c.getInt(c.getColumnIndex(COL_PHOTO)));
                     notes.setFrom(c.getString(c.getColumnIndex(COL_FROM)));
-                    notes.setPerson(c.getString(c.getColumnIndex(COL_PERSON)));
                     notes.setPrinciple(c.getString(c.getColumnIndex(COL_PRINCIPLE)));
+                    notes.setPerson(c.getString(c.getColumnIndex(COL_PERSON)));
 
                     noteList.add(notes);
                 } while (c.moveToNext());
@@ -99,8 +99,8 @@ public class DocumentQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_CATEGORY,category);
         cv.put(COL_FROM,from);
-        cv.put(COL_PERSON,person);
         cv.put(COL_PRINCIPLE,principle);
+        cv.put(COL_PERSON,person);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 

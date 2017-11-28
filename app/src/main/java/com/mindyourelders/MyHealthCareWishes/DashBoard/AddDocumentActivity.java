@@ -368,7 +368,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 if (validate()) {
                     Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,location,holder,photo,documentPath,docType,From,person,principle);
                     if (flag == true) {
-                        Toast.makeText(context, "You have added proxy contact successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "You have added document successfully", Toast.LENGTH_SHORT).show();
                        finish();
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();

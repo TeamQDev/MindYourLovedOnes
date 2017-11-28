@@ -72,14 +72,15 @@ public class DocumentAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent i=new Intent(context,AddDocumentActivity.class);
                 i.putExtra("GoTo","View");
-                if (position>3)
+                i.putExtra("Path","Yes");
+               /* if (position>3)
                 {
-                    i.putExtra("Path","Yes");
+
                 }
                 else
                 {
                     i.putExtra("Path","No");
-                }
+                }*/
                 i.putExtra("DocumentObject",documentList.get(position));
                 context.startActivity(i);
             }
