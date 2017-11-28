@@ -248,6 +248,26 @@ public class DropboxLoginActivity extends DropboxActivity {
                 });
                 alert.show();
             }
+
+           /* else if (preferences.getString(PrefConstants.STORE).equals("Backup")){
+                final AlertDialog.Builder alert=new AlertDialog.Builder(context);
+                alert.setTitle("BaCKUP");
+                alert.setMessage("sUCCESS");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        copydb(context);
+                        dialog.dismiss();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alert.show();
+            }*/
         }
     }
 

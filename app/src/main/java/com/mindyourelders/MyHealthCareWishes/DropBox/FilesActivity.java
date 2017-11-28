@@ -319,7 +319,7 @@ public class FilesActivity extends DropboxActivity {
 
         intent.setDataAndType(contentUri, type);
 
-        
+
         // Check for a handler first to avoid a crash
         PackageManager manager = getPackageManager();
         List<ResolveInfo> resolveInfo = manager.queryIntentActivities(intent, 0);
@@ -349,7 +349,6 @@ public class FilesActivity extends DropboxActivity {
                 // Reload the folder
                 loadData();
 
-                finish();
             }
 
             @Override
