@@ -29,6 +29,8 @@ public class DocumentQuery {
     public static final String COL_CATEGORY= "Category";
     public static final String COL_PERSON= "Person";
     public static final String COL_PRINCIPLE= "Principle";
+    public static final String COL_HOSP= "Hospital";
+    public static final String COL_OTHER= "Other_Category";
     public static final String COL_FROM= "Froms";
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
@@ -43,7 +45,7 @@ public class DocumentQuery {
     public static String createDocumentTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_DATE + " VARCHAR(50),"
-                + COL_TYPE + " VARCHAR(100)," + COL_HOLDER + " VARCHAR(50),"+COL_LOCATION + " VARCHAR(50),"+
+                +COL_OTHER + " VARCHAR(100)," + COL_HOSP + " VARCHAR(70),"+ COL_TYPE + " VARCHAR(100)," + COL_HOLDER + " VARCHAR(50),"+COL_LOCATION + " VARCHAR(50),"+
                 COL_CATEGORY +" VARCHAR(50),"+COL_FROM + " VARCHAR(50)," +COL_PERSON +" VARCHAR(50),"+COL_PRINCIPLE + " VARCHAR(50)," +
                 COL_DOCUMENT + " VARCHAR(100),"+
                 COL_PHOTO + " INTEGER);";
@@ -77,6 +79,8 @@ public class DocumentQuery {
                     notes.setFrom(c.getString(c.getColumnIndex(COL_FROM)));
                     notes.setPrinciple(c.getString(c.getColumnIndex(COL_PRINCIPLE)));
                     notes.setPerson(c.getString(c.getColumnIndex(COL_PERSON)));
+                    notes.setOtherCategory(c.getString(c.getColumnIndex(COL_OTHER)));
+                    notes.setHospital(c.getString(c.getColumnIndex(COL_HOSP)));
 
                     noteList.add(notes);
                 } while (c.moveToNext());
@@ -84,7 +88,7 @@ public class DocumentQuery {
         }
         return noteList;
     }
-    public static Boolean insertDocumentData(int userid, String name, String category, String date, String loacation, String holder, int photo, String document, String type, String from, String person, String principle) {
+    public static Boolean insertDocumentData(int userid, String name, String category, String date, String loacation, String holder, int photo, String document, String type, String from, String person, String principle, String otherCategory, String hosp) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -101,6 +105,8 @@ public class DocumentQuery {
         cv.put(COL_FROM,from);
         cv.put(COL_PRINCIPLE,principle);
         cv.put(COL_PERSON,person);
+        cv.put(COL_HOSP,hosp);
+        cv.put(COL_OTHER,otherCategory);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 

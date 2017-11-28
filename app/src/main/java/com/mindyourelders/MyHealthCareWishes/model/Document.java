@@ -7,6 +7,24 @@ import java.io.Serializable;
  */
 
 public class Document implements Serializable {
+    public String getOtherCategory() {
+        return OtherCategory;
+    }
+
+    public void setOtherCategory(String otherCategory) {
+        OtherCategory = otherCategory;
+    }
+
+    public String getHospital() {
+        return Hospital;
+    }
+
+    public void setHospital(String hospital) {
+        Hospital = hospital;
+    }
+
+    String OtherCategory="";
+    String Hospital="";
     public String getFrom() {
         return from;
     }

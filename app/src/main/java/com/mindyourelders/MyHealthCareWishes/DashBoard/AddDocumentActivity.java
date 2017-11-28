@@ -48,18 +48,19 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
-    TextView txtName,txtAdd, txtDate, txtLocation,txtHolderName,txtDist,txtDoc,txtPName,txtFName, txtDocTYpe;
+    TextView txtName,txtAdd,txtHosp, txtDate, txtLocation,txtHolderName,txtDist,txtOther,txtPName,txtFName, txtDocTYpe;
     String From;
     private static final int RESULTCODE = 200;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
-    TextInputLayout tilDate,tilDoc,tilDocType;
+    TextInputLayout tilDate,tilOther,tilDocType,tilHosp,tilName;
     Document document;
     DBHelper dbHelper;
     String name="";
     String type="";
     String docType="",person="",principle="";
-
+    String otherCategory="";
+    String Hosp="";
     String documentPath="";
     String location="";
     String holder="";
@@ -71,19 +72,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     final CharSequence[] alert_items = { "SD Card", "Dropbox" };
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
-    String[] DocList = {" Ethical Will","HIPAA Form","Health Care Proxy","Health Care Proxy/Living Will","Living Will","Non-Hospital DNR","Power of Attorney","Other Documents"};
 
     String[] ADList={"HIPAA Authorization","Health Care Proxy","Living Will","Living Will/Health Care Proxy","MOLST","Non-Hospital DNR Order","POLST"};
-
-    String[] LegalList={"Bank Durable Power of Attorney","Brokerage Firm Durable Power of Attorney","Trust","Will","Durable Power of Attorney"};
-
-    String[] InsurancerList={"Insurance Form – Dental","Insurance Form – Medical","Long Term Care"};
-
-    //String[] OtherList={"Financial","Home Health","Insurance","Legal","Medical"};
     String[] OtherList={"Financial","Insurance","Legal","Other"};
 
-    String[] Others={"Other"};
-    String Source="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,13 +110,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         spinnerDoc= (MySpinner) findViewById(R.id.spinnerDoc);
         spinnerType= (MySpinner) findViewById(R.id.spinnerType);
         txtName= (TextView) findViewById(R.id.txtName);
+        txtHosp= (TextView) findViewById(R.id.txtHosp);
         txtLocation= (TextView) findViewById(R.id.txtLocation);
         txtHolderName= (TextView) findViewById(R.id.txtHolderName);
         txtDist= (TextView) findViewById(R.id.txtDist);
-        txtDoc= (TextView) findViewById(R.id.txtDoc);
+        txtOther= (TextView) findViewById(R.id.txtOther);
         txtAdd= (TextView) findViewById(R.id.txtAdd);
         txtDocTYpe= (TextView) findViewById(R.id.txtDocType);
-       // tilDoc= (TextInputLayout) findViewById(R.id.tilDoc);
+       tilOther= (TextInputLayout) findViewById(R.id.tilOther);
+        tilName= (TextInputLayout) findViewById(R.id.tilName);
+        tilHosp= (TextInputLayout) findViewById(R.id.tilHosp);
         tilDocType= (TextInputLayout) findViewById(R.id.tilDocType);
         txtPName= (TextView) findViewById(R.id.txtPName);
         txtFName= (TextView) findViewById(R.id.txtFName);
@@ -164,28 +159,14 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               /* String item= parent.getItemAtPosition(position).toString();
-                switch(item)
-                {
-                    case "Legal":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
-                        break;
-                    case "Financial":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LegalList);
-                        break;
-                    case "Home Health":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
-                        break;
-                    case "Insurance":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, InsurancerList);
-                        break;
-                    case "Medical":
-                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, DocList);
-                        break;
-                }
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerDoc.setAdapter(adapter);
-                spinnerDoc.setHint("Document Type");*/
+                        if (parent.getItemAtPosition(position).toString().equals("Other"))
+                        {
+                            tilOther.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            tilOther.setVisibility(View.GONE);
+                        }
+
             }
 
             @Override
@@ -203,10 +184,33 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             spinnerDoc.setAdapter(adapter);
             spinnerDoc.setHint("Document Type");
             tilDocType.setVisibility(View.GONE);
+            txtHosp.setVisibility(View.GONE);
+            txtName.setVisibility(View.GONE);
+            tilName.setVisibility(View.GONE);
+            txtPName.setHint("Name of Person");
+            txtDate.setHint("Date Signed");
         }
-        else{
+        else if(From.equals("Other")){
             spinnerDoc.setVisibility(View.GONE);
             tilDocType.setVisibility(View.VISIBLE);
+            txtHosp.setVisibility(View.GONE);
+            txtName.setVisibility(View.GONE);
+            tilName.setVisibility(View.GONE);
+            txtPName.setHint("Name of Person");
+            txtDate.setHint("Date Signed");
+        }
+        else if(From.equals("Record"))
+        {
+            spinnerDoc.setVisibility(View.GONE);
+            spinnerType.setVisibility(View.GONE);
+            tilDocType.setVisibility(View.VISIBLE);
+            txtHolderName.setVisibility(View.GONE);
+            txtLocation.setVisibility(View.GONE);
+            txtHosp.setVisibility(View.VISIBLE);
+            txtName.setVisibility(View.GONE);
+            tilName.setVisibility(View.GONE);
+            txtPName.setHint("Name on Document");
+            txtDate.setHint("Date of Document");
         }
         switch (From) {
             case "AD":
@@ -226,6 +230,42 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
         if (Goto.equals("View"))
         {
+            if (From.equals("AD"))
+            {
+                spinnerDoc.setVisibility(View.VISIBLE);
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDoc.setAdapter(adapter);
+                spinnerDoc.setHint("Document Type");
+                tilDocType.setVisibility(View.GONE);
+                txtHosp.setVisibility(View.GONE);
+                txtName.setVisibility(View.GONE);
+                tilName.setVisibility(View.GONE);
+                txtPName.setHint("Name of Person");
+                txtDate.setHint("Date Signed");
+            }
+            else if(From.equals("Other")){
+                spinnerDoc.setVisibility(View.GONE);
+                tilDocType.setVisibility(View.VISIBLE);
+                txtHosp.setVisibility(View.GONE);
+                txtName.setVisibility(View.GONE);
+                tilName.setVisibility(View.GONE);
+                txtPName.setHint("Name of Person");
+                txtDate.setHint("Date Signed");
+            }
+            else if(From.equals("Record"))
+            {
+                spinnerDoc.setVisibility(View.GONE);
+                spinnerType.setVisibility(View.GONE);
+                tilDocType.setVisibility(View.VISIBLE);
+                txtHolderName.setVisibility(View.GONE);
+                txtLocation.setVisibility(View.GONE);
+                txtHosp.setVisibility(View.VISIBLE);
+                txtName.setVisibility(View.GONE);
+                tilName.setVisibility(View.GONE);
+                txtPName.setHint("Name on Document");
+                txtDate.setHint("Date of Document");
+            }
             imgDot.setVisibility(View.VISIBLE);
             imgDone.setVisibility(View.GONE);
 
@@ -236,9 +276,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtFName.setText(document.getName());
             txtPName.setText(document.getPerson());
             txtName.setText(document.getPrinciple());
-
-
-
+            txtOther.setText(document.getOtherCategory());
+            txtHosp.setText(document.getHospital());
             documentPath=document.getDocument();
             imgDoc.setImageResource(document.getImage());
 
@@ -366,7 +405,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDone:
                 if (validate()) {
-                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,location,holder,photo,documentPath,docType,From,person,principle);
+                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,location,holder,photo,documentPath,docType,From,person,principle,otherCategory,Hosp);
                     if (flag == true) {
                         Toast.makeText(context, "You have added document successfully", Toast.LENGTH_SHORT).show();
                        finish();
@@ -613,6 +652,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             if (indexValues!=0) {
                 category = OtherList[indexValues - 1];
             }
+            otherCategory=txtOther.getText().toString();
            /* switch(category)
             {
                 case "Legal":
@@ -643,20 +683,20 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             }*/
         }
 
-
+        Hosp=txtHosp.getText().toString();
         name=txtFName.getText().toString();
         location=txtLocation.getText().toString();
         holder=txtHolderName.getText().toString();
         date=txtDate.getText().toString();
         photo=R.drawable.pdf;
-        if (name.equals("")) {
+        /*if (name.equals("")) {
             txtFName.setError("Please Enter Name");
            Toast.makeText(context,"Enter Document Name",Toast.LENGTH_SHORT).show();
         }else{
             return true;
-        }
+        }*/
 
-        return false;
+        return true;
     }
 
 

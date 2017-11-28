@@ -105,30 +105,57 @@
 
     </RelativeLayout>
 
-
+<RelativeLayout
+    android:id="@+id/rlType"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dimension35dp"
+    android:layout_marginRight="@dimen/dimension35dp"
+    android:layout_marginTop="@dimen/dimension10dp"
+    android:layout_below="@+id/rlDocument"
+    >
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinnerType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimension35dp"
-        android:layout_marginRight="@dimen/dimension35dp"
-        android:layout_marginTop="@dimen/dimension10dp"
+
         app:ms_arrowColor="@color/colorBlue"
         app:ms_arrowSize="16dp"
-        app:ms_floatingLabelText="Document Category"
         app:ms_hint="hint"
         app:ms_multiline="true"
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
-        android:layout_below="@+id/rlDocument"
-
         />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
 
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinnerType"
+        android:visibility="gone"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/txtOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Other Category"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            />
+    </android.support.design.widget.TextInputLayout>
+</RelativeLayout>
     <RelativeLayout
         android:id="@+id/rlSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerType"
+        android:layout_below="@+id/rlType"
         >
     <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
         android:id="@+id/spinnerDoc"
@@ -142,36 +169,9 @@
         app:ms_multiline="true"
         custom:ms_floatingLabelColor="@color/colorBlue"
         custom:ms_hintColor="@color/colorDarkGray"
-android:visibility="gone"
+      android:visibility="gone"
         />
-      <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilDoc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:paddingBottom="@dimen/dimension8dp"
-            android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            android:paddingTop="@dimen/dimension8dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="gone"
-            >
-    <AutoCompleteTextView
-        android:id="@+id/txtDoc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Document Type"
-        android:paddingLeft="@dimen/dimension15dp"
-        android:paddingTop="@dimen/dimension2dp"
-        android:singleLine="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/dimension20dp"
-        android:drawableRight="@drawable/rsz_blue_drop"
 
-        />
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilDocType"
@@ -222,8 +222,6 @@ android:visibility="gone"
             android:id="@+id/txtPName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name of Person"
-
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension2dp"
             android:textColor="@color/colorPrimaryDark"
@@ -291,6 +289,37 @@ android:visibility="gone"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"   android:imeOptions="actionNext"
+            /><requestFocus />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilHosp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:layout_below="@+id/tilDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+        <AutoCompleteTextView
+            android:id="@+id/txtHosp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Associated Dr. or Hospital"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:paddingTop="@dimen/dimension2dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp"
+            android:imeOptions="actionNext"
+            android:visibility="gone"
             /><requestFocus />
 
     </android.support.design.widget.TextInputLayout>

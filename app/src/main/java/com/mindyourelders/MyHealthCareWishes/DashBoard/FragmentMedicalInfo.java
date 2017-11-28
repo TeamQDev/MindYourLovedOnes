@@ -274,6 +274,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         setAllergyData();
         setImplantData();
         setConditionData();
+        setVaccineData();
 
         setHistoryData();
         setHospitalData();
