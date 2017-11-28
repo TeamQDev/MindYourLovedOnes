@@ -160,7 +160,7 @@ DBHelper dbHelper;
     }
 */
     private void getData() {
-        documentList = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+        documentListOld = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
     }
 
     private void getDocuments() {
@@ -259,8 +259,8 @@ DBHelper dbHelper;
                // documentListOld.add(P3);
                 break;
         }
-        documentList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
-        documentListOld.addAll(documentList);
+        documentListOld= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+       // documentListOld.addAll(documentList);
        /* switch (From)
         {
             case "AD":

@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
+import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -42,6 +44,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     final CharSequence[] dialog_items = { "Email", "Bluetooth", "View" };
     RelativeLayout llAddDoc;
     Preferences preferences;
+    DBHelper dbHelper;
 
     RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal,rlMedicalRecord;
 
@@ -63,6 +66,8 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
 
     private void initComponent() {
         preferences=new Preferences(context);
+        dbHelper=new DBHelper(context);
+        DocumentQuery d=new DocumentQuery(context,dbHelper);
     }
 
     private void setDocuments() {

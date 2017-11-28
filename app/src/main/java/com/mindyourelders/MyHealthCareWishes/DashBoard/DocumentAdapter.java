@@ -56,7 +56,8 @@ public class DocumentAdapter extends BaseAdapter {
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
             holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
-            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
+            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgNext);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
 
             convertView.setTag(holder);
         }
@@ -67,11 +68,29 @@ public class DocumentAdapter extends BaseAdapter {
         holder.txtDocHeader.setText(documentList.get(position).getType());
         holder.txtDocTime.setText(documentList.get(position).getPerson());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
-        convertView.setOnClickListener(new View.OnClickListener() {
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(context,AddDocumentActivity.class);
                 i.putExtra("GoTo","View");
+                i.putExtra("Path","Yes");
+               /* if (position>3)
+                {
+
+                }
+                else
+                {
+                    i.putExtra("Path","No");
+                }*/
+                i.putExtra("DocumentObject",documentList.get(position));
+                context.startActivity(i);
+            }
+        });
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,AddDocumentActivity.class);
+                i.putExtra("GoTo","Edit");
                 i.putExtra("Path","Yes");
                /* if (position>3)
                 {
@@ -104,6 +123,6 @@ public class DocumentAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtDocHeader, txtDocDesc,txtDocTime;
-        ImageView imgDocType,imgForword;
+        ImageView imgDocType,imgForword,imgEdit;
     }
 }

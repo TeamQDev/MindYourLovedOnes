@@ -69,6 +69,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String category="";
     String Goto="";
     String path="";
+    int id;
     final CharSequence[] alert_items = { "SD Card", "Dropbox" };
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
@@ -154,8 +155,6 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDoc.setAdapter(adapter);
         spinnerDoc.setHint("Document Type");
-
-
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -166,12 +165,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         else{
                             tilOther.setVisibility(View.GONE);
                         }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -228,8 +224,36 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             path=i.getExtras().getString("Path");
         }
 
-        if (Goto.equals("View"))
+        if (Goto.equals("View")) {
+            imgDone.setVisibility(View.GONE);
+            imgDot.setVisibility(View.VISIBLE);
+            imgAdd.setVisibility(View.GONE);
+            txtAdd.setVisibility(View.GONE);
+            //  tilDoc.setVisibility(View.VISIBLE);
+            // imgDone.setVisibility(View.GONE);
+            //  imgDot.setVisibility(View.VISIBLE);
+            imgDoc.setClickable(true);
+        }
+        else if(Goto.equals("Edit"))
         {
+            imgDone.setVisibility(View.VISIBLE);
+            imgDot.setVisibility(View.GONE);
+            imgAdd.setVisibility(View.VISIBLE);
+            txtAdd.setVisibility(View.VISIBLE);
+            imgDoc.setClickable(false);
+        }
+        else{
+            imgDone.setVisibility(View.VISIBLE);
+            imgDot.setVisibility(View.GONE);
+
+            imgAdd.setVisibility(View.VISIBLE);
+            txtAdd.setVisibility(View.VISIBLE);
+            imgDoc.setClickable(false);
+        }
+
+        if (Goto.equals("View")||Goto.equals("Edit"))
+        {
+
             if (From.equals("AD"))
             {
                 spinnerDoc.setVisibility(View.VISIBLE);
@@ -266,8 +290,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 txtPName.setHint("Name on Document");
                 txtDate.setHint("Date of Document");
             }
-            imgDot.setVisibility(View.VISIBLE);
-            imgDone.setVisibility(View.GONE);
+          //  imgDot.setVisibility(View.VISIBLE);
+            //imgDone.setVisibility(View.GONE);
 
             document= (Document) i.getExtras().getSerializable("DocumentObject");
             txtDate.setText(document.getDate());
@@ -280,12 +304,11 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtHosp.setText(document.getHospital());
             documentPath=document.getDocument();
             imgDoc.setImageResource(document.getImage());
-
+            id=document.getId();
 
             int index= 0;
             if (From.equals("AD"))
             {
-
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
@@ -319,20 +342,13 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
            }
 
-            imgAdd.setVisibility(View.GONE);
-            txtAdd.setVisibility(View.GONE);
-          //  tilDoc.setVisibility(View.VISIBLE);
-            imgDone.setVisibility(View.GONE);
-            imgDot.setVisibility(View.VISIBLE);
-            imgDoc.setClickable(true);
+
         }
         else{
-            imgDot.setVisibility(View.GONE);
+           // imgDot.setVisibility(View.GONE);
            // tilDoc.setVisibility(View.GONE);
-            imgDone.setVisibility(View.VISIBLE);
-            imgAdd.setVisibility(View.VISIBLE);
-            txtAdd.setVisibility(View.VISIBLE);
-            imgDoc.setClickable(false);
+          //  imgDone.setVisibility(View.VISIBLE);
+
         }
 
 
@@ -405,12 +421,23 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDone:
                 if (validate()) {
-                    Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,category,date,location,holder,photo,documentPath,docType,From,person,principle,otherCategory,Hosp);
-                    if (flag == true) {
-                        Toast.makeText(context, "You have added document successfully", Toast.LENGTH_SHORT).show();
-                       finish();
-                    } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    if (Goto.equals("Edit"))
+                    {
+                        Boolean flag = DocumentQuery.updateDocumentData(id, name, category, date, location, holder, photo, documentPath, docType, From, person, principle, otherCategory, Hosp);
+                        if (flag == true) {
+                            Toast.makeText(context, "You have updated document successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, category, date, location, holder, photo, documentPath, docType, From, person, principle, otherCategory, Hosp);
+                        if (flag == true) {
+                            Toast.makeText(context, "You have added document successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 

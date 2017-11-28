@@ -135,6 +135,36 @@ public class DocumentQuery {
         return true;
     }
 
+    public static Boolean updateDocumentData(int id, String name, String category, String date, String loacation, String holder, int photo, String document, String type, String from, String person, String principle, String otherCategory, String hosp) {
+        boolean flag=false;
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        ContentValues cv=new ContentValues();
+        cv.put(COL_NAME,name);
+        cv.put(COL_DATE,date);
+        cv.put(COL_HOLDER,holder);
+        cv.put(COL_TYPE,type);
+        cv.put(COL_LOCATION,loacation);
+        cv.put(COL_DOCUMENT,document);
+        cv.put(COL_PHOTO,photo);
+        cv.put(COL_CATEGORY,category);
+        cv.put(COL_FROM,from);
+        cv.put(COL_PRINCIPLE,principle);
+        cv.put(COL_PERSON,person);
+        cv.put(COL_HOSP,hosp);
+        cv.put(COL_OTHER,otherCategory);
+
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid == 0) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+            return flag;
+    }
+
  /*   public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();

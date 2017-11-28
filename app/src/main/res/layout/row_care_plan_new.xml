@@ -37,12 +37,13 @@
             >
             <TextView
                 android:id="@+id/txtDocHeader"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|left"
                 android:text= "Cfklj kj ouio "
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension20dp"
+                android:layout_toLeftOf="@+id/imgEdit"
                 />
             <TextView
                 android:id="@+id/txtDocTime"
@@ -62,9 +63,9 @@
                 android:layout_width="@dimen/dimension25dp"
                 android:layout_height="@dimen/dimension25dp"
                 android:src="@drawable/ic_edit_blue"
-                android:layout_toRightOf="@+id/txtDocHeader"
                 android:layout_marginLeft="@dimen/dimension10dp"
                 android:layout_marginRight="@dimen/dimension10dp"
+                android:layout_alignParentRight="true"
 
                 />
         </RelativeLayout>
