@@ -67,17 +67,24 @@
             android:layout_below="@+id/header"
             android:visibility="gone"
             />
+   <!-- android:id="@+id/lvNote"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/header"
+    android:scrollbars="none"
+    android:dividerHeight="@dimen/dimension20dp"
+    android:divider="@color/colorLightGray"
+    android:background="@color/colorLightBlue"
+    android:visibility="gone"-->
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvDoc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none"
         android:dividerHeight="@dimen/dimension20dp"
         android:divider="@color/colorLightGray"
         android:background="@color/colorLightBlue"
         android:layout_below="@+id/header"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_above="@+id/llAddDoc"
         android:layout_marginTop="@dimen/dimension5dp"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>

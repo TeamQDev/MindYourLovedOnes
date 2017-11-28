@@ -165,6 +165,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
+        txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
         chkOther= (CheckBox) rootview.findViewById(R.id.chkOther);
         ListPet= (ListView) rootview.findViewById(R.id.ListPet);
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
@@ -456,6 +462,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         setPetData();
     }
 
+    private void hideSoftKeyboard() {
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
     private void setValues() {
         if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
             tilBdate.setVisibility(View.VISIBLE);
@@ -712,6 +725,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                             Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
+                                hideSoftKeyboard();
                                 getActivity().finish();
                                 editToConnection(photo,photoCard);
                             } else {
@@ -731,6 +745,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
             
             case R.id.imgBack:
+                hideSoftKeyboard();
                 getActivity().finish();
                 break;
 

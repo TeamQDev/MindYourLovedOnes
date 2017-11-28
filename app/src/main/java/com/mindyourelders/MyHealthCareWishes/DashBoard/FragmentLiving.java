@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -31,6 +33,7 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 public class FragmentLiving extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     View rootview;
+    RelativeLayout rlLiving;
     ImageView imgBack, imgDone;
     Preferences preferences;
     TextView txtTitle, txtName;
@@ -77,6 +80,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
     }
 
     private void initUI() {
+        rlLiving= (RelativeLayout) rootview.findViewById(R.id.rlLiving);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
@@ -111,7 +115,21 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
         tbKeeping = (ToggleButton) rootview.findViewById(R.id.tbKeeping);
         tbMedication = (ToggleButton) rootview.findViewById(R.id.tbMedication);
 
+        rlLiving.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
+
         setLivingInfo();
+    }
+
+    private void hideSoftKeyboard() {
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     private void setLivingInfo() {
@@ -273,6 +291,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
                 Boolean flag = LivingQuery.insertLivingData(preferences.getInt(PrefConstants.CONNECTED_USERID), finance, prepare, shop, use, bath, continence, dress, feed, toileting, transfer, transport, pets, drive, keep, medication, functionnote, fouctionOther, instaNote, instaOther);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Activity Living Info Saved", Toast.LENGTH_SHORT).show();
+                    hideSoftKeyboard();
                     getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -280,6 +299,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
 
                 break;
             case R.id.imgBack:
+                hideSoftKeyboard();
                 getActivity().finish();
                 break;
         }

@@ -108,17 +108,18 @@ fragmentLiving=new FragmentLiving();
     public void onClick(View v) {
         switch (v.getId()) {
            case R.id.imgBack:
-               try
-               {
-                   InputMethodManager inm= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                   inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-               }
-               catch (Exception e)
-               {
-                   //Todo: handle exception
-               }
+            hideSoftKeyboard();
                 finish();
                 break;
         }
     }
+
+    private void hideSoftKeyboard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
+
 }

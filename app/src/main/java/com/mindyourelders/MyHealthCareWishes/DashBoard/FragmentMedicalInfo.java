@@ -236,10 +236,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         rlMedical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getActivity().getCurrentFocus() != null) {
-                    InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                }
+                hideSoftKeyboard();
             }
         });
 
@@ -279,6 +276,13 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         setHistoryData();
         setHospitalData();
 
+    }
+
+    private void hideSoftKeyboard() {
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     private void setConditionData() {
@@ -793,6 +797,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote,visionnote,Aidenote,functionnote,dietnote,blind,speech,medicate,toilet,feed);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Medical Profile Saved", Toast.LENGTH_SHORT).show();
+                    hideSoftKeyboard();
                     getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -800,6 +805,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
                 break;
             case R.id.imgBack:
+                hideSoftKeyboard();
                 getActivity().finish();
                 break;
             case R.id.imgAddAllergy:

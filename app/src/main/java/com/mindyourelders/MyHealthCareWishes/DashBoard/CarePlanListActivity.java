@@ -77,6 +77,7 @@ DBHelper dbHelper;
 
     private void setDocuments() {
         if (documentListOld.size()!=0) {
+            lvDoc.setVisibility(View.VISIBLE);
             DocumentAdapter documentAdapter = new DocumentAdapter(context, documentListOld);
             lvDoc.setAdapter(documentAdapter);
             lvDoc.setVisibility(View.VISIBLE);
@@ -90,6 +91,10 @@ DBHelper dbHelper;
         llAddDoc.setOnClickListener(this);
     }
 
+  /*  lvNote.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+    SwipeMenuCreation s = new SwipeMenuCreation();
+    SwipeMenuCreator creator = s.createSingleMenu(context);
+    lvNote.setMenuCreator(creator);*/
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         lvDoc= (SwipeMenuListView) findViewById(R.id.lvDoc);
@@ -107,7 +112,7 @@ DBHelper dbHelper;
                         deleteDocument(item);
                         break;
                 }
-                return false;
+                return true;
             }
         });
         llAddDoc= (RelativeLayout) findViewById(R.id.llAddDoc);
@@ -150,18 +155,6 @@ DBHelper dbHelper;
         }
     }
 
-   /* private void setDocumentData() {
-        if (documentList.size() != 0) {
-            lvDoc.setVisibility(View.VISIBLE);
-            //txtView.setVisibility(View.GONE);
-        } else {
-           // txtView.setVisibility(View.VISIBLE);
-            lvDoc.setVisibility(View.GONE);
-        }
-        DocumentAdapter adapter = new DocumentAdapter(context, documentList);
-        lvDoc.setAdapter(adapter);
-    }
-*/
     private void getData() {
         documentListOld = DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
     }
@@ -571,7 +564,6 @@ DBHelper dbHelper;
     protected void onResume() {
         super.onResume();
         getData();
-        getDocuments();
         setDocuments();
     }
 }
