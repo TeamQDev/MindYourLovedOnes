@@ -76,13 +76,13 @@ android:background="@color/colorBlue"
 
                 <ImageView
                     android:id="@+id/imgNoti"
-                    android:layout_width="@dimen/dimension100dp"
-                    android:layout_height="@dimen/dimension75dp"
+                    android:layout_width="@dimen/dimension80dp"
+                    android:layout_height="@dimen/dimension85dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dimension15dp"
-                    android:src="@drawable/aba"
-
+                    android:src="@drawable/ic_launcher"
+                    android:padding="@dimen/dimension10dp"
                     />
                 <ImageView
                     android:id="@+id/imgLogo"

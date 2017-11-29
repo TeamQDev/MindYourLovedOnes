@@ -50,7 +50,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     Context context = this;
     ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
     MySpinner spinnerDoc,spinnerType;
-    TextView txtName,txtAdd,txtHosp, txtDate, txtLocation,txtHolderName,txtDist,txtOther,txtPName,txtFName, txtDocTYpe;
+    TextView txtTitle,txtName,txtAdd,txtHosp, txtDate, txtLocation,txtHolderName,txtDist,txtOther,txtPName,txtFName, txtDocTYpe;
     String From;
     private static final int RESULTCODE = 200;
     Preferences preferences;
@@ -127,7 +127,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         tilDocType= (TextInputLayout) findViewById(R.id.tilDocType);
         txtPName= (TextView) findViewById(R.id.txtPName);
         txtFName= (TextView) findViewById(R.id.txtFName);
-
+        txtTitle= (TextView) findViewById(R.id.txtTitle);
        /* txtDoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,6 +189,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             tilPName.setHint("Name of Person");
             tilDate.setHint("Date Signed");
+            txtTitle.setText("Advance Directives");
         }
         else if(From.equals("Other")){
             spinnerDoc.setVisibility(View.GONE);
@@ -199,6 +200,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             tilPName.setHint("Name of Person");
             tilDate.setHint("Date Signed");
+            txtTitle.setText("Documents");
         }
         else if(From.equals("Record"))
         {
@@ -210,7 +212,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtHosp.setVisibility(View.VISIBLE);
             txtName.setVisibility(View.GONE);
             tilName.setVisibility(View.GONE);
-
+            txtTitle.setText("Medical Records");
             tilPName.setHint("Name on Document");
             tilDate.setHint("Date of Document");
         }
