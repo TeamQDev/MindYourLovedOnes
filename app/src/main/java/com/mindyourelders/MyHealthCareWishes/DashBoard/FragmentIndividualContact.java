@@ -864,10 +864,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                                 System.out.println("\n" + result + "\n");
                                 break;
+
                             case 1://Email
                                 File f =new File(path);
                                 preferences.emailAttachement(f,getActivity());
                                 break;
+
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();
                                 break;

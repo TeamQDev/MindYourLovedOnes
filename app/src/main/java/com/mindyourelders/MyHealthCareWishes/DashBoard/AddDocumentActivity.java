@@ -10,6 +10,7 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -41,8 +42,6 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-
 
 
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
@@ -543,7 +542,22 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
                                 break;
                             case 2: // Fax
-                                if (path.equals("No"))
+                                //File localFile = UriHelpers.getFileForUri(AddDocumentActivity.this, Uri.parse(documentPath));
+                                Uri uris= Uri.parse(documentPath);
+                                String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+txtFName.getText().toString();
+/*
+                                File sourceFile = new File(path);
+
+                                try {
+                                    FileInputStream fileInputStream = new FileInputStream(sourceFile);
+                                    Toast.makeText(AddDocumentActivity.this,"valid",Toast.LENGTH_SHORT).show();
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(AddDocumentActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                }*/
+                                  new FaxCustomDialog(AddDocumentActivity.this,path).show();;
+
+                                /*if (path.equals("No"))
                                 {
                                     File file=new File(getExternalFilesDir(null),documentPath);
                                     Uri urifile=null;
@@ -563,7 +577,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                     String path=uris.getPath();
                                     serverAttachement(uris);
                                  //  emailAttachement(uris);
-                                }
+                                }*/
 
 
                                 break;
