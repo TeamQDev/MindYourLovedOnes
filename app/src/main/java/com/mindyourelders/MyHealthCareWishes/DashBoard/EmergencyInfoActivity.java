@@ -47,11 +47,11 @@ RelativeLayout header;
             {
                 case "Individual":
                     callFragment("INDIVIDUAL", fragmentIndividualContact);
-                    imgRight.setVisibility(View.GONE);
+                    imgRight.setVisibility(View.VISIBLE);
                     break;
                 case "Information":
                     callFragment("INFORMATION", fragmentMedicalInfo);
-                    imgRight.setVisibility(View.GONE);
+                    imgRight.setVisibility(View.VISIBLE);
                     break;
                 case "Emergency":
                     callFragment("EMERGENCY", fragmentEmergency);
@@ -64,7 +64,7 @@ RelativeLayout header;
                     break;
                 case "Functional":
                     callFragment("FUNCTIONAL", fragmentLiving);
-                    imgRight.setVisibility(View.GONE);
+                    imgRight.setVisibility(View.VISIBLE);
 
                     break;
                 case "Proxy":

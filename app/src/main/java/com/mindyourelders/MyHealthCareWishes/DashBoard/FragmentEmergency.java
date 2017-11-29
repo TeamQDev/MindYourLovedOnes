@@ -21,6 +21,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.ConnectionAdapter;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
@@ -54,7 +55,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
     Preferences preferences;
     EmergencyAdapter emergencyAdapter;
      String finalText="";
-    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -308,37 +309,27 @@ emergencyList=new ArrayList<>();
                 builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
-
+                              String path=Environment.getExternalStorageDirectory()
+                                      + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                      + "/Emergency.pdf";
                         switch (itemPos) {
                             case 0: //View
-                                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getEmergencyInfo());
 
-                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                                            + "/Emergency.pdf",
+                                    new PDFDocumentProcess(path,
                                             getActivity(), result);
 
                                     System.out.println("\n" + result + "\n");
-                                }else{
-                                    StringBuffer result = new StringBuffer();
-                                    result.append(new MessageString().getEmergencyInfo());
-
-                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                                            + "/Emergency.pdf",
-                                            getActivity(), result);
-
-                                    System.out.println("\n" + result + "\n");
-                                }
                                 break;
                             case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
                                 break;
                             case 2://fax
+                                new FaxCustomDialog(getActivity(), path).show();
                                 break;
-                            case 3: //Print
-                                break;
+
                         }
                        }
 
@@ -348,6 +339,24 @@ emergencyList=new ArrayList<>();
 
         }
     }
+
+   /* private void emailAttachement(File f) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+
+        emailIntent.setType("application/email");
+
+        getActivity().startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }*/
 
     @Override
     public void onResume() {

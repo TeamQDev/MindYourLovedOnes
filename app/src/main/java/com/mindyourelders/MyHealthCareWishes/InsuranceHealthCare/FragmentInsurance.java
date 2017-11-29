@@ -46,7 +46,7 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
     RelativeLayout llAddInsurance;
     Preferences preferences;
     DBHelper dbHelper;
-    final String dialog_items[]={"View","Email","Fax","Print"};
+    final String dialog_items[]={"View","Email","Fax"};
 
     @Nullable
     @Override
@@ -229,25 +229,26 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
                 builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
-
+String path=Environment.getExternalStorageDirectory()
+        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+        + "/Insurance.pdf";
                         switch (itemPos) {
                             case 0: // view
                                 StringBuffer result = new StringBuffer();
                                 result.append(new MessageString().getInsuranceInfo());
 
 
-                                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                                        + "/Insurance.pdf",
+                                new PDFDocumentProcess(path,
                                         getActivity(), result);
 
                                 System.out.println("\n" + result + "\n");
                                 break;
                             case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
                                 break;
                             case 2://fax
-                                break;
-                            case 3: //Print
+                                new FaxCustomDialog(getActivity(), path).show();
                                 break;
                         }
                     }

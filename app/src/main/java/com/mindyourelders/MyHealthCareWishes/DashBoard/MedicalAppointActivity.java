@@ -1,9 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
@@ -16,14 +19,20 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,12 +43,13 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     Context context=this;
     SwipeMenuListView lvNote;
     ArrayList<Appoint> noteList=new ArrayList<>();
-    ImageView imgBack,imgAdd,imgEdit;
+    ImageView imgBack,imgAdd,imgEdit,imgRight;
     TextView txtView;
     Preferences preferences;
     ArrayList<DateClass> dateList;
     DBHelper dbHelper;
     RelativeLayout header;
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     private void initListener() {
         imgAdd.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -61,6 +72,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         header.setBackgroundResource(R.color.colorFour);
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgAdd= (ImageView) findViewById(R.id.imgAdd);
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
         lvNote= (SwipeMenuListView) findViewById(R.id.lvNote);
 
@@ -205,6 +217,63 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
             Intent i=new Intent(context,AddAppointmentActivity.class);
                 i.putExtra("FROM","Add");
                 startActivity(i);
+                break;
+
+            case R.id.imgRight:
+
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Appointment.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Medical Appointment");
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+                ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+              //  ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+               // new EventPdf(NoteList,1);
+                new EventPdf(AppointList);
+
+                Header.document.close();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/Appointment.pdf";
+                        switch (itemPos) {
+                            case 0: //View
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getAppointInfo());
+                                new PDFDocumentProcess(path,
+                                        context, result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,context);
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(context, path).show();
+                                break;
+
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
         }
     }

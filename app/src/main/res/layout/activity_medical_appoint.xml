@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimension20dp"
            android:layout_centerInParent="true"
             android:text="APPOINTMENT CHECKLIST"
             android:textColor="#FFFFFF"
@@ -37,11 +36,21 @@
             android:id="@+id/imgAdd"
             android:layout_width="@dimen/dimension30dp"
             android:layout_height="@dimen/dimension30dp"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
             android:src="@drawable/add_white_square"
+            android:layout_toLeftOf="@+id/imgRight"
 
+            />
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimension5dp"
+            android:src="@drawable/menudot"
+            android:visibility="visible"
             />
     </RelativeLayout>
 

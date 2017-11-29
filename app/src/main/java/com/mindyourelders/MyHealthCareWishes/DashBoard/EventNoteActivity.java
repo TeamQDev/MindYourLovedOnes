@@ -1,10 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -21,13 +24,19 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,12 +46,12 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     Context context = this;
     SwipeMenuListView lvNote;
     ArrayList<Note> noteList = new ArrayList<>();
-    ImageView imgBack, imgAdd, imgEdit;
+    ImageView imgBack, imgAdd, imgEdit,imgRight;
     TextView txtView;
     Preferences preferences;
     DBHelper dbHelper;
     RelativeLayout header,rlEvent;
-
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +65,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     private void initListener() {
         imgAdd.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
         //txtDateTime.setOnClickListener(this);
 
     }
@@ -66,6 +76,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         header.setBackgroundResource(R.color.colorFour);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
+        imgRight=(ImageView) findViewById(R.id.imgRight);
         //imgEdit= (ImageView) findViewById(R.id.imgEdit);
         lvNote = (SwipeMenuListView) findViewById(R.id.lvNote);
         rlEvent.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +205,62 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.imgAdd:
                 showInputDialog(context);
+                break;
+
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "EventNote.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Event Note");
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+               // ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                 ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new EventPdf(NoteList,1);
+                //new EventPdf(AppointList);
+
+                Header.document.close();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/EventNote.pdf";
+                        switch (itemPos) {
+                            case 0: //View
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getEventInfo());
+                                new PDFDocumentProcess(path,
+                                        context, result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,context);
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(context, path).show();
+                                break;
+
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
             /*case R.id.txtDateTime:
 

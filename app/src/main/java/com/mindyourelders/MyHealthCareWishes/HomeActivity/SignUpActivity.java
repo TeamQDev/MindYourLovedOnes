@@ -75,10 +75,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtSignUp, txtLogin, txtForgotPassword,txtPolicy2,txtPolicy4,txtPolicy5;
     ImageView imgBack, imgEdit,imgProfile;
     TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
-     TextInputLayout tilName;
-    String name, email, mobile, country, bdate, password,address,phone;
-
-
+    TextInputLayout tilName;
+    String name="", email="", mobile="", country="", bdate="", password="",address="",phone="";
 
     MySpinner spinner;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
@@ -418,7 +416,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
      //   mobile = txtPhone.getText().toString().trim();
   //      bdate = txtBdate.getText().toString().trim();
 //        country=spinner.getSelectedItem().toString();
-        password = txtPassword.getText().toString().trim();
+       // password = txtPassword.getText().toString().trim();
       //  address=txtAddress.getText().toString().trim();
 
         if (name.equals("")) {
@@ -447,13 +445,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (bdate.equals("")) {
             txtBdate.setError("Please Enter Birth date");
             showAlert("Please Enter Birth date", context);
-        }*/ else if (password.equals("")) {
+        }*/ /*else if (password.equals("")) {
             txtPassword.setError("Please Enter Password");
             showAlert("Please Enter Password", context);
         } else if (password.length() < 6) {
             txtPassword.setError("Password should be minimum 6 characters");
             showAlert("Password should be minimum 6 characters", context);
-        } else {
+        } */else {
             return true;
         }
         return false;

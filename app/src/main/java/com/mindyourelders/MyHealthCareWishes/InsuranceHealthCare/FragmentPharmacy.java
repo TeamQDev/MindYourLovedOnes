@@ -34,6 +34,8 @@ import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 import java.io.File;
 import java.util.ArrayList;
 
+import static android.R.attr.path;
+
 /**
  * Created by varsha on 8/28/2017.
  */
@@ -46,7 +48,7 @@ public class FragmentPharmacy extends Fragment implements View.OnClickListener{
     RelativeLayout llAddPharmacy;
     Preferences preferences;
 DBHelper dbHelper;
-    final String dialog_items[]={"View","Email","Fax","Print"};
+    final String dialog_items[]={"View","Email","Fax"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -195,7 +197,9 @@ DBHelper dbHelper;
                 builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
-
+String path=Environment.getExternalStorageDirectory()
+        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+        + "/Pharmacy.pdf";
                         switch (itemPos) {
                             case 0: // view
                                     StringBuffer result = new StringBuffer();
@@ -213,10 +217,11 @@ DBHelper dbHelper;
                                     System.out.println("\n" + result + "\n");
                             break;
                             case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
                                 break;
                             case 2://fax
-                                break;
-                            case 3: //Print
+                                new FaxCustomDialog(getActivity(), path).show();
                                 break;
                         }
                     }

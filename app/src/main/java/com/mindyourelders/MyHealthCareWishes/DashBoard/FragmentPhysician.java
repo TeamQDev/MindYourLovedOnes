@@ -20,6 +20,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistAdapter;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
@@ -52,7 +53,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     TextView txtAdd;
     DBHelper dbHelper;
     SpecialistAdapter specialistAdapter;
-    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -223,7 +224,9 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
                 builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
-
+                            String path=Environment.getExternalStorageDirectory()
+                                    + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                    + "/Physician.pdf";
                         switch (itemPos) {
                             case 0: //View
                                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
@@ -240,19 +243,18 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getPhysicianInfo());
 
-                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                                            + "/Physician.pdf",
+                                    new PDFDocumentProcess(path,
                                             getActivity(), result);
 
                                     System.out.println("\n" + result + "\n");
                                 }
                                 break;
                             case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
                                 break;
                             case 2://fax
-                                break;
-                            case 3: //Print
+                                new FaxCustomDialog(getActivity(), path).show();
                                 break;
                         }
                     }

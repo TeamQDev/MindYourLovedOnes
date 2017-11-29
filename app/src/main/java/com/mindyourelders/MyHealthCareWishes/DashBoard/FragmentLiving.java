@@ -85,7 +85,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("ACTIVITIES OF DAILY LIVING");
+        txtTitle.setText("ACTIVITIES OF DAILY\nLIVING");
 
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);

@@ -21,6 +21,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.Connections.ConnectionAdapter;
 import com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
@@ -35,6 +36,8 @@ import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static android.R.attr.path;
 
 /**
  * Created by welcome on 9/14/2017.
@@ -53,7 +56,7 @@ public class FragmentProxy extends Fragment implements View.OnClickListener{
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
     ProxyAdapter proxyAdapter;
-    final String dialog_items[]={"View","Email","Fax","Print"};
+    final String dialog_items[]={"View","Email","Fax"};
 
     @Nullable
     @Override
@@ -205,16 +208,16 @@ public class FragmentProxy extends Fragment implements View.OnClickListener{
                 builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int itemPos) {
-
+String path=Environment.getExternalStorageDirectory()
+        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+        + "/Proxy.pdf";
                         switch (itemPos) {
                             case 0: //View
                                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getPhysicianInfo());
 
-                                    new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
-                                            + "/Proxy.pdf",
+                                    new PDFDocumentProcess(path,
                                             getActivity(), result);
 
                                     System.out.println("\n" + result + "\n");
@@ -231,10 +234,11 @@ public class FragmentProxy extends Fragment implements View.OnClickListener{
                                 }
                                 break;
                             case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
                                 break;
                             case 2://fax
-                                break;
-                            case 3: //Print
+                                new FaxCustomDialog(getActivity(), path).show();
                                 break;
                         }
                     }

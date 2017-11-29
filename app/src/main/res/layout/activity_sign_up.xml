@@ -263,7 +263,9 @@
             android:layout_below="@+id/tilEmail"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:visibility="gone"
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtPassword"

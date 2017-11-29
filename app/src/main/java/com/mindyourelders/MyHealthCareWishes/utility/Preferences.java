@@ -1,8 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.utility;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+
+import java.io.File;
 
 /**
  * Created by varsha on 8/21/2017.
@@ -119,5 +123,22 @@ public class Preferences {
     }
 
 
+    public void emailAttachement(File f,Context context) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                new String[] { "" });
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "MIND YOUR ELDERS"); // subject
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+
+        emailIntent.setType("application/email");
+
+        context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
 
 }

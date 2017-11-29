@@ -1,10 +1,12 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
@@ -47,6 +50,10 @@ import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -73,6 +80,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     ContentValues values;
     Uri imageUri;
     byte[] photoCard=null;
+    ImageView imgRight;
     RelativeLayout llIndividual;
     TextView txtSignUp, txtLogin, txtForgotPassword,txtOther;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
@@ -104,7 +112,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     DisplayImageOptions displayImageOptions;
     RelativeLayout rlCard;
     TextView txtCard;
-
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     DBHelper dbHelper;
     View rootview;
     Preferences preferences;
@@ -155,6 +163,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         imgDone.setOnClickListener(this);
         txtGender.setOnClickListener(this);
         imgAddpet.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -165,6 +174,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PERSONAL PROFILE");
+        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -802,6 +812,69 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 });
 
                 break;
+
+            case R.id.imgRight:
+
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "PersonalProfile.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Personal Profile");
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                    final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    new Individual((PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetLists);
+                }
+                else{
+                    final ArrayList<Pet> PetList = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    new Individual((MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetList);
+                }
+
+                Header.document.close();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path=Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/PersonalProfile.pdf";
+                        switch (itemPos) {
+                            case 0: //View
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getProfileUser());
+
+                                new PDFDocumentProcess(path,
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(getActivity(), path).show();
+                                break;
+
+                        }
+                    }
+
+                });
+                builder.create().show();
+                break;
+
             case R.id.imgEdit:
                showCardDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO,imgProfile,"Profile");
 

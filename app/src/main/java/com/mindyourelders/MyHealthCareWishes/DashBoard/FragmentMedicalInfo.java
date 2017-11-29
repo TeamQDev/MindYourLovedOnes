@@ -1,10 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
@@ -39,9 +43,14 @@ import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.utility.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,7 +65,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private static final int REQUEST_VACCINE =700 ;
     View rootview;
     RelativeLayout rlMedical;
-    ImageView imgBack, imgDone;
+    ImageView imgBack, imgDone,imgRight;
     TextView txtTitle,imgAddFlueShot;
     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
     TextView imgAddPneumonia,imgAddHPV,imgAddRubella,imgAddVaricella,imgAddShingles,imgAddTetanus,imgAddHepatitis,imgAddFlue,imgAddFlueNH,imgAddPneumococcal;
@@ -90,7 +99,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
     Preferences preferences;
     DBHelper dbHelper;
-
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -116,6 +125,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
     private void initListener() {
         imgDone.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
         imgBack.setOnClickListener(this);
         imgAddAllergy.setOnClickListener(this);
         imgAddVaccine.setOnClickListener(this);
@@ -185,6 +195,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         imgBack = (ImageView) getActivity().findViewById(R.id.imgBack);
         imgDone = (ImageView) getActivity().findViewById(R.id.imgDone);
         imgDone.setVisibility(View.VISIBLE);
+        imgRight=(ImageView) getActivity().findViewById(R.id.imgRight);
         etPreNote= (EditText) rootview.findViewById(R.id.etNote);
         etMouthNote= (EditText) rootview.findViewById(R.id.etMouthNote);
         etVisionNote= (EditText) rootview.findViewById(R.id.etVisionNote);
@@ -774,6 +785,65 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
             case R.id.imgAddPneumococcal:
                 getDate(getActivity(),imgAddPneumococcal);
+                break;
+
+            case R.id.imgRight:
+
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "MedicalProfile.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Medical Profile");
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);
+
+                final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                final ArrayList<String> historList = HistoryQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);
+
+                Header.document.close();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/MedicalProfile.pdf";
+                        switch (itemPos) {
+                            case 0: //View
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getMedicalInfo());
+                                new PDFDocumentProcess(path,
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity());
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(getActivity(), path).show();
+                                break;
+
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
 
 

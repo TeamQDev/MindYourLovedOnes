@@ -71,7 +71,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     RelativeLayout header;
     TextView txtName;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
+    final CharSequence[] dialog_items = {"View","Email","Fax"};
     Preferences preferences;
     DBHelper dbHelper;
 
@@ -159,6 +159,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         DateQuery da=new DateQuery(context,dbHelper);
         InsuranceQuery i=new InsuranceQuery(context,dbHelper);
         PetQuery pet=new PetQuery(context,dbHelper);
+        EventNoteQuery e=new EventNoteQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -480,7 +481,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         new FaxCustomDialog(SpecialistsActivity.this, path).show();;
     }
 
-    private void emailAttachement(File f) {
+    public void emailAttachement(File f) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
