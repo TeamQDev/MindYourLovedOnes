@@ -1,12 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by welcome on 11/28/2017.
  */
 
-public class Living implements Serializable {
+public class Living extends ArrayList<Living> implements Serializable {
     public int getId() {
         return id;
     }

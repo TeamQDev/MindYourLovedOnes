@@ -315,4 +315,23 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getLivingInfo() {
+        StringBuffer result = new StringBuffer();
+        if (Individual.messageLiving.size() > 0) {
+            result.append(Individual.messageLiving.get(0));
+            result.append("\n");
+            for (int i = 1; i < Individual.messageLiving.size(); i++) {
+
+                result.append(Individual.messageLiving.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

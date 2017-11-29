@@ -5,6 +5,7 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
@@ -47,6 +48,7 @@ public class Individual {
     public static ArrayList<String> messageEmergency = new ArrayList<String>();
     public static ArrayList<String> messagePhysician = new ArrayList<String>();
     public static ArrayList<String> messageProxy = new ArrayList<String>();
+    public static ArrayList<String> messageLiving=new ArrayList<>();
 
 
     public Individual(RelativeConnection connection,ArrayList<Pet> Petlist) {
@@ -1211,5 +1213,215 @@ public class Individual {
         }
 
         Header.addEmptyLine(1);
+    }
+
+    public Individual(ArrayList<Living> livingList, int i) {
+        Header.addChank("Activities Of Daily Living");
+        messageLiving.add("Activities Of Daily Living");
+        Header.addEmptyLine(1);
+
+        Header.widths[0] = 0.15f;
+        Header.widths[1] = 0.85f;
+        Header.table = new PdfPTable(Header.widths);
+        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+
+        for (i=0;i<livingList.size();i++) {
+            int k = i + 1;
+            Header.addTable("Activities Of Daily Living(ADL)" + k + " :");
+            Header.addTable("");
+            messageLiving.add("Activities Of Daily Living(ADL)" + k + " :");
+            messageLiving.add("");
+
+            Living s = livingList.get(i);
+
+            String bathing = "";
+            if (s.getBath() != null) {
+                bathing = s.getBath();
+            }
+            Header.addTable("Bathing :");
+            Header.addTable(bathing);
+            messageLiving.add("Bathing :");
+            messageLiving.add(bathing);
+
+            String continence = "";
+            if (s.getContinence() != null) {
+                continence = s.getContinence();
+            }
+            Header.addTable("Continence :");
+            Header.addTable(continence);
+            messageLiving.add("Continence :");
+            messageLiving.add(continence);
+
+            String dressing = "";
+            if (s.getDress() != null) {
+                dressing = s.getDress();
+            }
+            Header.addTable("Dressing :");
+            Header.addTable(dressing);
+            messageLiving.add("Dressing :");
+            messageLiving.add(dressing);
+
+            String eating = "";
+            if (s.getFeed() != null) {
+                eating = s.getFeed();
+            }
+            Header.addTable("Eating :");
+            Header.addTable(eating);
+            messageLiving.add("Eating :");
+            messageLiving.add(eating);
+
+            String toileting = "";
+            if (s.getToileting() != null) {
+                toileting = s.getToileting();
+            }
+            Header.addTable("Toileting :");
+            Header.addTable(toileting);
+            messageLiving.add("Toileting :");
+            messageLiving.add(toileting);
+
+            String transfering = "";
+            if (s.getTransfer() != null) {
+                transfering = s.getTransfer();
+            }
+            Header.addTable("Transfering :");
+            Header.addTable(transfering);
+            messageLiving.add("Transfering :");
+            messageLiving.add(transfering);
+
+            String functionOther = "";
+            if (s.getFunctionOther() != null) {
+                functionOther = s.getFunctionOther();
+            }
+            Header.addTable("Other-specify :");
+            Header.addTable(functionOther);
+            messageLiving.add("Other-specify :");
+            messageLiving.add(functionOther);
+
+            String functionNote = "";
+            if (s.getFunctionNote() != null) {
+                functionNote = s.getFunctionNote();
+            }
+            Header.addTable("Note :");
+            Header.addTable(functionNote);
+            messageLiving.add("Note :");
+            messageLiving.add(functionNote);
+
+
+            Header.addTable("Instrumental Activities Of Daily Living(IADL)" + k + " :");
+            Header.addTable("");
+            messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + k + " :");
+            messageLiving.add("");
+
+            String access = "";
+            if (s.getTransport() != null) {
+                access = s.getTransport();
+            }
+            Header.addTable("Accessing transportation :");
+            Header.addTable(access);
+            messageLiving.add("Accessing transportation :");
+            messageLiving.add(access);
+
+            String carePet = "";
+            if (s.getPets() != null) {
+                carePet = s.getPets();
+            }
+            Header.addTable("Caring for pets :");
+            Header.addTable(carePet);
+            messageLiving.add("Caring for pets :");
+            messageLiving.add(carePet);
+
+            String driving = "";
+            if (s.getDrive() != null) {
+                driving = s.getDrive();
+            }
+            Header.addTable("Driving :");
+            Header.addTable(driving);
+            messageLiving.add("Driving :");
+            messageLiving.add(driving);
+
+            String housekeeping = "";
+            if (s.getKeep() != null) {
+                housekeeping = s.getKeep();
+            }
+            Header.addTable("Housekeeping :");
+            Header.addTable(housekeeping);
+            messageLiving.add("Housekeeping :");
+            messageLiving.add(housekeeping);
+
+            String manage = "";
+            if (s.getMedication() != null) {
+                manage = s.getMedication();
+            }
+            Header.addTable("Manage medications :");
+            Header.addTable(manage);
+            messageLiving.add("Manage medications :");
+            messageLiving.add(manage);
+
+            String finance = "";
+            if (s.getFinance() != null) {
+                finance = s.getFinance();
+            }
+            Header.addTable("Managing personal finances :");
+            Header.addTable(finance);
+            messageLiving.add("Managing personal finances :");
+            messageLiving.add(finance);
+
+            String meal = "";
+            if (s.getPrepare() != null) {
+                meal = s.getPrepare();
+            }
+            Header.addTable("Preparing meals :");
+            Header.addTable(meal);
+            messageLiving.add("Preparing meals :");
+            messageLiving.add(meal);
+
+            String shopping = "";
+            if (s.getShop() != null) {
+                shopping = s.getShop();
+            }
+            Header.addTable("Shopping for groceries or clothes :");
+            Header.addTable(shopping);
+            messageLiving.add("Shopping for groceries or clothes :");
+            messageLiving.add(shopping);
+
+            String telephone = "";
+            if (s.getUse() != null) {
+                telephone = s.getUse();
+            }
+            Header.addTable("Using telephone:");
+            Header.addTable(telephone);
+            messageLiving.add("Using telephone :");
+            messageLiving.add(telephone);
+
+            String instOther = "";
+            if (s.getInstOther() != null) {
+                instOther = s.getInstOther();
+            }
+            Header.addTable("Other-specify :");
+            Header.addTable(instOther);
+            messageLiving.add("Other-specify :");
+            messageLiving.add(instOther);
+
+            String instNote = "";
+            if (s.getInstNote() != null) {
+                instNote = s.getInstNote();
+            }
+            Header.addTable("Note :");
+            Header.addTable(instNote);
+            messageLiving.add("Note :");
+            messageLiving.add(instNote);
+
+        }
+            Header.table.setWidthPercentage(100f);
+        try {
+
+            Header.document.add(Header.table);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        Header.addEmptyLine(1);
+
     }
 }
