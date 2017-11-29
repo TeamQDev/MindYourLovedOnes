@@ -1226,10 +1226,9 @@ public class Individual {
         Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
         for (i=0;i<livingList.size();i++) {
-            int k = i + 1;
-            Header.addTable("Activities Of Daily Living(ADL)" + k + " :");
+            Header.addTable("Activities Of Daily Living(ADL)"  + " :");
             Header.addTable("");
-            messageLiving.add("Activities Of Daily Living(ADL)" + k + " :");
+            messageLiving.add("Activities Of Daily Living(ADL)" + " :");
             messageLiving.add("");
 
             Living s = livingList.get(i);
@@ -1307,9 +1306,9 @@ public class Individual {
             messageLiving.add(functionNote);
 
 
-            Header.addTable("Instrumental Activities Of Daily Living(IADL)" + k + " :");
+            Header.addTable("Instrumental Activities Of Daily Living(IADL)" +  " :");
             Header.addTable("");
-            messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + k + " :");
+            messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + " :");
             messageLiving.add("");
 
             String access = "";

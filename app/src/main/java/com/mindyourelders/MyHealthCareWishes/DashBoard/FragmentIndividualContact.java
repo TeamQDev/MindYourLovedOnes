@@ -853,7 +853,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         switch (itemPos) {
                             case 0: //View
                                 StringBuffer result = new StringBuffer();
-                                result.append(new MessageString().getProfileUser());
+                                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                                    result.append(new MessageString().getProfileUser());
+                                }else {
+                                    result.append(new MessageString().getProfileProfile());
+                                }
 
                                 new PDFDocumentProcess(path,
                                         getActivity(), result);

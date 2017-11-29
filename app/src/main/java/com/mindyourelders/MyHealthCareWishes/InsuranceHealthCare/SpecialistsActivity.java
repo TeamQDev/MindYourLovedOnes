@@ -26,6 +26,7 @@ import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
+import com.mindyourelders.MyHealthCareWishes.database.LivingQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
@@ -40,6 +41,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
+import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
@@ -71,7 +73,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     RelativeLayout header;
     TextView txtName;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
+    final CharSequence[] dialog_items = {"View","Email","Fax" };
     Preferences preferences;
     DBHelper dbHelper;
 
@@ -159,6 +161,8 @@ public class SpecialistsActivity extends AppCompatActivity {
         DateQuery da=new DateQuery(context,dbHelper);
         InsuranceQuery i=new InsuranceQuery(context,dbHelper);
         PetQuery pet=new PetQuery(context,dbHelper);
+        EventNoteQuery e=new EventNoteQuery(context,dbHelper);
+        LivingQuery l=new LivingQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -239,12 +243,19 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);
 
+                    Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Living> LivingList=new ArrayList<Living>();
+                    LivingList.add(Live);
+                    new Individual(LivingList,1);
+
                     ArrayList<Emergency> emergencyList=MyConnectionsQuery.fetchAllEmergencyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
                     ArrayList<Proxy> proxyList=MyConnectionsQuery.fetchAllProxyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),3);
                     new Individual("Emergency",emergencyList);
                     new Individual(specialistsList,"Physician");
                     new Individual(proxyList);
+
+
 
                     Header.document.close();
 
@@ -343,9 +354,11 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());
+                                        result.append(new MessageString().getLivingInfo());
                                         result.append(new MessageString().getEmergencyInfo());
                                         result.append(new MessageString().getPhysicianInfo());
                                         result.append(new MessageString().getProxyInfo());
+
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                                 + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
@@ -357,6 +370,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileProfile());
                                         result.append(new MessageString().getMedicalInfo());
+                                        result.append(new MessageString().getLivingInfo());
                                         result.append(new MessageString().getEmergencyInfo());
                                         result.append(new MessageString().getPhysicianInfo());
                                         result.append(new MessageString().getProxyInfo());
