@@ -1,10 +1,13 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +22,19 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.CardQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgBack;
@@ -38,13 +47,13 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
     Preferences preferences;
     View rootview;
     SwipeMenuListView lvCard;
-
+ImageView imgRight;
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
     TextView txtView;
     public static final int REQUEST_PRES = 100;
     DBHelper dbHelper;
-
+    final String dialog_items[]={"View","Email","Fax"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +98,7 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
 
     private void initListener() {
         llAddCard.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
 
     }
 
@@ -96,6 +106,7 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
         llAddCard = (RelativeLayout) rootview.findViewById(R.id.llAddCard);
         lvCard = (SwipeMenuListView) rootview.findViewById(R.id.lvCard);
         txtView = (TextView) rootview.findViewById(R.id.txtView);
+        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
     }
 
     private void setCardData() {
@@ -195,6 +206,67 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
                 // preferences.putString(PrefConstants.SOURCE,"Card");
                 Intent i = new Intent(getActivity(), AddCardActivity.class);
                 startActivityForResult(i, REQUEST_PRES);
+                break;
+
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "InsuranceCard.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Insurance Card");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+               /* new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Insurance Information");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                // Header.addEmptyLine(2);*/
+
+                ArrayList<Card> CardList= CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new InsurancePdf(CardList,1);
+
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/InsuranceCard.pdf";
+                        switch (itemPos) {
+                            case 0: // view
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getInsuranceCard());
+
+
+                                new PDFDocumentProcess(path,
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity(),"Insurance Card");
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(getActivity(), path).show();
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
         }
     }
