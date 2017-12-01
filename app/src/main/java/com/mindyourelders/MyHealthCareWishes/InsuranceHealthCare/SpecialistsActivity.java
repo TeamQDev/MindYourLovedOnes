@@ -455,22 +455,22 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Specialty.pdf");
-                                    emailAttachement(f);
+                                    emailAttachement(f,"Speciality");
                                 } else if (from.equals("Emergency")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Profile.pdf");
-                                    emailAttachement(f);
+                                    emailAttachement(f, "Profile");
                                 } else if (from.equals("Insurance")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf");
-                                    emailAttachement(f);
+                                    emailAttachement(f, "Insurance");
                                 } else if (from.equals("Event")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf");
-                                    emailAttachement(f);
+                                    emailAttachement(f, "Event");
                                 }
                                 break;
 
@@ -527,17 +527,26 @@ public class SpecialistsActivity extends AppCompatActivity {
         new FaxCustomDialog(SpecialistsActivity.this, path).show();;
     }
 
-    private void emailAttachement(File f) {
+    private void emailAttachement(File f, String s) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
                 new String[] { "" });
+        String name= preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                "MIND YOUR ELDERS"); // subject
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+                name+"-"+s); // subject
 
+
+        String body="Hi, \n" +
+                "\n" +
+                "\n" +name+
+                " shared this document with you. Please check the attachment. \n" +
+                "\n" +
+                "Thanks,\n" +
+                "Mind Your Loved Ones - Support";
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
 
         emailIntent.setType("application/email");

@@ -1,7 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.pdfdesign;
 
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -816,527 +815,6 @@ public class Individual {
         }
     }
 
-    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<String> historList, ArrayList<String> hospitalList) {
-        try {
-            Header.addEmptyLine(1);
-            String preNote = "";
-            String glass = "";
-            String lense = "";
-            String blind = "";
-            String upper = "";
-            String lower = "";
-            String visionNote = "";
-            Header.addChank("Medical Profile");
-            messageInfo3.add("Medical Profile");
-            Header.addEmptyLine(1);
-
-//        Header.widths[0] = 0.15f;
-//        Header.widths[1] = 0.85f;
-//        Header.table = new PdfPTable(Header.widths);
-//        Header.table.getDefaultCell().setBorder(Rectangle.BOTTOM);
-
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
-
-            if (medInfo.getNote() != null) {
-                preNote = medInfo.getNote();
-            }
-            cell = new PdfPCell(new Phrase("Pre Existing Note : " + preNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Pre Existing Note :");
-            messageInfo3.add(preNote);
-
-            cell = new PdfPCell(new Phrase("Vision : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Vision :");
-            messageInfo3.add("");
-
-            if (medInfo.getGlass() != null) {
-                glass = medInfo.getGlass();
-            }
-            cell = new PdfPCell(new Phrase("Glasses : " + glass));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Glasses :");
-            messageInfo3.add(glass);
-
-            if (medInfo.getLense() != null) {
-                lense = medInfo.getLense();
-            }
-            cell = new PdfPCell(new Phrase("Contact Lense : " + lense));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Contact Lense :");
-            messageInfo3.add(lense);
-
-            if (medInfo.getBlind() != null) {
-                blind = medInfo.getBlind();
-            }
-            cell = new PdfPCell(new Phrase("Color Blind : " + blind));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Color Blind :");
-            messageInfo3.add(blind);
-
-            if (medInfo.getVisionNote() != null) {
-                visionNote = medInfo.getVisionNote();
-            }
-            cell = new PdfPCell(new Phrase("Notes : " + visionNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Notes :");
-            messageInfo3.add(visionNote);
-
-            cell = new PdfPCell(new Phrase("Mouth : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Mouth ");
-            messageInfo3.add("");
-
-            if (medInfo.getFalses() != null) {
-                upper = medInfo.getFalses();
-            }
-            cell = new PdfPCell(new Phrase("Dentures- Removable Upper : " + upper));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Dentures- Removable Upper :");
-            messageInfo3.add(upper);
-
-            if (medInfo.getImplants() != null) {
-                lower = medInfo.getImplants();
-            }
-            cell = new PdfPCell(new Phrase("Dentures- Removable Lower : " + lower));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Dentures- Removable Lower :");
-            messageInfo3.add(lower);
-
-            String drymouth = "";
-            if (medInfo.getMouth() != null) {
-                drymouth = medInfo.getMouth();
-            }
-            cell = new PdfPCell(new Phrase("Dry Mouth : " + drymouth));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Dry Mouth :");
-            messageInfo3.add(drymouth);
-
-            String mouthnote = "";
-            if (medInfo.getMouthnote() != null) {
-                mouthnote = medInfo.getMouthnote();
-            }
-            cell = new PdfPCell(new Phrase("Notes : " + mouthnote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Notes :");
-            messageInfo3.add(mouthnote);
-
-            cell = new PdfPCell(new Phrase("Hearing & Speech : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Hearing & Speech :");
-            messageInfo3.add("");
-
-            String aid = "";
-            if (medInfo.getAid() != null) {
-                aid = medInfo.getAid();
-            }
-            cell = new PdfPCell(new Phrase("Hearing Aids : " + aid));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Hearing Aids :");
-            messageInfo3.add(aid);
-
-            String speech = "";
-            if (medInfo.getSpeech() != null) {
-                speech = medInfo.getSpeech();
-            }
-            cell = new PdfPCell(new Phrase("Speech Impaired : " + speech));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Speech Impaired :");
-            messageInfo3.add(speech);
-
-            String aidNote = "";
-            if (medInfo.getAideNote() != null) {
-                aidNote = medInfo.getAideNote();
-            }
-            cell = new PdfPCell(new Phrase("Hearing Notes : " + aidNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Hearing Notes :");
-            messageInfo3.add(aidNote);
-
-            cell = new PdfPCell(new Phrase("Functional Status : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Functional Status :");
-            messageInfo3.add("");
-
-            String feeding = "";
-            if (medInfo.getFeed() != null) {
-                feeding = medInfo.getFeed();
-            }
-            cell = new PdfPCell(new Phrase("Feeding : " + feeding));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Feeding :");
-            messageInfo3.add(feeding);
-
-            String toileting = "";
-            if (medInfo.getToilet() != null) {
-                toileting = medInfo.getToilet();
-            }
-            cell = new PdfPCell(new Phrase("Toileting : " + toileting));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Toileting :");
-            messageInfo3.add(toileting);
-
-            String selfMedicate = "";
-            if (medInfo.getMedicate() != null) {
-                selfMedicate = medInfo.getMedicate();
-            }
-            cell = new PdfPCell(new Phrase("Self Medicate : " + selfMedicate));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Self Medicate :");
-            messageInfo3.add(selfMedicate);
-
-            String functionNote = "";
-            if (medInfo.getFunctionnote() != null) {
-                functionNote = medInfo.getFunctionnote();
-            }
-            cell = new PdfPCell(new Phrase("Function Notes : " + functionNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Function Notes :");
-            messageInfo3.add(functionNote);
-
-            cell = new PdfPCell(new Phrase("Diet : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Diet :");
-            messageInfo3.add("");
-
-            String dietNote = "";
-            if (medInfo.getDietNote() != null) {
-                dietNote = medInfo.getDietNote();
-            }
-            cell = new PdfPCell(new Phrase("Diet Notes : " + dietNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Diet Notes :");
-            messageInfo3.add(dietNote);
-
-            String bloodNote = "";
-            if (medInfo.getBloodType() != null) {
-                bloodNote = medInfo.getBloodType();
-            }
-            cell = new PdfPCell(new Phrase("Blood Type : " + bloodNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Blood Type :");
-            messageInfo3.add(bloodNote);
-
-
-            String organDonor = "";
-            if (medInfo.getDonor() != null) {
-                organDonor = medInfo.getDonor();
-            }
-            cell = new PdfPCell(new Phrase("Organ Donor : " + organDonor));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Organ Donor :");
-            messageInfo3.add(organDonor);
-
-            cell = new PdfPCell(new Phrase("Allergies : " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Allergies :");
-            messageInfo3.add("");
-
-            String allergy = "";
-            String treatment = "";
-            String reaction = "";
-            for (int i = 0; i < allargyLists.size(); i++) {
-                int k = i + 1;
-
-                cell = new PdfPCell(new Phrase("Allergy " + k + " :"));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Allergy " + k + " :");
-                messageInfo3.add("");
-
-                Allergy a = allargyLists.get(i);
-                if (a.getAllergy() != null) {
-                    allergy = a.getAllergy();
-                }
-                cell = new PdfPCell(new Phrase("Allergy : " + allergy));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Allergy :");
-                messageInfo3.add(allergy);
-
-                if (a.getReaction() != null) {
-                    reaction = a.getReaction();
-                }
-                cell = new PdfPCell(new Phrase("Reaction : " + reaction));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Reaction :");
-                messageInfo3.add(reaction);
-
-                if (a.getTreatment() != null) {
-                    treatment = a.getTreatment();
-                }
-                cell = new PdfPCell(new Phrase("Treatment : " + treatment));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Treatment :");
-                messageInfo3.add(treatment);
-
-            }
-
-
-            // String Implants="";
-            cell = new PdfPCell(new Phrase("Medical Implants - " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Medical Implants -");
-            messageInfo3.add("");
-
-            for (int i = 0; i < implantsList.size(); i++) {
-                int k = i + 1;
-                cell = new PdfPCell(new Phrase("Medical Implants " + k + " :"));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-                messageInfo3.add("Medical Implants " + k + " :");
-                messageInfo3.add("");
-
-
-                cell = new PdfPCell(new Phrase("Implants : " + implantsList.get(i)));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-                messageInfo3.add("Implants :");
-                messageInfo3.add(implantsList.get(i));
-            }
-
-            cell = new PdfPCell(new Phrase("Preferred Hospital - " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Preferred Hospital -");
-            messageInfo3.add("");
-            for (int i = 0; i < hospitalList.size(); i++) {
-                int k = i + 1;
-
-                cell = new PdfPCell(new Phrase("Preferred Hospital " + k + " :"));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Preferred Hospital " + k + " :");
-                messageInfo3.add("");
-
-                cell = new PdfPCell(new Phrase("Hospital : " + hospitalList.get(i)));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Hospital :");
-                messageInfo3.add(hospitalList.get(i));
-            }
-
-            cell = new PdfPCell(new Phrase("Medical History - " + ""));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageInfo3.add("Medical History -:");
-            messageInfo3.add("");
-            for (int i = 0; i < historList.size(); i++) {
-                int k = i + 1;
-
-                cell = new PdfPCell(new Phrase("Medical History " + k + " :"));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("Medical History " + k + " :");
-                messageInfo3.add("");
-
-                cell = new PdfPCell(new Phrase("History : " + historList.get(i)));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-
-                messageInfo3.add("History :");
-                messageInfo3.add(historList.get(i));
-            }
-
-
-//        Header.table.setWidthPercentage(100f);
-
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
-            Header.addEmptyLine(1);
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-    }
 
     public Individual(String emergency, ArrayList<Emergency> emergencyList) {
         try {
@@ -1898,19 +1376,553 @@ public class Individual {
 
     }
 
-    public Individual(ArrayList<Living> livingList, int i) {
-        Header.addChank("Activities Of Daily Living");
-        messageLiving.add("Activities Of Daily Living");
-        Header.addEmptyLine(1);
+    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<String> historList, ArrayList<String> hospitalList) {
+        try {
+            Header.addEmptyLine(1);
+            String preNote = "";
+            String glass = "";
+            String lense = "";
+            String blind = "";
+            String upper = "";
+            String lower = "";
+            String visionNote = "";
+            Header.addChank("Medical Profile");
+            messageInfo3.add("Medical Profile");
+            Header.addEmptyLine(1);
 
-        Header.widths[0] = 0.15f;
-        Header.widths[1] = 0.85f;
-        Header.table = new PdfPTable(Header.widths);
-        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+//        Header.widths[0] = 0.15f;
+//        Header.widths[1] = 0.85f;
+//        Header.table = new PdfPTable(Header.widths);
+//        Header.table.getDefaultCell().setBorder(Rectangle.BOTTOM);
+
+            PdfPTable table;
+            table = new PdfPTable(2);
+            PdfPCell cell;
+            table.setWidthPercentage(100);
+
+            if (medInfo.getNote() != null) {
+                preNote = medInfo.getNote();
+            }
+            cell = new PdfPCell(new Phrase("Pre Existing Note : " + preNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Pre Existing Note :");
+            messageInfo3.add(preNote);
+
+            cell = new PdfPCell(new Phrase("Vision : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Vision :");
+            messageInfo3.add("");
+
+            if (medInfo.getGlass() != null) {
+                glass = medInfo.getGlass();
+            }
+            cell = new PdfPCell(new Phrase("Glasses : " + glass));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Glasses :");
+            messageInfo3.add(glass);
+
+            if (medInfo.getLense() != null) {
+                lense = medInfo.getLense();
+            }
+            cell = new PdfPCell(new Phrase("Contact Lense : " + lense));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Contact Lense :");
+            messageInfo3.add(lense);
+
+            if (medInfo.getBlind() != null) {
+                blind = medInfo.getBlind();
+            }
+            cell = new PdfPCell(new Phrase("Color Blind : " + blind));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Color Blind :");
+            messageInfo3.add(blind);
+
+            if (medInfo.getVisionNote() != null) {
+                visionNote = medInfo.getVisionNote();
+            }
+            cell = new PdfPCell(new Phrase("Notes : " + visionNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Notes :");
+            messageInfo3.add(visionNote);
+
+            cell = new PdfPCell(new Phrase("Mouth : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Mouth ");
+            messageInfo3.add("");
+
+            if (medInfo.getFalses() != null) {
+                upper = medInfo.getFalses();
+            }
+            cell = new PdfPCell(new Phrase("Dentures- Removable Upper : " + upper));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Dentures- Removable Upper :");
+            messageInfo3.add(upper);
+
+            if (medInfo.getImplants() != null) {
+                lower = medInfo.getImplants();
+            }
+            cell = new PdfPCell(new Phrase("Dentures- Removable Lower : " + lower));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Dentures- Removable Lower :");
+            messageInfo3.add(lower);
+
+            String drymouth = "";
+            if (medInfo.getMouth() != null) {
+                drymouth = medInfo.getMouth();
+            }
+            cell = new PdfPCell(new Phrase("Dry Mouth : " + drymouth));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Dry Mouth :");
+            messageInfo3.add(drymouth);
+
+            String mouthnote = "";
+            if (medInfo.getMouthnote() != null) {
+                mouthnote = medInfo.getMouthnote();
+            }
+            cell = new PdfPCell(new Phrase("Notes : " + mouthnote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Notes :");
+            messageInfo3.add(mouthnote);
+
+            cell = new PdfPCell(new Phrase("Hearing & Speech : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Hearing & Speech :");
+            messageInfo3.add("");
+
+            String aid = "";
+            if (medInfo.getAid() != null) {
+                aid = medInfo.getAid();
+            }
+            cell = new PdfPCell(new Phrase("Hearing Aids : " + aid));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Hearing Aids :");
+            messageInfo3.add(aid);
+
+            String speech = "";
+            if (medInfo.getSpeech() != null) {
+                speech = medInfo.getSpeech();
+            }
+            cell = new PdfPCell(new Phrase("Speech Impaired : " + speech));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Speech Impaired :");
+            messageInfo3.add(speech);
+
+            String aidNote = "";
+            if (medInfo.getAideNote() != null) {
+                aidNote = medInfo.getAideNote();
+            }
+            cell = new PdfPCell(new Phrase("Hearing Notes : " + aidNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Hearing Notes :");
+            messageInfo3.add(aidNote);
+
+            cell = new PdfPCell(new Phrase("Functional Status : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Functional Status :");
+            messageInfo3.add("");
+
+            String feeding = "";
+            if (medInfo.getFeed() != null) {
+                feeding = medInfo.getFeed();
+            }
+            cell = new PdfPCell(new Phrase("Feeding : " + feeding));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Feeding :");
+            messageInfo3.add(feeding);
+
+            String toileting = "";
+            if (medInfo.getToilet() != null) {
+                toileting = medInfo.getToilet();
+            }
+            cell = new PdfPCell(new Phrase("Toileting : " + toileting));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Toileting :");
+            messageInfo3.add(toileting);
+
+            String selfMedicate = "";
+            if (medInfo.getMedicate() != null) {
+                selfMedicate = medInfo.getMedicate();
+            }
+            cell = new PdfPCell(new Phrase("Self Medicate : " + selfMedicate));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Self Medicate :");
+            messageInfo3.add(selfMedicate);
+
+            String functionNote = "";
+            if (medInfo.getFunctionnote() != null) {
+                functionNote = medInfo.getFunctionnote();
+            }
+            cell = new PdfPCell(new Phrase("Function Notes : " + functionNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Function Notes :");
+            messageInfo3.add(functionNote);
+
+            cell = new PdfPCell(new Phrase("Diet : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Diet :");
+            messageInfo3.add("");
+
+            String dietNote = "";
+            if (medInfo.getDietNote() != null) {
+                dietNote = medInfo.getDietNote();
+            }
+            cell = new PdfPCell(new Phrase("Diet Notes : " + dietNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Diet Notes :");
+            messageInfo3.add(dietNote);
+
+            String bloodNote = "";
+            if (medInfo.getBloodType() != null) {
+                bloodNote = medInfo.getBloodType();
+            }
+            cell = new PdfPCell(new Phrase("Blood Type : " + bloodNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Blood Type :");
+            messageInfo3.add(bloodNote);
+
+
+            String organDonor = "";
+            if (medInfo.getDonor() != null) {
+                organDonor = medInfo.getDonor();
+            }
+            cell = new PdfPCell(new Phrase("Organ Donor : " + organDonor));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Organ Donor :");
+            messageInfo3.add(organDonor);
+
+            cell = new PdfPCell(new Phrase("Allergies : " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Allergies :");
+            messageInfo3.add("");
+
+            String allergy = "";
+            String treatment = "";
+            String reaction = "";
+            for (int i = 0; i < allargyLists.size(); i++) {
+                int k = i + 1;
+
+                cell = new PdfPCell(new Phrase("Allergy " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Allergy " + k + " :");
+                messageInfo3.add("");
+
+                Allergy a = allargyLists.get(i);
+                if (a.getAllergy() != null) {
+                    allergy = a.getAllergy();
+                }
+                cell = new PdfPCell(new Phrase("Allergy : " + allergy));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Allergy :");
+                messageInfo3.add(allergy);
+
+                if (a.getReaction() != null) {
+                    reaction = a.getReaction();
+                }
+                cell = new PdfPCell(new Phrase("Reaction : " + reaction));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Reaction :");
+                messageInfo3.add(reaction);
+
+                if (a.getTreatment() != null) {
+                    treatment = a.getTreatment();
+                }
+                cell = new PdfPCell(new Phrase("Treatment : " + treatment));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Treatment :");
+                messageInfo3.add(treatment);
+
+            }
+
+
+            // String Implants="";
+            cell = new PdfPCell(new Phrase("Medical Implants - " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Medical Implants -");
+            messageInfo3.add("");
+
+            for (int i = 0; i < implantsList.size(); i++) {
+                int k = i + 1;
+                cell = new PdfPCell(new Phrase("Medical Implants " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Medical Implants " + k + " :");
+                messageInfo3.add("");
+
+
+                cell = new PdfPCell(new Phrase("Implants : " + implantsList.get(i)));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Implants :");
+                messageInfo3.add(implantsList.get(i));
+            }
+
+            cell = new PdfPCell(new Phrase("Preferred Hospital - " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Preferred Hospital -");
+            messageInfo3.add("");
+            for (int i = 0; i < hospitalList.size(); i++) {
+                int k = i + 1;
+
+                cell = new PdfPCell(new Phrase("Preferred Hospital " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Preferred Hospital " + k + " :");
+                messageInfo3.add("");
+
+                cell = new PdfPCell(new Phrase("Hospital : " + hospitalList.get(i)));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Hospital :");
+                messageInfo3.add(hospitalList.get(i));
+            }
+
+            cell = new PdfPCell(new Phrase("Medical History - " + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Medical History -:");
+            messageInfo3.add("");
+            for (int i = 0; i < historList.size(); i++) {
+                int k = i + 1;
+
+                cell = new PdfPCell(new Phrase("Medical History " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Medical History " + k + " :");
+                messageInfo3.add("");
+
+                cell = new PdfPCell(new Phrase("History : " + historList.get(i)));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("History :");
+                messageInfo3.add(historList.get(i));
+            }
+
+
+//        Header.table.setWidthPercentage(100f);
+
+            Header.document.add(table);
+            Paragraph p = new Paragraph(" ");
+            DottedLineSeparator line = new DottedLineSeparator();
+            line.setOffset(-4);
+            line.setLineColor(BaseColor.LIGHT_GRAY);
+            p.add(line);
+            Header.document.add(p);
+            Header.addEmptyLine(1);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+    public Individual(ArrayList<Living> livingList, int i) {
+
+        try {
+            Header.addEmptyLine(1);
+                       Header.addChank("Activities Of Daily Living");
+            messageLiving.add("Activities Of Daily Living");
+            Header.addEmptyLine(1);
+
+            PdfPTable table;
+            table = new PdfPTable(2);
+            PdfPCell cell;
+            table.setWidthPercentage(100);
 
         for (i=0;i<livingList.size();i++) {
-            Header.addTable("Activities Of Daily Living(ADL)"  + " :");
-            Header.addTable("");
+
+            cell = new PdfPCell(new Phrase("Activities Of Daily Living(ADL) " +" :"));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Activities Of Daily Living(ADL)" + " :");
             messageLiving.add("");
 
@@ -1920,8 +1932,14 @@ public class Individual {
             if (s.getBath() != null) {
                 bathing = s.getBath();
             }
-            Header.addTable("Bathing :");
-            Header.addTable(bathing);
+
+            cell = new PdfPCell(new Phrase("Bathing : " + bathing));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Bathing :");
             messageLiving.add(bathing);
 
@@ -1929,8 +1947,13 @@ public class Individual {
             if (s.getContinence() != null) {
                 continence = s.getContinence();
             }
-            Header.addTable("Continence :");
-            Header.addTable(continence);
+            cell = new PdfPCell(new Phrase("Continence : " + continence));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Continence :");
             messageLiving.add(continence);
 
@@ -1938,8 +1961,12 @@ public class Individual {
             if (s.getDress() != null) {
                 dressing = s.getDress();
             }
-            Header.addTable("Dressing :");
-            Header.addTable(dressing);
+            cell = new PdfPCell(new Phrase("Dressing : " + dressing));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
             messageLiving.add("Dressing :");
             messageLiving.add(dressing);
 
@@ -1947,8 +1974,13 @@ public class Individual {
             if (s.getFeed() != null) {
                 eating = s.getFeed();
             }
-            Header.addTable("Eating :");
-            Header.addTable(eating);
+            cell = new PdfPCell(new Phrase("Eating : " + eating));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Eating :");
             messageLiving.add(eating);
 
@@ -1956,8 +1988,14 @@ public class Individual {
             if (s.getToileting() != null) {
                 toileting = s.getToileting();
             }
-            Header.addTable("Toileting :");
-            Header.addTable(toileting);
+
+            cell = new PdfPCell(new Phrase("Toileting : " + toileting));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Toileting :");
             messageLiving.add(toileting);
 
@@ -1965,8 +2003,14 @@ public class Individual {
             if (s.getTransfer() != null) {
                 transfering = s.getTransfer();
             }
-            Header.addTable("Transfering :");
-            Header.addTable(transfering);
+
+            cell = new PdfPCell(new Phrase("Transfering : " + transfering));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Transfering :");
             messageLiving.add(transfering);
 
@@ -1974,8 +2018,12 @@ public class Individual {
             if (s.getFunctionOther() != null) {
                 functionOther = s.getFunctionOther();
             }
-            Header.addTable("Other-specify :");
-            Header.addTable(functionOther);
+            cell = new PdfPCell(new Phrase("Other-specify : " + functionOther));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
             messageLiving.add("Other-specify :");
             messageLiving.add(functionOther);
 
@@ -1983,14 +2031,23 @@ public class Individual {
             if (s.getFunctionNote() != null) {
                 functionNote = s.getFunctionNote();
             }
-            Header.addTable("Note :");
-            Header.addTable(functionNote);
+            cell = new PdfPCell(new Phrase("Note : " + functionNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Note :");
             messageLiving.add(functionNote);
 
+            cell = new PdfPCell(new Phrase("Instrumental Activities Of Daily Living(IADL) " +" :"));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
 
-            Header.addTable("Instrumental Activities Of Daily Living(IADL)" +  " :");
-            Header.addTable("");
             messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + " :");
             messageLiving.add("");
 
@@ -1998,8 +2055,13 @@ public class Individual {
             if (s.getTransport() != null) {
                 access = s.getTransport();
             }
-            Header.addTable("Accessing transportation :");
-            Header.addTable(access);
+            cell = new PdfPCell(new Phrase("Accessing transportation : " + access));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Accessing transportation :");
             messageLiving.add(access);
 
@@ -2007,8 +2069,13 @@ public class Individual {
             if (s.getPets() != null) {
                 carePet = s.getPets();
             }
-            Header.addTable("Caring for pets :");
-            Header.addTable(carePet);
+            cell = new PdfPCell(new Phrase("Caring for pets : " + carePet));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Caring for pets :");
             messageLiving.add(carePet);
 
@@ -2016,8 +2083,13 @@ public class Individual {
             if (s.getDrive() != null) {
                 driving = s.getDrive();
             }
-            Header.addTable("Driving :");
-            Header.addTable(driving);
+            cell = new PdfPCell(new Phrase("Driving : " + driving));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Driving :");
             messageLiving.add(driving);
 
@@ -2025,8 +2097,13 @@ public class Individual {
             if (s.getKeep() != null) {
                 housekeeping = s.getKeep();
             }
-            Header.addTable("Housekeeping :");
-            Header.addTable(housekeeping);
+            cell = new PdfPCell(new Phrase("Housekeeping : " + housekeeping));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Housekeeping :");
             messageLiving.add(housekeeping);
 
@@ -2034,8 +2111,13 @@ public class Individual {
             if (s.getMedication() != null) {
                 manage = s.getMedication();
             }
-            Header.addTable("Manage medications :");
-            Header.addTable(manage);
+            cell = new PdfPCell(new Phrase("Manage medications : " + manage));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Manage medications :");
             messageLiving.add(manage);
 
@@ -2043,8 +2125,12 @@ public class Individual {
             if (s.getFinance() != null) {
                 finance = s.getFinance();
             }
-            Header.addTable("Managing personal finances :");
-            Header.addTable(finance);
+            cell = new PdfPCell(new Phrase("Managing personal finances : " + finance));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
             messageLiving.add("Managing personal finances :");
             messageLiving.add(finance);
 
@@ -2052,8 +2138,13 @@ public class Individual {
             if (s.getPrepare() != null) {
                 meal = s.getPrepare();
             }
-            Header.addTable("Preparing meals :");
-            Header.addTable(meal);
+            cell = new PdfPCell(new Phrase("Preparing meals : " + meal));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Preparing meals :");
             messageLiving.add(meal);
 
@@ -2061,8 +2152,13 @@ public class Individual {
             if (s.getShop() != null) {
                 shopping = s.getShop();
             }
-            Header.addTable("Shopping for groceries or clothes :");
-            Header.addTable(shopping);
+            cell = new PdfPCell(new Phrase("Shopping for groceries or clothes : " + shopping));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Shopping for groceries or clothes :");
             messageLiving.add(shopping);
 
@@ -2070,8 +2166,13 @@ public class Individual {
             if (s.getUse() != null) {
                 telephone = s.getUse();
             }
-            Header.addTable("Using telephone:");
-            Header.addTable(telephone);
+            cell = new PdfPCell(new Phrase("Using telephone : " + telephone));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Using telephone :");
             messageLiving.add(telephone);
 
@@ -2079,8 +2180,13 @@ public class Individual {
             if (s.getInstOther() != null) {
                 instOther = s.getInstOther();
             }
-            Header.addTable("Other-specify :");
-            Header.addTable(instOther);
+            cell = new PdfPCell(new Phrase("Other-specify : " + instOther));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Other-specify :");
             messageLiving.add(instOther);
 
@@ -2088,22 +2194,30 @@ public class Individual {
             if (s.getInstNote() != null) {
                 instNote = s.getInstNote();
             }
-            Header.addTable("Note :");
-            Header.addTable(instNote);
+            cell = new PdfPCell(new Phrase("Note : " + instNote));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
             messageLiving.add("Note :");
             messageLiving.add(instNote);
 
         }
-        Header.table.setWidthPercentage(100f);
-        try {
+            Header.document.add(table);
+            Paragraph p = new Paragraph(" ");
+            DottedLineSeparator line = new DottedLineSeparator();
+            line.setOffset(-4);
+            line.setLineColor(BaseColor.LIGHT_GRAY);
+            p.add(line);
+            Header.document.add(p);
+            Header.addEmptyLine(1);
 
-            Header.document.add(Header.table);
-        } catch (DocumentException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        Header.addEmptyLine(1);
 
     }
 }

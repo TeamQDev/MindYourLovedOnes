@@ -25,11 +25,11 @@ import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -292,9 +292,15 @@ emergencyList=new ArrayList<>();
                 }
 
                 new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Emergency Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+/*
+                new Header().createPdfHeader(file.getAbsolutePath(),
                         "Emergency Contacts");
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
+                Header.addEmptyLine(2);*/
 
 
                 ArrayList<Emergency> emergencyList=MyConnectionsQuery.fetchAllEmergencyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);

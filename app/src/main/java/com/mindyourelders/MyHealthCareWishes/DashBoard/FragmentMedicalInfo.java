@@ -43,10 +43,10 @@ import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -797,11 +797,15 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 if (file.exists()) {
                     file.delete();
                 }
-
                 new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Medical Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+              /*  new Header().createPdfHeader(file.getAbsolutePath(),
                         "Medical Profile");
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
+                Header.addEmptyLine(2);*/
 
                 final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
