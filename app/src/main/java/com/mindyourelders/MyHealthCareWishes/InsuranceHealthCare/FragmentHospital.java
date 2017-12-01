@@ -24,9 +24,9 @@ import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -190,12 +190,17 @@ public class FragmentHospital extends Fragment implements View.OnClickListener {
                 if (file.exists()) {
                     file.delete();
                 }
+                new com.mindyourelders.MyHealthCareWishes.pdfdesign.Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addEmptyLine(1);
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addusereNameChank("Hospitals and other health professionals");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addEmptyLine(1);
 
-                new Header().createPdfHeader(file.getAbsolutePath(),
+              /*  new Header().createPdfHeader(file.getAbsolutePath(),
                         "Hospitals and other health professionals");
 
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
+                Header.addEmptyLine(2);*/
 
                 ArrayList<Hospital> HospitalList = HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 new Specialty("Hospital", HospitalList);

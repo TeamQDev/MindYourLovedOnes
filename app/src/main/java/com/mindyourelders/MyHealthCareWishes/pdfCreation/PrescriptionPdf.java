@@ -39,6 +39,33 @@ public class PrescriptionPdf {
 
             Prescription s = prescriptionList.get(i);
 
+            String supplement = "";
+            if (s.getMedicine() != null) {
+                supplement = s.getMedicine();
+            }
+            Header.addTable("Name of Medication or Suppliment :");
+            Header.addTable(supplement);
+            messagePrescription.add("Name of Medication or Suppliment :");
+            messagePrescription.add(supplement);
+
+            String dosage = "";
+            if (s.getDose() != null) {
+                dosage = s.getDose();
+            }
+            Header.addTable("Dosage :");
+            Header.addTable(dosage);
+            messagePrescription.add("Dosage :");
+            messagePrescription.add(dosage);
+
+            String rx = "";
+            if (s.getRX() != null) {
+                rx = s.getRX();
+            }
+            Header.addTable("RX :");
+            Header.addTable(rx);
+            messagePrescription.add("RX :");
+            messagePrescription.add(rx);
+
             String doctor = "";
             if (s.getDoctor() != null) {
                 doctor = s.getDoctor();
@@ -93,11 +120,11 @@ public class PrescriptionPdf {
                 messagePrescription.add("Medicine and Dosage " +k + " :");
                 messagePrescription.add("");
 
-                Dosage d = DosageList.get(j);
+               // Dosage s = DosageList.get(j);
 
                 String medicineName = "";
-                if (d.getMedicine() != null) {
-                    medicineName = d.getMedicine();
+                if (s.getMedicine() != null) {
+                    medicineName = s.getMedicine();
                 }
                 Header.addTable("Medicine Name :");
                 Header.addTable(medicineName);
@@ -105,8 +132,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(medicineName);
 
                 String RX = "";
-                if (d.getRx() != null) {
-                    RX = d.getRx();
+                if (s.getRx() != null) {
+                    RX = s.getRx();
                 }
                 Header.addTable("RX :");
                 Header.addTable(RX);
@@ -114,8 +141,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(RX);
 
                 String Dose = "";
-                if (d.getDose() != null) {
-                    Dose = d.getDose();
+                if (s.getDose() != null) {
+                    Dose = s.getDose();
                 }
                 Header.addTable("Dose :");
                 Header.addTable(Dose);
@@ -123,15 +150,13 @@ public class PrescriptionPdf {
                 messagePrescription.add(Dose);
 
                 String frequency = "";
-                if (d.getFrequency() != null) {
-                    frequency = d.getFrequency();
+                if (s.getFrequency() != null) {
+                    frequency = s.getFrequency();
                 }
                 Header.addTable("Frequency :");
                 Header.addTable(frequency);
                 messagePrescription.add("Frequency :");
                 messagePrescription.add(frequency);
-
-                
 
             }
 

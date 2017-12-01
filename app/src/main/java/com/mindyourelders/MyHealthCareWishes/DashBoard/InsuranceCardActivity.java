@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class InsuranceCardActivity extends AppCompatActivity implements View.OnClickListener{
     Context context=this;
     ListView lvCard;
-    ImageView imgBack;
+    ImageView imgBack,imgRight;
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
     TextView txtView;
@@ -56,9 +56,11 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
     private void initListener() {
         llAddCard.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         imgBack= (ImageView)findViewById(R.id.imgBack);
         llAddCard= (RelativeLayout) findViewById(R.id.llAddCard);
         lvCard= (ListView)findViewById(R.id.lvCard);
@@ -124,6 +126,9 @@ public class InsuranceCardActivity extends AppCompatActivity implements View.OnC
                 // preferences.putString(PrefConstants.SOURCE,"Card");
                 Intent i=new Intent(context,AddCardActivity.class);
                 startActivityForResult(i,REQUEST_PRES);
+                break;
+            case R.id.imgRight:
+
                 break;
         }
     }

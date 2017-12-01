@@ -587,9 +587,9 @@ public class Individual {
         messageInfo3.add(visionNote);
 
 
-        Header.addTable("Mouth ");
+        Header.addTable("Mouth :");
         Header.addTable("");
-        messageInfo3.add("Mouth ");
+        messageInfo3.add("Mouth :");
         messageInfo3.add("");
 
         if (medInfo.getFalses() != null) {

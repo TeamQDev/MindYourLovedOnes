@@ -630,7 +630,7 @@ public class Specialty {
 
             String companyName="";
             if (f.getPracticeName() != null) {
-                companyName = f.getFirm();
+                companyName = f.getPracticeName();
             }
             Header.addTable("Company Name :");
             Header.addTable(companyName);

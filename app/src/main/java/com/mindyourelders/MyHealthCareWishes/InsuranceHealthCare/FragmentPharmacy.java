@@ -24,9 +24,9 @@ import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -178,11 +178,17 @@ DBHelper dbHelper;
                     file.delete();
                 }
 
-                new Header().createPdfHeader(file.getAbsolutePath(),
+                new com.mindyourelders.MyHealthCareWishes.pdfdesign.Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addEmptyLine(1);
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addusereNameChank("Pharmacies and home medical equipment");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                com.mindyourelders.MyHealthCareWishes.pdfdesign.Header.addEmptyLine(1);
+
+                /*new Header().createPdfHeader(file.getAbsolutePath(),
                         "Pharmacies and home medical equipment");
 
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
+                Header.addEmptyLine(2);*/
 
                 ArrayList<Pharmacy> PharmacyList= PharmacyQuery.fetchAllPharmacyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 new Specialty(PharmacyList);
