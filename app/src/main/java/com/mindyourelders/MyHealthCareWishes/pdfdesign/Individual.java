@@ -1404,14 +1404,14 @@ public class Individual {
             if (medInfo.getNote() != null) {
                 preNote = medInfo.getNote();
             }
-            cell = new PdfPCell(new Phrase("Pre Existing Note : " + preNote));
+            cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions : " + preNote));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo3.add("Pre Existing Note :");
+            messageInfo3.add("Pre Existing Medical Conditions :");
             messageInfo3.add(preNote);
 
             cell = new PdfPCell(new Phrase("Vision : " + ""));
@@ -1440,7 +1440,7 @@ public class Individual {
             if (medInfo.getLense() != null) {
                 lense = medInfo.getLense();
             }
-            cell = new PdfPCell(new Phrase("Contact Lense : " + lense));
+            cell = new PdfPCell(new Phrase("Contact Lenses : " + lense));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
@@ -1476,14 +1476,14 @@ public class Individual {
             messageInfo3.add("Notes :");
             messageInfo3.add(visionNote);
 
-            cell = new PdfPCell(new Phrase("Mouth : " + ""));
+            cell = new PdfPCell(new Phrase("Dental : " + ""));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo3.add("Mouth ");
+            messageInfo3.add("Dental ");
             messageInfo3.add("");
 
             if (medInfo.getFalses() != null) {
@@ -1582,17 +1582,17 @@ public class Individual {
             if (medInfo.getAideNote() != null) {
                 aidNote = medInfo.getAideNote();
             }
-            cell = new PdfPCell(new Phrase("Hearing Notes : " + aidNote));
+            cell = new PdfPCell(new Phrase("Notes : " + aidNote));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo3.add("Hearing Notes :");
+            messageInfo3.add("Notes :");
             messageInfo3.add(aidNote);
 
-            cell = new PdfPCell(new Phrase("Functional Status : " + ""));
+          /*  cell = new PdfPCell(new Phrase("Functional Status : " + ""));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
@@ -1656,7 +1656,7 @@ public class Individual {
             table.addCell(cell);
 
             messageInfo3.add("Function Notes :");
-            messageInfo3.add(functionNote);
+            messageInfo3.add(functionNote);*/
 
             cell = new PdfPCell(new Phrase("Diet : " + ""));
             cell.setBorder(Rectangle.BOTTOM);
@@ -1846,26 +1846,26 @@ public class Individual {
                 messageInfo3.add(hospitalList.get(i));
             }
 
-            cell = new PdfPCell(new Phrase("Medical History - " + ""));
+            cell = new PdfPCell(new Phrase("Surgical History - " + ""));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo3.add("Medical History -:");
+            messageInfo3.add("Surgical History -:");
             messageInfo3.add("");
             for (int i = 0; i < historList.size(); i++) {
                 int k = i + 1;
 
-                cell = new PdfPCell(new Phrase("Medical History " + k + " :"));
+                cell = new PdfPCell(new Phrase("Surgical History " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
 
-                messageInfo3.add("Medical History " + k + " :");
+                messageInfo3.add("Surgical History " + k + " :");
                 messageInfo3.add("");
 
                 cell = new PdfPCell(new Phrase("History : " + historList.get(i)));
@@ -1877,6 +1877,8 @@ public class Individual {
 
                 messageInfo3.add("History :");
                 messageInfo3.add(historList.get(i));
+
+
             }
 
 

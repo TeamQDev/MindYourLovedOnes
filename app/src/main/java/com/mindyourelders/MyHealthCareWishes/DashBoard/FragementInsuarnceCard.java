@@ -271,7 +271,7 @@ ImageView imgRight;
         }
     }
 /*
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requ estCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_PRES && data != null) {
 
       *//*  Card p=new Card();
