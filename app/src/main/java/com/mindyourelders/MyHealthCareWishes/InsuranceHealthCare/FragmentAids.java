@@ -224,7 +224,7 @@ String path=Environment.getExternalStorageDirectory()
                             break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,getActivity());
+                                preferences.emailAttachement(f,getActivity(),"Home Health Service");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();

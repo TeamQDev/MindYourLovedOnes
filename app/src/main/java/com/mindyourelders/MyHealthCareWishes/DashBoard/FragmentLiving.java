@@ -337,7 +337,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
                                 break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,getActivity());
+                                preferences.emailAttachement(f,getActivity(),"Activities of Daily Living");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();

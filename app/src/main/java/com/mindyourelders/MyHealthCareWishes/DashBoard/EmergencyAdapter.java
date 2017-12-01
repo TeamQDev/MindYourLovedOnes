@@ -20,6 +20,8 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.util.ArrayList;
 
+import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgForword;
+
 /**
  * Created by varsha on 8/28/2017.
  */
@@ -68,7 +70,7 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtType= (TextView) convertView.findViewById(R.id.txtType);
             holder.imgProfile= (ImageView) convertView.findViewById(R.id.imgProfile);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
-            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
+            holder.imgForword= (ImageView) convertView.findViewById(imgForword);
             holder.rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
             holder.imgNext= (ImageView) convertView.findViewById(R.id.imgNext);
 //            holder.swipeLayout= (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
@@ -124,6 +126,13 @@ public class EmergencyAdapter extends BaseAdapter {
         if (emergencyList.get(position).getPhotoCard()!=null) {
             byte[] photoCard = emergencyList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+           /* if(bmpCard.getWidth() > bmpCard.getHeight())
+            {
+                // imgDoc.setRotation(180);
+            }else
+            {
+                holder.imgForword.setRotation(90);
+            }*/
             holder.imgForword.setImageBitmap(bmpCard);
             holder.imgForword.setVisibility(View.VISIBLE);
         }

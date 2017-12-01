@@ -867,7 +867,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,getActivity());
+                                preferences.emailAttachement(f,getActivity(),"Personal Profile");
                                 break;
 
                             case 2://fax

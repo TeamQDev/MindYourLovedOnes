@@ -173,6 +173,7 @@
             android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension30dp"
             android:src="@drawable/busi_card"
+            android:scaleType="fitXY"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imgNext"
             />

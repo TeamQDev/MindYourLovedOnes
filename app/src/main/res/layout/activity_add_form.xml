@@ -61,10 +61,14 @@
             <com.mindyourelders.MyHealthCareWishes.customview.TouchImageView
                 android:id="@+id/imgDoc"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:src="@drawable/imd_doc"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/dimension20dp"/>
+                android:scaleType="fitCenter"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                />
       <ImageView
         android:id="@+id/imgDelete"
         android:layout_width="@dimen/dimension40dp"

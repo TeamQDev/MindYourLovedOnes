@@ -250,7 +250,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                                 break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,context);
+                                preferences.emailAttachement(f,context,"Event Note");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(context, path).show();

@@ -263,7 +263,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
                                 break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,context);
+                                preferences.emailAttachement(f,context,"Appointment Checklist");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(context, path).show();

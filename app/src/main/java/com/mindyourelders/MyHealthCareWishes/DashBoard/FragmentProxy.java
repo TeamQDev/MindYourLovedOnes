@@ -37,8 +37,6 @@ import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 import java.io.File;
 import java.util.ArrayList;
 
-import static android.R.attr.path;
-
 /**
  * Created by welcome on 9/14/2017.
  */
@@ -235,7 +233,7 @@ String path=Environment.getExternalStorageDirectory()
                                 break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,getActivity());
+                                preferences.emailAttachement(f,getActivity(),"Health Care Proxy Agent");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();

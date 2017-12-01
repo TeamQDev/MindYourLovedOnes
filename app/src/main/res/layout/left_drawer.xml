@@ -300,6 +300,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlResources"
             android:background="@color/colorWhite"
+            android:visibility="gone"
             >
             <ImageView
                 android:id="@+id/imgMarketPlace"
@@ -335,6 +336,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlMarketPlace"
             android:background="@color/colorWhite"
+            android:visibility="gone"
             >
             <ImageView
                 android:id="@+id/imgVideos"

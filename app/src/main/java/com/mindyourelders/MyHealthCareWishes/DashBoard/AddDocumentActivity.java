@@ -530,11 +530,11 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                         urifile = Uri.fromFile(file);
                                     }
 
-                                    emailAttachement(urifile);
+                                    emailAttachement(urifile,txtFName.getText().toString());
                                 }
                                 else {
                                     Uri uris = Uri.parse(documentPath);
-                                    emailAttachement(uris);
+                                    emailAttachement(uris,txtFName.getText().toString());
                                 }
                        /* bluetoothAttachement(new File(item.getAbsolutePath()),
                                 context);
@@ -599,17 +599,26 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         new FaxCustomDialog(AddDocumentActivity.this, urlPath).show();;
     }
 
-    private void emailAttachement(Uri f) {
+    private void emailAttachement(Uri f, String s) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
                 new String[] { "" });
+        String name= preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                "MIND YOUR ELDERS"); // subject
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
-         // Uri uri=null;
+                name+"-"+s); // subject
+
+
+        String body="Hi, \n" +
+                "\n" +
+                "\n" +name+
+                " shared this document with you. Please check the attachment. \n" +
+                "\n" +
+                "Thanks,\n" +
+                "Mind Your Loved Ones - Support";
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -658,7 +667,6 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         Uri uri=null;
         // Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
             //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", outFile);
         } else {

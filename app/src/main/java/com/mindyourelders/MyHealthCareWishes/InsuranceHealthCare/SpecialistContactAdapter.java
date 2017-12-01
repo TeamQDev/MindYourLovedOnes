@@ -21,7 +21,7 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
  * Created by welcome on 9/13/2017.
  */
 
-class SpecialistContactAdapter extends BaseAdapter {
+public class SpecialistContactAdapter extends BaseAdapter {
     Context context;
     String[] specialist;
     LayoutInflater lf;

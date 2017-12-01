@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
+import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.webservice.CustomDialog;
 import com.mindyourelders.MyHealthCareWishes.webservice.WebService;
 
@@ -39,6 +41,7 @@ public class FaxCustomDialog extends Dialog implements
     private String from;
     private String subject;
     private Context context;
+    Preferences preferences;
 
     /**
      *
@@ -52,6 +55,7 @@ public class FaxCustomDialog extends Dialog implements
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         setContentView(R.layout.dialog_fax);
+        preferences=new Preferences(context);
         this.path = path;
         btn_ok = (TextView) findViewById(R.id.btnYes);
         btn_cancel = (TextView) findViewById(R.id.btnNo);
@@ -59,6 +63,17 @@ public class FaxCustomDialog extends Dialog implements
         editto = (EditText) findViewById(R.id.etTo);
         editfrom = (EditText) findViewById(R.id.etFrom);
         editsubject = (EditText) findViewById(R.id.etSubject);
+
+        int lastIndex = path.lastIndexOf("/");
+      //  int prevIndex = path.lastIndexOf("/", lastIndex);
+        String laststringa = path.substring(lastIndex+1).trim();
+        if (laststringa != null) {
+            editsubject.setText(preferences.getString(PrefConstants.CONNECTED_NAME)+"-"+laststringa);
+        }
+        else{
+            editsubject.setText("");
+        }
+
 
         // textmsg.setText(""+msg);
         btn_ok.setOnClickListener(this);

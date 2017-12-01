@@ -833,7 +833,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                                 break;
                             case 1://Email
                                 File f =new File(path);
-                                preferences.emailAttachement(f,getActivity());
+                                preferences.emailAttachement(f,getActivity(),"Medical Profile");
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();

@@ -173,7 +173,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                                 File f =new File(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Prescription.pdf");
-                                    emailAttachement(f);
+                                    emailAttachement(f,"Prescription");
 
                                 break;
                             case 2: // Fax
@@ -211,16 +211,26 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                 startActivity(Intent.createChooser(emailIntent, "Send file..."));
     }
 
-    private void emailAttachement(File f) {
+    private void emailAttachement(File f, String s) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
                 new String[] { "" });
+        String name= preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                "MIND YOUR ELDERS"); // subject
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
+                name+"-"+s); // subject
+
+
+        String body="Hi, \n" +
+                "\n" +
+                "\n" +name+
+                " shared this document with you. Please check the attachment. \n" +
+                "\n" +
+                "Thanks,\n" +
+                "Mind Your Loved Ones - Support";
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
 

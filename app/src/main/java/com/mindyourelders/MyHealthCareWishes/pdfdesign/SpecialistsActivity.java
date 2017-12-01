@@ -1,4 +1,4 @@
-package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
+package com.mindyourelders.MyHealthCareWishes.pdfdesign;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.SpecialistContactAdapter;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
@@ -28,7 +30,6 @@ import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
-import com.mindyourelders.MyHealthCareWishes.database.LivingQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
@@ -43,19 +44,18 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
-import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
+
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+
+
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -78,10 +78,9 @@ public class SpecialistsActivity extends AppCompatActivity {
     RelativeLayout header;
     TextView txtName;
    // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
-    final CharSequence[] dialog_items = {"View","Email","Fax" };
+    final CharSequence[] dialog_items = {"View","Email","Fax","Print" };
     Preferences preferences;
     DBHelper dbHelper;
-    final static String TARGET_BASE_PATH = "/sdcard/MYE/images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +120,8 @@ public class SpecialistsActivity extends AppCompatActivity {
                 header.setBackgroundResource(R.color.colorOne);
                 isEmergency=true;
                 isInsurance=false;
-                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE","ACTIVITIES OF DAILY LIVING", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
+                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
+                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
 
             }
             else if (from.equals("Insurance"))
@@ -167,8 +166,78 @@ public class SpecialistsActivity extends AppCompatActivity {
         DateQuery da=new DateQuery(context,dbHelper);
         InsuranceQuery i=new InsuranceQuery(context,dbHelper);
         PetQuery pet=new PetQuery(context,dbHelper);
-        EventNoteQuery e=new EventNoteQuery(context,dbHelper);
-        LivingQuery l=new LivingQuery(context,dbHelper);
+    }
+
+
+    final static String TARGET_BASE_PATH = "/sdcard/MYE/images/";
+
+    private void copyFilesToSdCard() {
+        copyFileOrDir(""); // copy all files in assets folder in my project
+    }
+
+    private void copyFileOrDir(String path) {
+        AssetManager assetManager = this.getAssets();
+        String assets[] = null;
+        try {
+            Log.i("tag", "copyFileOrDir() "+path);
+            assets = assetManager.list(path);
+            if (assets.length == 0) {
+                copyFile(path);
+            } else {
+                String fullPath =  TARGET_BASE_PATH + path;
+                Log.i("tag", "path="+fullPath);
+                File dir = new File(fullPath);
+                if (!dir.exists() && !path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
+                    if (!dir.mkdirs())
+                        Log.i("tag", "could not create dir "+fullPath);
+                for (int i = 0; i < assets.length; ++i) {
+                    String p;
+                    if (path.equals(""))
+                        p = "";
+                    else
+                        p = path + "/";
+
+                    if (!path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
+                        copyFileOrDir( p + assets[i]);
+                }
+            }
+        } catch (Exception ex) {
+            Log.e("tag", "I/O Exception", ex);
+        }
+    }
+
+    private void copyFile(String filename) {
+        AssetManager assetManager = this.getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        String newFileName = null;
+
+        try {
+            File dir = new File(TARGET_BASE_PATH);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            Log.i("tag", "copyFile() "+filename);
+            in = assetManager.open(filename);
+                           newFileName = TARGET_BASE_PATH + filename;
+            out = new FileOutputStream(newFileName);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", "Exception in copyFile() of "+newFileName);
+            Log.e("tag", "Exception in copyFile() "+e.toString());
+        }
+
     }
 
     private void initListener() {
@@ -194,18 +263,13 @@ public class SpecialistsActivity extends AppCompatActivity {
                         file.delete();
                     }
 
-                   /* new Header().createPdfHeader(file.getAbsolutePath(),
+                    new Header().createPdfHeader(file.getAbsolutePath(),
                             ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                     copyFile("ic_launcher.png");
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
-                    Header.addusereNameChank("Specialty Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(1);*/
-                   new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Specialty");
-
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                    Header.addusereNameChank("Specialty");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
 
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Hospital> HospitalList= HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -233,20 +297,14 @@ public class SpecialistsActivity extends AppCompatActivity {
                     if (file.exists()) {
                         file.delete();
                     }
-                   /* new Header().createPdfHeader(file.getAbsolutePath(),
+
+                    new Header().createPdfHeader(file.getAbsolutePath(),
                             ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                     copyFile("ic_launcher.png");
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Personal & Medical Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(1);*/
-
-                    new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Personal & Medical Profile");
-
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
-
+                    Header.addEmptyLine(1);
                     if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
@@ -264,19 +322,12 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);
 
-                    Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                    ArrayList<Living> LivingList=new ArrayList<Living>();
-                    LivingList.add(Live);
-                    new Individual(LivingList,1);
-
                     ArrayList<Emergency> emergencyList=MyConnectionsQuery.fetchAllEmergencyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
                     ArrayList<Proxy> proxyList=MyConnectionsQuery.fetchAllProxyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),3);
                     new Individual("Emergency",emergencyList);
                     new Individual(specialistsList,"Physician");
                     new Individual(proxyList);
-
-
 
                     Header.document.close();
 
@@ -293,10 +344,12 @@ public class SpecialistsActivity extends AppCompatActivity {
                     }
 
                     new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Insurance");
-
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                   // Header.addEmptyLine(2);
+                            ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                    copyFile("ic_launcher.png");
+                    Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                    Header.addEmptyLine(1);
+                    Header.addusereNameChank("Insurance");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
@@ -316,10 +369,12 @@ public class SpecialistsActivity extends AppCompatActivity {
                     }
 
                     new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Event And Appointment Checklist");
-
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                            ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                    copyFile("ic_launcher.png");
+                    Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                    Header.addEmptyLine(1);
+                    Header.addusereNameChank("Event And Appointment Checklist");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
 
                     ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -375,11 +430,9 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());
-                                        result.append(new MessageString().getLivingInfo());
                                         result.append(new MessageString().getEmergencyInfo());
                                         result.append(new MessageString().getPhysicianInfo());
                                         result.append(new MessageString().getProxyInfo());
-
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                                 + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
@@ -391,7 +444,6 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileProfile());
                                         result.append(new MessageString().getMedicalInfo());
-                                        result.append(new MessageString().getLivingInfo());
                                         result.append(new MessageString().getEmergencyInfo());
                                         result.append(new MessageString().getPhysicianInfo());
                                         result.append(new MessageString().getProxyInfo());
@@ -541,37 +593,4 @@ public class SpecialistsActivity extends AppCompatActivity {
         SpecialistContactAdapter adapter=new SpecialistContactAdapter(context,specialist,profile,isEmergency,isInsurance,from);
         listSpeciallist.setAdapter(adapter);
     }
-    private void copyFile(String filename) {
-        AssetManager assetManager = this.getAssets();
-
-        InputStream in = null;
-        OutputStream out = null;
-        String newFileName = null;
-
-        try {
-            File dir = new File(TARGET_BASE_PATH);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            Log.i("tag", "copyFile() " + filename);
-            in = assetManager.open(filename);
-            newFileName = TARGET_BASE_PATH + filename;
-            out = new FileOutputStream(newFileName);
-
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-        } catch (Exception e) {
-            Log.e("tag", "Exception in copyFile() of " + newFileName);
-            Log.e("tag", "Exception in copyFile() " + e.toString());
-        }
-
-    }
-    }
+}

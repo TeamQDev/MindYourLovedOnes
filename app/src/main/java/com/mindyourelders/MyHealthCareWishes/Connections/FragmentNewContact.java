@@ -5,9 +5,13 @@ import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -2780,6 +2784,7 @@ String location="";
                 imageUri = getActivity().getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, resultCameraImageCard);
                 dialog.dismiss();
@@ -3312,8 +3317,11 @@ String location="";
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                         getActivity().getContentResolver(), imageUri);
-                profileCard.setImageBitmap(thumbnail);
-                //  String imageurl = getRealPathFromURI(imageUri);
+
+                String imageurl = getRealPathFromURI(imageUri);
+                Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+                profileCard.setImageBitmap(bitmap);
+                //
                 rlCard.setVisibility(View.VISIBLE);
                 imgCard.setVisibility(View.VISIBLE);
                 txtCard.setVisibility(View.GONE);
@@ -3372,7 +3380,60 @@ String location="";
 
 
     }
+
+    private String getRealPathFromURI(Uri imageUri) {
+        String path = null;
+        String[] proj = { MediaStore.MediaColumns.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(imageUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
+    }
+
+    private Bitmap imageOreintationValidator(Bitmap bitmap, String path) {
+
+        ExifInterface ei;
+        try {
+            ei = new ExifInterface(path);
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    bitmap = rotateImage(bitmap, 270);
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
+    private Bitmap rotateImage(Bitmap source, float angle) {
+
+        Bitmap bitmap = null;
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        try {
+            bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true);
+        } catch (OutOfMemoryError err) {
+            err.printStackTrace();
+        }
+        return bitmap;
+    }
     public void callRelation(String relationship) {
         relation=relationship;
     }
+
 }
