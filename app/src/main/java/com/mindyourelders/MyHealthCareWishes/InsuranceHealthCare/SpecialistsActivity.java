@@ -50,12 +50,12 @@ import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.Specialty;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Specialty;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -194,15 +194,15 @@ public class SpecialistsActivity extends AppCompatActivity {
                         file.delete();
                     }
 
-                   /* new Header().createPdfHeader(file.getAbsolutePath(),
+                   new Header().createPdfHeader(file.getAbsolutePath(),
                             ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                     copyFile("ic_launcher.png");
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Specialty Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(1);*/
-                   new Header().createPdfHeader(file.getAbsolutePath(),
-                            "Specialty");
+                    Header.addEmptyLine(1);
+                  /* new Header().createPdfHeader(file.getAbsolutePath(),
+                            "Specialty");*/
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(2);
@@ -233,19 +233,19 @@ public class SpecialistsActivity extends AppCompatActivity {
                     if (file.exists()) {
                         file.delete();
                     }
-                   /* new Header().createPdfHeader(file.getAbsolutePath(),
+                    new Header().createPdfHeader(file.getAbsolutePath(),
                             ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                     copyFile("ic_launcher.png");
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Personal & Medical Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(1);*/
-
+                    Header.addEmptyLine(1);
+/*
                     new Header().createPdfHeader(file.getAbsolutePath(),
                             "Personal & Medical Profile");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                    Header.addEmptyLine(2);*/
 
                     if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -291,11 +291,17 @@ public class SpecialistsActivity extends AppCompatActivity {
                     if (file.exists()) {
                         file.delete();
                     }
-
                     new Header().createPdfHeader(file.getAbsolutePath(),
+                            ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                    copyFile("ic_launcher.png");
+                    Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                    Header.addEmptyLine(1);
+                    Header.addusereNameChank("Insurance");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
+                   /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Insurance");
 
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));*/
                    // Header.addEmptyLine(2);
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -314,12 +320,18 @@ public class SpecialistsActivity extends AppCompatActivity {
                     if (file.exists()) {
                         file.delete();
                     }
-
                     new Header().createPdfHeader(file.getAbsolutePath(),
+                            ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                    copyFile("ic_launcher.png");
+                    Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                    Header.addEmptyLine(1);
+                    Header.addusereNameChank("Event And Appointment Checklist");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
+                   /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Event And Appointment Checklist");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                    Header.addEmptyLine(2);*/
 
                     ArrayList<Appoint> AppointList= AppointmentQuery.fetchAllAppointmentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
