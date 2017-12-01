@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,16 +26,20 @@ import com.mindyourelders.MyHealthCareWishes.database.PrescriptionQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.PrescriptionPdf;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.PrescriptionPdf;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class PrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TARGET_BASE_PATH =  "/sdcard/MYE/images/";
     Context context=this;
     SwipeMenuListView lvPrescription;
    // ListView lvPrescription;
@@ -117,15 +123,22 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                 if (file.exists()) {
                     file.delete();
                 }
-
                 new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                copyFile("ic_launcher.png");
+                Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Prescription");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+               /* new Header().createPdfHeader(file.getAbsolutePath(),
                         "Prescription");
 
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                Header.addEmptyLine(2);
+                Header.addEmptyLine(2);*/
 
                 ArrayList<Prescription> prescriptionList= PrescriptionQuery.fetchAllPrescrptionRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-           //     ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),);
+
+                //     ArrayList<Dosage> DosageList= DosageQuery.fetchAllDosageRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),);
 
                 new PrescriptionPdf(prescriptionList);
 
@@ -297,5 +310,39 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
         super.onResume();
         getData();
         setPrescriptionData();
+    }
+
+    private void copyFile(String filename) {
+        AssetManager assetManager = this.getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        String newFileName = null;
+
+        try {
+            File dir = new File(TARGET_BASE_PATH);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            Log.i("tag", "copyFile() " + filename);
+            in = assetManager.open(filename);
+            newFileName = TARGET_BASE_PATH + filename;
+            out = new FileOutputStream(newFileName);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", "Exception in copyFile() of " + newFileName);
+            Log.e("tag", "Exception in copyFile() " + e.toString());
+        }
+
     }
 }

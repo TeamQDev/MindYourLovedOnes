@@ -20,6 +20,7 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AppointmentQuery;
+import com.mindyourelders.MyHealthCareWishes.database.CardQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
@@ -39,6 +40,7 @@ import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
+import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
@@ -169,6 +171,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         PetQuery pet=new PetQuery(context,dbHelper);
         EventNoteQuery e=new EventNoteQuery(context,dbHelper);
         LivingQuery l=new LivingQuery(context,dbHelper);
+        CardQuery c=new CardQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -305,8 +308,10 @@ public class SpecialistsActivity extends AppCompatActivity {
                    // Header.addEmptyLine(2);
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Card> CardList= CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                     new InsurancePdf(insuranceList);
+                    new InsurancePdf(CardList,1);
 
                     Header.document.close();
                 }
@@ -424,6 +429,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getInsuranceInfo());
+                                    result.append(new MessageString().getInsuranceCard());
 
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()

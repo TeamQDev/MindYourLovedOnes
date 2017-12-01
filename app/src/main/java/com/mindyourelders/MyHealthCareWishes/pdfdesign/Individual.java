@@ -19,7 +19,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 
 import java.util.ArrayList;
 
-import static com.mindyourelders.MyHealthCareWishes.pdfCreation.Individual.messageLiving;
+
 
 /**
  * Created by welcome on 11/1/2017.
@@ -53,6 +53,7 @@ public class Individual {
     public static ArrayList<String> messageEmergency = new ArrayList<String>();
     public static ArrayList<String> messagePhysician = new ArrayList<String>();
     public static ArrayList<String> messageProxy = new ArrayList<String>();
+    public static ArrayList<String> messageLiving = new ArrayList<String>();
 
 
     public Individual(RelativeConnection connection, ArrayList<Pet> Petlist) {

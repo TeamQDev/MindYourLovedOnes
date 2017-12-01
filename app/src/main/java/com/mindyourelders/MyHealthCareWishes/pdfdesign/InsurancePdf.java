@@ -7,6 +7,7 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
+import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class InsurancePdf {
     public static ArrayList<String> messageInsurance = new ArrayList<String>();
+    public static ArrayList<String> messageCard = new ArrayList<String>();
 
 
     public InsurancePdf(ArrayList<Insurance> insuranceList) {
@@ -188,6 +190,72 @@ public class InsurancePdf {
                 messageInsurance.add("Notes :");
                 messageInsurance.add(notes);
 
+            }
+
+
+            Header.document.add(table);
+            Paragraph p = new Paragraph(" ");
+            DottedLineSeparator line = new DottedLineSeparator();
+            line.setOffset(-4);
+            line.setLineColor(BaseColor.LIGHT_GRAY);
+            p.add(line);
+            Header.document.add(p);
+            Header.addEmptyLine(1);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public InsurancePdf(ArrayList<Card> cardList, int f) {
+        try {
+            PdfPTable table;
+            table = new PdfPTable(2);
+            PdfPCell cell;
+            table.setWidthPercentage(100);
+
+            Header.addEmptyLine(1);
+            Header.addChank("Insurance Card");
+            messageCard.add("Insurance Card");
+            Header.addEmptyLine(1);
+
+            for (int i = 0; i < cardList.size(); i++) {
+                cell = new PdfPCell(new Phrase("Insurance Card " + i + 1 + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageCard.add("Insurance Card " + i + 1 + " :");
+                messageCard.add("");
+
+                Card s = cardList.get(i);
+
+                String name = "";
+                if (s.getName() != null) {
+                    name = s.getName();
+                }
+                cell = new PdfPCell(new Phrase("Provider Name : " +name));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageCard.add("Provider Name : ");
+                messageCard.add(name);
+
+                String type = "";
+                if (s.getType() != null) {
+                    type = s.getType();
+                }
+                cell = new PdfPCell(new Phrase("Type: " +type));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageCard.add("Type :");
+                messageCard.add(type);
             }
 
 

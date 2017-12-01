@@ -7,10 +7,7 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
-import com.mindyourelders.MyHealthCareWishes.database.DosageQuery;
-import com.mindyourelders.MyHealthCareWishes.model.Dosage;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
-import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 
 import java.util.ArrayList;
 
@@ -35,6 +32,8 @@ public class PrescriptionPdf {
             messagePrescription.add("Prescription Tracker");
             Header.addEmptyLine(1);
 
+
+
             for (int i = 0; i < prescriptionList.size(); i++) {
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Prescription Tracker " + k + " :"));
@@ -47,6 +46,58 @@ public class PrescriptionPdf {
                 messagePrescription.add("");
 
                 Prescription s = prescriptionList.get(i);
+
+                String medicine = "";
+                if (s.getMedicine() != null) {
+                    medicine = s.getMedicine();
+                }
+                cell = new PdfPCell(new Phrase("Name of Medication or Supplement : " + medicine));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePrescription.add("Name of Medication or Supplement :");
+                messagePrescription.add(medicine);
+
+                String dosage = "";
+                if (s.getDose() != null) {
+                    dosage = s.getDose();
+                }
+                cell = new PdfPCell(new Phrase("Dosage : " + dosage));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePrescription.add("Dosage :");
+                messagePrescription.add(dosage);
+
+                String frequency = "";
+                if (s.getFrequency() != null) {
+                    frequency = s.getFrequency();
+                }
+                cell = new PdfPCell(new Phrase("Frequency : " + frequency));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePrescription.add("Frequency :");
+                messagePrescription.add(frequency);
+
+                String rx = "";
+                if (s.getRX() != null) {
+                    rx = s.getRX();
+                }
+                cell = new PdfPCell(new Phrase("RX# : " + rx));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePrescription.add("RX# :");
+                messagePrescription.add(rx);
 
                 String doctor = "";
                 if (s.getDoctor() != null) {
@@ -114,75 +165,15 @@ public class PrescriptionPdf {
                 messagePrescription.add(notes);
 
 
-                ArrayList<Dosage> DosageList = DosageQuery.fetchAllDosageRecord(prescriptionList.get(i).getUserid(), prescriptionList.get(i).getUnique());
-                for (int j = 0; j < DosageList.size(); j++) {
-                    k = j + 1;
-                    cell = new PdfPCell(new Phrase("Medicine and Dosage " + k + " :"));
-                    cell.setBorder(Rectangle.BOTTOM);
-                    cell.setUseBorderPadding(true);
-                    cell.setBorderWidthBottom(5);
-                    cell.setBorderColorBottom(BaseColor.WHITE);
-                    table.addCell(cell);
-                    messagePrescription.add("Medicine and Dosage " + k + " :");
-                    messagePrescription.add("");
-
-                    Dosage d = DosageList.get(j);
-
-                    String medicineName = "";
-                    if (d.getMedicine() != null) {
-                        medicineName = d.getMedicine();
-                    }
-                    cell = new PdfPCell(new Phrase("Medicine Name : " + medicineName));
-                    cell.setBorder(Rectangle.BOTTOM);
-                    cell.setUseBorderPadding(true);
-                    cell.setBorderWidthBottom(5);
-                    cell.setBorderColorBottom(BaseColor.WHITE);
-                    table.addCell(cell);
-                    messagePrescription.add("Medicine Name :");
-                    messagePrescription.add(medicineName);
-
-                    String RX = "";
-                    if (d.getRx() != null) {
-                        RX = d.getRx();
-                    }
-                    cell = new PdfPCell(new Phrase("RX : " + RX));
-                    cell.setBorder(Rectangle.BOTTOM);
-                    cell.setUseBorderPadding(true);
-                    cell.setBorderWidthBottom(5);
-                    cell.setBorderColorBottom(BaseColor.WHITE);
-                    table.addCell(cell);
-                    messagePrescription.add("RX :");
-                    messagePrescription.add(RX);
-
-                    String Dose = "";
-                    if (d.getDose() != null) {
-                        Dose = d.getDose();
-                    }
-                    cell = new PdfPCell(new Phrase("Dose : " + Dose));
-                    cell.setBorder(Rectangle.BOTTOM);
-                    cell.setUseBorderPadding(true);
-                    cell.setBorderWidthBottom(5);
-                    cell.setBorderColorBottom(BaseColor.WHITE);
-                    table.addCell(cell);
-                    messagePrescription.add("Dose :");
-                    messagePrescription.add(Dose);
-
-                    String frequency = "";
-                    if (d.getFrequency() != null) {
-                        frequency = d.getFrequency();
-                    }
-                    cell = new PdfPCell(new Phrase("Frequency : " + frequency));
-                    cell.setBorder(Rectangle.BOTTOM);
-                    cell.setUseBorderPadding(true);
-                    cell.setBorderWidthBottom(5);
-                    cell.setBorderColorBottom(BaseColor.WHITE);
-                    table.addCell(cell);
-                    messagePrescription.add("Frequency :");
-                    messagePrescription.add(frequency);
-
-
+              /*  ArrayList<PrescribeImage> imagelist=new ArrayList<>();
+                if (s.getPrescriptionImageList() != null) {
+                    imagelist =s.getPrescriptionImageList();
                 }
 
+                for(int j=0;j<imagelist.size();j++) {
+                   byte[] prphoto=imagelist.get(j).getImage();
+                }
+*/
             }
 
 

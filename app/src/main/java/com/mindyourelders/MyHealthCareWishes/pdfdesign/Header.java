@@ -195,7 +195,38 @@ public class Header {
         }
 
     }
+    public static void addPhoto(byte[] photo) {
+        Image image = null;
+        try {
+            // get input stream
+           /* InputStream ims = new FileInputStream(path);
+            Bitmap bmp = BitmapFactory.decodeStream(ims);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);*/
+            image = Image.getInstance(photo);
 
+            image.setAlignment(Element.ALIGN_RIGHT);
+            image.scaleAbsoluteHeight(30);
+            image.scaleAbsoluteWidth(15);
+            image.scalePercent(50);
+            image.setAbsolutePosition(50, 720);
+            image.scaleAbsolute(59f, 59f);
+            document.add(image);
+
+
+
+        } catch (BadElementException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (MalformedURLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+    }
     /**
      * add paragraph
      */

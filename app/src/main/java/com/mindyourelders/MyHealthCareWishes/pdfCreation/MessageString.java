@@ -1,6 +1,9 @@
 package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Specialty;
 
 /**
  * Created by welcome on 11/1/2017.
@@ -277,7 +280,24 @@ public class MessageString {
 
         return result;
     }
+    public StringBuffer getInsuranceCard() {
+        StringBuffer result = new StringBuffer();
+        if (com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf.messageCard.size() > 0) {
+            result.append(com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf.messageCard.get(0));
+            result.append("\n");
+            for (int i = 1; i < com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf.messageCard.size(); i++) {
 
+                result.append(com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf.messageCard.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
     public StringBuffer getAppointInfo() {
         StringBuffer result = new StringBuffer();
         if (EventPdf.messageAppoint.size() > 0) {
@@ -334,4 +354,6 @@ public class MessageString {
 
         return result;
     }
+
+
 }

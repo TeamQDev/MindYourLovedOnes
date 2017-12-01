@@ -22,11 +22,11 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
-import com.mindyourelders.MyHealthCareWishes.pdfCreation.InsurancePdf;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -213,10 +213,15 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
                 }
 
                 new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Insurance Information");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+               /* new Header().createPdfHeader(file.getAbsolutePath(),
                         "Insurance Information");
 
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                // Header.addEmptyLine(2);
+                // Header.addEmptyLine(2);*/
 
                 ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 new InsurancePdf(insuranceList);
