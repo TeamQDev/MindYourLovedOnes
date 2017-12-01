@@ -21,16 +21,17 @@
         android:visibility="gone"
         />
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lvDoc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/txtdocuments"
         android:scrollbars="none"
-        android:divider="@null"
+        android:dividerHeight="@dimen/dimension20dp"
+        android:divider="@color/colorLightGray"
         android:layout_above="@+id/llAddDoc"
         android:background="@color/colorLightBlue"
-        ></ListView>
+        ></com.baoyz.swipemenulistview.SwipeMenuListView>
 
     <RelativeLayout
         android:id="@+id/llAddDoc"

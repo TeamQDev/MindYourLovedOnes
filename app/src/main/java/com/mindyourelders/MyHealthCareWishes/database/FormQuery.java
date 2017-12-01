@@ -102,6 +102,26 @@ public class FormQuery {
         return true;
     }
 
+    public static Boolean updateDocumentData(int id, String name, int photo, String documentPath) {
+        boolean flag;
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+
+        ContentValues cv=new ContentValues();
+
+        cv.put(COL_NAME,name);
+        cv.put(COL_DOCUMENT,documentPath);
+        cv.put(COL_PHOTO,photo);
+        int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
+
+        if (rowid == 0) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+        return flag;
+    }
+
  /*   public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
