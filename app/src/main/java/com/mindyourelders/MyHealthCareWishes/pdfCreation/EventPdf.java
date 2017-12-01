@@ -1,13 +1,17 @@
 package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 
-import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.DateClass;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
-import com.mindyourelders.MyHealthCareWishes.utility.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 
 import java.util.ArrayList;
 
@@ -21,136 +25,190 @@ public class EventPdf {
     public static ArrayList<String> messageAppoint = new ArrayList<String>();
 
     public EventPdf(ArrayList<Appoint> appointList) {
-        Header.addChank("Appointment Checklist");
-        messageAppoint.add("Appointment Checklist");
-        Header.addEmptyLine(1);
+        try {
+            Header.addEmptyLine(1);
+            Header.addChank("Appointment Checklist");
+            messageAppoint.add("Appointment Checklist");
+            Header.addEmptyLine(1);
 
-        Header.widths[0] = 0.15f;
-        Header.widths[1] = 0.85f;
-        Header.table = new PdfPTable(Header.widths);
-        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            PdfPTable table;
+            table = new PdfPTable(2);
+            PdfPCell cell;
+            table.setWidthPercentage(100);
 
-        for (int i = 0; i < appointList.size(); i++) {
-            int k = i + 1;
-            Header.addTable("Appointment Checklist " + k + " :");
-            Header.addTable("");
-            messageAppoint.add("Appointment Checklist " + k + " :");
-            messageAppoint.add("");
-
-            Appoint s = appointList.get(i);
-
-            String speciality = "";
-            if (s.getType() != null) {
-                speciality = s.getType();
-            }
-            Header.addTable("Specialist or Type Test :");
-            Header.addTable(speciality);
-            messageAppoint.add("Specialist or Type Test :");
-            messageAppoint.add(speciality);
-
-            String name = "";
-            if (s.getDoctor() != null) {
-                name = s.getDoctor();
-            }
-            Header.addTable("Name of Doctor(if aplicable) :");
-            Header.addTable(name);
-            messageAppoint.add("Name of Doctor(if aplicable) :");
-            messageAppoint.add(name);
-
-            String frequency = "";
-            if (s.getFrequency() != null) {
-                frequency = s.getFrequency();
-            }
-            Header.addTable("Frequency :");
-            Header.addTable(frequency);
-            messageAppoint.add("Frequency :");
-            messageAppoint.add(frequency);
-
-            ArrayList<DateClass> datelist = DateQuery.fetchAllDosageRecord(appointList.get(i).getUserid(), appointList.get(i).getUnique());
-            for (int j = 0; j < datelist.size(); j++) {
-                k = j + 1;
-                Header.addTable("Date Completed" + k + " :");
-                Header.addTable("");
-                messageAppoint.add("Date Completed " + k + " :");
+            for (int i = 0; i < appointList.size(); i++) {
+                int k = i + 1;
+                cell = new PdfPCell(new Phrase("Appointment Checklist " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageAppoint.add("Appointment Checklist " + k + " :");
                 messageAppoint.add("");
 
-                DateClass d = datelist.get(j);
+                Appoint s = appointList.get(i);
 
-                String date = "";
-                if (d.getDate() != null) {
-                    date = d.getDate();
+                String speciality = "";
+                if (s.getType() != null) {
+                    speciality = s.getType();
                 }
-                Header.addTable("Date :");
-                Header.addTable(date);
-                messageAppoint.add("Date :");
-                messageAppoint.add(date);
+                cell = new PdfPCell(new Phrase("Specialist or Type Test : " + speciality));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageAppoint.add("Specialist or Type Test :");
+                messageAppoint.add(speciality);
+
+                String name = "";
+                if (s.getDoctor() != null) {
+                    name = s.getDoctor();
+                }
+                cell = new PdfPCell(new Phrase("Name of Doctor(if aplicable) : " + name));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageAppoint.add("Name of Doctor(if aplicable) :");
+                messageAppoint.add(name);
+
+                String frequency = "";
+                if (s.getFrequency() != null) {
+                    frequency = s.getFrequency();
+                }
+
+                cell = new PdfPCell(new Phrase("Frequency : " + frequency));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageAppoint.add("Frequency :");
+                messageAppoint.add(frequency);
+
+                ArrayList<DateClass> datelist = DateQuery.fetchAllDosageRecord(appointList.get(i).getUserid(), appointList.get(i).getUnique());
+                for (int j = 0; j < datelist.size(); j++) {
+                    k = j + 1;
+                    cell = new PdfPCell(new Phrase("Date Completed " + k + " :"));
+                    cell.setBorder(Rectangle.BOTTOM);
+                    cell.setUseBorderPadding(true);
+                    cell.setBorderWidthBottom(5);
+                    cell.setBorderColorBottom(BaseColor.WHITE);
+                    table.addCell(cell);
+                    messageAppoint.add("Date Completed " + k + " :");
+                    messageAppoint.add("");
+
+                    DateClass d = datelist.get(j);
+
+                    String date = "";
+                    if (d.getDate() != null) {
+                        date = d.getDate();
+                    }
+                    cell = new PdfPCell(new Phrase("Date : " + date));
+                    cell.setBorder(Rectangle.BOTTOM);
+                    cell.setUseBorderPadding(true);
+                    cell.setBorderWidthBottom(5);
+                    cell.setBorderColorBottom(BaseColor.WHITE);
+                    table.addCell(cell);
+                    messageAppoint.add("Date :");
+                    messageAppoint.add(date);
+
+                }
 
             }
 
-        }
 
+            Header.document.add(table);
 
-        Header.table.setWidthPercentage(100f);
-        try {
-
-            Header.document.add(Header.table);
-        } catch (DocumentException e) {
+            Paragraph p = new Paragraph(" ");
+            DottedLineSeparator line = new DottedLineSeparator();
+            line.setOffset(-4);
+            line.setLineColor(BaseColor.LIGHT_GRAY);
+            p.add(line);
+            Header.document.add(p);
+            Header.addEmptyLine(1);
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        Header.addEmptyLine(1);
     }
 
     public EventPdf(ArrayList<Note> noteList, int i) {
-
-        Header.addChank("Event Notes");
-        messageEvent.add("Event Notes");
-        Header.addEmptyLine(1);
-
-        Header.widths[0] = 0.15f;
-        Header.widths[1] = 0.85f;
-        Header.table = new PdfPTable(Header.widths);
-        Header.table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
-
-        for (i = 0; i < noteList.size(); i++) {
-            int k = i + 1;
-            Header.addTable("Event Notes " + k + " :");
-            Header.addTable("");
-            messageEvent.add("Event Notes " + k + " :");
-            messageEvent.add("");
-
-            Note s = noteList.get(i);
-
-            String name = "";
-            if (s.getTxtNote() != null) {
-                name = s.getTxtNote();
-            }
-            Header.addTable("Event Note :");
-            Header.addTable(name);
-            messageEvent.add("Event Note :");
-            messageEvent.add(name);
-
-
-            String noteDate = "";
-            if (s.getTxtDate() != null) {
-                noteDate = s.getTxtDate();
-            }
-            Header.addTable("Event Date :");
-            Header.addTable(noteDate);
-            messageEvent.add("Event Date :");
-            messageEvent.add(noteDate);
-
-        }
-        Header.table.setWidthPercentage(100f);
         try {
+            Header.addEmptyLine(1);
+            Header.addChank("Event Notes");
+            messageAppoint.add("Event Notes");
+            Header.addEmptyLine(1);
 
-            Header.document.add(Header.table);
-        } catch (DocumentException e) {
+            PdfPTable table;
+            table = new PdfPTable(2);
+            PdfPCell cell;
+            table.setWidthPercentage(100);
+
+
+            for (i = 0; i < noteList.size(); i++) {
+                int k = i + 1;
+                cell = new PdfPCell(new Phrase("Event Notes " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageEvent.add("Event Notes " + k + " :");
+                messageEvent.add("");
+
+                Note s = noteList.get(i);
+
+                String name = "";
+                if (s.getTxtNote() != null) {
+                    name = s.getTxtNote();
+                }
+                cell = new PdfPCell(new Phrase("Event Note : " + name));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageEvent.add("Event Note :");
+                messageEvent.add(name);
+
+
+                String noteDate = "";
+                if (s.getTxtDate() != null) {
+                    noteDate = s.getTxtDate();
+                }
+                cell = new PdfPCell(new Phrase("Event Date : " + noteDate));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageEvent.add("Event Date :");
+                messageEvent.add(noteDate);
+
+            }
+            Header.document.add(table);
+
+            Paragraph p = new Paragraph(" ");
+            DottedLineSeparator line = new DottedLineSeparator();
+            line.setOffset(-4);
+            line.setLineColor(BaseColor.LIGHT_GRAY);
+            p.add(line);
+            Header.document.add(p);
+            Header.addEmptyLine(1);
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
 
-        Header.addEmptyLine(1);
+        }
     }
 }

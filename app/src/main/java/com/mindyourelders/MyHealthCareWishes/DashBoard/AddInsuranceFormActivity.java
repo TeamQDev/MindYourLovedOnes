@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Form;
@@ -23,24 +25,26 @@ import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 
-public class AddInsuranceFormActivity extends AppCompatActivity  implements View.OnClickListener{
+public class AddInsuranceFormActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULTCODE = 200;
-    private static final int RQUESTCODE =400 ;
+    private static final int RQUESTCODE = 400;
     Context context = this;
-    ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
+    ImageView imgBack, imgDot, imgDone, imgDoc, imgAdd;
     TextView txtName;
     String From;
     Preferences preferences;
-    final CharSequence[] alert_items = { "SD Card", "Dropbox" };
-    final CharSequence[] dialog_items = {"View", "Email", "Fax" };
+    final CharSequence[] alert_items = {"SD Card", "Dropbox"};
+    final CharSequence[] dialog_items = {"View", "Email", "Fax"};
     Form document;
     DBHelper dbHelper;
-    String name="";
+    String name = "";
 
-    String documentPath="";
+    String documentPath = "";
     int photo;
-    String path="";
-    String Goto="";
+    String path = "";
+    String Goto = "";
+    int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgDoc = (ImageView) findViewById(R.id.imgDoc);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
-        txtName= (TextView) findViewById(R.id.txtName);
+        txtName = (TextView) findViewById(R.id.txtName);
         Intent i = getIntent();
         if (i.getExtras() != null) {
             Goto = i.getExtras().getString("GoTo");
@@ -82,6 +86,15 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
             documentPath = document.getDocument();
             imgDoc.setImageResource(document.getImage());
 
+        } else if (Goto.endsWith("Edit")) {
+            document = (Form) i.getExtras().getSerializable("FormObject");
+            txtName.setText(document.getName());
+            documentPath = document.getDocument();
+            imgDoc.setImageResource(document.getImage());
+            id = document.getId();
+            imgDot.setVisibility(View.GONE);
+            imgDone.setVisibility(View.VISIBLE);
+            imgAdd.setVisibility(View.VISIBLE);
         } else {
             imgDot.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
@@ -91,9 +104,9 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
     }
 
     private void initComponent() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        FormQuery d=new FormQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        FormQuery d = new FormQuery(context, dbHelper);
     }
 
     @Override
@@ -103,9 +116,8 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                 finish();
                 break;
             case R.id.imgDoc:
-                if (!documentPath.equals(""))
-                {
-                    Uri uris= Uri.parse(documentPath);
+                if (!documentPath.equals("")) {
+                    Uri uris = Uri.parse(documentPath);
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -118,117 +130,137 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
                     context.startActivity(intent);
 
 
-
-
                 }
 
                 break;
 
             case R.id.imgDone:
                 if (validate()) {
-                    Boolean flag = FormQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name,photo,documentPath);
-                    if (flag == true) {
-                        Toast.makeText(context, "You have added form successfully", Toast.LENGTH_SHORT).show();
-                        try
-                        {
-                            InputMethodManager inm= (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
-                            inm.hideSoftInputFromWindow(AddInsuranceFormActivity.this.getCurrentFocus().getWindowToken(),0);
-                        }catch (Exception e)
-                        {
-                            //Todo: handle exception
+                    if (Goto.equals("Edit")) {
+                        Boolean flag = FormQuery.updateDocumentData(id, name, photo, documentPath);
+                        if (flag == true) {
+                            Toast.makeText(context, "You have updated document successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                         }
-                        finish();
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        Boolean flag = FormQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, photo, documentPath);
+                        if (flag == true) {
+                            Toast.makeText(context, "You have added form successfully", Toast.LENGTH_SHORT).show();
+                            try {
+                                InputMethodManager inm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                                inm.hideSoftInputFromWindow(AddInsuranceFormActivity.this.getCurrentFocus().getWindowToken(), 0);
+                            } catch (Exception e) {
+                                //Todo: handle exception
+                            }
+
+                            finish();
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }
+                    break;
 
-                break;
+                    case R.id.imgAdd:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddInsuranceFormActivity.this);
 
-            case R.id.imgAdd:
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddInsuranceFormActivity.this);
+                        builder.setTitle("");
+                        builder.setItems(alert_items, new DialogInterface.OnClickListener() {
 
-                builder.setTitle("");
-                builder.setItems(alert_items, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int itemPos) {
 
-                    public void onClick(DialogInterface dialog, int itemPos) {
+                                switch (itemPos) {
+                                    case 0:
+                                        Intent i = new Intent(context, DocumentSdCardList.class);
+                                        startActivityForResult(i, RESULTCODE);
+                                        break;
+                                    case 1:
+                                        Intent intent = new Intent(context, DropboxLoginActivity.class);
+                                        intent.putExtra("FROM", "Document");
+                                        startActivityForResult(intent, RQUESTCODE);
+                                        break;
 
-                        switch (itemPos) {
-                            case 0:
-                                Intent i=new Intent(context,DocumentSdCardList.class);
-                                startActivityForResult(i,RESULTCODE);
-                                break;
-                            case 1:
-                                Intent intent=new Intent(context,DropboxLoginActivity.class);
-                                intent.putExtra("FROM","Document");
-                                startActivityForResult(intent,RQUESTCODE);
-                                break;
-
-                        }
-
-                    }
-
-                });
-
-                builder.create().show();
-
-                break;
-
-            case R.id.imgDot:
-
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-
-                alert.setTitle("");
-
-                alert.setItems(dialog_items, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int itemPos) {
-
-                        switch (itemPos) {
-                            case 0: //view
-                                Uri uris= Uri.parse(documentPath);
-                                Intent intent = new Intent();
-                                intent.setAction(Intent.ACTION_VIEW);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                    //  uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
-                                } else {
-                                    //  uri = Uri.fromFile(targetFile);
                                 }
-                                intent.setDataAndType(uris, "application/pdf");
-                                context.startActivity(intent);
-                                break;
-                            case 1: //email
-                                    Uri uris1 = Uri.parse(documentPath);
-                                    emailAttachement(uris1);
-                                break;
-                            case 2: // fax
 
-                                break;
+                            }
 
-                        }
-                    }
-                });
+                        });
 
-                alert.create().show();
-                // ((CarePlanActivity)context).CopyAssets();
-                break;
+                        builder.create().show();
 
+                        break;
+
+                    case R.id.imgDot:
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+                        alert.setTitle("");
+
+                        alert.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int itemPos) {
+
+                                switch (itemPos) {
+                                    case 0: //view
+                                        Uri uris = Uri.parse(documentPath);
+                                        Intent intent = new Intent();
+                                        intent.setAction(Intent.ACTION_VIEW);
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                            //  uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", targetFile);
+                                        } else {
+                                            //  uri = Uri.fromFile(targetFile);
+                                        }
+                                        intent.setDataAndType(uris, "application/pdf");
+                                        context.startActivity(intent);
+                                        break;
+                                    case 1: //email
+                                        Uri urisd = Uri.parse(documentPath);
+                                        emailAttachement(urisd, txtName.getText().toString());
+                                        break;
+                                    case 2: // fax
+                                        //Uri uri= Uri.parse(documentPath);
+                                        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + txtName.getText().toString();
+                                        new FaxCustomDialog(AddInsuranceFormActivity.this, path).show();
+                                        ;
+
+                                        break;
+
+                                }
+                            }
+                        });
+
+                        alert.create().show();
+                        // ((CarePlanActivity)context).CopyAssets();
+                        break;
+
+                }
         }
-        }
 
-    private void emailAttachement(Uri f) {
+
+    private void emailAttachement(Uri uris, String s) {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-                new String[] { "" });
+                new String[]{""});
+        String name = preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                "MIND YOUR ELDERS"); // subject
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, ""); // Body
-        // Uri uri=null;
+                name + "-" + s); // subject
+
+
+        String body = "Hi, \n" +
+                "\n" +
+                "\n" + name +
+                " shared this document with you. Please check the attachment. \n" +
+                "\n" +
+                "Thanks,\n" +
+                "Mind Your Loved Ones - Support";
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -237,7 +269,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
             // uri = Uri.fromFile(f);
         }
 
-        emailIntent.putExtra(Intent.EXTRA_STREAM, f);
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uris);
 
         emailIntent.setType("application/email");
 
@@ -245,13 +277,11 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
     }
 
     private boolean validate() {
-        photo=R.drawable.pdf;
-        name=txtName.getText().toString();
-        if (name.length()==0)
-        {
-            Toast.makeText(context,"Add Name of document",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        photo = R.drawable.pdf;
+        name = txtName.getText().toString();
+        if (name.length() == 0) {
+            Toast.makeText(context, "Add Name of document", Toast.LENGTH_SHORT).show();
+        } else {
             return true;
         }
         return false;
@@ -260,23 +290,20 @@ public class AddInsuranceFormActivity extends AppCompatActivity  implements View
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==RESULTCODE && data!=null)
-        {
-            name=data.getExtras().getString("Name");
-            documentPath=data.getExtras().getString("URI");
+        if (requestCode == RESULTCODE && data != null) {
+            name = data.getExtras().getString("Name");
+            documentPath = data.getExtras().getString("URI");
             txtName.setText(name);
-            String text="You Have selected <b>"+name +"</b> Document";
-            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            String text = "You Have selected <b>" + name + "</b> Document";
+            Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             imgDoc.setClickable(false);
             imgDoc.setImageResource(R.drawable.pdf);
-        }
-        else  if (requestCode==RQUESTCODE && data!=null)
-        {
-            name=data.getExtras().getString("Name");
-            documentPath=data.getExtras().getString("URI");
+        } else if (requestCode == RQUESTCODE && data != null) {
+            name = data.getExtras().getString("Name");
+            documentPath = data.getExtras().getString("URI");
             txtName.setText(name);
-            String text="You Have selected <b>"+name +"</b> Document";
-            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            String text = "You Have selected <b>" + name + "</b> Document";
+            Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             imgDoc.setImageResource(R.drawable.pdf);
             imgDoc.setClickable(false);
 

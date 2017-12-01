@@ -51,13 +51,13 @@ public class DocumentsAdapter extends BaseAdapter {
 
         if (convertView==null)
         {
-           convertView=lf.inflate(R.layout.row_care_plan,parent,false);
+           convertView=lf.inflate(R.layout.row_care_plan_new,parent,false);
            holder=new ViewHolder();
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
             holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
-            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
-
+            holder.imgForword= (ImageView) convertView.findViewById(R.id.imgNext);
+            holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);
         }
         else{
@@ -67,7 +67,7 @@ public class DocumentsAdapter extends BaseAdapter {
         holder.txtDocHeader.setText(documentList.get(position).getName());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
         holder.txtDocTime.setVisibility(View.GONE);
-        convertView.setOnClickListener(new View.OnClickListener() {
+        holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(context,AddInsuranceFormActivity.class);
@@ -84,7 +84,24 @@ public class DocumentsAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,AddInsuranceFormActivity.class);
+                i.putExtra("GoTo","Edit");
+                i.putExtra("Path","Yes");
+               /* if (position>3)
+                {
 
+                }
+                else
+                {
+                    i.putExtra("Path","No");
+                }*/
+                i.putExtra("FormObject",documentList.get(position));
+                context.startActivity(i);
+            }
+        });
 
      /*convertView.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -103,6 +120,6 @@ public class DocumentsAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView txtDocHeader, txtDocDesc,txtDocTime;
-        ImageView imgDocType,imgForword;
+        ImageView imgDocType,imgForword,imgEdit;
     }
 }

@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
@@ -22,6 +24,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Form;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 
 public class FragementForm extends Fragment implements View.OnClickListener {
     View rootview;
-    ListView lvDoc;
+    SwipeMenuListView lvDoc;
     ArrayList<Form> documentList;
     ArrayList<Document> documentListOld;
     ImageView imgBack;
@@ -79,8 +82,34 @@ public class FragementForm extends Fragment implements View.OnClickListener {
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddDoc = (RelativeLayout) rootview.findViewById(R.id.llAddDoc);
-        lvDoc = (ListView) rootview.findViewById(R.id.lvDoc);
+        lvDoc = (SwipeMenuListView) rootview.findViewById(R.id.lvDoc);
+        lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuCreation s=new SwipeMenuCreation();
+        SwipeMenuCreator creator=s.createSingleMenu(getActivity());
+        lvDoc.setMenuCreator(creator);
+        lvDoc.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Form item = documentList.get(position);
+                switch (index) {
+                    case 0:
+                        // delete
+                        deleteDocument(item);
+                        break;
+                }
+                return true;
+            }
+        });
         setListData();
+    }
+
+    private void deleteDocument(Form item) {
+        boolean flag = FormQuery.deleteRecord(item.getId());
+        if (flag == true) {
+            Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
+            getData();
+            setListData();
+        }
     }
 
     private void deleteInsurance(Insurance item) {
