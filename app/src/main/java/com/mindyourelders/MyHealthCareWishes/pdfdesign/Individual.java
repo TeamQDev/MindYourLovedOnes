@@ -401,6 +401,124 @@ public class Individual {
 
             }
 
+            String live="";
+            if (connection.getLive() != null) {
+                live = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Do you live alone? : " + live));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Do you live alone? :");
+            messageInfo.add(live);
+
+            String children="";
+            if (connection.getChildren() != null) {
+                children = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Children : " + children));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Children :");
+            messageInfo.add(children);
+
+            String friend="";
+            if (connection.getFriend() != null) {
+                friend = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Friend : " + friend));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Friend :");
+            messageInfo.add(friend);
+
+            String grandParents="";
+            if (connection.getGrand() != null) {
+                grandParents = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("GrandParents : " + grandParents));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("GrandParents :");
+            messageInfo.add(grandParents);
+
+
+            String parents="";
+            if (connection.getParents() != null) {
+                parents = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Parents : " + parents));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Parents :");
+            messageInfo.add(parents);
+
+
+            String spouse="";
+            if (connection.getParents() != null) {
+                spouse = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Spouse : " + spouse));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Spouse :");
+            messageInfo.add(spouse);
+
+
+
+            String significant="";
+            if (connection.getSign_other() != null) {
+                significant = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Significant Other : " + significant));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo.add("Significant Other :");
+            messageInfo.add(significant);
+
+
+
+
+/*            String organDonor = "";
+            if (medInfo.getDonor() != null) {
+                organDonor = medInfo.getDonor();
+            }
+            cell = new PdfPCell(new Phrase("Organ Donor : " + organDonor));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Organ Donor :");
+            messageInfo3.add(organDonor);*/
           /*  if (connection.get == null) {
                 oPhone = "";
             }
@@ -567,6 +685,108 @@ public class Individual {
 
             messageInfo2.add("Eyes :");
             messageInfo2.add(eyes);
+
+            String live="";
+            if (connection.getLive() != null) {
+                live = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Do you live alone? : " + live));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Do you live alone? :");
+            messageInfo2.add(live);
+
+            String children="";
+            if (connection.getChildren() != null) {
+                children = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Children : " + children));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Children :");
+            messageInfo2.add(children);
+
+            String friend="";
+            if (connection.getFriend() != null) {
+                friend = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Friend : " + friend));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Friend :");
+            messageInfo2.add(friend);
+
+            String grandParents="";
+            if (connection.getGrand() != null) {
+                grandParents = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("GrandParents : " + grandParents));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("GrandParents :");
+            messageInfo2.add(grandParents);
+
+
+            String parents="";
+            if (connection.getParents() != null) {
+                parents = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Parents : " + parents));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Parents :");
+            messageInfo2.add(parents);
+
+
+            String spouse="";
+            if (connection.getParents() != null) {
+                spouse = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Spouse : " + spouse));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Spouse :");
+            messageInfo2.add(spouse);
+
+
+
+            String significant="";
+            if (connection.getSign_other() != null) {
+                significant = connection.getPet();
+            }
+            cell = new PdfPCell(new Phrase("Significant Other : " + significant));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Significant Other :");
+            messageInfo2.add(significant);
 
             if (connection.getWeight() != null) {
                 employedBy = connection.getWeight();
