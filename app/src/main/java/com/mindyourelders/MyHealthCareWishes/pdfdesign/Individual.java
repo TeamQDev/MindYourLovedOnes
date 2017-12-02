@@ -1379,7 +1379,7 @@ public class Individual {
 
     }
 
-    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<History> historList, ArrayList<String> hospitalList) {
+    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<History> historList, ArrayList<String> hospitalList, ArrayList<String> conditionList) {
         try {
             Header.addEmptyLine(1);
             String preNote = "";
@@ -1403,17 +1403,34 @@ public class Individual {
             PdfPCell cell;
             table.setWidthPercentage(100);
 
+            for (int i = 0; i < conditionList.size(); i++) {
+                int k = i + 1;
+
+
+                cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions " + k + " :"+ conditionList.get(i)));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Pre Existing Medical Conditions " + k + " :");
+                messageInfo3.add(conditionList.get(i));
+
+
+
+            }
             if (medInfo.getNote() != null) {
                 preNote = medInfo.getNote();
             }
-            cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions : " + preNote));
+            cell = new PdfPCell(new Phrase("Medical Condition Note : " + preNote));
             cell.setBorder(Rectangle.BOTTOM);
             cell.setUseBorderPadding(true);
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo3.add("Pre Existing Medical Conditions :");
+            messageInfo3.add("Medical Condition Note :");
             messageInfo3.add(preNote);
 
             cell = new PdfPCell(new Phrase("Vision : " + ""));
@@ -1422,7 +1439,6 @@ public class Individual {
             cell.setBorderWidthBottom(5);
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
-
             messageInfo3.add("Vision :");
             messageInfo3.add("");
 

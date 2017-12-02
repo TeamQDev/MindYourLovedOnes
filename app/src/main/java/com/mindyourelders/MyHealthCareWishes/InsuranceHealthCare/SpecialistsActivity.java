@@ -31,6 +31,7 @@ import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.database.LivingQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
+import com.mindyourelders.MyHealthCareWishes.database.MedicalConditionQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
@@ -265,8 +266,9 @@ public class SpecialistsActivity extends AppCompatActivity {
                     final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    final ArrayList<String> conditionList= MedicalConditionQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
-                    new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);
+                    new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList);
 
                     Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Living> LivingList=new ArrayList<Living>();
