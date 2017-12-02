@@ -43,6 +43,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
+import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Living;
@@ -262,7 +263,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                     // new MessageString().getProfileProfile(connection);
                     final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                    final ArrayList<String> historList = HistoryQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                     new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList);

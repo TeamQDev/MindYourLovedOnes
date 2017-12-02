@@ -9,6 +9,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
+import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
@@ -1378,7 +1379,7 @@ public class Individual {
 
     }
 
-    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<String> historList, ArrayList<String> hospitalList) {
+    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<History> historList, ArrayList<String> hospitalList) {
         try {
             Header.addEmptyLine(1);
             String preNote = "";
@@ -1869,7 +1870,7 @@ public class Individual {
                 messageInfo3.add("Surgical History " + k + " :");
                 messageInfo3.add("");
 
-                cell = new PdfPCell(new Phrase("History : " + historList.get(i)));
+                cell = new PdfPCell(new Phrase("History : " + historList.get(i).getName()));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
@@ -1877,7 +1878,39 @@ public class Individual {
                 table.addCell(cell);
 
                 messageInfo3.add("History :");
-                messageInfo3.add(historList.get(i));
+                messageInfo3.add(historList.get(i).getName());
+
+                cell = new PdfPCell(new Phrase("Date : " + historList.get(i).getDate()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Date :");
+                messageInfo3.add(historList.get(i).getDate());
+
+
+                cell = new PdfPCell(new Phrase("Doctor : " + historList.get(i).getDoctor()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Doctor :");
+                messageInfo3.add(historList.get(i).getDoctor());
+
+
+                cell = new PdfPCell(new Phrase("Done At : " + historList.get(i).getDone()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Done At :");
+                messageInfo3.add(historList.get(i).getDone());
 
 
             }
