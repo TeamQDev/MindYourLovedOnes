@@ -2382,7 +2382,7 @@ String location="";
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
 
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior,otherRelation,"", "", "", "", "", "", "", "", "", "", "", "",photoCard, "");
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior,otherRelation,"", "", "", "", "", "", "", "", "", "", "", "",photoCard, "", "", "", "", "", "", "", "", "");
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated emergency contact successfully",Toast.LENGTH_SHORT).show();
@@ -2425,7 +2425,7 @@ String location="";
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox,otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", photoCard, "");
+                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox,otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", photoCard, "", "", "", "", "", "", "", "", "");
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated proxy contact successfully",Toast.LENGTH_SHORT).show();

@@ -5,6 +5,80 @@ package com.mindyourelders.MyHealthCareWishes.model;
  */
 
 public class RelativeConnection {
+
+    String live="";
+    String children="";
+    String friend="";
+
+    public String getLive() {
+        return live;
+    }
+
+    public void setLive(String live) {
+        this.live = live;
+    }
+
+    public String getChildren() {
+        return children;
+    }
+
+    public void setChildren(String children) {
+        this.children = children;
+    }
+
+    public String getFriend() {
+        return friend;
+    }
+
+    public void setFriend(String friend) {
+        this.friend = friend;
+    }
+
+    public String getGrand() {
+        return grand;
+    }
+
+    public void setGrand(String grand) {
+        this.grand = grand;
+    }
+
+    public String getParents() {
+        return parents;
+    }
+
+    public void setParents(String parents) {
+        this.parents = parents;
+    }
+
+    public String getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(String spouse) {
+        this.spouse = spouse;
+    }
+
+    public String getSign_other() {
+        return sign_other;
+    }
+
+    public void setSign_other(String sign_other) {
+        this.sign_other = sign_other;
+    }
+
+    public String getOther_person() {
+        return other_person;
+    }
+
+    public void setOther_person(String other_person) {
+        this.other_person = other_person;
+    }
+
+    String grand="";
+    String parents="";
+    String spouse="";
+    String sign_other="";
+    String other_person="";
     int id;
     String email="";
     String mobile="";

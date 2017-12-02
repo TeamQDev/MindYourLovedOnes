@@ -75,7 +75,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  * Created by welcome on 9/14/2017.
  */
 
-public class FragmentIndividualContact extends Fragment implements View.OnClickListener{
+public class FragmentIndividualContact extends Fragment implements View.OnClickListener,CompoundButton.OnCheckedChangeListener{
     private static final int REQUEST_CARD = 50;
     ContentValues values;
     Uri imageUri;
@@ -86,6 +86,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
     TextInputLayout tilOtherRelation,tilId,tilOther;
+
     RelativeLayout rlPet,rlLive;
     String name="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
     String height="",weight="",profession="",employed="",religion="",idnumber="";
@@ -99,7 +100,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     RadioGroup rgPet,rgVeteran,rgUnderstand,rgLive;
     RadioButton rbYes,rbNo,rbYesPet,rbNoPet,rbYess,rbNoo,rbYesLive,rbNoLive;
     public static final int REQUEST_PET= 400;
-    CheckBox chkOther;
+    CheckBox chkOther,chkChild,chkFriend,chkGrandParent,chkParent,chkSpouse;
+    String child="No",friend="No",grandParent="No",parent="No",spouse="No",other="No";
+    String liveOther="";
     
     ListView ListPet;
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
@@ -164,6 +167,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtGender.setOnClickListener(this);
         imgAddpet.setOnClickListener(this);
         imgRight.setOnClickListener(this);
+        chkChild.setOnCheckedChangeListener(this);
+        chkFriend.setOnCheckedChangeListener(this);
+        chkGrandParent.setOnCheckedChangeListener(this);
+        chkParent.setOnCheckedChangeListener(this);
+        chkSpouse.setOnCheckedChangeListener(this);
     }
 
     private void initUI() {
@@ -182,6 +190,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             }
         });
         chkOther= (CheckBox) rootview.findViewById(R.id.chkOther);
+
+
+        chkChild= (CheckBox) rootview.findViewById(R.id.chkChild);
+        chkFriend= (CheckBox) rootview.findViewById(R.id.chkFriend);
+        chkGrandParent= (CheckBox) rootview.findViewById(R.id.chkGrandParent);
+        chkParent= (CheckBox) rootview.findViewById(R.id.chkParent);
+        chkSpouse= (CheckBox) rootview.findViewById(R.id.chkSpouse);
+
         ListPet= (ListView) rootview.findViewById(R.id.ListPet);
         imgProfile = (ImageView) rootview.findViewById(R.id.imgProfile);
         imgCard= (ImageView) rootview.findViewById(R.id.imgCard);
@@ -275,12 +291,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked==true) {
                     tilOther.setVisibility(View.VISIBLE);
+                    other="Yes";
 
                 } else if (isChecked==false) {
                     tilOther.setVisibility(View.GONE);
+                    other="No";
                 }
             }
         });
+
         rgPet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -314,6 +333,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (checkedId == R.id.rbYesLive) {
                     live = "Yes";
                     rlLive.setVisibility(View.GONE);
+                    child="No";friend="No";grandParent="No";parent="No";spouse="No";other="No";
+                    liveOther="";
+                    chkChild.setChecked(false);
+                    chkFriend.setChecked(false);
+                    chkGrandParent.setChecked(false);
+                    chkParent.setChecked(false);
+                    chkSpouse.setChecked(false);
+                    chkOther.setChecked(false);
                 } else if (checkedId == R.id.rbNoLive) {
                     live = "No";
                     rlLive.setVisibility(View.VISIBLE);
@@ -494,6 +521,88 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 txtEmail.setText(personalInfo.getEmail());
                 txtAddress.setText(personalInfo.getAddress());
                 txtHomePhone.setText(personalInfo.getHomePhone());
+                txtOther.setText(personalInfo.getOther_person());
+             /*   if (personalInfo.getLive() != null) {
+                    if (personalInfo.getLive().equals("Yes")) {
+                        rbYes.setChecked(true);
+
+                    } else if (personalInfo.getLive().equals("No")) {
+                        rbNo.setChecked(true);
+                        live = "No";
+                        rlLive.setVisibility(View.VISIBLE);
+                    }
+                }*/
+                if (personalInfo.getLive()!=null) {
+                    if (personalInfo.getLive().equals("Yes")) {
+                        rbYesLive.setChecked(true);
+                        rbNoLive.setChecked(false);
+                        live = "Yes";
+                        rlLive.setVisibility(View.GONE);
+                    } else {
+                        rbYesLive.setChecked(false);
+                        rbNoLive.setChecked(true);
+                        live = "No";
+                        rlLive.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (personalInfo.getChildren() != null) {
+                    if (personalInfo.getChildren().equals("Yes")) {
+                        chkChild.setChecked(true);
+                        child = "Yes";
+                    } else if (personalInfo.getChildren().equals("No")) {
+                        chkChild.setChecked(false);
+                        child = "No";
+                    }
+                }
+                if (personalInfo.getFriend() != null) {
+                    if (personalInfo.getFriend().equals("Yes")) {
+                        chkFriend.setChecked(true);
+                        friend = "Yes";
+                    } else if (personalInfo.getFriend().equals("No")) {
+                        chkFriend.setChecked(false);
+                        friend = "No";
+                    }
+                }
+
+                if (personalInfo.getGrand() != null) {
+                    if (personalInfo.getGrand().equals("Yes")) {
+                        chkGrandParent.setChecked(true);
+                        grandParent = "Yes";
+                    } else if (personalInfo.getGrand().equals("No")) {
+                        chkGrandParent.setChecked(false);
+                        grandParent = "No";
+                    }
+                }
+                if (personalInfo.getParents() != null) {
+                    if (personalInfo.getParents().equals("Yes")) {
+                        chkParent.setChecked(true);
+                        parent = "Yes";
+                    } else if (personalInfo.getParents().equals("No")) {
+                        chkParent.setChecked(false);
+                        parent = "No";
+                    }
+                }
+                if (personalInfo.getSpouse() != null) {
+                    if (personalInfo.getSpouse().equals("Yes")) {
+                        chkSpouse.setChecked(true);
+                        spouse = "Yes";
+                    } else if (personalInfo.getSpouse().equals("No")) {
+                        chkSpouse.setChecked(false);
+                        spouse = "No";
+                    }
+                }
+                if (personalInfo.getSign_other() != null) {
+                    if (personalInfo.getSign_other().equals("Yes")) {
+                        chkOther.setChecked(true);
+                        other = "Yes";
+                        tilOther.setVisibility(View.VISIBLE);
+                    } else if (personalInfo.getSign_other().equals("No")) {
+                        chkOther.setChecked(false);
+                        other = "No";
+                        tilOther.setVisibility(View.GONE);
+                    }
+                }
+
 /*
                 if (personalInfo.getCountry()!=null) {
                     int index = 0;
@@ -614,6 +723,91 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         }
                     }
                     spinnerRelation.setSelection(index+1);
+
+                txtOther.setText(connection.getOther_person());
+             /*   if (personalInfo.getLive() != null) {
+                    if (personalInfo.getLive().equals("Yes")) {
+                        rbYes.setChecked(true);
+
+                    } else if (personalInfo.getLive().equals("No")) {
+                        rbNo.setChecked(true);
+                        live = "No";
+                        rlLive.setVisibility(View.VISIBLE);
+                    }
+                }*/
+                if (connection.getLive()!=null) {
+                    if (connection.getLive().equals("Yes")) {
+                        rbYesLive.setChecked(true);
+                        rbNoLive.setChecked(false);
+                        live = "Yes";
+                        rlLive.setVisibility(View.GONE);
+                    } else {
+                        rbYesLive.setChecked(false);
+                        rbNoLive.setChecked(true);
+                        live = "No";
+                        rlLive.setVisibility(View.VISIBLE);
+                    }
+                }
+                if (connection.getChildren() != null) {
+                    if (connection.getChildren().equals("Yes")) {
+                        chkChild.setChecked(true);
+                        child = "Yes";
+                    } else if (connection.getChildren().equals("No")) {
+                        chkChild.setChecked(false);
+                        child = "No";
+                    }
+                }
+                if (connection.getFriend() != null) {
+                    if (connection.getFriend().equals("Yes")) {
+                        chkFriend.setChecked(true);
+                        friend = "Yes";
+                    } else if (connection.getFriend().equals("No")) {
+                        chkFriend.setChecked(false);
+                        friend = "No";
+                    }
+                }
+
+                if (connection.getGrand() != null) {
+                    if (connection.getGrand().equals("Yes")) {
+                        chkGrandParent.setChecked(true);
+                        grandParent = "Yes";
+                    } else if (connection.getGrand().equals("No")) {
+                        chkGrandParent.setChecked(false);
+                        grandParent = "No";
+                    }
+                }
+                if (connection.getParents() != null) {
+                    if (connection.getParents().equals("Yes")) {
+                        chkParent.setChecked(true);
+                        parent = "Yes";
+                    } else if (connection.getParents().equals("No")) {
+                        chkParent.setChecked(false);
+                        parent = "No";
+                    }
+                }
+                if (connection.getSpouse() != null) {
+                    if (connection.getSpouse().equals("Yes")) {
+                        chkSpouse.setChecked(true);
+                        spouse = "Yes";
+                    } else if (connection.getSpouse().equals("No")) {
+                        chkSpouse.setChecked(false);
+                        spouse = "No";
+                    }
+                }
+                if (connection.getSign_other() != null) {
+                    if (connection.getSign_other().equals("Yes")) {
+                        chkOther.setChecked(true);
+                        other = "Yes";
+                        tilOther.setVisibility(View.VISIBLE);
+                    } else if (connection.getSign_other().equals("No")) {
+                        chkOther.setChecked(false);
+                        other = "No";
+                        tilOther.setVisibility(View.GONE);
+                    }
+                }
+
+
+
                 byte[] photo=connection.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                 imgProfile.setImageBitmap(bmp);
@@ -714,7 +908,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
             case R.id.imgDone:
 
-                    Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                 byte[] photo = baos.toByteArray();
@@ -729,10 +923,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     photoCard = null;
                 }
 
-
                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 hideSoftKeyboard();
@@ -1071,7 +1264,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         marital_status=MaritalList[i3-1];
 
 
-
+        liveOther=txtOther.getText().toString();
         idnumber=txtIdNumber.getText().toString();
         height=txtHeight.getText().toString();
         weight=txtWeight.getText().toString();
@@ -1146,6 +1339,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         employed=txtEmployed.getText().toString();
         manager_phone=txttelephone.getText().toString();
         religion=txtReligion.getText().toString();
+        liveOther=txtOther.getText().toString();
 
         int indexValue = spinnerEyes.getSelectedItemPosition();
         if (indexValue!=0)
@@ -1199,7 +1393,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void editToConnection(byte[] photo, byte[] photoCard) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard,english);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -1209,7 +1403,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard, english);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard, english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -1466,6 +1660,46 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
         else{
             ListPet.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        switch (compoundButton.getId()) {
+            case R.id.chkChild:
+                if (isChecked == true)
+                    child = "Yes";
+                else
+                    child = "No";
+                break;
+
+            case R.id.chkFriend:
+                if (isChecked == true)
+                    friend = "Yes";
+                else
+                    friend = "No";
+                break;
+
+            case R.id.chkGrandParent:
+                if (isChecked == true)
+                    grandParent = "Yes";
+                else
+                    grandParent = "No";
+                break;
+
+            case R.id.chkParent:
+                if (isChecked == true)
+                    parent = "Yes";
+                else
+                    parent = "No";
+                break;
+            case R.id.chkSpouse:
+                if (isChecked == true)
+                    spouse = "Yes";
+                else
+                    spouse = "No";
+                break;
+
         }
     }
 }

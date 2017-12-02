@@ -51,6 +51,14 @@ public class MyConnectionsQuery {
     public static final String COL_PHOTOCARD= "PhotoCard";
     public static final String COL_ENGLISH= "English";
 
+    public static final String COL_CHILD= "child";
+    public static final String COL_FRIEND= "friend";
+    public static final String COL_GRAND= "grandparent";
+    public static final String COL_PARENT= "parent";
+    public static final String COL_SPOUSE= "spouse";
+    public static final String COL_OTHER_SIGN= "significant_other";
+    public static final String COL_OTHER= "other";
+    public static final String COL_LIVE= "Living";
 
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -64,6 +72,8 @@ public class MyConnectionsQuery {
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
                 COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" BLOB,"+
+                COL_CHILD+" VARCHAR(10),"+COL_FRIEND+" VARCHAR(10),"+COL_GRAND+" VARCHAR(10),"+COL_PARENT+" VARCHAR(10),"+COL_SPOUSE+" VARCHAR(10),"+
+                COL_OTHER_SIGN+" VARCHAR(20),"+COL_OTHER+" VARCHAR(20),"+COL_LIVE+" VARCHAR(20),"+
                 COL_PHOTO+" BLOB,"+COL_ENGLISH+" VARCHAR(10));";
         return createTableQuery;
     }
@@ -145,6 +155,15 @@ public class MyConnectionsQuery {
                     connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
                     connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
+                    connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
+                    connection.setFriend(c.getString(c.getColumnIndex(COL_FRIEND)));
+
+                    connection.setGrand(c.getString(c.getColumnIndex(COL_GRAND)));
+                    connection.setParents(c.getString(c.getColumnIndex(COL_PARENT)));
+                    connection.setSpouse(c.getString(c.getColumnIndex(COL_SPOUSE)));
+                    connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
+                    connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
+                    connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
 
                     connectionList.add(connection);
                 } while (c.moveToNext());
@@ -204,6 +223,15 @@ public class MyConnectionsQuery {
                 connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
                 connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
+                connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
+                connection.setFriend(c.getString(c.getColumnIndex(COL_FRIEND)));
+
+                connection.setGrand(c.getString(c.getColumnIndex(COL_GRAND)));
+                connection.setParents(c.getString(c.getColumnIndex(COL_PARENT)));
+                connection.setSpouse(c.getString(c.getColumnIndex(COL_SPOUSE)));
+                connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
+                connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
+                connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
             } while (c.moveToNext());
         }
 
@@ -211,7 +239,7 @@ public class MyConnectionsQuery {
     }
 
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard, String english) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -245,6 +273,14 @@ public class MyConnectionsQuery {
         cv.put(COL_PHOTOCARD,photoCard);
         cv.put(COL_ENGLISH,english);
 
+        cv.put(COL_CHILD,child);
+        cv.put(COL_FRIEND,friend);
+        cv.put(COL_GRAND,grandParent);
+        cv.put(COL_PARENT,parent);
+        cv.put(COL_SPOUSE,spouse);
+        cv.put(COL_OTHER_SIGN,other);
+        cv.put(COL_OTHER,liveOther);
+        cv.put(COL_LIVE,live);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
