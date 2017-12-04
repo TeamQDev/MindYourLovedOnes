@@ -96,7 +96,7 @@
             android:layout_marginLeft="@dimen/dimension5dp"
             android:layout_marginRight="@dimen/dimension1dp"
             android:layout_marginBottom="@dimen/dimension5dp"
-            android:src="@drawable/g_one" />
+            android:src="@drawable/family" />
         </LinearLayout>
 
         <LinearLayout

@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(AllergyQuery.createAllergyTable());
 
         //Implants Table
-        db.execSQL(MedicalImplantsQuery.createImplantsTable());
+        db.execSQL(MedicalImplantsQuery.createVaccineTable());
         db.execSQL(MedicalConditionQuery.createImplantsTable());
 
 
@@ -69,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(FormQuery.createDocumentTable());
         db.execSQL(VaccineQuery.createVaccineTable());
         db.execSQL(LivingQuery.createLivingTable());
+        db.execSQL(ImplantQuery.createVaccineTable());
     }
 
     @Override
@@ -121,6 +122,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(FormQuery.dropTable());
         db.execSQL(VaccineQuery.dropTable());
         db.execSQL(LivingQuery.dropTable());
+        db.execSQL(ImplantQuery.dropTable());
         onCreate(db);
     }
 }

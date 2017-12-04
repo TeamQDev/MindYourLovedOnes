@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by welcome on 9/25/2017.
  */
 
-public class MedicalImplantsQuery {
+public class ImplantQuery {
     Context context;
     static DBHelper dbHelper;
 
@@ -25,7 +25,7 @@ public class MedicalImplantsQuery {
     public static final String COL_DATE = "Date";
 
 
-    public MedicalImplantsQuery(Context context, DBHelper dbHelper) {
+    public ImplantQuery(Context context, DBHelper dbHelper) {
         this.context = context;
         this.dbHelper = dbHelper;
     }

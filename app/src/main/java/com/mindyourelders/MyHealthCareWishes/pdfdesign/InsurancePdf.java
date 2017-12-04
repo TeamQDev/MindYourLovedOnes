@@ -1,6 +1,8 @@
 package com.mindyourelders.MyHealthCareWishes.pdfdesign;
 
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -256,6 +258,51 @@ public class InsurancePdf {
                 table.addCell(cell);
                 messageCard.add("Type :");
                 messageCard.add(type);
+
+
+                byte[] IMG1 = s.getImgFront();
+
+                Image img1 = Image.getInstance(IMG1);
+                img1.scaleAbsolute(500,500);
+                img1.setBorder(Rectangle.BOX);
+                img1.setBorderColor(BaseColor.DARK_GRAY);
+
+                PdfPTable table1;
+                table1 = new PdfPTable(1);
+                table1.setWidthPercentage(100);
+
+                PdfPCell cell1 = new PdfPCell();
+                cell1.setBorder(Rectangle.NO_BORDER);
+                cell1.addElement(img1);
+                cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                table1.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+                table1.addCell(cell1);
+
+                Header.document.add(table1);
+
+                Header.addEmptyLine(1);
+
+                byte[] IMG2 = s.getImgBack();
+
+                Image img2 = Image.getInstance(IMG2);
+                img2.scaleAbsolute(500,500);
+                img2.setBorder(Rectangle.BOX);
+                img2.setBorderColor(BaseColor.DARK_GRAY);
+
+                PdfPTable table2;
+                table2 = new PdfPTable(1);
+                table2.setWidthPercentage(100);
+
+                PdfPCell cell2 = new PdfPCell();
+                cell2.setBorder(Rectangle.NO_BORDER);
+                cell2.addElement(img1);
+                cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                table2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+                table2.addCell(cell2);
+
+                Header.document.add(table2);
+
+                Header.addEmptyLine(1);
             }
 
 

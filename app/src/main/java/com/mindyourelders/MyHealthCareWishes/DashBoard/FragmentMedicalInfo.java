@@ -41,12 +41,13 @@ import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.VaccineQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
+import com.mindyourelders.MyHealthCareWishes.model.Implant;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
-import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -480,7 +481,60 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     }
 
     private void setImplantData() {
-        final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        final ArrayList allergyList = new ArrayList();
+        final ArrayList<Implant> AllargyLists = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+        if (AllargyLists.size() != 0) {
+            ListImplants.setVisibility(View.VISIBLE);
+            for (int i = 0; i < AllargyLists.size(); i++) {
+                Implant a = AllargyLists.get(i);
+                String allergy = "Implant: " + a.getName() + "\nDate: " + a.getDate();
+                allergyList.add(allergy);
+            }
+            if (allergyList.size() != 0) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, allergyList);
+                ListImplants.setAdapter(adapter);
+                ListImplants.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        ImageView imgEdit= (ImageView) view.findViewById(R.id.imgEdit);
+                        ImageView imgDelete= (ImageView) view.findViewById(R.id.imgDelete);
+                        imgEdit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Implant a=AllargyLists.get(position);
+                                Intent allergyIntent = new Intent(getActivity(), AddInfoActivity.class);
+                                allergyIntent.putExtra("IsAllergy", false);
+                                allergyIntent.putExtra("IsHistory", false);
+                                allergyIntent.putExtra("IsImplant", true);
+                                allergyIntent.putExtra("ADD", "ImplantUpdate");
+                                allergyIntent.putExtra("Title", "Update Medical Implant");
+                                allergyIntent.putExtra("Name", "Update Medical Implant");
+                                allergyIntent.putExtra("ImplantObject",a);
+                                startActivityForResult(allergyIntent, REQUEST_IMPLANTS);
+                            }
+                        });
+
+                        imgDelete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Implant a=AllargyLists.get(position);
+                                boolean flag= MedicalImplantsQuery.deleteRecord(a.getId());
+                                if(flag==true)
+                                {
+                                    Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+                                    setImplantData();
+                                    ListImplants.requestFocus();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        else{
+            ListImplants.setVisibility(View.GONE);
+        }
+       /* final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
         if (implantsList.size() != 0) {
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_medicalinfo, R.id.txtInfo, implantsList);
@@ -522,7 +576,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             });
         } else {
             ListImplants.setVisibility(View.GONE);
-        }
+        }*/
     }
 
     private void setHistoryData() {
@@ -663,11 +717,11 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                             @Override
                             public void onClick(View v) {
                                 Vaccine a=AllargyLists.get(position);
-                                boolean flag= AllergyQuery.deleteRecord(a.getId());
+                                boolean flag= VaccineQuery.deleteRecord(a.getId());
                                 if(flag==true)
                                 {
                                     Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
-                                    setAllergyData();
+                                    setVaccineData();
                                     ListVaccine.requestFocus();
                                 }
                             }
@@ -808,12 +862,14 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 Header.addEmptyLine(2);*/
 
                 final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                final ArrayList<Implant> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 final ArrayList<String> conditionList=MedicalConditionQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                final ArrayList<Vaccine> vaccineList= VaccineQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
-                new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList);
+
+                new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList,vaccineList);
 
                 Header.document.close();
 

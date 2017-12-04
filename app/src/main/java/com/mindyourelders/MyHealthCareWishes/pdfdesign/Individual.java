@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.History;
+import com.mindyourelders.MyHealthCareWishes.model.Implant;
 import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.MedInfo;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
@@ -17,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
+import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 
 import java.util.ArrayList;
 
@@ -139,6 +141,8 @@ public class Individual {
             messageInfo.add("Home Phone :");
             messageInfo.add(hPhone);
 
+
+
             if (connection.getHeight() != null) {
                 height = connection.getHeight();
             }
@@ -178,8 +182,8 @@ public class Individual {
             messageInfo.add("Eyes :");
             messageInfo.add(eyes);
 
-            if (connection.getWeight() != null) {
-                employedBy = connection.getWeight();
+            if (connection.getEmployed() != null) {
+                employedBy = connection.getEmployed();
             }
             cell = new PdfPCell(new Phrase("Employed By : " + employedBy));
             cell.setBorder(Rectangle.BOTTOM);
@@ -403,7 +407,7 @@ public class Individual {
 
             String live="";
             if (connection.getLive() != null) {
-                live = connection.getPet();
+                live = connection.getLive();
             }
             cell = new PdfPCell(new Phrase("Do you live alone? : " + live));
             cell.setBorder(Rectangle.BOTTOM);
@@ -412,12 +416,12 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Do you live alone? :");
-            messageInfo.add(live);
+            messageInfo2.add("Do you live alone? :");
+            messageInfo2.add(live);
 
             String children="";
             if (connection.getChildren() != null) {
-                children = connection.getPet();
+                children = connection.getChildren();
             }
             cell = new PdfPCell(new Phrase("Children : " + children));
             cell.setBorder(Rectangle.BOTTOM);
@@ -426,12 +430,12 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Children :");
-            messageInfo.add(children);
+            messageInfo2.add("Children :");
+            messageInfo2.add(children);
 
             String friend="";
             if (connection.getFriend() != null) {
-                friend = connection.getPet();
+                friend = connection.getFriend();
             }
             cell = new PdfPCell(new Phrase("Friend : " + friend));
             cell.setBorder(Rectangle.BOTTOM);
@@ -440,12 +444,12 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Friend :");
-            messageInfo.add(friend);
+            messageInfo2.add("Friend :");
+            messageInfo2.add(friend);
 
             String grandParents="";
             if (connection.getGrand() != null) {
-                grandParents = connection.getPet();
+                grandParents = connection.getGrand();
             }
             cell = new PdfPCell(new Phrase("GrandParents : " + grandParents));
             cell.setBorder(Rectangle.BOTTOM);
@@ -454,13 +458,13 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("GrandParents :");
-            messageInfo.add(grandParents);
+            messageInfo2.add("GrandParents :");
+            messageInfo2.add(grandParents);
 
 
             String parents="";
             if (connection.getParents() != null) {
-                parents = connection.getPet();
+                parents = connection.getParents();
             }
             cell = new PdfPCell(new Phrase("Parents : " + parents));
             cell.setBorder(Rectangle.BOTTOM);
@@ -469,13 +473,13 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Parents :");
-            messageInfo.add(parents);
+            messageInfo2.add("Parents :");
+            messageInfo2.add(parents);
 
 
             String spouse="";
-            if (connection.getParents() != null) {
-                spouse = connection.getPet();
+            if (connection.getSpouse() != null) {
+                spouse = connection.getSpouse();
             }
             cell = new PdfPCell(new Phrase("Spouse : " + spouse));
             cell.setBorder(Rectangle.BOTTOM);
@@ -484,14 +488,14 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Spouse :");
-            messageInfo.add(spouse);
+            messageInfo2.add("Spouse :");
+            messageInfo2.add(spouse);
 
 
 
             String significant="";
             if (connection.getSign_other() != null) {
-                significant = connection.getPet();
+                significant = connection.getSign_other();
             }
             cell = new PdfPCell(new Phrase("Significant Other : " + significant));
             cell.setBorder(Rectangle.BOTTOM);
@@ -500,10 +504,37 @@ public class Individual {
             cell.setBorderColorBottom(BaseColor.WHITE);
             table.addCell(cell);
 
-            messageInfo.add("Significant Other :");
-            messageInfo.add(significant);
+            messageInfo2.add("Significant Other :");
+            messageInfo2.add(significant);
 
 
+            String other="";
+            if (connection.getOther_person() != null) {
+                other = connection.getOther_person();
+            }
+            cell = new PdfPCell(new Phrase("Other : " + other));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Other :");
+            messageInfo2.add(other);
+
+            String english="";
+            if (connection.getEnglish() != null) {
+                english = connection.getEnglish();
+            }
+            cell = new PdfPCell(new Phrase("Understand English : " + english));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Understand English :");
+            messageInfo2.add(english);
 
 
 /*            String organDonor = "";
@@ -634,6 +665,32 @@ public class Individual {
             messageInfo2.add("Home Phone :");
             messageInfo2.add(hPhone);
 
+            String bdate="";
+            if (connection.getDob() != null) {
+                bdate = connection.getDob();
+            }
+            cell = new PdfPCell(new Phrase("Birth Date : " + bdate));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+            messageInfo2.add("Birth Date :");
+            messageInfo2.add(bdate);
+
+            if (connection.getGender() != null) {
+                gender = connection.getGender();
+            }
+            cell = new PdfPCell(new Phrase("Gender : " + gender));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Gender :");
+            messageInfo2.add(gender);
+
             if (connection.getGender() != null) {
                 gender = connection.getGender();
             }
@@ -688,7 +745,7 @@ public class Individual {
 
             String live="";
             if (connection.getLive() != null) {
-                live = connection.getPet();
+                live = connection.getLive();
             }
             cell = new PdfPCell(new Phrase("Do you live alone? : " + live));
             cell.setBorder(Rectangle.BOTTOM);
@@ -702,7 +759,7 @@ public class Individual {
 
             String children="";
             if (connection.getChildren() != null) {
-                children = connection.getPet();
+                children = connection.getChildren();
             }
             cell = new PdfPCell(new Phrase("Children : " + children));
             cell.setBorder(Rectangle.BOTTOM);
@@ -716,7 +773,7 @@ public class Individual {
 
             String friend="";
             if (connection.getFriend() != null) {
-                friend = connection.getPet();
+                friend = connection.getFriend();
             }
             cell = new PdfPCell(new Phrase("Friend : " + friend));
             cell.setBorder(Rectangle.BOTTOM);
@@ -730,7 +787,7 @@ public class Individual {
 
             String grandParents="";
             if (connection.getGrand() != null) {
-                grandParents = connection.getPet();
+                grandParents = connection.getGrand();
             }
             cell = new PdfPCell(new Phrase("GrandParents : " + grandParents));
             cell.setBorder(Rectangle.BOTTOM);
@@ -745,7 +802,7 @@ public class Individual {
 
             String parents="";
             if (connection.getParents() != null) {
-                parents = connection.getPet();
+                parents = connection.getParents();
             }
             cell = new PdfPCell(new Phrase("Parents : " + parents));
             cell.setBorder(Rectangle.BOTTOM);
@@ -759,8 +816,8 @@ public class Individual {
 
 
             String spouse="";
-            if (connection.getParents() != null) {
-                spouse = connection.getPet();
+            if (connection.getSpouse() != null) {
+                spouse = connection.getSpouse();
             }
             cell = new PdfPCell(new Phrase("Spouse : " + spouse));
             cell.setBorder(Rectangle.BOTTOM);
@@ -776,7 +833,7 @@ public class Individual {
 
             String significant="";
             if (connection.getSign_other() != null) {
-                significant = connection.getPet();
+                significant = connection.getSign_other();
             }
             cell = new PdfPCell(new Phrase("Significant Other : " + significant));
             cell.setBorder(Rectangle.BOTTOM);
@@ -788,8 +845,35 @@ public class Individual {
             messageInfo2.add("Significant Other :");
             messageInfo2.add(significant);
 
-            if (connection.getWeight() != null) {
-                employedBy = connection.getWeight();
+            String other="";
+            if (connection.getOther_person() != null) {
+                other = connection.getOther_person();
+            }
+            cell = new PdfPCell(new Phrase("Other : " + other));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Other :");
+            messageInfo2.add(other);
+            String english="";
+            if (connection.getEnglish() != null) {
+                english = connection.getEnglish();
+            }
+            cell = new PdfPCell(new Phrase("Understand English : " + english));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo2.add("Understand English :");
+            messageInfo2.add(english);
+
+            if (connection.getEmployed() != null) {
+                employedBy = connection.getEmployed();
             }
             cell = new PdfPCell(new Phrase("Employed By : " + employedBy));
             cell.setBorder(Rectangle.BOTTOM);
@@ -1599,7 +1683,7 @@ public class Individual {
 
     }
 
-    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<String> implantsList, ArrayList<History> historList, ArrayList<String> hospitalList, ArrayList<String> conditionList) {
+    public Individual(MedInfo medInfo, ArrayList<Allergy> allargyLists, ArrayList<Implant> implantsList, ArrayList<History> historList, ArrayList<String> hospitalList, ArrayList<String> conditionList, ArrayList<Vaccine> vaccineList) {
         try {
             Header.addEmptyLine(1);
             String preNote = "";
@@ -1623,6 +1707,16 @@ public class Individual {
             PdfPCell cell;
             table.setWidthPercentage(100);
 
+
+            cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions " + ":"));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Pre Existing Medical Conditions " + ":");
+            messageInfo3.add("");
             for (int i = 0; i < conditionList.size(); i++) {
                 int k = i + 1;
 
@@ -2041,15 +2135,67 @@ public class Individual {
                 messageInfo3.add("");
 
 
-                cell = new PdfPCell(new Phrase("Implants : " + implantsList.get(i)));
+                cell = new PdfPCell(new Phrase("Implants : " + implantsList.get(i).getName()));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageInfo3.add("Implants :");
-                messageInfo3.add(implantsList.get(i));
+                messageInfo3.add(implantsList.get(i).getName());
+
+                cell = new PdfPCell(new Phrase("Date : " + implantsList.get(i).getDate()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Date :");
+                messageInfo3.add(implantsList.get(i).getDate());
             }
+
+            // String Implants="";
+            cell = new PdfPCell(new Phrase("Immunizations/Vaccines :" + ""));
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setUseBorderPadding(true);
+            cell.setBorderWidthBottom(5);
+            cell.setBorderColorBottom(BaseColor.WHITE);
+            table.addCell(cell);
+
+            messageInfo3.add("Immunizations/Vaccines :");
+            messageInfo3.add("");
+
+            for (int i = 0; i < vaccineList.size(); i++) {
+                int k = i + 1;
+                cell = new PdfPCell(new Phrase("Immunizations/Vaccines " + k + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Immunizations/Vaccines " + k + " :");
+                messageInfo3.add("");
+
+
+                cell = new PdfPCell(new Phrase("Immunization/Vaccine : " + vaccineList.get(i).getName()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Immunization/Vaccine :");
+                messageInfo3.add(vaccineList.get(i).getName());
+
+                cell = new PdfPCell(new Phrase("Date : " + vaccineList.get(i).getDate()));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("Date :");
+                messageInfo3.add(vaccineList.get(i).getDate());
+            }
+
 
             cell = new PdfPCell(new Phrase("Preferred Hospital - " + ""));
             cell.setBorder(Rectangle.BOTTOM);

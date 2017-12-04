@@ -1,18 +1,21 @@
 package com.mindyourelders.MyHealthCareWishes.pdfdesign;
 
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
+import com.mindyourelders.MyHealthCareWishes.model.PrescribeImage;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 
 import java.util.ArrayList;
 
 /**
- * Created by welcome on 11/7/2017.
+ * Edited by nikita on 04/11/2017.
  */
 
 
@@ -22,34 +25,26 @@ public class PrescriptionPdf {
 
     public PrescriptionPdf(ArrayList<Prescription> prescriptionList) {
         try {
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
-
             Header.addEmptyLine(1);
             Header.addChank("Prescription Tracker");
             messagePrescription.add("Prescription Tracker");
             Header.addEmptyLine(1);
 
-
-
             for (int i = 0; i < prescriptionList.size(); i++) {
                 int k = i + 1;
-                cell = new PdfPCell(new Phrase("Prescription Tracker " + k + " :"));
-                cell.setBorder(Rectangle.BOTTOM);
-                cell.setUseBorderPadding(true);
-                cell.setBorderWidthBottom(5);
-                cell.setBorderColorBottom(BaseColor.WHITE);
-                table.addCell(cell);
-                messagePrescription.add("Prescription Tracker " + k + " :");
-                messagePrescription.add("");
+                Header.addEmptyLine(1);
+                Header.addChank("Prescription Tracker " + k + " : ");
+                messagePrescription.add("Prescription Tracker " + k + " : ");
+                Header.addEmptyLine(1);
 
-                Prescription s = prescriptionList.get(i);
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
 
                 String medicine = "";
-                if (s.getMedicine() != null) {
-                    medicine = s.getMedicine();
+                if (prescriptionList.get(i).getMedicine() != null) {
+                    medicine = prescriptionList.get(i).getMedicine();
                 }
                 cell = new PdfPCell(new Phrase("Name of Medication or Supplement : " + medicine));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -61,8 +56,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(medicine);
 
                 String dosage = "";
-                if (s.getDose() != null) {
-                    dosage = s.getDose();
+                if (prescriptionList.get(i).getDose() != null) {
+                    dosage = prescriptionList.get(i).getDose();
                 }
                 cell = new PdfPCell(new Phrase("Dosage : " + dosage));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -74,8 +69,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(dosage);
 
                 String frequency = "";
-                if (s.getFrequency() != null) {
-                    frequency = s.getFrequency();
+                if (prescriptionList.get(i).getFrequency() != null) {
+                    frequency = prescriptionList.get(i).getFrequency();
                 }
                 cell = new PdfPCell(new Phrase("Frequency : " + frequency));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -87,8 +82,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(frequency);
 
                 String rx = "";
-                if (s.getRX() != null) {
-                    rx = s.getRX();
+                if (prescriptionList.get(i).getRX() != null) {
+                    rx = prescriptionList.get(i).getRX();
                 }
                 cell = new PdfPCell(new Phrase("RX# : " + rx));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -100,8 +95,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(rx);
 
                 String doctor = "";
-                if (s.getDoctor() != null) {
-                    doctor = s.getDoctor();
+                if (prescriptionList.get(i).getDoctor() != null) {
+                    doctor = prescriptionList.get(i).getDoctor();
                 }
                 cell = new PdfPCell(new Phrase("Prescribing Doctor : " + doctor));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -113,8 +108,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(doctor);
 
                 String counter = "";
-                if (s.getPre() != null) {
-                    counter = s.getPre();
+                if (prescriptionList.get(i).getPre() != null) {
+                    counter = prescriptionList.get(i).getPre();
                 }
                 cell = new PdfPCell(new Phrase("Over-the-counter : " + counter));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -126,8 +121,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(counter);
 
                 String date = "";
-                if (s.getDates() != null) {
-                    date = s.getDates();
+                if (prescriptionList.get(i).getDates() != null) {
+                    date = prescriptionList.get(i).getDates();
                 }
                 cell = new PdfPCell(new Phrase("Date of Prescription : " + date));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -139,8 +134,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(date);
 
                 String treatment = "";
-                if (s.getPurpose() != null) {
-                    treatment = s.getPurpose();
+                if (prescriptionList.get(i).getPurpose() != null) {
+                    treatment = prescriptionList.get(i).getPurpose();
                 }
                 cell = new PdfPCell(new Phrase("Treatment For : " + treatment));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -152,8 +147,8 @@ public class PrescriptionPdf {
                 messagePrescription.add(treatment);
 
                 String notes = "";
-                if (s.getNote() != null) {
-                    notes = s.getNote();
+                if (prescriptionList.get(i).getNote() != null) {
+                    notes = prescriptionList.get(i).getNote();
                 }
                 cell = new PdfPCell(new Phrase("Notes : " + notes));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -164,27 +159,53 @@ public class PrescriptionPdf {
                 messagePrescription.add("Notes :");
                 messagePrescription.add(notes);
 
+                Header.document.add(table);
 
-              /*  ArrayList<PrescribeImage> imagelist=new ArrayList<>();
-                if (s.getPrescriptionImageList() != null) {
-                    imagelist =s.getPrescriptionImageList();
+                Header.addEmptyLine(1);
+
+                ArrayList<PrescribeImage> imagelist = new ArrayList<PrescribeImage>();
+                if (prescriptionList.get(i).getPrescriptionImageList() != null) {
+                    imagelist = prescriptionList.get(i).getPrescriptionImageList();
+
+                    for (int j = 0; j < imagelist.size(); j++) {
+
+                        byte[] IMG1 = imagelist.get(j).getImage();
+
+                        Image img1 = Image.getInstance(IMG1);
+                        img1.scaleAbsolute(500,500);
+                        img1.setBorder(Rectangle.BOX);
+                        img1.setBorderColor(BaseColor.DARK_GRAY);
+
+                        PdfPTable table1;
+                        table1 = new PdfPTable(1);
+                        table1.setWidthPercentage(100);
+
+                        PdfPCell cell1 = new PdfPCell();
+                        cell1.setBorder(Rectangle.NO_BORDER);
+                        cell1.addElement(img1);
+                        cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                        table1.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+                        table1.addCell(cell1);
+
+                        Header.document.add(table1);
+
+                        Header.addEmptyLine(1);
+                    }
+
+
                 }
 
-                for(int j=0;j<imagelist.size();j++) {
-                   byte[] prphoto=imagelist.get(j).getImage();
-                }
-*/
+
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
             }
 
 
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
-            Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

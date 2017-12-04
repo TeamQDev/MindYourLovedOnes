@@ -38,6 +38,7 @@ import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
+import com.mindyourelders.MyHealthCareWishes.database.VaccineQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
@@ -46,6 +47,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
+import com.mindyourelders.MyHealthCareWishes.model.Implant;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
@@ -53,6 +55,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
+import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
@@ -174,6 +177,8 @@ public class SpecialistsActivity extends AppCompatActivity {
         EventNoteQuery e=new EventNoteQuery(context,dbHelper);
         LivingQuery l=new LivingQuery(context,dbHelper);
         CardQuery c=new CardQuery(context,dbHelper);
+        MedicalConditionQuery mu=new MedicalConditionQuery(context,dbHelper);
+        VaccineQuery v=new VaccineQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -263,12 +268,14 @@ public class SpecialistsActivity extends AppCompatActivity {
                     }
                     // new MessageString().getProfileProfile(connection);
                     final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                    final ArrayList<String> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    final ArrayList<Implant> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<String> hospitalList = HospitalQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<String> conditionList= MedicalConditionQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    final ArrayList<Vaccine> vaccineList= VaccineQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
-                    new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList);
+
+                    new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList,vaccineList);
 
                     Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Living> LivingList=new ArrayList<Living>();

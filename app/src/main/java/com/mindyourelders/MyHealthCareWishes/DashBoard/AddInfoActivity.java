@@ -26,6 +26,7 @@ import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.VaccineQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.History;
+import com.mindyourelders.MyHealthCareWishes.model.Implant;
 import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
@@ -171,9 +172,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     break;
 
                 case "ImplantUpdate":
-                    String value= i.getExtras().getString("ImplantObject");
-                    txtName.setText(value);
-                    data=value;
+                    Implant implant= (Implant) i.getExtras().getSerializable("ImplantObject");
+                    txtName.setText(implant.getName());
+                    txtDate.setText(implant.getDate());
+                    id=implant.getId();
                     break;
 
                 case "VaccineUpdate":
@@ -456,16 +458,17 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             finish();
                             break;
                         case "Implants":
-                            Boolean flag1 = MedicalImplantsQuery.insertImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
-                            if (flag1 == true) {
-                                Toast.makeText(context, "Implants Added Succesfully", Toast.LENGTH_SHORT).show();
+                            String dater=txtDate.getText().toString();
+                            Boolean flage = MedicalImplantsQuery.insertImplantData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,dater);
+                            if (flage == true) {
+                                Toast.makeText(context, "Implant Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                             }
 
-                            Intent intentImplants = new Intent();
-                           // intentImplants.putExtra("Value", value);
-                            setResult(RESULT_IMPLANTS, intentImplants);
+                            Intent intentVaccines = new Intent();
+                            // intentImplants.putExtra("Value", value);
+                            setResult(RESULT_IMPLANTS, intentVaccines);
                             finish();
                             break;
 
@@ -500,16 +503,17 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             break;
 
                         case "ImplantUpdate":
-                            Boolean flag1s = MedicalImplantsQuery.updateImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
-                            if (flag1s == true) {
-                                Toast.makeText(context, "Implants updated Succesfully", Toast.LENGTH_SHORT).show();
+                            String datee=txtDate.getText().toString();
+                            Boolean flagw= MedicalImplantsQuery.updateImplantData(id,value,datee);
+                            if (flagw == true) {
+                                Toast.makeText(context, "Implant Updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                             }
 
-                            Intent intentImplant = new Intent();
+                            Intent intentVacciney = new Intent();
                             // intentImplants.putExtra("Value", value);
-                            setResult(RESULT_IMPLANTS, intentImplant);
+                            setResult(RESULT_IMPLANTS, intentVacciney);
                             finish();
                             break;
                         case "Condition":
