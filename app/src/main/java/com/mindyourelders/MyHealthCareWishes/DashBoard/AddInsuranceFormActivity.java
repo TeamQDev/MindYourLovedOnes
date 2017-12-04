@@ -33,7 +33,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
     TextView txtName;
     String From;
     Preferences preferences;
-    final CharSequence[] alert_items = {"SD Card", "Dropbox"};
+    final CharSequence[] alert_items = {"Phone Memory", "Dropbox"};
     final CharSequence[] dialog_items = {"View", "Email", "Fax"};
     Form document;
     DBHelper dbHelper;

@@ -71,7 +71,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     String Goto="";
     String path="";
     int id;
-    final CharSequence[] alert_items = { "SD Card", "Dropbox" };
+    final CharSequence[] alert_items = { "Phone Memory", "Dropbox" };
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
     final CharSequence[] dialog_items = {"View", "Email", "Fax" };
 

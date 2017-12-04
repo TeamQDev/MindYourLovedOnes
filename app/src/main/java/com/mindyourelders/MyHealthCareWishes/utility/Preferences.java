@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 
@@ -144,8 +146,15 @@ public class Preferences {
                 "Mind Your Loved Ones - Support";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
-        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
-
+        Uri uri=null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+              uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", f);
+        } else {
+              uri = Uri.fromFile(f);
+        }
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
         emailIntent.setType("application/email");
 
         context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
