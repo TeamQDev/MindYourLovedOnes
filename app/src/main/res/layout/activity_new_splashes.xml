@@ -91,12 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension0dp"
             android:layout_weight="2"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:layout_marginTop="@dimen/dimension1dp"
             android:layout_marginLeft="@dimen/dimension5dp"
             android:layout_marginRight="@dimen/dimension1dp"
             android:layout_marginBottom="@dimen/dimension5dp"
-            android:src="@drawable/s_two" />
+            android:src="@drawable/g_one" />
         </LinearLayout>
 
         <LinearLayout

@@ -307,7 +307,7 @@ if (isEdit==false) {
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE1 && null != data) {
+        } else if (requestCode == RESULT_CAMERA_IMAGE1) {
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                       getContentResolver(), imageUri);
@@ -371,7 +371,7 @@ if (isEdit==false) {
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE2 && null != data) {
+        } else if (requestCode == RESULT_CAMERA_IMAGE2 ) {
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                         getContentResolver(), imageUri);

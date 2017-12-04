@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -79,7 +78,7 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CARD =50 ;
     ContentValues values;
-    Uri imageUri;
+    Uri imageUriProfile,imageUriCard;
     byte[] photoCard=null;
     String Cname = "";
     String Cemail ="";
@@ -2725,15 +2724,15 @@ String location="";
                 }
                 break;
             case R.id.imgEdit:
-               ShowCameraDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO);
+               ShowCameraDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO,"Profile");
 
                 break;
             case R.id.imgEditCard:
-                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,"Card");
                 break;
 
             case R.id.txtCard:
-                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD);
+                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,"Card");
                 break;
 
             case R.id.imgCard:
@@ -2751,7 +2750,7 @@ String location="";
         }
     }
 
-    private void ShowCameraDialog(final int resultCameraImageCard, final int resultSelectPhotoCard) {
+    private void ShowCameraDialog(final int resultCameraImageCard, final int resultSelectPhotoCard, final String profile) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -2778,14 +2777,25 @@ String location="";
             @Override
             public void onClick(View v) {
                // dispatchTakePictureIntent(resultCameraImageCard);
+
                 values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                imageUri = getActivity().getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                if (profile.equals("Profile"))
+                {
+                    imageUriProfile = getActivity().getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                  //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriProfile);
+                }else if (profile.equals("Card"))
+                {
+                    imageUriCard = getActivity().getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                   // intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriCard);
+                }
+
                 startActivityForResult(intent, resultCameraImageCard);
                 dialog.dismiss();
             }
@@ -3245,12 +3255,14 @@ String location="";
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
+        } else if (requestCode == RESULT_CAMERA_IMAGE ) {
 
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                        getActivity().getContentResolver(), imageUri);
-                profileImage.setImageBitmap(thumbnail);
+                        getActivity().getContentResolver(), imageUriProfile);
+                String imageurl = getRealPathFromURI(imageUriProfile);
+                Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+                profileImage.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -3313,12 +3325,12 @@ String location="";
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE_CARD && null != data) {
+        } else if (requestCode == RESULT_CAMERA_IMAGE_CARD ) {
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                        getActivity().getContentResolver(), imageUri);
+                        getActivity().getContentResolver(), imageUriCard);
 
-                String imageurl = getRealPathFromURI(imageUri);
+                String imageurl = getRealPathFromURI(imageUriCard);
                 Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
                 profileCard.setImageBitmap(bitmap);
                 //
@@ -3403,7 +3415,7 @@ String location="";
             switch (orientation) {
 
                 case ExifInterface.ORIENTATION_ROTATE_90:
-                    bitmap = rotateImage(bitmap, 180);
+                    bitmap = rotateImage(bitmap, 90);
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_180:
                     bitmap = rotateImage(bitmap, 180);

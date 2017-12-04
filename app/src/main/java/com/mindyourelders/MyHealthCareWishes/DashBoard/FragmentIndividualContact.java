@@ -8,9 +8,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -50,10 +53,10 @@ import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
-import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -1314,7 +1317,6 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
         return false;
 
-
     }
 
     private boolean validateUser() {
@@ -1476,12 +1478,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
+        } else if (requestCode == RESULT_CAMERA_IMAGE ) {
 
          try {
              Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                      getActivity().getContentResolver(), imageUri);
-             profileImage.setImageBitmap(thumbnail);
+             String imageurl = getRealPathFromURI(imageUri);
+             Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+             profileImage.setImageBitmap(bitmap);
          } catch (Exception e) {
              e.printStackTrace();
          }
@@ -1528,8 +1532,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
 */
         }
-     else
-     if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
+     else if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
          try {
              final Uri imageUri = data.getData();
              final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -1542,12 +1545,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
              e.printStackTrace();
          }
 
-     } else if (requestCode == RESULT_CAMERA_IMAGE_CARD && null != data) {
+     } else if (requestCode == RESULT_CAMERA_IMAGE_CARD) {
 
              try {
                  Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                          getActivity().getContentResolver(), imageUri);
-                 profileCard.setImageBitmap(thumbnail);
+                 String imageurl = getRealPathFromURI(imageUri);
+                 Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+                 profileCard.setImageBitmap(bitmap);
+
                //  String imageurl = getRealPathFromURI(imageUri);
                  rlCard.setVisibility(View.VISIBLE);
                  imgCard.setVisibility(View.VISIBLE);
@@ -1701,5 +1707,55 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 break;
 
         }
+    }
+    private Bitmap imageOreintationValidator(Bitmap bitmap, String path) {
+
+        ExifInterface ei;
+        try {
+            ei = new ExifInterface(path);
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    bitmap = rotateImage(bitmap, 90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    bitmap = rotateImage(bitmap, 270);
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
+    private Bitmap rotateImage(Bitmap source, float angle) {
+
+        Bitmap bitmap = null;
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        try {
+            bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true);
+        } catch (OutOfMemoryError err) {
+            err.printStackTrace();
+        }
+        return bitmap;
+    }
+    private String getRealPathFromURI(Uri imageUri) {
+        String path = null;
+        String[] proj = { MediaStore.MediaColumns.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(imageUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
     }
 }
