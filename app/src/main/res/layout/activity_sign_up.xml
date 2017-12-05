@@ -21,6 +21,19 @@
             android:layout_marginTop="@dimen/dimension20dp"
             android:src="@drawable/ic_back" />
 
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_toRightOf="@+id/flProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:paddingLeft="@dimen/dimension30dp"
+          android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_launcher"
+            android:layout_centerVertical="true"
+            />
+
         <FrameLayout
             android:id="@+id/flProfile"
             android:layout_width="@dimen/dimension110dp"
@@ -473,7 +486,8 @@ rules do not apply to this app because the app is in your control."
                 android:padding="@dimen/dimension10dp"
                 android:text="Have Account? Log In"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dimension16dp" />
+                android:textSize="@dimen/dimension16dp"
+                />
 
             <TextView
                 android:id="@+id/txtForgotPassword"
@@ -484,7 +498,8 @@ rules do not apply to this app because the app is in your control."
                 android:padding="@dimen/dimension10dp"
                 android:text="Forgot your password?"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dimension16dp" />
+                android:textSize="@dimen/dimension16dp"
+                android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

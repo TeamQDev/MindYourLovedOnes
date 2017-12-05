@@ -31,6 +31,8 @@ public class PetQuery {
     public static final String COL_VETERIAN = "Veteran";
     public static final String COL_GUARD = "Guard";
     public static final String COL_CHIP= "Chip";
+    public static final String COL_Bdate="Bdate";
+    public static final String COL_NOTES="Notes";
 
     public PetQuery(Context context, DBHelper dbHelper) {
         this.context = context;
@@ -40,7 +42,7 @@ public class PetQuery {
     public static String createPetTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER, " +
                 COL_NAME+ " VARCHAR(30)," +COL_BREED + " VARCHAR(30)," + COL_COLOR + " VARCHAR(30)," +
-                COL_VETERIAN + " VARCHAR(100)," +   COL_GUARD + " VARCHAR(100)," +   COL_CHIP + " VARCHAR(30)" +
+                COL_VETERIAN + " VARCHAR(100)," + COL_GUARD + " VARCHAR(100)," + COL_Bdate + " VARCHAR(50)," + COL_NOTES + " VARCHAR(100)," + COL_CHIP + " VARCHAR(30)" +
                 ");";
         return createTableQuery;
     }
@@ -51,7 +53,7 @@ public class PetQuery {
     }
 
 
-    public static Boolean insertPetData(int userid, String name, String breed, String color, String chip, String veterain, String care) {
+    public static Boolean insertPetData(int userid, String name, String breed, String color, String chip, String veterain, String care, String bdate, String notes) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -63,6 +65,8 @@ public class PetQuery {
         cv.put(COL_GUARD, care);
         cv.put(COL_CHIP, chip);
         cv.put(COL_NAME, name);
+        cv.put(COL_Bdate,bdate);
+        cv.put(COL_NOTES,notes);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -93,6 +97,8 @@ public class PetQuery {
                     allergy.setVeterian(c.getString(c.getColumnIndex(COL_VETERIAN)));
                     allergy.setGuard(c.getString(c.getColumnIndex(COL_GUARD)));
                     allergy.setBreed(c.getString(c.getColumnIndex(COL_BREED)));
+                    allergy.setBdate(c.getString(c.getColumnIndex(COL_Bdate)));
+                    allergy.setNotes(c.getString(c.getColumnIndex(COL_NOTES)));
                     allergyList.add(allergy);
                 } while (c.moveToNext());
             }
@@ -138,20 +144,7 @@ public class PetQuery {
         return true;
     }
 
-    public static boolean deleteRecords(int id) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + id + "';", null);
-
-        if (c.moveToFirst()) {
-            do {
-                db.execSQL("delete from " + TABLE_NAME + " where " + COL_USERID + "='" + id+"';");
-            } while (c.moveToNext());
-        }
-
-        return true;
-    }
-
-    public static Boolean updatePetData(int id, String name, String breed, String color, String chip, String veterain, String care) {
+    public static Boolean updatePetData(int id, String name, String breed, String color, String chip, String veterain, String care, String bdate, String notes) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -163,6 +156,8 @@ public class PetQuery {
         cv.put(COL_GUARD, care);
         cv.put(COL_CHIP, chip);
         cv.put(COL_NAME, name);
+        cv.put(COL_Bdate,bdate);
+        cv.put(COL_NOTES,notes);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
@@ -176,5 +171,18 @@ public class PetQuery {
         }
 
         return flag;
+    }
+
+    public static boolean deleteRecords(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_USERID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+        return true;
     }
 }

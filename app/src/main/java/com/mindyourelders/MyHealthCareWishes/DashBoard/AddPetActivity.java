@@ -20,11 +20,11 @@ import static com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity.RE
 
 public class AddPetActivity extends AppCompatActivity {
     Context context = this;
-    TextView txtName, txtBreed, txtColor, txtChip, txtVeterian, txtCare;
-    String name = "", breed = "", color = "", veterain = "", care = "", chip = "";
+    TextView txtName, txtBreed, txtColor, txtChip, txtVeterian, txtCare, txtPetBirthDate, txtPetNotes;
+    String name = "", breed = "", color = "", veterain = "", care = "", chip = "", bdate ="", notes ="";
     ImageView imgBack, imgDone;
     public static final int REQUEST_PET = 400;
-    boolean isUpdate=false;
+    boolean isUpdate = false;
 
     Preferences preferences;
     DBHelper dbHelper;
@@ -56,42 +56,49 @@ public class AddPetActivity extends AppCompatActivity {
         txtChip = (TextView) findViewById(R.id.txtChip);
         txtVeterian = (TextView) findViewById(R.id.txtVeteran);
         txtCare = (TextView) findViewById(R.id.txtCare);
-
+        txtPetBirthDate= (TextView) findViewById(R.id.txtPetBirthDate);
+        txtPetNotes= (TextView) findViewById(R.id.txtPetNote);
         Intent i = getIntent();
         if (i.getExtras() != null) {
             if (i.getExtras().get("FROM").equals("Update")) {
-                isUpdate=true;
-                Pet p= (Pet) i.getExtras().getSerializable("PetObject");
-                pet=p;
-                if (p.getName()!=null) {
+                isUpdate = true;
+                Pet p = (Pet) i.getExtras().getSerializable("PetObject");
+                pet = p;
+                if (p.getName() != null) {
                     txtName.setText(p.getName());
                 }
-                if (p.getBreed()!=null)
-                {
+                if (p.getBreed() != null) {
                     txtBreed.setText(p.getBreed());
                 }
-             if (p.getColor()!=null)
-             {
-                 txtColor.setText(p.getColor());
-             }
-             if (p.getVeterian()!=null)
-             {
-                 txtVeterian.setText(p.getVeterian());
-             }
-               if (p.getChip()!=null) {
-                   txtChip.setText(p.getChip());
-               }
-               if (p.getGuard()!=null) {
-                   txtCare.setText(p.getGuard());
-               }
-
-            }
-            else{
-                isUpdate=false;
+                if (p.getColor() != null) {
+                    txtColor.setText(p.getColor());
+                }
+                if (p.getVeterian() != null) {
+                    txtVeterian.setText(p.getVeterian());
+                }
+                if (p.getChip() != null) {
+                    txtChip.setText(p.getChip());
+                }
+                if (p.getGuard() != null) {
+                    txtCare.setText(p.getGuard());
+                }
+                if (p.getBdate() != null) {
+                    txtPetBirthDate.setText(p.getBdate());
+                }
+                if (p.getNotes() != null) {
+                    txtPetNotes.setText(p.getNotes());
+                }
+            } else {
+                isUpdate = false;
             }
 
         }
-
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         imgDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,16 +108,17 @@ public class AddPetActivity extends AppCompatActivity {
                 chip = txtChip.getText().toString();
                 veterain = txtVeterian.getText().toString();
                 care = txtCare.getText().toString();
-                if (isUpdate==false) {
-                    Boolean flag = PetQuery.insertPetData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, breed, color, chip, veterain, care);
+                bdate= txtPetBirthDate.getText().toString();
+                notes=txtPetNotes.getText().toString();
+                if (isUpdate == false) {
+                    Boolean flag = PetQuery.insertPetData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, breed, color, chip, veterain, care, bdate, notes);
                     if (flag == true) {
                         Toast.makeText(context, "Pet Added Succesfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else if (isUpdate==true) {
-                    Boolean flag = PetQuery.updatePetData(pet.getId(), name, breed, color, chip, veterain, care);
+                } else if (isUpdate == true) {
+                    Boolean flag = PetQuery.updatePetData(pet.getId(), name, breed, color, chip, veterain, care, bdate, notes);
                     if (flag == true) {
                         Toast.makeText(context, "Pet updated Succesfully", Toast.LENGTH_SHORT).show();
                     } else {

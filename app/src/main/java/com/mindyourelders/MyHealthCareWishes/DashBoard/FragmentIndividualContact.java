@@ -1640,7 +1640,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             ListPet.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Pet a = AllargyLists.get(i);
-                String allergy = "Pet Name: " + a.getName() + "\nBreed: " + a.getBreed() + "\nColor: " + a.getColor()+ "\nVeterinarian: " + a.getVeterian()+ "\nCaretaker: " + a.getGuard();
+                String allergy = "Pet Name: " + a.getName() + "\nBreed: " + a.getBreed() + "\nColor: " + a.getColor()+ "\nVeterinarian: " + a.getVeterian()+ "\nCaretaker: " + a.getGuard()+ "\nBirthdate: " + a.getBdate()+ "\nNotes: " + a.getNotes();
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {

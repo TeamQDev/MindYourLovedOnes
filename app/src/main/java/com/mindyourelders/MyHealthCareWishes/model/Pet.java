@@ -30,6 +30,25 @@ public class Pet implements Serializable{
     String color="";
     String breed="";
 
+    public String getBdate() {
+        return bdate;
+    }
+
+    public void setBdate(String bdate) {
+        this.bdate = bdate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    String bdate="";
+    String notes="";
+
     public String getName() {
         return name;
     }
