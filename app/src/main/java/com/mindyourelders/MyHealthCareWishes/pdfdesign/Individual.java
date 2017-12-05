@@ -23,8 +23,6 @@ import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import java.util.ArrayList;
 
 
-
-
 /**
  * Created by welcome on 11/1/2017.
  */
@@ -49,7 +47,8 @@ public class Individual {
     String Veteran = "";
     String Pets = "";
     String idNumber = "";
-
+    String Bdate = "";
+    String notes = "";
 
     public static ArrayList<String> messageInfo = new ArrayList<String>();
     public static ArrayList<String> messageInfo2 = new ArrayList<String>();
@@ -140,7 +139,6 @@ public class Individual {
 
             messageInfo.add("Home Phone :");
             messageInfo.add(hPhone);
-
 
 
             if (connection.getHeight() != null) {
@@ -403,9 +401,36 @@ public class Individual {
                 messageInfo3.add("Person(s) who will care for pet :");
                 messageInfo3.add(person);
 
+                if (a.getBdate() != null) {
+                    Bdate = a.getBdate();
+                }
+
+                cell = new PdfPCell(new Phrase("Birthdate : " + Bdate));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Birthdate :");
+                messageInfo3.add(Bdate);
+
+                if (a.getNotes() != null) {
+                    notes = a.getNotes();
+                }
+
+                cell = new PdfPCell(new Phrase("Notes about Pet : " + notes));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Notes about Pet :");
+                messageInfo3.add(notes);
             }
 
-            String live="";
+            String live = "";
             if (connection.getLive() != null) {
                 live = connection.getLive();
             }
@@ -419,7 +444,7 @@ public class Individual {
             messageInfo2.add("Do you live alone? :");
             messageInfo2.add(live);
 
-            String children="";
+            String children = "";
             if (connection.getChildren() != null) {
                 children = connection.getChildren();
             }
@@ -433,7 +458,7 @@ public class Individual {
             messageInfo2.add("Children :");
             messageInfo2.add(children);
 
-            String friend="";
+            String friend = "";
             if (connection.getFriend() != null) {
                 friend = connection.getFriend();
             }
@@ -447,7 +472,7 @@ public class Individual {
             messageInfo2.add("Friend :");
             messageInfo2.add(friend);
 
-            String grandParents="";
+            String grandParents = "";
             if (connection.getGrand() != null) {
                 grandParents = connection.getGrand();
             }
@@ -462,7 +487,7 @@ public class Individual {
             messageInfo2.add(grandParents);
 
 
-            String parents="";
+            String parents = "";
             if (connection.getParents() != null) {
                 parents = connection.getParents();
             }
@@ -477,7 +502,7 @@ public class Individual {
             messageInfo2.add(parents);
 
 
-            String spouse="";
+            String spouse = "";
             if (connection.getSpouse() != null) {
                 spouse = connection.getSpouse();
             }
@@ -492,8 +517,7 @@ public class Individual {
             messageInfo2.add(spouse);
 
 
-
-            String significant="";
+            String significant = "";
             if (connection.getSign_other() != null) {
                 significant = connection.getSign_other();
             }
@@ -508,7 +532,7 @@ public class Individual {
             messageInfo2.add(significant);
 
 
-            String other="";
+            String other = "";
             if (connection.getOther_person() != null) {
                 other = connection.getOther_person();
             }
@@ -522,7 +546,7 @@ public class Individual {
             messageInfo2.add("Other :");
             messageInfo2.add(other);
 
-            String english="";
+            String english = "";
             if (connection.getEnglish() != null) {
                 english = connection.getEnglish();
             }
@@ -665,7 +689,7 @@ public class Individual {
             messageInfo2.add("Home Phone :");
             messageInfo2.add(hPhone);
 
-            String bdate="";
+            String bdate = "";
             if (connection.getDob() != null) {
                 bdate = connection.getDob();
             }
@@ -743,7 +767,7 @@ public class Individual {
             messageInfo2.add("Eyes :");
             messageInfo2.add(eyes);
 
-            String live="";
+            String live = "";
             if (connection.getLive() != null) {
                 live = connection.getLive();
             }
@@ -757,7 +781,7 @@ public class Individual {
             messageInfo2.add("Do you live alone? :");
             messageInfo2.add(live);
 
-            String children="";
+            String children = "";
             if (connection.getChildren() != null) {
                 children = connection.getChildren();
             }
@@ -771,7 +795,7 @@ public class Individual {
             messageInfo2.add("Children :");
             messageInfo2.add(children);
 
-            String friend="";
+            String friend = "";
             if (connection.getFriend() != null) {
                 friend = connection.getFriend();
             }
@@ -785,7 +809,7 @@ public class Individual {
             messageInfo2.add("Friend :");
             messageInfo2.add(friend);
 
-            String grandParents="";
+            String grandParents = "";
             if (connection.getGrand() != null) {
                 grandParents = connection.getGrand();
             }
@@ -800,7 +824,7 @@ public class Individual {
             messageInfo2.add(grandParents);
 
 
-            String parents="";
+            String parents = "";
             if (connection.getParents() != null) {
                 parents = connection.getParents();
             }
@@ -815,7 +839,7 @@ public class Individual {
             messageInfo2.add(parents);
 
 
-            String spouse="";
+            String spouse = "";
             if (connection.getSpouse() != null) {
                 spouse = connection.getSpouse();
             }
@@ -830,8 +854,7 @@ public class Individual {
             messageInfo2.add(spouse);
 
 
-
-            String significant="";
+            String significant = "";
             if (connection.getSign_other() != null) {
                 significant = connection.getSign_other();
             }
@@ -845,7 +868,7 @@ public class Individual {
             messageInfo2.add("Significant Other :");
             messageInfo2.add(significant);
 
-            String other="";
+            String other = "";
             if (connection.getOther_person() != null) {
                 other = connection.getOther_person();
             }
@@ -858,7 +881,7 @@ public class Individual {
 
             messageInfo2.add("Other :");
             messageInfo2.add(other);
-            String english="";
+            String english = "";
             if (connection.getEnglish() != null) {
                 english = connection.getEnglish();
             }
@@ -1721,7 +1744,7 @@ public class Individual {
                 int k = i + 1;
 
 
-                cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions " + k + " :"+ conditionList.get(i)));
+                cell = new PdfPCell(new Phrase("Pre Existing Medical Conditions " + k + " :" + conditionList.get(i)));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
@@ -1730,7 +1753,6 @@ public class Individual {
 
                 messageInfo3.add("Pre Existing Medical Conditions " + k + " :");
                 messageInfo3.add(conditionList.get(i));
-
 
 
             }
@@ -2318,13 +2340,11 @@ public class Individual {
     }
 
 
-
-
     public Individual(ArrayList<Living> livingList, int i) {
 
         try {
             Header.addEmptyLine(1);
-                       Header.addChank("Activities Of Daily Living");
+            Header.addChank("Activities Of Daily Living");
             messageLiving.add("Activities Of Daily Living");
             Header.addEmptyLine(1);
 
@@ -2333,297 +2353,297 @@ public class Individual {
             PdfPCell cell;
             table.setWidthPercentage(100);
 
-        for (i=0;i<livingList.size();i++) {
+            for (i = 0; i < livingList.size(); i++) {
 
-            cell = new PdfPCell(new Phrase("Activities Of Daily Living(ADL) " +" :"));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
+                cell = new PdfPCell(new Phrase("Activities Of Daily Living(ADL) " + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
 
-            messageLiving.add("Activities Of Daily Living(ADL)" + " :");
-            messageLiving.add("");
+                messageLiving.add("Activities Of Daily Living(ADL)" + " :");
+                messageLiving.add("");
 
-            Living s = livingList.get(i);
+                Living s = livingList.get(i);
 
-            String bathing = "";
-            if (s.getBath() != null) {
-                bathing = s.getBath();
+                String bathing = "";
+                if (s.getBath() != null) {
+                    bathing = s.getBath();
+                }
+
+                cell = new PdfPCell(new Phrase("Bathing : " + bathing));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Bathing :");
+                messageLiving.add(bathing);
+
+                String continence = "";
+                if (s.getContinence() != null) {
+                    continence = s.getContinence();
+                }
+                cell = new PdfPCell(new Phrase("Continence : " + continence));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Continence :");
+                messageLiving.add(continence);
+
+                String dressing = "";
+                if (s.getDress() != null) {
+                    dressing = s.getDress();
+                }
+                cell = new PdfPCell(new Phrase("Dressing : " + dressing));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageLiving.add("Dressing :");
+                messageLiving.add(dressing);
+
+                String eating = "";
+                if (s.getFeed() != null) {
+                    eating = s.getFeed();
+                }
+                cell = new PdfPCell(new Phrase("Eating : " + eating));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Eating :");
+                messageLiving.add(eating);
+
+                String toileting = "";
+                if (s.getToileting() != null) {
+                    toileting = s.getToileting();
+                }
+
+                cell = new PdfPCell(new Phrase("Toileting : " + toileting));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Toileting :");
+                messageLiving.add(toileting);
+
+                String transfering = "";
+                if (s.getTransfer() != null) {
+                    transfering = s.getTransfer();
+                }
+
+                cell = new PdfPCell(new Phrase("Transfering : " + transfering));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Transfering :");
+                messageLiving.add(transfering);
+
+                String functionOther = "";
+                if (s.getFunctionOther() != null) {
+                    functionOther = s.getFunctionOther();
+                }
+                cell = new PdfPCell(new Phrase("Other-specify : " + functionOther));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageLiving.add("Other-specify :");
+                messageLiving.add(functionOther);
+
+                String functionNote = "";
+                if (s.getFunctionNote() != null) {
+                    functionNote = s.getFunctionNote();
+                }
+                cell = new PdfPCell(new Phrase("Note : " + functionNote));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Note :");
+                messageLiving.add(functionNote);
+
+                cell = new PdfPCell(new Phrase("Instrumental Activities Of Daily Living(IADL) " + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + " :");
+                messageLiving.add("");
+
+                String access = "";
+                if (s.getTransport() != null) {
+                    access = s.getTransport();
+                }
+                cell = new PdfPCell(new Phrase("Accessing transportation : " + access));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Accessing transportation :");
+                messageLiving.add(access);
+
+                String carePet = "";
+                if (s.getPets() != null) {
+                    carePet = s.getPets();
+                }
+                cell = new PdfPCell(new Phrase("Caring for pets : " + carePet));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Caring for pets :");
+                messageLiving.add(carePet);
+
+                String driving = "";
+                if (s.getDrive() != null) {
+                    driving = s.getDrive();
+                }
+                cell = new PdfPCell(new Phrase("Driving : " + driving));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Driving :");
+                messageLiving.add(driving);
+
+                String housekeeping = "";
+                if (s.getKeep() != null) {
+                    housekeeping = s.getKeep();
+                }
+                cell = new PdfPCell(new Phrase("Housekeeping : " + housekeeping));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Housekeeping :");
+                messageLiving.add(housekeeping);
+
+                String manage = "";
+                if (s.getMedication() != null) {
+                    manage = s.getMedication();
+                }
+                cell = new PdfPCell(new Phrase("Manage medications : " + manage));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Manage medications :");
+                messageLiving.add(manage);
+
+                String finance = "";
+                if (s.getFinance() != null) {
+                    finance = s.getFinance();
+                }
+                cell = new PdfPCell(new Phrase("Managing personal finances : " + finance));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageLiving.add("Managing personal finances :");
+                messageLiving.add(finance);
+
+                String meal = "";
+                if (s.getPrepare() != null) {
+                    meal = s.getPrepare();
+                }
+                cell = new PdfPCell(new Phrase("Preparing meals : " + meal));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Preparing meals :");
+                messageLiving.add(meal);
+
+                String shopping = "";
+                if (s.getShop() != null) {
+                    shopping = s.getShop();
+                }
+                cell = new PdfPCell(new Phrase("Shopping for groceries or clothes : " + shopping));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Shopping for groceries or clothes :");
+                messageLiving.add(shopping);
+
+                String telephone = "";
+                if (s.getUse() != null) {
+                    telephone = s.getUse();
+                }
+                cell = new PdfPCell(new Phrase("Using telephone : " + telephone));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Using telephone :");
+                messageLiving.add(telephone);
+
+                String instOther = "";
+                if (s.getInstOther() != null) {
+                    instOther = s.getInstOther();
+                }
+                cell = new PdfPCell(new Phrase("Other-specify : " + instOther));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Other-specify :");
+                messageLiving.add(instOther);
+
+                String instNote = "";
+                if (s.getInstNote() != null) {
+                    instNote = s.getInstNote();
+                }
+                cell = new PdfPCell(new Phrase("Note : " + instNote));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("Note :");
+                messageLiving.add(instNote);
+
             }
-
-            cell = new PdfPCell(new Phrase("Bathing : " + bathing));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Bathing :");
-            messageLiving.add(bathing);
-
-            String continence = "";
-            if (s.getContinence() != null) {
-                continence = s.getContinence();
-            }
-            cell = new PdfPCell(new Phrase("Continence : " + continence));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Continence :");
-            messageLiving.add(continence);
-
-            String dressing = "";
-            if (s.getDress() != null) {
-                dressing = s.getDress();
-            }
-            cell = new PdfPCell(new Phrase("Dressing : " + dressing));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-            messageLiving.add("Dressing :");
-            messageLiving.add(dressing);
-
-            String eating = "";
-            if (s.getFeed() != null) {
-                eating = s.getFeed();
-            }
-            cell = new PdfPCell(new Phrase("Eating : " + eating));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Eating :");
-            messageLiving.add(eating);
-
-            String toileting = "";
-            if (s.getToileting() != null) {
-                toileting = s.getToileting();
-            }
-
-            cell = new PdfPCell(new Phrase("Toileting : " + toileting));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Toileting :");
-            messageLiving.add(toileting);
-
-            String transfering = "";
-            if (s.getTransfer() != null) {
-                transfering = s.getTransfer();
-            }
-
-            cell = new PdfPCell(new Phrase("Transfering : " + transfering));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Transfering :");
-            messageLiving.add(transfering);
-
-            String functionOther = "";
-            if (s.getFunctionOther() != null) {
-                functionOther = s.getFunctionOther();
-            }
-            cell = new PdfPCell(new Phrase("Other-specify : " + functionOther));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-            messageLiving.add("Other-specify :");
-            messageLiving.add(functionOther);
-
-            String functionNote = "";
-            if (s.getFunctionNote() != null) {
-                functionNote = s.getFunctionNote();
-            }
-            cell = new PdfPCell(new Phrase("Note : " + functionNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Note :");
-            messageLiving.add(functionNote);
-
-            cell = new PdfPCell(new Phrase("Instrumental Activities Of Daily Living(IADL) " +" :"));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + " :");
-            messageLiving.add("");
-
-            String access = "";
-            if (s.getTransport() != null) {
-                access = s.getTransport();
-            }
-            cell = new PdfPCell(new Phrase("Accessing transportation : " + access));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Accessing transportation :");
-            messageLiving.add(access);
-
-            String carePet = "";
-            if (s.getPets() != null) {
-                carePet = s.getPets();
-            }
-            cell = new PdfPCell(new Phrase("Caring for pets : " + carePet));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Caring for pets :");
-            messageLiving.add(carePet);
-
-            String driving = "";
-            if (s.getDrive() != null) {
-                driving = s.getDrive();
-            }
-            cell = new PdfPCell(new Phrase("Driving : " + driving));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Driving :");
-            messageLiving.add(driving);
-
-            String housekeeping = "";
-            if (s.getKeep() != null) {
-                housekeeping = s.getKeep();
-            }
-            cell = new PdfPCell(new Phrase("Housekeeping : " + housekeeping));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Housekeeping :");
-            messageLiving.add(housekeeping);
-
-            String manage = "";
-            if (s.getMedication() != null) {
-                manage = s.getMedication();
-            }
-            cell = new PdfPCell(new Phrase("Manage medications : " + manage));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Manage medications :");
-            messageLiving.add(manage);
-
-            String finance = "";
-            if (s.getFinance() != null) {
-                finance = s.getFinance();
-            }
-            cell = new PdfPCell(new Phrase("Managing personal finances : " + finance));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-            messageLiving.add("Managing personal finances :");
-            messageLiving.add(finance);
-
-            String meal = "";
-            if (s.getPrepare() != null) {
-                meal = s.getPrepare();
-            }
-            cell = new PdfPCell(new Phrase("Preparing meals : " + meal));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Preparing meals :");
-            messageLiving.add(meal);
-
-            String shopping = "";
-            if (s.getShop() != null) {
-                shopping = s.getShop();
-            }
-            cell = new PdfPCell(new Phrase("Shopping for groceries or clothes : " + shopping));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Shopping for groceries or clothes :");
-            messageLiving.add(shopping);
-
-            String telephone = "";
-            if (s.getUse() != null) {
-                telephone = s.getUse();
-            }
-            cell = new PdfPCell(new Phrase("Using telephone : " + telephone));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Using telephone :");
-            messageLiving.add(telephone);
-
-            String instOther = "";
-            if (s.getInstOther() != null) {
-                instOther = s.getInstOther();
-            }
-            cell = new PdfPCell(new Phrase("Other-specify : " + instOther));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Other-specify :");
-            messageLiving.add(instOther);
-
-            String instNote = "";
-            if (s.getInstNote() != null) {
-                instNote = s.getInstNote();
-            }
-            cell = new PdfPCell(new Phrase("Note : " + instNote));
-            cell.setBorder(Rectangle.BOTTOM);
-            cell.setUseBorderPadding(true);
-            cell.setBorderWidthBottom(5);
-            cell.setBorderColorBottom(BaseColor.WHITE);
-            table.addCell(cell);
-
-            messageLiving.add("Note :");
-            messageLiving.add(instNote);
-
-        }
             Header.document.add(table);
             Paragraph p = new Paragraph(" ");
             DottedLineSeparator line = new DottedLineSeparator();
