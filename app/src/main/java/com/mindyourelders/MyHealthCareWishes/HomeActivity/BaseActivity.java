@@ -40,11 +40,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     FragmentOverview fragmentOverview = null;
     ImageView imgDrawer, imgNoti, imgLogout, imgLocationFeed,imgProfile,imgDrawerProfile,imgPdf;
     TextView txtTitle,txtName,txtDrawerName;
+    TextView txtBank,txtForm,txtSenior,txtAdvance;
     DrawerLayout drawerLayout;
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
     Preferences preferences;
-    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos,rlBackup;
+    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlMarketPlace.setOnClickListener(this);
         rlVideos.setOnClickListener(this);
         rlBackup.setOnClickListener(this);
+
+        txtBank.setOnClickListener(this);
+        txtForm.setOnClickListener(this);
+        txtSenior.setOnClickListener(this);
+        txtAdvance.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -101,6 +107,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         imgLocationFeed = (ImageView) findViewById(R.id.imgLocationFeed);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         txtName = (TextView) findViewById(R.id.txtName);
+
+        txtBank = (TextView) findViewById(R.id.txtBank);
+        txtForm = (TextView) findViewById(R.id.txtForm);
+        txtSenior = (TextView) findViewById(R.id.txtSenior);
+        txtAdvance = (TextView) findViewById(R.id.txtAdvance);
+
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         leftDrawer = (RelativeLayout) findViewById(R.id.leftDrawer);
@@ -120,6 +132,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlMarketPlace= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketPlace);
         rlVideos= (RelativeLayout) leftDrawer.findViewById(R.id.rlVideos);
         rlBackup= (RelativeLayout) leftDrawer.findViewById(R.id.rlBackup);
+        rlMarketDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketDetail);
+        rlResourcesDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlResourcesDetail);
     }
 
     private void fragmentData() {
@@ -209,18 +223,50 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlResources:
-               // if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
+              rlResourcesDetail.setVisibility(View.VISIBLE);
+              /* // if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
                     callFragment("RESOURCES", fragmentResources);
               //  }
-                drawerLayout.closeDrawer(leftDrawer);
+                drawerLayout.closeDrawer(leftDrawer);*/
                 break;
 
             case R.id.rlMarketPlace:
-             //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                rlMarketDetail.setVisibility(View.VISIBLE);
+             /*//   if (fragmentManager.findFragmentByTag("MARKET") == null) {
                     callFragment("MARKET", fragmentMarketPlace);
               //  }
+                drawerLayout.closeDrawer(leftDrawer);*/
+                break;
+
+            case R.id.txtForm:
+                //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                callFragment("FORM", fragmentResources);
+                //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
+
+            case R.id.txtAdvance:
+                //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                callFragment("FORM", fragmentResources);
+                //  }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.txtBank:
+                //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                callFragment("MARKET", fragmentMarketPlace);
+                //  }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.txtSenior:
+                //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
+                callFragment("MARKET", fragmentMarketPlace);
+                //  }
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+
 
             case R.id.rlVideos:
                // if (fragmentManager.findFragmentByTag("VIDEOS") == null) {

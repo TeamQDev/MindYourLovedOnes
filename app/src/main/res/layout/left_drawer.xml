@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="HOME"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgHome"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="SUPPORT-FAQs"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgSupport"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlSupport"
             android:background="@color/colorWhite"
-            android:visibility="gone"
+
             >
             <ImageView
                 android:id="@+id/imgContact"
@@ -177,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="CONTACT US"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgContact"
@@ -280,10 +280,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="RESOURCES"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgResources"
+                android:drawableRight="@drawable/ic_droupdown_arrow"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:paddingRight="@dimen/dimension20dp"
                 />
             <View
                 android:layout_width="match_parent"
@@ -293,14 +296,59 @@
                 android:layout_toRightOf="@id/imgResources"
                 ></View>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlResourcesDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlResources"
+            android:background="@color/colorWhite"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/txtForm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="Helpful Forms and Templates"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                />
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_below="@+id/txtForm"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                ></View>
+            <TextView
+                android:id="@+id/txtAdvance"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="Advance Directives Information"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_below="@+id/view1"
+                />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rlMarketPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlResources"
+            android:layout_below="@+id/rlResourcesDetail"
             android:background="@color/colorWhite"
             >
+            <View
+                android:id="@+id/viewsd"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_toRightOf="@+id/imgMarketPlace"
+                ></View>
             <ImageView
                 android:id="@+id/imgMarketPlace"
                 android:layout_width="@dimen/dimension50dp"
@@ -308,16 +356,21 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
                 android:padding="@dimen/dimension10dp"
-                android:src="@drawable/marketplace" />
+                android:src="@drawable/marketplace"
+                android:layout_below="@+id/viewsd"
+                />
             <TextView
                 android:id="@+id/txtMarketPlace"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="MARKETPLACE"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgMarketPlace"
+                android:drawableRight="@drawable/ic_droupdown_arrow"
+                android:drawablePadding="@dimen/dimension10dp"
+                android:paddingRight="@dimen/dimension20dp"
                 />
             <View
                 android:layout_width="match_parent"
@@ -327,21 +380,68 @@
                 android:layout_toRightOf="@id/imgMarketPlace"
                 ></View>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlMarketDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlMarketPlace"
+            android:background="@color/colorWhite"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/txtBank"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="Banking and other Financial Services"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                />
+            <View
+                android:id="@+id/views1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_below="@+id/txtBank"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                ></View>
+            <TextView
+                android:id="@+id/txtSenior"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="Senior Concierge Services"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_below="@+id/views1"
+                />
+
+        </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/rlVideos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlMarketPlace"
+            android:layout_below="@+id/rlMarketDetail"
             android:background="@color/colorWhite"
             >
+            <View
+                android:id="@+id/views"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_toRightOf="@+id/imgVideos"
+                ></View>
             <ImageView
                 android:id="@+id/imgVideos"
                 android:layout_width="@dimen/dimension50dp"
                 android:layout_height="@dimen/dimension50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimension10dp"
+                android:layout_below="@+id/views"
                 android:padding="@dimen/dimension10dp"
                 android:src="@drawable/videos" />
             <TextView
@@ -349,7 +449,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
                 android:text="VIDEOS"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgVideos"
@@ -418,8 +518,8 @@
                 android:id="@+id/txtBackup"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
-                android:text="BACKUP"
-                android:textColor="@color/colorBlack"
+                android:text="BACKUP YOUR INFORMATION"
+                android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/imgBackup"
