@@ -55,7 +55,6 @@ import com.mindyourelders.MyHealthCareWishes.model.Living;
 import com.mindyourelders.MyHealthCareWishes.model.Note;
 import com.mindyourelders.MyHealthCareWishes.model.Pet;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
-import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
 import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
@@ -130,9 +129,12 @@ public class SpecialistsActivity extends AppCompatActivity {
                 header.setBackgroundResource(R.color.colorOne);
                 isEmergency=true;
                 isInsurance=false;
-                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
-                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE","ACTIVITIES OF DAILY LIVING", "EMERGENCY CONTACTS", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
+                profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician};
+                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE", "EMERGENCY CONTACTS AND HEALTH CARE PROXY AGENT", "PRIMARY PHYSICIAN" };
 
+               /* profile=new int[]{R.drawable.contacts,R.drawable.medicalinfos,R.drawable.emer_contacts,R.drawable.physician,R.drawable.proxys};
+                specialist= new String[] { "PERSONAL PROFILE", "MEDICAL PROFILE", "EMERGENCY CONTACTS AND \nHEALTH CARE PROXY AGENT", "PRIMARY PHYSICIAN", "HEALTH CARE PROXY AGENT" };
+*/
             }
             else if (from.equals("Insurance"))
             {
@@ -149,8 +151,8 @@ public class SpecialistsActivity extends AppCompatActivity {
               //  imgRight.setVisibility(View.VISIBLE);
                 txtTitle.setText("NOTES & APPOINTMENT CHECKLIST");
                 header.setBackgroundResource(R.color.colorFour);
-                profile=new int[]{R.drawable.finances,R.drawable.insurancess};
-                specialist= new String[]{"EVENT NOTES", "APPOINTMENT CHECKLIST"};
+                profile=new int[]{R.drawable.finances,R.drawable.insurancess,R.drawable.medicalinfos};
+                specialist= new String[]{"EVENT NOTES", "APPOINTMENT CHECKLIST","ACTIVITIES OF DAILY LIVING"};
                 isEmergency=false;
                 isInsurance=false;
             }
@@ -279,17 +281,14 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     new Individual(MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID)),AllargyLists,implantsList,historList,hospitalList,conditionList,vaccineList);
 
-                    Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                    ArrayList<Living> LivingList=new ArrayList<Living>();
-                    LivingList.add(Live);
-                    new Individual(LivingList,1);
+
 
                     ArrayList<Emergency> emergencyList=MyConnectionsQuery.fetchAllEmergencyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),1);
-                    ArrayList<Proxy> proxyList=MyConnectionsQuery.fetchAllProxyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),3);
+                   // ArrayList<Proxy> proxyList=MyConnectionsQuery.fetchAllProxyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),3);
                     new Individual("Emergency",emergencyList);
                     new Individual(specialistsList,"Physician");
-                    new Individual(proxyList);
+                 //   new Individual(proxyList);
 
 
 
@@ -354,6 +353,10 @@ public class SpecialistsActivity extends AppCompatActivity {
                     ArrayList<Note> NoteList= EventNoteQuery.fetchAllNoteRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     new EventPdf(NoteList,1);
                     new EventPdf(AppointList);
+                    Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Living> LivingList=new ArrayList<Living>();
+                    LivingList.add(Live);
+                    new EventPdf(1,LivingList,1);
 
 
                     Header.document.close();
@@ -404,10 +407,9 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());
-                                        result.append(new MessageString().getLivingInfo());
                                         result.append(new MessageString().getEmergencyInfo());
                                         result.append(new MessageString().getPhysicianInfo());
-                                        result.append(new MessageString().getProxyInfo());
+                                     //   result.append(new MessageString().getProxyInfo());
 
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
@@ -456,6 +458,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getEventInfo());
                                     result.append(new MessageString().getAppointInfo());
+                                    result.append(new MessageString().getLivingInfo());
 
 
 

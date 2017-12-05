@@ -14,6 +14,7 @@ import com.mindyourelders.MyHealthCareWishes.DashBoard.EmergencyInfoActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.EventNoteActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.InsuranceInfoActivity;
+import com.mindyourelders.MyHealthCareWishes.DashBoard.LivingActivity;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.MedicalAppointActivity;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 
@@ -154,7 +155,7 @@ public class SpecialistContactAdapter extends BaseAdapter {
                     case "MEDICAL PROFILE":
                         fragment = "Information";
                         break;
-                    case "EMERGENCY CONTACTS":
+                    case "EMERGENCY CONTACTS AND HEALTH CARE PROXY AGENT":
                         fragment = "Emergency";
                         break;
                     case "PRIMARY PHYSICIAN":
@@ -184,7 +185,7 @@ public class SpecialistContactAdapter extends BaseAdapter {
                         break;
                 }
                 if (isEmergency == false&&isInsurance==false) {
-                    if (fragment.equals("Event Notes")||fragment.equals("Appointment Tracker"))
+                    if (fragment.equals("Event Notes")||fragment.equals("Appointment Tracker")||fragment.equals("Functional"))
                     {
                         if (fragment.equals("Event Notes"))
                         {
@@ -193,6 +194,11 @@ public class SpecialistContactAdapter extends BaseAdapter {
                             context.startActivity(i);
                         } else if (fragment.equals("Appointment Tracker")) {
                            Intent i = new Intent(context, MedicalAppointActivity.class);
+                            i.putExtra("FRAGMENT", fragment);
+                            context.startActivity(i);
+                        }else if(fragment.equals("Functional"))
+                        {
+                            Intent i = new Intent(context, LivingActivity.class);
                             i.putExtra("FRAGMENT", fragment);
                             context.startActivity(i);
                         }

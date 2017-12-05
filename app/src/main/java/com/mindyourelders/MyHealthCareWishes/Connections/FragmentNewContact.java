@@ -529,15 +529,15 @@ String location="";
             case "Emergency":
                 visiEmergency();
                 spinnerPriority.setVisibility(View.VISIBLE);
-                txtAdd.setText("Add Emergency");
-                txtTitle.setText("Add Emergency Contact");
+                txtAdd.setText("Add Emergency Contact and Proxy Agent");
+                txtTitle.setText("Add Emergency Contact and Proxy Agent");
                 break;
 
             case "EmergencyUpdate":
                 visiEmergency();
                 spinnerPriority.setVisibility(View.VISIBLE);
-                txtAdd.setText("Update Emergency");
-                txtTitle.setText("Update Emergency Contact");
+                txtAdd.setText("Update Emergency and Proxy Agent");
+                txtTitle.setText("Update Emergency Contact and Proxy Agent");
                 Intent EmergencyIntent = getActivity().getIntent();
                 if (EmergencyIntent.getExtras()!=null)
                 {
@@ -604,7 +604,7 @@ String location="";
                 disableEmergency();
                 spinnerPriority.setVisibility(View.VISIBLE);
                 txtTitle.setVisibility(View.VISIBLE);
-                txtTitle.setText("Emergency Contact");
+                txtTitle.setText("Emergency Contact and \nHealth Care Proxy Agent");
                 Intent EmergencyIntents = getActivity().getIntent();
                 if (EmergencyIntents.getExtras()!=null)
                 {
