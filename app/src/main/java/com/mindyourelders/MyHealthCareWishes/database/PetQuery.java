@@ -138,6 +138,19 @@ public class PetQuery {
         return true;
     }
 
+    public static boolean deleteRecords(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_USERID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+
+        return true;
+    }
+
     public static Boolean updatePetData(int id, String name, String breed, String color, String chip, String veterain, String care) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();

@@ -323,9 +323,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (checkedId == R.id.rbYes) {
                     veteran = "Yes";
                     tilId.setVisibility(View.VISIBLE);
+
                 } else if (checkedId == R.id.rbNo) {
                     veteran = "No";
                     tilId.setVisibility(View.GONE);
+                    idnumber="";
+                    txtIdNumber.setText(idnumber);
                 }
             }
         });
@@ -925,7 +928,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 }else if(imgCard.getVisibility()==View.GONE){
                     photoCard = null;
                 }
-
+                 if (pet.equals("No"))
+                 {
+                     boolean flag= PetQuery.deleteRecords(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                     if(flag==true)
+                     {
+                         //  Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+                         setPetData();
+                         // ListPet.requestFocus();
+                     }
+                 }
                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
                             Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english,child,friend,grandParent,parent,spouse,other,liveOther,live);

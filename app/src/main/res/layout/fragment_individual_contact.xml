@@ -12,10 +12,14 @@
     android:id="@+id/llIndividual"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-   <RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-       <!--  <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+        <!--  <RelativeLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,56 +80,55 @@
                 android:src="@drawable/ic_edit_blue" />
         </FrameLayout>
 
-    <RelativeLayout
-        android:id="@+id/llCard"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension60dp"
-        android:layout_below="@+id/flProfile"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="@dimen/dimension20dp"
-        android:background="@color/colorWhite"
-        android:layout_marginLeft="@dimen/dimension20dp"
-        android:layout_marginTop="@dimen/dimension10dp"
-        >
-        <TextView
-            android:id="@+id/txtCard"
-            style="@style/EmergencyCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Add Business Card"
-            android:textColor="@color/colorBlue"
-            android:padding="@dimen/dimension10dp"
-            android:paddingRight="@dimen/dimension20dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/dimension10dp"
-            />
         <RelativeLayout
-            android:id="@+id/rlCard"
-            android:layout_width="@dimen/dimension90dp"
+            android:id="@+id/llCard"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dimension60dp"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            >
-            <ImageView
-                android:id="@+id/imgCard"
-                android:layout_width="@dimen/dimension80dp"
-                android:layout_height="@dimen/dimension50dp"
-                android:src="@drawable/busi_card"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="@dimen/dimension20dp"
-                android:background="@android:color/transparent"
-                android:visibility="gone"
-                />
-            <ImageView
-                android:id="@+id/imgEditCard"
-                android:layout_width="@dimen/dimension30dp"
-                android:layout_height="@dimen/dimension30dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_edit_blue"
-                />
-        </RelativeLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/flProfile"
+            android:layout_marginLeft="@dimen/dimension20dp"
+            android:layout_marginRight="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/txtCard"
+                style="@style/EmergencyCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:padding="@dimen/dimension10dp"
+                android:paddingRight="@dimen/dimension20dp"
+                android:text="Add Business Card"
+                android:textColor="@color/colorBlue" />
+
+            <RelativeLayout
+                android:id="@+id/rlCard"
+                android:layout_width="@dimen/dimension90dp"
+                android:layout_height="@dimen/dimension60dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgCard"
+                    android:layout_width="@dimen/dimension80dp"
+                    android:layout_height="@dimen/dimension50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="@dimen/dimension20dp"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/busi_card"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgEditCard"
+                    android:layout_width="@dimen/dimension30dp"
+                    android:layout_height="@dimen/dimension30dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_edit_blue" />
+            </RelativeLayout>
         </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -136,11 +139,11 @@
             android:layout_marginTop="@dimen/dimension22dp"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
+            android:gravity="bottom"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
             android:paddingTop="@dimen/dimension8dp"
-            android:gravity="bottom"
 
             >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
@@ -149,16 +152,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
+                android:imeOptions="actionNext"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension10dp"
-                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -166,27 +170,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlRelation"
+            android:gravity="bottom"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            android:gravity="bottom"
-            >
+            android:paddingRight="@dimen/dimension30dp">
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                android:imeOptions="actionNext"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension10dp"
-                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -194,34 +198,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tilWorkPhone"
+            android:gravity="bottom"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            android:gravity="bottom"
-            >
+            android:paddingRight="@dimen/dimension30dp">
 
             <AutoCompleteTextView
                 android:id="@+id/txtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
+                android:imeOptions="actionNext"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension10dp"
-                android:paddingBottom="@dimen/dimension10dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
         </android.support.design.widget.TextInputLayout>
-       <View
-           android:id="@+id/view2"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/tilAddres"
-           />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/tilAddres"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -239,17 +243,17 @@
                 android:drawablePadding="@dimen/dimension10dp"
                 android:drawableRight="@drawable/ic_droupdown_arrow"
                 android:hint="Country"
+                android:imeOptions="actionNext"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension2dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
-        </android.support.design.widget.TextInputLayout>
+                android:textSize="@dimen/dimension20dp" />
 
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
 
 
         <android.support.design.widget.TextInputLayout
@@ -257,184 +261,189 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tilEmail"
+            android:gravity="bottom"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            android:gravity="bottom"
-            >
+            android:paddingRight="@dimen/dimension30dp">
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mobile Phone"
+                android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:maxLength="12"
                 android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension10dp"
-                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
-        </android.support.design.widget.TextInputLayout>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilHomePhone"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilPhone"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-           <AutoCompleteTextView
-               android:id="@+id/txtHomePhone"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Home Phone"
-               android:inputType="phone"
-               android:maxLength="12"
-               android:maxLines="1"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:singleLine="true"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilWorkPhone"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilHomePhone"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           android:visibility="gone"
-           >
-           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-           <AutoCompleteTextView
-               android:id="@+id/txtWorkPhone"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Work Phone"
-               android:inputType="phone"
-               android:maxLength="12"
-               android:maxLines="1"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:singleLine="true"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <RelativeLayout
-           android:id="@+id/rlRelation"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilName"
-           >
-       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-           android:id="@+id/spinnerRelation"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="@dimen/dimension35dp"
-           android:layout_marginRight="@dimen/dimension35dp"
-           app:ms_arrowColor="@color/colorBlue"
-           app:ms_arrowSize="16dp"
-           app:ms_floatingLabelText="Relationship"
-           app:ms_hint="hint"
-           app:ms_multiline="true"
-           custom:ms_floatingLabelColor="@color/colorBlue"
-           custom:ms_hintColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension20dp" />
 
-           android:visibility="gone"
-           />
-           <android.support.design.widget.TextInputLayout
-               android:id="@+id/tilOtherRelation"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:descendantFocusability="beforeDescendants"
-               android:focusableInTouchMode="true"
-               android:layout_below="@+id/spinnerRelation"
-               android:paddingBottom="@dimen/dimension8dp"
-               app:hintEnabled="false"
-               android:paddingLeft="@dimen/dimension30dp"
-               android:paddingRight="@dimen/dimension30dp"
-               android:paddingTop="@dimen/dimension8dp"
-               android:visibility="gone">
-               <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-               <AutoCompleteTextView
-                   android:id="@+id/txtOtherRelation"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:maxLength="30"
-                   android:maxLines="1"
-                   android:paddingLeft="@dimen/dimension15dp"
-                   android:paddingTop="@dimen/dimension2dp"
-                   android:singleLine="true"
-                   android:textColor="@color/colorPrimaryDark"
-                   android:textSize="@dimen/dimension20dp"
-                   android:imeOptions="actionNext"
-                   /><requestFocus />
-           </android.support.design.widget.TextInputLayout>
-       </RelativeLayout>
-       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-           android:id="@+id/spinner"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilPhone"
-           android:layout_marginLeft="@dimen/dimension35dp"
-           android:layout_marginRight="@dimen/dimension35dp"
-           app:ms_arrowColor="@color/colorBlue"
-           app:ms_arrowSize="16dp"
-           app:ms_floatingLabelText="Country"
-           app:ms_hint="hint"
-           app:ms_multiline="true"
-           custom:ms_floatingLabelColor="@color/colorBlue"
-           custom:ms_hintColor="@color/colorDarkGray"
-           android:visibility="gone"
-           />
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilGender"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_alignParentLeft="true"
-           android:layout_alignParentStart="true"
-           android:layout_below="@+id/tilBdate"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:focusable="false"
-           android:gravity="bottom"
-           >
-           <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-           <AutoCompleteTextView
-               android:id="@+id/txtGender"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:focusable="false"
-               android:hint="Gender"
-               android:maxLength="30"
-               android:maxLines="1"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:singleLine="true"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHomePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilPhone"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtHomePhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Home Phone"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilWorkPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilHomePhone"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtWorkPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Work Phone"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilName">
+
+            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                android:id="@+id/spinnerRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension35dp"
+                android:layout_marginRight="@dimen/dimension35dp"
+                android:visibility="gone"
+                app:ms_arrowColor="@color/colorBlue"
+                app:ms_arrowSize="16dp"
+                app:ms_floatingLabelText="Relationship"
+                app:ms_hint="hint"
+                app:ms_multiline="true"
+                custom:ms_floatingLabelColor="@color/colorBlue"
+
+                custom:ms_hintColor="@color/colorDarkGray" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilOtherRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerRelation"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:paddingBottom="@dimen/dimension8dp"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:paddingRight="@dimen/dimension30dp"
+                android:paddingTop="@dimen/dimension8dp"
+                android:visibility="gone"
+                app:hintEnabled="false">
+                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                <AutoCompleteTextView
+                    android:id="@+id/txtOtherRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/dimension15dp"
+                    android:paddingTop="@dimen/dimension2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimension20dp" />
+
+                <requestFocus />
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilPhone"
+            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginRight="@dimen/dimension35dp"
+            android:visibility="gone"
+            app:ms_arrowColor="@color/colorBlue"
+            app:ms_arrowSize="16dp"
+            app:ms_floatingLabelText="Country"
+            app:ms_hint="hint"
+            app:ms_multiline="true"
+            custom:ms_floatingLabelColor="@color/colorBlue"
+            custom:ms_hintColor="@color/colorDarkGray" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tilBdate"
+            android:focusable="false"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+            <AutoCompleteTextView
+                android:id="@+id/txtGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Gender"
+                android:imeOptions="actionNext"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilBdate"
@@ -443,12 +452,11 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/view2"
+            android:gravity="bottom"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
-            android:visibility="gone"
-            android:gravity="bottom"
-            >
+            android:visibility="gone">
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtBdate"
@@ -456,605 +464,623 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="Birth Date"
+                android:imeOptions="actionNext"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:paddingBottom="@dimen/dimension10dp"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension10dp"
-                android:paddingBottom="@dimen/dimension10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp"
-                android:imeOptions="actionNext"
-                /><requestFocus />
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
         </android.support.design.widget.TextInputLayout>
 
 
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilHeight"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilGender"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtHeight"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Height(Ft-Inches)"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:inputType="phone"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               android:nextFocusDown="@+id/txtWeight"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilWeight"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilHeight"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtWeight"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Weight(lbs)"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:inputType="number"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-           android:id="@+id/spinnerEyes"
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/dimension85dp"
-           android:layout_marginLeft="@dimen/dimension35dp"
-           android:layout_marginRight="@dimen/dimension35dp"
-           app:ms_arrowColor="@color/colorBlue"
-           app:ms_arrowSize="16dp"
-           app:ms_floatingLabelText="Eyes Color"
-           app:ms_hint="hint"
-           app:ms_multiline="true"
-           android:layout_below="@+id/tilWeight"
-           custom:ms_floatingLabelColor="@color/colorBlue"
-           custom:ms_hintColor="@color/colorDarkGray"
-           />
-       <View
-           android:id="@+id/view3"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/spinnerEyes"
-           >
-       </View>
-       <TextView
-           android:id="@+id/txtLiving"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:layout_marginLeft="@dimen/dimension10dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:text="Do you live alone?"
-           android:textColor="@color/colorPrimary"
-           android:textSize="@dimen/dimension20dp"
-           android:layout_below="@+id/view3"
-           />
-       <RadioGroup
-           android:id="@+id/rgLive"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/txtLiving"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:orientation="horizontal"
-           >
-           <RadioButton
-               android:id="@+id/rbYesLive"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Yes"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-           <RadioButton
-               android:id="@+id/rbNoLive"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="No"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-       </RadioGroup>
-       <RelativeLayout
-           android:id="@+id/rlLive"
-           android:layout_below="@+id/rgLive"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="@dimen/dimension50dp"
-           android:visibility="gone"
-           >
-       <CheckBox
-           android:id="@+id/chkChild"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Children"
-           android:textSize="@dimen/dimension20dp"
-           />
-           <CheckBox
-               android:id="@+id/chkFriend"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Friend"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_below="@+id/chkChild"
-               />
-           <CheckBox
-               android:id="@+id/chkGrandParent"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Grand Parents"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_below="@+id/chkFriend"
-               />
-           <CheckBox
-               android:id="@+id/chkParent"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Parents"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_below="@+id/chkGrandParent"
-               />
-           <CheckBox
-               android:id="@+id/chkSpouse"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Spouse"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_below="@+id/chkParent"
-               />
-           <CheckBox
-               android:id="@+id/chkOther"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Significant Other"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_below="@+id/chkSpouse"
-               />
-           <android.support.design.widget.TextInputLayout
-               android:id="@+id/tilOther"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_below="@+id/chkOther"
-               android:paddingBottom="@dimen/dimension8dp"
-               android:paddingLeft="@dimen/dimension30dp"
-               android:paddingRight="@dimen/dimension30dp"
-               android:gravity="bottom"
-               android:visibility="gone"
-               >
-               <AutoCompleteTextView
-                   android:id="@+id/txtOther"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:hint="Other(Specify)"
-                   android:paddingLeft="@dimen/dimension15dp"
-                   android:paddingTop="@dimen/dimension10dp"
-                   android:paddingBottom="@dimen/dimension10dp"
-                   android:textColor="@color/colorPrimaryDark"
-                   android:textSize="@dimen/dimension20dp"
-                   android:imeOptions="actionNext"
-                   /><requestFocus />
-           </android.support.design.widget.TextInputLayout>
-       </RelativeLayout>
-       <View
-           android:id="@+id/view12"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/rlLive"
-           >
-       </View>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilProfession"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/view12"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtProfession"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Profession"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-           /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilGender"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
 
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilEmployedBy"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilProfession"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtEmployedBy"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Employed by"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tiltelephone"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilEmployedBy"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txttelephone"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Telephone # of Manager"
-               android:inputType="phone"
-               android:maxLength="12"
-               android:maxLines="2"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <View
-           android:id="@+id/view4"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/tiltelephone"
-           >
-       </View>
-       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-           android:id="@+id/spinnerLanguage"
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/dimension85dp"
-           android:layout_marginLeft="@dimen/dimension35dp"
-           android:layout_marginRight="@dimen/dimension35dp"
-           app:ms_arrowColor="@color/colorBlue"
-           app:ms_arrowSize="16dp"
-           app:ms_floatingLabelText="Language Spoken"
-           app:ms_hint="hint"
-           app:ms_multiline="true"
-           android:layout_below="@+id/view4"
-           custom:ms_floatingLabelColor="@color/colorBlue"
-           custom:ms_hintColor="@color/colorDarkGray"
-           />
-       <TextView
-           android:id="@+id/txtUnderstand"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:layout_marginLeft="@dimen/dimension10dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:text="Understand English"
-           android:textColor="@color/colorPrimary"
-           android:textSize="@dimen/dimension20dp"
-           android:layout_below="@+id/spinnerLanguage"
-           />
-       <RadioGroup
-           android:id="@+id/rgUnderstand"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/txtUnderstand"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:orientation="horizontal"
-           >
-           <RadioButton
-               android:id="@+id/rbYess"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Yes"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-           <RadioButton
-               android:id="@+id/rbNoo"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="No"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-       </RadioGroup>
-       <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-           android:id="@+id/spinnerMarital"
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/dimension85dp"
-           android:layout_marginLeft="@dimen/dimension35dp"
-           android:layout_marginRight="@dimen/dimension35dp"
-           app:ms_arrowColor="@color/colorBlue"
-           app:ms_arrowSize="16dp"
-           app:ms_floatingLabelText="Marital Status"
-           app:ms_hint="hint"
-           app:ms_multiline="true"
-           android:layout_below="@+id/rgUnderstand"
-           custom:ms_floatingLabelColor="@color/colorBlue"
-           custom:ms_hintColor="@color/colorDarkGray"
+            <AutoCompleteTextView
+                android:id="@+id/txtHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Height(Ft-Inches)"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:nextFocusDown="@+id/txtWeight"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
 
-           />
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilReligion"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/spinnerMarital"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtReligion"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Religion-Notes"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:maxLines="3"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
 
-       <View
-           android:id="@+id/view5"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/tilReligion"
-           >
-       </View>
-       <TextView
-           android:id="@+id/txtVeteran"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:layout_marginLeft="@dimen/dimension10dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:text="Veteran Y/N"
-           android:textColor="@color/colorPrimary"
-           android:textSize="@dimen/dimension20dp"
-           android:layout_below="@+id/view5"
-           />
-       <RadioGroup
-           android:id="@+id/rgVeteran"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/txtVeteran"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:orientation="horizontal"
-           >
-           <RadioButton
-               android:id="@+id/rbYes"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Yes"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-           <RadioButton
-               android:id="@+id/rbNo"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="No"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-       </RadioGroup>
-       <android.support.design.widget.TextInputLayout
-           android:id="@+id/tilId"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/rgVeteran"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           android:visibility="gone"
-           >
-           <AutoCompleteTextView
-               android:id="@+id/txtId"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="ID Number"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
-       <android.support.design.widget.TextInputLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/tilId"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:gravity="bottom"
-           android:visibility="gone"
-           >
-           <AutoCompleteTextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="ID Number"
-               android:paddingLeft="@dimen/dimension15dp"
-               android:paddingTop="@dimen/dimension10dp"
-               android:paddingBottom="@dimen/dimension10dp"
-               android:textColor="@color/colorPrimaryDark"
-               android:textSize="@dimen/dimension20dp"
-               android:background="@drawable/corner_gray_white_border"
-               android:imeOptions="actionNext"
-               /><requestFocus />
-       </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilHeight"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
 
-       <View
-           android:id="@+id/view6"
-           android:layout_height="@dimen/dimension20dp"
-           android:layout_width="match_parent"
-           android:layout_marginBottom="@dimen/dimension15dp"
-           android:layout_marginTop="@dimen/dimension15dp"
-           android:background="@color/colorLightGray"
-           android:layout_below="@+id/tilId"
-           >
-       </View>
-       <TextView
-           android:id="@+id/txtPet"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:paddingBottom="@dimen/dimension8dp"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:layout_marginLeft="@dimen/dimension10dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:text="Pets Y/N"
-           android:layout_below="@+id/view6"
-           android:textColor="@color/colorPrimary"
-           android:textSize="@dimen/dimension20dp"
-           />
-       <RadioGroup
-           android:id="@+id/rgPet"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/txtPet"
-           android:paddingLeft="@dimen/dimension30dp"
-           android:paddingRight="@dimen/dimension30dp"
-           android:paddingTop="@dimen/dimension8dp"
-           android:orientation="horizontal"
-           >
-           <RadioButton
-               android:id="@+id/rbYesPet"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Yes"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-           <RadioButton
-               android:id="@+id/rbNoPet"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="No"
-               android:textSize="@dimen/dimension20dp"
-               android:layout_marginLeft="@dimen/dimension20dp"
-               />
-       </RadioGroup>
-           <RelativeLayout
-               android:id="@+id/rlPet"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_below="@+id/rgPet"
-               android:layout_marginLeft="@dimen/dimension30dp"
-               android:layout_marginRight="@dimen/dimension30dp"
-               android:layout_marginTop="@dimen/dimension8dp"
-               android:layout_marginBottom="@dimen/dimension8dp"
-               android:visibility="gone"
-              >
+            <AutoCompleteTextView
+                android:id="@+id/txtWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Weight(lbs)"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
 
-               <TextView
-                   android:id="@+id/txtPetHeader"
-                   android:layout_width="match_parent"
-                   android:layout_height="@dimen/dimension40dp"
-                   android:layout_toRightOf="@+id/imgAllergy"
-                   android:text="Add Pets"
-                   android:textColor="@color/colorPrimary"
-                   android:textSize="@dimen/dimension20dp"
-                   android:paddingLeft="@dimen/dimension30dp"
-                   android:gravity="center_vertical"
-                   />
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
 
-               <ImageView
-                   android:id="@+id/imgAddPet"
-                   android:layout_width="@dimen/dimension40dp"
-                   android:layout_height="@dimen/dimension40dp"
-                   android:layout_alignParentRight="true"
-                   android:padding="@dimen/dimension5dp"
-                   android:src="@drawable/add_square" />
-               <View
-                   android:id="@+id/viewBar"
-                   android:layout_width="match_parent"
-                   android:layout_height="1dp"
-                   android:layout_below="@+id/txtPetHeader"
-                   android:background="@color/colorLightGray"
-                   android:layout_margin="@dimen/dimension5dp"
-                   ></View>
+        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            android:id="@+id/spinnerEyes"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension85dp"
+            android:layout_below="@+id/tilWeight"
+            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginRight="@dimen/dimension35dp"
+            app:ms_arrowColor="@color/colorBlue"
+            app:ms_arrowSize="16dp"
+            app:ms_floatingLabelText="Eyes Color"
+            app:ms_hint="hint"
+            app:ms_multiline="true"
+            custom:ms_floatingLabelColor="@color/colorBlue"
+            custom:ms_hintColor="@color/colorDarkGray" />
 
-               <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
-                   android:id="@+id/ListPet"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/viewBar"
-                   android:divider="@null" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/spinnerEyes"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray"></View>
 
-           </RelativeLayout>
+        <TextView
+            android:id="@+id/txtLiving"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view3"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:text="Do you live alone?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimension20dp" />
+
+        <RadioGroup
+            android:id="@+id/rgLive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLiving"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+
+            <RadioButton
+                android:id="@+id/rbYesLive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="Yes"
+                android:textSize="@dimen/dimension20dp" />
+
+            <RadioButton
+                android:id="@+id/rbNoLive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="No"
+                android:textSize="@dimen/dimension20dp" />
+        </RadioGroup>
+
+        <RelativeLayout
+            android:id="@+id/rlLive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rgLive"
+            android:layout_marginLeft="@dimen/dimension50dp"
+            android:visibility="gone">
+
+            <CheckBox
+                android:id="@+id/chkChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Children"
+                android:textSize="@dimen/dimension20dp" />
+
+            <CheckBox
+                android:id="@+id/chkFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkChild"
+                android:text="Friend"
+                android:textSize="@dimen/dimension20dp" />
+
+            <CheckBox
+                android:id="@+id/chkGrandParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkFriend"
+                android:text="Grand Parents"
+                android:textSize="@dimen/dimension20dp" />
+
+            <CheckBox
+                android:id="@+id/chkParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkGrandParent"
+                android:text="Parents"
+                android:textSize="@dimen/dimension20dp" />
+
+            <CheckBox
+                android:id="@+id/chkSpouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkParent"
+                android:text="Spouse"
+                android:textSize="@dimen/dimension20dp" />
+
+            <CheckBox
+                android:id="@+id/chkOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkSpouse"
+                android:text="Significant Other"
+                android:textSize="@dimen/dimension20dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chkOther"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/dimension8dp"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:paddingRight="@dimen/dimension30dp"
+                android:visibility="gone">
+
+                <AutoCompleteTextView
+                    android:id="@+id/txtOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Other(Specify)"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="@dimen/dimension10dp"
+                    android:paddingLeft="@dimen/dimension15dp"
+                    android:paddingTop="@dimen/dimension10dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimension20dp" />
+
+                <requestFocus />
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view12"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/rlLive"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray"></View>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilProfession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view12"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtProfession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Profession"
+                android:imeOptions="actionNext"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmployedBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProfession"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtEmployedBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Employed by"
+                android:imeOptions="actionNext"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tiltelephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmployedBy"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/txttelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telephone # of Manager"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="12"
+                android:maxLines="2"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/tiltelephone"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray"></View>
+
+        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            android:id="@+id/spinnerLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension85dp"
+            android:layout_below="@+id/view4"
+            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginRight="@dimen/dimension35dp"
+            app:ms_arrowColor="@color/colorBlue"
+            app:ms_arrowSize="16dp"
+            app:ms_floatingLabelText="Language Spoken"
+            app:ms_hint="hint"
+            app:ms_multiline="true"
+            custom:ms_floatingLabelColor="@color/colorBlue"
+            custom:ms_hintColor="@color/colorDarkGray" />
+
+        <TextView
+            android:id="@+id/txtUnderstand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinnerLanguage"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:text="Understand English"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimension20dp" />
+
+        <RadioGroup
+            android:id="@+id/rgUnderstand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtUnderstand"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+
+            <RadioButton
+                android:id="@+id/rbYess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="Yes"
+                android:textSize="@dimen/dimension20dp" />
+
+            <RadioButton
+                android:id="@+id/rbNoo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="No"
+                android:textSize="@dimen/dimension20dp" />
+        </RadioGroup>
+
+        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            android:id="@+id/spinnerMarital"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension85dp"
+            android:layout_below="@+id/rgUnderstand"
+            android:layout_marginLeft="@dimen/dimension35dp"
+            android:layout_marginRight="@dimen/dimension35dp"
+            app:ms_arrowColor="@color/colorBlue"
+            app:ms_arrowSize="16dp"
+            app:ms_floatingLabelText="Marital Status"
+            app:ms_hint="hint"
+            app:ms_multiline="true"
+            custom:ms_floatingLabelColor="@color/colorBlue"
+            custom:ms_hintColor="@color/colorDarkGray"
+
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilReligion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinnerMarital"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtReligion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Religion-Notes"
+                android:imeOptions="actionNext"
+                android:maxLines="3"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/tilReligion"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray"></View>
+
+        <TextView
+            android:id="@+id/txtVeteran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view5"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:text="Veteran Y/N"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimension20dp" />
+
+        <RadioGroup
+            android:id="@+id/rgVeteran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtVeteran"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+
+            <RadioButton
+                android:id="@+id/rbYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="Yes"
+                android:textSize="@dimen/dimension20dp" />
+
+            <RadioButton
+                android:id="@+id/rbNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="No"
+                android:textSize="@dimen/dimension20dp" />
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rgVeteran"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ID Number"
+                android:imeOptions="actionNext"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilId"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:visibility="gone">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corner_gray_white_border"
+                android:hint="ID Number"
+                android:imeOptions="actionNext"
+                android:paddingBottom="@dimen/dimension10dp"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp" />
+
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/tilId"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray"></View>
+
+        <TextView
+            android:id="@+id/txtPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view6"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp"
+            android:text="Pets Y/N"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimension20dp" />
+
+        <RadioGroup
+            android:id="@+id/rgPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPet"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+
+            <RadioButton
+                android:id="@+id/rbYesPet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="Yes"
+                android:textSize="@dimen/dimension20dp" />
+
+            <RadioButton
+                android:id="@+id/rbNoPet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension20dp"
+                android:text="No"
+                android:textSize="@dimen/dimension20dp" />
+        </RadioGroup>
+
+        <RelativeLayout
+            android:id="@+id/rlPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rgPet"
+            android:layout_marginBottom="@dimen/dimension8dp"
+            android:layout_marginLeft="@dimen/dimension30dp"
+            android:layout_marginRight="@dimen/dimension30dp"
+            android:layout_marginTop="@dimen/dimension8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtPetHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:text="Add Pets"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimension20dp" />
+
+            <ImageView
+                android:id="@+id/imgAddPet"
+                android:layout_width="@dimen/dimension40dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dimension5dp"
+                android:src="@drawable/add_square" />
+
+            <View
+                android:id="@+id/viewBar"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/txtPetHeader"
+                android:layout_margin="@dimen/dimension5dp"
+                android:background="@color/colorLightGray"></View>
+
+            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+                android:id="@+id/ListPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBar"
+                android:divider="@null" />
+
+            <View
+                android:id="@+id/viewg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension20dp"
+                android:layout_below="@+id/ListPet"
+                android:layout_marginBottom="@dimen/dimension15dp"
+                android:layout_marginTop="@dimen/dimension15dp"
+                android:background="@color/colorLightGray" />
+        </RelativeLayout>
 
     </RelativeLayout>
 </RelativeLayout>
