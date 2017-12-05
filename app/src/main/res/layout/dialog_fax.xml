@@ -16,7 +16,7 @@
             android:layout_marginBottom="@dimen/dimension20dp"
             android:layout_marginTop="@dimen/dimension20dp"
             android:gravity="center"
-            android:text="Mind Your Elders"
+            android:text="Mind Your Loved Ones"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/dimension26dp"
             android:textStyle="bold" />
