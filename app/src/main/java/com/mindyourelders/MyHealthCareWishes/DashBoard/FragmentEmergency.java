@@ -89,7 +89,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
 
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText("EMERGENCY CONTACTS AND\nHEALTH CARE PROXY AGENT");
+        txtTitle.setText("EMERGENCY CONTACTS &\nHEALTH CARE PROXY AGENT");
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         /*imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);*/

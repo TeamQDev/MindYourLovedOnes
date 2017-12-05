@@ -45,7 +45,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
     Preferences preferences;
-    RelativeLayout rlHome,rlSupport,rlResources,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail;
+    RelativeLayout rlHome,rlSupport,rlContact,rlResources,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail;
+    boolean flagResource=false,flagMarket=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlMarketPlace.setOnClickListener(this);
         rlVideos.setOnClickListener(this);
         rlBackup.setOnClickListener(this);
+        rlContact.setOnClickListener(this);
 
         txtBank.setOnClickListener(this);
         txtForm.setOnClickListener(this);
@@ -134,6 +136,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlBackup= (RelativeLayout) leftDrawer.findViewById(R.id.rlBackup);
         rlMarketDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketDetail);
         rlResourcesDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlResourcesDetail);
+        rlContact= (RelativeLayout) leftDrawer.findViewById(R.id.rlContact);
     }
 
     private void fragmentData() {
@@ -222,8 +225,23 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
+            case R.id.rlContact:
+                Intent intents = new Intent();
+                intents.setAction(Intent.ACTION_VIEW);
+                intents.addCategory(Intent.CATEGORY_BROWSABLE);
+                intents.setData(Uri.parse("http://www.myhealthcarewishes.com/support.html"));
+                startActivity(intents);
+                break;
+
             case R.id.rlResources:
-              rlResourcesDetail.setVisibility(View.VISIBLE);
+                if (flagResource==false) {
+                    rlResourcesDetail.setVisibility(View.VISIBLE);
+                    flagResource=true;
+                }
+                else  if (flagResource==true){
+                    rlResourcesDetail.setVisibility(View.GONE);
+                    flagResource=false;
+                }
               /* // if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
                     callFragment("RESOURCES", fragmentResources);
               //  }
@@ -231,7 +249,15 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlMarketPlace:
-                rlMarketDetail.setVisibility(View.VISIBLE);
+                if (flagMarket==false) {
+                    rlMarketDetail.setVisibility(View.VISIBLE);
+                    flagMarket=true;
+                }
+                else  if (flagMarket==true){
+                    rlMarketDetail.setVisibility(View.GONE);
+                    flagMarket=false;
+                }
+              ///  rlMarketDetail.setVisibility(View.VISIBLE);
              /*//   if (fragmentManager.findFragmentByTag("MARKET") == null) {
                     callFragment("MARKET", fragmentMarketPlace);
               //  }
