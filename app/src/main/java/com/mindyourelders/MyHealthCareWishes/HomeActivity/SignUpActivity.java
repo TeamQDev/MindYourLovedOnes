@@ -168,6 +168,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String texts = "<b> <font color='black'><a href='http://www.myhealthcarewishes.com'> All Information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy\n" +
                 "rules <b> <font color='black'> <a href='http://www.myhealthcarewishes.com'> do not apply </a> </b> </font> to this app because the app is in your control.";
         txtPolicy5.setText(Html.fromHtml(texts));
+        
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, countryList);
