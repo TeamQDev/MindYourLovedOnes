@@ -1072,16 +1072,16 @@
                 android:layout_below="@+id/viewBar"
                 android:divider="@null" />
 
-            <View
-                android:id="@+id/viewg"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension20dp"
-                android:layout_below="@+id/ListPet"
-                android:layout_marginBottom="@dimen/dimension15dp"
-                android:layout_marginTop="@dimen/dimension15dp"
-                android:background="@color/colorLightGray" />
-        </RelativeLayout>
 
+        </RelativeLayout>
+        <View
+            android:id="@+id/viewg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_below="@+id/rlPet"
+            android:layout_marginBottom="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:background="@color/colorLightGray" />
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>
