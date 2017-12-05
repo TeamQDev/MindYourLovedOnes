@@ -294,7 +294,7 @@ emergencyList=new ArrayList<>();
                 new Header().createPdfHeader(file.getAbsolutePath(),
                         ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                 Header.addEmptyLine(1);
-                Header.addusereNameChank("Emergency Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addusereNameChank("Emergency Contacts And Health Care Proxy Agent");//preferences.getString(PrefConstants.CONNECTED_NAME));
                 Header.addEmptyLine(1);
 /*
                 new Header().createPdfHeader(file.getAbsolutePath(),

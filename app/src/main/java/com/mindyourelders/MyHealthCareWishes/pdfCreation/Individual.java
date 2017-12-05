@@ -844,8 +844,8 @@ public class Individual {
     }
 
    public Individual(String emergency, ArrayList<Emergency> emergencyList) {
-       Header.addChank("Emergency Contacts");
-       messageEmergency.add("Emergency Contacts");
+       Header.addChank("Emergency Contacts And Health Care Proxy Agent");
+       messageEmergency.add("Emergency Contacts And Health Care Proxy Agent");
        Header.addEmptyLine(1);
 
        Header.widths[0] = 0.15f;
