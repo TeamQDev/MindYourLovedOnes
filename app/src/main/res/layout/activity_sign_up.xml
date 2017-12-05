@@ -422,8 +422,7 @@
               android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension30dp"
-            android:text="All Information on this app resides on your smartphone or tablet. HIPAA federal privacy
-rules do not apply to this app because the app is in your control."
+            android:textColorLink="#000000"
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
         <TextView
