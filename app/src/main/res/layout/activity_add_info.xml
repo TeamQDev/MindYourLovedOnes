@@ -52,15 +52,25 @@
                 android:src="@drawable/check_mark"
                 android:visibility="gone" />
         </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header"
+            android:layout_marginBottom="@dimen/dimension10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimension30dp"
+                >
     <ImageView
         android:id="@+id/imgInfo"
         android:layout_width="@dimen/dimension30dp"
         android:layout_height="@dimen/dimension30dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/header"
-
         android:src="@drawable/info"
         android:layout_margin="@dimen/dimension10dp"
+        android:visibility="gone"
         />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilTitle"
@@ -284,9 +294,10 @@
             android:layout_marginTop="@dimen/dimension40dp"
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension30dp"
             android:layout_centerHorizontal="true"
-            android:visibility="gone"
-            >]
+
+            >
             <TextView
                 android:id="@+id/txtHeader"
                 android:layout_width="match_parent"
@@ -296,33 +307,23 @@
                 android:textSize="@dimen/dimension20dp"
                 android:textColor="@color/colorBlackDark"
                 android:layout_marginLeft="@dimen/dimension10dp"
+                 android:layout_marginTop="@dimen/dimension10dp"
                 ></TextView>
-            <RelativeLayout
-                android:id="@+id/rlOne"
+
+            <TextView
+                android:id="@+id/txtInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Pdf For Reference"
+                android:textSize="@dimen/dimension18dp"
+                android:textColor="@color/colorBlackDark"
+                android:layout_marginLeft="@dimen/dimension10dp"
                 android:layout_below="@+id/txtHeader"
-                android:layout_marginTop="@dimen/dimension10dp"
-                >
-                <ImageView
-                    android:id="@+id/imgOne"
-                    android:layout_width="@dimen/dimension20dp"
-                    android:layout_height="@dimen/dimension17dp"
-                    android:src="@drawable/checkbullet"
-                    android:layout_marginTop="@dimen/dimension10dp"
-                    />
-                <TextView
-                    android:id="@+id/txtOne"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Types of Reaction"
-                    android:textSize="@dimen/dimension19dp"
-                    android:textColor="@color/colorBlue"
-                    android:layout_toRightOf="@+id/imgOne"
-                    android:layout_marginLeft="@dimen/dimension10dp"
-                    ></TextView>
-            </RelativeLayout>
+                ></TextView>
 
         </RelativeLayout>
-    </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+
+</RelativeLayout>
 </RelativeLayout>

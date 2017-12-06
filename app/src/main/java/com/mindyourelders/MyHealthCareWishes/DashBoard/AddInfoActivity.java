@@ -37,7 +37,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     private static final int RESULT_VACCINE =700 ;
     Context context=this;
     ImageView imgBack,imgInfo;
-    RelativeLayout llAddConn,rlInfo;
+    RelativeLayout llAddConn,rlInfo,rlPdf;
     TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone;
     TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone;
     public static final int RESULT_ALLERGY=100;
@@ -52,7 +52,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     String data="";
     String header="";
             String msg="";
-
+TextView txtHeader,txtInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,191 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     return false;
                 }
             });
+              switch (from) {
+                case "Allergy":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+
+                case "AllergyUpdate":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+                case "Implants":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+
+                case "ImplantUpdate":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+                case "Condition":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+
+                case "ConditionUpdate":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+                case "Hospital":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+
+                case "HospitalUpdate":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+                case "History":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+
+                case "HistoryUpdate":
+                    rlPdf.setVisibility(View.VISIBLE);
+                    break;
+
+                case "Vaccine":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+
+                case "VaccineUpdate":
+                    rlPdf.setVisibility(View.GONE);
+                    break;
+            }
             switch (from) {
+                case "Allergy":
+                    header = "Types of Reaction to Consider :";
+                    msg =   "<br>Anaphylaxis<br>" +
+                            "Difficulty Breathing<br>" +
+                            "Hives<br>" +
+                            "Nausea<br>" +
+                            "Rash<br>" +
+                            "Vomiting";
+                   txtHeader.setText(header);
+                   txtInfo.setText(Html.fromHtml(msg));
+                    break;
+
+                case "AllergyUpdate":
+                    header = "Types of Reaction to Consider :";
+                    msg =   "<br>Anaphylaxis<br>" +
+                            "Difficulty Breathing<br>" +
+                            "Hives<br>" +
+                            "Nausea<br>" +
+                            "Rash<br>" +
+                            "Vomiting";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+                case "Implants":
+                    header = "Medical Implants to Consider :";
+                    msg = "<br><ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                            "<li>Artifical Limbs</li>" +
+                            "<li>Artificial Heart Value</li>" +
+                            "<li>Body Art</li>" +
+                            "<li>Body Piercing </li>" +
+                            "<li>Coronary Stents (Drug Coated/Bare Methal/Unknown)</li>" +
+                            "<li>Gastric Band</li>" +
+                            "<li>Implanted Cardio Defibrilator (ICD)</li>" +
+                            "<li>Implanted Devices/Pumps/Stimulator</li>" +
+                            "<li>Joint Replacements (specify)______</li>" +
+                            "<li>Lens Implants</li>" +
+                            "<li>Metal Implants</li>" +
+                            "<li>Middle Ear Prosthesis</li>" +
+                            "<li>Pacemaker</li>" +
+                            "<li>Penile Implant</li>" +
+                            "<li>Pins/Rods/Screws (specify)</li>" +
+                            "<li>Prosthetic Eye</li>" +
+                            "<li>Renal or other Stents</li>" +
+                            "<li>Tracheotomy</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+
+                case "ImplantUpdate":
+                    header = "Medical Implants to Consider :";
+                    msg = "<br><ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                            "<li>Artifical Limbs</li>" +
+                            "<li>Artificial Heart Value</li>" +
+                            "<li>Body Art</li>" +
+                            "<li>Body Piercing </li>" +
+                            "<li>Coronary Stents (Drug Coated/Bare Methal/Unknown)</li>" +
+                            "<li>Gastric Band</li>" +
+                            "<li>Implanted Cardio Defibrilator (ICD)</li>" +
+                            "<li>Implanted Devices/Pumps/Stimulator</li>" +
+                            "<li>Joint Replacements (specify)______</li>" +
+                            "<li>Lens Implants</li>" +
+                            "<li>Metal Implants</li>" +
+                            "<li>Middle Ear Prosthesis</li>" +
+                            "<li>Pacemaker</li>" +
+                            "<li>Penile Implant</li>" +
+                            "<li>Pins/Rods/Screws (specify)</li>" +
+                            "<li>Prosthetic Eye</li>" +
+                            "<li>Renal or other Stents</li>" +
+                            "<li>Tracheotomy</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                   break;
+                case "Condition":
+
+                    break;
+
+                case "ConditionUpdate":
+
+                    break;
+                case "Hospital":
+
+                    break;
+
+                case "HospitalUpdate":
+
+                    break;
+                case "History":
+                    header="Surgical History to Consider :";
+                    msg="<br><ul><li>Appendix</li>" +
+                            "<li>Breast Biopsy/Mastectomy</li>" +
+                            "<li>Cataract</li>" +
+                            "<li>Colon</li>" +
+                            "<li>Gallbladder</li>" +
+                            "<li>Heart, Angio/Stent</li>" +
+                            "<li>Heart, Bypass</li>" +
+                            "<li>Heart, Valve</li>" +
+                            "<li>Hernia</li>" +
+                            "<li>Hip Replacement</li>" +
+                            "<li>Hysterectomy</li>" +
+                            "<li>Metal Implants</li>" +
+                            "<li>Middle Ear Prosthesis</li>" +
+                            "<li>Knee Surgery/Replacement</li>" +
+                            "<li>Lasik Surgery</li>" +
+                            "<li>Spine Surgery</li>" +
+                            "<li>Thyroid Surgery</li>" +
+                            "<li>Tonsils</li>" +
+                            "<li>Vascular Surgery</li>" +
+                            "<li>Wisdom Teeth</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+
+                case "HistoryUpdate":
+                    header="Surgical History to Consider :";
+                    msg="<br><ul><li>Appendix</li>" +
+                            "<li>Breast Biopsy/Mastectomy</li>" +
+                            "<li>Cataract</li>" +
+                            "<li>Colon</li>" +
+                            "<li>Gallbladder</li>" +
+                            "<li>Heart, Angio/Stent</li>" +
+                            "<li>Heart, Bypass</li>" +
+                            "<li>Heart, Valve</li>" +
+                            "<li>Hernia</li>" +
+                            "<li>Hip Replacement</li>" +
+                            "<li>Hysterectomy</li>" +
+                            "<li>Metal Implants</li>" +
+                            "<li>Middle Ear Prosthesis</li>" +
+                            "<li>Knee Surgery/Replacement</li>" +
+                            "<li>Lasik Surgery</li>" +
+                            "<li>Spine Surgery</li>" +
+                            "<li>Thyroid Surgery</li>" +
+                            "<li>Tonsils</li>" +
+                            "<li>Vascular Surgery</li>" +
+                            "<li>Wisdom Teeth</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+            }
+          /*  switch (from) {
                 case "Allergy":
                   imgInfo.setVisibility(View.VISIBLE);
                     break;
@@ -131,7 +315,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 case "VaccineUpdate":
                     imgInfo.setVisibility(View.GONE);
                     break;
-            }
+            }*/
             isAllergy=i.getExtras().getBoolean("IsAllergy");
             isHistory=i.getExtras().getBoolean("IsHistory");
             isImplant=i.getExtras().getBoolean("IsImplant");
@@ -228,6 +412,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         txtReaction= (TextView) findViewById(R.id.txtReaction);
         txtAdd= (TextView) findViewById(R.id.txtAdd);
         txtTitle= (TextView) findViewById(R.id.txtTitle);
+        txtHeader= (TextView) findViewById(R.id.txtHeader);
+        txtInfo= (TextView) findViewById(R.id.txtInfo);
 
         txtDate= (TextView) findViewById(R.id.txtDate);
         txtDoctor= (TextView) findViewById(R.id.txtDoctor);
@@ -239,6 +425,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
         tilDoctor= (TextInputLayout) findViewById(R.id.tilDoctor);
         tilDone= (TextInputLayout) findViewById(R.id.tilDone);
 
+        rlPdf= (RelativeLayout) findViewById(R.id.rlPdf);
         rlInfo= (RelativeLayout) findViewById(R.id.rlInfo);
         rlInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,6 +433,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
               hideSoftKeyboard();
             }
         });
+
+
 
     }
 
