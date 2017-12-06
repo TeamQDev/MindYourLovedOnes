@@ -529,15 +529,15 @@ String location="";
             case "Emergency":
                 visiEmergency();
                 spinnerPriority.setVisibility(View.VISIBLE);
-                txtAdd.setText("Add Emergency Contact and Proxy Agent");
-                txtTitle.setText("Add Emergency Contact and Proxy Agent");
+                txtAdd.setText("Add Emergency Contact & Proxy Agent");
+                txtTitle.setText("Add Emergency Contact & Proxy Agent");
                 break;
 
             case "EmergencyUpdate":
                 visiEmergency();
                 spinnerPriority.setVisibility(View.VISIBLE);
-                txtAdd.setText("Update Emergency and Proxy Agent");
-                txtTitle.setText("Update Emergency Contact and Proxy Agent");
+                txtAdd.setText("Update Emergency Contact & Proxy Agent");
+                txtTitle.setText("Update Emergency Contact & Proxy Agent");
                 Intent EmergencyIntent = getActivity().getIntent();
                 if (EmergencyIntent.getExtras()!=null)
                 {
@@ -716,8 +716,8 @@ String location="";
             case "PhysicianData":
 
                 visiSpecialist();
-                txtAdd.setText("Update Physician");
-                txtTitle.setText("Update Physician");
+                txtAdd.setText("Update Primary Physician");
+                txtTitle.setText("Update Primary Physician");
                 Intent specialistIntent1 = getActivity().getIntent();
                 if (specialistIntent1.getExtras() != null) {
                     Specialist specialist= (Specialist) specialistIntent1.getExtras().getSerializable("SpecialistObject");
