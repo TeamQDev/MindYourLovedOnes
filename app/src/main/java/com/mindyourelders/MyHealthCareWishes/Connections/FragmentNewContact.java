@@ -2515,6 +2515,39 @@ String location="";
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
+                    case "PhysicianData":
+                        if (validate("Physician")) {
+
+
+                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+                            byte[] photo = baos.toByteArray();
+                            if (isPhysician==1) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 1, lastseen,photoCard);
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(isPhysician==2)
+                            {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 2, lastseen, photoCard);
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            }
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
                     case "Pharmacy":
 
                         if (validate("Pharmacy")) {

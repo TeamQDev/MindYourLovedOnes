@@ -27,7 +27,7 @@
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
             android:textAllCaps="true"
-            android:text="Add Emergency Contact And Proxy Agent"
+            android:text="Add Emergency Contact &amp; Proxy Agent"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>
