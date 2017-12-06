@@ -224,7 +224,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy5= (TextView) findViewById(R.id.txtPolicy5);
         txtPolicy2.setClickable(true);
         txtPolicy2.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a> Private Policy </a>";
+        String text = "<a> <font color='orange'> Private Policy </a></font>";
         txtPolicy2.setText(Html.fromHtml(text));
 
         txtPolicy4.setClickable(true);
