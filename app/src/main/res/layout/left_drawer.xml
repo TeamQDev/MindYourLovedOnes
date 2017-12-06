@@ -313,6 +313,8 @@
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimension100dp"
+                android:drawableLeft="@drawable/dot"
+                android:drawablePadding="@dimen/dimension10dp"
                 />
             <View
                 android:id="@+id/view1"
@@ -331,6 +333,8 @@
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimension100dp"
+                android:drawableLeft="@drawable/dot"
+                android:drawablePadding="@dimen/dimension10dp"
                 android:layout_below="@+id/view1"
                 />
         </RelativeLayout>
@@ -386,7 +390,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlMarketPlace"
             android:background="@color/colorWhite"
-            android:visibility="gone"
+           android:visibility="gone"
             >
             <TextView
                 android:id="@+id/txtBank"
@@ -397,6 +401,8 @@
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimension100dp"
+                android:drawableLeft="@drawable/dot"
+                android:drawablePadding="@dimen/dimension10dp"
                 />
             <View
                 android:id="@+id/views1"
@@ -416,6 +422,8 @@
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimension100dp"
                 android:layout_below="@+id/views1"
+                android:drawableLeft="@drawable/dot"
+                android:drawablePadding="@dimen/dimension10dp"
                 />
 
         </RelativeLayout>

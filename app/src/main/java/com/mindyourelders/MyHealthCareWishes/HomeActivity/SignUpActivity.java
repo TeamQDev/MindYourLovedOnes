@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -64,6 +66,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 
 import static com.google.android.gms.drive.metadata.CustomPropertyKey.fromJson;
@@ -133,6 +136,70 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         imgBack.setOnClickListener(this);
         txtBdate.setOnClickListener(this);
         imgEdit.setOnClickListener(this);
+        txtPolicy2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CopyReadAssetss("mobile_app_privacy_policy.pdf");
+            }
+        });
+    }
+
+    public void CopyReadAssetss(String documentPath) {
+        AssetManager assetManager = getAssets();
+        File outFile = null;
+        InputStream in = null;
+        OutputStream out = null;
+        File file = new File(getFilesDir(), documentPath);
+        try
+        {
+            in = assetManager.open(documentPath);
+            outFile=new File(getExternalFilesDir(null),documentPath);
+            out=new FileOutputStream(outFile);
+
+            copyFiles(in,out);
+            in.close();
+            in=null;
+            out.flush();
+            out.close();
+            out=null;
+            /*out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
+
+            copyFiles(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;*/
+        } catch (Exception e)
+        {
+            Log.e("tag", e.getMessage());
+        }
+        Uri uri=null;
+        // Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", outFile);
+        } else {
+            uri = Uri.fromFile(outFile);
+        }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(uri, "application/pdf");
+        context.startActivity(intent);
+
+    }
+
+    private void copyFiles(InputStream in, OutputStream out) throws IOException
+    {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1)
+        {
+            out.write(buffer, 0, read);
+        }
+
+
     }
 
     private void initUI() {
@@ -157,12 +224,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy5= (TextView) findViewById(R.id.txtPolicy5);
         txtPolicy2.setClickable(true);
         txtPolicy2.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='http://www.americanbar.org/utility/privacy.html'> Private Policy </a>";
+        String text = "<a> Private Policy </a>";
         txtPolicy2.setText(Html.fromHtml(text));
 
         txtPolicy4.setClickable(true);
         txtPolicy4.setMovementMethod(LinkMovementMethod.getInstance());
-        String text1 = "<a href='http://www.myhealthcarewishes.com'> Terms of Use </a>";
+        String text1 = "<a> Terms of Use </a>";
         txtPolicy4.setText(Html.fromHtml(text1));
 
         String texts = "<b> <font color='black'><a href='http://www.myhealthcarewishes.com'> All Information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";

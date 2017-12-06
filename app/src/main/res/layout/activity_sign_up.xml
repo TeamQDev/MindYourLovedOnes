@@ -486,6 +486,7 @@
                 android:text="Have Account? Log In"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
+                android:visibility="gone"
                 />
 
             <TextView
