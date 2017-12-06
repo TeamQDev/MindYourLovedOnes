@@ -388,7 +388,6 @@
                 android:layout_centerHorizontal="true"
                 android:text="Private Policy "
                 android:textColor="@color/colorGrayPolicy"
-               android:textColorLink="#ED7D31"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold" />
 
