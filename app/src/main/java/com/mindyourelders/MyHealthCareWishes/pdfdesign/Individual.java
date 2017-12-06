@@ -1112,6 +1112,32 @@ public class Individual {
                 messageInfo3.add("Person(s) who will care for pet :");
                 messageInfo3.add(person);
 
+                if (a.getBdate() != null) {
+                    Bdate = a.getBdate();
+                }
+                cell = new PdfPCell(new Phrase("Birthdate : " + Bdate));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Birthdate :");
+                messageInfo3.add(Bdate);
+
+                if (a.getNotes() != null) {
+                    notes = a.getNotes();
+                }
+                cell = new PdfPCell(new Phrase("Notes about Pet : " + notes));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageInfo3.add("Notes about Pet :");
+                messageInfo3.add(notes);
+
             }
 
           /*  if (connection.get == null) {

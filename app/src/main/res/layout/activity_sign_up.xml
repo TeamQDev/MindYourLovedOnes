@@ -388,6 +388,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Private Policy "
                 android:textColor="@color/colorGrayPolicy"
+               android:textColorLink="#ED7D31"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold" />
 
@@ -405,12 +406,13 @@
                 android:id="@+id/txtPolicy4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_toRightOf="@+id/txtPolicy3"
                 android:text="Terms of Use"
                 android:textColor="@color/colorGrayPolicy"
                 android:textSize="@dimen/dimension16dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/txtPolicy3"
+                android:layout_toEndOf="@+id/txtPolicy3" />
         </RelativeLayout>
         <TextView
             android:id="@+id/txtPolicy5"

@@ -262,7 +262,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 switch (from) {
                     case "Allergy":
                          header="Allergy";
-                         msg="<b>Types of Reaction :</b><br>"+
+                         msg="<b>Types of Reaction to Consider :</b><br>"+
                                 "Anaphylaxis<br>" +
                                 "Difficulty Breathing<br>" +
                                 "Hives<br>" +
@@ -274,7 +274,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
                     case "AllergyUpdate":
                         header="Allergy";
-                      msg="<b>Types of Reaction :</b><br>"+
+                      msg="<b>Types of Reaction to Consider :</b><br>"+
                                 "Anaphylaxis<br>" +
                                 "Difficulty Breathing<br>" +
                                 "Hives<br>" +
@@ -284,7 +284,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                         showViewDialog(context,msg,header);
                         break;
                     case "Implants":
-                        header="Medical Implants";
+                        header="Medical Implants to Consider";
                         msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
                                 "<li>Artifical Limbs</li>" +
                                 "<li>Artificial Heart Value</li>" +
@@ -308,7 +308,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                         break;
 
                     case "ImplantUpdate":
-                        header="Medical Implants";
+                        header="Medical Implants to Consider";
                         msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
                                 "<li>Artifical Limbs</li>" +
                                 "<li>Artificial Heart Value</li>" +
@@ -345,7 +345,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
                         break;
                     case "History":
-                        header="Surgical History";
+                        header="Surgical History to Consider";
                         msg="<ul><li>Appendix</li>" +
                                 "<li>Breast Biopsy/Mastectomy</li>" +
                                 "<li>Cataract</li>" +
@@ -370,7 +370,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                         break;
 
                     case "HistoryUpdate":
-                        header="Surgical History";
+                        header="Surgical History to Consider";
                         msg="<ul><li>Appendix</li>" +
                                 "<li>Breast Biopsy/Mastectomy</li>" +
                                 "<li>Cataract</li>" +

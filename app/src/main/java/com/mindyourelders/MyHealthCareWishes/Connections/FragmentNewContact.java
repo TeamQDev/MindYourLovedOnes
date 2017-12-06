@@ -658,8 +658,8 @@ String location="";
 
             case "Physician":
                 visiSpecialist();
-                txtAdd.setText("Add Physician");
-                txtTitle.setText("Add Physician");
+                txtAdd.setText("Add Primary Physician");
+                txtTitle.setText("Add Primary Physician");
                 break;
 
             case "SpecialistData":
