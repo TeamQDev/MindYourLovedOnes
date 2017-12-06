@@ -32,9 +32,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Header {
-    public static Font GreenFont = new Font(Font.FontFamily.TIMES_ROMAN, 24,
+
+    public static final String FONT = "main/assets/RomanS.ttf";
+   // public static Font GreenFont = FontFactory.getFont(FONT, "Cp1250", BaseFont.EMBEDDED);
+
+
+    public static Font GreenFont =new Font(Font.FontFamily.TIMES_ROMAN, 20,
             Font.BOLD);
-    public static Font BlackFont = new Font(Font.FontFamily.TIMES_ROMAN, 14,
+
+    public static Font BlackFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.BOLD);
     public static Document document;
     public static float[] widths = {0.15f, 0.85f};
@@ -317,6 +323,7 @@ public class Header {
 
     public static void addusereNameChank(String username) {
         GreenFont.setColor(0,153,153);
+     //   GreenFont.setSize(10);
         Chunk underline = new Chunk(username, GreenFont);
 //        underline.setUnderline(0.1f, -3f); // 0.1 thick, -2 y-location
         Paragraph p = new Paragraph(underline);

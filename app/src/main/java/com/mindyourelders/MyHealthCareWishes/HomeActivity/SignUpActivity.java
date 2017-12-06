@@ -23,8 +23,10 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -232,10 +234,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String text1 = "<a> Terms of Use </a>";
         txtPolicy4.setText(Html.fromHtml(text1));
 
-        String texts = "<b> <font color='black'><a href='http://www.myhealthcarewishes.com'> All Information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";
-        String texts2= "<b> <font color='black'> <a href='http://www.myhealthcarewishes.com'> do not apply </a> </b> </font> to this app because the app is in your control.";
+        String texts = "<b> <font color='black'><a> All Information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";
+        String texts2= "<b> <font color='black'> <a> do not apply </a> </b> </font>.";
         txtPolicy5.setText(Html.fromHtml(texts+texts2));
-        
+        String data=txtPolicy5.getText().toString();
+
+       /* txtPolicy5.setMovementMethod(LinkMovementMethod.getInstance());
+        txtPolicy5.setText(addClickablePart(data), TextView.BufferType.SPANNABLE);*/
 
         spinner = (MySpinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, countryList);
@@ -281,6 +286,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    private SpannableStringBuilder addClickablePart(String str) {
+        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+
+        int idx1 =0;
+        int idx2 =14;
+       /* while (idx1 != -1) {
+            idx2 = str.indexOf("]", idx1) + 1;
+*/
+            final String clickString = str.substring(idx1, idx2);
+            ssb.setSpan(new ClickableSpan() {
+
+                @Override
+                public void onClick(View widget) {
+                    Toast.makeText(context, clickString,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }, idx1, idx2, 0);
+            idx1 = str.indexOf("[", idx2);
+       // }
+
+        return ssb;
+    }
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
@@ -1038,4 +1065,5 @@ String name;
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
 }

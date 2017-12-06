@@ -374,6 +374,7 @@
             android:textSize="@dimen/dimension16dp" />
 
         <RelativeLayout
+            android:id="@+id/rlok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtPolicy1"
@@ -387,7 +388,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="Private Policy "
-                android:textColor="#ED7D31"
+                android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold" />
 
@@ -406,21 +407,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Terms of Use"
-                android:textColor="#ED7D31"
+                android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/txtPolicy3"
                 android:layout_toEndOf="@+id/txtPolicy3" />
+
+
         </RelativeLayout>
+
         <TextView
             android:id="@+id/txtPolicy5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtPolicy1"
             android:layout_centerHorizontal="true"
+            android:layout_below="@+id/rlok"
             android:gravity="center_horizontal"
-              android:paddingLeft="@dimen/dimension15dp"
+            android:paddingLeft="@dimen/dimension15dp"
+            android:text="All Information"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension30dp"
             android:textColorLink="#000000"
@@ -451,7 +456,9 @@
             android:layout_marginTop="@dimen/dimension15dp"
             android:text="Users can decide if they want to add a Password to the data"
             android:textColor="@color/colorGrayPolicy"
-            android:textSize="@dimen/dimension16dp" />
+            android:textSize="@dimen/dimension16dp"
+            android:visibility="gone"
+            />
 
         <TextView
             android:id="@+id/txtSignUp"

@@ -23,7 +23,7 @@
         android:textColor="@color/colorBlackDark"
         android:layout_below="@+id/imgLogo"
         android:textStyle="bold"
-        android:textSize="@dimen/dimension26dp"
+        android:textSize="@dimen/dimension30dp"
         />
     <ImageView
         android:id="@+id/imgLogo"
@@ -35,17 +35,19 @@
         android:layout_centerHorizontal="true"
         />
     </RelativeLayout>
+
     <TextView
         android:id="@+id/txtMed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/rlHeader"
         android:gravity="center_horizontal"
         android:text="Medical Information"
+        android:textColor="@color/colorBlack"
         android:textSize="@dimen/dimension20dp"
-        android:textColor="@color/colorBlackDark"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/txtMed2"
         android:layout_width="match_parent"
@@ -54,7 +56,7 @@
         android:gravity="center_horizontal"
         android:text="&amp; Advance Directives"
         android:textSize="@dimen/dimension20dp"
-        android:textColor="@color/colorBlackDark"
+        android:textColor="@color/colorBlack"
         android:textStyle="bold"
         />
 
