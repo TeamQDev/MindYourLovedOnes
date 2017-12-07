@@ -26,6 +26,7 @@ public class EventPdf {
     public static ArrayList<String> messageAppoint = new ArrayList<String>();
     public static ArrayList<String> messageLiving = new ArrayList<String>();
 
+
     public EventPdf(ArrayList<Appoint> appointList) {
         try {
             Header.addEmptyLine(1);
@@ -33,12 +34,19 @@ public class EventPdf {
             messageAppoint.add("Appointment Checklist");
             Header.addEmptyLine(1);
 
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
+
 
             for (int i = 0; i < appointList.size(); i++) {
+
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
+
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Appointment Checklist " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -120,27 +128,26 @@ public class EventPdf {
                     table.addCell(cell);
                     messageAppoint.add("Date :");
                     messageAppoint.add(date);
-
                 }
 
+                Header.document.add(table);
+
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
             }
-
-
-            Header.document.add(table);
-
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+            Header.document.add(table1);
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+
         }
     }
-
     public EventPdf(ArrayList<Note> noteList, int i) {
         try {
             Header.addEmptyLine(1);
@@ -148,13 +155,18 @@ public class EventPdf {
             messageAppoint.add("Event Notes");
             Header.addEmptyLine(1);
 
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
 
 
             for (i = 0; i < noteList.size(); i++) {
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
+
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Event Notes " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -197,15 +209,27 @@ public class EventPdf {
                 messageEvent.add("Event Date :");
                 messageEvent.add(noteDate);
 
-            }
-            Header.document.add(table);
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
 
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+                messageEvent.add("");
+                messageEvent.add(noteDate);
+
+                Header.document.add(table);
+
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
+            }
+            Header.document.add(table1);
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -237,6 +261,16 @@ public class EventPdf {
                 table.addCell(cell);
 
                 messageLiving.add("Activities Of Daily Living(ADL)" + " :");
+                messageLiving.add("");
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("");
                 messageLiving.add("");
 
                 Living s = livingList.get(i);
@@ -363,7 +397,15 @@ public class EventPdf {
 
                 messageLiving.add("Instrumental Activities Of Daily Living(IADL)" + " :");
                 messageLiving.add("");
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
 
+                messageLiving.add("");
+                messageLiving.add("");
                 String access = "";
                 if (s.getTransport() != null) {
                     access = s.getTransport();
@@ -516,6 +558,16 @@ public class EventPdf {
 
                 messageLiving.add("Note :");
                 messageLiving.add(instNote);
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageLiving.add("");
+                messageLiving.add("");
 
             }
             Header.document.add(table);
