@@ -97,6 +97,9 @@ android:visibility="gone"
             android:textColor="@color/colorBlue"
             android:layout_centerHorizontal="true"
             android:padding="@dimen/dimension10dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:gravity="center_vertical"
             android:drawableRight="@drawable/ic_droupdown_arrow"
             android:drawablePadding="@dimen/dimension10dp"
@@ -109,7 +112,7 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rltype"
             android:orientation="vertical"
-            android:visibility="gone"
+
             ></LinearLayout>
         <View
             android:id="@+id/view"

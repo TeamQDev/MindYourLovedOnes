@@ -1,7 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,18 +52,10 @@ class AppointAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        Appoint a=noteList.get(position);
+        final ArrayList<DateClass> dates=a.getDateList();
         if (convertView == null) {
             convertView = lf.inflate(R.layout.row_appoint, parent, false);
-
-          /*  RelativeLayout rlMain= (RelativeLayout) convertView.findViewById(R.id.rlMain);
-            if (position%2==0)
-            {
-                rlMain.setBackgroundColor(context.getResources().getColor(R.color.colorTwoBar));
-            }
-            else{
-                rlMain.setBackgroundColor(context.getResources().getColor(R.color.colorOneBar));
-            }*/
-
             holder = new Holder();
 
             holder.txtDoctor = (TextView) convertView.findViewById(R.id.txtDoctor);
@@ -75,13 +66,39 @@ class AppointAdapter extends BaseAdapter {
             holder.imgForward= (ImageView) convertView.findViewById(R.id.imgForword);
             holder.llDate= (LinearLayout) convertView.findViewById(R.id.llDate);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
+
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
-          Appoint a=noteList.get(position);
+
         holder.txtDoctor.setText(noteList.get(position).getDoctor());
         holder.txtDateTime.setText(noteList.get(position).getDate());
+       // LinearLayout llDate= (LinearLayout) convertView.findViewById(R.id.llDate);
+       /* for (int i=0;i<dates.size()+1;i++) {
+
+            View helperview = lf.inflate(R.layout.date_row, null);
+            holder.llDate.addView(helperview);
+            TextView datetime = (TextView) helperview.findViewById(R.id.txtDateTime);
+
+            if (i == dates.size()) {
+                datetime.setText("Add +");
+                datetime.setTextColor(context.getResources().getColor(R.color.colorBlue));
+                datetime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((MedicalAppointActivity) context).SetDate(noteList.get(position), position);
+                    }
+                });
+            } else {
+                datetime.setText("Completion Date:  " + dates.get(i).getDate());
+                if (i % 2 == 0) {
+                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
+                } else {
+                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+                }
+            }
+        }*/
     //    holder.txtFrequency.setText(noteList.get(position).getFrequency());
         if (noteList.get(position).getType().equals("Other"))
         {
@@ -97,35 +114,10 @@ class AppointAdapter extends BaseAdapter {
         else{
             holder.txtFrequency.setText(noteList.get(position).getFrequency());
         }
-        final ArrayList<DateClass> dates=a.getDateList();
-        for (int i=0;i<dates.size()+1;i++)
-        {
 
-            View helperview = lf.inflate(R.layout.date_row, null);
-            holder.llDate.addView(helperview);
-            TextView datetime= (TextView) helperview.findViewById(R.id.txtDateTime);
 
-            if (i==dates.size())
-            {
-                datetime.setText("Add +");
-                datetime.setTextColor(context.getResources().getColor(R.color.colorBlue));
-                datetime.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ((MedicalAppointActivity)context).SetDate(noteList.get(position),position);
-                    }
-                });
-            }
-          else {
-                datetime.setText("Completion Date:  " + dates.get(i).getDate());
-                if (i % 2 == 0) {
-                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorSkyBlue));
-                } else {
-                    datetime.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
-                }
-            }
 
-        }
+
       /*  ArrayList<Date> datesliST=new ArrayList<>();
         {
             for (int i=0;i<dates.size();i++) {
@@ -147,13 +139,13 @@ class AppointAdapter extends BaseAdapter {
         });*/
 
         //holder.imgProfile.setImageResource(student.getImgid());
-        final View finalConvertView = convertView;
+       /* final View finalConvertView = convertView;
         holder.txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LinearLayout ll= (LinearLayout) finalConvertView.findViewById(R.id.llDate);
 
-                if ( ll.getVisibility() == View.GONE)
+              *//*  if ( ll.getVisibility() == View.GONE)
                 {
                     //expandedChildList.set(arg2, true);
                     ll.setVisibility(View.VISIBLE);
@@ -162,7 +154,7 @@ class AppointAdapter extends BaseAdapter {
                 {
                     //expandedChildList.set(arg2, false);
                     ll.setVisibility(View.GONE);
-                }
+                }*//*
             }
         });
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +166,7 @@ class AppointAdapter extends BaseAdapter {
                 intent.putExtra("AppointObject",a);
                 context.startActivity(intent);
             }
-        });
+        });*/
        /* holder.txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

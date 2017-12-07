@@ -64,6 +64,7 @@
         android:divider="@color/colorLightGray"
         android:background="@color/colorLightBlue"
         android:visibility="gone"
+        android:transcriptMode="alwaysScroll"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
     <TextView
         android:id="@+id/txtView"

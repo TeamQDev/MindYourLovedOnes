@@ -41,7 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension40dp"
             android:layout_below="@+id/txtNoteHeader"
-            android:layout_margin="@dimen/dimension15dp"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:layout_marginBottom="@dimen/dimension10dp"
             android:text="Note"
             android:textSize="@dimen/dimension20dp" />
 
@@ -51,7 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtNotes"
-            android:layout_margin="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension10dp"
             android:background="@drawable/darkgray_white_border"
             android:gravity="top"
             android:padding="@dimen/dimension10dp" />
