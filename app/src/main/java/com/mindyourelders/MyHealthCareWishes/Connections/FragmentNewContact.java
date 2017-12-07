@@ -2948,7 +2948,7 @@ String location="";
     private boolean validate(String screen) {
         Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
         ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-        bitmaps.compress(Bitmap.CompressFormat.JPEG,40, baoss);
+        bitmaps.compress(Bitmap.CompressFormat.JPEG,20, baoss);
         if (imgCard.getVisibility()==View.VISIBLE)
         {
             photoCard = baoss.toByteArray();

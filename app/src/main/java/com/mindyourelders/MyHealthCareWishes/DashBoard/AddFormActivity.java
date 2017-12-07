@@ -37,16 +37,16 @@ public class AddFormActivity extends AppCompatActivity  {
         if (i.getExtras()!=null) {
             byte[] photo = i.getExtras().getByteArray("Image");
             Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-            int nh = (int) ( photoCard.getHeight() * (600.0 / photoCard.getWidth()) );
-            Bitmap scaled = Bitmap.createScaledBitmap(photoCard, 600, nh, true);
-            if(scaled.getWidth() > scaled.getHeight())
+         /*   int nh = (int) ( photoCard.getHeight() * (600.0 / photoCard.getWidth()) );
+            Bitmap scaled = Bitmap.createScaledBitmap(photoCard, 600, nh, true);*/
+            if(photoCard.getWidth() > photoCard.getHeight())
             {
                // imgDoc.setRotation(180);
             }else
             {
                 imgDoc.setRotation(90);
             }
-            imgDoc.setImageBitmap(scaled);
+            imgDoc.setImageBitmap(photoCard);
 
 
             if (i.getExtras().containsKey("IsDelete")) {
