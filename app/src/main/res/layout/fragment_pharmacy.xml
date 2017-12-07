@@ -25,7 +25,7 @@
             android:layout_height="@dimen/dimension60dp"
             android:layout_toRightOf="@+id/imgAdd"
             android:gravity="center"
-            android:text="Add Pharmacy"
+            android:text="Add PHARMACIES &amp;\nHOME MEDICAL EQUIPMENT"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp" />
     </RelativeLayout>

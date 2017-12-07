@@ -23,7 +23,6 @@ public class HospitalHealthQuery {
     public static final String COL_NAME = "Name";
     public static final String COL_ADDRESS = "Address";
     public static final String COL_OFFICE_PHONE = "OfficePhone";
-    public static final String COL_MOBILE_PHONE = "MobilePhone";
     public static final String COL_OTHER_PHONE = "OtherPhone";
     public static final String COL_CATEGORY = "Category";
     public static final String COL_OTHER_CATEGORY = "OtherCategory";
@@ -34,6 +33,7 @@ public class HospitalHealthQuery {
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
     public static final String COL_LASTSEEN = "LastSeen";
+    public static final String COL_LOCATION= "Location";
     public static final String COL_PHOTOCARD= "PhotoCard";
 
 
@@ -43,7 +43,7 @@ public class HospitalHealthQuery {
     }
 
 
-    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard) {
+    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String location) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -54,7 +54,7 @@ public class HospitalHealthQuery {
         cv.put(COL_LASTSEEN,lastseen);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_OFFICE_PHONE,officephone);
-        cv.put(COL_MOBILE_PHONE,hourphone);
+        cv.put(COL_LOCATION,location);
         cv.put(COL_OTHER_PHONE,otherphone);
         cv.put(COL_NOTE,note);
         cv.put(COL_PRACTICENAME,practice_name);
@@ -82,7 +82,7 @@ public class HospitalHealthQuery {
     public static String createHospitalHealthTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50)," + COL_LASTSEEN + " VARCHAR(50),"+
-                COL_MOBILE_PHONE + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
+                COL_LOCATION + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
                 COL_OFFICE_PHONE + " VARCHAR(20)," + COL_CATEGORY + " VARCHAR(50)," + COL_OTHER_CATEGORY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
                 COL_PHOTOCARD+" BLOB,"+
@@ -95,7 +95,7 @@ public class HospitalHealthQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard) {
+    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String location) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -106,7 +106,7 @@ public class HospitalHealthQuery {
         cv.put(COL_LASTSEEN,lastseen);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_OFFICE_PHONE,officephone);
-        cv.put(COL_MOBILE_PHONE,hourphone);
+        cv.put(COL_LOCATION,location);
         cv.put(COL_OTHER_PHONE,otherphone);
         cv.put(COL_NOTE,note);
         cv.put(COL_PRACTICENAME,practice_name);
@@ -162,7 +162,7 @@ public class HospitalHealthQuery {
                 connection.setWebsite(c.getString(c.getColumnIndex(COL_WEBSITE)));
                 connection.setLastseen(c.getString(c.getColumnIndex(COL_LASTSEEN)));
                 connection.setOfficePhone(c.getString(c.getColumnIndex(COL_OFFICE_PHONE)));
-                connection.setHourPhone(c.getString(c.getColumnIndex(COL_MOBILE_PHONE)));
+                connection.setLocation(c.getString(c.getColumnIndex(COL_LOCATION)));
                 connection.setOtherPhone(c.getString(c.getColumnIndex(COL_OTHER_PHONE)));
                 connection.setCategory(c.getString(c.getColumnIndex(COL_CATEGORY)));
                 connection.setPracticeName(c.getString(c.getColumnIndex(COL_PRACTICENAME)));

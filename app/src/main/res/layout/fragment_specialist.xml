@@ -24,12 +24,11 @@
             android:textAllCaps="true"
             android:layout_height="@dimen/dimension60dp"
             android:gravity="center"
-            android:text="Add Doctor"
+            android:text="Add DOCTORS &amp; OTHER\nHEALTH PROFESSIONALS"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/dimension24dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_toRightOf="@+id/imgAdd"
+            />
     </RelativeLayout>
 
     <com.baoyz.swipemenulistview.SwipeMenuListView

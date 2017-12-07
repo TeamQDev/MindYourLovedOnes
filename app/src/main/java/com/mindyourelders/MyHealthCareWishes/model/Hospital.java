@@ -7,6 +7,15 @@ import java.io.Serializable;
  */
 
 public class Hospital implements Serializable {
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    String location="";
     public String getFax() {
         return Fax;
     }

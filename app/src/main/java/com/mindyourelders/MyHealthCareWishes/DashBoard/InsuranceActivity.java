@@ -65,16 +65,16 @@ RelativeLayout header;
                     callFragment("INSURANCE", fragmentInsurance);
                     break;
                 case "Doctors":
-                    txtTitle.setText("DOCTORS");
+                    txtTitle.setText("DOCTORS & OTHER HEALTH\nPROFESSIONALS");
                     callFragment("SPECIALIST", fragmentSpecialist);
                     break;
 
                 case "Hospitals":
-                    txtTitle.setText("HOSPITALS AND OTHER HEALTH PROFESSIONALS");
+                    txtTitle.setText("HOSPITALS & REHABILITATION CENTERS");
                     callFragment("HOSPITAL", fragmentHospital);
                     break;
                 case "Pharmacies":
-                    txtTitle.setText("PHARMACIES AND \nHOME MEDICAL EQUIPMENT");
+                    txtTitle.setText("PHARMACIES & HOME\nMEDICAL EQUIPMENT");
                     callFragment("PHARMACY", fragmentPharmacy);
                     break;
                 case "Home Health Services":

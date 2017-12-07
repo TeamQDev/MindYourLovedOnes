@@ -29,7 +29,7 @@ public class FinanceQuery {
     public static final String COL_OTHER_CATEGORY = "OtherCategory";
     public static final String COL_FAX = "Faxno";
     public static final String COL_WEBSITE = "Website";
-    public static final String COL_PRACTICENAME = "PracticeName";
+    public static final String COL_PRACTICENAME = "ContactName";
     public static final String COL_NOTE = "Note";
     public static final String COL_EMAIL = "Email";
     public static final String COL_LOCATION = "Location";
@@ -63,7 +63,7 @@ public class FinanceQuery {
                     connection.setHourPhone(c.getString(c.getColumnIndex(COL_MOBILE_PHONE)));
                     connection.setOtherPhone(c.getString(c.getColumnIndex(COL_OTHER_PHONE)));
                     connection.setCategory(c.getString(c.getColumnIndex(COL_CATEGORY)));
-                    connection.setPracticeName(c.getString(c.getColumnIndex(COL_PRACTICENAME)));
+                    connection.setContactName(c.getString(c.getColumnIndex(COL_PRACTICENAME)));
                     connection.setFax(c.getString(c.getColumnIndex(COL_FAX)));
                     connection.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                     connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
@@ -82,7 +82,7 @@ public class FinanceQuery {
 
         return connectionList;
     }
-    public static Boolean insertFinanceData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location) {
+    public static Boolean insertFinanceData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location, String contactName) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -96,7 +96,7 @@ public class FinanceQuery {
         cv.put(COL_MOBILE_PHONE,hourphone);
         cv.put(COL_OTHER_PHONE,otherphone);
         cv.put(COL_NOTE,note);
-        cv.put(COL_PRACTICENAME,practice_name);
+        cv.put(COL_PRACTICENAME,contactName);
         cv.put(COL_CATEGORY,speciality);
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);
@@ -136,7 +136,7 @@ public class FinanceQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updateFinanceData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location) {
+    public static Boolean updateFinanceData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String note, String lastseen, String otherCategory, byte[] photoCard, String email, String location, String contactName) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -150,7 +150,7 @@ public class FinanceQuery {
         cv.put(COL_MOBILE_PHONE,hourphone);
         cv.put(COL_OTHER_PHONE,otherphone);
         cv.put(COL_NOTE,note);
-        cv.put(COL_PRACTICENAME,practice_name);
+        cv.put(COL_PRACTICENAME,contactName);
         cv.put(COL_CATEGORY,speciality);
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);

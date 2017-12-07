@@ -112,7 +112,8 @@
                 android:id="@+id/rlTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="gone"
+                >
 
                 <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
                     android:id="@+id/spinner"
@@ -154,43 +155,39 @@
                             app:ms_multiline="true"
                             custom:ms_floatingLabelColor="@color/colorBlue"
                             custom:ms_hintColor="@color/colorDarkGray" android:imeOptions="actionNext"
+                            android:visibility="gone"
                             /><requestFocus />
+                    </RelativeLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilOtherCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlCategory"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/tilOtherCategory"
+                        <AutoCompleteTextView
+                            android:id="@+id/txtOtherCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/spinnerFinance"
-                            android:descendantFocusability="beforeDescendants"
-                            android:focusableInTouchMode="true"
-                            android:paddingBottom="@dimen/dimension8dp"
-                            android:paddingLeft="@dimen/dimension30dp"
-                            android:paddingRight="@dimen/dimension30dp"
-                            android:paddingTop="@dimen/dimension8dp"
-                            android:visibility="gone"
-                            app:hintEnabled="false">
-                            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-                            <AutoCompleteTextView
-                                android:id="@+id/txtOtherCategory"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:paddingLeft="@dimen/dimension15dp"
-                                android:paddingTop="@dimen/dimension2dp"
-                                android:singleLine="true"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/dimension20dp"
-                                android:imeOptions="actionNext"
-                                /><requestFocus />
-                        </android.support.design.widget.TextInputLayout>
-                    </RelativeLayout>
-
+                            android:hint="Category"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
+                    </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/tilFName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/rlCategory"
+                        android:layout_below="@+id/tilOtherCategory"
                         android:descendantFocusability="beforeDescendants"
                         android:focusableInTouchMode="true"
                         android:paddingBottom="@dimen/dimension8dp"
@@ -211,12 +208,36 @@
                             android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
                             /><requestFocus />
                     </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tilFName"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp">
 
+                        <AutoCompleteTextView
+                            android:id="@+id/txtContactName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Contact Name"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                            /><requestFocus />
+                    </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/tilFinanceEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tilFName"
+                        android:layout_below="@+id/tilContactName"
                         android:paddingBottom="@dimen/dimension8dp"
                         android:paddingLeft="@dimen/dimension30dp"
                         android:paddingRight="@dimen/dimension30dp">
@@ -319,7 +340,9 @@
                         android:layout_below="@+id/tilFinanceOtherPhone"
                         android:paddingBottom="@dimen/dimension8dp"
                         android:paddingLeft="@dimen/dimension30dp"
-                        android:paddingRight="@dimen/dimension30dp">
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:visibility="gone"
+                        >
 
                         <AutoCompleteTextView
                             android:id="@+id/txtFinanceLocation"
@@ -413,7 +436,9 @@
                         android:layout_below="@+id/tilFinanceWebsite"
                         android:paddingBottom="@dimen/dimension8dp"
                         android:paddingLeft="@dimen/dimension30dp"
-                        android:paddingRight="@dimen/dimension30dp">
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:visibility="gone"
+                        >
 
                         <AutoCompleteTextView
                             android:id="@+id/txtFinancePracticeName"
@@ -476,10 +501,306 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlHospital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/rlCategoryHospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        android:id="@+id/spinnerHospital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimension35dp"
+                        android:layout_marginRight="@dimen/dimension35dp"
+                        app:ms_arrowColor="@color/colorBlue"
+                        app:ms_arrowSize="16dp"
+                        app:ms_floatingLabelText="Category"
+                        app:ms_hint="hint"
+                        app:ms_multiline="true"
+                        custom:ms_floatingLabelColor="@color/colorBlue"
+                        custom:ms_hintColor="@color/colorDarkGray" android:imeOptions="actionNext"
+                        /><requestFocus />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilOtherCategoryHospital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/spinnerHospital"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        app:hintEnabled="false">
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                        <AutoCompleteTextView
+                            android:id="@+id/txtOtherCategoryHospital"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp"
+                            android:imeOptions="actionNext"
+                            /><requestFocus />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilFNameHospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlCategoryHospital"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtFNameHospital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalOfficePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilFNameHospital"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalOfficePhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Office Phone #"
+                        android:inputType="phone"
+                        android:maxLength="12"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalOtherPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalFax"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalOtherPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Other Phone #"
+                        android:inputType="phone"
+                        android:maxLength="12"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalFax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalOfficePhone"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalFax"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Office Fax #"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:maxLength="12"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalAddres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalOtherPhone"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalAddres"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalWebsite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Website"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalWebsite"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="In Network Status"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalPracticeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalLocation"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalPracticeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Contact Person"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilHospitalLastSeen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalPracticeName"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalLastSeen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Seen"
+
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilHospitalLastSeen"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtHospitalNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Notes"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp"
+                        android:imeOptions="actionNext"
+                        /><requestFocus />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/rlCommon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlTop"
+                android:layout_below="@+id/rlHospital"
                 android:visibility="gone">
 
                 <android.support.design.widget.TextInputLayout

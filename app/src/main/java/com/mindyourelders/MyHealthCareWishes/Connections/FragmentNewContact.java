@@ -87,19 +87,21 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     TextView txtCard;
     //TextView btnShowMore,btnShowLess,btnSon;
     TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
-
-    TextView txtFinanceEmail,txtFinanceLocation,txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
+String contactName="";
+    TextView txtContactName,txtFinanceEmail,txtFinanceLocation,txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
     TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
     TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
     TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
     TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
     TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
     TextView txtTitle;
+    TextView txtOtherCategoryHospital,txtFNameHospital,txtHospitalOfficePhone,txtHospitalOtherPhone,txtHospitalFax,txtHospitalAddress,txtHospitalWebsite,txtHospitalLocation,txtHospitalPracticeName,txtHospitalLastSeen,txtHospitalNote;
+    TextInputLayout tilFNameHospital;
     String agent="";
 
     ImageView imgEdit, imgProfile,imgCard,imgEditCard;
     View rootview;
-    RelativeLayout rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
+    RelativeLayout rlHospital,rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
     Preferences preferences;
     String source="";
     private static int RESULT_CAMERA_IMAGE = 1;
@@ -107,7 +109,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     private static int RESULT_CAMERA_IMAGE_CARD = 3;
     private static int RESULT_SELECT_PHOTO_CARD = 4;
-
+TextInputLayout tilOtherCategoryHospital;
 
 String location="";
     String name="", email="", mobile="", speciality="",phone="",address="",workphone="",note="",member="",group="",subscriber="",type="";
@@ -123,7 +125,7 @@ String location="";
     int prox=0;
     int connectionFlag;
     boolean inPrimary;
-    MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority;
+    MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority,spinnerHospital;
     TextInputLayout tilOtherInsurance,tilOtherCategory,tilOtherRelation,tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
@@ -136,12 +138,12 @@ String location="";
 
     String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
 
-    String[] healthSpeciality = {"CARDIOLOGIST","ENDOCRINOLOGIST","FAMILY PRACTICE PHYSICIAN","GERIATRIC PSYCHIATRIST","GERIATRICIAN","GYNECOLOGIST","INTERNIST","NEPHROLOGIST","NEUROLOGIST","ONCOLOGIST","OPHTHALMOLOGIST","ORTHOPEDIC","PHYSICAL THERAPIST","PULMONOLOGIST","RHEUMATOLOGIST","UROLOGIST"};
+    String[] healthSpeciality = {"Acupunture","Allergy & Immunology","Anesthesiology","Audiology","Cardiology","Chiropractor","Cosmetic and Laser Surgery ","Critical Care Medicine ","Dentist ","Dermatology","Diabetes & Metabolism","Emergency Medicine","Endocrinology","Endodontics","Endovascular Medicine","Family Medicine","Foot and Ankle Surgery","Gastroenterology","Geriatric Medicine","Gynecology","Hospice & Palliative Medicine	","Infectious Disease","Internal Medicine","Massage Therapy","Medical Genetics","Nephrology","Neurology","Obstetrics & Gynecology","Oncology ","Ophthalmology","Optometrist","Orthodontics","Orthopadeic ","Orthopadeic Surgery","Otolaryngology","Pain Medicine","Pathology","Pediatrics","Periodontics","Physical Therapist","Plastic & Reconstructive Surgery","Podiatrist ","Psychiatry","Pulmonology","Radiology","Rheumatology","Speech Therapist","Sports Medicine","Surgery - General ","Thoracic & Cardiac Surgery","Urology","Vascular Medicine","Other"};
 
     String[] insuaranceType = {"Dental","Disability","Life","Long Term Care","Medicaid","Medical","Medicare Supplement (Medigap)","Medicare","Supplemental","Vision", "Other"};
 
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
-    String[] HospitalType = {"Hospital", "Rehabilitation Center", "Physical Therapist", "Speech Pathologist","Other"};
+    String[] HospitalType = {"Hospital", "Rehabilitation Center","Other"};
 
     String[] proxyType = {"Primary - Health Care Proxy Agent", "Successor - Health Care Proxy Agent"};
     String[] priorityType = {"Primary", "Secondary"};
@@ -223,14 +225,14 @@ String location="";
                     getSContact();
                     break;
                 case "Hospital":
-                    txtFName.setText(Cname);
+                    txtFNameHospital.setText(Cname);
                    // txtEmail.setText(email);
                     try {
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
                         mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
-                        txtFinanceMobilePhone.setText(mobile);
+                        txtHospitalOfficePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -333,14 +335,14 @@ String location="";
 
             case "Pharmacy":
                 visiPharmacy();
-                txtAdd.setText("Add Pharmacy");
-                txtTitle.setText("Add Pharmacy");
+                txtAdd.setText("Add PHARMACIES &\nHOME MEDICAL EQUIPMENT");
+                txtTitle.setText("Add PHARMACIES &\nHOME MEDICAL EQUIPMENT");
                 break;
 
             case "PharmacyData":
                 visiPharmacy();
-                txtAdd.setText("Update Pharmacy");
-                txtTitle.setText("Update Pharmacy");
+                txtAdd.setText("Update PHARMACIES &\nHOME MEDICAL EQUIPMENT");
+                txtTitle.setText("Update PHARMACIES &\nHOME MEDICAL EQUIPMENT");
                 Intent specialistIntents = getActivity().getIntent();
                 if (specialistIntents.getExtras() != null) {
                     Pharmacy specialist = (Pharmacy) specialistIntents.getExtras().getSerializable("PharmacyObject");
@@ -652,8 +654,8 @@ String location="";
 
             case "Speciality":
                 visiSpecialist();
-                txtAdd.setText("Add Doctor");
-                txtTitle.setText("Add Doctor");
+                txtAdd.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
+                txtTitle.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
                 break;
 
             case "Physician":
@@ -665,8 +667,8 @@ String location="";
             case "SpecialistData":
 
                 visiSpecialist();
-                txtAdd.setText("Update Doctor");
-                txtTitle.setText("Update Doctor");
+                txtAdd.setText("Update DOCTORS & OTHER\n HEALTH PROFESSIONALS");
+                txtTitle.setText("Update DOCTORS & OTHER\n HEALTH PROFESSIONALS");
                 Intent specialistIntent = getActivity().getIntent();
                 if (specialistIntent.getExtras() != null) {
                     Specialist specialist= (Specialist) specialistIntent.getExtras().getSerializable("SpecialistObject");
@@ -1074,32 +1076,33 @@ String location="";
                 break;
 
             case "Hospital":
-                visiFinance();
-                txtAdd.setText("Add Hospitals and Other Health Professionals");
-                txtTitle.setText("Add Hospitals and Other Health Professionals");
+               // visiFinance();
+                visiHospital();
+                txtAdd.setText("Add HOSPITALS & REHABILITATION CENTERS");
+                txtTitle.setText("Add HOSPITALS & REHABILITATION CENTERS");
                 break;
 
             case "HospitalData":
-                visiFinance();
-                tilFName.setHintEnabled(true);
-                txtFName.setFocusable(true);
-                txtAdd.setText("Update Hospitals and Other Health Professionals");
-                txtTitle.setText("Update Hospitals and Other Health Professionals");
+                visiHospital();
+                tilFNameHospital.setHintEnabled(true);
+                txtFNameHospital.setFocusable(true);
+                txtAdd.setText("Update HOSPITALS & REHABILITATION CENTERS");
+                txtTitle.setText("Update HOSPITALS & REHABILITATION CENTERS");
                 Intent hospIntent = getActivity().getIntent();
                 if (hospIntent.getExtras() != null) {
                     Hospital specialist = (Hospital) hospIntent.getExtras().getSerializable("HospitalObject");
 
-                    txtFName.setText(specialist.getName());
-                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
-                    txtLastSeen.setText(specialist.getLastseen());
-                    txtFinanceAddress.setText(specialist.getAddress());
-                    txtFinanceWebsite.setText(specialist.getWebsite());
-                    txtFinanceFax.setText(specialist.getFax());
-                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
-                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
-                    txtFinancePracticeName.setText(specialist.getPracticeName());
-                    txtFinanceNote.setText(specialist.getNote());
-                    txtOtherCategory.setText(specialist.getOtherCategory());
+                    txtFNameHospital.setText(specialist.getName());
+                    txtHospitalOtherPhone.setText(specialist.getOtherPhone());
+                    txtHospitalLastSeen.setText(specialist.getLastseen());
+                    txtHospitalAddress.setText(specialist.getAddress());
+                    txtHospitalWebsite.setText(specialist.getWebsite());
+                    txtHospitalFax.setText(specialist.getFax());
+                    txtHospitalOfficePhone.setText(specialist.getOfficePhone());
+                    txtHospitalPracticeName.setText(specialist.getPracticeName());
+                    txtHospitalNote.setText(specialist.getNote());
+                    txtOtherCategoryHospital.setText(specialist.getOtherCategory());
+                   txtHospitalLocation.setText(specialist.getLocation());
                     id = specialist.getId();
 
                     int index = 0;
@@ -1108,7 +1111,7 @@ String location="";
                             index = i;
                         }
                     }
-                    spinnerFinance.setSelection(index + 1);
+                    spinnerHospital.setSelection(index + 1);
 
                     byte[] photo = specialist.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -1131,35 +1134,39 @@ String location="";
                 }
                 break;
             case "HospitalViewData":
-                visiFinance();
-                disableFinance();
-                tilFName.setHintEnabled(true);
-                txtFName.setFocusable(true);
-                txtTitle.setText("Hospitals and Other Health Professionals");
+                visiHospital();
+                disableHospital();
+
+               // disableFinance();
+                tilFNameHospital.setHintEnabled(true);
+                txtFNameHospital.setFocusable(true);
+                txtTitle.setText("HOSPITALS & REHABILITATION CENTERS");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent financeIntent2 = getActivity().getIntent();
                 if (financeIntent2.getExtras() != null) {
                     Hospital specialist = (Hospital) financeIntent2.getExtras().getSerializable("HospitalObject");
 
-                    txtFName.setText(specialist.getName());
-                    txtFinanceOtherPhone.setText(specialist.getOtherPhone());
-                    txtLastSeen.setText(specialist.getLastseen());
-                    txtFinanceAddress.setText(specialist.getAddress());
-                    txtFinanceWebsite.setText(specialist.getWebsite());
-                    txtFinanceFax.setText(specialist.getFax());
-                    txtFinanceMobilePhone.setText(specialist.getHourPhone());
-                    txtFinanceOfficePhone.setText(specialist.getOfficePhone());
-                    txtFinancePracticeName.setText(specialist.getPracticeName());
-                    txtFinanceNote.setText(specialist.getNote());
-                    txtOtherCategory.setText(specialist.getOtherCategory());
+                    txtFNameHospital.setText(specialist.getName());
+                    txtHospitalOtherPhone.setText(specialist.getOtherPhone());
+                    txtHospitalLastSeen.setText(specialist.getLastseen());
+                    txtHospitalAddress.setText(specialist.getAddress());
+                    txtHospitalWebsite.setText(specialist.getWebsite());
+                    txtHospitalFax.setText(specialist.getFax());
+                    txtHospitalOfficePhone.setText(specialist.getOfficePhone());
+                    txtHospitalPracticeName.setText(specialist.getPracticeName());
+                    txtHospitalNote.setText(specialist.getNote());
+                    txtOtherCategoryHospital.setText(specialist.getOtherCategory());
+                    txtHospitalLocation.setText(specialist.getLocation());
                     id = specialist.getId();
+
                     int index = 0;
                     for (int i = 0; i < HospitalType.length; i++) {
                         if (specialist.getCategory().equals(HospitalType[i])) {
                             index = i;
                         }
                     }
-                    spinnerFinance.setSelection(index + 1);
+                    spinnerHospital.setSelection(index + 1);
+
 
                     byte[] photo = specialist.getPhoto();
                     Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -1196,6 +1203,7 @@ String location="";
                     txtFName.setText(specialist.getName());
                     txtFinanceLocation.setText(specialist.getLocation());
                     txtFinanceEmail.setText(specialist.getEmail());
+                    txtContactName.setText(specialist.getContactName());
                     txtFinanceOtherPhone.setText(specialist.getOtherPhone());
                     txtLastSeen.setText(specialist.getLastseen());
                     txtFinanceAddress.setText(specialist.getAddress());
@@ -1250,6 +1258,7 @@ String location="";
                     txtFName.setText(specialist.getName());
                     txtFinanceOtherPhone.setText(specialist.getOtherPhone());
                     txtFinanceEmail.setText(specialist.getEmail());
+                    txtContactName.setText(specialist.getContactName());
                     txtFinanceLocation.setText(specialist.getLocation());
                     txtLastSeen.setText(specialist.getLastseen());
                     txtFinanceAddress.setText(specialist.getAddress());
@@ -1292,6 +1301,50 @@ String location="";
 
 
         }
+
+    }
+
+    private void disableHospital() {
+        txtFNameHospital.setEnabled(false);
+        txtHospitalLocation.setEnabled(false);
+        txtHospitalOtherPhone.setEnabled(false);
+        txtHospitalLastSeen.setEnabled(false);
+        txtHospitalAddress.setEnabled(false);
+        txtHospitalWebsite.setEnabled(false);
+        txtHospitalFax.setEnabled(false);
+        txtHospitalOfficePhone.setEnabled(false);
+        txtHospitalPracticeName.setEnabled(false);
+        txtHospitalNote.setEnabled(false);
+        spinnerHospital.setClickable(false);
+        llAddConn.setVisibility(View.GONE);
+        imgEdit.setVisibility(View.GONE);
+    }
+
+    private void visiHospital() {
+        rlTop.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.GONE);
+        rlFinance.setVisibility(View.GONE);
+        rlHospital.setVisibility(View.VISIBLE);
+        spinnerRelation.setVisibility(View.GONE);
+        rlCommon.setVisibility(View.GONE);
+        rlConnection.setVisibility(View.GONE);
+        rlDoctor.setVisibility(View.GONE);
+        rlInsurance.setVisibility(View.GONE);
+        rlAids.setVisibility(View.GONE);
+        rlProxy.setVisibility(View.GONE);
+
+       /* tilFNameHospital.setHint("Name");
+        tilFNameHospital.setHintEnabled(false);
+        txtFNameHospital.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilFNameHospital.setHintEnabled(true);
+                txtFName.setFocusable(true);
+
+                return false;
+            }
+        });*/
+        rlPharmacy.setVisibility(View.GONE);
 
     }
 
@@ -1441,6 +1494,7 @@ String location="";
     private void disableFinance() {
         txtFName.setEnabled(false);
         txtFinanceEmail.setEnabled(false);
+        txtContactName.setEnabled(false);
         txtFinanceLocation.setEnabled(false);
         txtFinanceOtherPhone.setEnabled(false);
         txtLastSeen.setEnabled(false);
@@ -1522,8 +1576,8 @@ String location="";
         rlFinance.setVisibility(View.VISIBLE);
         rlProxy.setVisibility(View.GONE);
 
-        tilFName.setHint("Name");
-       tilFName.setHintEnabled(false);
+        tilFName.setHint("Firm Name");
+        tilFName.setHintEnabled(false);
         txtFName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1572,8 +1626,8 @@ String location="";
         rlAids.setVisibility(View.GONE);
         rlProxy.setVisibility(View.GONE);
 
-        txtAdd.setText("Add Doctor");
-        txtTitle.setText("Add Doctor");
+        txtAdd.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
+        txtTitle.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
         tilDoctorName.setHintEnabled(false);
 
         txtDoctorName.setOnTouchListener(new View.OnTouchListener() {
@@ -1624,6 +1678,9 @@ String location="";
         rlContact= (RelativeLayout) rootview.findViewById(R.id.rlContact);
        rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
        txtCard= (TextView) rootview.findViewById(R.id.txtCard);
+        tilOtherCategoryHospital= (TextInputLayout) rootview.findViewById(R.id.tilOtherCategoryHospital);
+        tilOtherCategoryHospital.setHint("Other");
+        tilFNameHospital= (TextInputLayout) rootview.findViewById(R.id.tilFNameHospital);
         //Doctor
         txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
         txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
@@ -1722,6 +1779,19 @@ String location="";
         txtLastSeen = (TextView) rootview.findViewById(R.id.txtLastSeen);
         txtFinanceNote= (TextView) rootview.findViewById(R.id.txtFinanceNote);
 
+        rlHospital= (RelativeLayout) rootview.findViewById(R.id.rlHospital);
+        txtOtherCategoryHospital = (TextView) rootview.findViewById(R.id.txtOtherCategoryHospital);
+        txtFNameHospital = (TextView) rootview.findViewById(R.id.txtFNameHospital);
+        txtHospitalOfficePhone = (TextView) rootview.findViewById(R.id.txtHospitalOfficePhone);
+        txtHospitalOtherPhone = (TextView) rootview.findViewById(R.id.txtHospitalOtherPhone);
+        txtHospitalFax = (TextView) rootview.findViewById(R.id.txtHospitalFax);
+        txtHospitalAddress = (TextView) rootview.findViewById(R.id.txtHospitalAddress);
+        txtHospitalWebsite = (TextView) rootview.findViewById(R.id.txtHospitalWebsite);
+        txtHospitalLocation = (TextView) rootview.findViewById(R.id.txtHospitalLocation);
+        txtHospitalPracticeName= (TextView) rootview.findViewById(R.id.txtHospitalPracticeName);
+        txtHospitalLastSeen= (TextView) rootview.findViewById(R.id.txtHospitalLastSeen);
+        txtHospitalNote= (TextView) rootview.findViewById(R.id.txtHospitalNote);
+
         txtFinanceFax.addTextChangedListener(new TextWatcher() {
             int prevL=0;
             @Override
@@ -1759,7 +1829,7 @@ String location="";
         rlTop = (RelativeLayout) rootview.findViewById(R.id.rlTop);
 
         tilOtherCategory = (TextInputLayout) rootview.findViewById(R.id.tilOtherCategory);
-        tilOtherCategory.setHint("Other Category");
+        tilOtherCategory.setHint("Category");
         txtOtherCategory = (TextView) rootview.findViewById(R.id.txtOtherCategory);
         tilOtherInsurance = (TextInputLayout) rootview.findViewById(R.id.tilOtherInsurance);
 
@@ -1801,6 +1871,7 @@ String location="";
         spinner = (MySpinner) rootview.findViewById(R.id.spinner);
         spinnerInsuarance = (MySpinner) rootview.findViewById(R.id.spinnerInsuarance);
         spinnerFinance = (MySpinner) rootview.findViewById(R.id.spinnerFinance);
+        spinnerHospital= (MySpinner) rootview.findViewById(R.id.spinnerHospital);
         spinnerProxy= (MySpinner) rootview.findViewById(R.id.spinnerProxy);
         spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
         spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
@@ -2024,6 +2095,7 @@ String location="";
 
         txtFName = (TextView) rootview.findViewById(R.id.txtFName);
         txtFinanceEmail = (TextView) rootview.findViewById(R.id.txtFinanceEmail);
+        txtContactName= (TextView) rootview.findViewById(R.id.txtContactName);
         txtFinanceLocation = (TextView) rootview.findViewById(R.id.txtFinanceLocation);
         txtAids = (TextView) rootview.findViewById(R.id.txtAids);
         txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
@@ -2197,12 +2269,11 @@ String location="";
             spinnerFinance.setAdapter(financeadapter);
             spinnerFinance.setHint("Category");
         }
-        else{
-            ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
+
+            ArrayAdapter<String> hospitaladapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerFinance.setAdapter(financeadapter);
-            spinnerFinance.setHint("Category");
-        }
+            spinnerHospital.setAdapter(hospitaladapter);
+        spinnerHospital.setHint("Category");
 
         ArrayAdapter<String> adapterInsuarance = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, insuaranceType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -2247,6 +2318,22 @@ String location="";
                 }
                 else{
                     tilOtherCategory.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spinnerHospital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other"))
+                {
+                    tilOtherCategoryHospital.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tilOtherCategoryHospital.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -2636,12 +2723,12 @@ String location="";
 
                     case "Hospital":
 
-                        if (validate("Finance")) {
+                        if (validate("Hospital")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
+                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,location);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
@@ -2656,12 +2743,12 @@ String location="";
 
                     case "HospitalData":
 
-                        if (validate("Finance")) {
+                        if (validate("Hospital")) {
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard);
+                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,location);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
@@ -2680,7 +2767,7 @@ String location="";
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location);
+                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location,contactName);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
@@ -2699,7 +2786,7 @@ String location="";
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
                             byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location);
+                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location,contactName);
                             if (flag==true)
                             {
                                 Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
@@ -3126,10 +3213,62 @@ String location="";
             }*/
 
         }
+        else if(screen.equals("Hospital"))
+        {
+
+            name=txtFNameHospital.getText().toString();
+            email="";
+            location=txtHospitalLocation.getText().toString();
+            mobile=txtHospitalOfficePhone.getText().toString();
+            phone="";
+            workphone=txtHospitalOtherPhone.getText().toString();
+            fax=txtHospitalFax.getText().toString();
+            address=txtHospitalAddress.getText().toString();
+            website=txtHospitalWebsite.getText().toString();
+            lastseen=txtHospitalLastSeen.getText().toString();
+            otherCategory=txtOtherCategoryHospital.getText().toString();
+            int indexValuex = spinnerHospital.getSelectedItemPosition();
+            String sources=preferences.getString(PrefConstants.SOURCE);
+                if (indexValuex != 0) {
+                    speciality = HospitalType[indexValuex - 1];
+                }
+            practice_name=txtHospitalPracticeName.getText().toString();
+            note=txtHospitalNote.getText().toString();
+            if (name.equals("")) {
+                txtFNameHospital.setError("Please Enter Name");
+                showAlert("Please Enter Name", getActivity());
+            }
+
+         /*   if (mobile.equals("")) {
+                txtFinanceOfficePhone.setError("Please Enter Mobile");
+                showAlert("Please Enter Mobile", getActivity());
+            } */else if (mobile.length()!=0 && mobile.length() < 10) {
+                txtFinanceOfficePhone.setError("Office number should be 10 digits");
+                showAlert("Office number should be 10 digits", getActivity());
+            } else return true;
+            /*else if (phone.equals("")) {
+                txtFinanceMobilePhone.setError("Please Enter Home Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            } else if (phone.length() < 10) {
+                txtFinanceMobilePhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }
+            else if (workphone.equals("")) {
+                txtFinanceOtherPhone.setError("Please Enter Work Phone");
+                showAlert("Please Enter Mobile", getActivity());
+            }else if (workphone.length() < 10) {
+                txtFinanceOtherPhone.setError("Mobile number should be 10 digits");
+                showAlert("Mobile number should be 10 digits", getActivity());
+            }*/
+
+
+
+        }
         else if (screen.equals("Finance")) {
 
             name=txtFName.getText().toString();
             email=txtFinanceEmail.getText().toString();
+            contactName=txtContactName.getText().toString();
             location=txtFinanceLocation.getText().toString();
             mobile=txtFinanceOfficePhone.getText().toString();
             phone=txtFinanceMobilePhone.getText().toString();

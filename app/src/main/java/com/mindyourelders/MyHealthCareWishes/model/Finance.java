@@ -8,7 +8,15 @@ import java.io.Serializable;
 
 public class Finance implements Serializable {
 
+    public String getContactName() {
+        return ContactName;
+    }
 
+    public void setContactName(String contactName) {
+        ContactName = contactName;
+    }
+
+    String ContactName="";
     public String getLocation() {
         return location;
     }
