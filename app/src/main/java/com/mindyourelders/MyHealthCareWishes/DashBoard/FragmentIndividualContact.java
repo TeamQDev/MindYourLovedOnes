@@ -916,12 +916,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                 Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 byte[] photo = baos.toByteArray();
 
                 Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-                bitmaps.compress(Bitmap.CompressFormat.JPEG, 40, baoss);
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 10, baoss);
                 if (imgCard.getVisibility()==View.VISIBLE)
                 {
                     photoCard = baoss.toByteArray();
@@ -1111,7 +1111,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             case R.id.imgCard:
                 Bitmap bitma = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bitma.compress(Bitmap.CompressFormat.JPEG, 40, bao);
+                bitma.compress(Bitmap.CompressFormat.JPEG, 10, bao);
                 photoCard = bao.toByteArray();
                 Intent i=new Intent(getActivity(), AddFormActivity.class);
                 i.putExtra("Image",photoCard);

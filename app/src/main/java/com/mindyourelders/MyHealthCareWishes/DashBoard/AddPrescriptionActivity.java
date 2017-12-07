@@ -518,7 +518,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                selectedImage.compress(Bitmap.CompressFormat.PNG, 40, stream);
+                selectedImage.compress(Bitmap.CompressFormat.PNG, 10, stream);
                 byte[] byteArray = stream.toByteArray();
                 PrescribeImage p = new PrescribeImage();
                 p.setImage(byteArray);
@@ -534,7 +534,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream streams = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 40, streams);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 10, streams);
             byte[] byteArrays = streams.toByteArray();
             PrescribeImage p = new PrescribeImage();
             p.setImage(byteArrays);

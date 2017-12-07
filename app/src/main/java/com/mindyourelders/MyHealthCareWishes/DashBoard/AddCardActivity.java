@@ -132,7 +132,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 type = txttype.getText().toString();
                 Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap1.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+                bitmap1.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                /* int newHeight = bitmap1.getHeight();
                 int newWidth = bitmap1.getWidth();
                 int ratio = bitmap1.getWidth() / bitmap1.getHeight();
@@ -149,7 +149,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 byte[] photo1 = baos.toByteArray();
                Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-                bitmap2.compress(Bitmap.CompressFormat.JPEG, 40, baos2);
+                bitmap2.compress(Bitmap.CompressFormat.JPEG, 10, baos2);
                /* newHeight = bitmap2.getHeight();
                 newWidth = bitmap2.getWidth();
                 ratio = bitmap2.getWidth() / bitmap2.getHeight();
