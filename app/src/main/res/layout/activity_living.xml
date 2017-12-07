@@ -370,12 +370,13 @@
                         android:layout_height="@dimen/dimension50dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Tranfering"
+                        android:text="Tranferring"
                         android:layout_toLeftOf="@+id/tbTranfering"
                         android:layout_alignParentLeft="true"
                         android:id="@+id/txtDf"
 
                         />
+
                     <TextView
                         style="@style/EmergencyDescs"
                         android:layout_width="match_parent"
