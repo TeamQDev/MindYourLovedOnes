@@ -90,7 +90,16 @@
                 android:layout_marginLeft="@dimen/dimension15dp"
                 android:layout_toRightOf="@+id/imgDoc"
                 android:src="@drawable/addplus" />
-
+            <TextView
+                android:id="@+id/txtAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_toRightOf="@id/imgAdd"
+                android:text="Select File"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/dimension18dp" />
         </RelativeLayout>
 
 

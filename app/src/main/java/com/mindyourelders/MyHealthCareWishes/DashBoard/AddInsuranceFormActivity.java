@@ -30,7 +30,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
     private static final int RQUESTCODE = 400;
     Context context = this;
     ImageView imgBack, imgDot, imgDone, imgDoc, imgAdd;
-    TextView txtName;
+    TextView txtName,txtAdd;
     String From;
     Preferences preferences;
     final CharSequence[] alert_items = {"Phone Memory", "Dropbox"};
@@ -70,6 +70,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
         imgDoc = (ImageView) findViewById(R.id.imgDoc);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
         txtName = (TextView) findViewById(R.id.txtName);
+        txtAdd = (TextView) findViewById(R.id.txtAdd);
         Intent i = getIntent();
         if (i.getExtras() != null) {
             Goto = i.getExtras().getString("GoTo");
@@ -85,6 +86,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
             txtName.setText(document.getName());
             documentPath = document.getDocument();
             imgDoc.setImageResource(document.getImage());
+            txtAdd.setVisibility(View.GONE);
 
         } else if (Goto.endsWith("Edit")) {
             document = (Form) i.getExtras().getSerializable("FormObject");
@@ -95,10 +97,14 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
             imgDot.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
+            txtAdd.setVisibility(View.VISIBLE);
+            txtAdd.setText("Edit File");
         } else {
             imgDot.setVisibility(View.GONE);
             imgDone.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
+            txtAdd.setVisibility(View.VISIBLE);
+            txtAdd.setText("Select File");
         }
 
     }
@@ -298,6 +304,8 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
             Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             imgDoc.setClickable(false);
             imgDoc.setImageResource(R.drawable.pdf);
+            txtAdd.setText("Edit File");
+            ShowWindowDialog(text);
         } else if (requestCode == RQUESTCODE && data != null) {
             name = data.getExtras().getString("Name");
             documentPath = data.getExtras().getString("URI");
@@ -306,8 +314,21 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
             Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             imgDoc.setImageResource(R.drawable.pdf);
             imgDoc.setClickable(false);
-
+            txtAdd.setText("Edit File");
+            ShowWindowDialog(text);
         }
+    }
+
+    private void ShowWindowDialog(String text) {
+        AlertDialog.Builder alert=new AlertDialog.Builder(context);
+        alert.setMessage(Html.fromHtml(text));
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 
 }

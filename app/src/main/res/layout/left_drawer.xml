@@ -312,7 +312,7 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 android:drawableLeft="@drawable/dot"
                 android:drawablePadding="@dimen/dimension10dp"
                 />
@@ -322,7 +322,7 @@
                 android:layout_height="@dimen/dimension1dp"
                 android:background="@color/colorLightGray"
                 android:layout_below="@+id/txtForm"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 ></View>
             <TextView
                 android:id="@+id/txtAdvance"
@@ -332,7 +332,7 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 android:drawableLeft="@drawable/dot"
                 android:drawablePadding="@dimen/dimension10dp"
                 android:layout_below="@+id/view1"
@@ -400,7 +400,7 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 android:drawableLeft="@drawable/dot"
                 android:drawablePadding="@dimen/dimension10dp"
                 />
@@ -410,7 +410,7 @@
                 android:layout_height="@dimen/dimension1dp"
                 android:background="@color/colorLightGray"
                 android:layout_below="@+id/txtBank"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 ></View>
             <TextView
                 android:id="@+id/txtSenior"
@@ -420,7 +420,7 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimension100dp"
+                android:layout_marginLeft="@dimen/dimension80dp"
                 android:layout_below="@+id/views1"
                 android:drawableLeft="@drawable/dot"
                 android:drawablePadding="@dimen/dimension10dp"

@@ -47,15 +47,15 @@ public class RoundedImageView extends ImageView {
         }
         Bitmap b = ((BitmapDrawable) drawable).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+        b.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-        Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+        //Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
 
         int w = getWidth();
         @SuppressWarnings("unused")
         int h = getHeight();
 
-        Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
+        Bitmap roundBitmap = getCroppedBitmap(b, w);
         canvas.drawBitmap(roundBitmap, 0, 0, null);
 
     }

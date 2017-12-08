@@ -2839,14 +2839,8 @@ public class Individual {
                 messageLiving.add("Note :");
                 messageLiving.add(instNote);
 
-                Header.document.add(table);
-                Paragraph p = new Paragraph(" ");
-                DottedLineSeparator line = new DottedLineSeparator();
-                line.setOffset(-4);
-                line.setLineColor(BaseColor.LIGHT_GRAY);
-                p.add(line);
-                Header.document.add(p);
-            }
+
+        }
             Header.document.add(table);
             Paragraph p = new Paragraph(" ");
             DottedLineSeparator line = new DottedLineSeparator();

@@ -14,7 +14,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -175,7 +174,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
         spinner.setHint("Dosage Form");
 
         tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
-        tilTitle.setHintEnabled(false);
+       /* tilTitle.setHintEnabled(false);
         txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -185,7 +184,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 return false;
             }
         });
-
+*/
         Intent i=getIntent();
         if (i.getExtras()!=null)
         {
