@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Files"
-                android:background="@color/colorBlue"
+                android:background="@color/colorSix"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimension20dp"
                 android:padding="@dimen/dimension10dp"

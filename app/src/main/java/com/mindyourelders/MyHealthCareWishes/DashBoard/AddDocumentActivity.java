@@ -16,7 +16,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -138,15 +137,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         });*/
 
         tilDate= (TextInputLayout) findViewById(R.id.tilDate);
+        //tilDate.setHint("Date Signed");
         txtDate= (TextView) findViewById(R.id.txtDate);
-        tilDate.setHintEnabled(false);
+       /* tilDate.setHintEnabled(false);
         txtDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 tilDate.setHintEnabled(true);
                 return false;
             }
-        });
+        });*/
 
         adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, OtherList);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -199,7 +199,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             tilPName.setHint("Name of Person");
             tilDate.setHint("Date Signed");
-            txtTitle.setText("Documents");
+            txtTitle.setText("Other Documents");
         }
         else if(From.equals("Record"))
         {
@@ -236,17 +236,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             imgDot.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.GONE);
             txtAdd.setVisibility(View.GONE);
-            //  tilDoc.setVisibility(View.VISIBLE);
-            // imgDone.setVisibility(View.GONE);
-            //  imgDot.setVisibility(View.VISIBLE);
             imgDoc.setClickable(true);
+            disableView();
         }
         else if(Goto.equals("Edit"))
         {
             imgDone.setVisibility(View.VISIBLE);
-            imgDot.setVisibility(View.GONE);
+            imgDot.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
             txtAdd.setVisibility(View.VISIBLE);
+            txtAdd.setText("Edit File");
             imgDoc.setClickable(false);
         }
         else{
@@ -255,6 +254,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             imgAdd.setVisibility(View.VISIBLE);
             txtAdd.setVisibility(View.VISIBLE);
+            txtAdd.setText("Select File");
             imgDoc.setClickable(false);
         }
 
@@ -359,6 +359,18 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         }
 
 
+    }
+
+    private void disableView() {
+        txtDate.setEnabled(false);
+        txtHolderName.setEnabled(false);
+        txtLocation.setEnabled(false);
+        txtFName.setEnabled(false);
+        txtPName.setEnabled(false);
+        txtName.setEnabled(false);
+        txtOther.setEnabled(false);
+        txtHosp.setEnabled(false);
+        txtDocTYpe.setEnabled(false);
     }
 
     @Override
@@ -771,6 +783,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             imgDoc.setClickable(false);
             String text="You Have selected <b>"+name +"</b> Document";
             Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            showDialogWindow(text);
+            txtAdd.setText("Edit File");
             imgDoc.setImageResource(R.drawable.pdf);
         }
         else  if (requestCode==RQUESTCODE && data!=null)
@@ -781,9 +795,23 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             imgDoc.setClickable(false);
             String text="You Have selected <b>"+name +"</b> Document";
             Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            showDialogWindow(text);
+            txtAdd.setText("Edit File");
             imgDoc.setImageResource(R.drawable.pdf);
         }
 
+    }
+
+    private void showDialogWindow(String text) {
+        AlertDialog.Builder alert=new AlertDialog.Builder(context);
+        alert.setMessage(Html.fromHtml(text));
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 
  /*   public void getData(Uri uri, String ext) {
