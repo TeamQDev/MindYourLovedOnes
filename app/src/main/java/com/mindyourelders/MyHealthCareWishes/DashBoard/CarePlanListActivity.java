@@ -24,9 +24,14 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.DocumentPdf;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -47,10 +52,10 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     SwipeMenuListView lvDoc;
     ArrayList<Document> documentList;
     ArrayList<Document> documentListOld;
-    ImageView imgBack;
+    ImageView imgBack,imgRight;
     TextView txtTitle,txtAdd;
     String From;
-    final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
+    final CharSequence[] dialog_items ={"View", "Email", "Fax" };
     RelativeLayout llAddDoc;
     Preferences preferences;
 
@@ -88,6 +93,7 @@ DBHelper dbHelper;
 
     private void initListener() {
         imgBack.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
         llAddDoc.setOnClickListener(this);
     }
 
@@ -97,6 +103,7 @@ DBHelper dbHelper;
     lvNote.setMenuCreator(creator);*/
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         lvDoc= (SwipeMenuListView) findViewById(R.id.lvDoc);
         lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
@@ -380,6 +387,170 @@ DBHelper dbHelper;
                 i.putExtra("GoTo","Add");
                 startActivity(i);
                 break;
+
+            case R.id.imgRight:
+                switch (From) {
+                    case "AD":
+                        final String RESULT1 = Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        File dirfile1 = new File(RESULT1);
+                        dirfile1.mkdirs();
+                        File file1 = new File(dirfile1, "AdvanceDirectives.pdf");
+                        if (file1.exists()) {
+                            file1.delete();
+                        }
+
+                        new Header().createPdfHeader(file1.getAbsolutePath(),
+                                ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+                        Header.addusereNameChank("Advance Directives");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+
+                        ArrayList<Document> AdList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"AD");
+                        new DocumentPdf(AdList);
+                        Header.document.close();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                        builder.setTitle("");
+
+                        builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int itemPos) {
+                                String path= Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/AdvanceDirectives.pdf";
+                                switch (itemPos) {
+                                    case 0: // view
+                                        StringBuffer result = new StringBuffer();
+                                        result.append(new MessageString().getAdvanceDocuments());
+
+                                        new PDFDocumentProcess(path,
+                                                context, result);
+
+                                        System.out.println("\n" + result + "\n");
+                                        break;
+                                    case 1://Email
+                                        File f =new File(path);
+                                        preferences.emailAttachement(f,context,"Advance Directives");
+                                        break;
+                                    case 2://fax
+                                        new FaxCustomDialog(context, path).show();
+                                        break;
+                                }
+                            }
+
+                        });
+                        builder.create().show();
+                        break;
+                    case "Record":
+                        final String RESULT2 = Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        File dirfile2 = new File(RESULT2);
+                        dirfile2.mkdirs();
+                        File file2 = new File(dirfile2, "MedicalRecords.pdf");
+                        if (file2.exists()) {
+                            file2.delete();
+                        }
+
+                        new Header().createPdfHeader(file2.getAbsolutePath(),
+                                ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+                        Header.addusereNameChank("Medical Records");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+
+                        ArrayList<Document> RecordList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"Record");
+                        new DocumentPdf(RecordList,"Record");
+                        Header.document.close();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+
+                        builder1.setTitle("");
+
+                        builder1.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int itemPos) {
+                                String path= Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/MedicalRecords.pdf";
+                                switch (itemPos) {
+                                    case 0: // view
+                                        StringBuffer result = new StringBuffer();
+                                        result.append(new MessageString().getRecordDocuments());
+
+
+                                        new PDFDocumentProcess(path,
+                                                context, result);
+
+                                        System.out.println("\n" + result + "\n");
+                                        break;
+                                    case 1://Email
+                                        File f =new File(path);
+                                        preferences.emailAttachement(f,context,"Medical Records");
+                                        break;
+                                    case 2://fax
+                                        new FaxCustomDialog(context, path).show();
+                                        break;
+                                }
+                            }
+
+                        });
+                        builder1.create().show();
+                        break;
+                    case "Other":
+                        final String RESULT3 = Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        File dirfile3 = new File(RESULT3);
+                        dirfile3.mkdirs();
+                        File file3 = new File(dirfile3, "OtherDocuments.pdf");
+                        if (file3.exists()) {
+                            file3.delete();
+                        }
+
+                        new Header().createPdfHeader(file3.getAbsolutePath(),
+                                ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+                        Header.addusereNameChank("Other Documents");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                        Header.addEmptyLine(1);
+
+                        ArrayList<Document> OtherList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"Other");
+                        new DocumentPdf(OtherList,1);
+                        Header.document.close();
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+
+                        builder2.setTitle("");
+
+                        builder2.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int itemPos) {
+                                String path= Environment.getExternalStorageDirectory()
+                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/OtherDocuments.pdf";
+                                switch (itemPos) {
+                                    case 0: // view
+                                        StringBuffer result = new StringBuffer();
+                                        result.append(new MessageString().getOtherDocuments());
+                                        new PDFDocumentProcess(path,
+                                                context, result);
+
+                                        System.out.println("\n" + result + "\n");
+                                        break;
+                                    case 1://Email
+                                        File f =new File(path);
+                                        preferences.emailAttachement(f,context,"Other Documents");
+                                        break;
+                                    case 2://fax
+                                        new FaxCustomDialog(context, path).show();
+                                        break;
+                                }
+                            }
+
+                        });
+                        builder2.create().show();
+                        break;
+                }
+                break;
+
+
         }
     }
 

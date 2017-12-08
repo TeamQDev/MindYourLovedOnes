@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.pdfCreation;
 
 import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.DocumentPdf;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Specialty;
@@ -356,4 +357,60 @@ public class MessageString {
     }
 
 
+    public StringBuffer getAdvanceDocuments() {
+        StringBuffer result = new StringBuffer();
+        if (DocumentPdf.messageAdvance.size() > 0) {
+            result.append(DocumentPdf.messageAdvance.get(0));
+            result.append("\n");
+            for (int i = 1; i < DocumentPdf.messageAdvance.size(); i++) {
+
+                result.append(DocumentPdf.messageAdvance.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getOtherDocuments() {
+        StringBuffer result = new StringBuffer();
+        if (DocumentPdf.messageOther.size() > 0) {
+            result.append(DocumentPdf.messageOther.get(0));
+            result.append("\n");
+            for (int i = 1; i < DocumentPdf.messageOther.size(); i++) {
+
+                result.append(DocumentPdf.messageOther.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public StringBuffer getRecordDocuments() {
+        StringBuffer result = new StringBuffer();
+        if (DocumentPdf.messageRecord.size() > 0) {
+            result.append(DocumentPdf.messageRecord.get(0));
+            result.append("\n");
+            for (int i = 1; i < DocumentPdf.messageRecord.size(); i++) {
+
+                result.append(DocumentPdf.messageRecord.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

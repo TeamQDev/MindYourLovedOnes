@@ -219,8 +219,8 @@ public class SpecialistsActivity extends AppCompatActivity {
                   /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Specialty");*/
 
-                    Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(2);
+                   // Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                  //  Header.addEmptyLine(2);
 
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Hospital> HospitalList= HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));

@@ -22,9 +22,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DocumentQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.DocumentPdf;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -37,11 +42,12 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class CarePlanActivity extends AppCompatActivity implements View.OnClickListener{
+    final static String TARGET_BASE_PATH = "/sdcard/MYE/images/";
     Context context=this;
     ListView lvDoc;
     ArrayList<Document> documentList;
-    ImageView imgBack;
-    final CharSequence[] dialog_items = { "Email", "Bluetooth", "View" };
+    ImageView imgBack,imgRight;
+    final CharSequence[] dialog_items = {"View", "Email", "Fax" };
     RelativeLayout llAddDoc;
     Preferences preferences;
     DBHelper dbHelper;
@@ -83,6 +89,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
         rlMedical.setOnClickListener(this);
         rlInsurance.setOnClickListener(this);
         rlOther.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
         //llAddDoc.setOnClickListener(this);
     }
 
@@ -90,6 +97,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
         txtUserName=(TextView) findViewById(R.id.txtUserName);
         txtUserName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgRight= (ImageView) findViewById(R.id.imgRight);
         rlAD= (RelativeLayout) findViewById(R.id.rlAD);
         rlMedicalRecord= (RelativeLayout) findViewById(R.id.rlMedicalRecord);
         rlLegal= (RelativeLayout) findViewById(R.id.rlLegal);
@@ -157,6 +165,75 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
 
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "Documents.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                copyFile("ic_launcher.png");
+                Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Documents");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                  /* new Header().createPdfHeader(file.getAbsolutePath(),
+                            "Specialty");*/
+
+              /*  Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(2);*/
+
+                ArrayList<Document> AdList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"AD");
+                ArrayList<Document> OtherList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"Other");
+                ArrayList<Document> RecordList= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),"Record");
+                new DocumentPdf(AdList);
+                new DocumentPdf(OtherList,1);
+                new DocumentPdf(RecordList,"Record");
+
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/Documents.pdf";
+                        switch (itemPos) {
+                            case 0: // view
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getAdvanceDocuments());
+                                result.append(new MessageString().getOtherDocuments());
+                                result.append(new MessageString().getRecordDocuments());
+
+
+                                new PDFDocumentProcess(path,
+                                        context, result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,context,"Documents");
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(context, path).show();
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
+                break;
+
+
             case R.id.rlOther:
                 Intent i=new Intent(context,CarePlanListActivity.class);
                 preferences.putString(PrefConstants.FROM,"Other");
@@ -203,6 +280,40 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(i);
                 break;*/
         }
+    }
+
+    private void copyFile(String filename) {
+        AssetManager assetManager = this.getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        String newFileName = null;
+
+        try {
+            File dir = new File(TARGET_BASE_PATH);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            Log.i("tag", "copyFile() " + filename);
+            in = assetManager.open(filename);
+            newFileName = TARGET_BASE_PATH + filename;
+            out = new FileOutputStream(newFileName);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", "Exception in copyFile() of " + newFileName);
+            Log.e("tag", "Exception in copyFile() " + e.toString());
+        }
+
     }
 
     public void CopyReadAssets(String fileName) {

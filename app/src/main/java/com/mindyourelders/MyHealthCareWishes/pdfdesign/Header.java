@@ -37,7 +37,7 @@ public class Header {
    // public static Font GreenFont = FontFactory.getFont(FONT, "Cp1250", BaseFont.EMBEDDED);
 
 
-    public static Font GreenFont =new Font(Font.FontFamily.TIMES_ROMAN, 20,
+    public static Font GreenFont =new Font(Font.FontFamily.TIMES_ROMAN, 22,
             Font.BOLD);
 
     public static Font BlackFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,

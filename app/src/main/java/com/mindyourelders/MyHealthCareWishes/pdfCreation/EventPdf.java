@@ -152,7 +152,7 @@ public class EventPdf {
         try {
             Header.addEmptyLine(1);
             Header.addChank("Event Notes");
-            messageAppoint.add("Event Notes");
+            messageEvent.add("Event Notes");
             Header.addEmptyLine(1);
 
             PdfPTable table1;
@@ -217,7 +217,7 @@ public class EventPdf {
                 table.addCell(cell);
 
                 messageEvent.add("");
-                messageEvent.add(noteDate);
+                messageEvent.add("");
 
                 Header.document.add(table);
 
