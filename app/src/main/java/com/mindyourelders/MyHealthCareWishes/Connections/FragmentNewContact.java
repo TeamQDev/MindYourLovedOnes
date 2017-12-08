@@ -1792,6 +1792,74 @@ String location="";
         txtHospitalLastSeen= (TextView) rootview.findViewById(R.id.txtHospitalLastSeen);
         txtHospitalNote= (TextView) rootview.findViewById(R.id.txtHospitalNote);
 
+        txtHospitalOfficePhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHospitalOfficePhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtHospitalOtherPhone.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHospitalOtherPhone.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        txtHospitalFax.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                prevL = txtHospitalFax.getText().toString().length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+
+
         txtFinanceFax.addTextChangedListener(new TextWatcher() {
             int prevL=0;
             @Override
