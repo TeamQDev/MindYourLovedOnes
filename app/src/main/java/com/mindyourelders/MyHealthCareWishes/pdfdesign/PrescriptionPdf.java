@@ -29,7 +29,7 @@ public class PrescriptionPdf {
             Header.addChank("Prescription Tracker");
             messagePrescription.add("Prescription Tracker");
             Header.addEmptyLine(1);
-
+           
             for (int i = 0; i < prescriptionList.size(); i++) {
                 int k = i + 1;
                 Header.addEmptyLine(1);
@@ -158,6 +158,15 @@ public class PrescriptionPdf {
                 table.addCell(cell);
                 messagePrescription.add("Notes :");
                 messagePrescription.add(notes);
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePrescription.add("");
+                messagePrescription.add("");
 
                 Header.document.add(table);
 

@@ -28,8 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
            android:layout_centerInParent="true"
-            android:text="APPOINTMENT CHECKLIST"
+            android:text="APPOINTMENT \nCHECKLIST"
             android:textColor="#FFFFFF"
+            android:gravity="center"
             android:textSize="@dimen/dimension22dp" />
 
         <ImageView
@@ -37,7 +38,7 @@
             android:layout_width="@dimen/dimension30dp"
             android:layout_height="@dimen/dimension30dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimension15dp"
+            android:layout_marginRight="@dimen/dimension10dp"
             android:src="@drawable/add_white_square"
             android:layout_toLeftOf="@+id/imgRight"
 

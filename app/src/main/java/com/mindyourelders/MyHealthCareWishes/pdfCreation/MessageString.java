@@ -413,4 +413,23 @@ public class MessageString {
 
         return result;
     }
+
+    public StringBuffer getFormInfo() {
+        StringBuffer result = new StringBuffer();
+        if (InsurancePdf.messageForm.size() > 0) {
+            result.append(InsurancePdf.messageForm.get(0));
+            result.append("\n");
+            for (int i = 1; i < InsurancePdf.messageForm.size(); i++) {
+
+                result.append(InsurancePdf.messageForm.get(i));
+                if (i % 2 == 0 && i >= 2) {
+                    result.append("\n");
+
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

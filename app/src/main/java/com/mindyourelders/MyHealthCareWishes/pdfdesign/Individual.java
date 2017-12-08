@@ -2293,6 +2293,15 @@ public class Individual {
                 table.addCell(cell);
                 messageInfo3.add("Date :");
                 messageInfo3.add(implantsList.get(i).getDate());
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("");
+                messageInfo3.add("");
             }
             if ((implantsList.size())%2!=0)
             {
@@ -2357,6 +2366,15 @@ public class Individual {
                 table.addCell(cell);
                 messageInfo3.add("Date :");
                 messageInfo3.add(vaccineList.get(i).getDate());
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("");
+                messageInfo3.add("");
             }
 
             if ((vaccineList.size())%2!=0)
@@ -2487,7 +2505,14 @@ public class Individual {
                 messageInfo3.add("Location :");
                 messageInfo3.add(historList.get(i).getDone());
 
-
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInfo3.add("");
+                messageInfo3.add("");
             }
 
 

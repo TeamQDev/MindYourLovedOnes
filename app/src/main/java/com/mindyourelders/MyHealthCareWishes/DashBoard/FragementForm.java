@@ -1,8 +1,11 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +19,22 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
 import com.mindyourelders.MyHealthCareWishes.database.InsuranceQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Document;
 import com.mindyourelders.MyHealthCareWishes.model.Form;
 import com.mindyourelders.MyHealthCareWishes.model.Insurance;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -34,13 +43,14 @@ import java.util.ArrayList;
 
 public class FragementForm extends Fragment implements View.OnClickListener {
     View rootview;
+    ImageView imgRight;
     SwipeMenuListView lvDoc;
     ArrayList<Form> documentList;
     ArrayList<Document> documentListOld;
     ImageView imgBack;
     TextView txtTitle;
     String From;
-    final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
+    final String dialog_items[]={"View","Email","Fax"};
     RelativeLayout llAddDoc;
     Preferences preferences;
     DBHelper dbHelper;
@@ -76,12 +86,14 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     private void initListener() {
         //  imgADMTick.setOnClickListener(this);
         llAddDoc.setOnClickListener(this);
+        imgRight.setOnClickListener(this);
     }
 
     private void initUI() {
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddDoc = (RelativeLayout) rootview.findViewById(R.id.llAddDoc);
+        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         lvDoc = (SwipeMenuListView) rootview.findViewById(R.id.lvDoc);
         lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
@@ -196,6 +208,66 @@ public class FragementForm extends Fragment implements View.OnClickListener {
                 Intent i = new Intent(getActivity(), AddInsuranceFormActivity.class);
                 i.putExtra("GoTo","Add");
                 startActivity(i);
+                break;
+
+            case R.id.imgRight:
+                final String RESULT = Environment.getExternalStorageDirectory()
+                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                File dirfile = new File(RESULT);
+                dirfile.mkdirs();
+                File file = new File(dirfile, "InsuranceForm.pdf");
+                if (file.exists()) {
+                    file.delete();
+                }
+
+                new Header().createPdfHeader(file.getAbsolutePath(),
+                        ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Header.addusereNameChank("Insurance Form");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+               /* new Header().createPdfHeader(file.getAbsolutePath(),
+                        "Insurance Information");
+
+                Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
+                // Header.addEmptyLine(2);*/
+
+                ArrayList<Form> formList= FormQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                new InsurancePdf(formList,"form");
+                Header.document.close();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("");
+
+                builder.setItems(dialog_items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int itemPos) {
+                        String path= Environment.getExternalStorageDirectory()
+                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/InsuranceForm.pdf";
+                        switch (itemPos) {
+                            case 0: // view
+                                StringBuffer result = new StringBuffer();
+                                result.append(new MessageString().getFormInfo());
+
+
+                                new PDFDocumentProcess(path,
+                                        getActivity(), result);
+
+                                System.out.println("\n" + result + "\n");
+                                break;
+                            case 1://Email
+                                File f =new File(path);
+                                preferences.emailAttachement(f,getActivity(),"Insurance Form");
+                                break;
+                            case 2://fax
+                                new FaxCustomDialog(getActivity(), path).show();
+                                break;
+                        }
+                    }
+
+                });
+                builder.create().show();
                 break;
         }
     }

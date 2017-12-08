@@ -27,6 +27,7 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DateQuery;
 import com.mindyourelders.MyHealthCareWishes.database.EventNoteQuery;
 import com.mindyourelders.MyHealthCareWishes.database.FinanceQuery;
+import com.mindyourelders.MyHealthCareWishes.database.FormQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalHealthQuery;
 import com.mindyourelders.MyHealthCareWishes.database.HospitalQuery;
@@ -41,12 +42,12 @@ import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.database.VaccineQuery;
-import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.model.Allergy;
 import com.mindyourelders.MyHealthCareWishes.model.Appoint;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.model.Finance;
+import com.mindyourelders.MyHealthCareWishes.model.Form;
 import com.mindyourelders.MyHealthCareWishes.model.History;
 import com.mindyourelders.MyHealthCareWishes.model.Hospital;
 import com.mindyourelders.MyHealthCareWishes.model.Implant;
@@ -117,9 +118,11 @@ public class SpecialistsActivity extends AppCompatActivity {
 
               //  imgRight.setVisibility(View.VISIBLE);
                 header.setBackgroundResource(R.color.colorThree);
-                profile=new int[]{R.drawable.physician,R.drawable.hosp_icon,R.drawable.pharmacies,R.drawable.aides,R.drawable.finances};
+                profile=new int[]{R.drawable.physician,R.drawable.hosp_icon,R.drawable.pharmacies,R.drawable.finances};
              //   specialist= new String[]{"DOCTORS","HOSPITALS AND \nOTHER HEALTH PROFESSIONALS", "PHARMACIES AND \nHOME MEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
-                specialist= new String[]{"DOCTORS & OTHER HEALTH\nPROFESSIONALS","HOSPITALS & REHABILITATION CENTERS", "PHARMACIES & HOME\nMEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
+               // specialist= new String[]{"DOCTORS & OTHER HEALTH\nPROFESSIONALS","HOSPITALS & REHABILITATION CENTERS", "PHARMACIES & HOME\nMEDICAL EQUIPMENT", "HOME HEALTH SERVICES", "FINANCE, INSURANCE, LEGAL"};
+                specialist= new String[]{"DOCTORS & OTHER HEALTH\nPROFESSIONALS","HOSPITALS & REHABILITATION CENTERS", "PHARMACIES & HOME\nMEDICAL EQUIPMENT", "FINANCE, INSURANCE, LEGAL"};
+
                 isEmergency=false;
                 isInsurance=false;
             }
@@ -184,6 +187,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         CardQuery c=new CardQuery(context,dbHelper);
         MedicalConditionQuery mu=new MedicalConditionQuery(context,dbHelper);
         VaccineQuery v=new VaccineQuery(context,dbHelper);
+        FormQuery fo=new FormQuery(context,dbHelper);
     }
 
     private void initListener() {
@@ -225,14 +229,13 @@ public class SpecialistsActivity extends AppCompatActivity {
                     ArrayList<Specialist> specialistsList= SpecialistQuery.fetchAllPhysicianRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),2);
                     ArrayList<Hospital> HospitalList= HospitalHealthQuery.fetchAllHospitalhealthRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Pharmacy> PharmacyList= PharmacyQuery.fetchAllPharmacyRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-                    ArrayList<Aides> AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                   // ArrayList<Aides> AidesList= AideQuery.fetchAllAideRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Finance> financeList= FinanceQuery.fetchAllFinanceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
-
-                    new Specialty("Hospital",HospitalList);
                     new Specialty(specialistsList,"Doctors");
+                    new Specialty("Hospital",HospitalList);
                     new Specialty(PharmacyList);
-                    new Specialty(AidesList,1);
+                 //   new Specialty(AidesList,1);
                     new Specialty(1,financeList);
 
                     Header.document.close();
@@ -312,7 +315,6 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Insurance");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                    Header.addEmptyLine(1);
                    /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Insurance");
 
@@ -321,9 +323,11 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                     ArrayList<Insurance> insuranceList= InsuranceQuery.fetchAllInsuranceRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     ArrayList<Card> CardList= CardQuery.fetchAllCardRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    ArrayList<Form> formList= FormQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                     new InsurancePdf(insuranceList);
                     new InsurancePdf(CardList,1);
+                    new InsurancePdf(formList,"form");
 
                     Header.document.close();
                 }
@@ -391,7 +395,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         result.append(new MessageString().getDoctorsInfo());
                                         result.append(new MessageString().getHospitalInfo());
                                         result.append(new MessageString().getPharmacyInfo());
-                                        result.append(new MessageString().getAideInfo());
+                                       // result.append(new MessageString().getAideInfo());
                                         result.append(new MessageString().getFinanceInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
@@ -445,7 +449,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     StringBuffer result = new StringBuffer();
                                     result.append(new MessageString().getInsuranceInfo());
                                     result.append(new MessageString().getInsuranceCard());
-
+                                    result.append(new MessageString().getFormInfo());
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()
                                             + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)

@@ -32,10 +32,10 @@ public class Specialty {
     public Specialty(ArrayList<Specialist> specialistsList, String doctors) {
         try {
 
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
             Header.addEmptyLine(1);
 
             Header.addChank("Doctors");
@@ -44,6 +44,10 @@ public class Specialty {
 
 
             for (int i = 0; i < specialistsList.size(); i++) {
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Doctors " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -225,17 +229,18 @@ public class Specialty {
                 table.addCell(cell);
                 messageDoctor.add("Notes :");
                 messageDoctor.add(note);
-
+                Header.document.add(table);
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
             }
 
 
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+            Header.document.add(table1);
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -245,10 +250,10 @@ public class Specialty {
 
     public Specialty(String hospital, ArrayList<Hospital> hospitalList) {
         try {
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
 
             Header.addEmptyLine(1);
             Header.addChank("Hospitals And Other Health Professionals");
@@ -256,6 +261,10 @@ public class Specialty {
             Header.addEmptyLine(1);
 
             for (int i = 0; i < hospitalList.size(); i++) {
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Hospitals And Other Health Professionals " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -280,6 +289,19 @@ public class Specialty {
                 table.addCell(cell);
                 messageHospital.add("Category :");
                 messageHospital.add(category);
+
+                String othercategory = "";
+                if (h.getOtherCategory() != null) {
+                    othercategory = h.getOtherCategory();
+                }
+                cell = new PdfPCell(new Phrase("Other Category : " + othercategory));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageHospital.add("Other Category :");
+                messageHospital.add(othercategory);
 
                 String name = "";
                 if (h.getName() != null) {
@@ -307,7 +329,7 @@ public class Specialty {
                 messageHospital.add("Office Phone :");
                 messageHospital.add(officePhone);
 
-                String mobile = "";
+               /* String mobile = "";
                 if (h.getHourPhone() != null) {
                     mobile = h.getHourPhone();
                 }
@@ -318,7 +340,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageHospital.add("Mobile Phone :");
-                messageHospital.add(mobile);
+                messageHospital.add(mobile);*/
 
                 String otherPhone = "";
                 if (h.getOtherPhone() != null) {
@@ -377,14 +399,27 @@ public class Specialty {
                 if (h.getPracticeName() != null) {
                     companyName = h.getPracticeName();
                 }
-                cell = new PdfPCell(new Phrase("Company Name : " + companyName));
+                cell = new PdfPCell(new Phrase("Contact Person : " + companyName));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
-                messageHospital.add("Company Name :");
+                messageHospital.add("Contact Person :");
                 messageHospital.add(companyName);
+
+                String network = "";
+                if (h.getLocation() != null) {
+                    network = h.getLocation();
+                }
+                cell = new PdfPCell(new Phrase("In Network Status : " + network));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageHospital.add("In Network Status :");
+                messageHospital.add(network);
 
                 String lastSeen = "";
                 if (h.getLastseen() != null) {
@@ -412,15 +447,28 @@ public class Specialty {
                 messageHospital.add("Notes :");
                 messageHospital.add(note);
 
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageHospital.add("");
+                messageHospital.add(note);
+
+                Header.document.add(table);
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
             }
 
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+            Header.document.add(table1);
+
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -430,10 +478,10 @@ public class Specialty {
 
     public Specialty(ArrayList<Pharmacy> pharmacyList) {
         try {
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
 
             Header.addEmptyLine(1);
             Header.addChank("Pharmacies And Home Medical Equipment");
@@ -441,6 +489,10 @@ public class Specialty {
             Header.addEmptyLine(1);
 
             for (int i = 0; i < pharmacyList.size(); i++) {
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Pharmacies And Home Medical Equipment " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -532,14 +584,25 @@ public class Specialty {
                 messagePharmacy.add("Notes :");
                 messagePharmacy.add(note);
 
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePharmacy.add("");
+                messagePharmacy.add(note);
+
+                Header.document.add(table);
+                Paragraph ps = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                ps.add(line);
+                Header.document.add(ps);
+                Header.addEmptyLine(1);
             }
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+            Header.document.add(table1);
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -712,16 +775,21 @@ public class Specialty {
 
     public Specialty(int i, ArrayList<Finance> financeList) {
         try {
-            PdfPTable table;
-            table = new PdfPTable(2);
-            PdfPCell cell;
-            table.setWidthPercentage(100);
+            PdfPTable table1;
+            table1 = new PdfPTable(2);
+            PdfPCell cell1;
+            table1.setWidthPercentage(100);
 
             Header.addChank("Finance,Insurance,Legal");
             messageFinance.add("Finance,Insurance,Legal");
             Header.addEmptyLine(1);
 
             for (i = 0; i < financeList.size(); i++) {
+                PdfPTable table;
+                table = new PdfPTable(2);
+                PdfPCell cell;
+                table.setWidthPercentage(100);
+
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Finance,Insurance,Legal " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -735,8 +803,8 @@ public class Specialty {
                 Finance f = financeList.get(i);
 
                 String category = "";
-                if (f.getCategory() != null) {
-                    category = f.getCategory();
+                if (f.getOtherCategory() != null) {
+                    category = f.getOtherCategory();
                 }
                 cell = new PdfPCell(new Phrase("Category : " +category));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -751,14 +819,27 @@ public class Specialty {
                 if (f.getName() != null) {
                     name = f.getName();
                 }
-                cell = new PdfPCell(new Phrase("Name : " +name));
+                cell = new PdfPCell(new Phrase("Firm Name : " +name));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
-                messageFinance.add("Name :");
+                messageFinance.add("Firm Name :");
                 messageFinance.add(name);
+
+                String person = "";
+                if (f.getContactName() != null) {
+                    person = f.getContactName();
+                }
+                cell = new PdfPCell(new Phrase("Contact Name : " +person));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageFinance.add("Contact Name :");
+                messageFinance.add(person);
 
                 String email = "";
                 if (f.getEmail() != null) {
@@ -813,7 +894,7 @@ public class Specialty {
                 messageFinance.add("Other Phone :");
                 messageFinance.add(otherPhone);
 
-                String location = "";
+               /* String location = "";
                 if (f.getLocation() != null) {
                     location = f.getLocation();
                 }
@@ -824,7 +905,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageFinance.add("Location :");
-                messageFinance.add(location);
+                messageFinance.add(location);*/
 
                 String officeFax = "";
                 if (f.getFax() != null) {
@@ -866,7 +947,7 @@ public class Specialty {
                 messageFinance.add("Website :");
                 messageFinance.add(website);
 
-                String companyName = "";
+               /* String companyName = "";
                 if (f.getPracticeName() != null) {
                     companyName = f.getFirm();
                 }
@@ -877,7 +958,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageFinance.add("Company Name :");
-                messageFinance.add(companyName);
+                messageFinance.add(companyName);*/
 
                 String lastSeen = "";
                 if (f.getLastseen() != null) {
@@ -905,15 +986,26 @@ public class Specialty {
                 messageFinance.add("Notes :");
                 messageFinance.add(note);
 
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageFinance.add("");
+                messageFinance.add(note);
+
+                Header.document.add(table);
+                Paragraph p = new Paragraph(" ");
+                DottedLineSeparator line = new DottedLineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                Header.document.add(p);
+                Header.addEmptyLine(1);
             }
 
-            Header.document.add(table);
-            Paragraph p = new Paragraph(" ");
-            DottedLineSeparator line = new DottedLineSeparator();
-            line.setOffset(-4);
-            line.setLineColor(BaseColor.LIGHT_GRAY);
-            p.add(line);
-            Header.document.add(p);
+            Header.document.add(table1);
             Header.addEmptyLine(1);
         } catch (Exception e) {
             // TODO Auto-generated catch block

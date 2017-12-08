@@ -45,7 +45,7 @@
             android:layout_height="@dimen/dimension30dp"
             android:layout_toLeftOf="@+id/imgRight"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimension15dp"
+            android:layout_marginRight="@dimen/dimension10dp"
             android:src="@drawable/add_white_square"
             />
         <ImageView
