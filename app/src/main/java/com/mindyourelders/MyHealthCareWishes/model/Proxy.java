@@ -7,12 +7,12 @@ import java.io.Serializable;
  */
 
 public class Proxy implements Serializable {
-    byte[] photoCard;
-    public byte[] getPhotoCard() {
+    String photoCard;
+    public String getPhotoCard() {
         return photoCard;
     }
 
-    public void setPhotoCard(byte[] photoCard) {
+    public void setPhotoCard(String photoCard) {
         this.photoCard = photoCard;
     }
     public String getProxy() {
@@ -108,17 +108,17 @@ public class Proxy implements Serializable {
         this.phone = phone;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
     String name="";
     String phone="";
-    byte[] photo;
+    String photo;
 
     public String getName() {
         return name;

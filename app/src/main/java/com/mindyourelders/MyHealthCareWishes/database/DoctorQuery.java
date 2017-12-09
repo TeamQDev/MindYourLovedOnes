@@ -52,7 +52,7 @@ public class DoctorQuery {
                 COL_MOBILE + " VARCHAR(20)," + COL_SPECIALITY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAXNO +
                 " VARCHAR(20)," + COL_ISPHISYCIAN + " INTEGER," +
                 COL_NETWORK + " VARCHAR(50)," + COL_AFFIL + " VARCHAR(50)," +
-                COL_PHOTO + " BLOB);";
+                COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -82,7 +82,7 @@ public class DoctorQuery {
                     connection.setNetwork(c.getString(c.getColumnIndex(COL_NETWORK)));
                     connection.setFax(c.getString(c.getColumnIndex(COL_FAXNO)));
                     connection.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
-                    connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setIsPhysician(c.getInt(c.getColumnIndex(COL_ISPHISYCIAN)));
                     connectionList.add(connection);
 

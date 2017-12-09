@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -84,9 +84,19 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
             holder.txtConName.setText(connectionList.get(position).getName());
             holder.txtConRelation.setText(connectionList.get(position).getRelationType());
 
-            byte[] photo = connectionList.get(position).getPhoto();
-            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-            holder.imgConPhoto.setImageBitmap(bmp);
+            if (!connectionList.get(position).getPhoto().equals("")) {
+                File imgFile = new File(connectionList.get(position).getPhoto());
+                //  if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                holder.imgConPhoto.setImageBitmap(myBitmap);
+            }
+            else{
+                holder.imgConPhoto.setImageResource(R.drawable.ic_profile_defaults);
+            }
+          //  }
+            /*byte[] photo = connectionList.get(position).getPhoto();
+            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);*/
+            //holder.imgConPhoto.setImageBitmap(bmp);
         }
 /*
 if (connectionList.get(position).getAddress().equals(""))
@@ -116,8 +126,8 @@ else {
                     args.putString("Name", connectionList.get(position).getName());
                     args.putString("Address", connectionList.get(position).getAddress());
                     args.putString("Relation", connectionList.get(position).getRelationType());
-                    String saveThis = Base64.encodeToString(connectionList.get(position).getPhoto(), Base64.DEFAULT);
-                    preferences.putString(PrefConstants.USER_IMAGE, saveThis);
+                    //String saveThis = Base64.encodeToString(connectionList.get(position).getPhoto(), Base64.DEFAULT);
+                    preferences.putString(PrefConstants.USER_IMAGE, connectionList.get(position).getPhoto());
                     preferences.putString(PrefConstants.CONNECTED_NAME, connectionList.get(position).getName());
                     preferences.putString(PrefConstants.CONNECTED_USEREMAIL, connectionList.get(position).getEmail());
                     preferences.putInt(PrefConstants.CONNECTED_USERID, connectionList.get(position).getId());

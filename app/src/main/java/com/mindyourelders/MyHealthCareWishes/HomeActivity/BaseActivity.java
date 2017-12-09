@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -133,10 +132,19 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         txtDrawerName = (TextView) leftDrawer.findViewById(R.id.txtDrawerName);
         imgDrawerProfile = (ImageView) leftDrawer.findViewById(R.id.imgDrawerProfile);
         String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
-        byte[] photo = Base64.decode(image, Base64.DEFAULT);
+        //byte[] photo = Base64.decode(image, Base64.DEFAULT);
         txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
-        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        imgDrawerProfile.setImageBitmap(bmp);
+        if (!image.equals("")) {
+            File imgFile = new File(image);
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgDrawerProfile.setImageBitmap(myBitmap);
+            }
+        }else{
+            imgDrawerProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
+       /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        imgDrawerProfile.setImageBitmap(bmp);*/
 
         rlHome= (RelativeLayout) leftDrawer.findViewById(R.id.rlHome);
         rlSupport= (RelativeLayout) leftDrawer.findViewById(R.id.rlSupport);
@@ -216,7 +224,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.imgDrawer:
-               drawerLayout.openDrawer(leftDrawer);
+              // Intent intn=new Intent(context, ImageActivity.class);
+               // startActivity(intn);
+              drawerLayout.openDrawer(leftDrawer);
                // copydb(context);
                 break;
 

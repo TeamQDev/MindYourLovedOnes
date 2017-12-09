@@ -9,12 +9,12 @@ import java.io.Serializable;
 public class Specialist implements Serializable {
     String lastseen="";
     String website="";
-    byte[] photoCard;
-    public byte[] getPhotoCard() {
+    String photoCard;
+    public String getPhotoCard() {
         return photoCard;
     }
 
-    public void setPhotoCard(byte[] photoCard) {
+    public void setPhotoCard(String photoCard) {
         this.photoCard = photoCard;
     }
 
@@ -116,15 +116,15 @@ public class Specialist implements Serializable {
     }
 
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
     String practiceName;
-    byte[] photo;
+    String photo;
     int id;
     String email="";
 

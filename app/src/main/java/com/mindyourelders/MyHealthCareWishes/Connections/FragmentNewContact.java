@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,6 +62,7 @@ import com.riontech.staggeredtextgridview.StaggeredTextGridView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -76,57 +76,59 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
  */
 
 public class FragmentNewContact extends Fragment implements View.OnClickListener {
-    private static final int REQUEST_CARD =50 ;
+    private static final int REQUEST_CARD = 50;
     ContentValues values;
-    Uri imageUriProfile,imageUriCard;
-    byte[] photoCard=null;
+    Uri imageUriProfile, imageUriCard;
+   // byte[] photoCard = null;
+    String card = "";
+
     String Cname = "";
-    String Cemail ="";
-    String Cphone ="";
-    RelativeLayout rlCard,rlContact;
+    String Cemail = "";
+    String Cphone = "";
+    RelativeLayout rlCard, rlContact;
     TextView txtCard;
     //TextView btnShowMore,btnShowLess,btnSon;
-    TextView txtOtherInsurance,txtOtherCategory,txtOtherRelation,txtName, txtEmail, txtMobile,txtHomePhone,txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
-String contactName="";
-    TextView txtContactName,txtFinanceEmail,txtFinanceLocation,txtAgent,txtPracticeName, txtFax, txtNetwork, txtAffiliation,txtDoctorNote,txtDoctorName,txtDoctorOfficePhone,txtDoctorHourOfficePhone,txtDoctorOtherPhone,txtDoctorFax,txtDoctorWebsite;
-    TextView txtDoctorAddress,txtDoctorLastSeen,txtSubscribe,txtInsuaranceFax,txtInsuaranceEmail,txtWebsite,txtInsuaranceNote;
-    TextView txtFName,txtFinanceOfficePhone,txtFinanceMobilePhone,txtFinanceOtherPhone,txtFinanceFax,txtFinanceAddress,txtFinanceWebsite,txtFinancePracticeName,txtLastSeen,txtFinanceNote;
-    TextView txtAids, txtSchedule, txtOther,txtEmergencyNote;
-    TextView txtPharmacyName,txtPharmacyAddress,txtPharmacyPhone,txtPharmacyFax,txtPharmacyWebsite,txtPharmacyNote;
-    TextView txtAideAddress,txtAideCompName,txtAideOfficePhone,txtHourOfficePhone,txtOtherPhone,txtAideFax,txtAideEmail,txtAideWebsite,txtAideNote;
+    TextView txtOtherInsurance, txtOtherCategory, txtOtherRelation, txtName, txtEmail, txtMobile, txtHomePhone, txtWorkPhone, txtAdd, txtInsuaranceName, txtInsuarancePhone, txtId, txtGroup, txtMember, txtAddress;
+    String contactName = "";
+    TextView txtContactName, txtFinanceEmail, txtFinanceLocation, txtAgent, txtPracticeName, txtFax, txtNetwork, txtAffiliation, txtDoctorNote, txtDoctorName, txtDoctorOfficePhone, txtDoctorHourOfficePhone, txtDoctorOtherPhone, txtDoctorFax, txtDoctorWebsite;
+    TextView txtDoctorAddress, txtDoctorLastSeen, txtSubscribe, txtInsuaranceFax, txtInsuaranceEmail, txtWebsite, txtInsuaranceNote;
+    TextView txtFName, txtFinanceOfficePhone, txtFinanceMobilePhone, txtFinanceOtherPhone, txtFinanceFax, txtFinanceAddress, txtFinanceWebsite, txtFinancePracticeName, txtLastSeen, txtFinanceNote;
+    TextView txtAids, txtSchedule, txtOther, txtEmergencyNote;
+    TextView txtPharmacyName, txtPharmacyAddress, txtPharmacyPhone, txtPharmacyFax, txtPharmacyWebsite, txtPharmacyNote;
+    TextView txtAideAddress, txtAideCompName, txtAideOfficePhone, txtHourOfficePhone, txtOtherPhone, txtAideFax, txtAideEmail, txtAideWebsite, txtAideNote;
     TextView txtTitle;
-    TextView txtOtherCategoryHospital,txtFNameHospital,txtHospitalOfficePhone,txtHospitalOtherPhone,txtHospitalFax,txtHospitalAddress,txtHospitalWebsite,txtHospitalLocation,txtHospitalPracticeName,txtHospitalLastSeen,txtHospitalNote;
+    TextView txtOtherCategoryHospital, txtFNameHospital, txtHospitalOfficePhone, txtHospitalOtherPhone, txtHospitalFax, txtHospitalAddress, txtHospitalWebsite, txtHospitalLocation, txtHospitalPracticeName, txtHospitalLastSeen, txtHospitalNote;
     TextInputLayout tilFNameHospital;
-    String agent="";
+    String agent = "";
 
-    ImageView imgEdit, imgProfile,imgCard,imgEditCard;
+    ImageView imgEdit, imgProfile, imgCard, imgEditCard;
     View rootview;
-    RelativeLayout rlHospital,rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance,rlProxy, rlTop,llAddConn,rlPharmacy;
+    RelativeLayout rlHospital, rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance, rlProxy, rlTop, llAddConn, rlPharmacy;
     Preferences preferences;
-    String source="";
+    String source = "";
     private static int RESULT_CAMERA_IMAGE = 1;
     private static int RESULT_SELECT_PHOTO = 2;
 
     private static int RESULT_CAMERA_IMAGE_CARD = 3;
     private static int RESULT_SELECT_PHOTO_CARD = 4;
-TextInputLayout tilOtherCategoryHospital;
+    TextInputLayout tilOtherCategoryHospital;
 
-String location="";
-    String name="", email="", mobile="", speciality="",phone="",address="",workphone="",note="",member="",group="",subscriber="",type="";
-    String network="",affil="",practice_name="",website="",lastseen="";
-    String fax="";
-    String relation="";
-    String proxy="";
-    String priority="";
-    String otherRelation="";
-    String otherCategory="";
-    String otherInsurance="";
+    String location = "";
+    String name = "", email = "", mobile = "", speciality = "", phone = "", address = "", workphone = "", note = "", member = "", group = "", subscriber = "", type = "";
+    String network = "", affil = "", practice_name = "", website = "", lastseen = "";
+    String fax = "";
+    String relation = "";
+    String proxy = "";
+    String priority = "";
+    String otherRelation = "";
+    String otherCategory = "";
+    String otherInsurance = "";
     int prior;
-    int prox=0;
+    int prox = 0;
     int connectionFlag;
     boolean inPrimary;
-    MySpinner spinner, spinnerInsuarance, spinnerFinance,spinnerProxy,spinnerRelation,spinnerPriority,spinnerHospital;
-    TextInputLayout tilOtherInsurance,tilOtherCategory,tilOtherRelation,tilName,tilFName,tilEmergencyNote,tilDoctorName,tilPharmacyName,tilAideCompName,tilInsuaranceName;
+    MySpinner spinner, spinnerInsuarance, spinnerFinance, spinnerProxy, spinnerRelation, spinnerPriority, spinnerHospital;
+    TextInputLayout tilOtherInsurance, tilOtherCategory, tilOtherRelation, tilName, tilFName, tilEmergencyNote, tilDoctorName, tilPharmacyName, tilAideCompName, tilInsuaranceName;
 
     StaggeredTextGridView gridRelation;
     ArrayList<String> relationArraylist;
@@ -134,16 +136,16 @@ String location="";
 
     DialogManager dialogManager;
 
-    String imagepath = "";
+    String imagepath = "",cardPath="";
 
-    String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
+    String[] Relationship = {"Aunt", "Brother", "Cousin", "Dad", "Daughter", "Father-in-law", "Friend", "GrandDaughter", "GrandFather", "GrandMother", "GrandSon", "Husband", "Mom", "Mother-in-law", "Neighbor", "Nephew", "Niece", "Sister", "Son", "Uncle", "Wife", "Other"};
 
-    String[] healthSpeciality = {"Acupunture","Allergy & Immunology","Anesthesiology","Audiology","Cardiology","Chiropractor","Cosmetic and Laser Surgery ","Critical Care Medicine ","Dentist ","Dermatology","Diabetes & Metabolism","Emergency Medicine","Endocrinology","Endodontics","Endovascular Medicine","Family Medicine","Foot and Ankle Surgery","Gastroenterology","Geriatric Medicine","Gynecology","Hospice & Palliative Medicine	","Infectious Disease","Internal Medicine","Massage Therapy","Medical Genetics","Nephrology","Neurology","Obstetrics & Gynecology","Oncology ","Ophthalmology","Optometrist","Orthodontics","Orthopadeic ","Orthopadeic Surgery","Otolaryngology","Pain Medicine","Pathology","Pediatrics","Periodontics","Physical Therapist","Plastic & Reconstructive Surgery","Podiatrist ","Psychiatry","Pulmonology","Radiology","Rheumatology","Speech Therapist","Sports Medicine","Surgery - General ","Thoracic & Cardiac Surgery","Urology","Vascular Medicine","Other"};
+    String[] healthSpeciality = {"Acupunture", "Allergy & Immunology", "Anesthesiology", "Audiology", "Cardiology", "Chiropractor", "Cosmetic and Laser Surgery ", "Critical Care Medicine ", "Dentist ", "Dermatology", "Diabetes & Metabolism", "Emergency Medicine", "Endocrinology", "Endodontics", "Endovascular Medicine", "Family Medicine", "Foot and Ankle Surgery", "Gastroenterology", "Geriatric Medicine", "Gynecology", "Hospice & Palliative Medicine	", "Infectious Disease", "Internal Medicine", "Massage Therapy", "Medical Genetics", "Nephrology", "Neurology", "Obstetrics & Gynecology", "Oncology ", "Ophthalmology", "Optometrist", "Orthodontics", "Orthopadeic ", "Orthopadeic Surgery", "Otolaryngology", "Pain Medicine", "Pathology", "Pediatrics", "Periodontics", "Physical Therapist", "Plastic & Reconstructive Surgery", "Podiatrist ", "Psychiatry", "Pulmonology", "Radiology", "Rheumatology", "Speech Therapist", "Sports Medicine", "Surgery - General ", "Thoracic & Cardiac Surgery", "Urology", "Vascular Medicine", "Other"};
 
-    String[] insuaranceType = {"Dental","Disability","Life","Long Term Care","Medicaid","Medical","Medicare Supplement (Medigap)","Medicare","Supplemental","Vision", "Other"};
+    String[] insuaranceType = {"Dental", "Disability", "Life", "Long Term Care", "Medicaid", "Medical", "Medicare Supplement (Medigap)", "Medicare", "Supplemental", "Vision", "Other"};
 
     String[] financeType = {"Accountant", "Attorney", "Financial Planner", "Insurance Broker", "Stock Broker", "Trustee", "Executor", "Other"};
-    String[] HospitalType = {"Hospital", "Rehabilitation Center","Other"};
+    String[] HospitalType = {"Hospital", "Rehabilitation Center", "Other"};
 
     String[] proxyType = {"Primary - Health Care Proxy Agent", "Successor - Health Care Proxy Agent"};
     String[] priorityType = {"Primary", "Secondary"};
@@ -166,15 +168,15 @@ String location="";
     }
 
     private void initComponent() {
-        dbHelper=new DBHelper(getActivity());
-        MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
-        DoctorQuery d=new DoctorQuery(getActivity(),dbHelper);
-        SpecialistQuery s=new SpecialistQuery(getActivity(),dbHelper);
-        HospitalHealthQuery h=new HospitalHealthQuery(getActivity(),dbHelper);
+        dbHelper = new DBHelper(getActivity());
+        MyConnectionsQuery m = new MyConnectionsQuery(getActivity(), dbHelper);
+        DoctorQuery d = new DoctorQuery(getActivity(), dbHelper);
+        SpecialistQuery s = new SpecialistQuery(getActivity(), dbHelper);
+        HospitalHealthQuery h = new HospitalHealthQuery(getActivity(), dbHelper);
     }
 
     private void getRelationData() {
-        AppConstants.RELATION="";
+        AppConstants.RELATION = "";
         relationArraylist = new ArrayList<>();
         relationArraylist.add("Mother");
         relationArraylist.add("Father");
@@ -193,22 +195,17 @@ String location="";
     }
 
     private void initVariables() {
-        Bundle bundle = this.getArguments();
+       Bundle bundle = this.getArguments();
         if (bundle != null) {
-           Cname = bundle.getString("Name");
+            Cname = bundle.getString("Name");
             Cemail = bundle.getString("Email");
             Cphone = bundle.getString("Phone");
             byte[] image = bundle.getByteArray("Photo");
             Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
-
-            /*byte[] imageCard = bundle.getByteArray("PhotoCard");
-            Bitmap photoCard = BitmapFactory.decodeByteArray(imageCard, 0, imageCard.length);*/
-
             imgProfile.setImageBitmap(photo);
-          //  imgCard.setImageBitmap(photoCard);
+
             source = preferences.getString(PrefConstants.SOURCE);
-            switch(source)
-            {
+            switch (source) {
                 case "Connection":
                     getContact();
                     break;
@@ -226,7 +223,7 @@ String location="";
                     break;
                 case "Hospital":
                     txtFNameHospital.setText(Cname);
-                   // txtEmail.setText(email);
+                    // txtEmail.setText(email);
                     try {
                         String mobile = "";
                         mobile = Cphone;
@@ -327,7 +324,8 @@ String location="";
                         return false;
                     }
                 });
-                txtTitle.setText("Add Profile");txtTitle.setAllCaps(true);
+                txtTitle.setText("Add Profile");
+                txtTitle.setAllCaps(true);
 
                 tilEmergencyNote.setVisibility(View.GONE);
                 rlPharmacy.setVisibility(View.GONE);
@@ -353,26 +351,36 @@ String location="";
                     txtPharmacyPhone.setText(specialist.getPhone());
                     txtPharmacyNote.setText(specialist.getNote());
                     id = specialist.getId();
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                  /*  Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
                     //Change Class Name
-
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                      cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
                     }
                 }
-                    break;
+                break;
 
             case "PharmacyDataView":
                 visiPharmacy();
@@ -390,19 +398,30 @@ String location="";
                     txtPharmacyNote.setText(specialist.getNote());
                     id = specialist.getId();
 
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -421,10 +440,9 @@ String location="";
                 txtAdd.setText("Update Proxy AGENT & SUCCESSOR(S)");
                 txtTitle.setText("Update Proxy AGENT & SUCCESSOR(S)");
                 Intent ProxyIntent = getActivity().getIntent();
-                if (ProxyIntent.getExtras()!=null)
-                {
+                if (ProxyIntent.getExtras() != null) {
 
-                    Proxy rel= (Proxy) ProxyIntent.getExtras().getSerializable("ProxyObject");
+                    Proxy rel = (Proxy) ProxyIntent.getExtras().getSerializable("ProxyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
                     txtMobile.setText(rel.getMobile());
@@ -433,14 +451,14 @@ String location="";
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
-                    id=rel.getId();
+                    id = rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
                         if (rel.getRelationType().equals(Relationship[i])) {
                             index = i;
                         }
                     }
-                    spinnerRelation.setSelection(index+1);
+                    spinnerRelation.setSelection(index + 1);
                    /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
@@ -448,22 +466,33 @@ String location="";
                     {
                         spinnerProxy.setSelection(1);
                     }*/
-                    spinnerProxy.setSelection(rel.getIsPrimary()+1);
+                    spinnerProxy.setSelection(rel.getIsPrimary() + 1);
 
-                    byte[] photo=rel.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = rel.getPhoto();
+                    imagepath=rel.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (rel.getPhotoCard()!=null) {
-                        byte[] photoCard = rel.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=rel.getPhotoCard();
+                    if (!rel.getPhotoCard().equals("")) {
+                        String photoCard = rel.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                        /*Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -477,10 +506,9 @@ String location="";
                 txtTitle.setText("Proxy");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent ProxyIntents = getActivity().getIntent();
-                if (ProxyIntents.getExtras()!=null)
-                {
+                if (ProxyIntents.getExtras() != null) {
 
-                    Proxy rel= (Proxy) ProxyIntents.getExtras().getSerializable("ProxyObject");
+                    Proxy rel = (Proxy) ProxyIntents.getExtras().getSerializable("ProxyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
                     txtMobile.setText(rel.getMobile());
@@ -489,14 +517,14 @@ String location="";
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
-                    id=rel.getId();
+                    id = rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
                         if (rel.getRelationType().equals(Relationship[i])) {
                             index = i;
                         }
                     }
-                    spinnerRelation.setSelection(index+1);
+                    spinnerRelation.setSelection(index + 1);
                    /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
@@ -505,21 +533,32 @@ String location="";
                         spinnerProxy.setSelection(1);
                     }*/
 
-                    spinnerProxy.setSelection(rel.getIsPrimary()+1);
-                    byte[] photo=rel.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    spinnerProxy.setSelection(rel.getIsPrimary() + 1);
+                    String photo = rel.getPhoto();
+                    imagepath=rel.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                    /*Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (rel.getPhotoCard()!=null) {
-                        byte[] photoCard = rel.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=rel.getPhotoCard();
+                    if (!rel.getPhotoCard().equals("")) {
+                        String photoCard = rel.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -541,10 +580,9 @@ String location="";
                 txtAdd.setText("Update Emergency Contact & Proxy Agent");
                 txtTitle.setText("Update Emergency Contact & Proxy Agent");
                 Intent EmergencyIntent = getActivity().getIntent();
-                if (EmergencyIntent.getExtras()!=null)
-                {
+                if (EmergencyIntent.getExtras() != null) {
 
-                    Emergency rel= (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
+                    Emergency rel = (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
                     txtMobile.setText(rel.getMobile());
@@ -553,15 +591,15 @@ String location="";
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
-                    id=rel.getId();
-                        int index = 0;
-                        for (int i = 0; i < Relationship.length; i++) {
-                            if (rel.getRelationType().equals(Relationship[i])) {
-                                index = i;
-                            }
+                    id = rel.getId();
+                    int index = 0;
+                    for (int i = 0; i < Relationship.length; i++) {
+                        if (rel.getRelationType().equals(Relationship[i])) {
+                            index = i;
                         }
+                    }
 
-                    spinnerRelation.setSelection(index+1);
+                    spinnerRelation.setSelection(index + 1);
                     int indexs = 0;
                    /* int pr=rel.getIsPrimary();String priem="";
                     if (pr==0)
@@ -577,22 +615,33 @@ String location="";
                         }
                     }*/
 
-                    spinnerPriority.setSelection(rel.getIsPrimary()+1);
+                    spinnerPriority.setSelection(rel.getIsPrimary() + 1);
 
-                    byte[] photo=rel.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = rel.getPhoto();
+                    imagepath=rel.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (rel.getPhotoCard()!=null) {
-                        byte[] photoCard = rel.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=rel.getPhotoCard();
+                    if (!rel.getPhotoCard().equals("")) {
+                        String photoCard = rel.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -608,10 +657,9 @@ String location="";
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Emergency Contact and \nHealth Care Proxy Agent");
                 Intent EmergencyIntents = getActivity().getIntent();
-                if (EmergencyIntents.getExtras()!=null)
-                {
+                if (EmergencyIntents.getExtras() != null) {
 
-                    Emergency rel= (Emergency) EmergencyIntents.getExtras().getSerializable("EmergencyObject");
+                    Emergency rel = (Emergency) EmergencyIntents.getExtras().getSerializable("EmergencyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
                     txtMobile.setText(rel.getMobile());
@@ -620,7 +668,7 @@ String location="";
                     txtAddress.setText(rel.getAddress());
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
-                    id=rel.getId();
+                    id = rel.getId();
                     int index = 0;
                     for (int i = 0; i < Relationship.length; i++) {
                         if (rel.getRelationType().equals(Relationship[i])) {
@@ -628,22 +676,33 @@ String location="";
                         }
                     }
 
-                    spinnerRelation.setSelection(index+1);
-                    spinnerPriority.setSelection(rel.getIsPrimary()+1);
-                    byte[] photo=rel.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    spinnerRelation.setSelection(index + 1);
+                    spinnerPriority.setSelection(rel.getIsPrimary() + 1);
+                    String photo = rel.getPhoto();
+                    imagepath=rel.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (rel.getPhotoCard()!=null) {
-                        byte[] photoCard = rel.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=rel.getPhotoCard();
+                    if (!rel.getPhotoCard().equals("")) {
+                        String photoCard = rel.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -671,7 +730,7 @@ String location="";
                 txtTitle.setText("Update DOCTORS & OTHER\n HEALTH PROFESSIONALS");
                 Intent specialistIntent = getActivity().getIntent();
                 if (specialistIntent.getExtras() != null) {
-                    Specialist specialist= (Specialist) specialistIntent.getExtras().getSerializable("SpecialistObject");
+                    Specialist specialist = (Specialist) specialistIntent.getExtras().getSerializable("SpecialistObject");
                     txtDoctorName.setText(specialist.getName());
                     txtDoctorOtherPhone.setText(specialist.getOtherPhone());
                     txtDoctorLastSeen.setText(specialist.getLastseen());
@@ -684,30 +743,41 @@ String location="";
                     txtPracticeName.setText(specialist.getPracticeName());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
-                    id=specialist.getId();
-                    isPhysician=specialist.getIsPhysician();
+                    id = specialist.getId();
+                    isPhysician = specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
                         if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index+1);
+                    spinner.setSelection(index + 1);
 
-                    byte[] photo=specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                    /*Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -722,7 +792,7 @@ String location="";
                 txtTitle.setText("Update Primary Physician");
                 Intent specialistIntent1 = getActivity().getIntent();
                 if (specialistIntent1.getExtras() != null) {
-                    Specialist specialist= (Specialist) specialistIntent1.getExtras().getSerializable("SpecialistObject");
+                    Specialist specialist = (Specialist) specialistIntent1.getExtras().getSerializable("SpecialistObject");
                     txtDoctorName.setText(specialist.getName());
                     txtDoctorOtherPhone.setText(specialist.getOtherPhone());
                     txtDoctorLastSeen.setText(specialist.getLastseen());
@@ -735,30 +805,41 @@ String location="";
                     txtPracticeName.setText(specialist.getPracticeName());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
-                    id=specialist.getId();
-                    isPhysician=specialist.getIsPhysician();
+                    id = specialist.getId();
+                    isPhysician = specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
                         if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index+1);
+                    spinner.setSelection(index + 1);
 
-                    byte[] photo=specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                   String photo = specialist.getPhoto();
+                   imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -775,7 +856,7 @@ String location="";
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent specialistIntentss = getActivity().getIntent();
                 if (specialistIntentss.getExtras() != null) {
-                    Specialist specialist= (Specialist) specialistIntentss.getExtras().getSerializable("SpecialistObject");
+                    Specialist specialist = (Specialist) specialistIntentss.getExtras().getSerializable("SpecialistObject");
                     txtDoctorName.setText(specialist.getName());
                     txtDoctorOtherPhone.setText(specialist.getOtherPhone());
                     txtDoctorLastSeen.setText(specialist.getLastseen());
@@ -788,30 +869,41 @@ String location="";
                     txtPracticeName.setText(specialist.getPracticeName());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
-                    id=specialist.getId();
-                    isPhysician=specialist.getIsPhysician();
+                    id = specialist.getId();
+                    isPhysician = specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
                         if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index+1);
+                    spinner.setSelection(index + 1);
 
-                    byte[] photo=specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                    /*Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
-
+*/
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -826,7 +918,7 @@ String location="";
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent specialistIntents4 = getActivity().getIntent();
                 if (specialistIntents4.getExtras() != null) {
-                    Specialist specialist= (Specialist) specialistIntents4.getExtras().getSerializable("SpecialistObject");
+                    Specialist specialist = (Specialist) specialistIntents4.getExtras().getSerializable("SpecialistObject");
                     txtDoctorName.setText(specialist.getName());
                     txtDoctorOtherPhone.setText(specialist.getOtherPhone());
                     txtDoctorLastSeen.setText(specialist.getLastseen());
@@ -839,30 +931,41 @@ String location="";
                     txtPracticeName.setText(specialist.getPracticeName());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
-                    id=specialist.getId();
-                    isPhysician=specialist.getIsPhysician();
+                    id = specialist.getId();
+                    isPhysician = specialist.getIsPhysician();
                     int index = 0;
                     for (int i = 0; i < healthSpeciality.length; i++) {
                         if (specialist.getType().equals(healthSpeciality[i])) {
                             index = i;
                         }
                     }
-                    spinner.setSelection(index+1);
+                    spinner.setSelection(index + 1);
 
-                    byte[] photo=specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                  /*  Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                        /*Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -886,14 +989,14 @@ String location="";
                 txtTitle.setText("Update Insurance");
                 Intent insuranceIntent = getActivity().getIntent();
                 if (insuranceIntent.getExtras() != null) {
-                    Insurance insurance= (Insurance) insuranceIntent.getExtras().getSerializable("InsuranceObject");
+                    Insurance insurance = (Insurance) insuranceIntent.getExtras().getSerializable("InsuranceObject");
                     int index = 0;
                     for (int i = 0; i < insuaranceType.length; i++) {
                         if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
                             index = i;
                         }
                     }
-                    spinnerInsuarance.setSelection(index+1);
+                    spinnerInsuarance.setSelection(index + 1);
                     spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
                     txtInsuarancePhone.setText(insurance.getPhone());
                     txtId.setText(insurance.getMember());
@@ -906,21 +1009,32 @@ String location="";
                     txtInsuaranceName.setText(insurance.getName());
                     txtSubscribe.setText(insurance.getSubscriber());
                     txtOtherInsurance.setText(insurance.getOtherInsurance());
-                    id=insurance.getId();
-                    byte[] photo=insurance.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    id = insurance.getId();
+                    String photo = insurance.getPhoto();
+                    imagepath=insurance.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                  /*  Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (insurance.getPhotoCard()!=null) {
-                        byte[] photoCard = insurance.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=insurance.getPhotoCard();
+                    if (!insurance.getPhotoCard().equals("")) {
+                        String photoCard = insurance.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                     /*   Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -930,21 +1044,21 @@ String location="";
 
             case "InsuranceViewData":
                 visiInsurance();
-              disableInsurance();
+                disableInsurance();
                 tilInsuaranceName.setHintEnabled(true);
                 txtInsuaranceName.setFocusable(true);
                 txtTitle.setText("INSURANCE INFORMATION");
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent insuranceIntent2 = getActivity().getIntent();
                 if (insuranceIntent2.getExtras() != null) {
-                    Insurance insurance= (Insurance) insuranceIntent2.getExtras().getSerializable("InsuranceObject");
+                    Insurance insurance = (Insurance) insuranceIntent2.getExtras().getSerializable("InsuranceObject");
                     int index = 0;
                     for (int i = 0; i < insuaranceType.length; i++) {
                         if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
                             index = i;
                         }
                     }
-                    spinnerInsuarance.setSelection(index+1);
+                    spinnerInsuarance.setSelection(index + 1);
                     spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
                     txtInsuarancePhone.setText(insurance.getPhone());
                     txtId.setText(insurance.getMember());
@@ -957,21 +1071,32 @@ String location="";
                     txtInsuaranceName.setText(insurance.getName());
                     txtSubscribe.setText(insurance.getSubscriber());
                     txtOtherInsurance.setText(insurance.getOtherInsurance());
-                    id=insurance.getId();
-                    byte[] photo=insurance.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    id = insurance.getId();
+                    String photo = insurance.getPhoto();
+                    imagepath=insurance.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (insurance.getPhotoCard()!=null) {
-                        byte[] photoCard = insurance.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=insurance.getPhotoCard();
+                    if (!insurance.getPhotoCard().equals("")) {
+                        String photoCard = insurance.getPhotoCard();
+                        File imgFile1 = new File(photo);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                        /*Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -991,7 +1116,7 @@ String location="";
                 txtTitle.setText("Update Health Service");
                 Intent aidesIntent = getActivity().getIntent();
                 if (aidesIntent.getExtras() != null) {
-                    Aides aides= (Aides) aidesIntent.getSerializableExtra("AideObject");
+                    Aides aides = (Aides) aidesIntent.getSerializableExtra("AideObject");
                     txtAideCompName.setText(aides.getAidName());
                     txtAideOfficePhone.setText(aides.getOfficePhone());
                     txtHourOfficePhone.setText(aides.getHourPhone());
@@ -1002,22 +1127,33 @@ String location="";
                     txtAideWebsite.setText(aides.getWebsite());
                     txtAideWebsite.setText(aides.getWebsite());
                     txtAideNote.setText(aides.getNote());
-                    id=aides.getId();
+                    id = aides.getId();
 
-                    byte[] photo=aides.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = aides.getPhoto();
+                    imagepath=aides.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (aides.getPhotoCard()!=null) {
-                        byte[] photoCard = aides.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=aides.getPhotoCard();
+                    if (!aides.getPhotoCard().equals("")) {
+                        String photoCard = aides.getPhotoCard();
+                        File imgFile1 = new File(photo);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1033,7 +1169,7 @@ String location="";
                 txtTitle.setVisibility(View.VISIBLE);
                 Intent aidesIntent2 = getActivity().getIntent();
                 if (aidesIntent2.getExtras() != null) {
-                    Aides aides= (Aides) aidesIntent2.getSerializableExtra("AideObject");
+                    Aides aides = (Aides) aidesIntent2.getSerializableExtra("AideObject");
                     txtAideCompName.setText(aides.getAidName());
                     txtAideOfficePhone.setText(aides.getOfficePhone());
                     txtHourOfficePhone.setText(aides.getHourPhone());
@@ -1044,23 +1180,34 @@ String location="";
                     txtAideWebsite.setText(aides.getWebsite());
                     txtAideWebsite.setText(aides.getWebsite());
                     txtAideNote.setText(aides.getNote());
-                    id=aides.getId();
+                    id = aides.getId();
 
-                    byte[] photo=aides.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = aides.getPhoto();
+                    imagepath=aides.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                  /*  Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
 
                     //Change Class Name
-                    if (aides.getPhotoCard()!=null) {
-                        byte[] photoCard = aides.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=aides.getPhotoCard();
+                    if (!aides.getPhotoCard().equals("")) {
+                       String photoCard = aides.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                      /*  Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1076,7 +1223,7 @@ String location="";
                 break;
 
             case "Hospital":
-               // visiFinance();
+                // visiFinance();
                 visiHospital();
                 txtAdd.setText("Add HOSPITALS & REHABILITATION CENTERS");
                 txtTitle.setText("Add HOSPITALS & REHABILITATION CENTERS");
@@ -1102,7 +1249,7 @@ String location="";
                     txtHospitalPracticeName.setText(specialist.getPracticeName());
                     txtHospitalNote.setText(specialist.getNote());
                     txtOtherCategoryHospital.setText(specialist.getOtherCategory());
-                   txtHospitalLocation.setText(specialist.getLocation());
+                    txtHospitalLocation.setText(specialist.getLocation());
                     id = specialist.getId();
 
                     int index = 0;
@@ -1113,20 +1260,31 @@ String location="";
                     }
                     spinnerHospital.setSelection(index + 1);
 
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+                    String photo = specialist.getPhoto();
+                    imagepath=specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                    /*Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1137,7 +1295,7 @@ String location="";
                 visiHospital();
                 disableHospital();
 
-               // disableFinance();
+                // disableFinance();
                 tilFNameHospital.setHintEnabled(true);
                 txtFNameHospital.setFocusable(true);
                 txtTitle.setText("HOSPITALS & REHABILITATION CENTERS");
@@ -1167,21 +1325,31 @@ String location="";
                     }
                     spinnerHospital.setSelection(index + 1);
 
-
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                    imgProfile.setImageBitmap(bmp);
+imagepath=specialist.getPhoto();
+                   String photo = specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+                    imgProfile.setImageBitmap(bmp);*/
 
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1222,21 +1390,31 @@ String location="";
                         }
                     }
                     spinnerFinance.setSelection(index + 1);
-
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+imagepath=specialist.getPhoto();
+                    String photo = specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
-
+*/
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1277,21 +1455,31 @@ String location="";
                         }
                     }
                     spinnerFinance.setSelection(index + 1);
-
-                    byte[] photo = specialist.getPhoto();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+imagepath=specialist.getPhoto();
+                    String photo = specialist.getPhoto();
+                    File imgFile = new File(photo);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                   /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                     imgProfile.setImageBitmap(bmp);
-
+*/
                     //Change Class Name
-                    if (specialist.getPhotoCard()!=null) {
-                        byte[] photoCard = specialist.getPhotoCard();
-                        Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                        imgCard.setImageBitmap(bmpCard);
+                    cardPath=specialist.getPhotoCard();
+                    if (!specialist.getPhotoCard().equals("")) {
+                        String photoCard = specialist.getPhotoCard();
+                        File imgFile1 = new File(photoCard);
+                        if (imgFile1.exists()) {
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                            imgCard.setImageBitmap(myBitmap);
+                        }
+                       /* Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
+                        imgCard.setImageBitmap(bmpCard);*/
                         imgCard.setVisibility(View.VISIBLE);
                         rlCard.setVisibility(View.VISIBLE);
                         txtCard.setVisibility(View.GONE);
-                    }
-                    else{
+                    } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
                         txtCard.setVisibility(View.VISIBLE);
@@ -1350,7 +1538,7 @@ String location="";
 
     private void getSContact() {
         txtDoctorName.setText(Cname);
-       // txtEmail.setText(email);
+        // txtEmail.setText(email);
         try {
             String mobile = "";
             mobile = Cphone;
@@ -1675,12 +1863,12 @@ String location="";
     }
 
     private void initUI() {
-        rlContact= (RelativeLayout) rootview.findViewById(R.id.rlContact);
-       rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
-       txtCard= (TextView) rootview.findViewById(R.id.txtCard);
-        tilOtherCategoryHospital= (TextInputLayout) rootview.findViewById(R.id.tilOtherCategoryHospital);
+        rlContact = (RelativeLayout) rootview.findViewById(R.id.rlContact);
+        rlCard = (RelativeLayout) rootview.findViewById(R.id.rlCard);
+        txtCard = (TextView) rootview.findViewById(R.id.txtCard);
+        tilOtherCategoryHospital = (TextInputLayout) rootview.findViewById(R.id.tilOtherCategoryHospital);
         tilOtherCategoryHospital.setHint("Other");
-        tilFNameHospital= (TextInputLayout) rootview.findViewById(R.id.tilFNameHospital);
+        tilFNameHospital = (TextInputLayout) rootview.findViewById(R.id.tilFNameHospital);
         //Doctor
         txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
         txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
@@ -1722,7 +1910,7 @@ String location="";
         txtDoctorWebsite = (TextView) rootview.findViewById(R.id.txtDoctorWebsite);
         txtDoctorAddress = (TextView) rootview.findViewById(R.id.txtDoctorAddress);
         txtDoctorLastSeen = (TextView) rootview.findViewById(R.id.txtDoctorLastSeen);
-        txtOtherInsurance= (TextView) rootview.findViewById(R.id.txtOtherInsurance);
+        txtOtherInsurance = (TextView) rootview.findViewById(R.id.txtOtherInsurance);
 
         //Pharmacy
         txtPharmacyName = (TextView) rootview.findViewById(R.id.txtPharmacyName);
@@ -1731,7 +1919,6 @@ String location="";
         txtPharmacyFax = (TextView) rootview.findViewById(R.id.txtPharmacyFax);
         txtPharmacyWebsite = (TextView) rootview.findViewById(R.id.txtPharmacyWebsite);
         txtPharmacyNote = (TextView) rootview.findViewById(R.id.txtPharmacyNote);
-
 
 
         //Aides
@@ -1743,7 +1930,7 @@ String location="";
         txtAideEmail = (TextView) rootview.findViewById(R.id.txtAideEmail);
         txtAideWebsite = (TextView) rootview.findViewById(R.id.txtAideWebsite);
         txtAideNote = (TextView) rootview.findViewById(R.id.txtAideNote);
-        txtAideAddress= (TextView) rootview.findViewById(R.id.txtAideAddress);
+        txtAideAddress = (TextView) rootview.findViewById(R.id.txtAideAddress);
 
         txtAideFax.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -1777,9 +1964,9 @@ String location="";
         txtFinanceWebsite = (TextView) rootview.findViewById(R.id.txtFinanceWebsite);
         txtFinancePracticeName = (TextView) rootview.findViewById(R.id.txtFinancePracticeName);
         txtLastSeen = (TextView) rootview.findViewById(R.id.txtLastSeen);
-        txtFinanceNote= (TextView) rootview.findViewById(R.id.txtFinanceNote);
+        txtFinanceNote = (TextView) rootview.findViewById(R.id.txtFinanceNote);
 
-        rlHospital= (RelativeLayout) rootview.findViewById(R.id.rlHospital);
+        rlHospital = (RelativeLayout) rootview.findViewById(R.id.rlHospital);
         txtOtherCategoryHospital = (TextView) rootview.findViewById(R.id.txtOtherCategoryHospital);
         txtFNameHospital = (TextView) rootview.findViewById(R.id.txtFNameHospital);
         txtHospitalOfficePhone = (TextView) rootview.findViewById(R.id.txtHospitalOfficePhone);
@@ -1788,9 +1975,9 @@ String location="";
         txtHospitalAddress = (TextView) rootview.findViewById(R.id.txtHospitalAddress);
         txtHospitalWebsite = (TextView) rootview.findViewById(R.id.txtHospitalWebsite);
         txtHospitalLocation = (TextView) rootview.findViewById(R.id.txtHospitalLocation);
-        txtHospitalPracticeName= (TextView) rootview.findViewById(R.id.txtHospitalPracticeName);
-        txtHospitalLastSeen= (TextView) rootview.findViewById(R.id.txtHospitalLastSeen);
-        txtHospitalNote= (TextView) rootview.findViewById(R.id.txtHospitalNote);
+        txtHospitalPracticeName = (TextView) rootview.findViewById(R.id.txtHospitalPracticeName);
+        txtHospitalLastSeen = (TextView) rootview.findViewById(R.id.txtHospitalLastSeen);
+        txtHospitalNote = (TextView) rootview.findViewById(R.id.txtHospitalNote);
 
         txtHospitalOfficePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -1859,12 +2046,12 @@ String location="";
         });
 
 
-
         txtFinanceFax.addTextChangedListener(new TextWatcher() {
-            int prevL=0;
+            int prevL = 0;
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                prevL=txtFinanceFax.getText().toString().length();
+                prevL = txtFinanceFax.getText().toString().length();
             }
 
             @Override
@@ -1874,9 +2061,8 @@ String location="";
 
             @Override
             public void afterTextChanged(Editable editable) {
-                int length=editable.length();
-                if ((prevL<length) && (length==3 || length==7))
-                {
+                int length = editable.length();
+                if ((prevL < length) && (length == 3 || length == 7)) {
                     editable.append("-");
                 }
             }
@@ -1886,13 +2072,12 @@ String location="";
         txtSubscribe = (TextView) rootview.findViewById(R.id.txtSubscribe);
         txtInsuaranceFax = (TextView) rootview.findViewById(R.id.txtInsuaranceFax);
         txtInsuaranceEmail = (TextView) rootview.findViewById(R.id.txtInsuaranceEmail);
-        txtAgent= (TextView) rootview.findViewById(R.id.txtAgent);
+        txtAgent = (TextView) rootview.findViewById(R.id.txtAgent);
         txtWebsite = (TextView) rootview.findViewById(R.id.txtWebsite);
         txtInsuaranceNote = (TextView) rootview.findViewById(R.id.txtInsuaranceNote);
 
 
-
-        txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
+        txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         llAddConn = (RelativeLayout) rootview.findViewById(R.id.llAddConn);
         rlTop = (RelativeLayout) rootview.findViewById(R.id.rlTop);
 
@@ -1927,10 +2112,10 @@ String location="";
             }
         });
 
-        txtHomePhone= (TextView) rootview.findViewById(txtPhone);
-        txtWorkPhone= (TextView) rootview.findViewById(R.id.txtOfficePhone);
+        txtHomePhone = (TextView) rootview.findViewById(txtPhone);
+        txtWorkPhone = (TextView) rootview.findViewById(R.id.txtOfficePhone);
         rlRelation = (RelativeLayout) rootview.findViewById(R.id.rlRelation);
-        rlProxy= (RelativeLayout) rootview.findViewById(R.id.rlProxy);
+        rlProxy = (RelativeLayout) rootview.findViewById(R.id.rlProxy);
         txtAdd = (TextView) rootview.findViewById(R.id.txtAdd);
         imgEdit = (ImageView) rootview.findViewById(R.id.imgEdit);
         imgEditCard = (ImageView) rootview.findViewById(R.id.imgEditCard);
@@ -1939,11 +2124,11 @@ String location="";
         spinner = (MySpinner) rootview.findViewById(R.id.spinner);
         spinnerInsuarance = (MySpinner) rootview.findViewById(R.id.spinnerInsuarance);
         spinnerFinance = (MySpinner) rootview.findViewById(R.id.spinnerFinance);
-        spinnerHospital= (MySpinner) rootview.findViewById(R.id.spinnerHospital);
-        spinnerProxy= (MySpinner) rootview.findViewById(R.id.spinnerProxy);
-        spinnerRelation= (MySpinner) rootview.findViewById(R.id.spinnerRelation);
-        spinnerPriority= (MySpinner) rootview.findViewById(R.id.spinnerPriority);
-        txtOtherRelation=(TextView)rootview.findViewById(R.id.txtOtherRelation);
+        spinnerHospital = (MySpinner) rootview.findViewById(R.id.spinnerHospital);
+        spinnerProxy = (MySpinner) rootview.findViewById(R.id.spinnerProxy);
+        spinnerRelation = (MySpinner) rootview.findViewById(R.id.spinnerRelation);
+        spinnerPriority = (MySpinner) rootview.findViewById(R.id.spinnerPriority);
+        txtOtherRelation = (TextView) rootview.findViewById(R.id.txtOtherRelation);
 
         txtHomePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -1969,12 +2154,12 @@ String location="";
 
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilPharmacyName = (TextInputLayout) rootview.findViewById(R.id.tilPharmacyName);
-        tilFName= (TextInputLayout) rootview.findViewById(R.id.tilFName);
+        tilFName = (TextInputLayout) rootview.findViewById(R.id.tilFName);
         tilAideCompName = (TextInputLayout) rootview.findViewById(R.id.tilAideCompName);
-        tilDoctorName= (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
-        tilInsuaranceName= (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
-        tilEmergencyNote= (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
-        tilOtherRelation= (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
+        tilDoctorName = (TextInputLayout) rootview.findViewById(R.id.tilDoctorName);
+        tilInsuaranceName = (TextInputLayout) rootview.findViewById(R.id.tilInsuaranceName);
+        tilEmergencyNote = (TextInputLayout) rootview.findViewById(R.id.tilEmergencyNote);
+        tilOtherRelation = (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
         tilOtherRelation.setHint("Other Relation");
         txtWorkPhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
@@ -2163,7 +2348,7 @@ String location="";
 
         txtFName = (TextView) rootview.findViewById(R.id.txtFName);
         txtFinanceEmail = (TextView) rootview.findViewById(R.id.txtFinanceEmail);
-        txtContactName= (TextView) rootview.findViewById(R.id.txtContactName);
+        txtContactName = (TextView) rootview.findViewById(R.id.txtContactName);
         txtFinanceLocation = (TextView) rootview.findViewById(R.id.txtFinanceLocation);
         txtAids = (TextView) rootview.findViewById(R.id.txtAids);
         txtSchedule = (TextView) rootview.findViewById(R.id.txtSchedule);
@@ -2189,7 +2374,6 @@ String location="";
                 }
             }
         });
-
 
 
         txtDoctorHourOfficePhone.addTextChangedListener(new TextWatcher() {
@@ -2251,7 +2435,7 @@ String location="";
         txtMember = (TextView) rootview.findViewById(R.id.txtMember);
         txtInsuarancePhone = (TextView) rootview.findViewById(R.id.txtInsuarancePhone);
 
-          txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
+        txtInsuarancePhone.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
 
             @Override
@@ -2330,17 +2514,17 @@ String location="";
         spinner.setAdapter(adapter);
         spinner.setHint("Specialty");
 
-        String sources=preferences.getString(PrefConstants.SOURCE);
-        if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
+        String sources = preferences.getString(PrefConstants.SOURCE);
+        if (sources.equals("Finance") || sources.equals("FinanceViewData") || sources.equals("FinanceData")) {
             ArrayAdapter<String> financeadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, financeType);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerFinance.setAdapter(financeadapter);
             spinnerFinance.setHint("Category");
         }
 
-            ArrayAdapter<String> hospitaladapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerHospital.setAdapter(hospitaladapter);
+        ArrayAdapter<String> hospitaladapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, HospitalType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHospital.setAdapter(hospitaladapter);
         spinnerHospital.setHint("Category");
 
         ArrayAdapter<String> adapterInsuarance = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, insuaranceType);
@@ -2352,9 +2536,10 @@ String location="";
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProxy.setAdapter(adapterProxy);
         spinnerProxy.setHint("Proxy Agent Priority");
-        txtTitle.setAllCaps(true);  txtAdd.setAllCaps(true);
+        txtTitle.setAllCaps(true);
+        txtAdd.setAllCaps(true);
 
-        ArrayAdapter<String> adapterPriority= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, priorityType);
+        ArrayAdapter<String> adapterPriority = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, priorityType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPriority.setAdapter(adapterPriority);
         spinnerPriority.setHint("Priority");
@@ -2363,31 +2548,29 @@ String location="";
 
         spinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if (parent.getItemAtPosition(position).toString().equals("Other"))
-            {
-                tilOtherRelation.setVisibility(View.VISIBLE);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                    tilOtherRelation.setVisibility(View.VISIBLE);
+                } else {
+                    tilOtherRelation.setVisibility(View.GONE);
+                }
             }
-            else{
-                tilOtherRelation.setVisibility(View.GONE);
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-    });
+        });
 
         spinnerFinance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).toString().equals("Other"))
-                {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
                     tilOtherCategory.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     tilOtherCategory.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -2396,32 +2579,29 @@ String location="";
         spinnerHospital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).toString().equals("Other"))
-                {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
                     tilOtherCategoryHospital.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     tilOtherCategoryHospital.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
 
-
         spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).toString().equals("Other"))
-                {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
                     tilOtherInsurance.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     tilOtherInsurance.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -2440,7 +2620,7 @@ String location="";
         switch (v.getId()) {
 
             case R.id.llAddConn:
-                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
                /* switch (source)
                 {
                     case "Connections":
@@ -2469,83 +2649,73 @@ String location="";
                 break;
             case R.id.txtAdd:
                 //Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
-                try
-                    {
-                        InputMethodManager inm= (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                       inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
-                    }
-                    catch (Exception e)
-            {
-             //TODO: handle exception
+                try {
+                    InputMethodManager inm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    //TODO: handle exception
                 }
-                switch (source)
-                {
+                switch (source) {
                     case "Connection":
                         if (validate("Connection")) {
 
-                                Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
-                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                                byte[] photo = baos.toByteArray();
-                                Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID),name,email,address,mobile,phone,workphone,relation,photo,"",1,2,otherRelation,photoCard);
-                                if (flag==true)
-                                {
-                                    Toast.makeText(getActivity(),"You have added connection Successfully",Toast.LENGTH_SHORT).show();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, mobile, phone, workphone, relation, imagepath, "", 1, 2, otherRelation, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added connection Successfully", Toast.LENGTH_SHORT).show();
                                     /*Intent signupIntent = new Intent(context, LoginActivity.class);
                                     startActivity(signupIntent);*/
-                                    getActivity().finish();
-                                }
-                                else{
-                                    Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                                }
+                                getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                            }
                   /*  */
 
-                            Toast.makeText(getActivity(),"Succesas",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
 
                     case "Emergency":
-                    if (validate("Emergency")) {
-
-                        Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                        byte[] photo = baos.toByteArray();
-
-                        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,2,prior, otherRelation, photoCard);
-                        if (flag==true)
-                        {
-                            Toast.makeText(getActivity(),"You have added emergency contact successfully",Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
-                        }
-                        else{
-                            Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                        }
-                        Toast.makeText(getActivity(),"Succesas",Toast.LENGTH_SHORT).show();
-                        //  dialogManager = new DialogManager(new FragmentNewContact());
-                        //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
-                    }
-                    break;
-                    case "EmergencyUpdate":
                         if (validate("Emergency")) {
 
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();
-
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,2,prior,otherRelation,"", "", "", "", "", "", "", "", "", "", "", "",photoCard, "", "", "", "", "", "", "", "", "");
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated emergency contact successfully",Toast.LENGTH_SHORT).show();
+*/
+                            Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, mobile, phone, workphone, relation, imagepath, note, 2, prior, otherRelation, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added emergency contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
+                            //  dialogManager = new DialogManager(new FragmentNewContact());
+                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
+                        }
+                        break;
+                    case "EmergencyUpdate":
+                        if (validate("Emergency")) {
+
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                            byte[] photo = baos.toByteArray();*/
+
+                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 2, prior, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "");
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated emergency contact successfully", Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(getActivity(),"Succesas",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2553,20 +2723,18 @@ String location="";
                     case "Proxy":
                         if (validate("Proxy")) {
 
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,email,address,mobile,phone,workphone,relation,photo,note,3,prox, otherRelation, photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added proxy contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, mobile, phone, workphone, relation, imagepath, note, 3, prox, otherRelation, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added proxy contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2574,21 +2742,19 @@ String location="";
 
                     case "ProxyUpdate":
                         if (validate("Proxy")) {
-
+/*
                             Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= MyConnectionsQuery.updateMyConnectionsData(id,name,email,address,mobile,phone,workphone,relation,photo,note,3,prox,otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", photoCard, "", "", "", "", "", "", "", "", "");
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated proxy contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 3, prox, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "");
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated proxy contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2596,21 +2762,19 @@ String location="";
 
                     case "Physician":
 
-                       if (validate("Physician")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                        if (validate("Physician")) {
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,1,lastseen,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added physician contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added physician contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2619,20 +2783,18 @@ String location="";
                     case "Speciality":
 
                         if (validate("Physician")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,network,affil,note,2,lastseen, photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added doctor contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added doctor contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2641,12 +2803,12 @@ String location="";
                         if (validate("Physician")) {
 
 
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            if (isPhysician==1) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 1, lastseen,photoCard);
+                            byte[] photo = baos.toByteArray();*/
+                            if (isPhysician == 1) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2654,10 +2816,8 @@ String location="";
                                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                                 }
                                 Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(isPhysician==2)
-                            {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 2, lastseen, photoCard);
+                            } else if (isPhysician == 2) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2674,12 +2834,12 @@ String location="";
                         if (validate("Physician")) {
 
 
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            if (isPhysician==1) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 1, lastseen,photoCard);
+                            byte[] photo = baos.toByteArray();*/
+                            if (isPhysician == 1) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2687,10 +2847,8 @@ String location="";
                                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                                 }
                                 Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(isPhysician==2)
-                            {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, photo, fax, practice_name, network, affil, note, 2, lastseen, photoCard);
+                            } else if (isPhysician == 2) {
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2706,20 +2864,18 @@ String location="";
                     case "Pharmacy":
 
                         if (validate("Pharmacy")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= PharmacyQuery.insertPharmacyData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,phone,photo,fax,note,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added pharmacy successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = PharmacyQuery.insertPharmacyData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, phone, imagepath, fax, note, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added pharmacy successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2727,20 +2883,18 @@ String location="";
                     case "PharmacyData":
 
                         if (validate("Pharmacy")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                            /*Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= PharmacyQuery.updatePharmacyData(id,name,website,address,phone,photo,fax,note,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated pharmacy successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = PharmacyQuery.updatePharmacyData(id, name, website, address, phone, imagepath, fax, note, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated pharmacy successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2749,20 +2903,18 @@ String location="";
                     case "Aides":
 
                         if (validate("Aides")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= AideQuery.insertAidesData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,email,mobile,phone,workphone,photo,fax,note,address,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added Health Service successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = AideQuery.insertAidesData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, email, mobile, phone, workphone, imagepath, fax, note, address, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added Health Service successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2770,20 +2922,18 @@ String location="";
                     case "AidesData":
 
                         if (validate("Aides")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= AideQuery.updateAideData(id,name,website,email,mobile,phone,workphone,photo,fax,note,address,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated Health Service successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = AideQuery.updateAideData(id, name, website, email, mobile, phone, workphone, imagepath, fax, note, address, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated Health Service successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2792,97 +2942,87 @@ String location="";
                     case "Hospital":
 
                         if (validate("Hospital")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                          /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,location);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = HospitalHealthQuery.insertHospitalHealthData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, note, lastseen, otherCategory, cardPath, location);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                         }
                         break;
 
                     case "HospitalData":
 
                         if (validate("Hospital")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= HospitalHealthQuery.updateHospitalHealthData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,location);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = HospitalHealthQuery.updateHospitalHealthData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, note, lastseen, otherCategory, cardPath, location);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case "Finance":
 
                         if (validate("Finance")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location,contactName);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = FinanceQuery.insertFinanceData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, note, lastseen, otherCategory, cardPath, email, location, contactName);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case "FinanceData":
 
                         if (validate("Finance")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= FinanceQuery.updateFinanceData(id,name,website,address,mobile,phone,workphone,speciality,photo,fax,practice_name,note,lastseen,otherCategory,photoCard,email,location,contactName);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated contact successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = FinanceQuery.updateFinanceData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, note, lastseen, otherCategory, cardPath, email, location, contactName);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case "Insurance":
 
                         if (validate("Insurance")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID),name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have added insurance information successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = InsuranceQuery.insertInsuranceData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, type, phone, imagepath, fax, note, member, group, subscriber, email, otherInsurance, agent, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have added insurance information successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2890,20 +3030,18 @@ String location="";
                     case "InsuranceData":
 
                         if (validate("Insurance")) {
-                            Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();
-                            Boolean flag= InsuranceQuery.updateInsuranceData(id,name,website,type,phone,photo,fax,note,member,group,subscriber,email,otherInsurance,agent,photoCard);
-                            if (flag==true)
-                            {
-                                Toast.makeText(getActivity(),"You have updated insurance information successfully",Toast.LENGTH_SHORT).show();
+                            byte[] photo = baos.toByteArray();*/
+                            Boolean flag = InsuranceQuery.updateInsuranceData(id, name, website, type, phone, imagepath, fax, note, member, group, subscriber, email, otherInsurance, agent, cardPath);
+                            if (flag == true) {
+                                Toast.makeText(getActivity(), "You have updated insurance information successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
+                            } else {
+                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(getActivity(),"Success",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             //  dialogManager = new DialogManager(new FragmentNewContact());
                             //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
@@ -2912,26 +3050,26 @@ String location="";
                 }
                 break;
             case R.id.imgEdit:
-               ShowCameraDialog(RESULT_CAMERA_IMAGE,RESULT_SELECT_PHOTO,"Profile");
+                ShowCameraDialog(RESULT_CAMERA_IMAGE, RESULT_SELECT_PHOTO, "Profile");
 
                 break;
             case R.id.imgEditCard:
-                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,"Card");
+                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD, RESULT_SELECT_PHOTO_CARD, "Card");
                 break;
 
             case R.id.txtCard:
-                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD,RESULT_SELECT_PHOTO_CARD,"Card");
+                ShowCameraDialog(RESULT_CAMERA_IMAGE_CARD, RESULT_SELECT_PHOTO_CARD, "Card");
                 break;
 
             case R.id.imgCard:
-                Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+                /*Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-                bitmaps.compress(Bitmap.CompressFormat.JPEG, 10, baoss);
-                photoCard = baoss.toByteArray();
-                Intent i=new Intent(getActivity(), AddFormActivity.class);
-                i.putExtra("Image",photoCard);
-                i.putExtra("IsDelete",true);
-                startActivityForResult(i,REQUEST_CARD);
+                bitmaps.compress(Bitmap.CompressFormat.JPEG, 100, baoss);
+                byte[]  photoCard = baoss.toByteArray();*/
+                Intent i = new Intent(getActivity(), AddFormActivity.class);
+                i.putExtra("Image", cardPath);
+                i.putExtra("IsDelete", true);
+                startActivityForResult(i, REQUEST_CARD);
                 break;
 
 
@@ -2964,27 +3102,25 @@ String location="";
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // dispatchTakePictureIntent(resultCameraImageCard);
+                dispatchTakePictureIntent(resultCameraImageCard, profile);
 
-                values = new ContentValues();
+               /* values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (profile.equals("Profile"))
-                {
+                if (profile.equals("Profile")) {
                     imageUriProfile = getActivity().getContentResolver().insert(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                  //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriProfile);
-                }else if (profile.equals("Card"))
-                {
+                } else if (profile.equals("Card")) {
                     imageUriCard = getActivity().getContentResolver().insert(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                   // intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    // intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriCard);
                 }
 
-                startActivityForResult(intent, resultCameraImageCard);
+                startActivityForResult(intent, resultCameraImageCard);*/
                 dialog.dismiss();
             }
         });
@@ -3001,7 +3137,16 @@ String location="";
         textOption3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                if (profile.equals("Profile")) {
+                    imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                    imagepath="";
+                }else if (profile.equals("Card"))
+                {
+                    cardPath="";
+                   imgCard.setVisibility(View.GONE);
+                    rlCard.setVisibility(View.GONE);
+                    txtCard.setVisibility(View.VISIBLE);
+                }
                 dialog.dismiss();
             }
         });
@@ -3014,29 +3159,28 @@ String location="";
     }
 
     private boolean validate(String screen) {
-        Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+      /*  Bitmap bitmaps = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
         ByteArrayOutputStream baoss = new ByteArrayOutputStream();
-        bitmaps.compress(Bitmap.CompressFormat.JPEG,10, baoss);
-        if (imgCard.getVisibility()==View.VISIBLE)
-        {
+        bitmaps.compress(Bitmap.CompressFormat.JPEG, 10, baoss);
+        if (imgCard.getVisibility() == View.VISIBLE) {
             photoCard = baoss.toByteArray();
-        }else if(imgCard.getVisibility()==View.GONE){
+        } else if (imgCard.getVisibility() == View.GONE) {
             photoCard = null;
-        }
+        }*/
 
         name = txtName.getText().toString().trim();
         email = txtEmail.getText().toString().trim();
         mobile = txtMobile.getText().toString().trim();
-        phone=txtHomePhone.getText().toString().trim();
-        workphone=txtWorkPhone.getText().toString().trim();
-        address=txtAddress.getText().toString().trim();
+        phone = txtHomePhone.getText().toString().trim();
+        workphone = txtWorkPhone.getText().toString().trim();
+        address = txtAddress.getText().toString().trim();
         int indexValue = spinnerRelation.getSelectedItemPosition();
 
         if (screen.equals("Connection")) {
-            if (indexValue!=0) {
+            if (indexValue != 0) {
                 relation = Relationship[indexValue - 1];
             }
-            otherRelation=txtOtherRelation.getText().toString();
+            otherRelation = txtOtherRelation.getText().toString();
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -3049,7 +3193,7 @@ String location="";
             } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
+            }*/ else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             } /*else if (address.equals("")) {
@@ -3066,31 +3210,26 @@ String location="";
             } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
+            }*/ else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
 
             } else return true;
-        }
-        else if(screen.equals("Emergency"))
-        {
+        } else if (screen.equals("Emergency")) {
 
-            int indexs=spinnerPriority.getSelectedItemPosition();
-            if(indexValue!=0) {
+            int indexs = spinnerPriority.getSelectedItemPosition();
+            if (indexValue != 0) {
                 relation = Relationship[indexValue - 1];
             }
-            if (indexs!=0) {
+            if (indexs != 0) {
                 priority = priorityType[indexs - 1];
             }
-            otherRelation=txtOtherRelation.getText().toString();
-            note=txtEmergencyNote.getText().toString().trim();
-            if (priority.equals("Primary"))
-            {
-                prior=0;
-            }
-            else
-            {
-                prior=1;
+            otherRelation = txtOtherRelation.getText().toString();
+            note = txtEmergencyNote.getText().toString().trim();
+            if (priority.equals("Primary")) {
+                prior = 0;
+            } else {
+                prior = 1;
             }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
@@ -3104,7 +3243,7 @@ String location="";
             } else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
+            }*/ else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             }
@@ -3123,23 +3262,21 @@ String location="";
             }else if (address.equals("")) {
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
-            }*/ else return true;
-        }
-        else if(screen.equals("Proxy"))
-        {
-            if (indexValue!=0) {
+            }*/
+            else return true;
+        } else if (screen.equals("Proxy")) {
+            if (indexValue != 0) {
                 relation = Relationship[indexValue - 1];
             }
-            otherRelation=txtOtherRelation.getText().toString();
+            otherRelation = txtOtherRelation.getText().toString();
             int indexValues = spinnerProxy.getSelectedItemPosition();
-            if (indexValues!=0) {
+            if (indexValues != 0) {
                 proxy = proxyType[indexValues - 1];
             }
             if (proxy.equals("Primary - Health Care Proxy Agent")) {
-                prox=0;
-            } else if (proxy.equals("Successor - Health Care Proxy Agent"))
-            {
-                prox=1;
+                prox = 0;
+            } else if (proxy.equals("Successor - Health Care Proxy Agent")) {
+                prox = 1;
             }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
@@ -3154,10 +3291,10 @@ String location="";
             else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
+            }*/ else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtMobile.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }else return true;
+            } else return true;
            /* else if (phone.equals("")) {
                 txtHomePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
@@ -3176,25 +3313,24 @@ String location="";
                 txtAddress.setError("Please Enter Address");
                 showAlert("Please Enter Address", getActivity());
             }*/
-        }
-        else if (screen.equals("Physician")) {
-            name=txtDoctorName.getText().toString();
-            mobile=txtDoctorOfficePhone.getText().toString();
-            phone=txtDoctorHourOfficePhone.getText().toString();
-            workphone=txtDoctorOtherPhone.getText().toString();
-            fax=txtDoctorFax.getText().toString();
-            address=txtDoctorAddress.getText().toString();
-            website=txtDoctorWebsite.getText().toString();
-            lastseen=txtDoctorLastSeen.getText().toString();
-          //  fax=txtDoctorFax.getText().toString();
+        } else if (screen.equals("Physician")) {
+            name = txtDoctorName.getText().toString();
+            mobile = txtDoctorOfficePhone.getText().toString();
+            phone = txtDoctorHourOfficePhone.getText().toString();
+            workphone = txtDoctorOtherPhone.getText().toString();
+            fax = txtDoctorFax.getText().toString();
+            address = txtDoctorAddress.getText().toString();
+            website = txtDoctorWebsite.getText().toString();
+            lastseen = txtDoctorLastSeen.getText().toString();
+            //  fax=txtDoctorFax.getText().toString();
             int indexValuex = spinner.getSelectedItemPosition();
-            if (indexValuex!=0) {
+            if (indexValuex != 0) {
                 speciality = healthSpeciality[indexValuex - 1];
             }
-            practice_name=txtPracticeName.getText().toString();
-            network=txtNetwork.getText().toString();
-            affil=txtAffiliation.getText().toString();
-            note=txtDoctorNote.getText().toString();
+            practice_name = txtPracticeName.getText().toString();
+            network = txtNetwork.getText().toString();
+            affil = txtAffiliation.getText().toString();
+            note = txtDoctorNote.getText().toString();
 
             if (name.equals("")) {
                 txtDoctorName.setError("Please Doctor Enter Name");
@@ -3203,11 +3339,11 @@ String location="";
              /* if (mobile.equals("")) {
                   txtDoctorOfficePhone.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
-                  txtDoctorOfficePhone.setError("Mobile number should be 10 digits");
+            }*/
+            else if (mobile.length() != 0 && mobile.length() < 10) {
+                txtDoctorOfficePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }
-            else return true;
+            } else return true;
            /* else if (phone.equals("")) {
                   txtDoctorHourOfficePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
@@ -3223,14 +3359,13 @@ String location="";
                 showAlert("Mobile number should be 10 digits", getActivity());
             }*/
 
-        }
-        else if (screen.equals("Pharmacy")) {
-            name=txtPharmacyName.getText().toString();
-            phone=txtPharmacyPhone.getText().toString();
-            fax=txtPharmacyFax.getText().toString();
-            address=txtPharmacyAddress.getText().toString();
-            website=txtPharmacyWebsite.getText().toString();
-            note=txtPharmacyNote.getText().toString();
+        } else if (screen.equals("Pharmacy")) {
+            name = txtPharmacyName.getText().toString();
+            phone = txtPharmacyPhone.getText().toString();
+            fax = txtPharmacyFax.getText().toString();
+            address = txtPharmacyAddress.getText().toString();
+            website = txtPharmacyWebsite.getText().toString();
+            note = txtPharmacyNote.getText().toString();
             if (name.equals("")) {
                 txtPharmacyName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -3243,17 +3378,16 @@ String location="";
                 showAlert("Mobile number should be 10 digits", getActivity());
             }*/
             else return true;
-        }
-        else if (screen.equals("Aides")) {
-            name=txtAideCompName.getText().toString();
-            mobile=txtAideOfficePhone.getText().toString();
-            phone=txtHourOfficePhone.getText().toString();
-            workphone=txtOtherPhone.getText().toString();
-            website=txtAideWebsite.getText().toString();
-            note=txtAideNote.getText().toString();
-            email=txtAideEmail.getText().toString();
-            fax=txtAideFax.getText().toString();
-            address=txtAideAddress.getText().toString();
+        } else if (screen.equals("Aides")) {
+            name = txtAideCompName.getText().toString();
+            mobile = txtAideOfficePhone.getText().toString();
+            phone = txtHourOfficePhone.getText().toString();
+            workphone = txtOtherPhone.getText().toString();
+            website = txtAideWebsite.getText().toString();
+            note = txtAideNote.getText().toString();
+            email = txtAideEmail.getText().toString();
+            fax = txtAideFax.getText().toString();
+            address = txtAideAddress.getText().toString();
             if (name.equals("")) {
                 txtAideCompName.setError("Please Enter Name Of Company");
                 showAlert("Please Enter Name Of Company", getActivity());
@@ -3261,10 +3395,11 @@ String location="";
          /*   if (mobile.equals("")) {
                 txtAideOfficePhone.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } */else if (mobile.length()!=0 && mobile.length() < 10) {
+            } */
+            else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtAideOfficePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }else return true;
+            } else return true;
            /* else if (phone.equals("")) {
                 txtHourOfficePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
@@ -3280,28 +3415,26 @@ String location="";
                 showAlert("Mobile number should be 10 digits", getActivity());
             }*/
 
-        }
-        else if(screen.equals("Hospital"))
-        {
+        } else if (screen.equals("Hospital")) {
 
-            name=txtFNameHospital.getText().toString();
-            email="";
-            location=txtHospitalLocation.getText().toString();
-            mobile=txtHospitalOfficePhone.getText().toString();
-            phone="";
-            workphone=txtHospitalOtherPhone.getText().toString();
-            fax=txtHospitalFax.getText().toString();
-            address=txtHospitalAddress.getText().toString();
-            website=txtHospitalWebsite.getText().toString();
-            lastseen=txtHospitalLastSeen.getText().toString();
-            otherCategory=txtOtherCategoryHospital.getText().toString();
+            name = txtFNameHospital.getText().toString();
+            email = "";
+            location = txtHospitalLocation.getText().toString();
+            mobile = txtHospitalOfficePhone.getText().toString();
+            phone = "";
+            workphone = txtHospitalOtherPhone.getText().toString();
+            fax = txtHospitalFax.getText().toString();
+            address = txtHospitalAddress.getText().toString();
+            website = txtHospitalWebsite.getText().toString();
+            lastseen = txtHospitalLastSeen.getText().toString();
+            otherCategory = txtOtherCategoryHospital.getText().toString();
             int indexValuex = spinnerHospital.getSelectedItemPosition();
-            String sources=preferences.getString(PrefConstants.SOURCE);
-                if (indexValuex != 0) {
-                    speciality = HospitalType[indexValuex - 1];
-                }
-            practice_name=txtHospitalPracticeName.getText().toString();
-            note=txtHospitalNote.getText().toString();
+            String sources = preferences.getString(PrefConstants.SOURCE);
+            if (indexValuex != 0) {
+                speciality = HospitalType[indexValuex - 1];
+            }
+            practice_name = txtHospitalPracticeName.getText().toString();
+            note = txtHospitalNote.getText().toString();
             if (name.equals("")) {
                 txtFNameHospital.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -3310,7 +3443,8 @@ String location="";
          /*   if (mobile.equals("")) {
                 txtFinanceOfficePhone.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } */else if (mobile.length()!=0 && mobile.length() < 10) {
+            } */
+            else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtFinanceOfficePhone.setError("Office number should be 10 digits");
                 showAlert("Office number should be 10 digits", getActivity());
             } else return true;
@@ -3330,36 +3464,33 @@ String location="";
             }*/
 
 
+        } else if (screen.equals("Finance")) {
 
-        }
-        else if (screen.equals("Finance")) {
-
-            name=txtFName.getText().toString();
-            email=txtFinanceEmail.getText().toString();
-            contactName=txtContactName.getText().toString();
-            location=txtFinanceLocation.getText().toString();
-            mobile=txtFinanceOfficePhone.getText().toString();
-            phone=txtFinanceMobilePhone.getText().toString();
-            workphone=txtFinanceOtherPhone.getText().toString();
-            fax=txtFinanceFax.getText().toString();
-            address=txtFinanceAddress.getText().toString();
-            website=txtFinanceWebsite.getText().toString();
-            lastseen=txtLastSeen.getText().toString();
-            otherCategory=txtOtherCategory.getText().toString();
+            name = txtFName.getText().toString();
+            email = txtFinanceEmail.getText().toString();
+            contactName = txtContactName.getText().toString();
+            location = txtFinanceLocation.getText().toString();
+            mobile = txtFinanceOfficePhone.getText().toString();
+            phone = txtFinanceMobilePhone.getText().toString();
+            workphone = txtFinanceOtherPhone.getText().toString();
+            fax = txtFinanceFax.getText().toString();
+            address = txtFinanceAddress.getText().toString();
+            website = txtFinanceWebsite.getText().toString();
+            lastseen = txtLastSeen.getText().toString();
+            otherCategory = txtOtherCategory.getText().toString();
             int indexValuex = spinnerFinance.getSelectedItemPosition();
-            String sources=preferences.getString(PrefConstants.SOURCE);
-            if(sources.equals("Finance")||sources.equals("FinanceViewData")||sources.equals("FinanceData")) {
-                if (indexValuex!=0) {
+            String sources = preferences.getString(PrefConstants.SOURCE);
+            if (sources.equals("Finance") || sources.equals("FinanceViewData") || sources.equals("FinanceData")) {
+                if (indexValuex != 0) {
                     speciality = financeType[indexValuex - 1];
                 }
-            }
-            else {
+            } else {
                 if (indexValuex != 0) {
                     speciality = HospitalType[indexValuex - 1];
                 }
             }
-            practice_name=txtFinancePracticeName.getText().toString();
-            note=txtFinanceNote.getText().toString();
+            practice_name = txtFinancePracticeName.getText().toString();
+            note = txtFinanceNote.getText().toString();
             if (name.equals("")) {
                 txtFName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
@@ -3368,7 +3499,8 @@ String location="";
          /*   if (mobile.equals("")) {
                 txtFinanceOfficePhone.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
-            } */else if (mobile.length()!=0 && mobile.length() < 10) {
+            } */
+            else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtFinanceOfficePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
             } else return true;
@@ -3388,9 +3520,7 @@ String location="";
             }*/
 
 
-
-        }
-        else if (screen.equals("Insurance")) {
+        } else if (screen.equals("Insurance")) {
             name = txtInsuaranceName.getText().toString();
             phone = txtInsuarancePhone.getText().toString();
             fax = txtInsuaranceFax.getText().toString();
@@ -3405,7 +3535,7 @@ String location="";
                 type = insuaranceType[indexValuex - 1];
             }
             email = txtInsuaranceEmail.getText().toString();
-            agent=txtAgent.getText().toString();
+            agent = txtAgent.getText().toString();
             otherInsurance = txtOtherInsurance.getText().toString();
             if (name.equals("")) {
                 txtInsuaranceName.setError("Please Enter Name of Insurance Company");
@@ -3415,10 +3545,11 @@ String location="";
             /*else if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
                 showAlert("Please Enter Mobile", getActivity());
-            }*/ else if (mobile.length()!=0 && mobile.length() < 10) {
+            }*/
+            else if (mobile.length() != 0 && mobile.length() < 10) {
                 txtInsuarancePhone.setError("Mobile number should be 10 digits");
                 showAlert("Mobile number should be 10 digits", getActivity());
-            }else return true;
+            } else return true;
         }
             /* (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");
@@ -3432,15 +3563,15 @@ String location="";
         return false;
     }
 
-    private void dispatchTakePictureIntent(int resultCameraImageCard) {
+    private void dispatchTakePictureIntent(int resultCameraImage, String profile) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
-                photoFile = createImageFile();
+
+                photoFile = createImageFile(profile);
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 ex.printStackTrace();
@@ -3451,13 +3582,12 @@ String location="";
                         "com.infidigi.fotobuddies.fileprovider",
                         photoFile);*/
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile.getAbsolutePath());
-                startActivityForResult(takePictureIntent, resultCameraImageCard);
+                startActivityForResult(takePictureIntent, resultCameraImage);
             }
-
         }
     }
 
-    private File createImageFile() throws IOException {
+    private File createImageFile(String profile) throws IOException {
         // Create an image file name
         String imageFileName = "JPEG_PROFILE";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -3468,7 +3598,11 @@ String location="";
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-        imagepath = image.getAbsolutePath();
+        if (profile.equals("Profile")) {
+            imagepath = image.getAbsolutePath();
+        } else if (profile.equals("Card")) {
+            cardPath = image.getAbsolutePath();
+        }
         return image;
     }
 
@@ -3484,28 +3618,64 @@ String location="";
             rlCard.setVisibility(View.GONE);
             imgCard.setVisibility(View.GONE);
             txtCard.setVisibility(View.VISIBLE);
-            photoCard = null;
+            cardPath="";
+          //  photoCard = null;
         } else if (requestCode == RESULT_SELECT_PHOTO && null != data) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 profileImage.setImageBitmap(selectedImage);
+                storeImage(selectedImage,"Profile");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE ) {
-
+        } else if (requestCode == RESULT_CAMERA_IMAGE) {
+            // ImageView profileImage = (ImageView) findViewById(R.id.imgProfile);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imgProfile.setImageBitmap(imageBitmap);
+            storeImage(imageBitmap,"Profile");
+           /* FileOutputStream outStream = null;
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    "/MYLO/");
+            String path = file.getAbsolutePath();
+            if (!file.exists()) {
+                file.mkdirs();
+            }
             try {
+
+                imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(imagepath);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                outStream.write(byteArray);
+                outStream.close();
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+
+            }*/
+
+
+
+           /* try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                         getActivity().getContentResolver(), imageUriProfile);
                 String imageurl = getRealPathFromURI(imageUriProfile);
-                Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
                 profileImage.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
 /*
 
             Bundle extras = data.getExtras();
@@ -3555,23 +3725,25 @@ String location="";
         } else if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
             try {
                 final Uri imageUri = data.getData();
+               // cardPath = data.getStringExtra("imagepath");
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 profileCard.setImageBitmap(selectedImage);
                 rlCard.setVisibility(View.VISIBLE);
                 imgCard.setVisibility(View.VISIBLE);
                 txtCard.setVisibility(View.GONE);
+                storeImage(selectedImage,"Card");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE_CARD ) {
-            try {
+        } else if (requestCode == RESULT_CAMERA_IMAGE_CARD) {
+           /* try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                         getActivity().getContentResolver(), imageUriCard);
 
                 String imageurl = getRealPathFromURI(imageUriCard);
-                Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
+                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
                 profileCard.setImageBitmap(bitmap);
                 //
                 rlCard.setVisibility(View.VISIBLE);
@@ -3579,7 +3751,52 @@ String location="";
                 txtCard.setVisibility(View.GONE);
             } catch (Exception e) {
                 e.printStackTrace();
+            }*/
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imgCard.setImageBitmap(imageBitmap);
+
+        //    String imageurl = getRealPathFromURI(imageUriCard);
+            //
+            rlCard.setVisibility(View.VISIBLE);
+            imgCard.setVisibility(View.VISIBLE);
+            txtCard.setVisibility(View.GONE);
+            storeImage(imageBitmap,"Card");
+           /* FileOutputStream outStream = null;
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    "/MYLO/");
+            String path = file.getAbsolutePath();
+            if (!file.exists()) {
+                file.mkdirs();
             }
+           *//* if (file.isDirectory())
+            {
+                String[] children = file.list();
+                for (int i = 0; i < children.length; i++)
+                {
+                    new File(file, children[i]).delete();
+                }
+            }*//*
+            try {
+
+                cardPath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(cardPath);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                outStream.write(byteArray);
+                outStream.close();
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+
+            }*/
         }/*{
 
             Bundle extras = data.getExtras();
@@ -3635,7 +3852,7 @@ String location="";
 
     private String getRealPathFromURI(Uri imageUri) {
         String path = null;
-        String[] proj = { MediaStore.MediaColumns.DATA };
+        String[] proj = {MediaStore.MediaColumns.DATA};
         Cursor cursor = getActivity().getContentResolver().query(imageUri, proj, null, null, null);
         if (cursor.moveToFirst()) {
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
@@ -3684,8 +3901,47 @@ String location="";
         }
         return bitmap;
     }
-    public void callRelation(String relationship) {
-        relation=relationship;
-    }
 
+    public void callRelation(String relationship) {
+        relation = relationship;
+    }
+    private void storeImage(Bitmap selectedImage, String profile) {
+
+        FileOutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        String path = file.getAbsolutePath();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+
+            if (profile.equals("Profile")) {
+                imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(imagepath);
+            }
+            else   if (profile.equals("Card")){
+                cardPath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(cardPath);
+            }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            outStream.write(byteArray);
+            outStream.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
 }

@@ -45,7 +45,7 @@
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/dimension75dp"
                     android:layout_height="@dimen/dimension75dp"
-                    android:src="@drawable/circular_profile"
+                    android:src="@drawable/ic_profile_defaults"
                     android:scaleType="fitXY"
                     android:layout_marginTop="@dimen/dimension2dp"
                     android:layout_marginBottom="@dimen/dimension2dp"

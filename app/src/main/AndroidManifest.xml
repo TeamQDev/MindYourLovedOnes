@@ -246,11 +246,12 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.LivingActivity"
+        <activity
+            android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.LivingActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.mindyourelders.MyHealthCareWishes.DashBoard.ImageActivity"></activity>
     </application>
 
 </manifest>

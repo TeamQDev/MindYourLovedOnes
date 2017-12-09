@@ -11,11 +11,14 @@ import android.widget.ImageView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 
+import java.io.File;
+
 
 public class AddFormActivity extends AppCompatActivity  {
     private static final int RESULT_CARD = 50;
     ImageView imgDoc,imgBack,imgDelete;
     boolean IsDelete=false;
+    Bitmap myBitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +38,26 @@ public class AddFormActivity extends AppCompatActivity  {
 
         Intent i=getIntent();
         if (i.getExtras()!=null) {
-            byte[] photo = i.getExtras().getByteArray("Image");
-            Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            String photo = i.getExtras().getString("Image");
+            if (!photo.equals("")) {
+                File imgFile1 = new File(photo);
+                if (imgFile1.exists()) {
+                    myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                    //   imgCard.setImageBitmap(myBitmap);
+                }
+            }
+          /*  byte[] photo = i.getExtras().getByteArray("Image");
+            Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);*/
          /*   int nh = (int) ( photoCard.getHeight() * (600.0 / photoCard.getWidth()) );
             Bitmap scaled = Bitmap.createScaledBitmap(photoCard, 600, nh, true);*/
-            if(photoCard.getWidth() > photoCard.getHeight())
+            if(myBitmap.getWidth() > myBitmap.getHeight())
             {
                // imgDoc.setRotation(180);
             }else
             {
                 imgDoc.setRotation(90);
             }
-            imgDoc.setImageBitmap(photoCard);
+            imgDoc.setImageBitmap(myBitmap);
 
 
             if (i.getExtras().containsKey("IsDelete")) {
@@ -72,7 +83,6 @@ public class AddFormActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent i=new Intent();
                 i.putExtra("Card","Delete");
-
                 setResult(RESULT_CARD,i);
                 finish();
             }

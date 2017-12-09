@@ -71,10 +71,10 @@ public class MyConnectionsQuery {
                 COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
-                COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" BLOB,"+
+                COL_MANGER_PHONE+" VARCHAR(20),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" VARCHAR(50),"+
                 COL_CHILD+" VARCHAR(10),"+COL_FRIEND+" VARCHAR(10),"+COL_GRAND+" VARCHAR(10),"+COL_PARENT+" VARCHAR(10),"+COL_SPOUSE+" VARCHAR(10),"+
                 COL_OTHER_SIGN+" VARCHAR(20),"+COL_OTHER+" VARCHAR(20),"+COL_LIVE+" VARCHAR(20),"+
-                COL_PHOTO+" BLOB,"+COL_ENGLISH+" VARCHAR(10));";
+                COL_PHOTO+" VARCHAR(50),"+COL_ENGLISH+" VARCHAR(10));";
         return createTableQuery;
     }
 
@@ -83,7 +83,7 @@ public class MyConnectionsQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMyConnectionsData(int id, String name, String email, String address, String mobile, String phone, String workphone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, byte[] photoCard) {
+    public static Boolean insertMyConnectionsData(int id, String name, String email, String address, String mobile, String phone, String workphone, String relation, String photo, String note, int connectionflag, int isPrimary, String otherRelation, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -136,7 +136,7 @@ public class MyConnectionsQuery {
                     connection.setConnectionFlag(c.getInt(c.getColumnIndex(COL_FLAG)));
                     connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
-                    connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
 
                     connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
@@ -152,7 +152,7 @@ public class MyConnectionsQuery {
                     connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                     connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                     connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
-                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                     connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
                     connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
@@ -204,7 +204,7 @@ public class MyConnectionsQuery {
                 connection.setConnectionFlag(c.getInt(c.getColumnIndex(COL_FLAG)));
                 connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
                 connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
-                connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                 connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
 
                 connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
@@ -220,7 +220,7 @@ public class MyConnectionsQuery {
                 connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
-                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                 connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
                 connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
@@ -239,7 +239,7 @@ public class MyConnectionsQuery {
     }
 
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, byte[] photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, String photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -318,9 +318,9 @@ public class MyConnectionsQuery {
                     connection.setConnectionFlag(c.getInt(c.getColumnIndex(COL_FLAG)));
                     connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
-                    connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
-                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
 
                     connectionList.add(connection);
 
@@ -351,9 +351,9 @@ public class MyConnectionsQuery {
                     connection.setConnectionFlag(c.getInt(c.getColumnIndex(COL_FLAG)));
                     connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
-                    connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
-                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
 
                     connectionList.add(connection);
 

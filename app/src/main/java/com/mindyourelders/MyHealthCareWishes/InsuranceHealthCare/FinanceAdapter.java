@@ -19,6 +19,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Finance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -114,14 +115,25 @@ public class FinanceAdapter extends BaseAdapter {
         }*/
         holder.txtCategory.setText(FinanceList.get(position).getOtherCategory());
         //holder.imgProfile.setImageResource(FinanceList.get(position).getImage());
-        byte[] photo=FinanceList.get(position).getPhoto();
+        File imgFile = new File(FinanceList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
+
+        /*byte[] photo=FinanceList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         holder.imgProfile.setImageBitmap(bmp);
-
-        if (FinanceList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = FinanceList.get(position).getPhotoCard();
+*/
+        if (!FinanceList.get(position).getPhotoCard().equals("")) {
+            File imgFile1 = new File(FinanceList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForward.setImageBitmap(myBitmap);
+            }
+           /* byte[] photoCard = FinanceList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-            holder.imgForward.setImageBitmap(bmpCard);
+            holder.imgForward.setImageBitmap(bmpCard);*/
             holder.imgForward.setVisibility(View.VISIBLE);
         }
         else{

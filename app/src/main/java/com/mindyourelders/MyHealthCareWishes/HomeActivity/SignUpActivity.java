@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,7 +26,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -319,11 +317,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     if (flags == true) {
                         Toast.makeText(context, "This email is already registered", Toast.LENGTH_SHORT).show();
                     } else {
-                        Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                      /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                        byte[] photo = baos.toByteArray();
-                        Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, mobile, bdate, password, photo,"","");
+                        byte[] photo = baos.toByteArray();*/
+                      Log.v("Path",imagepath);
+                        Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, mobile, bdate, password, imagepath,"","","");
                         if (flag == true) {
                             Toast.makeText(context, "You have registered Successfully", Toast.LENGTH_SHORT).show();
                             Intent signupIntent = new Intent(context, BaseActivity.class);
@@ -332,8 +331,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             PersonalInfo personalInfo=PersonalInfoQuery.fetchProfile(email);
                             preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
                             preferences.putString(PrefConstants.USER_NAME, personalInfo.getName());
-                            String saveThis = Base64.encodeToString( personalInfo.getPhoto(), Base64.DEFAULT);
-                            preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
+                          //  String saveThis = Base64.encodeToString( personalInfo.getPhoto(), Base64.DEFAULT);
+                            preferences.putString(PrefConstants.USER_PROFILEIMAGE, personalInfo.getPhoto());
                             preferences.setREGISTERED(true);
                             preferences.setLogin(true);
                             startActivity(signupIntent);
@@ -417,6 +416,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onClick(View v) {
                        imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                       imagepath="";
                         dialog.dismiss();
                     }
                 });
@@ -453,11 +453,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void saveToConnection(int id) {
-        Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+       /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-        byte[] photo = baos.toByteArray();
-        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",photo," ",1,2, "", null);
+        byte[] photo = baos.toByteArray();*/
+        Boolean flag= MyConnectionsQuery.insertMyConnectionsData(id,name,email,address,mobile," ","","Self",imagepath," ",1,2, "", "");
         if (flag==true)
         {
             Toast.makeText(context,"You have added connection Successfully",Toast.LENGTH_SHORT).show();
@@ -561,35 +561,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 profileImage.setImageBitmap(selectedImage);
+                  storeImage(selectedImage,"Profile");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
-
+        }  else if (requestCode == RESULT_CAMERA_IMAGE) {
+            // ImageView profileImage = (ImageView) findViewById(R.id.imgProfile);
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            profileImage.setImageBitmap(imageBitmap);
-            // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
+            imgProfile.setImageBitmap(imageBitmap);
 
             FileOutputStream outStream = null;
             File file = new File(Environment.getExternalStorageDirectory(),
-                    "/MHCWProfile/");
+                    "/MYLO/");
             String path = file.getAbsolutePath();
             if (!file.exists()) {
                 file.mkdirs();
             }
-
-
-            if (file.isDirectory()) {
-                String[] children = file.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(file, children[i]).delete();
-                }
-            }
             try {
 
-                imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())+ ".jpg";
+                imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
                 // Write to SD Card
                 outStream = new FileOutputStream(imagepath);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -607,9 +600,40 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             }
 
-
         }
 
+    }
+
+    private void storeImage(Bitmap selectedImage, String profile) {
+
+        FileOutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        String path = file.getAbsolutePath();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+
+            imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                    + ".jpg";
+            // Write to SD Card
+            outStream = new FileOutputStream(imagepath);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            outStream.write(byteArray);
+            outStream.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
     }
 
     class CreateUserAsynk extends AsyncTask<Void, Void, String> {

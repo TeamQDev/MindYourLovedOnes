@@ -36,12 +36,12 @@ public class Finance implements Serializable {
 
     String Fax;
     String practiceName;
-    byte[] photoCard;
-    public byte[] getPhotoCard() {
+    String photoCard;
+    public String getPhotoCard() {
         return photoCard;
     }
 
-    public void setPhotoCard(byte[] photoCard) {
+    public void setPhotoCard(String photoCard) {
         this.photoCard = photoCard;
     }
 
@@ -63,11 +63,11 @@ public class Finance implements Serializable {
         this.practiceName = practiceName;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -79,7 +79,7 @@ public class Finance implements Serializable {
         this.id = id;
     }
 
-    byte[] photo;
+    String photo;
     int id;
     String officePhone="";
 

@@ -87,7 +87,7 @@ public class RelativeConnection {
     String profession="";
     String employed="";
  String eyes="";
-    byte[] photoCard;
+    String photoCard="";
     public String getEnglish() {
         return english;
     }
@@ -97,11 +97,11 @@ public class RelativeConnection {
     }
 
     String english="";
-    public byte[] getPhotoCard() {
+    public String getPhotoCard() {
         return photoCard;
     }
 
-    public void setPhotoCard(byte[] photoCard) {
+    public void setPhotoCard(String photoCard) {
         this.photoCard = photoCard;
     }
 
@@ -311,17 +311,17 @@ public class RelativeConnection {
         this.phone = phone;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
     String name="";
     String phone="";
-            byte[] photo;
+            String photo="";
 
     public String getName() {
         return name;

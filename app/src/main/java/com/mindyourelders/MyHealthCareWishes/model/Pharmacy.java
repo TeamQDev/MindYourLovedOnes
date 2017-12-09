@@ -7,22 +7,22 @@ import java.io.Serializable;
  */
 
 public class Pharmacy implements Serializable {
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
-    byte[] photoCard;
-    public byte[] getPhotoCard() {
+    String photoCard;
+    public String getPhotoCard() {
         return photoCard;
     }
 
-    public void setPhotoCard(byte[] photoCard) {
+    public void setPhotoCard(String photoCard) {
         this.photoCard = photoCard;
     }
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    byte[] photo;
+    String photo;
     int id;
 
     public int getId() {

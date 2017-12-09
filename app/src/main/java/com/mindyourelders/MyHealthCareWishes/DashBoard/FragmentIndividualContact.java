@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,6 +64,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -82,7 +82,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     private static final int REQUEST_CARD = 50;
     ContentValues values;
     Uri imageUri;
-    byte[] photoCard=null;
+   // byte[] photoCard=null;
     ImageView imgRight;
     RelativeLayout llIndividual;
     TextView txtSignUp, txtLogin, txtForgotPassword,txtOther;
@@ -111,7 +111,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     MySpinner spinner,spinnerRelation,spinnerEyes,spinnerLanguage,spinnerMarital;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "California", "India"};
 
-    String imagepath = "";//
+    String imagepath = "",cardpath="";//
     String relation;
 
     ImageLoader imageLoader;
@@ -688,14 +688,30 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         rbNoPet.setChecked(true);
                     }
                 }
-                byte[] photo=personalInfo.getPhoto();
+                imagepath=personalInfo.getPhoto();
+                if (!imagepath.equals("")) {
+                    File imgFile = new File(imagepath);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                }
+                else{
+                    imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                }
+              /*  byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-               imgProfile.setImageBitmap(bmp);
-
-                if (personalInfo.getPhotoCard()!=null) {
-                    byte[] photoCard = personalInfo.getPhotoCard();
-                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmps);
+               imgProfile.setImageBitmap(bmp);*/
+                cardpath=personalInfo.getPhotoCard();
+                if (!personalInfo.getPhotoCard().equals("")) {
+                    File imgFile1 = new File(personalInfo.getPhotoCard());
+                    if (imgFile1.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);
+                    }
+                   /* byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+                   // imgCard.setImageBitmap(bmps);
                     imgCard.setVisibility(View.VISIBLE);
                     rlCard.setVisibility(View.VISIBLE);
                     txtCard.setVisibility(View.GONE);
@@ -812,16 +828,30 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     }
                 }
 
-
-
-                byte[] photo=connection.getPhoto();
+                imagepath=connection.getPhoto();
+                if (!imagepath.equals("")) {
+                    File imgFile = new File(imagepath);
+                    if (imgFile.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);
+                    }
+                }
+                else{
+                    imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                }
+              /*  byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                imgProfile.setImageBitmap(bmp);
-
-                if (connection.getPhotoCard()!=null) {
-                    byte[] photoCard = connection.getPhotoCard();
-                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-                    imgCard.setImageBitmap(bmps);
+               imgProfile.setImageBitmap(bmp);*/
+                cardpath=connection.getPhotoCard();
+                if (!connection.getPhotoCard().equals("")) {
+                    File imgFile1 = new File(connection.getPhotoCard());
+                    if (imgFile1.exists()) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);
+                    }
+                   /* byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+                    // imgCard.setImageBitmap(bmps);
                     imgCard.setVisibility(View.VISIBLE);
                     rlCard.setVisibility(View.VISIBLE);
                     txtCard.setVisibility(View.GONE);
@@ -831,7 +861,6 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     rlCard.setVisibility(View.GONE);
                     txtCard.setVisibility(View.VISIBLE);
                 }
-
 
                 txtHeight.setText(connection.getHeight());
                 txtWeight.setText(connection.getWeight());
@@ -914,7 +943,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
             case R.id.imgDone:
 
-                Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+               /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 byte[] photo = baos.toByteArray();
@@ -927,7 +956,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     photoCard = baoss.toByteArray();
                 }else if(imgCard.getVisibility()==View.GONE){
                     photoCard = null;
-                }
+                }*/
                  if (pet.equals("No"))
                  {
                      boolean flag= PetQuery.deleteRecords(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -940,12 +969,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                  }
                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, photo,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,photoCard,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 hideSoftKeyboard();
                                 getActivity().finish();
-                                editToConnection(photo,photoCard);
+                                editToConnection(imagepath,cardpath);
                             } else {
                                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                             }
@@ -953,7 +982,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     }
                     else {
                         if (validateConnection()) {
-                            editToConnection(photo,photoCard);
+                            editToConnection(imagepath,cardpath);
                             getActivity().finish();
                         }
                     }
@@ -1109,12 +1138,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 break;
 
             case R.id.imgCard:
-                Bitmap bitma = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
+               /* Bitmap bitma = ((BitmapDrawable) imgCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bitma.compress(Bitmap.CompressFormat.JPEG, 10, bao);
-                photoCard = bao.toByteArray();
+                bitma.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+                byte[] photoCard = bao.toByteArray();*/
                 Intent i=new Intent(getActivity(), AddFormActivity.class);
-                i.putExtra("Image",photoCard);
+                i.putExtra("Image",cardpath);
                 i.putExtra("IsDelete",true);
                 startActivityForResult(i,REQUEST_CARD);
                 break;
@@ -1175,15 +1204,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // dispatchTakePictureIntent(resultCameraImage);
-                values = new ContentValues();
+                dispatchTakePictureIntent(resultCameraImage,from);
+             /*   values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
                 imageUri = getActivity().getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, resultCameraImage);
+                startActivityForResult(intent, resultCameraImage);*/
                 dialog.dismiss();
             }
         });
@@ -1202,13 +1231,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (from.equals("Profile"))
                 {
                     imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+                    imagepath="";
                 }
                 else if(from.equals("Card"))
                 {
                     imgCard.setVisibility(View.GONE);
                     rlCard.setVisibility(View.GONE);
                     txtCard.setVisibility(View.VISIBLE);
-                    photoCard = null;
+                    cardpath="";
+                    //photoCard = null;
                 }
                 dialog.dismiss();
             }
@@ -1221,14 +1252,14 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         });
     }
 
-    private void dispatchTakePictureIntent(int resultCameraImage) {
+    private void dispatchTakePictureIntent(int resultCameraImage, String from) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
-                photoFile = createImageFile();
+                photoFile = createImageFile(from);
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 ex.printStackTrace();
@@ -1244,7 +1275,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
     }
 
-    private File createImageFile() throws IOException {
+    private File createImageFile(String from) throws IOException {
         // Create an image file name
         String imageFileName = "JPEG_PROFILE";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -1255,7 +1286,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-        imagepath = image.getAbsolutePath();
+        if (from.equals("Profile")) {
+            imagepath = image.getAbsolutePath();
+        }
+        else if (from.equals("Card"))
+        {
+            cardpath = image.getAbsolutePath();
+        }
         return image;
     }
 
@@ -1408,11 +1445,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         return false;
     }
 
-    private void editToConnection(byte[] photo, byte[] photoCard) {
+    private void editToConnection(String photo, String photoCard) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", photo," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, photoCard,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
@@ -1420,7 +1458,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , photo,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, photoCard, english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -1475,79 +1513,31 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         ImageView profileImage = (ImageView) rootview.findViewById(R.id.imgProfile);
      ImageView profileCard = (ImageView) rootview.findViewById(R.id.imgCard);
      if (REQUEST_PET == requestCode) {
-           /* String value=data.getExtras().getString("Value");
-            String reaction=data.getExtras().getString("Reaction");
-            String treatment=data.getExtras().getString("Treatment");
-            String allergy="Pet: "+value+"\nReaction: "+reaction+"\nTreatment: "+treatment;
-            allergyList.add(allergy);*/
          setPetData();
          ListPet.requestFocus();
-     } else
-     if (requestCode == RESULT_SELECT_PHOTO && null != data) {
-            try {
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                profileImage.setImageBitmap(selectedImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+     }
 
-        } else if (requestCode == RESULT_CAMERA_IMAGE ) {
-
+     if (requestCode == RESULT_SELECT_PHOTO ) {
          try {
-             Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                     getActivity().getContentResolver(), imageUri);
-             String imageurl = getRealPathFromURI(imageUri);
-             Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
-             profileImage.setImageBitmap(bitmap);
-         } catch (Exception e) {
+             final Uri imageUri = data.getData();
+             final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+             profileImage.setImageBitmap(selectedImage);
+             storeImage(selectedImage,"Profile");
+         } catch (FileNotFoundException e) {
              e.printStackTrace();
          }
-           /* Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            profileImage.setImageBitmap(imageBitmap);
-            // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
 
-            FileOutputStream outStream = null;
-            File file = new File(Environment.getExternalStorageDirectory(),
-                    "/MHCWProfile/");
-            String path = file.getAbsolutePath();
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-
-
-            if (file.isDirectory()) {
-                String[] children = file.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(file, children[i]).delete();
-                }
-            }
-            try {
-
-                imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())
-                        + ".jpg";
-                // Write to SD Card
-                outStream = new FileOutputStream(imagepath);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                outStream.write(byteArray);
-                outStream.close();
-
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
-            }
-
-*/
         }
-     else if (requestCode == RESULT_SELECT_PHOTO_CARD && null != data) {
+        if (requestCode == RESULT_CAMERA_IMAGE ) {
+         Bundle extras = data.getExtras();
+         Bitmap imageBitmap = (Bitmap) extras.get("data");
+         imgProfile.setImageBitmap(imageBitmap);
+
+         storeImage(imageBitmap,"Profile");
+
+        }
+     if (requestCode == RESULT_SELECT_PHOTO_CARD ) {
          try {
              final Uri imageUri = data.getData();
              final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
@@ -1556,80 +1546,35 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
              rlCard.setVisibility(View.VISIBLE);
              imgCard.setVisibility(View.VISIBLE);
              txtCard.setVisibility(View.GONE);
+             storeImage(selectedImage,"Card");
          } catch (FileNotFoundException e) {
              e.printStackTrace();
          }
 
-     } else if (requestCode == RESULT_CAMERA_IMAGE_CARD) {
-
-             try {
-                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                         getActivity().getContentResolver(), imageUri);
-                 String imageurl = getRealPathFromURI(imageUri);
-                 Bitmap bitmap=imageOreintationValidator(thumbnail,imageurl);
-                 profileCard.setImageBitmap(bitmap);
-
-               //  String imageurl = getRealPathFromURI(imageUri);
-                 rlCard.setVisibility(View.VISIBLE);
-                 imgCard.setVisibility(View.VISIBLE);
-                 txtCard.setVisibility(View.GONE);
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
-
-
-
-        /* Bundle extras = data.getExtras();
+     }
+     if (requestCode == RESULT_CAMERA_IMAGE_CARD) {
+         Bundle extras = data.getExtras();
          Bitmap imageBitmap = (Bitmap) extras.get("data");
-         profileCard.setImageBitmap(imageBitmap);
+         imgCard.setImageBitmap(imageBitmap);
+        // String imageurl = getRealPathFromURI(imageUriCard);
+         //
          rlCard.setVisibility(View.VISIBLE);
          imgCard.setVisibility(View.VISIBLE);
          txtCard.setVisibility(View.GONE);
-         // imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
-
          FileOutputStream outStream = null;
-         File file = new File(Environment.getExternalStorageDirectory(),
-                 "/MHCWProfile/");
-         String path = file.getAbsolutePath();
-         if (!file.exists()) {
-             file.mkdirs();
-         }
+         storeImage(imageBitmap,"Card");
 
-
-         if (file.isDirectory()) {
-             String[] children = file.list();
-             for (int i = 0; i < children.length; i++) {
-                 new File(file, children[i]).delete();
-             }
-         }
-         try {
-
-             imagepath = path + "/MHCWProfile_" + String.valueOf(System.currentTimeMillis())
-                     + ".jpg";
-             // Write to SD Card
-             outStream = new FileOutputStream(imagepath);
-             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-             byte[] byteArray = stream.toByteArray();
-             outStream.write(byteArray);
-             outStream.close();
-
-
-         } catch (FileNotFoundException e) {
-             e.printStackTrace();
-         } catch (IOException e) {
-             e.printStackTrace();
-         } finally {
-
-         }*/
 
 
      }
-     if (requestCode == REQUEST_CARD && null != data) {
-         rlCard.setVisibility(View.GONE);
-         imgCard.setVisibility(View.GONE);
-         txtCard.setVisibility(View.VISIBLE);
-         photoCard=null;
+     if (requestCode == REQUEST_CARD && data!=null) {
+         if (data.getExtras().getString("Card").equals("Delete")) {
+             rlCard.setVisibility(View.GONE);
+             imgCard.setVisibility(View.GONE);
+             txtCard.setVisibility(View.VISIBLE);
+             cardpath="";
+         }
+         //photoCard=null;
      }
  }
 
@@ -1772,5 +1717,83 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         }
         cursor.close();
         return path;
+    }
+
+    private void storeImage(Bitmap selectedImage, String profile) {
+
+        FileOutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        String path = file.getAbsolutePath();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+
+            if (profile.equals("Profile")) {
+                imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(imagepath);
+            }
+            else   if (profile.equals("Card")){
+                cardpath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(cardpath);
+            }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            outStream.write(byteArray);
+            outStream.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+       /* imagepath=personalInfo.getPhoto();
+        if (!imagepath.equals("")) {
+            File imgFile = new File(imagepath);
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgProfile.setImageBitmap(myBitmap);
+            }
+        }
+        else{
+            imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
+              *//*  byte[] photo=personalInfo.getPhoto();
+                Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+               imgProfile.setImageBitmap(bmp);*//*
+        cardpath=personalInfo.getPhotoCard();
+        if (!personalInfo.getPhotoCard().equals("")) {
+            File imgFile1 = new File(personalInfo.getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                imgCard.setImageBitmap(myBitmap);
+            }
+                   *//* byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*//*
+            // imgCard.setImageBitmap(bmps);
+            imgCard.setVisibility(View.VISIBLE);
+            rlCard.setVisibility(View.VISIBLE);
+            txtCard.setVisibility(View.GONE);
+        }
+        else{
+            imgCard.setVisibility(View.GONE);
+            rlCard.setVisibility(View.GONE);
+            txtCard.setVisibility(View.VISIBLE);
+        }*/
     }
 }

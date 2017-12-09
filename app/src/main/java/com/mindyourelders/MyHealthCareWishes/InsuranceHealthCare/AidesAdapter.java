@@ -19,6 +19,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Aides;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -97,14 +98,25 @@ public class AidesAdapter extends BaseAdapter {
         holder.txtAddress.setText(AidesList.get(position).getAddress());
         holder.txtPhone.setText(AidesList.get(position).getOfficePhone());
        // holder.imgProfile.setImageResource(AidesList.get(position).getImage());
-        byte[] photo=AidesList.get(position).getPhoto();
+        /*byte[] photo=AidesList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);
+        holder.imgProfile.setImageBitmap(bmp);*/
+
+        File imgFile = new File(AidesList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
 
         if (AidesList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = AidesList.get(position).getPhotoCard();
+            File imgFile1 = new File(AidesList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);
+            }
+            /*byte[] photoCard = AidesList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setImageBitmap(bmpCard);*/
             holder.imgForword.setVisibility(View.VISIBLE);
         }
         else{

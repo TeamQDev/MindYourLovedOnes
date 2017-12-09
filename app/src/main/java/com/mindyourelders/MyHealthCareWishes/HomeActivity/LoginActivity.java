@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -102,8 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(context, "You have Logged in Successfully", Toast.LENGTH_SHORT).show();
                                 preferences.putString(PrefConstants.USER_EMAIL, PersonList.get(i).getEmail());
                                 preferences.putString(PrefConstants.USER_NAME, PersonList.get(i).getName());
-                                String saveThis = Base64.encodeToString(PersonList.get(i).getPhoto(), Base64.DEFAULT);
-                                preferences.putString(PrefConstants.USER_PROFILEIMAGE, saveThis);
+                               // String saveThis = Base64.encodeToString(PersonList.get(i).getPhoto(), Base64.DEFAULT);
+                                preferences.putString(PrefConstants.USER_PROFILEIMAGE, PersonList.get(i).getPhoto());
                                 preferences.putInt(PrefConstants.USER_ID, PersonList.get(i).getId());
                                 preferences.setREGISTERED(true);
                                 preferences.setLogin(true);

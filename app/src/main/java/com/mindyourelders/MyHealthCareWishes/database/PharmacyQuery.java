@@ -42,8 +42,8 @@ public class PharmacyQuery {
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50),"
                 + COL_ADDRESS + " VARCHAR(100)," + COL_OFFICE_PHONE + " VARCHAR(20)," +COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
-                COL_PHOTOCARD+" BLOB,"+
-                COL_PHOTO + " BLOB);";
+                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -68,8 +68,8 @@ public class PharmacyQuery {
                     notes.setFax(c.getString(c.getColumnIndex(COL_FAX)));
                     notes.setWebsite(c.getString(c.getColumnIndex(COL_WEBSITE)));
                     notes.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
-                    notes.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
-                    notes.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    notes.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
+                    notes.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
 
 
                     noteList.add(notes);
@@ -80,7 +80,7 @@ public class PharmacyQuery {
         return noteList;
     }
 
-    public static Boolean insertPharmacyData(int userid, String name, String website, String address, String phone, byte[] photo, String fax, String note, byte[] photoCard) {
+    public static Boolean insertPharmacyData(int userid, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -110,7 +110,7 @@ public class PharmacyQuery {
         return flag;
     }
 
-    public static Boolean updatePharmacyData(int id, String name, String website, String address, String phone, byte[] photo, String fax, String note, byte[] photoCard) {
+    public static Boolean updatePharmacyData(int id, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 

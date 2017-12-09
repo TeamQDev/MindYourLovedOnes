@@ -2,7 +2,10 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -19,6 +22,7 @@ import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import io.fabric.sdk.android.Fabric;
 
 public class SplashNewActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_CALL_PERMISSION =100 ;
     Context context=this;
     TextView txtNew,txtRegistered,textMessage,txtWelcome;
     Preferences preferences;
@@ -30,6 +34,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_splashes_);
+        accessPermission();
         variableInitialization();
         initUI();
         initListener();
@@ -42,7 +47,26 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    private void accessPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+            requestPermissions(new String[]{android.Manifest.permission.CALL_PHONE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+            }, REQUEST_CALL_PERMISSION);
 
+        } else {
+            // checkForRegistration();
+        }
+    }
 
     private void init() {
 
@@ -190,4 +214,27 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         img.getLayoutParams().width = intendedWidth;
         img.getLayoutParams().height = newHeight;
     }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CALL_PERMISSION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //  checkForRegistration();
+
+                } else {
+
+                    accessPermission();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'switch' lines to check for other
+            // permissions this app might request
+        }
+    }
 }

@@ -70,10 +70,10 @@ public class PersonalInfoQuery {
                 COL_GENDER+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_COUNTRY+" VARCHAR(40),"+COL_DOB+" VARCHAR(20),"+COL_PASS+" VARCHAR(10),"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_ENGLISH+" VARCHAR(10),"+
-                COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" BLOB,"+
+                COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" VARCHAR(50),"+
                 COL_CHILD+" VARCHAR(10),"+COL_FRIEND+" VARCHAR(10),"+COL_GRAND+" VARCHAR(10),"+COL_PARENT+" VARCHAR(10),"+COL_SPOUSE+" VARCHAR(10),"+
                 COL_OTHER_SIGN+" VARCHAR(20),"+COL_OTHER+" VARCHAR(20),"+COL_LIVE+" VARCHAR(20),"+
-                COL_PHOTO+" BLOB);";
+                COL_PHOTO+" VARCHAR(50));";
 
         return createTableQuery;
     }
@@ -83,7 +83,7 @@ public class PersonalInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertPersonalInfoData(String name, String email, String address, String country, String phone, String bdate, String password, byte[] photo, String homephone, String gender) {
+    public static Boolean insertPersonalInfoData(String name, String email, String address, String country, String phone, String bdate, String password, String photo, String homephone, String gender, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -98,6 +98,8 @@ public class PersonalInfoQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_PHONE,homephone);
         cv.put(COL_GENDER,gender);
+        cv.put(COL_PHOTOCARD,photoCard);
+
 
 
 
@@ -136,7 +138,7 @@ public class PersonalInfoQuery {
                             Person.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
                             Person.setPassword(c.getString(c.getColumnIndex(COL_PASS)));
                             Person.setDob(c.getString(c.getColumnIndex(COL_DOB)));
-                            Person.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                            Person.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                             Person.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
 
                             Person.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
@@ -154,7 +156,7 @@ public class PersonalInfoQuery {
                             Person.setPet(c.getString(c.getColumnIndex(COL_PET)));
                             Person.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                             Person.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
-                            Person.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                            Person.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                             Person.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
                             Person.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
@@ -191,7 +193,7 @@ public class PersonalInfoQuery {
                 connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                 connection.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
 
-                connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                 connection.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
                 connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
                 connection.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
@@ -211,7 +213,7 @@ public class PersonalInfoQuery {
 
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
-                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                 connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
                 connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
@@ -246,7 +248,7 @@ public class PersonalInfoQuery {
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, byte[] photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, byte[] photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, String photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -314,7 +316,7 @@ public class PersonalInfoQuery {
                 connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                 connection.setPhone(c.getString(c.getColumnIndex(COL_MOBILE)));
 
-                connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                 connection.setCountry(c.getString(c.getColumnIndex(COL_COUNTRY)));
                 connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
                 connection.setHomePhone(c.getString(c.getColumnIndex(COL_PHONE)));
@@ -334,7 +336,7 @@ public class PersonalInfoQuery {
 
                 connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
                 connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
-                connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                 connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
 
                 connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));

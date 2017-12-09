@@ -68,9 +68,9 @@ public class SpecialistQuery {
                     connection.setNetwork(c.getString(c.getColumnIndex(COL_NETWORK)));
                     connection.setFax(c.getString(c.getColumnIndex(COL_FAX)));
                     connection.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
-                    connection.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setIsPhysician(c.getInt(c.getColumnIndex(COL_ISPHISYCIAN)));
-                    connection.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
                     connectionList.add(connection);
 
                 } while (c.moveToNext());
@@ -79,7 +79,7 @@ public class SpecialistQuery {
 
         return connectionList;
     }
-    public static Boolean insertPhysicianData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, byte[] photoCard) {
+    public static Boolean insertPhysicianData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -124,8 +124,8 @@ public class SpecialistQuery {
                 COL_OFFICE_PHONE + " VARCHAR(20)," + COL_SPECIALITY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
                 " VARCHAR(20)," + COL_ISPHISYCIAN + " INTEGER," +
                 COL_NETWORK + " VARCHAR(50)," + COL_AFFIL + " VARCHAR(50)," + COL_NOTE + " VARCHAR(50)," +
-                COL_PHOTOCARD+" BLOB,"+
-                COL_PHOTO + " BLOB);";
+                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -134,7 +134,7 @@ public class SpecialistQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updatePhysicianData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, byte[] photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, byte[] photoCard) {
+    public static Boolean updatePhysicianData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();

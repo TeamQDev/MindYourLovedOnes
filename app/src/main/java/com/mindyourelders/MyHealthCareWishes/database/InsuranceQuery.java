@@ -51,8 +51,8 @@ public class InsuranceQuery {
                 + COL_TYPE + " VARCHAR(70)," + COL_AGENT+ " VARCHAR(100)," +COL_OTHER_TYPE + " VARCHAR(70)," +  COL_OFFICE_PHONE + " VARCHAR(20),"+COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +COL_MEMBERID + " VARCHAR(50),"+
                 COL_SUBSCRIBER + " VARCHAR(50)," +COL_GROUP+" VARCHAR(50)," +COL_EMAIL+" VARCHAR(50)," +
-                COL_PHOTOCARD+" BLOB,"+
-                COL_PHOTO + " BLOB);";
+                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -80,10 +80,10 @@ public class InsuranceQuery {
                     notes.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
                     notes.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                     notes.setSubscriber(c.getString(c.getColumnIndex(COL_SUBSCRIBER)));
-                    notes.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
+                    notes.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     notes.setOtherInsurance(c.getString(c.getColumnIndex(COL_OTHER_TYPE)));
                     notes.setAgent(c.getString(c.getColumnIndex(COL_AGENT)));
-                    notes.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    notes.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
 
 
                     noteList.add(notes);
@@ -92,7 +92,7 @@ public class InsuranceQuery {
         }
         return noteList;
     }
-    public static Boolean insertInsuranceData(int userid, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent, byte[] photoCard) {
+    public static Boolean insertInsuranceData(int userid, String name, String website, String type, String phone, String photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -141,7 +141,7 @@ public class InsuranceQuery {
         return true;
     }
 
-    public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, byte[] photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent, byte[] photoCard) {
+    public static Boolean updateInsuranceData(int id, String name, String website, String type, String phone, String photo, String fax, String note, String member, String group, String subscriber, String email, String otherInsurance, String agent, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 

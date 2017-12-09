@@ -33,6 +33,8 @@ import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
+
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergency;
 
 /**
@@ -163,16 +165,27 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+            preferences.putString(PrefConstants.USER_PROFILEIMAGE, personalInfo.getPhoto());
             String name =personalInfo.getName();
             String address=personalInfo.getAddress();
             String relation = "Self";
-            byte[]array =personalInfo.getPhoto();
+            //byte[]array =personalInfo.getPhoto();
+            if (!personalInfo.getPhoto().equals(""))
+            {
+            File imgFile = new File(personalInfo.getPhoto());
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgProfile.setImageBitmap(myBitmap);
+            }
+        }else{
+            imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
            // byte[] array = Base64.decode(image, Base64.DEFAULT);
             txtName.setText(name+" - "+relation);
             txtRelation.setText(relation);
             txtAddress.setText(address);
-            Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
-            imgProfile.setImageBitmap(bmp);
+          /*  Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+            imgProfile.setImageBitmap(bmp);*/
         }
         else {
             connection = MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -187,13 +200,18 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             }
 
             String relation =Relationship[index+1];*/
-            byte[]array =connection.getPhoto();
+           // byte[]array =connection.getPhoto();
+            File imgFile = new File(connection.getPhoto());
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgProfile.setImageBitmap(myBitmap);
+            }
             // byte[] array = Base64.decode(image, Base64.DEFAULT);
             txtName.setText(name+" - "+relation);
             txtRelation.setText(relation);
             txtAddress.setText(address);
-            Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
-            imgProfile.setImageBitmap(bmp);
+//            Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+//            imgProfile.setImageBitmap(bmp);
         }
 
 

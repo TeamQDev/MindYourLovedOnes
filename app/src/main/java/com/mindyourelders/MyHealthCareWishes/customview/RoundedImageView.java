@@ -13,8 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * Created by varsha on 9/6/2017.
  */
@@ -46,18 +44,15 @@ public class RoundedImageView extends ImageView {
             return;
         }
         Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        b.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        if (b!=null) {
+            Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
 
-        //Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
-
-        int w = getWidth();
-        @SuppressWarnings("unused")
-        int h = getHeight();
-
-        Bitmap roundBitmap = getCroppedBitmap(b, w);
-        canvas.drawBitmap(roundBitmap, 0, 0, null);
-
+            int w = getWidth();
+            @SuppressWarnings("unused")
+            int h = getHeight();
+            Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
+            canvas.drawBitmap(roundBitmap, 0, 0, null);
+        }
     }
 
     public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {

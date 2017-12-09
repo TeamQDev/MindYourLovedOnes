@@ -17,6 +17,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Proxy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -114,14 +115,24 @@ public class ProxyAdapter extends BaseAdapter {
 
 
         holder.txtTelePhone.setText(proxyList.get(position).getWorkPhone());
-        byte[] photo=proxyList.get(position).getPhoto();
+        File imgFile = new File(proxyList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
+       /* byte[] photo=proxyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);
+        holder.imgProfile.setImageBitmap(bmp);*/
 
         if (proxyList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = proxyList.get(position).getPhotoCard();
+            File imgFile1 = new File(proxyList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);
+            }
+           /* byte[] photoCard = proxyList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setImageBitmap(bmpCard);*/
             holder.imgForword.setVisibility(View.VISIBLE);
         }
         else{

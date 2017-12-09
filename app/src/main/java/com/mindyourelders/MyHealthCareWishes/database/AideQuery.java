@@ -45,8 +45,8 @@ public class AideQuery {
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50)," + COL_ADDRESS + " VARCHAR(50),"
                 + COL_EMAIL + " VARCHAR(50)," + COL_OFFICE_PHONE + " VARCHAR(20),"+ COL_HOUR_PHONE + " VARCHAR(20)," +COL_OTHER_PHONE + " VARCHAR(20)," +COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
-                COL_PHOTOCARD+" BLOB,"+
-                COL_PHOTO + " BLOB);";
+                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -74,8 +74,8 @@ public class AideQuery {
                     notes.setFax(c.getString(c.getColumnIndex(COL_FAX)));
                     notes.setWebsite(c.getString(c.getColumnIndex(COL_WEBSITE)));
                     notes.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
-                    notes.setPhoto(c.getBlob(c.getColumnIndex(COL_PHOTO)));
-                    notes.setPhotoCard(c.getBlob(c.getColumnIndex(COL_PHOTOCARD)));
+                    notes.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
+                    notes.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
 
 
                     noteList.add(notes);
@@ -86,7 +86,7 @@ public class AideQuery {
         return noteList;
     }
 
-    public static Boolean insertAidesData(int userid, String name, String website, String email, String officephone, String hourPhone, String otherphone, byte[] photo, String fax, String note, String address, byte[] photoCard) {
+    public static Boolean insertAidesData(int userid, String name, String website, String email, String officephone, String hourPhone, String otherphone, String photo, String fax, String note, String address, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -118,7 +118,7 @@ public class AideQuery {
         return flag;
     }
 
-    public static Boolean updateAideData(int id, String name, String website, String email, String officephone, String hourPhone, String otherphone, byte[] photo, String fax, String note, String address, byte[] photoCard) {
+    public static Boolean updateAideData(int id, String name, String website, String email, String officephone, String hourPhone, String otherphone, String photo, String fax, String note, String address, String photoCard) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 

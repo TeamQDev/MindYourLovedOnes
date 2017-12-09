@@ -19,6 +19,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -84,16 +85,26 @@ class PharmacyAdapter extends BaseAdapter {
 
         holder.txtName.setText(pharmacyList.get(position).getName());
         holder.txtPhone.setText(pharmacyList.get(position).getPhone());
-        byte[] photo=pharmacyList.get(position).getPhoto();
+        File imgFile = new File(pharmacyList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
+       /* byte[] photo=pharmacyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);
+        holder.imgProfile.setImageBitmap(bmp);*/
      // holder.txtAddress.setText(pharmacyList.get(position).getAddress());
        // holder.imgProfile.setImageResource(pharmacyList.get(position).getImage());
 
-        if (pharmacyList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = pharmacyList.get(position).getPhotoCard();
+        if (!pharmacyList.get(position).getPhotoCard().equals("")) {
+            File imgFile1 = new File(pharmacyList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);
+            }
+           /* byte[] photoCard = pharmacyList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setImageBitmap(bmpCard);*/
             holder.imgForword.setVisibility(View.VISIBLE);
         }
         else{

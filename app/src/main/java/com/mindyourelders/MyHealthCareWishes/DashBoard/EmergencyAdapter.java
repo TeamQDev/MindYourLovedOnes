@@ -18,6 +18,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Emergency;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgForword;
@@ -119,21 +120,24 @@ public class EmergencyAdapter extends BaseAdapter {
         holder.txtTelePhone.setText(emergencyList.get(position).getPhone());
 
 
-        byte[] photo=emergencyList.get(position).getPhoto();
+      /*  byte[] photo=emergencyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);
+        holder.imgProfile.setImageBitmap(bmp);*/
+        File imgFile = new File(emergencyList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
 
-        if (emergencyList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = emergencyList.get(position).getPhotoCard();
+        if (!emergencyList.get(position).getPhotoCard().equals("")) {
+            File imgFile1 = new File(emergencyList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);
+            }
+           /* byte[] photoCard = emergencyList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-           /* if(bmpCard.getWidth() > bmpCard.getHeight())
-            {
-                // imgDoc.setRotation(180);
-            }else
-            {
-                holder.imgForword.setRotation(90);
-            }*/
-            holder.imgForword.setImageBitmap(bmpCard);
+            holder.imgForword.setImageBitmap(bmpCard);*/
             holder.imgForword.setVisibility(View.VISIBLE);
         }
         else{

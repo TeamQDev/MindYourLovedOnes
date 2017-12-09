@@ -14,7 +14,7 @@
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension60dp"
             android:layout_height="@dimen/dimension60dp"
-            android:src="@drawable/ic_user_one"
+            android:src="@drawable/ic_profile_defaults"
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
             android:layout_centerVertical="true"

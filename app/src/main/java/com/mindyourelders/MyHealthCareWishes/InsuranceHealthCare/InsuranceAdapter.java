@@ -19,6 +19,7 @@ import com.mindyourelders.MyHealthCareWishes.model.Insurance;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -96,14 +97,25 @@ public class InsuranceAdapter extends BaseAdapter {
         }*/
         holder.txtPhone.setText(insuranceList.get(position).getPhone());
       //  holder.imgProfile.setImageResource(insuranceList.get(position).getImage());
-        byte[] photo=insuranceList.get(position).getPhoto();
-        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgProfile.setImageBitmap(bmp);
 
-        if (insuranceList.get(position).getPhotoCard()!=null) {
-            byte[] photoCard = insuranceList.get(position).getPhotoCard();
-            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);
-            holder.imgForword.setImageBitmap(bmpCard);
+        File imgFile = new File(insuranceList.get(position).getPhoto());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);
+        }
+        /*byte[] photo=insuranceList.get(position).getPhoto();
+        Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        holder.imgProfile.setImageBitmap(bmp);*/
+
+        if (!insuranceList.get(position).getPhotoCard().equals("")) {
+            File imgFile1 = new File(insuranceList.get(position).getPhotoCard());
+            if (imgFile1.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);
+            }
+          /*  byte[] photoCard = insuranceList.get(position).getPhotoCard();
+            Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+           // holder.imgForword.setImageBitmap(bmpCard);
             holder.imgForword.setVisibility(View.VISIBLE);
         }
         else{
