@@ -24,10 +24,10 @@ import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.LivingQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Living;
+import com.mindyourelders.MyHealthCareWishes.pdfCreation.EventPdf;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
-import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
@@ -307,7 +307,7 @@ public class LivingActivity extends AppCompatActivity implements View.OnClickLis
                 Living Live=LivingQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                 ArrayList<Living> LivingList=new ArrayList<Living>();
                 LivingList.add(Live);
-                new Individual(LivingList,1);
+                new EventPdf(1,LivingList,1);
 
                 Header.document.close();
 

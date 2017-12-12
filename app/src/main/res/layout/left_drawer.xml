@@ -15,11 +15,11 @@
             android:background="@color/colorBlue"
             android:padding="@dimen/dimension10dp"
             >
-            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+            <ImageView
                 android:id="@+id/imgDrawerProfile"
                 android:layout_width="@dimen/dimension110dp"
                 android:layout_height="@dimen/dimension110dp"
-                android:src="@drawable/ic_user_profile"
+                android:src="@drawable/ic_profile_defaults"
                 android:layout_marginTop="@dimen/dimension30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_centerHorizontal="true"

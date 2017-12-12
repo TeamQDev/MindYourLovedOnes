@@ -4,12 +4,15 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,20 +32,27 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class AddCardActivity extends AppCompatActivity implements View.OnClickListener {
     ContentValues values;
-    Uri imageUri;
+    Uri imageUriFront,imageUriBack;
     Context context = this;
     TextView txtName, txttype,txtTitle;
     TextInputLayout tilTitle;
     Bitmap bitmap1,bitmap2;
+    String imagePathFront="",imagePathBack="";
     ImageView imgDone, imgBack, imgEdit1, imgEdit2, imgfrontCard, imgBackCard;
     private static int RESULT_CAMERA_IMAGE1 = 1;
     private static int RESULT_SELECT_PHOTO1 = 2;
@@ -55,14 +65,37 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
 
     Preferences preferences;
     DBHelper dbHelper;
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
         initComponent();
+        initImageLoader();
         initUI();
         initListener();
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ins_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -113,13 +146,22 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             txtName.setText(card.getName());
             txttype.setText(card.getType());
             id=card.getId();
-            byte[] photo=card.getImgFront();
-            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-           imgfrontCard.setImageBitmap(bmp);
-
-            byte[] photo1=card.getImgBack();
-            Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
-            imgBackCard.setImageBitmap(bmp1);
+            String photo=card.getImgFront();
+            imagePathFront=photo;
+           /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+           imgfrontCard.setImageBitmap(bmp);*/
+            File imgFile = new File(photo);
+            if (imgFile.exists()) {
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)), imgfrontCard, displayImageOptions);
+            }
+            String photo1=card.getImgBack();
+            imagePathBack=photo1;
+            File imgFile1 = new File(photo1);
+            if (imgFile1.exists()) {
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile1)), imgBackCard, displayImageOptions);
+            }
+           /* Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
+            imgBackCard.setImageBitmap(bmp1);*/
         }
 
     }
@@ -130,9 +172,9 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imgDone:
                 name = txtName.getText().toString();
                 type = txttype.getText().toString();
-                Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap1.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+//                Bitmap bitmap1 = ((BitmapDrawable) imgfrontCard.getDrawable()).getBitmap();
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap1.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                /* int newHeight = bitmap1.getHeight();
                 int newWidth = bitmap1.getWidth();
                 int ratio = bitmap1.getWidth() / bitmap1.getHeight();
@@ -146,10 +188,10 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 Bitmap.createBitmap(bitmap1,bitmap1.getWidth()-100,bitmap1.getHeight()-100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos);
 */
-                byte[] photo1 = baos.toByteArray();
+               /* byte[] photo1 = baos.toByteArray();
                Bitmap bitmap2 = ((BitmapDrawable) imgBackCard.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-                bitmap2.compress(Bitmap.CompressFormat.JPEG, 10, baos2);
+                bitmap2.compress(Bitmap.CompressFormat.JPEG, 10, baos2);*/
                /* newHeight = bitmap2.getHeight();
                 newWidth = bitmap2.getWidth();
                 ratio = bitmap2.getWidth() / bitmap2.getHeight();
@@ -163,9 +205,9 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 Bitmap.createBitmap(bitmap2,bitmap2.getWidth()+100, bitmap2.getHeight()+100, newWidth, newHeight).compress(Bitmap.CompressFormat.JPEG, 100, baos2);
 */
-                byte[] photo2 = baos2.toByteArray();
+             //   byte[] photo2 = baos2.toByteArray();
 if (isEdit==false) {
-    boolean flag = CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, type, photo1, photo2);
+    boolean flag = CardQuery.insertInsuranceCardData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, type, imagePathFront, imagePathBack);
     if (flag) {
         Toast.makeText(context, "You have added insurance information successfully", Toast.LENGTH_SHORT).show();
         finish();
@@ -175,7 +217,7 @@ if (isEdit==false) {
     Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 }else if (isEdit==true)
 {
-    boolean flag = CardQuery.updateInsuranceCardData(id, name, type, photo1, photo2);
+    boolean flag = CardQuery.updateInsuranceCardData(id, name, type, imagePathFront, imagePathBack);
     if (flag) {
         Toast.makeText(context, "You have updated insurance information successfully", Toast.LENGTH_SHORT).show();
         finish();
@@ -190,29 +232,31 @@ if (isEdit==false) {
                 finish();
                 break;
             case R.id.imgEdit1:
-                showDialogs(RESULT_CAMERA_IMAGE1, RESULT_SELECT_PHOTO1);
+                showDialogs(RESULT_CAMERA_IMAGE1, RESULT_SELECT_PHOTO1,"Front");
 
                 break;
             case R.id.imgEdit2:
-                showDialogs(RESULT_CAMERA_IMAGE2, RESULT_SELECT_PHOTO2);
+                showDialogs(RESULT_CAMERA_IMAGE2, RESULT_SELECT_PHOTO2,"Back");
                 break;
 
 
         }
     }
 
-    private void showDialogs(final int resultCameraImage, final int resultSelectPhoto) {
+    private void showDialogs(final int resultCameraImage, final int resultSelectPhoto, final String from) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         LayoutInflater lf = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialogview = lf.inflate(R.layout.dialog_gender, null);
+        View dialogview = lf.inflate(R.layout.dialog_gender1, null);
         final TextView textOption1 = (TextView) dialogview.findViewById(R.id.txtOption1);
         final TextView textOption2 = (TextView) dialogview.findViewById(R.id.txtOption2);
+        final TextView textOption3 = (TextView) dialogview.findViewById(R.id.txtOption3);
         TextView textCancel = (TextView) dialogview.findViewById(R.id.txtCancel);
         textOption1.setText("Take Picture");
         textOption2.setText("Gallery");
+        textOption3.setText("Remove Picture");
         dialog.setContentView(dialogview);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
@@ -228,10 +272,17 @@ if (isEdit==false) {
                 values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                imageUri = getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                if(from.equals("Front")) {
+                    imageUriFront = getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFront);
+                }else if(from.equals("Back"))
+                {
+                    imageUriBack = getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriBack);
+                }
                 startActivityForResult(intent, resultCameraImage);
                // dispatchTakePictureIntent(resultCameraImage);
                 dialog.dismiss();
@@ -249,6 +300,20 @@ if (isEdit==false) {
         textCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        textOption3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (from.equals("Front")) {
+                    imgfrontCard.setImageResource(R.drawable.ins_card);
+                    imagePathFront="";
+                }else if (from.equals("Back"))
+                {
+                    imagePathBack="";
+                    imgBackCard.setImageResource(R.drawable.ins_card);
+                }
                 dialog.dismiss();
             }
         });
@@ -299,20 +364,34 @@ if (isEdit==false) {
         if (requestCode == RESULT_SELECT_PHOTO1 && null != data) {
             try {
                 final Uri imageUri = data.getData();
+                final InputStream imageStream =getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                //  profileImage.setImageBitmap(selectedImage);
+                imageLoader.displayImage(String.valueOf(imageUri),imgfrontCard,displayImageOptions);
+
+                storeImage(selectedImage,"Front");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+          /*  try {
+                final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 bitmap1=selectedImage;
                 imgfrontCard.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }
+            }*/
 
         } else if (requestCode == RESULT_CAMERA_IMAGE1) {
             try {
-                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                      getContentResolver(), imageUri);
-                imgfrontCard.setImageBitmap(thumbnail);
-                //  String imageurl = getRealPathFromURI(imageUri);
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriFront);
+                String imageurl = getRealPathFromURI(imageUriFront);
+                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                imageLoader.displayImage(String.valueOf(imageUriFront),imgfrontCard,displayImageOptions);
+
+                // profileImage.setImageBitmap(bitmap);
+                storeImage(bitmap,"Front");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -363,20 +442,24 @@ if (isEdit==false) {
         } else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
             try {
                 final Uri imageUri = data.getData();
-                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final InputStream imageStream =getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                bitmap2=selectedImage;
-                imgBackCard.setImageBitmap(selectedImage);
+                //  profileImage.setImageBitmap(selectedImage);
+                imageLoader.displayImage(String.valueOf(imageUri),imgBackCard,displayImageOptions);
+
+                storeImage(selectedImage,"Back");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
         } else if (requestCode == RESULT_CAMERA_IMAGE2 ) {
             try {
-                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
-                        getContentResolver(), imageUri);
-                imgBackCard.setImageBitmap(thumbnail);
-                //  String imageurl = getRealPathFromURI(imageUri);
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriBack);
+                String imageurl = getRealPathFromURI(imageUriBack);
+                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                imageLoader.displayImage(String.valueOf(imageUriBack),imgBackCard,displayImageOptions);
+
+                // profileImage.setImageBitmap(bitmap);
+                storeImage(bitmap,"Back");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -425,5 +508,96 @@ if (isEdit==false) {
 */
         }
 
+    }
+
+    private void storeImage(Bitmap selectedImage, String profile) {
+        FileOutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        String path = file.getAbsolutePath();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+
+            if (profile.equals("Front")) {
+                imagePathFront = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(imagePathFront);
+            }
+            else if (profile.equals("Back")){
+                imagePathBack = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                        + ".jpg";
+                // Write to SD Card
+                outStream = new FileOutputStream(imagePathBack);
+            }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+            byte[] byteArray = stream.toByteArray();
+            outStream.write(byteArray);
+            outStream.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
+    private String getRealPathFromURI(Uri imageUri) {
+        String path = null;
+        String[] proj = {MediaStore.MediaColumns.DATA};
+        Cursor cursor =getContentResolver().query(imageUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
+    }
+
+    private Bitmap imageOreintationValidator(Bitmap bitmap, String path) {
+
+        ExifInterface ei;
+        try {
+            ei = new ExifInterface(path);
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    bitmap = rotateImage(bitmap, 90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    bitmap = rotateImage(bitmap, 270);
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
+    private Bitmap rotateImage(Bitmap source, int angle) {
+
+        Bitmap bitmap = null;
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        try {
+            bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                    matrix, true);
+        } catch (OutOfMemoryError err) {
+            err.printStackTrace();
+        }
+        return bitmap;
     }
 }

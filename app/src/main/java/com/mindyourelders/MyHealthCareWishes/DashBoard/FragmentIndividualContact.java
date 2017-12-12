@@ -16,6 +16,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -60,6 +61,10 @@ import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -81,7 +86,8 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.showAl
 public class FragmentIndividualContact extends Fragment implements View.OnClickListener,CompoundButton.OnCheckedChangeListener{
     private static final int REQUEST_CARD = 50;
     ContentValues values;
-    Uri imageUri;
+    Uri imageUriProfile=null,imageUriCard=null;
+
    // byte[] photoCard=null;
     ImageView imgRight;
     RelativeLayout llIndividual;
@@ -131,6 +137,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
     String[] MaritalList = {"Divorced","Domestic Partner","Married","Separated","Single","Widowed"};
     String[] LangList = {"Arabic","Chinese","English","French","German","Greek","Hebrew","Hindi","Italian","Japanese","Korean","Russian","Spanish","Other"};
+    ImageLoader imageLoaderProfile,imageLoaderCard;
+    DisplayImageOptions displayImageOptionsProfile,displayImageOptionsCard;
 
 
     @Nullable
@@ -139,9 +147,49 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         rootview=inflater.inflate(R.layout.fragment_individual_contact,null);
         preferences = new Preferences(getActivity());
         initComponent();
+        initImageLoader();
         initUI();
         initListener();
         return rootview;
+    }
+
+    private void initImageLoader() {
+
+        //Profile
+        displayImageOptionsProfile = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(displayImageOptionsProfile)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoaderProfile = ImageLoader.getInstance();
+
+        //Card
+        displayImageOptionsCard = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.busi_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration configs = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(displayImageOptionsCard)
+                .build();
+        ImageLoader.getInstance().init(configs);
+        imageLoaderCard = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -313,6 +361,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 } else if (checkedId == R.id.rbNoPet) {
                     pet = "No";
                     rlPet.setVisibility(View.GONE);
+                    boolean flag= PetQuery.deleteRecords(preferences.getInt(PrefConstants.CONNECTED_USERID));
+                    if(flag==true)
+                    {
+                        //  Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+                        setPetData();
+                        // ListPet.requestFocus();
+                    }
                 }
             }
         });
@@ -692,8 +747,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!imagepath.equals("")) {
                     File imgFile = new File(imagepath);
                     if (imgFile.exists()) {
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                        imgProfile.setImageBitmap(myBitmap);
+                      /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);*/
+                        imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
                     }
                 }
                 else{
@@ -706,8 +762,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!personalInfo.getPhotoCard().equals("")) {
                     File imgFile1 = new File(personalInfo.getPhotoCard());
                     if (imgFile1.exists()) {
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
-                        imgCard.setImageBitmap(myBitmap);
+                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);*/
+                        imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),imgCard,displayImageOptionsCard);
                     }
                    /* byte[] photoCard = personalInfo.getPhotoCard();
                     Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
@@ -832,8 +889,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!imagepath.equals("")) {
                     File imgFile = new File(imagepath);
                     if (imgFile.exists()) {
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                        imgProfile.setImageBitmap(myBitmap);
+                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);*/
+                        imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
                     }
                 }
                 else{
@@ -846,8 +904,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!connection.getPhotoCard().equals("")) {
                     File imgFile1 = new File(connection.getPhotoCard());
                     if (imgFile1.exists()) {
-                        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
-                        imgCard.setImageBitmap(myBitmap);
+                      /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);*/
+                        imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),imgCard,displayImageOptionsCard);
                     }
                    /* byte[] photoCard = personalInfo.getPhotoCard();
                     Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
@@ -973,6 +1032,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 hideSoftKeyboard();
+                                preferences.putString(PrefConstants.USER_NAME,name);
+                                preferences.putString(PrefConstants.USER_PROFILEIMAGE,imagepath);
                                 getActivity().finish();
                                 editToConnection(imagepath,cardpath);
                             } else {
@@ -983,6 +1044,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     else {
                         if (validateConnection()) {
                             editToConnection(imagepath,cardpath);
+
                             getActivity().finish();
                         }
                     }
@@ -1204,15 +1266,24 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         textOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent(resultCameraImage,from);
-             /*   values = new ContentValues();
+               // dispatchTakePictureIntent(resultCameraImage,from);
+                values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                imageUri = getActivity().getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, resultCameraImage);*/
+                if (from.equals("Profile")) {
+                    imageUriProfile = getActivity().getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriProfile);
+                } else if (from.equals("Card")) {
+                    imageUriCard = getActivity().getContentResolver().insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    // intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriCard);
+                }
+
+                startActivityForResult(intent, resultCameraImage);
                 dialog.dismiss();
             }
         });
@@ -1450,7 +1521,6 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
-
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
@@ -1517,12 +1587,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
          ListPet.requestFocus();
      }
 
-     if (requestCode == RESULT_SELECT_PHOTO ) {
+     if (requestCode == RESULT_SELECT_PHOTO && data!=null  ) {
          try {
              final Uri imageUri = data.getData();
              final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
              final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-             profileImage.setImageBitmap(selectedImage);
+            // profileImage.setImageBitmap(selectedImage);
+             imageLoaderProfile.displayImage(String.valueOf(imageUri),imgProfile,displayImageOptionsProfile);
              storeImage(selectedImage,"Profile");
          } catch (FileNotFoundException e) {
              e.printStackTrace();
@@ -1530,19 +1601,31 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
         }
         if (requestCode == RESULT_CAMERA_IMAGE ) {
-         Bundle extras = data.getExtras();
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), imageUriProfile);
+                String imageurl = getRealPathFromURI(imageUriProfile);
+                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                imageLoaderProfile.displayImage(String.valueOf(imageUriProfile),imgProfile,displayImageOptionsProfile);
+               // profileImage.setImageBitmap(bitmap);
+                storeImage(bitmap,"Profile");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        /* Bundle extras = data.getExtras();
          Bitmap imageBitmap = (Bitmap) extras.get("data");
          imgProfile.setImageBitmap(imageBitmap);
 
-         storeImage(imageBitmap,"Profile");
+         storeImage(imageBitmap,"Profile");*/
 
         }
-     if (requestCode == RESULT_SELECT_PHOTO_CARD ) {
+     if (requestCode == RESULT_SELECT_PHOTO_CARD  && data!=null) {
          try {
              final Uri imageUri = data.getData();
              final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
              final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-             profileCard.setImageBitmap(selectedImage);
+             imageLoaderCard.displayImage(String.valueOf(imageUri),imgCard,displayImageOptionsCard);
+            // profileCard.setImageBitmap(selectedImage);
              rlCard.setVisibility(View.VISIBLE);
              imgCard.setVisibility(View.VISIBLE);
              txtCard.setVisibility(View.GONE);
@@ -1552,8 +1635,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
          }
 
      }
-     if (requestCode == RESULT_CAMERA_IMAGE_CARD) {
-         Bundle extras = data.getExtras();
+     if (requestCode == RESULT_CAMERA_IMAGE_CARD ) {
+       /*  Bundle extras = data.getExtras();
          Bitmap imageBitmap = (Bitmap) extras.get("data");
          imgCard.setImageBitmap(imageBitmap);
         // String imageurl = getRealPathFromURI(imageUriCard);
@@ -1563,8 +1646,23 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
          txtCard.setVisibility(View.GONE);
          FileOutputStream outStream = null;
          storeImage(imageBitmap,"Card");
+*/
+         try {
+             Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                     getActivity().getContentResolver(), imageUriCard);
 
-
+             String imageurl = getRealPathFromURI(imageUriCard);
+             Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+             imageLoaderCard.displayImage(String.valueOf(imageUriCard),imgCard,displayImageOptionsCard);
+           //  profileCard.setImageBitmap(bitmap);
+             //
+             rlCard.setVisibility(View.VISIBLE);
+             imgCard.setVisibility(View.VISIBLE);
+             txtCard.setVisibility(View.GONE);
+             storeImage(bitmap,"Card");
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
 
      }
      if (requestCode == REQUEST_CARD && data!=null) {
@@ -1744,7 +1842,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 outStream = new FileOutputStream(cardpath);
             }
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
             byte[] byteArray = stream.toByteArray();
             outStream.write(byteArray);
             outStream.close();

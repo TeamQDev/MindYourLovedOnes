@@ -21,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimension20dp">
 
-            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+            <ImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/dimension100dp"
                 android:layout_height="@dimen/dimension100dp"

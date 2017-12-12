@@ -34,6 +34,11 @@ import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +120,21 @@ public class FilesActivity extends DropboxActivity {
         DBHelper dbHelper=new DBHelper(FilesActivity.this);
 
         File path=FilesActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
+/*
+        Log.e("", path.getAbsolutePath());
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        String str=path.getAbsolutePath();
+        int index=str.lastIndexOf('/');
+        File currentDB = new File(str.substring(0,index+1));
+        File backupDB = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        try {
+            copyFile(currentDB,backupDB);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         //uploadFile(data.getData().toString());
         // Launch intent to pick file for upload
        //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -129,6 +149,10 @@ public class FilesActivity extends DropboxActivity {
       //  }
         uploadFile(contentUri.toString());
        // startActivityForResult(intent, PICKFILE_REQUEST_CODE);*/
+    }
+
+    private void copy(File backupDB, File currentDB) {
+
     }
 
     @Override
@@ -441,4 +465,32 @@ public class FilesActivity extends DropboxActivity {
             return values[code];
         }
     }
+    private void copyFile(File backupDB, File currentDB)throws IOException {
+        InputStream in = new FileInputStream(backupDB);
+        try {
+            OutputStream out = new FileOutputStream(currentDB);
+            try {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally {
+                out.close();
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            in.close();
+        }
+    }
+
 }

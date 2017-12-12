@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +34,11 @@ import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.DialogManager;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.io.File;
 
@@ -57,6 +64,9 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     private static final int REQUEST_WRITE_PERMISSION = 200;
     private static final int REQUEST_CALL_PERMISSION = 300;
     String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
 
     @Nullable
     @Override
@@ -66,6 +76,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         //checkRuntimePermission();
         accessPermission();
         //requestPermission();
+        initImageLoader();
         initUI();
         initListener();
         initComponent();
@@ -73,8 +84,27 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         return rootview;
     }
 
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
+    }
 
-        private void accessPermission() {
+
+    private void accessPermission() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                     ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
                             Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
@@ -174,8 +204,9 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             {
             File imgFile = new File(personalInfo.getPhoto());
             if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imgProfile.setImageBitmap(myBitmap);
+               /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgProfile.setImageBitmap(myBitmap);*/
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptions);
             }
         }else{
             imgProfile.setImageResource(R.drawable.ic_profile_defaults);
@@ -205,6 +236,8 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             if (imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imgProfile.setImageBitmap(myBitmap);
+            }else{
+                imgProfile.setImageResource(R.drawable.ic_profile_defaults);
             }
             // byte[] array = Base64.decode(image, Base64.DEFAULT);
             txtName.setText(name+" - "+relation);

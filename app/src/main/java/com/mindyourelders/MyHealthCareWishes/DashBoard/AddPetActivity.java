@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class AddPetActivity extends AppCompatActivity {
     ImageView imgBack, imgDone;
     public static final int REQUEST_PET = 400;
     boolean isUpdate = false;
-
+RelativeLayout llAddConn;
     Preferences preferences;
     DBHelper dbHelper;
 
@@ -50,6 +51,7 @@ public class AddPetActivity extends AppCompatActivity {
 
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgDone = (ImageView) findViewById(R.id.imgDone);
+        llAddConn= (RelativeLayout) findViewById(R.id.llAddConn);
         txtName = (TextView) findViewById(R.id.txtName);
         txtBreed = (TextView) findViewById(R.id.txtBreed);
         txtColor = (TextView) findViewById(R.id.txtColor);
@@ -99,7 +101,7 @@ public class AddPetActivity extends AppCompatActivity {
                 finish();
             }
         });
-        imgDone.setOnClickListener(new View.OnClickListener() {
+        llAddConn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = txtName.getText().toString();

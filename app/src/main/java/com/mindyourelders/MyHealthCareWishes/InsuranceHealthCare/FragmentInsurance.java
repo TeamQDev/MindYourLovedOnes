@@ -98,8 +98,10 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 Insurance item = insuranceList.get(position);
                 switch (index) {
-
                     case 0:
+                        callUser(item);
+                        break;
+                    case 1:
                         // delete
                         deleteInsurance(item);
                         break;

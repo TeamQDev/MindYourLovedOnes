@@ -27,25 +27,25 @@ int id;
     }
 
     int userid;
-    public  byte[] getImgFront() {
+    public  String getImgFront() {
         return imgFront;
     }
 
-    public void setImgFront( byte[] imgFront) {
+    public void setImgFront( String imgFront) {
         this.imgFront = imgFront;
     }
 
-    byte[] imgFront;
+    String imgFront="";
 
-    public  byte[] getImgBack() {
+    public  String getImgBack() {
         return imgBack;
     }
 
-    public void setImgBack( byte[] imgBack) {
+    public void setImgBack( String imgBack) {
         this.imgBack = imgBack;
     }
 
-    byte[] imgBack;
+    String imgBack="";
     String name = "";
 
     public String getName() {
@@ -64,5 +64,5 @@ int id;
         this.type = type;
     }
 
-    String type;
+    String type="";
 }

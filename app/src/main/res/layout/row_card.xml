@@ -78,7 +78,7 @@
                 android:layout_marginLeft="@dimen/dimension30dp"
                 android:layout_marginRight="@dimen/dimension30dp"
                 android:layout_marginTop="@dimen/dimension20dp"
-                android:src="@drawable/treat"
+                android:src="@drawable/ins_card"
                 android:layout_centerInParent="true"
                 android:background="@color/colorWhite"
                 android:layout_below="@+id/rlProvider"

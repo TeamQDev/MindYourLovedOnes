@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,11 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,12 +38,35 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
     LayoutInflater lf;
     ViewHolder holder;
     Preferences preferences;
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
 
     public ConnectionAdapter(Context context, ArrayList<RelativeConnection> connectionList) {
         preferences=new Preferences(context);
         this.context=context;
         this.connectionList=connectionList;
         lf= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        initImageLoader();
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     @Override
@@ -88,7 +118,8 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
                 File imgFile = new File(connectionList.get(position).getPhoto());
                 //  if (imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                holder.imgConPhoto.setImageBitmap(myBitmap);
+               // holder.imgConPhoto.setImageBitmap(myBitmap);
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgConPhoto,displayImageOptions);
             }
             else{
                 holder.imgConPhoto.setImageResource(R.drawable.ic_profile_defaults);

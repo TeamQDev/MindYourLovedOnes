@@ -35,8 +35,8 @@ public class CardQuery {
     public static String createCardTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50),"
-                + COL_TYPE + " VARCHAR(50)," +COL_BACK+" BLOB," +
-                COL_FRONT + " BLOB);";
+                + COL_TYPE + " VARCHAR(50)," +COL_BACK+" VARCHAR(50)," +
+                COL_FRONT + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -45,7 +45,7 @@ public class CardQuery {
         return dropTableQuery;
     }
 
-    public static boolean insertInsuranceCardData(int userid, String name, String type, byte[] photo1, byte[] photo2) {
+    public static boolean insertInsuranceCardData(int userid, String name, String type, String photo1, String photo2) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         boolean flag=false;
         try {
@@ -86,8 +86,8 @@ public class CardQuery {
                     notes.setUserid(c.getInt(c.getColumnIndex(COL_USER_ID)));
                     notes.setName(c.getString(c.getColumnIndex(COL_NAME)));
                     notes.setType(c.getString(c.getColumnIndex(COL_TYPE)));
-                    notes.setImgFront(c.getBlob(c.getColumnIndex(COL_FRONT)));
-                    notes.setImgBack(c.getBlob(c.getColumnIndex(COL_BACK)));
+                    notes.setImgFront(c.getString(c.getColumnIndex(COL_FRONT)));
+                    notes.setImgBack(c.getString(c.getColumnIndex(COL_BACK)));
 
                     noteList.add(notes);
                 } while (c.moveToNext());
@@ -109,7 +109,7 @@ public class CardQuery {
         return true;
     }
 
-    public static boolean updateInsuranceCardData(int id, String name, String type, byte[] photo1, byte[] photo2) {
+    public static boolean updateInsuranceCardData(int id, String name, String type, String photo1, String photo2) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         boolean flag=false;
 

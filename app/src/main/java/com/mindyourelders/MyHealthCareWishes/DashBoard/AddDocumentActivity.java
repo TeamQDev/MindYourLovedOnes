@@ -46,36 +46,36 @@ import java.util.Date;
 public class AddDocumentActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RQUESTCODE = 400;
     Context context = this;
-    ImageView imgBack,imgDot,imgDone,imgDoc,imgAdd;
-    MySpinner spinnerDoc,spinnerType;
-    TextView txtTitle,txtName,txtAdd,txtHosp, txtDate, txtLocation,txtHolderName,txtDist,txtOther,txtPName,txtFName, txtDocTYpe;
+    ImageView imgBack, imgDot, imgDone, imgDoc, imgAdd;
+    MySpinner spinnerDoc, spinnerType;
+    TextView txtTitle, txtName, txtAdd, txtHosp, txtDate, txtLocation, txtHolderName, txtDist, txtOther, txtPName, txtFName, txtDocTYpe;
     String From;
     private static final int RESULTCODE = 200;
     Preferences preferences;
     ArrayAdapter<String> adapter, adapter1;
-    TextInputLayout tilDate,tilOther,tilDocType,tilHosp,tilName,tilPName;
+    TextInputLayout tilDate, tilOther, tilDocType, tilHosp, tilName, tilPName;
     Document document;
     DBHelper dbHelper;
-    String name="";
-    String type="";
-    String docType="",person="",principle="";
-    String otherCategory="";
-    String Hosp="";
-    String documentPath="";
-    String location="";
-    String holder="";
+    String name = "";
+    String type = "";
+    String docType = "", person = "", principle = "";
+    String otherCategory = "";
+    String Hosp = "";
+    String documentPath = "";
+    String location = "";
+    String holder = "";
     int photo;
-    String date="";
-    String category="";
-    String Goto="";
-    String path="";
+    String date = "";
+    String category = "";
+    String Goto = "";
+    String path = "";
     int id;
-    final CharSequence[] alert_items = { "Phone Memory", "Dropbox" };
+    final CharSequence[] alert_items = {"Phone Memory", "Dropbox"};
     //final CharSequence[] dialog_items = { "Email", "Bluetooth", "View", "Print", "Fax" };
-    final CharSequence[] dialog_items = {"View", "Email", "Fax" };
+    final CharSequence[] dialog_items = {"View", "Email", "Fax"};
 
-    String[] ADList={"HIPAA Authorization","Health Care Proxy","Living Will","Living Will/Health Care Proxy","MOLST","Non-Hospital DNR Order","POLST"};
-    String[] OtherList={"Financial","Insurance","Legal","Other"};
+    String[] ADList = {"HIPAA Authorization", "Health Care Proxy", "Living Will", "Living Will/Health Care Proxy", "MOLST", "Non-Hospital DNR Order", "POLST"};
+    String[] OtherList = {"Financial", "Insurance", "Legal", "Other"};
 
 
     @Override
@@ -88,9 +88,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initComponent() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        DocumentQuery d=new DocumentQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        DocumentQuery d = new DocumentQuery(context, dbHelper);
     }
 
     private void initListener() {
@@ -108,24 +108,24 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgDoc = (ImageView) findViewById(R.id.imgDoc);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
-        spinnerDoc= (MySpinner) findViewById(R.id.spinnerDoc);
-        spinnerType= (MySpinner) findViewById(R.id.spinnerType);
-        txtName= (TextView) findViewById(R.id.txtName);
-        txtHosp= (TextView) findViewById(R.id.txtHosp);
-        txtLocation= (TextView) findViewById(R.id.txtLocation);
-        txtHolderName= (TextView) findViewById(R.id.txtHolderName);
-        txtDist= (TextView) findViewById(R.id.txtDist);
-        txtOther= (TextView) findViewById(R.id.txtOther);
-        txtAdd= (TextView) findViewById(R.id.txtAdd);
-        txtDocTYpe= (TextView) findViewById(R.id.txtDocType);
-       tilOther= (TextInputLayout) findViewById(R.id.tilOther);
-        tilName= (TextInputLayout) findViewById(R.id.tilName);
-        tilPName= (TextInputLayout) findViewById(R.id.tilPName);
-        tilHosp= (TextInputLayout) findViewById(R.id.tilHosp);
-        tilDocType= (TextInputLayout) findViewById(R.id.tilDocType);
-        txtPName= (TextView) findViewById(R.id.txtPName);
-        txtFName= (TextView) findViewById(R.id.txtFName);
-        txtTitle= (TextView) findViewById(R.id.txtTitle);
+        spinnerDoc = (MySpinner) findViewById(R.id.spinnerDoc);
+        spinnerType = (MySpinner) findViewById(R.id.spinnerType);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtHosp = (TextView) findViewById(R.id.txtHosp);
+        txtLocation = (TextView) findViewById(R.id.txtLocation);
+        txtHolderName = (TextView) findViewById(R.id.txtHolderName);
+        txtDist = (TextView) findViewById(R.id.txtDist);
+        txtOther = (TextView) findViewById(R.id.txtOther);
+        txtAdd = (TextView) findViewById(R.id.txtAdd);
+        txtDocTYpe = (TextView) findViewById(R.id.txtDocType);
+        tilOther = (TextInputLayout) findViewById(R.id.tilOther);
+        tilName = (TextInputLayout) findViewById(R.id.tilName);
+        tilPName = (TextInputLayout) findViewById(R.id.tilPName);
+        tilHosp = (TextInputLayout) findViewById(R.id.tilHosp);
+        tilDocType = (TextInputLayout) findViewById(R.id.tilDocType);
+        txtPName = (TextView) findViewById(R.id.txtPName);
+        txtFName = (TextView) findViewById(R.id.txtFName);
+        txtTitle = (TextView) findViewById(R.id.txtTitle);
        /* txtDoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,9 +136,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             }
         });*/
 
-        tilDate= (TextInputLayout) findViewById(R.id.tilDate);
+        tilDate = (TextInputLayout) findViewById(R.id.tilDate);
         //tilDate.setHint("Date Signed");
-        txtDate= (TextView) findViewById(R.id.txtDate);
+        txtDate = (TextView) findViewById(R.id.txtDate);
        /* tilDate.setHintEnabled(false);
         txtDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -160,22 +160,20 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if (parent.getItemAtPosition(position).toString().equals("Other"))
-                        {
-                            tilOther.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            tilOther.setVisibility(View.GONE);
-                        }
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                    tilOther.setVisibility(View.VISIBLE);
+                } else {
+                    tilOther.setVisibility(View.GONE);
+                }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        From=preferences.getString(PrefConstants.FROM);
-        if (From.equals("AD"))
-        {
+        From = preferences.getString(PrefConstants.FROM);
+        if (From.equals("AD")) {
             spinnerDoc.setVisibility(View.VISIBLE);
             adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -189,8 +187,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             tilPName.setHint("Name of Person");
             tilDate.setHint("Date Signed");
             txtTitle.setText("Advance Directives");
-        }
-        else if(From.equals("Other")){
+        } else if (From.equals("Other")) {
             spinnerDoc.setVisibility(View.GONE);
             tilDocType.setVisibility(View.VISIBLE);
             txtHosp.setVisibility(View.GONE);
@@ -200,9 +197,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             tilPName.setHint("Name of Person");
             tilDate.setHint("Date Signed");
             txtTitle.setText("Other Documents");
-        }
-        else if(From.equals("Record"))
-        {
+        } else if (From.equals("Record")) {
             spinnerDoc.setVisibility(View.GONE);
             spinnerType.setVisibility(View.GONE);
             tilDocType.setVisibility(View.VISIBLE);
@@ -224,11 +219,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 spinnerType.setVisibility(View.VISIBLE);
                 break;
         }
-        Intent i=getIntent();
-        if (i.getExtras()!=null)
-        {
-            Goto=i.getExtras().getString("GoTo");
-            path=i.getExtras().getString("Path");
+        Intent i = getIntent();
+        if (i.getExtras() != null) {
+            Goto = i.getExtras().getString("GoTo");
+            path = i.getExtras().getString("Path");
         }
 
         if (Goto.equals("View")) {
@@ -238,17 +232,14 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtAdd.setVisibility(View.GONE);
             imgDoc.setClickable(true);
             disableView();
-        }
-        else if(Goto.equals("Edit"))
-        {
+        } else if (Goto.equals("Edit")) {
             imgDone.setVisibility(View.VISIBLE);
             imgDot.setVisibility(View.VISIBLE);
             imgAdd.setVisibility(View.VISIBLE);
             txtAdd.setVisibility(View.VISIBLE);
             txtAdd.setText("Edit File");
             imgDoc.setClickable(false);
-        }
-        else{
+        } else {
             imgDone.setVisibility(View.VISIBLE);
             imgDot.setVisibility(View.GONE);
 
@@ -258,11 +249,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             imgDoc.setClickable(false);
         }
 
-        if (Goto.equals("View")||Goto.equals("Edit"))
-        {
+        if (Goto.equals("View") || Goto.equals("Edit")) {
 
-            if (From.equals("AD"))
-            {
+            if (From.equals("AD")) {
                 spinnerDoc.setVisibility(View.VISIBLE);
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -274,8 +263,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 tilName.setVisibility(View.GONE);
                 txtPName.setHint("Name of Person");
                 txtDate.setHint("Date Signed");
-            }
-            else if(From.equals("Other")){
+            } else if (From.equals("Other")) {
                 spinnerDoc.setVisibility(View.GONE);
                 tilDocType.setVisibility(View.VISIBLE);
                 txtHosp.setVisibility(View.GONE);
@@ -283,9 +271,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 tilName.setVisibility(View.GONE);
                 txtPName.setHint("Name of Person");
                 txtDate.setHint("Date Signed");
-            }
-            else if(From.equals("Record"))
-            {
+            } else if (From.equals("Record")) {
                 spinnerDoc.setVisibility(View.GONE);
                 spinnerType.setVisibility(View.GONE);
                 tilDocType.setVisibility(View.VISIBLE);
@@ -297,10 +283,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 txtPName.setHint("Name on Document");
                 txtDate.setHint("Date of Document");
             }
-          //  imgDot.setVisibility(View.VISIBLE);
+            //  imgDot.setVisibility(View.VISIBLE);
             //imgDone.setVisibility(View.GONE);
 
-            document= (Document) i.getExtras().getSerializable("DocumentObject");
+            document = (Document) i.getExtras().getSerializable("DocumentObject");
             txtDate.setText(document.getDate());
             txtHolderName.setText(document.getHolder());
             txtLocation.setText(document.getLocation());
@@ -309,19 +295,17 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             txtName.setText(document.getPrinciple());
             txtOther.setText(document.getOtherCategory());
             txtHosp.setText(document.getHospital());
-            documentPath=document.getDocument();
+            documentPath = document.getDocument();
             imgDoc.setImageResource(document.getImage());
-            id=document.getId();
+            id = document.getId();
 
-            int index= 0;
-            if (From.equals("AD"))
-            {
+            int index = 0;
+            if (From.equals("AD")) {
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerDoc.setAdapter(adapter);
                 spinnerDoc.setHint("Document Type");
-            }
-            else{
+            } else {
                 txtDocTYpe.setText(document.getType());
                 int indexs = 0;
                 for (int j = 0; j < OtherList.length; j++) {
@@ -329,11 +313,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         indexs = j;
                     }
                 }
-                spinnerType.setSelection(indexs+1);
+                spinnerType.setSelection(indexs + 1);
             }
 
-            if (document.getFrom().equals("AD"))
-            {
+            if (document.getFrom().equals("AD")) {
                 int indexs = 0;
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, ADList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -344,17 +327,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         indexs = j;
                     }
                 }
-                spinnerDoc.setSelection(indexs+1);
-               String sel=spinnerDoc.getSelectedItem().toString();
+                spinnerDoc.setSelection(indexs + 1);
+                String sel = spinnerDoc.getSelectedItem().toString();
 
-           }
+            }
 
 
-        }
-        else{
-           // imgDot.setVisibility(View.GONE);
-           // tilDoc.setVisibility(View.GONE);
-          //  imgDone.setVisibility(View.VISIBLE);
+        } else {
+            // imgDot.setVisibility(View.GONE);
+            // tilDoc.setVisibility(View.GONE);
+            //  imgDone.setVisibility(View.VISIBLE);
 
         }
 
@@ -380,22 +362,19 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
             case R.id.imgDoc:
-                if (!documentPath.equals(""))
-                {
-                    Uri uri=null;
-                    if (path.equals("No"))
-                    {
+                if (!documentPath.equals("")) {
+                    Uri uri = null;
+                    if (path.equals("No")) {
 
-                       CopyReadAssetss(documentPath);
+                        CopyReadAssetss(documentPath);
 
-                    }
-                    else{
+                    } else {
                        /* uri= Uri.parse(documentPath);
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.setDataAndType(uri, "application/pdf");
                         context.startActivity(intent);*/
-                        Uri uris= Uri.parse(documentPath);
+                        Uri uris = Uri.parse(documentPath);
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -407,7 +386,6 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         intent.setDataAndType(uris, "application/pdf");
                         context.startActivity(intent);
                     }
-
 
 
                 }
@@ -427,12 +405,12 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         long selectedMilli = newDate.getTimeInMillis();
 
                         Date datePickerDate = new Date(selectedMilli);
-                        String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+                        String reportDate = new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
 
-                        DateClass d=new DateClass();
+                        DateClass d = new DateClass();
                         d.setDate(reportDate);
                         txtDate.setText(reportDate);
-                       // txtDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        // txtDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 dpd.show();
@@ -440,8 +418,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.imgDone:
                 if (validate()) {
-                    if (Goto.equals("Edit"))
-                    {
+                    if (Goto.equals("Edit")) {
                         Boolean flag = DocumentQuery.updateDocumentData(id, name, category, date, location, holder, photo, documentPath, docType, From, person, principle, otherCategory, Hosp);
                         if (flag == true) {
                             Toast.makeText(context, "You have updated document successfully", Toast.LENGTH_SHORT).show();
@@ -449,7 +426,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                         } else {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         Boolean flag = DocumentQuery.insertDocumentData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, category, date, location, holder, photo, documentPath, docType, From, person, principle, otherCategory, Hosp);
                         if (flag == true) {
                             Toast.makeText(context, "You have added document successfully", Toast.LENGTH_SHORT).show();
@@ -473,13 +450,13 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
                         switch (itemPos) {
                             case 0:
-                                Intent i=new Intent(context,DocumentSdCardList.class);
-                                startActivityForResult(i,RESULTCODE);
+                                Intent i = new Intent(context, DocumentSdCardList.class);
+                                startActivityForResult(i, RESULTCODE);
                                 break;
                             case 1:
-                                Intent intent=new Intent(context,DropboxLoginActivity.class);
-                                intent.putExtra("FROM","Document");
-                                startActivityForResult(intent,RQUESTCODE);
+                                Intent intent = new Intent(context, DropboxLoginActivity.class);
+                                intent.putExtra("FROM", "Document");
+                                startActivityForResult(intent, RQUESTCODE);
                                 break;
 
                         }
@@ -505,18 +482,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
                         switch (itemPos) {
                             case 0: // email
-                                Uri uri=null;
-                                if (path.equals("No"))
-                                {
+                                Uri uri = null;
+                                if (path.equals("No")) {
                                     CopyReadAssetss(documentPath);
-                                }
-                                else{
+                                } else {
                                    /* uri= Uri.parse(documentPath);
                                     Intent intent = new Intent();
                                     intent.setAction(Intent.ACTION_VIEW);
                                     intent.setDataAndType(uri, "application/pdf");
                                     context.startActivity(intent);*/
-                                    Uri uris= Uri.parse(documentPath);
+                                    Uri uris = Uri.parse(documentPath);
                                     Intent intent = new Intent();
                                     intent.setAction(Intent.ACTION_VIEW);
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -531,10 +506,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
                                 break;
                             case 1: // email
-                                if (path.equals("No"))
-                                {
-                                    File file=new File(getExternalFilesDir(null),documentPath);
-                                    Uri urifile=null;
+                                if (path.equals("No")) {
+                                    File file = new File(getExternalFilesDir(null), documentPath);
+                                    Uri urifile = null;
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                                         urifile = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", file);
@@ -542,11 +516,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                         urifile = Uri.fromFile(file);
                                     }
 
-                                    emailAttachement(urifile,txtFName.getText().toString());
-                                }
-                                else {
+                                    emailAttachement(urifile, txtFName.getText().toString());
+                                } else {
                                     Uri uris = Uri.parse(documentPath);
-                                    emailAttachement(uris,txtFName.getText().toString());
+                                    emailAttachement(uris, txtFName.getText().toString());
                                 }
                        /* bluetoothAttachement(new File(item.getAbsolutePath()),
                                 context);
@@ -555,8 +528,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                 break;
                             case 2: // Fax
                                 //File localFile = UriHelpers.getFileForUri(AddDocumentActivity.this, Uri.parse(documentPath));
-                                Uri uris= Uri.parse(documentPath);
-                                String path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+txtFName.getText().toString();
+                                Uri uris = Uri.parse(documentPath);
+                                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + txtFName.getText().toString();
 /*
                                 File sourceFile = new File(path);
 
@@ -567,7 +540,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                                     e.printStackTrace();
                                     Toast.makeText(AddDocumentActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
                                 }*/
-                                  new FaxCustomDialog(AddDocumentActivity.this,path).show();;
+                                new FaxCustomDialog(AddDocumentActivity.this, path).show();
+                                ;
 
                                 /*if (path.equals("No"))
                                 {
@@ -604,11 +578,13 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
         }
     }
+
     private void serverAttachement(Uri path) {
-        String urlPath=path.getPath();
-        System.out.println("Path of the file    "+path);
+        String urlPath = path.getPath();
+        System.out.println("Path of the file    " + path);
         //WebService.sendPDFToFax(convertFileToByteArray(file));
-        new FaxCustomDialog(AddDocumentActivity.this, urlPath).show();;
+        new FaxCustomDialog(AddDocumentActivity.this, urlPath).show();
+        ;
     }
 
     private void emailAttachement(Uri f, String s) {
@@ -617,15 +593,15 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-                new String[] { "" });
-        String name= preferences.getString(PrefConstants.CONNECTED_NAME);
+                new String[]{""});
+        String name = preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                name+"-"+s); // subject
+                name + "-" + s); // subject
 
 
-        String body="Hi, \n" +
+        String body = "Hi, \n" +
                 "\n" +
-                "\n" +name+
+                "\n" + name +
                 " shared this document with you. Please check the attachment. \n" +
                 "\n" +
                 "Thanks,\n" +
@@ -634,9 +610,9 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-           // uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", f);
+            // uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", f);
         } else {
-             // uri = Uri.fromFile(f);
+            // uri = Uri.fromFile(f);
         }
 
         emailIntent.putExtra(Intent.EXTRA_STREAM, f);
@@ -652,18 +628,17 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
         InputStream in = null;
         OutputStream out = null;
         File file = new File(getFilesDir(), documentPath);
-        try
-        {
+        try {
             in = assetManager.open(documentPath);
-            outFile=new File(getExternalFilesDir(null),documentPath);
-            out=new FileOutputStream(outFile);
+            outFile = new File(getExternalFilesDir(null), documentPath);
+            out = new FileOutputStream(outFile);
 
-            copyFiles(in,out);
+            copyFiles(in, out);
             in.close();
-            in=null;
+            in = null;
             out.flush();
             out.close();
-            out=null;
+            out = null;
             /*out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
 
             copyFiles(in, out);
@@ -672,11 +647,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             out.flush();
             out.close();
             out = null;*/
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e("tag", e.getMessage());
         }
-        Uri uri=null;
+        Uri uri = null;
         // Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -692,12 +666,10 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void copyFiles(InputStream in, OutputStream out) throws IOException
-    {
+    private void copyFiles(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
-        while ((read = in.read(buffer)) != -1)
-        {
+        while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
 
@@ -707,21 +679,20 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     private boolean validate() {
         int indexValues = spinnerType.getSelectedItemPosition();
         int indexValue = spinnerDoc.getSelectedItemPosition();
-        person=txtPName.getText().toString();
+        person = txtPName.getText().toString();
 
-        principle=txtName.getText().toString();
-        if (From.equals("AD"))
-        {
-            category="AD";
-            if (indexValue!=0) {
+        principle = txtName.getText().toString();
+        if (From.equals("AD")) {
+            category = "AD";
+            if (indexValue != 0) {
                 docType = ADList[indexValue - 1];
             }
-        }else{
-            docType=txtDocTYpe.getText().toString();
-            if (indexValues!=0) {
+        } else {
+            docType = txtDocTYpe.getText().toString();
+            if (indexValues != 0) {
                 category = OtherList[indexValues - 1];
             }
-            otherCategory=txtOther.getText().toString();
+            otherCategory = txtOther.getText().toString();
            /* switch(category)
             {
                 case "Legal":
@@ -752,49 +723,46 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
             }*/
         }
 
-        Hosp=txtHosp.getText().toString();
-        name=txtFName.getText().toString();
-        location=txtLocation.getText().toString();
-        holder=txtHolderName.getText().toString();
-        date=txtDate.getText().toString();
-        photo=R.drawable.pdf;
-        /*if (name.equals("")) {
-            txtFName.setError("Please Enter Name");
-           Toast.makeText(context,"Enter Document Name",Toast.LENGTH_SHORT).show();
-        }else{
+        Hosp = txtHosp.getText().toString();
+        name = txtFName.getText().toString();
+        location = txtLocation.getText().toString();
+        holder = txtHolderName.getText().toString();
+        date = txtDate.getText().toString();
+        photo = R.drawable.pdf;
+        if (name.equals("")) {
+            txtFName.setError("Please Select File");
+            Toast.makeText(context, "Please Select File", Toast.LENGTH_SHORT).show();
+        } else if (docType.equals("")) {
+            txtDocTYpe.setError("Please enter type of document");
+            Toast.makeText(context, "Please enter type of document", Toast.LENGTH_SHORT).show();
+        } else {
             return true;
-        }*/
+        }
 
-        return true;
+        return false;
     }
-
-
-
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==RESULTCODE && data!=null)
-        {
-            name=data.getExtras().getString("Name");
-            documentPath=data.getExtras().getString("URI");
+        if (requestCode == RESULTCODE && data != null) {
+            name = data.getExtras().getString("Name");
+            documentPath = data.getExtras().getString("URI");
             txtFName.setText(name);
             imgDoc.setClickable(false);
-            String text="You Have selected <b>"+name +"</b> Document";
-            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            String text = "You Have selected <b>" + name + "</b> Document";
+            Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             showDialogWindow(text);
             txtAdd.setText("Edit File");
             imgDoc.setImageResource(R.drawable.pdf);
-        }
-        else  if (requestCode==RQUESTCODE && data!=null)
-        {
-            name=data.getExtras().getString("Name");
-            documentPath=data.getExtras().getString("URI");
+        } else if (requestCode == RQUESTCODE && data != null) {
+            name = data.getExtras().getString("Name");
+            documentPath = data.getExtras().getString("URI");
             txtFName.setText(name);
             imgDoc.setClickable(false);
-            String text="You Have selected <b>"+name +"</b> Document";
-            Toast.makeText(context, Html.fromHtml(text),Toast.LENGTH_SHORT).show();
+            String text = "You Have selected <b>" + name + "</b> Document";
+            Toast.makeText(context, Html.fromHtml(text), Toast.LENGTH_SHORT).show();
             showDialogWindow(text);
             txtAdd.setText("Edit File");
             imgDoc.setImageResource(R.drawable.pdf);
@@ -803,7 +771,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void showDialogWindow(String text) {
-        AlertDialog.Builder alert=new AlertDialog.Builder(context);
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setMessage(Html.fromHtml(text));
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -80,7 +81,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtName, txtEmail,txtAddress, txtCountry, txtPhone, txtBdate, txtPassword,txtGender,txtHomePhone;
     TextInputLayout tilName;
     String name="", email="", mobile="", country="", bdate="", password="",address="",phone="";
-
+    Uri imageUriProfile=null;
+    ContentValues values=null;
     MySpinner spinner;
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "california", "India"};
     private static int RESULT_CAMERA_IMAGE = 1;
@@ -399,8 +401,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 textOption1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dispatchTakePictureIntent();
+                    //    dispatchTakePictureIntent();
+                        values = new ContentValues();
+                        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                            imageUriProfile = getContentResolver().insert(
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                            //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriProfile);
+
+                        startActivityForResult(intent, RESULT_CAMERA_IMAGE);
                         dialog.dismiss();
+
                     }
                 });
                 textOption2.setOnClickListener(new View.OnClickListener() {
@@ -566,9 +580,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
 
-        }  else if (requestCode == RESULT_CAMERA_IMAGE) {
+        }  else if (requestCode == RESULT_CAMERA_IMAGE ) {
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getContentResolver(), imageUriProfile);
+              //  String imageurl = getRealPathFromURI(imageUriProfile);
+               // Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                profileImage.setImageBitmap(thumbnail);
+                storeImage(thumbnail,"Profile");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             // ImageView profileImage = (ImageView) findViewById(R.id.imgProfile);
-            Bundle extras = data.getExtras();
+           /* Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imgProfile.setImageBitmap(imageBitmap);
 
@@ -586,7 +610,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 // Write to SD Card
                 outStream = new FileOutputStream(imagepath);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
                 byte[] byteArray = stream.toByteArray();
                 outStream.write(byteArray);
                 outStream.close();
@@ -599,7 +623,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             } finally {
 
             }
-
+*/
         }
 
     }
@@ -621,7 +645,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             // Write to SD Card
             outStream = new FileOutputStream(imagepath);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
             byte[] byteArray = stream.toByteArray();
             outStream.write(byteArray);
             outStream.close();

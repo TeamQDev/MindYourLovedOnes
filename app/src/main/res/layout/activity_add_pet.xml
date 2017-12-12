@@ -43,6 +43,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimension15dp"
             android:src="@drawable/check_mark"
+            android:visibility="gone"
             />
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
@@ -410,5 +411,34 @@ android:visibility="gone"
                 android:textSize="@dimen/dimension20dp"
                 android:textStyle="bold" />
         </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/llAddConn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension60dp"
+        android:layout_below="@+id/tilPetNote"
+        android:layout_marginLeft="@dimen/dimension15dp"
+        android:layout_marginRight="@dimen/dimension15dp"
+        android:layout_marginTop="@dimen/dimension15dp"
+        android:layout_marginBottom="@dimen/dimension20dp"
+        android:background="@color/colorGreen">
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/dimension60dp"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/adddoc" />
+
+        <TextView
+            android:id="@+id/txtAdd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:layout_toRightOf="@+id/imgAdd"
+            android:gravity="center"
+            android:text="Add Pet"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dimension24dp" />
+    </RelativeLayout>
 </RelativeLayout>
 </ScrollView>

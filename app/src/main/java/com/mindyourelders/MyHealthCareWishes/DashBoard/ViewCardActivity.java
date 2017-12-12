@@ -2,6 +2,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,11 @@ import android.widget.TextView;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.SliderPagerAdapter;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -28,14 +34,17 @@ public class ViewCardActivity extends AppCompatActivity {
     ImageView imageBack;
     private LinearLayout ll_dots;
     SliderPagerAdapter sliderPagerAdapter;
-    ArrayList<byte[]> slider_image_list;
+    ArrayList<String> slider_image_list;
     ArrayList<String> slider_text_list=new ArrayList<>();
     private TextView[] dots;
     int page_position = 0;
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
+        initImageLoader();
         initUI();
         initListener();
         initComponent();
@@ -67,20 +76,39 @@ public class ViewCardActivity extends AppCompatActivity {
 
     }
 
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ins_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
+    }
+
     private void initComponent() {
         Intent i=getIntent();
         if (i.getExtras()!=null)
         {
             Card card= (Card) i.getSerializableExtra("Card");
-            byte[] front=card.getImgFront();
-            byte[] back=card.getImgBack();
+            String front=card.getImgFront();
+            String back=card.getImgBack();
            String provider=card.getName();
             String type=card.getType();
 
             txtProviderValue.setText(provider);
             txtTypeValue.setText(type);
             slider_image_list = new ArrayList<>();
-           slider_image_list.add(front);
+             slider_image_list.add(front);
             slider_image_list.add(back);
 
         }

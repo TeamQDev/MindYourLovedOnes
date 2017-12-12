@@ -41,7 +41,7 @@
                     android:layout_toRightOf="@+id/imgDrawer"
                        android:visibility="gone"
                     />
-                <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+                <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/dimension75dp"
                     android:layout_height="@dimen/dimension75dp"

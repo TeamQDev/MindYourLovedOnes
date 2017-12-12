@@ -5,9 +5,10 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,11 @@ import com.mindyourelders.MyHealthCareWishes.pdfdesign.InsurancePdf;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,11 +60,14 @@ ImageView imgRight;
     public static final int REQUEST_PRES = 100;
     DBHelper dbHelper;
     final String dialog_items[]={"View","Email","Fax"};
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.activity_insurance_card, null);
         initComponent();
+        initImageLoader();
         try {
             getData();
         } catch (Exception e) {
@@ -67,6 +76,25 @@ ImageView imgRight;
         initListener();
         setCardData();
         return rootview;
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ins_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -133,9 +161,19 @@ ImageView imgRight;
                     imgFront.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            byte[] photo = CardList.get(position).getImgFront();
+                           /* byte[] photo = CardList.get(position).getImgFront();
                             Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-                            imgCard.setImageBitmap(bmp);
+                            imgCard.setImageBitmap(bmp);*/
+                            File imgFile = new File(CardList.get(position).getImgFront());
+                            if (imgFile.exists()) {
+                                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgCard,displayImageOptions);
+                            /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);*/
+                            }
+                            else{
+                                imgCard.setImageResource(R.drawable.ins_card);
+                            }
+                          //  imageLoader.displayImage(String.valueOf(CardList.get(position).getImgFront()),imgCard,displayImageOptions);
                             imgPre.setImageResource(R.drawable.white_dot);
                             imgFront.setImageResource(R.drawable.blue_dot);
                         }
@@ -143,9 +181,17 @@ ImageView imgRight;
                     imgPre.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            byte[] photo1 = CardList.get(position).getImgBack();
+                           /* byte[] photo1 = CardList.get(position).getImgBack();
                             Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
-                            imgCard.setImageBitmap(bmp1);
+                            imgCard.setImageBitmap(bmp1);*/
+                            File imgFile = new File(CardList.get(position).getImgBack());
+                            if (imgFile.exists()) {
+                                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgCard,displayImageOptions);
+                            }else{
+                                imgCard.setImageResource(R.drawable.ins_card);
+                            }
+                           // imageLoader.displayImage(String.valueOf(CardList.get(position).getImgBack()),imgCard,displayImageOptions);
+
                             imgPre.setImageResource(R.drawable.blue_dot);
                             imgFront.setImageResource(R.drawable.white_dot);
                         }

@@ -7,10 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +28,11 @@ import com.mindyourelders.MyHealthCareWishes.DashBoard.FragmentNotification;
 import com.mindyourelders.MyHealthCareWishes.IndexMenu.FragmentOverview;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,6 +62,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout rlHome,rlSupport,rlContact,rlResources,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail;
     boolean flagResource=false,flagMarket=false;
 
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +75,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseCrash.log("MainActivity started");
 
         //Crashlytics.getInstance().crash(); // Force a crash
+        initImageLoader();
         initComponent();
         initUI();
         initListener();
@@ -83,6 +92,25 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             callFragment("CONNECTION", fragmentConnection);
         }
 
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -131,18 +159,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlLogOutt= (RelativeLayout) findViewById(R.id.rlLogOutt);
         txtDrawerName = (TextView) leftDrawer.findViewById(R.id.txtDrawerName);
         imgDrawerProfile = (ImageView) leftDrawer.findViewById(R.id.imgDrawerProfile);
-        String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
-        //byte[] photo = Base64.decode(image, Base64.DEFAULT);
-        txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
-        if (!image.equals("")) {
-            File imgFile = new File(image);
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imgDrawerProfile.setImageBitmap(myBitmap);
-            }
-        }else{
-            imgDrawerProfile.setImageResource(R.drawable.ic_profile_defaults);
-        }
+
        /* Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         imgDrawerProfile.setImageBitmap(bmp);*/
 
@@ -412,6 +429,19 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+        String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
+        //byte[] photo = Base64.decode(image, Base64.DEFAULT);
+        txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
+        if (!image.equals("")) {
+            File imgFile = new File(image);
+            if (imgFile.exists()) {
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgDrawerProfile,displayImageOptions);
+               /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgDrawerProfile.setImageBitmap(myBitmap);*/
+            }
+        }else{
+            imgDrawerProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
     }
 
     public void CopyReadAssetss(String documentPath) {

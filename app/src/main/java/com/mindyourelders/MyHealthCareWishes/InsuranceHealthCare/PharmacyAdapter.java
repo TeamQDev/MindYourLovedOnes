@@ -3,7 +3,8 @@ package com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,12 @@ import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Pharmacy;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,11 +39,53 @@ class PharmacyAdapter extends BaseAdapter {
     LayoutInflater lf;
     ViewHolder holder;
     Preferences preferences;
+    ImageLoader imageLoaderProfile,imageLoaderCard;
+    DisplayImageOptions displayImageOptionsProfile,displayImageOptionsCard;
+
     public PharmacyAdapter(Context context, ArrayList<Pharmacy> pharmacyList) {
         this.context=context;
         this.pharmacyList=pharmacyList;
         lf= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         preferences=new Preferences(context);
+        initImageLoader();
+    }
+
+    private void initImageLoader() {
+        //Profile
+        displayImageOptionsProfile = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptionsProfile)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoaderProfile = ImageLoader.getInstance();
+
+        //Card
+        displayImageOptionsCard = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.busi_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration configs = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptionsCard)
+                .build();
+        ImageLoader.getInstance().init(configs);
+        imageLoaderCard = ImageLoader.getInstance();
     }
 
     @Override
@@ -87,8 +136,10 @@ class PharmacyAdapter extends BaseAdapter {
         holder.txtPhone.setText(pharmacyList.get(position).getPhone());
         File imgFile = new File(pharmacyList.get(position).getPhoto());
         if (imgFile.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.imgProfile.setImageBitmap(myBitmap);
+            /*Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);*/
+            imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgProfile,displayImageOptionsProfile);
+
         }
        /* byte[] photo=pharmacyList.get(position).getPhoto();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
@@ -99,8 +150,9 @@ class PharmacyAdapter extends BaseAdapter {
         if (!pharmacyList.get(position).getPhotoCard().equals("")) {
             File imgFile1 = new File(pharmacyList.get(position).getPhotoCard());
             if (imgFile1.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
-                holder.imgForword.setImageBitmap(myBitmap);
+               /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                holder.imgForword.setImageBitmap(myBitmap);*/
+                imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),holder.imgForword,displayImageOptionsCard);
             }
            /* byte[] photoCard = pharmacyList.get(position).getPhotoCard();
             Bitmap bmpCard = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);

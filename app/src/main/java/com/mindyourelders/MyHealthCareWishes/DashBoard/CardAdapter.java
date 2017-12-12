@@ -3,7 +3,8 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,13 @@ import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.Card;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgCard;
@@ -25,15 +32,35 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.imgCard;
 class CardAdapter extends BaseAdapter{
     Context context;
     ArrayList<Card> cardList;
-    
     LayoutInflater lf;
     Holder holder;
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
     public CardAdapter(Context context, ArrayList<Card> cardList) {
         this.context=context;
         this.cardList=cardList;
         lf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        initImageLoader();
     }
 
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ins_card)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
+    }
     @Override
     public int getCount() {
         return cardList.size();
@@ -64,9 +91,16 @@ class CardAdapter extends BaseAdapter{
         } else {
             holder = (Holder) convertView.getTag();
         }
-        byte[] photo=cardList.get(position).getImgFront();
+       /* byte[] photo=cardList.get(position).getImgFront();
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-        holder.imgCard.setImageBitmap(bmp);
+        holder.imgCard.setImageBitmap(bmp);*/
+        File imgFile = new File(cardList.get(position).getImgFront());
+        if (imgFile.exists()) {
+            imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgCard,displayImageOptions);
+           /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgProfile.setImageBitmap(myBitmap);*/
+        }
+     // imageLoader.displayImage(String.valueOf(cardList.get(position).getImgFront()),holder.imgCard,displayImageOptions);
      //   holder.imgCard.setImageResource(cardList.get(position).getImgFront());
         holder.txtProvider.setText(cardList.get(position).getName());
         holder.txtType.setText(cardList.get(position).getType());

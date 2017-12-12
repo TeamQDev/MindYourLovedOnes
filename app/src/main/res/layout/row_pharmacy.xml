@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         >
 
-        <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+        <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension60dp"
             android:layout_height="@dimen/dimension60dp"
