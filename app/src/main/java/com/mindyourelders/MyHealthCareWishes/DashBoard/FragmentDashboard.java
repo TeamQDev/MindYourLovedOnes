@@ -97,7 +97,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
                 .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
                 .handler(new Handler()) // default
                 .build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getContext()).defaultDisplayImageOptions(displayImageOptions)
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(displayImageOptions)
                 .build();
         ImageLoader.getInstance().init(config);
         imageLoader = ImageLoader.getInstance();
