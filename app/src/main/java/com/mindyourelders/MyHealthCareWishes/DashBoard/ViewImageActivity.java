@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 
+import java.io.File;
+
 
 public class ViewImageActivity extends AppCompatActivity  {
     private static final int RESULT_CARD = 50;
     ImageView imgDoc,imgBack,imgDelete;
     boolean IsDelete=false;
-    byte[] photo=null;
+    String photo=null;
     TextView txtTitle;
 
     @Override
@@ -41,9 +43,16 @@ public class ViewImageActivity extends AppCompatActivity  {
 
         Intent i=getIntent();
         if (i.getExtras()!=null) {
-            photo = i.getExtras().getByteArray("Image");
-            Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-            imgDoc.setImageBitmap(photoCard);
+            photo = i.getExtras().getString("Image");
+            if (!photo.equals("")) {
+                File imgFile = new File(photo);
+                //  if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgDoc.setImageBitmap(myBitmap);
+                //imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgConPhoto,displayImageOptions);
+            }
+           /* Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            imgDoc.setImageBitmap(photoCard);*/
 
           /*  if (i.getExtras().containsKey("IsDelete")) {
                 IsDelete = i.getExtras().getBoolean("IsDelete");

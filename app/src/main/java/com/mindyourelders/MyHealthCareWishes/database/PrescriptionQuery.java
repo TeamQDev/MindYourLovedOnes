@@ -176,8 +176,8 @@ public class PrescriptionQuery {
             flag=true;
             ArrayList<Dosage> d=DosageQuery.fetchAllDosageRecord(userid,id);
             ArrayList<PrescribeImage> i=PrescribeImageQuery.fetchAllImageRecord(userid,id);
-        Boolean flags = DosageQuery.updateDosageData(dosageList,id,d);
-        Boolean flag3 = PrescribeImageQuery.updateImageData(imageList,id,i);
+            Boolean flags = DosageQuery.updateDosageData(dosageList,id,d);
+            Boolean flag3 = PrescribeImageQuery.updateImageData(imageList,id,i);
         }
         return flag;
     }

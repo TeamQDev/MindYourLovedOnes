@@ -155,7 +155,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String[] HospitalType = {"Hospital", "Rehabilitation Center", "Other"};
 
     String[] proxyType = {"Primary - Health Care Proxy Agent", "Successor - Health Care Proxy Agent"};
-    String[] priorityType = {"Primary", "Secondary"};
+    String[] priorityType = {"Primary-Proxy Agent","Primary-Emergency Contact", "Secondary-Proxy Agent","Secondary-Emergency Contact"};
 
     Boolean isEdit;
 

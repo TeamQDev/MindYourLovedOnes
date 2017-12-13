@@ -35,13 +35,13 @@ public class PrescribeImage implements Serializable {
 
     int userid;
     int preid;
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    byte[] image;
+    String image;
 }

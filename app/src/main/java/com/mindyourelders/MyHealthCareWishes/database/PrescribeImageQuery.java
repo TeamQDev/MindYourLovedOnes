@@ -32,7 +32,7 @@ public class PrescribeImageQuery {
     }
 
     public static String createImageTable() {
-        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_PREID + " INTEGER,"  + COL_Image + " BLOB);";
+        String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER," + COL_PREID + " INTEGER,"  + COL_Image + " VARCHAR(50));";
         return createTableQuery;
     }
 
@@ -41,7 +41,7 @@ public class PrescribeImageQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertImageData(int userid,int preid,byte[] image) {
+    public static Boolean insertImageData(int userid,int preid,String image) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -71,7 +71,7 @@ public class PrescribeImageQuery {
                     notes.setId(c.getInt(c.getColumnIndex(COL_ID)));
                     notes.setUserid(c.getInt(c.getColumnIndex(COL_USERID)));
                     notes.setPreid(c.getInt(c.getColumnIndex(COL_PREID)));
-                    notes.setImage(c.getBlob(c.getColumnIndex(COL_Image)));
+                    notes.setImage(c.getString(c.getColumnIndex(COL_Image)));
                     noteList.add(notes);
                 } while (c.moveToNext());
             }

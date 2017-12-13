@@ -1,6 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
@@ -41,6 +43,11 @@ import com.mindyourelders.MyHealthCareWishes.model.PrescribeImage;
 import com.mindyourelders.MyHealthCareWishes.model.Prescription;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,7 +64,10 @@ import static com.mindyourelders.MyHealthCareWishes.utility.DialogManager.closeK
 public class AddPrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int REQUEST_CARD =50 ;
     Context context = this;
-    byte[] currentImage=null;
+    String currentImage=null;
+    Uri imageUriProfile=null;
+    ContentValues values=null;
+
     ImageView imgBack, imgAddDosage, imgAddPhoto,imgDone;
     ListView ListDosage, ListPhoto;
     ArrayList<Dosage> dosageList = new ArrayList<>();
@@ -83,13 +93,37 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     int unique;
     boolean isEdit;
     int id,colid,dosageid,imageid;
+
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescription);
         initComponent();
+        initImageLoader();
         initUI();
         initListener();
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -153,7 +187,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                          Intent i=new Intent(context,ViewImageActivity.class);
                          i.putExtra("Image",imageList.get(position).getImage());
-                 currentImage=imageList.get(position).getImage();
+                         currentImage=imageList.get(position).getImage();
                          startActivityForResult(i,REQUEST_CARD);
              }
          });
@@ -352,7 +386,19 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 textOption1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dispatchTakePictureIntent();
+                       // dispatchTakePictureIntent();
+                        values = new ContentValues();
+                        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+                        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                        imageUriProfile = getContentResolver().insert(
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                        //  intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriProfile);
+
+                        startActivityForResult(intent, RESULT_CAMERA_IMAGE);
+                        dialog.dismiss();
                         dialog.dismiss();
                     }
                 });
@@ -510,9 +556,19 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView profileImage = (ImageView) findViewById(R.id.imgProfile);
+       // ImageView profileImage = (ImageView) findViewById(R.id.imgProfile);
         if (requestCode == RESULT_SELECT_PHOTO && null != data) {
             try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+               // profileImage.setImageBitmap(selectedImage);
+                storeImage(selectedImage,"Profile");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+           /* try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
@@ -526,10 +582,24 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 // profileImage.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            }*/
+
+        } else if (requestCode == RESULT_CAMERA_IMAGE) {
+            try {
+                Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                        getContentResolver(), imageUriProfile);
+                //  String imageurl = getRealPathFromURI(imageUriProfile);
+                // Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+              //  imageLoader.displayImage(imageBitmap,profileImage,displayImageOptions);
+             //   profileImage.setImageBitmap(thumbnail);
+                storeImage(thumbnail,"Profile");
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } else if (requestCode == RESULT_CAMERA_IMAGE && null != data) {
-
+/*
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream streams = new ByteArrayOutputStream();
@@ -575,12 +645,58 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 e.printStackTrace();
             } finally {
 
-            }
+            }*/
         }
         else if(requestCode == REQUEST_CARD )
         {
-              imageList.remove(currentImage);
+            if (data!=null) {
+                if (data.getExtras().getString("Prescription").equals("Delete")) {
+                    String photo = data.getExtras().getString("Photo");
+                    for (int i = 0; i < imageList.size(); i++) {
+                        if (imageList.get(i).getImage().equals(photo)) {
+                            imageList.remove(i);
+                        }
+                    }
+
+                    setImageListData();
+                }
+            }
+        }
+    }
+
+    private void storeImage(Bitmap selectedImage, String profile) {
+
+        FileOutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO/");
+        String path = file.getAbsolutePath();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+
+            imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
+                    + ".jpg";
+            // Write to SD Card
+            outStream = new FileOutputStream(imagepath);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+            byte[] byteArray = stream.toByteArray();
+            outStream.write(byteArray);
+            outStream.close();
+
+            PrescribeImage p = new PrescribeImage();
+            p.setImage(imagepath);
+            imageList.add(p);
             setImageListData();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
         }
     }
 

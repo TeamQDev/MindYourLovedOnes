@@ -1,9 +1,9 @@
 package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,13 @@ import android.widget.ImageView;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.model.PrescribeImage;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -25,10 +31,34 @@ class ImageAdapter  extends BaseAdapter {
     LayoutInflater lf;
     Holder holder;
 
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
+
+
     public ImageAdapter(Context context, ArrayList imageList) {
         this.context = context;
         this.imageList = imageList;
         lf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        initImageLoader();
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new SimpleBitmapDisplayer()) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     @Override
@@ -56,9 +86,16 @@ class ImageAdapter  extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-        byte[] imageData=imageList.get(position).getImage();
+        if (!imageList.get(position).getImage().equals("")) {
+            File imgFile = new File(imageList.get(position).getImage());
+            //  if (imgFile.exists()) {
+          /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.img.setImageBitmap(myBitmap);*/
+            imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.img,displayImageOptions);
+        }
+       /* byte[] imageData=imageList.get(position).getImage();
         Bitmap bm= BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
-        holder.img.setImageBitmap(bm);
+        holder.img.setImageBitmap(bm);*/
 
         //holder.imgProfile.setImageResource(student.getImgid());
        /* holder.imgForward.setOnClickListener(new View.OnClickListener() {

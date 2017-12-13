@@ -1,8 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.pdfdesign;
 
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -177,7 +175,7 @@ public class PrescriptionPdf {
                     imagelist = prescriptionList.get(i).getPrescriptionImageList();
 
                     for (int j = 0; j < imagelist.size(); j++) {
-
+/*
                         byte[] IMG1 = imagelist.get(j).getImage();
 
                         Image img1 = Image.getInstance(IMG1);
@@ -198,7 +196,7 @@ public class PrescriptionPdf {
 
                         Header.document.add(table1);
 
-                        Header.addEmptyLine(1);
+                        Header.addEmptyLine(1);*/
                     }
 
 
