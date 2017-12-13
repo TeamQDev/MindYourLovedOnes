@@ -3312,10 +3312,17 @@ imagepath=specialist.getPhoto();
             }
             otherRelation = txtOtherRelation.getText().toString();
             note = txtEmergencyNote.getText().toString().trim();
-            if (priority.equals("Primary")) {
+
+            if (priority.equals("Primary-Proxy Agent")) {
                 prior = 0;
-            } else {
+            } else if(priority.equals("Primary-Emergency Contact")) {
                 prior = 1;
+            }
+            else if(priority.equals("Secondary-Proxy Agent")) {
+                prior = 2;
+            }
+            else if(priority.equals("Secondary-Emergency Contact")) {
+                prior = 3;
             }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");

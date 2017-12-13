@@ -23,7 +23,7 @@ public class CallDialog {
     public void showCallDialog(final Context context, String mobile, String hphone, String wphone) {
         this.context=context;
         //   String text=mobile;
-        if (mobile.contains("-")) {
+        /*if (mobile.contains("-")) {
             mobile = mobile.replaceAll("-", "");
         }
         if (hphone.contains("-")) {
@@ -31,7 +31,7 @@ public class CallDialog {
         }
         if (wphone.contains("-")) {
             wphone = wphone.replaceAll("-", "");
-        }
+        }*/
         // System.out.println("" + text);
         try {
             Double.parseDouble(mobile);

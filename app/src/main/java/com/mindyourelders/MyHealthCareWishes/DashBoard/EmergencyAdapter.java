@@ -155,12 +155,22 @@ public class EmergencyAdapter extends BaseAdapter {
         {
             holder.txtType.setVisibility(View.VISIBLE);
         }*/
+        String[] priorityType = {"","", "",""};
+
         if (emergencyList.get(position).getIsPrimary()==0)
         {
-            holder.txtState.setText("Primary");
+            holder.txtState.setText("Primary-Proxy Agent");
         }else if (emergencyList.get(position).getIsPrimary()==1)
         {
-            holder.txtState.setText("Secondary");
+            holder.txtState.setText("Primary-Emergency Contact");
+        }
+        else if (emergencyList.get(position).getIsPrimary()==2)
+        {
+            holder.txtState.setText("Secondary-Proxy Agent");
+        }
+        else if (emergencyList.get(position).getIsPrimary()==3)
+        {
+            holder.txtState.setText("Secondary-Emergency Contact");
         }
 
         holder.txtName.setText(emergencyList.get(position).getName());

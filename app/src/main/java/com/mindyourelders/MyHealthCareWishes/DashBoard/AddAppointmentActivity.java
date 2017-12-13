@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -86,6 +85,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         txtOtherSpecialist= (TextView) findViewById(R.id.txtOtherType);
         tilOtherFrequency= (TextInputLayout) findViewById(R.id.tilOtherFrequency);
         tilOtherSpecialist= (TextInputLayout) findViewById(R.id.tilOtherType);
+        tilOtherSpecialist.setHint("Other Specialist or Test");
         spinnerType= (MySpinner) findViewById(R.id.spinnerType);
         spinnerFrequency= (MySpinner) findViewById(R.id.spinnerFrequency);
         imgBack= (ImageView) findViewById(R.id.imgBack);
@@ -136,14 +136,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        txtName.setOnTouchListener(new View.OnTouchListener() {
+        /*txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 tilName.setHintEnabled(true);
                 txtName.setFocusable(true);
                 return false;
             }
-        });
+        });*/
 
         rgCompleted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -181,6 +181,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                         }
                     }
                     spinnerFrequency.setSelection(index+1);
+                }
+                if (a.getFrequency().equals("Other"))
+                {
+                    txtOtherFrequency.setText(a.getOtherFrequency());
+                }
+                if (a.getType().equals("Other"))
+                {
+                    txtOtherSpecialist.setText(a.getOtherDoctor());
                 }
                 if (a.getType()!=null)
                 {

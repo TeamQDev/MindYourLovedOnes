@@ -103,11 +103,11 @@ TextView txtHeader,txtInfo;
                     rlPdf.setVisibility(View.VISIBLE);
                     break;
                 case "Condition":
-                    rlPdf.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.VISIBLE);
                     break;
 
                 case "ConditionUpdate":
-                    rlPdf.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.VISIBLE);
                     break;
                 case "Hospital":
                     rlPdf.setVisibility(View.GONE);
@@ -133,6 +133,8 @@ TextView txtHeader,txtInfo;
                     break;
             }
             switch (from) {
+
+
                 case "Allergy":
                     header = "Types of Reaction to Consider :";
                     msg =   "<br>Anaphylaxis<br>" +
@@ -206,11 +208,21 @@ TextView txtHeader,txtInfo;
                     txtInfo.setText(Html.fromHtml(msg));
                    break;
                 case "Condition":
-
+                    header = "Recommendation:<br>Use Medical History Template";
+                    msg =   "<br>" +
+                            "Click on<br>" +
+                            "Resources/Forms and Templates/Medical History Template" ;
+                    txtHeader.setText(Html.fromHtml(header));
+                    txtInfo.setText(Html.fromHtml(msg));
                     break;
 
                 case "ConditionUpdate":
-
+                    header = "Recommendation:<br>Use Medical History Template";
+                    msg =   "<br>" +
+                            "Click on<br>" +
+                            "Resources/Forms and Templates/Medical History Template" ;
+                    txtHeader.setText(Html.fromHtml(header));
+                    txtInfo.setText(Html.fromHtml(msg));
                     break;
                 case "Hospital":
 

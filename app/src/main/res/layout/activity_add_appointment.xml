@@ -81,6 +81,7 @@
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
+            custom:ms_floatingLabelColor="@color/colorBlue"
             android:visibility="gone"
             >
 
@@ -102,7 +103,6 @@
         android:id="@+id/tilName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hintEnabled="false"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/dimension8dp"
