@@ -18,6 +18,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.AideQuery;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
@@ -257,6 +261,17 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Personal & Medical Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
+                    Paragraph p = new Paragraph(" ");
+                    LineSeparator line = new LineSeparator();
+                    line.setOffset(-4);
+                    line.setLineColor(BaseColor.LIGHT_GRAY);
+                    p.add(line);
+                    try {
+                        Header.document.add(p);
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
                     Header.addEmptyLine(1);
 /*
                     new Header().createPdfHeader(file.getAbsolutePath(),

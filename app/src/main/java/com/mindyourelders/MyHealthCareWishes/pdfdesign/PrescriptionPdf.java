@@ -29,11 +29,11 @@ public class PrescriptionPdf {
             Header.addEmptyLine(1);
            
             for (int i = 0; i < prescriptionList.size(); i++) {
-                int k = i + 1;
+               /* int k = i + 1;
                 Header.addEmptyLine(1);
                 Header.addChank("Prescription Tracker " + k + " : ");
                 messagePrescription.add("Prescription Tracker " + k + " : ");
-                Header.addEmptyLine(1);
+                Header.addEmptyLine(1);*/
 
                 PdfPTable table;
                 table = new PdfPTable(2);

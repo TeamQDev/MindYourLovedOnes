@@ -39,7 +39,7 @@ public class DocumentPdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Advance Directive" + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -48,7 +48,7 @@ public class DocumentPdf {
                 table.addCell(cell);
 
                 messageAdvance.add("Advance Directive" + k + " :");
-                messageAdvance.add("");
+                messageAdvance.add("");*/
 
                 Document s = adList.get(i);
 
@@ -157,7 +157,7 @@ public class DocumentPdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Other Document" + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -166,7 +166,7 @@ public class DocumentPdf {
                 table.addCell(cell);
 
                 messageOther.add("Other Document" + k + " :");
-                messageOther.add("");
+                messageOther.add("");*/
 
                 Document s = otherList.get(i);
 
@@ -304,7 +304,7 @@ public class DocumentPdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Medical Record" + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -313,7 +313,7 @@ public class DocumentPdf {
                 table.addCell(cell);
 
                 messageRecord.add("Medical Record" + k + " :");
-                messageRecord.add("");
+                messageRecord.add("");*/
 
                 Document s = recordList.get(i);
 

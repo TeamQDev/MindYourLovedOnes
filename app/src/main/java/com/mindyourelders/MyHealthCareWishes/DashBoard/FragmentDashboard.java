@@ -6,7 +6,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -234,8 +233,9 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
            // byte[]array =connection.getPhoto();
             File imgFile = new File(connection.getPhoto());
             if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imgProfile.setImageBitmap(myBitmap);
+              /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgProfile.setImageBitmap(myBitmap);*/
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptions);
             }else{
                 imgProfile.setImageResource(R.drawable.ic_profile_defaults);
             }

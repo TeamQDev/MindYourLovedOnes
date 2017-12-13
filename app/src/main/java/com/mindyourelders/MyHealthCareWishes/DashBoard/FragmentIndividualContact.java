@@ -43,6 +43,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.InsuranceHealthCare.FaxCustomDialog;
 import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
@@ -1126,6 +1130,17 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         ""+preferences.getString(PrefConstants.CONNECTED_NAME));
                 Header.addEmptyLine(1);
                 Header.addusereNameChank("Personal Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                Header.addEmptyLine(1);
+                Paragraph p = new Paragraph(" ");
+                LineSeparator line = new LineSeparator();
+                line.setOffset(-4);
+                line.setLineColor(BaseColor.LIGHT_GRAY);
+                p.add(line);
+                try {
+                    Header.document.add(p);
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
                 Header.addEmptyLine(1);
                /* new Header().createPdfHeader(file.getAbsolutePath(),
                         "Personal Profile");

@@ -47,7 +47,7 @@ public class EventPdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Appointment Checklist " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -55,7 +55,7 @@ public class EventPdf {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageAppoint.add("Appointment Checklist " + k + " :");
-                messageAppoint.add("");
+                messageAppoint.add("");*/
 
                 Appoint s = appointList.get(i);
 
@@ -102,9 +102,19 @@ public class EventPdf {
                 messageAppoint.add("Frequency :");
                 messageAppoint.add(frequency);
 
+
+                cell = new PdfPCell(new Phrase("Date Completed" + " :"));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageAppoint.add("Date Completed" + " :");
+                messageAppoint.add("");
+
                 ArrayList<DateClass> datelist = DateQuery.fetchAllDosageRecord(appointList.get(i).getUserid(), appointList.get(i).getUnique());
                 for (int j = 0; j < datelist.size(); j++) {
-                    k = j + 1;
+                  /*  k = j + 1;
                     cell = new PdfPCell(new Phrase("Date Completed " + k + " :"));
                     cell.setBorder(Rectangle.BOTTOM);
                     cell.setUseBorderPadding(true);
@@ -112,7 +122,7 @@ public class EventPdf {
                     cell.setBorderColorBottom(BaseColor.WHITE);
                     table.addCell(cell);
                     messageAppoint.add("Date Completed " + k + " :");
-                    messageAppoint.add("");
+                    messageAppoint.add("");*/
 
                     DateClass d = datelist.get(j);
 
@@ -128,6 +138,17 @@ public class EventPdf {
                     table.addCell(cell);
                     messageAppoint.add("Date :");
                     messageAppoint.add(date);
+                }
+                if (!(datelist.size()%2==0))
+                {
+                    cell = new PdfPCell(new Phrase(""));
+                    cell.setBorder(Rectangle.BOTTOM);
+                    cell.setUseBorderPadding(true);
+                    cell.setBorderWidthBottom(5);
+                    cell.setBorderColorBottom(BaseColor.WHITE);
+                    table.addCell(cell);
+                    messageAppoint.add("");
+                    messageAppoint.add("");
                 }
 
                 Header.document.add(table);
@@ -166,7 +187,7 @@ public class EventPdf {
                 table = new PdfPTable(2);
                 PdfPCell cell;
                 table.setWidthPercentage(100);
-
+/*
                 int k = i + 1;
                 cell = new PdfPCell(new Phrase("Event Notes " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -176,7 +197,7 @@ public class EventPdf {
                 table.addCell(cell);
 
                 messageEvent.add("Event Notes " + k + " :");
-                messageEvent.add("");
+                messageEvent.add("");*/
 
                 Note s = noteList.get(i);
 

@@ -48,7 +48,7 @@ public class Specialty {
                 table = new PdfPTable(2);
                 PdfPCell cell;
                 table.setWidthPercentage(100);
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Doctors " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -56,7 +56,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageDoctor.add("Doctors " + k + " :");
-                messageDoctor.add("");
+                messageDoctor.add("");*/
 
                 Specialist s = specialistsList.get(i);
 
@@ -229,6 +229,17 @@ public class Specialty {
                 table.addCell(cell);
                 messageDoctor.add("Notes :");
                 messageDoctor.add(note);
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageDoctor.add("");
+                messageDoctor.add(note);
+
+
                 Header.document.add(table);
                 Paragraph p = new Paragraph(" ");
                 DottedLineSeparator line = new DottedLineSeparator();
@@ -265,7 +276,7 @@ public class Specialty {
                 table = new PdfPTable(2);
                 PdfPCell cell;
                 table.setWidthPercentage(100);
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Hospitals And Other Health Professionals " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -273,7 +284,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageHospital.add("Hospitals And Other Health Professionals " + k + " :");
-                messageHospital.add("");
+                messageHospital.add("");*/
 
                 Hospital h = hospitalList.get(i);
 
@@ -493,7 +504,7 @@ public class Specialty {
                 table = new PdfPTable(2);
                 PdfPCell cell;
                 table.setWidthPercentage(100);
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Pharmacies And Home Medical Equipment " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -501,7 +512,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messagePharmacy.add("Pharmacies And Home Medical Equipment " + k + " :");
-                messagePharmacy.add("");
+                messagePharmacy.add("");*/
 
                 Pharmacy p = pharmacyList.get(i);
 
@@ -790,7 +801,7 @@ public class Specialty {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Finance,Insurance,Legal " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -798,7 +809,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageFinance.add("Finance,Insurance,Legal " + k + " :");
-                messageFinance.add("");
+                messageFinance.add("");*/
 
                 Finance f = financeList.get(i);
 

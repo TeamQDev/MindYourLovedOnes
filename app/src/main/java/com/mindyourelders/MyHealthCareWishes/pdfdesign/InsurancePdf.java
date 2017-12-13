@@ -43,7 +43,7 @@ public class InsurancePdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Insurance Information " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -52,7 +52,7 @@ public class InsurancePdf {
                 table.addCell(cell);
                 messageInsurance.add("Insurance Information " + k + " :");
                 messageInsurance.add("");
-
+*/
                 Insurance s = insuranceList.get(i);
 
                 String name = "";
@@ -198,6 +198,15 @@ public class InsurancePdf {
                 messageInsurance.add("Notes :");
                 messageInsurance.add(notes);
 
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageInsurance.add("");
+                messageInsurance.add(notes);
+
                 Header.document.add(table);
                 Paragraph p = new Paragraph(" ");
                 DottedLineSeparator line = new DottedLineSeparator();
@@ -235,7 +244,7 @@ public class InsurancePdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Insurance Card " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -243,7 +252,7 @@ public class InsurancePdf {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageCard.add("Insurance Card " + k + " :");
-                messageCard.add("");
+                messageCard.add("");*/
 
                 Card s = cardList.get(i);
 
@@ -364,7 +373,7 @@ public class InsurancePdf {
                 PdfPCell cell;
                 table.setWidthPercentage(100);
 
-                int k = i + 1;
+               /* int k = i + 1;
                 cell = new PdfPCell(new Phrase("Insurance Form " + k + " :"));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
@@ -372,7 +381,7 @@ public class InsurancePdf {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageForm.add("Insurance Form " + k + " :");
-                messageForm.add("");
+                messageForm.add("");*/
 
                 Form s = formList.get(i);
 
@@ -387,6 +396,15 @@ public class InsurancePdf {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageForm.add("Form Name : ");
+                messageForm.add(name);
+
+                cell = new PdfPCell(new Phrase(""));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageForm.add("");
                 messageForm.add(name);
 /*
                 String type = "";
