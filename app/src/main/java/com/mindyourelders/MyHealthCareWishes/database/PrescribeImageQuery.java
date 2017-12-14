@@ -112,23 +112,87 @@ public class PrescribeImageQuery {
         }
     }
 
-    public static Boolean updateImageData(ArrayList<PrescribeImage> imageList, int unique, ArrayList<PrescribeImage> d) {
+    public static Boolean updateImageData(ArrayList<PrescribeImage> imageList, int unique, ArrayList<PrescribeImage> oldList, ArrayList<PrescribeImage> imageListOld, int userid) {
         boolean flag=false;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        for(int i=0;i<imageList.size();i++) {
-            ContentValues cv = new ContentValues();
-            cv.put(COL_Image, imageList.get(i).getImage());
+        if (oldList.size()<imageList.size())
+        {
+            if (oldList.size()==0)
+            {
+                for (int j=0;j<imageList.size();j++) {
+                    ContentValues cv = new ContentValues();
+                    cv.put(COL_USERID, userid);
+                    cv.put(COL_PREID, unique);
+                    cv.put(COL_Image, imageList.get(j).getImage());
 
-            int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique+" and "+COL_ID+ "=" + d.get(i).getId(), null);
+                    long rowid = db.insert(TABLE_NAME, null, cv);
+
+                    if (rowid == -1) {
+                        flag = false;
+                    } else {
+                        flag = true;
+                    }
+                }
+            }
+            else{
+           // for(int i=0;i<oldList.size();i++) {
+                for (int j=0;j<imageList.size();j++) {
+                    if (imageList.get(j).getPreid()!=0) {
+                        ContentValues cv = new ContentValues();
+                        cv.put(COL_Image, imageList.get(j).getImage());
+                        int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique + " and " + COL_ID + "=" + imageList.get(j).getId(), null);
+
+                        if (rowid == 0) {
+                            flag = false;
+                        } else {
+                            flag = true;
+                        }
+                    } else {
+                        ContentValues cv = new ContentValues();
+                        cv.put(COL_USERID, userid);
+                        cv.put(COL_PREID, unique);
+                        cv.put(COL_Image, imageList.get(j).getImage());
+
+                        long rowid = db.insert(TABLE_NAME, null, cv);
+
+                        if (rowid == -1) {
+                            flag = false;
+                        } else {
+                            flag = true;
+                        }
+                    }
+                }
+          //  }
+            }
+        }
+else {
+            for (int i = 0; i < imageList.size(); i++) {
+                ContentValues cv = new ContentValues();
+                cv.put(COL_Image, imageList.get(i).getImage());
+
+                int rowid = db.update(TABLE_NAME, cv, COL_PREID + "=" + unique + " and " + COL_ID + "=" + oldList.get(i).getId(), null);
 
 
-            if (rowid == 0) {
-                flag = false;
-            } else {
-                flag = true;
+                if (rowid == 0) {
+                    flag = false;
+                } else {
+                    flag = true;
+                }
             }
         }
             return flag;
+    }
+
+    public static boolean deleteImageRecord(int id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_ID + "='" + id + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                db.execSQL("delete from " + TABLE_NAME + " where " + COL_ID + "='" + id+"';");
+            } while (c.moveToNext());
+        }
+        return true;
     }
 }

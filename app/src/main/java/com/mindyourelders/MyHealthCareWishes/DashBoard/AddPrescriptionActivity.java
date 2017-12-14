@@ -67,11 +67,13 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     String currentImage=null;
     Uri imageUriProfile=null;
     ContentValues values=null;
+    int userid;
 
     ImageView imgBack, imgAddDosage, imgAddPhoto,imgDone;
     ListView ListDosage, ListPhoto;
     ArrayList<Dosage> dosageList = new ArrayList<>();
     ArrayList<PrescribeImage> imageList = new ArrayList<>();
+    ArrayList<PrescribeImage> imageListOld = new ArrayList<>();
     RelativeLayout llAddPrescription;
     String pre = "No";
     ToggleButton tbPre;
@@ -226,6 +228,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             isEdit=i.getExtras().getBoolean("IsEdit");
             if (isEdit==true) {
                 id = p.getUnique();
+                userid=p.getUserid();
                 colid=p.getId();
                 txtName.setText(p.getDoctor());
                 txtDate.setText(p.getDates());
@@ -243,7 +246,8 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 txtFrequency.setText(p.getFrequency());
                 txtMedicine.setText(p.getMedicine());
                 dosageList = p.getDosageList();
-                imageList = p.getPrescriptionImageList();
+                imageList = PrescribeImageQuery.fetchAllImageRecord(p.getUserid(),p.getUnique());
+                imageListOld=imageList;
                 setDosageData();
                 setImageListData();
             }
@@ -334,7 +338,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 }
             }
                 else{
-                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx,dose,frequency,medicine);
+                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx,dose,frequency,medicine,imageListOld);
                     if (flag == true) {
                         Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
                         closeKeyboard(AddPrescriptionActivity.this);
@@ -654,11 +658,17 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                     String photo = data.getExtras().getString("Photo");
                     for (int i = 0; i < imageList.size(); i++) {
                         if (imageList.get(i).getImage().equals(photo)) {
-                            imageList.remove(i);
+                            boolean flag= PrescribeImageQuery.deleteImageRecord(imageList.get(i).getId());
+                            if(flag==true)
+                            {
+                                Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+                                imageList.remove(imageList.get(i));
+                                setImageListData();
+                            }
                         }
                     }
 
-                    setImageListData();
+                   // setImageListData();
                 }
             }
         }

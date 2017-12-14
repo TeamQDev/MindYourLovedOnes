@@ -53,7 +53,6 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     DBHelper dbHelper;
 
     RelativeLayout rlAD,rlHome,rlMedical,rlInsurance,rlOther,rlLegal,rlMedicalRecord;
-
     TextView txtOne,txtTwo,txtUserName;
 
     @Override
@@ -125,7 +124,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getDocuments() {
-        documentList=new ArrayList<>();
+      /*  documentList=new ArrayList<>();
 
         Document P1=new Document();
         P1.setName("HealthCare Proxy");
@@ -154,7 +153,7 @@ public class CarePlanActivity extends AppCompatActivity implements View.OnClickL
         documentList.add(P1);
         documentList.add(P2);
         documentList.add(P3);
-        documentList.add(P4 );
+        documentList.add(P4 );*/
     }
 
     @Override

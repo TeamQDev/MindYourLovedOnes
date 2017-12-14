@@ -11,6 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,11 +40,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
-public class FilesActivity extends DropboxActivity {
+public class FilesActivity extends DropboxActivity implements ZipListner{
     private static final String TAG = FilesActivity.class.getName();
 
     public final static String EXTRA_PATH = "FilesActivity_Path";
@@ -120,35 +124,69 @@ public class FilesActivity extends DropboxActivity {
         DBHelper dbHelper=new DBHelper(FilesActivity.this);
 
         File path=FilesActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
-/*
+
         Log.e("", path.getAbsolutePath());
         FileChannel source = null;
         FileChannel destination = null;
 
         String str=path.getAbsolutePath();
-        int index=str.lastIndexOf('/');
-        File currentDB = new File(str.substring(0,index+1));
+       // int index=str.lastIndexOf('/');
+       // File currentDB = new File(str.substring(0,index+1));
+        File currentDB = new File(str);
         File backupDB = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/");
+                "/MYLO/MYE.db");
+        if (!backupDB.exists())
+        {
+            try {
+                backupDB.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             copyFile(currentDB,backupDB);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-        //uploadFile(data.getData().toString());
-        // Launch intent to pick file for upload
-       //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-       // intent.addCategory(Intent.CATEGORY_OPENABLE);
-       // intent.setType("*/*");
-         Uri contentUri=null;
-      /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-              contentUri = FileProvider.getUriForFile(FilesActivity.this, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", path);
-        } else {*/
-            contentUri = Uri.fromFile(path);
-      //  }
-        uploadFile(contentUri.toString());
-       // startActivityForResult(intent, PICKFILE_REQUEST_CODE);*/
+        }
+        File folder = new File(Environment.getExternalStorageDirectory(),
+                "/MYLO");
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mye/MYE.zip");
+        if (!destfolder.exists())
+        {
+            try {
+                destfolder.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        new ZipTask(FilesActivity.this,folder.getAbsolutePath(),destfolder.getAbsolutePath()).execute();
+       // zipFolder(folder.getAbsolutePath(),destfolder.getAbsolutePath());
+
+    }
+
+    private static void zipFolder(String inputFolderPath, String outZipPath) {
+        try {
+            FileOutputStream fos = new FileOutputStream(outZipPath);
+            ZipOutputStream zos = new ZipOutputStream(fos);
+            File srcFile = new File(inputFolderPath);
+            File[] files = srcFile.listFiles();
+            Log.d("", "Zip directory: " + srcFile.getName());
+            for (int i = 0; i < files.length; i++) {
+                Log.d("", "Adding file: " + files[i].getName());
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = new FileInputStream(files[i]);
+                zos.putNextEntry(new ZipEntry(files[i].getName()));
+                int length;
+                while ((length = fis.read(buffer)) > 0) {
+                    zos.write(buffer, 0, length);
+                }
+                zos.closeEntry();
+                fis.close();
+            }
+            zos.close();
+        } catch (IOException ioe) {
+            Log.e("", ioe.getMessage());
+        }
     }
 
     private void copy(File backupDB, File currentDB) {
@@ -436,6 +474,22 @@ public class FilesActivity extends DropboxActivity {
                 action.getPermissions(),
                 action.getCode()
         );
+    }
+
+    public void getFile(String s) {
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mye/MYE.zip");
+        if (!destfolder.exists())
+        {
+            try {
+                destfolder.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Uri contentUri=null;
+        contentUri = Uri.fromFile(destfolder);
+        uploadFile(contentUri.toString());
     }
 
     private enum FileAction {

@@ -17,10 +17,11 @@
 
             <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                 android:id="@+id/imgConPhoto"
-                android:layout_width="@dimen/dimension80dp"
-                android:layout_height="@dimen/dimension80dp"
+                android:layout_width="@dimen/dimension60dp"
+                android:layout_height="@dimen/dimension60dp"
                 android:src="@drawable/ic_profile_defaults"
                 android:background="@color/colorLightBlue"
+                android:layout_centerVertical="true"
                 />
 
             <TextView
@@ -46,7 +47,6 @@
                 android:text="789564132"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
-                android:layout_toLeftOf="@+id/imglink"
                 android:layout_below="@+id/txtConName"
                 android:drawableLeft="@drawable/phone"
                 android:gravity="top|left"
@@ -63,7 +63,6 @@
                 android:text="suzy.jkd@gmail.com"
                 android:textColor="@color/colorDarkGray"
                 android:textSize="@dimen/dimension16dp"
-                android:layout_toLeftOf="@+id/imglink"
                 android:layout_below="@+id/txtPhone"
                 android:drawableLeft="@drawable/email"
                 android:gravity="top|left"

@@ -44,14 +44,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.drawable.pdf;
-
 
 public class CarePlanListActivity extends AppCompatActivity implements View.OnClickListener {
     Context context=this;
     SwipeMenuListView lvDoc;
     ArrayList<Document> documentList;
-    ArrayList<Document> documentListOld;
+    ArrayList<Document> documentListOld=new ArrayList<>();
     ImageView imgBack,imgRight;
     TextView txtTitle,txtAdd;
     String From;
@@ -70,7 +68,7 @@ DBHelper dbHelper;
         initListener();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        getDocuments();
+      //  getDocuments();
         setDocuments();
     }
 
@@ -171,7 +169,7 @@ DBHelper dbHelper;
     }
 
     private void getDocuments() {
-        documentListOld=new ArrayList<>();
+      /*  documentListOld=new ArrayList<>();
          switch (From) {
             case "AD":
                 Document P1d = new Document();
@@ -266,7 +264,7 @@ DBHelper dbHelper;
                // documentListOld.add(P3);
                 break;
         }
-        documentListOld= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);
+        documentListOld= DocumentQuery.fetchAllDocumentRecord(preferences.getInt(PrefConstants.CONNECTED_USERID),From);*/
        // documentListOld.addAll(documentList);
        /* switch (From)
         {

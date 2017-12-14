@@ -149,7 +149,7 @@ public class PrescriptionQuery {
             return true;
     }
 
-    public static Boolean updatePrescriptionData(int colid, int id, String doctor, String purpose, String note, String date, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int userid, String pre, String rx, String dose, String frequency, String medicine) {
+    public static Boolean updatePrescriptionData(int colid, int id, String doctor, String purpose, String note, String date, ArrayList<Dosage> dosageList, ArrayList<PrescribeImage> imageList, int userid, String pre, String rx, String dose, String frequency, String medicine, ArrayList<PrescribeImage> imageListOld) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -174,10 +174,12 @@ public class PrescriptionQuery {
         else
         {
             flag=true;
-            ArrayList<Dosage> d=DosageQuery.fetchAllDosageRecord(userid,id);
+            //ArrayList<Dosage> d=DosageQuery.fetchAllDosageRecord(userid,id);
+
+
+          //  Boolean flags = DosageQuery.updateDosageData(dosageList,id,d);
             ArrayList<PrescribeImage> i=PrescribeImageQuery.fetchAllImageRecord(userid,id);
-            Boolean flags = DosageQuery.updateDosageData(dosageList,id,d);
-            Boolean flag3 = PrescribeImageQuery.updateImageData(imageList,id,i);
+            Boolean flag3 = PrescribeImageQuery.updateImageData(imageList,id,i,imageListOld,userid);
         }
         return flag;
     }
