@@ -125,11 +125,11 @@ TextView txtHeader,txtInfo;
                     break;
 
                 case "Vaccine":
-                    rlPdf.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.VISIBLE);
                     break;
 
                 case "VaccineUpdate":
-                    rlPdf.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.VISIBLE);
                     break;
             }
             switch (from) {
@@ -279,6 +279,42 @@ TextView txtHeader,txtInfo;
                             "<li>Tonsils</li>" +
                             "<li>Vascular Surgery</li>" +
                             "<li>Wisdom Teeth</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+
+                case "Vaccine":
+                    header="Vaccines to Consider :";
+                    msg="<br><ul><li>Chickenpox (Varicella)</li>" +
+                            "<li>Hepatitis A</li>" +
+                            "<li>Hepatitis B</li>" +
+                            "<li>Hib</li>" +
+                            "<li>Human Papillomavirus (HPV)</li>" +
+                            "<li>Influenza (Flu)</li>" +
+                            "<li>Measles, Mumps, Rubella (MMR)</li>" +
+                            "<li>Meningococcal</li>" +
+                            "<li>Polio (IPV)</li>" +
+                            "<li>Pneumococcal (PCV and PPSV)</li>" +
+                            "<li>Shingles (Herpes Zoster)</li>" +
+                            "<li>Tetanus, Diphtheria, Pertussis (Td, Tdap)</li></ul>";
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
+                    break;
+
+                case "VaccineUpdate":
+                    header="Vaccines to Consider :";
+                    msg="<br><ul><li>Chickenpox (Varicella)</li>" +
+                            "<li>Hepatitis A</li>" +
+                            "<li>Hepatitis B</li>" +
+                            "<li>Hib</li>" +
+                            "<li>Human Papillomavirus (HPV)</li>" +
+                            "<li>Influenza (Flu)</li>" +
+                            "<li>Measles, Mumps, Rubella (MMR)</li>" +
+                            "<li>Meningococcal</li>" +
+                            "<li>Polio (IPV)</li>" +
+                            "<li>Pneumococcal (PCV and PPSV)</li>" +
+                            "<li>Shingles (Herpes Zoster)</li>" +
+                            "<li>Tetanus, Diphtheria, Pertussis (Td, Tdap)</li></ul>";
                     txtHeader.setText(header);
                     txtInfo.setText(Html.fromHtml(msg));
                     break;

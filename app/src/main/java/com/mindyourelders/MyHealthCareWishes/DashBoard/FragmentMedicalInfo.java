@@ -844,7 +844,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             case R.id.imgRight:
 
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "MedicalProfile.pdf");
@@ -882,7 +882,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
                     public void onClick(DialogInterface dialog, int itemPos) {
                         String path= Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                 + "/MedicalProfile.pdf";
                         switch (itemPos) {
                             case 0: //View

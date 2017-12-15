@@ -256,7 +256,7 @@ ImageView imgRight;
 
             case R.id.imgRight:
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "InsuranceCard.pdf");
@@ -288,7 +288,7 @@ ImageView imgRight;
 
                     public void onClick(DialogInterface dialog, int itemPos) {
                         String path= Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                 + "/InsuranceCard.pdf";
                         switch (itemPos) {
                             case 0: // view

@@ -134,7 +134,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
        // File currentDB = new File(str.substring(0,index+1));
         File currentDB = new File(str);
         File backupDB = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/MYE.db");
+                "/MYLO/MYLO.db");
         if (!backupDB.exists())
         {
             try {
@@ -150,7 +150,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
         }
         File folder = new File(Environment.getExternalStorageDirectory(),
                 "/MYLO");
-        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mye/MYE.zip");
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mylo/MYLO.zip");
         if (!destfolder.exists())
         {
             try {
@@ -282,7 +282,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
                     }
                     else if(preferences.getString(PrefConstants.STORE).equals("Restore"))
                     {
-                        if (result.getEntries().get(i).getName().endsWith(".db")) {
+                        if (result.getEntries().get(i).getName().endsWith(".zip")) {
                             // if (result.getEntries().get(i).getName().endsWith(".pdf")||result.getEntries().get(i).getName().endsWith(".db")) {
                             resultList.add(result.getEntries().get(i));
                         }
@@ -477,7 +477,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
     }
 
     public void getFile(String s) {
-        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mye/MYE.zip");
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mylo/MYLO.zip");
         if (!destfolder.exists())
         {
             try {

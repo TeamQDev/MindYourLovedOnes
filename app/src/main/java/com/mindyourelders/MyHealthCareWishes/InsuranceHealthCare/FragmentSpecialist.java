@@ -186,7 +186,7 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
                 break;
             case R.id.imgRight:
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "Doctor.pdf");
@@ -217,7 +217,7 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
 
                     public void onClick(DialogInterface dialog, int itemPos) {
 String path=Environment.getExternalStorageDirectory()
-        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
         + "/Doctor.pdf";
                         switch (itemPos) {
                             case 0: //View

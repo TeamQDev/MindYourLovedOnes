@@ -94,7 +94,7 @@ public class SpecialistsActivity extends AppCompatActivity {
     final CharSequence[] dialog_items = {"View","Email","Fax" };
     Preferences preferences;
     DBHelper dbHelper;
-    final static String TARGET_BASE_PATH = "/sdcard/MYE/images/";
+    final static String TARGET_BASE_PATH = "/sdcard/MYLO/images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,7 +209,7 @@ public class SpecialistsActivity extends AppCompatActivity {
 
                 if (from.equals("Speciality")) {
                     final String RESULT = Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                     File dirfile = new File(RESULT);
                     dirfile.mkdirs();
                     File file = new File(dirfile, "Specialty.pdf");
@@ -248,7 +248,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                 else if (from.equals("Emergency"))
                 {
                     final String RESULT = Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                     File dirfile = new File(RESULT);
                     dirfile.mkdirs();
                     File file = new File(dirfile, "Profile.pdf");
@@ -317,7 +317,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                 else if (from.equals("Insurance"))
                 {
                     final String RESULT = Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                     File dirfile = new File(RESULT);
                     dirfile.mkdirs();
                     File file = new File(dirfile, "Insurance.pdf");
@@ -349,7 +349,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                 else if (from.equals("Event"))
                 {
                     final String RESULT = Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                     File dirfile = new File(RESULT);
                     dirfile.mkdirs();
                     File file = new File(dirfile, "Event.pdf");
@@ -414,7 +414,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         result.append(new MessageString().getFinanceInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                                 + "/Specialty.pdf",
                                                 context, result);
 
@@ -433,7 +433,7 @@ public class SpecialistsActivity extends AppCompatActivity {
 
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                                 + "/Profile.pdf",
                                                 context, result);
 
@@ -448,13 +448,13 @@ public class SpecialistsActivity extends AppCompatActivity {
                                         result.append(new MessageString().getProxyInfo());
 
                                         new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                                 + "/Profile.pdf",
                                                 context, result);
 
                                         System.out.println("\n" + result + "\n");
                  /* new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                             + "/Profile.pdf", getActivity(),
                             new MessageString().getProfileProfile(connection));*/
                                     }
@@ -467,7 +467,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                     result.append(new MessageString().getFormInfo());
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf",
                                             context, result);
 
@@ -483,7 +483,7 @@ public class SpecialistsActivity extends AppCompatActivity {
 
 
                                     new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf",
                                             context, result);
 
@@ -494,22 +494,22 @@ public class SpecialistsActivity extends AppCompatActivity {
                             case 1: // email
                                 if (from.equals("Speciality")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Specialty.pdf");
                                     emailAttachement(f,"Speciality");
                                 } else if (from.equals("Emergency")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Profile.pdf");
                                     emailAttachement(f, "Profile");
                                 } else if (from.equals("Insurance")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf");
                                     emailAttachement(f, "Insurance");
                                 } else if (from.equals("Event")) {
                                     File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf");
                                     emailAttachement(f, "Event");
                                 }
@@ -518,34 +518,34 @@ public class SpecialistsActivity extends AppCompatActivity {
                             case 2://Fax
                                 if (from.equals("Speciality")) {
                                     serverAttachement(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Specialty.pdf");
                                   /*  File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Specialty.pdf");
                                     emailAttachement(f);*/
                                 } else if (from.equals("Emergency")) {
                                     serverAttachement(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Profile.pdf");
                                   /*  File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Profile.pdf");
                                     emailAttachement(f);*/
                                 } else if (from.equals("Insurance")) {
                                     serverAttachement(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf");
                                     /*File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Insurance.pdf");*/
                                    // emailAttachement(f);
                                 } else if (from.equals("Event")) {
                                     serverAttachement(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf");
                                   /*  File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Event.pdf");
                                     emailAttachement(f);*/
                                 }

@@ -24,6 +24,7 @@ import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxClientFactory;
 import com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.GetCurrentAccountTask;
+import com.mindyourelders.MyHealthCareWishes.DropBox.ZipListner;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
@@ -40,7 +41,7 @@ import java.nio.channels.FileChannel;
 import static com.mindyourelders.MyHealthCareWishes.utility.PrefConstants.URI;
 
 
-public class DropboxLoginActivity extends DropboxActivity {
+public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
     private static final int RESULTCODE = 400;
     Context context=this;
     private static final String APP_KEY = "428h5i4dsj95eeh";
@@ -232,12 +233,31 @@ public class DropboxLoginActivity extends DropboxActivity {
             else if (preferences.getString(PrefConstants.STORE).equals("Restore")){
                 final AlertDialog.Builder alert=new AlertDialog.Builder(context);
                 alert.setTitle("Restore?");
-                alert.setMessage("Do you want to restore "+preferences.getString(PrefConstants.RESULT)+" database?");
+                alert.setMessage("Do you want to unzip and  restore "+preferences.getString(PrefConstants.RESULT)+" database?");
                 alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        copydb(context);
                         dialog.dismiss();
+/*
+                        String sd= Environment.getExternalStorageDirectory().getAbsolutePath();
+                        //  File data=DropboxLoginActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
+                        String backupDBPath = "/Download/" + "MYLO.zip";;
+                        *//*File currentDB = new File( data.getAbsolutePath());
+                        File backupDB = new File(sd,backupDBPath);*//*
+
+                        File folder = new File(sd,backupDBPath);
+                        File destfolder = new File(Environment.getExternalStorageDirectory(),
+                                "/MYLO");
+                        if (!destfolder.exists())
+                        {
+                            try {
+                                destfolder.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        new UnZipTask(DropboxLoginActivity.this,folder.getAbsolutePath(),destfolder.getAbsolutePath()).execute();
+                        // copydb(context);*/
                     }
                 });
                 alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -284,8 +304,8 @@ public class DropboxLoginActivity extends DropboxActivity {
         FileChannel source = null;
         FileChannel destination = null;
         String currentDBPath = "//data//com.mindyourelders.MyHealthCareWishes.HomeActivity"
-                + "//databases//" + "MYE.db";
-        String backupDBPath = "/Download/" + "MYE.db";;
+                + "//databases//" + "MYLO.db";
+        String backupDBPath = "/Download/" + "MYLO.db";;
         File currentDB = new File( data.getAbsolutePath());
         File backupDB = new File(sd,backupDBPath);
         try {
@@ -324,4 +344,8 @@ public class DropboxLoginActivity extends DropboxActivity {
     }
 
 
+    @Override
+    public void getFile(String res) {
+
+    }
 }

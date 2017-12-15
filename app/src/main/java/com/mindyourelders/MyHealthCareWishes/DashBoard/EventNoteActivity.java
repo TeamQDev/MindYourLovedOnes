@@ -209,7 +209,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.imgRight:
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "EventNote.pdf");
@@ -241,7 +241,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
 
                     public void onClick(DialogInterface dialog, int itemPos) {
                         String path= Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                 + "/EventNote.pdf";
                         switch (itemPos) {
                             case 0: //View

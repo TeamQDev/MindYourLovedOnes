@@ -64,7 +64,7 @@ public class Preferences {
     public Preferences(Context context) {
         // TODO Auto-generated constructor stub\
         mContext = context;
-        preferences = context.getSharedPreferences("MHCWPref", Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences("MYLOPref", Context.MODE_PRIVATE);
         editor = preferences.edit();
     }
 

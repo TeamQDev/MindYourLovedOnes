@@ -513,7 +513,7 @@
         <com.mindyourelders.MyHealthCareWishes.customview.TextViewRomanS
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Courtesy of Barbara Keller from MYE."
+            android:text="Courtesy of Barbara Keller from MYLO."
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dimension19dp"
             android:textStyle="normal"

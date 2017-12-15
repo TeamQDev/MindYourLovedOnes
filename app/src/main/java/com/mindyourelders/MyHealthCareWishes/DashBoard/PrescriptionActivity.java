@@ -41,7 +41,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class PrescriptionActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TARGET_BASE_PATH =  "/sdcard/MYE/images/";
+    private static final String TARGET_BASE_PATH =  "/sdcard/MYLO/images/";
     Context context=this;
     SwipeMenuListView lvPrescription;
    // ListView lvPrescription;
@@ -118,7 +118,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "Prescription.pdf");
@@ -176,7 +176,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
 
 
                                 new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/Prescription.pdf",
                                         context, result);
 
@@ -186,14 +186,14 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
 
                             case 1: // email
                                 File f =new File(Environment.getExternalStorageDirectory()
-                                            + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                            + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                             + "/Prescription.pdf");
                                     emailAttachement(f,"Prescription");
 
                                 break;
                             case 2: // Fax
                                 serverAttachement(Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/Prescription.pdf");
                                 break;
 

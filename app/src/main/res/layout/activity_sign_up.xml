@@ -369,7 +369,7 @@
             android:layout_below="@+id/tilPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimension30dp"
-            android:text="By creating an account, you agree to MYE "
+            android:text="By creating an account, you agree to MYLO "
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
 

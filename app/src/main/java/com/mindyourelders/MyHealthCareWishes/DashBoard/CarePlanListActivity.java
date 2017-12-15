@@ -390,7 +390,7 @@ DBHelper dbHelper;
                 switch (From) {
                     case "AD":
                         final String RESULT1 = Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                         File dirfile1 = new File(RESULT1);
                         dirfile1.mkdirs();
                         File file1 = new File(dirfile1, "AdvanceDirectives.pdf");
@@ -416,7 +416,7 @@ DBHelper dbHelper;
 
                             public void onClick(DialogInterface dialog, int itemPos) {
                                 String path= Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/AdvanceDirectives.pdf";
                                 switch (itemPos) {
                                     case 0: // view
@@ -443,7 +443,7 @@ DBHelper dbHelper;
                         break;
                     case "Record":
                         final String RESULT2 = Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                         File dirfile2 = new File(RESULT2);
                         dirfile2.mkdirs();
                         File file2 = new File(dirfile2, "MedicalRecords.pdf");
@@ -468,7 +468,7 @@ DBHelper dbHelper;
 
                             public void onClick(DialogInterface dialog, int itemPos) {
                                 String path= Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/MedicalRecords.pdf";
                                 switch (itemPos) {
                                     case 0: // view
@@ -496,7 +496,7 @@ DBHelper dbHelper;
                         break;
                     case "Other":
                         final String RESULT3 = Environment.getExternalStorageDirectory()
-                                + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
                         File dirfile3 = new File(RESULT3);
                         dirfile3.mkdirs();
                         File file3 = new File(dirfile3, "OtherDocuments.pdf");
@@ -521,7 +521,7 @@ DBHelper dbHelper;
 
                             public void onClick(DialogInterface dialog, int itemPos) {
                                 String path= Environment.getExternalStorageDirectory()
-                                        + "/mye/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                                         + "/OtherDocuments.pdf";
                                 switch (itemPos) {
                                     case 0: // view
