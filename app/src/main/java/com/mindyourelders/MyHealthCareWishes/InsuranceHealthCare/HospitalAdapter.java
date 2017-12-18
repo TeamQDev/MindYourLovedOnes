@@ -157,7 +157,7 @@ public class HospitalAdapter extends BaseAdapter{
         holder.txtType.setText(hospitalList.get(position).getName());
         if (hospitalList.get(position).getCategory().equals("Other"))
         {
-            holder.txtCategory.setText(hospitalList.get(position).getCategory()+"-"+hospitalList.get(position).getOtherCategory());
+            holder.txtCategory.setText(hospitalList.get(position).getCategory()+" - "+hospitalList.get(position).getOtherCategory());
         }
         else {
             holder.txtCategory.setText(hospitalList.get(position).getCategory());

@@ -235,7 +235,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                 new String[] { "" });
         String name= preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                name+"-"+s); // subject
+                name+" - "+s); // subject
 
 
         String body="Hi, \n" +

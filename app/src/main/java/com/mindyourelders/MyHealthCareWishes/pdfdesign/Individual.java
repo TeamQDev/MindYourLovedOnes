@@ -2152,6 +2152,19 @@ public class Individual {
                 messagePhysician.add("Speciality :");
                 messagePhysician.add(speciality);
 
+                String specialityOther = "";
+                if (s.getOtherType() != null) {
+                    specialityOther = s.getOtherType();
+                }
+                cell = new PdfPCell(new Phrase("Other Speciality : " + specialityOther));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messagePhysician.add("Other Speciality :");
+                messagePhysician.add(specialityOther);
+
                 String name = "";
                 if (s.getName() != null) {
                     name = s.getName();
@@ -3244,6 +3257,15 @@ public class Individual {
                 messageInfo3.add("Immunization/Vaccine :");
                 messageInfo3.add(vaccineList.get(i).getName());
 
+                cell8 = new PdfPCell(new Phrase("Other Immunization/Vaccine : " + vaccineList.get(i).getOther()));
+                cell8.setBorder(Rectangle.BOTTOM);
+                cell8.setUseBorderPadding(true);
+                cell8.setBorderWidthBottom(5);
+                cell8.setBorderColorBottom(BaseColor.WHITE);
+                table8.addCell(cell8);
+                messageInfo3.add("Other Immunization/Vaccine :");
+                messageInfo3.add(vaccineList.get(i).getOther());
+
                 cell8 = new PdfPCell(new Phrase("Date : " + vaccineList.get(i).getDate()));
                 cell8.setBorder(Rectangle.BOTTOM);
                 cell8.setUseBorderPadding(true);
@@ -3253,14 +3275,14 @@ public class Individual {
                 messageInfo3.add("Date :");
                 messageInfo3.add(vaccineList.get(i).getDate());
 
-//                cell8 = new PdfPCell(new Phrase(""));
-//                cell8.setBorder(Rectangle.BOTTOM);
-//                cell8.setUseBorderPadding(true);
-//                cell8.setBorderWidthBottom(5);
-//                cell8.setBorderColorBottom(BaseColor.WHITE);
-//                table8.addCell(cell8);
-//                messageInfo3.add("");
-//                messageInfo3.add("");
+               cell8 = new PdfPCell(new Phrase(""));
+                cell8.setBorder(Rectangle.BOTTOM);
+               cell8.setUseBorderPadding(true);
+               cell8.setBorderWidthBottom(5);
+               cell8.setBorderColorBottom(BaseColor.WHITE);
+               table8.addCell(cell8);
+               messageInfo3.add("");
+               messageInfo3.add("");
             }
 
             if ((vaccineList.size())%2!=0)

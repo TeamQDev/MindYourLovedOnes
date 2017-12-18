@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AddCardActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_CARD =50 ;
     ContentValues values;
     Uri imageUriFront,imageUriBack;
     Context context = this;
@@ -109,6 +110,8 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
         imgBack.setOnClickListener(this);
         imgEdit1.setOnClickListener(this);
         imgEdit2.setOnClickListener(this);
+        imgfrontCard.setOnClickListener(this);
+        imgBackCard.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -152,12 +155,39 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
            imgfrontCard.setImageBitmap(bmp);*/
             File imgFile = new File(photo);
             if (imgFile.exists()) {
-                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)), imgfrontCard, displayImageOptions);
+               /* BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),bmOptions);
+                Matrix matrix = new Matrix();
+                if (bitmap.getHeight()>bitmap.getWidth()) {
+                    matrix.postRotate(90);
+                }
+                else
+                {
+                    matrix.postRotate(0);
+                }
+                //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap , 0, 0, bitmap .getWidth(), bitmap .getHeight(), matrix, true);
+                imgfrontCard.setImageBitmap(rotatedBitmap);*/
+                //bitmap = Bitmap.createScaledBitmap(bitmap,bitmap.getWidth(),bitmap.getHeight(),true);
+               imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)), imgfrontCard, displayImageOptions);
             }
             String photo1=card.getImgBack();
             imagePathBack=photo1;
             File imgFile1 = new File(photo1);
             if (imgFile1.exists()) {
+//                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//                Bitmap bitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath(),bmOptions);
+//                Matrix matrix = new Matrix();
+//                if (bitmap.getHeight()>bitmap.getWidth()) {
+//                    matrix.postRotate(90);
+//                }
+//                else
+//                {
+//                    matrix.postRotate(0);
+//                }
+//                //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+//                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap , 0, 0, bitmap .getWidth(), bitmap .getHeight(), matrix, true);
+//                imgBackCard.setImageBitmap(rotatedBitmap);
                 imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile1)), imgBackCard, displayImageOptions);
             }
            /* Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
@@ -169,6 +199,18 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.imgFrontCard:
+                Intent i=new Intent(context,AddFormActivity.class);
+                i.putExtra("Image",imagePathFront);
+                startActivityForResult(i,REQUEST_CARD);
+                break;
+
+            case R.id.imgBackCard:
+                Intent j=new Intent(context,AddFormActivity.class);
+                j.putExtra("Image",imagePathBack);
+                startActivityForResult(j,REQUEST_CARD);
+                break;
             case R.id.imgDone:
                 name = txtName.getText().toString();
                 type = txttype.getText().toString();
@@ -367,9 +409,20 @@ if (isEdit==false) {
                 final InputStream imageStream =getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 //  profileImage.setImageBitmap(selectedImage);
-                imageLoader.displayImage(String.valueOf(imageUri),imgfrontCard,displayImageOptions);
 
-                storeImage(selectedImage,"Front");
+               // imageLoader.displayImage(String.valueOf(imageUri),imgfrontCard,displayImageOptions);
+                Matrix matrix = new Matrix();
+                if (selectedImage.getHeight()>selectedImage.getWidth()) {
+                    matrix.postRotate(90);
+                }
+                else
+                {
+                    matrix.postRotate(0);
+                }
+                //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(selectedImage , 0, 0, selectedImage .getWidth(), selectedImage .getHeight(), matrix, true);
+                imgfrontCard.setImageBitmap(rotatedBitmap);
+                storeImage(rotatedBitmap,"Front");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -386,12 +439,21 @@ if (isEdit==false) {
         } else if (requestCode == RESULT_CAMERA_IMAGE1) {
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriFront);
-                String imageurl = getRealPathFromURI(imageUriFront);
-                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
-                imageLoader.displayImage(String.valueOf(imageUriFront),imgfrontCard,displayImageOptions);
-
-                // profileImage.setImageBitmap(bitmap);
-                storeImage(bitmap,"Front");
+               // String imageurl = getRealPathFromURI(imageUriFront);
+               // Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+           //     imageLoader.displayImage(String.valueOf(imageUriFront),imgfrontCard,displayImageOptions);
+                Matrix matrix = new Matrix();
+                if (thumbnail.getHeight()>thumbnail.getWidth()) {
+                    matrix.postRotate(90);
+                }
+                else
+                {
+                    matrix.postRotate(0);
+                }
+              //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(thumbnail , 0, 0, thumbnail .getWidth(), thumbnail .getHeight(), matrix, true);
+                imgfrontCard.setImageBitmap(rotatedBitmap);
+                storeImage(rotatedBitmap,"Front");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -445,21 +507,41 @@ if (isEdit==false) {
                 final InputStream imageStream =getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 //  profileImage.setImageBitmap(selectedImage);
-                imageLoader.displayImage(String.valueOf(imageUri),imgBackCard,displayImageOptions);
-
-                storeImage(selectedImage,"Back");
+              //  imageLoader.displayImage(String.valueOf(imageUri),imgBackCard,displayImageOptions);
+                Matrix matrix = new Matrix();
+                if (selectedImage.getHeight()>selectedImage.getWidth()) {
+                    matrix.postRotate(90);
+                }
+                else
+                {
+                    matrix.postRotate(0);
+                }
+                //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(selectedImage , 0, 0, selectedImage .getWidth(), selectedImage .getHeight(), matrix, true);
+                imgBackCard.setImageBitmap(rotatedBitmap);
+                storeImage(rotatedBitmap,"Back");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         } else if (requestCode == RESULT_CAMERA_IMAGE2 ) {
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriBack);
-                String imageurl = getRealPathFromURI(imageUriBack);
-                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
-                imageLoader.displayImage(String.valueOf(imageUriBack),imgBackCard,displayImageOptions);
-
+               // String imageurl = getRealPathFromURI(imageUriBack);
+               // Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+               // imageLoader.displayImage(String.valueOf(imageUriBack),imgBackCard,displayImageOptions);
+                Matrix matrix = new Matrix();
+                if (thumbnail.getHeight()>thumbnail.getWidth()) {
+                    matrix.postRotate(90);
+                }
+                else
+                {
+                    matrix.postRotate(0);
+                }
+                //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(thumbnail , 0, 0, thumbnail .getWidth(), thumbnail .getHeight(), matrix, true);
+                imgBackCard.setImageBitmap(rotatedBitmap);
                 // profileImage.setImageBitmap(bitmap);
-                storeImage(bitmap,"Back");
+                storeImage(rotatedBitmap,"Back");
             } catch (Exception e) {
                 e.printStackTrace();
             }

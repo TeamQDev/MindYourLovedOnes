@@ -23,6 +23,7 @@ public class VaccineQuery {
     public static final String COL_USERID = "UserId";
     public static final String COL_NAME = "Name";
     public static final String COL_DATE = "Date";
+    public static final String COL_OTHER = "OtherVaccine";
 
 
     public VaccineQuery(Context context, DBHelper dbHelper) {
@@ -32,7 +33,7 @@ public class VaccineQuery {
 
     public static String createVaccineTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER, " +
-                COL_NAME + " VARCHAR(100)," + COL_DATE + " VARCHAR(100)" +
+                COL_NAME + " VARCHAR(100)," + COL_OTHER + " VARCHAR(100)," +COL_DATE + " VARCHAR(100)" +
                 ");";
         return createTableQuery;
     }
@@ -43,7 +44,7 @@ public class VaccineQuery {
     }
 
 
-    public static Boolean insertVaccineData(int userid, String value, String date) {
+    public static Boolean insertVaccineData(int userid, String value, String date, String other) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -51,6 +52,7 @@ public class VaccineQuery {
         cv.put(COL_USERID, userid);
         cv.put(COL_NAME, value);
         cv.put(COL_DATE, date);
+        cv.put(COL_OTHER, other);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -76,6 +78,7 @@ public class VaccineQuery {
                     allergy.setUserId(c.getInt(c.getColumnIndex(COL_USERID)));
                     allergy.setName(c.getString(c.getColumnIndex(COL_NAME)));
                     allergy.setDate(c.getString(c.getColumnIndex(COL_DATE)));
+                    allergy.setOther(c.getString(c.getColumnIndex(COL_OTHER)));
                     allergyList.add(allergy);
                 } while (c.moveToNext());
             }
@@ -84,7 +87,7 @@ public class VaccineQuery {
         return allergyList;
     }
 
-    public static Boolean updateVaccineData(int id, String value, String date) {
+    public static Boolean updateVaccineData(int id, String value, String date, String others) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -92,6 +95,7 @@ public class VaccineQuery {
 
         cv.put(COL_NAME, value);
         cv.put(COL_DATE, date);
+        cv.put(COL_OTHER, others);
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
         if (rowid==0)

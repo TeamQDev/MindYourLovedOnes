@@ -148,6 +148,16 @@ public class Specialist implements Serializable {
 
 
     String name="";
+
+    public String getOtherType() {
+        return otherType;
+    }
+
+    public void setOtherType(String otherType) {
+        this.otherType = otherType;
+    }
+
+    String otherType="";
     String type="";
     String address="";
 

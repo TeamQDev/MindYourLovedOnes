@@ -68,7 +68,7 @@ public class FaxCustomDialog extends Dialog implements
       //  int prevIndex = path.lastIndexOf("/", lastIndex);
         String laststringa = path.substring(lastIndex+1).trim();
         if (laststringa != null) {
-            editsubject.setText(preferences.getString(PrefConstants.CONNECTED_NAME)+"-"+laststringa);
+            editsubject.setText(preferences.getString(PrefConstants.CONNECTED_NAME)+" - "+laststringa);
         }
         else{
             editsubject.setText("");

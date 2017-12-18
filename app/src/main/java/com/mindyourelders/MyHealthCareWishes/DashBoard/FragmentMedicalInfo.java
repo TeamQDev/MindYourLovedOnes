@@ -96,7 +96,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
     String[] LangList = {"English","French","German","Greek","Italian","Japanese","Russian","Spanish"};
     String[] EyesList = {"Blue", "Brown", "Green", "Hazel"};
-    String[] BloodList = {"","A-negative","A-positive","AB-negative","AB-positive","B-negative","B-positive","O-negative","O-positive","I dont know"};
+    String[] BloodList = {"","A - negative","A - positive","AB - negative","AB - positive","B - negative","B - positive","O - negative","O - positive","I don't know"};
 
     Preferences preferences;
     DBHelper dbHelper;
@@ -487,7 +487,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListImplants.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Implant a = AllargyLists.get(i);
-                String allergy = "Implant: " + a.getName() + "\nDate: " + a.getDate();
+                String allergy = "Implant: " + a.getName()+ "\nOther Implant: " + a.getOther() + "\nDate: " + a.getDate();
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {
@@ -686,7 +686,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListVaccine.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Vaccine a = AllargyLists.get(i);
-                String allergy = "Vaccine: " + a.getName() + "\nDate: " + a.getDate();
+                String allergy = "Vaccine: " + a.getName() +"\nOther Vaccine: " + a.getOther()+ "\nDate: " + a.getDate();
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {
@@ -1018,7 +1018,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 long selectedMilli = newDate.getTimeInMillis();
 
                 Date datePickerDate = new Date(selectedMilli);
-                String reportDate=new SimpleDateFormat("d-MMM-yyyy").format(datePickerDate);
+                String reportDate=new SimpleDateFormat("d - MMM - yyyy").format(datePickerDate);
 
                 DateClass d=new DateClass();
                 d.setDate(reportDate);

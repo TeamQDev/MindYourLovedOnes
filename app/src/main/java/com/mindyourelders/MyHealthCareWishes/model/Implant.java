@@ -7,6 +7,15 @@ import java.io.Serializable;
  */
 
 public class Implant implements Serializable{
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    String other="";
     public int getUserId() {
         return userId;
     }

@@ -33,7 +33,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
     TextView txtName,txtAdd;
     String From;
     Preferences preferences;
-    final CharSequence[] alert_items = {"Phone Memory", "Dropbox"};
+    final CharSequence[] alert_items = {"Phone Storage", "Dropbox"};
     final CharSequence[] dialog_items = {"View", "Email", "Fax"};
     Form document;
     DBHelper dbHelper;
@@ -256,7 +256,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
                 new String[]{""});
         String name = preferences.getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                name + "-" + s); // subject
+                name + " - " + s); // subject
 
 
         String body = "Hi, \n" +

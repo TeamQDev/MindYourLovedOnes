@@ -35,6 +35,12 @@ public class AddFormActivity extends AppCompatActivity  {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         imgDoc= (ImageView) findViewById(R.id.imgDoc);
         imgDelete= (ImageView) findViewById(R.id.imgDelete);
+        
+        if (IsDelete == true) {
+            imgDelete.setVisibility(View.VISIBLE);
+        } else {
+            imgDelete.setVisibility(View.GONE);
+        }
 
         Intent i=getIntent();
         if (i.getExtras()!=null) {

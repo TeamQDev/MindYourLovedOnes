@@ -73,6 +73,19 @@ public class Specialty {
                 messageDoctor.add("Speciality :");
                 messageDoctor.add(speciality);
 
+                String specialityOther = "";
+                if (s.getOtherType() != null) {
+                    specialityOther = s.getOtherType();
+                }
+                cell = new PdfPCell(new Phrase("Other Speciality : " + specialityOther));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+                messageDoctor.add("Other Speciality :");
+                messageDoctor.add(specialityOther);
+
                 String name = "";
                 if (s.getName() != null) {
                     name = s.getName();

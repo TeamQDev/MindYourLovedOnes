@@ -3,20 +3,28 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
+import com.mindyourelders.MyHealthCareWishes.customview.MySpinner;
 import com.mindyourelders.MyHealthCareWishes.database.AllergyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.HistoryQuery;
@@ -31,6 +39,12 @@ import com.mindyourelders.MyHealthCareWishes.model.Vaccine;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 
 public class AddInfoActivity extends AppCompatActivity  implements View.OnClickListener{
     private static final int RESULT_CONDITION =500 ;
@@ -38,8 +52,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     Context context=this;
     ImageView imgBack,imgInfo;
     RelativeLayout llAddConn,rlInfo,rlPdf;
-    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone;
-    TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone;
+    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone,txtOtherVaccine;
+    TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone,tilOtherVaccine;
     public static final int RESULT_ALLERGY=100;
     public static final int RESULT_HISTORY=200;
     public static final int RESULT_IMPLANTS=300;
@@ -53,11 +67,17 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     String header="";
             String msg="";
 TextView txtHeader,txtInfo;
+RelativeLayout rlName;
+MySpinner spinner;
+
+    String[] vaccineList = {"Chickenpox (Varicella)", "Hepatitis A", "Hepatitis B", "Hib", "Human Papillomavirus (HPV)", "Influenza (Flu)", "Measles, Mumps, Rubella (MMR)", "Meningococcal", "Polio (IPV)", "Pneumococcal (PCV and PPSV)", "Shingles (Herpes Zoster)", "Tetanus, Diphtheria, Pertussis (Td, Tdap)", "Other"};
+    String[] implantList = {"Aneurysm Stent or Aneurysm Clip","Artifical Limbs","Artificial Heart Value","Body Art","Coronary Stents (Drug Coated/Bare Methal/Unknown)","Crowns","Dental metal implants","Fillings","Gastric Band","HBody Piercing","Implanted Cardio Defibrilator (ICD)","Implanted Devices/Pumps/Stimulator","Joint Replacements (specify)","Lens Implants","Metal Implants","Middle Ear Prosthesis","Pacemaker","Penile Implant","Pins/Rods/Screws","Prosthetic Eye","Renal or other Stents","Tracheotomy", "Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_info);
+
         initUi();
         initListener();
         InitComponent();
@@ -87,49 +107,108 @@ TextView txtHeader,txtInfo;
                     return false;
                 }
             });
+            if (from.equals("VaccineUpdate")||from.equals("Vaccine")) {
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, vaccineList);
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter1);
+
+            }
+            else{
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, implantList);
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter1);
+
+            }
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                        tilOtherVaccine.setVisibility(View.VISIBLE);
+                    } else {
+                        tilOtherVaccine.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
               switch (from) {
                 case "Allergy":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
 
                 case "AllergyUpdate":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
                 case "Implants":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other Implants");
+                    spinner.setHint("Medical Implants");
                     break;
 
                 case "ImplantUpdate":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other Implants");
+                    spinner.setHint("Medical Implants");
                     break;
                 case "Condition":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
 
                 case "ConditionUpdate":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
                 case "Hospital":
                     rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
 
                 case "HospitalUpdate":
                     rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
                 case "History":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
 
                 case "HistoryUpdate":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.GONE);
                     break;
 
                 case "Vaccine":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other Vaccine");
+                    spinner.setHint("Immunizations/Vaccines");
                     break;
 
                 case "VaccineUpdate":
                     rlPdf.setVisibility(View.VISIBLE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other Vaccine");
+                    spinner.setHint("Immunizations/Vaccines");
                     break;
             }
             switch (from) {
@@ -166,6 +245,9 @@ TextView txtHeader,txtInfo;
                             "<li>Body Art</li>" +
                             "<li>Body Piercing </li>" +
                             "<li>Coronary Stents (Drug Coated/Bare Methal/Unknown)</li>" +
+                            "<li>Crowns</li>" +
+                            "<li>Dental metal implants</li>" +
+                            "<li>Fillings</li>" +
                             "<li>Gastric Band</li>" +
                             "<li>Implanted Cardio Defibrilator (ICD)</li>" +
                             "<li>Implanted Devices/Pumps/Stimulator</li>" +
@@ -211,18 +293,32 @@ TextView txtHeader,txtInfo;
                     header = "Recommendation:<br>Use Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
-                            "Resources/Forms and Templates/Medical History Template" ;
+                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
+
+                    txtInfo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CopyReadAssetss("medical_history_form.pdf");
+                        }
+                    });
                     break;
 
                 case "ConditionUpdate":
                     header = "Recommendation:<br>Use Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
-                            "Resources/Forms and Templates/Medical History Template" ;
+                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
+
+                    txtInfo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CopyReadAssetss("medical_history_form.pdf");
+                        }
+                    });
                     break;
                 case "Hospital":
 
@@ -405,16 +501,32 @@ TextView txtHeader,txtInfo;
 
                 case "ImplantUpdate":
                     Implant implant= (Implant) i.getExtras().getSerializable("ImplantObject");
-                    txtName.setText(implant.getName());
+                    //txtName.setText(implant.getName());
+                    txtOtherVaccine.setText(implant.getOther());
                     txtDate.setText(implant.getDate());
                     id=implant.getId();
+                    int index = 0;
+                    for (int j = 0; j < implantList.length; j++) {
+                        if (implant.getName().equals(implantList[j])) {
+                            index = j;
+                        }
+                    }
+                    spinner.setSelection(index + 1);
                     break;
 
                 case "VaccineUpdate":
                     Vaccine vaccine= (Vaccine) i.getExtras().getSerializable("VaccineObject");
-                    txtName.setText(vaccine.getName());
+                   // txtName.setText(vaccine.getName());
                     txtDate.setText(vaccine.getDate());
+                    txtOtherVaccine.setText(vaccine.getOther());
                     id=vaccine.getId();
+                    int indexs = 0;
+                    for (int j = 0; j < vaccineList.length; j++) {
+                        if (vaccine.getName().equals(vaccineList[j])) {
+                            indexs = j;
+                        }
+                    }
+                    spinner.setSelection(indexs + 1);
                     break;
 
                 case "ConditionUpdate":
@@ -443,6 +555,64 @@ TextView txtHeader,txtInfo;
         }
     }
 
+    private void CopyReadAssetss(String documentPath) {
+        AssetManager assetManager = getAssets();
+        File outFile = null;
+        InputStream in = null;
+        OutputStream out = null;
+        File file = new File(getFilesDir(), documentPath);
+        try
+        {
+            in = assetManager.open(documentPath);
+            outFile=new File(getExternalFilesDir(null),documentPath);
+            out=new FileOutputStream(outFile);
+
+            copyFiles(in,out);
+            in.close();
+            in=null;
+            out.flush();
+            out.close();
+            out=null;
+            /*out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
+
+            copyFiles(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;*/
+        } catch (Exception e)
+        {
+            Log.e("tag", e.getMessage());
+        }
+        Uri uri=null;
+        // Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            uri = FileProvider.getUriForFile(context, "com.mindyourelders.MyHealthCareWishes.HomeActivity.fileProvider", outFile);
+        } else {
+            uri = Uri.fromFile(outFile);
+        }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(uri, "application/pdf");
+        context.startActivity(intent);
+
+    }
+
+    private void copyFiles(InputStream in, OutputStream out) throws IOException
+    {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1)
+        {
+            out.write(buffer, 0, read);
+        }
+
+
+    }
+
     private void initListener() {
         imgBack.setOnClickListener(this);
         imgInfo.setOnClickListener(this);
@@ -468,11 +638,17 @@ TextView txtHeader,txtInfo;
         txtDone= (TextView) findViewById(R.id.txtDone);
         tilTreatment= (TextInputLayout) findViewById(R.id.tilTreatment);
         txtTreatment= (TextView) findViewById(R.id.txtTreatment);
+        txtOtherVaccine= (TextView) findViewById(R.id.txtOtherVaccine);
+
+        tilOtherVaccine= (TextInputLayout) findViewById(R.id.tilOtherVaccine);
 
         tilDate= (TextInputLayout) findViewById(R.id.tilDate);
         tilDoctor= (TextInputLayout) findViewById(R.id.tilDoctor);
         tilDone= (TextInputLayout) findViewById(R.id.tilDone);
 
+        spinner=findViewById(R.id.spinner);
+
+        rlName=findViewById(R.id.rlName);
         rlPdf= (RelativeLayout) findViewById(R.id.rlPdf);
         rlInfo= (RelativeLayout) findViewById(R.id.rlInfo);
         rlInfo.setOnClickListener(new View.OnClickListener() {
@@ -656,7 +832,25 @@ TextView txtHeader,txtInfo;
                 dpd.show();
                 break;*/
             case R.id.llAddConn:
-                String value=txtName.getText().toString().trim();
+                String value="";
+                if (from.equals("VaccineUpdate")||from.equals("Vaccine"))
+                {
+                    int indexValue = spinner.getSelectedItemPosition();
+                    if (indexValue != 0) {
+                        value = vaccineList[indexValue - 1];
+                    }
+                }
+                else if (from.equals("ImplantUpdate")||from.equals("Implants"))
+                {
+                    int indexValue = spinner.getSelectedItemPosition();
+                    if (indexValue != 0) {
+                        value = implantList[indexValue - 1];
+                    }
+                }
+                else{
+                    value=txtName.getText().toString().trim();
+                }
+
                 if (value.length()!=0) {
                     switch (from) {
                         case "Allergy":
@@ -696,7 +890,8 @@ TextView txtHeader,txtInfo;
                             break;
                         case "Implants":
                             String dater=txtDate.getText().toString();
-                            Boolean flage = MedicalImplantsQuery.insertImplantData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,dater);
+                            String otheri=txtOtherVaccine.getText().toString();
+                            Boolean flage = MedicalImplantsQuery.insertImplantData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,dater,otheri);
                             if (flage == true) {
                                 Toast.makeText(context, "Implant Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -710,8 +905,10 @@ TextView txtHeader,txtInfo;
                             break;
 
                         case "Vaccine":
+
                             String datev=txtDate.getText().toString();
-                            Boolean flagr = VaccineQuery.insertVaccineData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,datev);
+                            String other=txtOtherVaccine.getText().toString();
+                            Boolean flagr = VaccineQuery.insertVaccineData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,datev,other);
                             if (flagr == true) {
                                 Toast.makeText(context, "Vaccine Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -726,7 +923,8 @@ TextView txtHeader,txtInfo;
 
                         case "VaccineUpdate":
                             String dates=txtDate.getText().toString();
-                            Boolean flagf = VaccineQuery.updateVaccineData(id,value,dates);
+                            String others=txtOtherVaccine.getText().toString();
+                            Boolean flagf = VaccineQuery.updateVaccineData(id,value,dates,others);
                             if (flagf == true) {
                                 Toast.makeText(context, "Vaccine Updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -741,7 +939,8 @@ TextView txtHeader,txtInfo;
 
                         case "ImplantUpdate":
                             String datee=txtDate.getText().toString();
-                            Boolean flagw= MedicalImplantsQuery.updateImplantData(id,value,datee);
+                            String otherd=txtOtherVaccine.getText().toString();
+                            Boolean flagw= MedicalImplantsQuery.updateImplantData(id,value,datee,otherd);
                             if (flagw == true) {
                                 Toast.makeText(context, "Implant Updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {

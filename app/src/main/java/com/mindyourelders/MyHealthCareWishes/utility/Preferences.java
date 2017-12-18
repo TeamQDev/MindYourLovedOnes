@@ -134,7 +134,7 @@ public class Preferences {
                 new String[] { "" });
         String name= getString(PrefConstants.CONNECTED_NAME);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                name+"-"+s); // subject
+                name+" - "+s); // subject
 
 
         String body="Hi, \n" +

@@ -96,6 +96,19 @@ class CardAdapter extends BaseAdapter{
         holder.imgCard.setImageBitmap(bmp);*/
         File imgFile = new File(cardList.get(position).getImgFront());
         if (imgFile.exists()) {
+           /* BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),bmOptions);
+            Matrix matrix = new Matrix();
+            if (bitmap.getHeight()>bitmap.getWidth()) {
+                matrix.postRotate(90);
+            }
+            else
+            {
+                matrix.postRotate(0);
+            }
+            //  Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumbnail,thumbnail.getWidth(),thumbnail.getHeight(),true);
+            Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap , 0, 0, bitmap .getWidth(), bitmap .getHeight(), matrix, true);
+            holder.imgCard.setImageBitmap(rotatedBitmap);*/
             imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgCard,displayImageOptions);
            /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.imgProfile.setImageBitmap(myBitmap);*/

@@ -37,8 +37,8 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     ArrayList<RelativeConnection> connectionList;
     TextView txtAdd;
     //RelativeLayout llAddConn;
-    TextView txtTitle,txtName;
-    ImageView imgNoti,imgProfile,imgLogo,imgPdf;
+    TextView txtTitle, txtName;
+    ImageView imgNoti, imgProfile, imgLogo, imgPdf;
     DBHelper dbHelper;
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
@@ -51,17 +51,17 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         initComponent();
         getProfile();
 
-        getData();
+        // getData();
         initUI();
         initListener();
         return rootview;
     }
 
     private void initComponent() {
-        preferences=new Preferences(getActivity());
-        dbHelper=new DBHelper(getActivity());
-        PersonalInfoQuery p = new PersonalInfoQuery(getActivity(),dbHelper);
-        MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
+        preferences = new Preferences(getActivity());
+        dbHelper = new DBHelper(getActivity());
+        PersonalInfoQuery p = new PersonalInfoQuery(getActivity(), dbHelper);
+        MyConnectionsQuery m = new MyConnectionsQuery(getActivity(), dbHelper);
     }
 
     private void setListData() {
@@ -79,10 +79,10 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PROFILES");
-        imgPdf= (ImageView) getActivity().findViewById(R.id.imgPdf);
+        imgPdf = (ImageView) getActivity().findViewById(R.id.imgPdf);
         imgPdf.setVisibility(View.GONE);
-        imgProfile= (ImageView) getActivity().findViewById(R.id.imgProfile);
-        txtName= (TextView) getActivity().findViewById(R.id.txtName);
+        imgProfile = (ImageView) getActivity().findViewById(R.id.imgProfile);
+        txtName = (TextView) getActivity().findViewById(R.id.txtName);
         txtName.setVisibility(View.GONE);
         imgProfile.setVisibility(View.GONE);
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
@@ -91,22 +91,22 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         imgLogo.setVisibility(View.VISIBLE);
         String deviceName = android.os.Build.MODEL;
         String deviceMan = android.os.Build.MANUFACTURER;
-Toast.makeText(getActivity(),deviceMan+" "+deviceName,Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), deviceMan + " " + deviceName, Toast.LENGTH_LONG).show();
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         //llAddConn = (RelativeLayout) rootview.findViewById(llAddConn);
         lvConnection = (GridView) rootview.findViewById(R.id.lvConnection);
-        if (connectionList.size()!=0||connectionList!=null)
+       /* if (connectionList.size()!=0||connectionList!=null)
         {
             setListData();
-        }
+        }*/
         lvConnection.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-              //  Toast.makeText(getActivity(),"Long Pressed",Toast.LENGTH_SHORT).show();
-                if (position!=connectionList.size()) {
+                //  Toast.makeText(getActivity(),"Long Pressed",Toast.LENGTH_SHORT).show();
+                if (position != connectionList.size()) {
                     if (position != 0) {
                         final Dialog dialog = new Dialog(getActivity());
-                       dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setContentView(R.layout.dialog_common);
                     /* LayoutInflater lf = (LayoutInflater) getActivity()
                             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -133,10 +133,9 @@ Toast.makeText(getActivity(),deviceMan+" "+deviceName,Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
                             }
                         });
-dialog.show();
-                    }
-                    else{
-                        Toast.makeText(getActivity(),"You can not delete user profile",Toast.LENGTH_SHORT).show();
+                        dialog.show();
+                    } else {
+                        Toast.makeText(getActivity(), "You can not delete user profile", Toast.LENGTH_SHORT).show();
                     }
                 }
                 return false;
@@ -146,7 +145,7 @@ dialog.show();
         //lvConnection.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         //SwipeMenuCreation s=new SwipeMenuCreation();
         //SwipeMenuCreator creator=s.createMenu(getActivity());
-      //  lvConnection.setMenuCreator(creator);
+        //  lvConnection.setMenuCreator(creator);
       /*  lvConnection.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
@@ -195,18 +194,18 @@ dialog.show();
         preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
     }
 
-   /* private void deleteConnection(RelativeConnection item) {
-        boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
-        if(flag==true)
-        {
-            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
-            getData();
-            setListData();
-        }
-    }
-*/
+    /* private void deleteConnection(RelativeConnection item) {
+         boolean flag= MyConnectionsQuery.deleteRecord(item.getEmail());
+         if(flag==true)
+         {
+             Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+             getData();
+             setListData();
+         }
+     }
+ */
     private void getData() {
-        connectionList = MyConnectionsQuery.fetchAllRecord(preferences.getInt(PrefConstants.USER_ID),1);
+        connectionList = MyConnectionsQuery.fetchAllRecord(preferences.getInt(PrefConstants.USER_ID), 1);
 
         /*RelativeConnection P1 = new RelativeConnection();
         P1.setName("Caiete Charlo");
@@ -270,15 +269,14 @@ dialog.show();
     @Override
     public void onResume() {
         super.onResume();
-         getData();
-         setListData();
+        getData();
+        setListData();
     }
 
     public void deleteConnection(int id) {
-        boolean flag= MyConnectionsQuery.deleteRecord(id);
-        if(flag==true)
-        {
-            Toast.makeText(getActivity(),"Deleted",Toast.LENGTH_SHORT).show();
+        boolean flag = MyConnectionsQuery.deleteRecord(id);
+        if (flag == true) {
+            Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
             getData();
             setListData();
         }

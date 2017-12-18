@@ -1,7 +1,7 @@
 package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mindyourelders.MyHealthCareWishes.DashBoard.AddFormActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -27,14 +28,15 @@ import java.util.ArrayList;
 
 public class SliderPagerAdapter extends PagerAdapter {
 
+    private static final int REQUEST_CARD = 100;
     private LayoutInflater layoutInflater;
-    Activity activity;
+    Context activity;
     ArrayList<String> image_arraylist;
     ArrayList<String> slider_text_list;
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
 
-    public SliderPagerAdapter(Activity activity, ArrayList<String> image_arraylist, ArrayList<String> slider_text_list) {
+    public SliderPagerAdapter(Context activity, ArrayList<String> image_arraylist, ArrayList<String> slider_text_list) {
         this.activity = activity;
         this.image_arraylist = image_arraylist;
         this.slider_text_list=slider_text_list;
@@ -61,11 +63,11 @@ public class SliderPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = layoutInflater.inflate(R.layout.layout_slider, container, false);
-        ImageView im_slider = (ImageView) view.findViewById(R.id.im_slider);
+        final ImageView im_slider = (ImageView) view.findViewById(R.id.im_slider);
         TextView textview= (TextView) view.findViewById(R.id.text);
 //        textview.setText(slider_text_list.get(position));
        im_slider.setAdjustViewBounds(true);
@@ -78,6 +80,15 @@ public class SliderPagerAdapter extends PagerAdapter {
         }else{
             im_slider.setImageResource(R.drawable.ins_card);
         }
+
+        im_slider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(activity,AddFormActivity.class);
+                i.putExtra("Image",image_arraylist.get(position));
+                activity.startActivity(i);
+            }
+        });
        // imageLoader.displayImage(String.valueOf(image_arraylist.get(position)),im_slider,displayImageOptions);
        /* byte[] photo=image_arraylist.get(position);
         Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);

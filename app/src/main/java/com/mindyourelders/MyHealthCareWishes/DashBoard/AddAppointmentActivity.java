@@ -51,7 +51,9 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     boolean isUpdate=false;
     Appoint p;
 
-    String[] Type = { "CT Scan","Cardiologist","Colonoscopy","Dermatologist – Face","Dermatologist","Glucose Test","Gynecologist","Hypothyroid Blood test","Internist","Mammogram","Ophthalmologist","Psychiatrist","Pulmonologist","Thyroid Scan","Other"};
+    String[] Type = {"CT Scan","Colonoscopy","Glucose Test","Hypothyroid Blood test","Mammogram","Thyroid Scan","",
+            "Acupunture","Allergy & Immunology","Anesthesiology","Audiology","Cardiology","Chiropractor","Cosmetic and Laser Surgeon ","Critical Care Medicine ","Dentist ","Dermatology","Diabetes & Metabolism","Emergency Medicine","Endocrinology","Endodontics","Endovascular Medicine","Family Medicine","Foot and Ankle Surgeon","Gastroenterology","Geriatric Medicine","Gynecology","Hospice & Palliative Medicine	","Infectious Disease","Internal Medicine","Internist","Massage Therapy","Medical Genetics","Nephrology","Neurology","Obstetrics & Gynecology","Oncology ","Ophthalmology","Optometrist","Orthodontics","Orthopadeic ","Orthopadeic Surgeon","Otolaryngology","Pain Medicine","Pathology","Pediatrics","Periodontics","Physical Therapist","Plastic & Reconstructive Surgeon","Podiatrist ","Psychiatry","Pulmonology","Radiology","Rheumatology","Speech Therapist","Sports Medicine","Surgeon - General ","Thoracic & Cardiac Surgeon","Urology","Vascular Medicine", "Other"
+    };
 
     String[] Frequency = {"Annual","Daily","Every 5 Years","Monthly","Quarterly","Semi-Annual","Weekly","Other"};
 

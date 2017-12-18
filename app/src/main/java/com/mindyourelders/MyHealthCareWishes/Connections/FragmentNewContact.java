@@ -104,13 +104,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     TextView txtPharmacyName, txtPharmacyAddress, txtPharmacyPhone, txtPharmacyFax, txtPharmacyWebsite, txtPharmacyNote;
     TextView txtAideAddress, txtAideCompName, txtAideOfficePhone, txtHourOfficePhone, txtOtherPhone, txtAideFax, txtAideEmail, txtAideWebsite, txtAideNote;
     TextView txtTitle;
-    TextView txtOtherCategoryHospital, txtFNameHospital, txtHospitalOfficePhone, txtHospitalOtherPhone, txtHospitalFax, txtHospitalAddress, txtHospitalWebsite, txtHospitalLocation, txtHospitalPracticeName, txtHospitalLastSeen, txtHospitalNote;
-    TextInputLayout tilFNameHospital;
+    TextView txtOtherCategoryDoctor,txtOtherCategoryHospital, txtFNameHospital, txtHospitalOfficePhone, txtHospitalOtherPhone, txtHospitalFax, txtHospitalAddress, txtHospitalWebsite, txtHospitalLocation, txtHospitalPracticeName, txtHospitalLastSeen, txtHospitalNote;
+    TextInputLayout tilFNameHospital,tilOtherCategoryDoctor;
+    String otherDoctor="";
     String agent = "";
 
     ImageView imgEdit, imgProfile, imgCard, imgEditCard;
     View rootview;
-    RelativeLayout rlHospital, rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance, rlProxy, rlTop, llAddConn, rlPharmacy;
+    RelativeLayout rlDoctorCategory,rlHospital, rlRelation, rlConnection, rlDoctor, rlInsurance, rlCommon, rlAids, rlFinance, rlProxy, rlTop, llAddConn, rlPharmacy;
     Preferences preferences;
     String source = "";
     private static int RESULT_CAMERA_IMAGE = 1;
@@ -147,7 +148,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
 
     String[] Relationship = {"Aunt", "Brother", "Cousin", "Dad", "Daughter", "Father-in-law", "Friend", "GrandDaughter", "GrandFather", "GrandMother", "GrandSon", "Husband", "Mom", "Mother-in-law", "Neighbor", "Nephew", "Niece", "Sister", "Son", "Uncle", "Wife", "Other"};
 
-    String[] healthSpeciality = {"Acupunture", "Allergy & Immunology", "Anesthesiology", "Audiology", "Cardiology", "Chiropractor", "Cosmetic and Laser Surgery ", "Critical Care Medicine ", "Dentist ", "Dermatology", "Diabetes & Metabolism", "Emergency Medicine", "Endocrinology", "Endodontics", "Endovascular Medicine", "Family Medicine", "Foot and Ankle Surgery", "Gastroenterology", "Geriatric Medicine", "Gynecology", "Hospice & Palliative Medicine	", "Infectious Disease", "Internal Medicine", "Massage Therapy", "Medical Genetics", "Nephrology", "Neurology", "Obstetrics & Gynecology", "Oncology ", "Ophthalmology", "Optometrist", "Orthodontics", "Orthopadeic ", "Orthopadeic Surgery", "Otolaryngology", "Pain Medicine", "Pathology", "Pediatrics", "Periodontics", "Physical Therapist", "Plastic & Reconstructive Surgery", "Podiatrist ", "Psychiatry", "Pulmonology", "Radiology", "Rheumatology", "Speech Therapist", "Sports Medicine", "Surgery - General ", "Thoracic & Cardiac Surgery", "Urology", "Vascular Medicine", "Other"};
+    String[] healthSpeciality = {"Acupunture", "Allergy & Immunology", "Anesthesiology", "Audiology", "Cardiology", "Chiropractor", "Cosmetic and Laser Surgeon  ", "Critical Care Medicine ", "Dentist ", "Dermatology", "Diabetes & Metabolism", "Emergency Medicine", "Endocrinology", "Endodontics", "Endovascular Medicine", "Family Medicine", "Foot and Ankle Surgeon ", "Gastroenterology", "Geriatric Medicine", "Gynecology", "Hospice & Palliative Medicine	", "Infectious Disease", "Internal Medicine", "Massage Therapy", "Medical Genetics", "Nephrology", "Neurology", "Obstetrics & Gynecology", "Oncology ", "Ophthalmology", "Optometrist", "Orthodontics", "Orthopadeic ", "Orthopadeic Surgeon ", "Otolaryngology", "Pain Medicine", "Pathology", "Pediatrics", "Periodontics", "Physical Therapist", "Plastic & Reconstructive Surgeon ", "Podiatrist ", "Psychiatry", "Pulmonology", "Radiology", "Rheumatology", "Speech Therapist", "Sports Medicine", "Surgeon  - General ", "Thoracic & Cardiac Surgeon ", "Urology", "Vascular Medicine", "Other"};
 
     String[] insuaranceType = {"Dental", "Disability", "Life", "Long Term Care", "Medicaid", "Medical", "Medicare Supplement (Medigap)", "Medicare", "Supplemental", "Vision", "Other"};
 
@@ -803,6 +804,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorOfficePhone.setText(specialist.getOfficePhone());
                     txtAffiliation.setText(specialist.getHospAffiliation());
                     txtPracticeName.setText(specialist.getPracticeName());
+                    txtOtherCategoryDoctor.setText(specialist.getOtherType());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
@@ -865,6 +867,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorFax.setText(specialist.getFax());
                     txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
                     txtDoctorOfficePhone.setText(specialist.getOfficePhone());
+                    txtOtherCategoryDoctor.setText(specialist.getOtherType());
                     txtAffiliation.setText(specialist.getHospAffiliation());
                     txtPracticeName.setText(specialist.getPracticeName());
                     txtNetwork.setText(specialist.getNetwork());
@@ -933,6 +936,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorOfficePhone.setText(specialist.getOfficePhone());
                     txtAffiliation.setText(specialist.getHospAffiliation());
                     txtPracticeName.setText(specialist.getPracticeName());
+                    txtOtherCategoryDoctor.setText(specialist.getOtherType());
                     txtNetwork.setText(specialist.getNetwork());
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
@@ -994,6 +998,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorWebsite.setText(specialist.getWebsite());
                     txtDoctorFax.setText(specialist.getFax());
                     txtDoctorHourOfficePhone.setText(specialist.getHourPhone());
+                    txtOtherCategoryDoctor.setText(specialist.getOtherType());
                     txtDoctorOfficePhone.setText(specialist.getOfficePhone());
                     txtAffiliation.setText(specialist.getHospAffiliation());
                     txtPracticeName.setText(specialist.getPracticeName());
@@ -1597,6 +1602,7 @@ imagepath=specialist.getPhoto();
     private void visiHospital() {
         rlTop.setVisibility(View.VISIBLE);
         spinner.setVisibility(View.GONE);
+        rlDoctorCategory.setVisibility(View.GONE);
         rlFinance.setVisibility(View.GONE);
         rlHospital.setVisibility(View.VISIBLE);
         spinnerRelation.setVisibility(View.GONE);
@@ -1825,6 +1831,7 @@ imagepath=specialist.getPhoto();
         txtDoctorAddress.setEnabled(false);
         txtDoctorWebsite.setEnabled(false);
         txtDoctorFax.setEnabled(false);
+        txtOtherCategoryDoctor.setEnabled(false);
         txtDoctorHourOfficePhone.setEnabled(false);
         txtDoctorOfficePhone.setEnabled(false);
         txtAffiliation.setEnabled(false);
@@ -1840,6 +1847,7 @@ imagepath=specialist.getPhoto();
     private void visiFinance() {
         rlTop.setVisibility(View.VISIBLE);
         spinner.setVisibility(View.GONE);
+        rlDoctorCategory.setVisibility(View.GONE);
         rlFinance.setVisibility(View.VISIBLE);
         spinnerRelation.setVisibility(View.GONE);
         rlCommon.setVisibility(View.GONE);
@@ -1891,6 +1899,7 @@ imagepath=specialist.getPhoto();
     private void visiSpecialist() {
         rlTop.setVisibility(View.VISIBLE);
         spinner.setVisibility(View.VISIBLE);
+        rlDoctorCategory.setVisibility(View.VISIBLE);
         rlFinance.setVisibility(View.GONE);
         rlCommon.setVisibility(View.GONE);
         spinnerRelation.setVisibility(View.GONE);
@@ -1902,9 +1911,9 @@ imagepath=specialist.getPhoto();
 
         txtAdd.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
         txtTitle.setText("Add DOCTORS & OTHER\n HEALTH PROFESSIONALS");
-        tilDoctorName.setHintEnabled(false);
+      // tilDoctorName.setHintEnabled(false);
 
-        txtDoctorName.setOnTouchListener(new View.OnTouchListener() {
+       /* txtDoctorName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 tilDoctorName.setHintEnabled(true);
@@ -1912,7 +1921,7 @@ imagepath=specialist.getPhoto();
 
                 return false;
             }
-        });
+        });*/
         rlPharmacy.setVisibility(View.GONE);
     }
 
@@ -1949,13 +1958,17 @@ imagepath=specialist.getPhoto();
     }
 
     private void initUI() {
+        rlDoctorCategory=(RelativeLayout) rootview.findViewById(R.id.rlDoctorCategory);
         rlContact = (RelativeLayout) rootview.findViewById(R.id.rlContact);
         rlCard = (RelativeLayout) rootview.findViewById(R.id.rlCard);
         txtCard = (TextView) rootview.findViewById(R.id.txtCard);
         tilOtherCategoryHospital = (TextInputLayout) rootview.findViewById(R.id.tilOtherCategoryHospital);
+        tilOtherCategoryDoctor  = (TextInputLayout) rootview.findViewById(R.id.tilOtherCategoryDoctor);
+        tilOtherCategoryDoctor.setHint("Other");
         tilOtherCategoryHospital.setHint("Other");
         tilFNameHospital = (TextInputLayout) rootview.findViewById(R.id.tilFNameHospital);
         //Doctor
+        txtOtherCategoryDoctor = (TextView) rootview.findViewById(R.id.txtOtherCategoryDoctor);
         txtDoctorName = (TextView) rootview.findViewById(R.id.txtDoctorName);
         txtDoctorOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorOfficePhone);
         txtDoctorHourOfficePhone = (TextView) rootview.findViewById(R.id.txtDoctorHourOfficePhone);
@@ -2677,6 +2690,22 @@ imagepath=specialist.getPhoto();
             }
         });
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                    tilOtherCategoryDoctor.setVisibility(View.VISIBLE);
+                    txtOtherCategoryDoctor.requestFocus();
+                } else {
+                    tilOtherCategoryDoctor.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 
         spinnerInsuarance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -2853,7 +2882,7 @@ imagepath=specialist.getPhoto();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
-                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
+                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath,otherDoctor);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have added physician contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -2873,7 +2902,7 @@ imagepath=specialist.getPhoto();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
-                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
+                            Boolean flag = SpecialistQuery.insertPhysicianData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath, otherDoctor);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have added doctor contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -2894,7 +2923,7 @@ imagepath=specialist.getPhoto();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
                             if (isPhysician == 1) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath,otherDoctor);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2903,7 +2932,7 @@ imagepath=specialist.getPhoto();
                                 }
                                 Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             } else if (isPhysician == 2) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath, otherDoctor);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2925,7 +2954,7 @@ imagepath=specialist.getPhoto();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
                             if (isPhysician == 1) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath);
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 1, lastseen, cardPath, otherDoctor);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated physician contact successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -2934,7 +2963,7 @@ imagepath=specialist.getPhoto();
                                 }
                                 Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                             } else if (isPhysician == 2) {
-                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath);
+                                Boolean flag = SpecialistQuery.updatePhysicianData(id, name, website, address, mobile, phone, workphone, speciality, imagepath, fax, practice_name, network, affil, note, 2, lastseen, cardPath, otherDoctor);
                                 if (flag == true) {
                                     Toast.makeText(getActivity(), "You have updated doctor successfully", Toast.LENGTH_SHORT).show();
                                     getActivity().finish();
@@ -3411,6 +3440,7 @@ imagepath=specialist.getPhoto();
             mobile = txtDoctorOfficePhone.getText().toString();
             phone = txtDoctorHourOfficePhone.getText().toString();
             workphone = txtDoctorOtherPhone.getText().toString();
+            otherDoctor=txtOtherCategoryDoctor.getText().toString();
             fax = txtDoctorFax.getText().toString();
             address = txtDoctorAddress.getText().toString();
             website = txtDoctorWebsite.getText().toString();

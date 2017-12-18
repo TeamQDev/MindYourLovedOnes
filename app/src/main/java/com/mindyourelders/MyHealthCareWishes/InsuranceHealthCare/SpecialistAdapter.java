@@ -156,7 +156,14 @@ public class SpecialistAdapter extends BaseAdapter {
         holder.txtName.setText(specialistList.get(position).getName());
         holder.txtOfficePhone.setText(specialistList.get(position).getOtherPhone());
         holder.txtPhone.setText(specialistList.get(position).getOfficePhone());
-        holder.txtType.setText(specialistList.get(position).getType());
+        if (specialistList.get(position).getType().equals("Other"))
+        {
+            holder.txtType.setText(specialistList.get(position).getType()+" - "+specialistList.get(position).getOtherType());
+        }
+        else {
+            holder.txtType.setText(specialistList.get(position).getType());
+        }
+       // holder.txtType.setText(specialistList.get(position).getType());
         holder.txtTelePhone.setText(specialistList.get(position).getOtherPhone());
         holder.txtAddress.setText(specialistList.get(position).getAddress());
       //  holder.imgProfile.setImageResource(specialistList.get(position).getImage());

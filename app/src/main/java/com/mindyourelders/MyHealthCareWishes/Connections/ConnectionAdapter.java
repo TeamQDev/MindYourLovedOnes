@@ -3,7 +3,6 @@ package com.mindyourelders.MyHealthCareWishes.Connections;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -117,7 +116,7 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
             if (!connectionList.get(position).getPhoto().equals("")) {
                 File imgFile = new File(connectionList.get(position).getPhoto());
                 //  if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+               //   Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                // holder.imgConPhoto.setImageBitmap(myBitmap);
                 imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),holder.imgConPhoto,displayImageOptions);
             }
