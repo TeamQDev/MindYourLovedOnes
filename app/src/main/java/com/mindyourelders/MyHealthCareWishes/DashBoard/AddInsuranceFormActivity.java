@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
     Context context = this;
     ImageView imgBack, imgDot, imgDone, imgDoc, imgAdd;
     TextView txtName,txtAdd;
+    TextInputLayout tilName;
     String From;
     Preferences preferences;
     final CharSequence[] alert_items = {"Phone Storage", "Dropbox"};
@@ -70,7 +73,17 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
         imgDoc = (ImageView) findViewById(R.id.imgDoc);
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
         txtName = (TextView) findViewById(R.id.txtName);
+        tilName = findViewById(R.id.tilName);
         txtAdd = (TextView) findViewById(R.id.txtAdd);
+
+        txtName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tilName.setHintEnabled(true);
+                txtName.setFocusable(true);
+                return false;
+            }
+        });
         Intent i = getIntent();
         if (i.getExtras() != null) {
             Goto = i.getExtras().getString("GoTo");

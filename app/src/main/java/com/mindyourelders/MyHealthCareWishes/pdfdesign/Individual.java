@@ -447,6 +447,16 @@ public class Individual {
             messageInfo2.add("Profession :");
             messageInfo2.add(profession);
 
+            cell3 = new PdfPCell(new Phrase(""));
+            cell3.setBorder(Rectangle.BOTTOM);
+            cell3.setUseBorderPadding(true);
+            cell3.setBorderWidthBottom(5);
+            cell3.setBorderColorBottom(BaseColor.WHITE);
+            table3.addCell(cell3);
+
+            messageInfo2.add("");
+            messageInfo2.add(profession);
+
             Header.document.add(table3);
             Paragraph p3 = new Paragraph(" ");
             DottedLineSeparator line3 = new DottedLineSeparator();
@@ -589,7 +599,7 @@ public class Individual {
                 if (a.getChip() != null) {
                     microchip = a.getChip();
                 }
-                cell = new PdfPCell(new Phrase("Microchip number : " + name));
+                cell = new PdfPCell(new Phrase("Microchip number : " + microchip));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
@@ -1643,6 +1653,16 @@ public class Individual {
             messageInfo2.add("Profession :");
             messageInfo2.add(profession);
 
+            cell3 = new PdfPCell(new Phrase(""));
+            cell3.setBorder(Rectangle.BOTTOM);
+            cell3.setUseBorderPadding(true);
+            cell3.setBorderWidthBottom(5);
+            cell3.setBorderColorBottom(BaseColor.WHITE);
+            table3.addCell(cell3);
+
+            messageInfo2.add("");
+            messageInfo2.add(profession);
+
             Header.document.add(table3);
             Paragraph p3 = new Paragraph(" ");
             DottedLineSeparator line3 = new DottedLineSeparator();
@@ -1785,7 +1805,7 @@ public class Individual {
                 if (a.getChip() != null) {
                     microchip = a.getChip();
                 }
-                cell = new PdfPCell(new Phrase("Microchip number : " + name));
+                cell = new PdfPCell(new Phrase("Microchip number : " + microchip));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
@@ -1965,6 +1985,21 @@ public class Individual {
 
                 messageEmergency.add("Relation Type :");
                 messageEmergency.add(reationType);
+
+
+                String relationOther = "";
+                if (e.getOtherRelation() != null) {
+                    relationOther = e.getOtherRelation();
+                }
+                cell = new PdfPCell(new Phrase("Other : " + relationOther));
+                cell.setBorder(Rectangle.BOTTOM);
+                cell.setUseBorderPadding(true);
+                cell.setBorderWidthBottom(5);
+                cell.setBorderColorBottom(BaseColor.WHITE);
+                table.addCell(cell);
+
+                messageEmergency.add("Other :");
+                messageEmergency.add(relationOther);
 
                 String priority = "";
                 if (e.getIsPrimary() == 0) {
