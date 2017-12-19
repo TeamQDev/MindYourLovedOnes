@@ -76,6 +76,7 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
         tilName = findViewById(R.id.tilName);
         txtAdd = (TextView) findViewById(R.id.txtAdd);
 
+        
         txtName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
