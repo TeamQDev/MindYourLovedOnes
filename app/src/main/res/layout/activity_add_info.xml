@@ -64,15 +64,15 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dimension30dp"
                 >
-    <ImageView
-        android:id="@+id/imgInfo"
-        android:layout_width="@dimen/dimension30dp"
-        android:layout_height="@dimen/dimension30dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/info"
-        android:layout_margin="@dimen/dimension10dp"
-        android:visibility="gone"
-        />
+                <ImageView
+                    android:id="@+id/imgInfo"
+                    android:layout_width="@dimen/dimension30dp"
+                    android:layout_height="@dimen/dimension30dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/info"
+                    android:layout_margin="@dimen/dimension10dp"
+                    android:visibility="gone"
+                    />
                 <RelativeLayout
                     android:id="@+id/rlName"
                     android:layout_width="match_parent"
@@ -83,21 +83,20 @@
                         android:id="@+id/rlSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimension35dp"
-                    android:layout_marginRight="@dimen/dimension35dp"
-                    android:imeOptions="actionNext"
-                    android:visibility="gone"
-                    app:ms_arrowColor="@color/colorBlue"
-                    app:ms_arrowSize="16dp"
-                    app:ms_floatingLabelText="Immunizations/Vaccines"
-                    app:ms_hint="hint"
-                    app:ms_multiline="true"
-                    custom:ms_floatingLabelColor="@color/colorBlue"
-                    custom:ms_hintColor="@color/colorDarkGray" />
+                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimension35dp"
+                            android:layout_marginRight="@dimen/dimension35dp"
+                            android:imeOptions="actionNext"
+                            android:visibility="gone"
+                            app:ms_arrowColor="@color/colorBlue"
+                            app:ms_arrowSize="16dp"
+                            app:ms_hint="hint"
+                            app:ms_multiline="true"
+                            custom:ms_floatingLabelColor="@color/colorBlue"
+                            custom:ms_hintColor="@color/colorDarkGray" />
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/tilOtherVaccine"
                             android:layout_width="match_parent"
@@ -127,314 +126,311 @@
                     </RelativeLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimension10dp"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:paddingBottom="@dimen/dimension8dp"
-            android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp"
-            android:paddingTop="@dimen/dimension8dp"
-            android:visibility="gone"
-            >
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimension10dp"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone"
+                        >
 
-            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
 
 
-            <AutoCompleteTextView
-                android:id="@+id/txtName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/dimension15dp"
-                android:paddingTop="@dimen/dimension2dp"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/dimension20dp" />
-        </android.support.design.widget.TextInputLayout>
+                        <AutoCompleteTextView
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
+                    </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rlextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rlName">
-
-            <RelativeLayout
-                android:id="@+id/rlSpinnerReaction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
-                    android:id="@+id/spinnerReaction"
+                <RelativeLayout
+                    android:id="@+id/rlextra"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimension35dp"
-                    android:layout_marginRight="@dimen/dimension35dp"
-                    android:imeOptions="actionNext"
-                    android:visibility="gone"
-                    app:ms_arrowColor="@color/colorBlue"
-                    app:ms_arrowSize="16dp"
-                    app:ms_floatingLabelText="Types of Reaction"
-                    app:ms_multiline="true"
-                    custom:ms_floatingLabelColor="@color/colorBlue"
-                    custom:ms_hintColor="@color/colorDarkGray" />
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilReaction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:hint="Reaction"
-                    android:paddingBottom="@dimen/dimension8dp"
-                    android:paddingLeft="@dimen/dimension30dp"
-                    android:paddingRight="@dimen/dimension30dp"
-                    android:paddingTop="@dimen/dimension8dp"
-                    android:visibility="gone">
+                    android:layout_below="@+id/rlName">
 
-                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                    <RelativeLayout
+                        android:id="@+id/rlReaction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <RelativeLayout
+                            android:id="@+id/rlReactionSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                                android:id="@+id/spinnerReaction"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimension35dp"
+                                android:layout_marginRight="@dimen/dimension35dp"
+                                android:imeOptions="actionNext"
+                                android:visibility="gone"
+                                app:ms_arrowColor="@color/colorBlue"
+                                app:ms_arrowSize="16dp"
+                                app:ms_floatingLabelText="Reaction"
+                                app:ms_hint="hint"
+                                app:ms_multiline="true"
+                                custom:ms_floatingLabelColor="@color/colorBlue"
+                                custom:ms_hintColor="@color/colorDarkGray" />
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/tilOtherReaction"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/spinnerReaction"
+                                android:paddingBottom="@dimen/dimension8dp"
+                                android:paddingLeft="@dimen/dimension30dp"
+                                android:paddingRight="@dimen/dimension30dp"
+                                android:paddingTop="@dimen/dimension8dp"
+                                android:visibility="gone">
+                                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                                <AutoCompleteTextView
+                                    android:id="@+id/txtOtherReaction"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:paddingLeft="@dimen/dimension15dp"
+                                    android:paddingTop="@dimen/dimension2dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="@dimen/dimension20dp" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/txtReaction"
+                                <requestFocus />
+                            </android.support.design.widget.TextInputLayout>
+                        </RelativeLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilReaction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:paddingLeft="@dimen/dimension15dp"
-                        android:paddingTop="@dimen/dimension2dp"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:hint="Reaction"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone">
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                        <AutoCompleteTextView
+                            android:id="@+id/txtReaction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
 
-                </android.support.design.widget.TextInputLayout>
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilTreatment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tilReaction"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:hint="Treatment"
-                    android:paddingBottom="@dimen/dimension8dp"
-                    android:paddingLeft="@dimen/dimension30dp"
-                    android:paddingRight="@dimen/dimension30dp"
-                    android:paddingTop="@dimen/dimension8dp"
-                    android:visibility="gone">
-
-                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-
-
-                    <AutoCompleteTextView
-                        android:id="@+id/txtTreatment"
+                    </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilTreatment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:paddingLeft="@dimen/dimension15dp"
-                        android:paddingTop="@dimen/dimension2dp"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
+                        android:layout_below="@+id/rlReaction"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:hint="Treatment"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone">
 
-                </android.support.design.widget.TextInputLayout>
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
 
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilOtherReaction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Other"
-                    android:layout_below="@+id/spinnerReaction"
-                    android:paddingBottom="@dimen/dimension8dp"
-                    android:paddingLeft="@dimen/dimension30dp"
-                    android:paddingRight="@dimen/dimension30dp"
-                    android:paddingTop="@dimen/dimension8dp"
-                    android:visibility="gone">
-                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-                    <AutoCompleteTextView
-                        android:id="@+id/txtOtherReaction"
+                        <AutoCompleteTextView
+                            android:id="@+id/txtTreatment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:paddingLeft="@dimen/dimension15dp"
-                        android:paddingTop="@dimen/dimension2dp"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/dimension20dp" />
 
-                    <requestFocus />
-                </android.support.design.widget.TextInputLayout>
-            </RelativeLayout>
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:hint="Date"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone">
 
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
 
 
+                        <AutoCompleteTextView
+                            android:id="@+id/txtDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    </android.support.design.widget.TextInputLayout>
 
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:hint="Date"
-                android:paddingBottom="@dimen/dimension8dp"
-                android:paddingLeft="@dimen/dimension30dp"
-                android:paddingRight="@dimen/dimension30dp"
-                android:paddingTop="@dimen/dimension8dp"
-                android:visibility="gone">
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilDoctor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tilDate"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:hint="Name of Doctor"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone">
 
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
 
 
-                <AutoCompleteTextView
-                    android:id="@+id/txtDate"
+                        <AutoCompleteTextView
+                            android:id="@+id/txtDoctor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilDone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tilDoctor"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:hint="Treatment Location"
+                        android:paddingBottom="@dimen/dimension8dp"
+                        android:paddingLeft="@dimen/dimension30dp"
+                        android:paddingRight="@dimen/dimension30dp"
+                        android:paddingTop="@dimen/dimension8dp"
+                        android:visibility="gone">
+
+                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/txtDone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/dimension15dp"
+                            android:paddingTop="@dimen/dimension2dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/dimension20dp" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/llAddConn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension60dp"
+                    android:layout_below="@+id/rlextra"
+                    android:layout_marginLeft="@dimen/dimension15dp"
+                    android:layout_marginRight="@dimen/dimension15dp"
+                    android:layout_marginTop="@dimen/dimension15dp"
+                    android:background="@color/colorGreen">
+
+                    <ImageView
+                        android:id="@+id/imgAdd"
+                        android:layout_width="@dimen/dimension60dp"
+                        android:layout_height="@dimen/dimension60dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/adddoc" />
+
+                    <TextView
+                        android:id="@+id/txtAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimension60dp"
+                        android:layout_toRightOf="@+id/imgAdd"
+                        android:gravity="center"
+                        android:text="Add"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/dimension24dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlPdf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/dimension15dp"
-                    android:paddingTop="@dimen/dimension2dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/dimension20dp" />
+                    android:padding="@dimen/dimension10dp"
+                    android:background="@drawable/darkgray_white_border"
+                    android:layout_below="@+id/llAddConn"
+                    android:layout_marginTop="@dimen/dimension40dp"
+                    android:layout_marginLeft="@dimen/dimension10dp"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:layout_marginBottom="@dimen/dimension30dp"
+                    android:layout_centerHorizontal="true"
 
-            </android.support.design.widget.TextInputLayout>
+                    >
+                    <TextView
+                        android:id="@+id/txtHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pdf For Reference"
+                        android:textStyle="italic|bold"
+                        android:textSize="@dimen/dimension20dp"
+                        android:textColor="@color/colorBlackDark"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_marginTop="@dimen/dimension10dp"
+                        android:drawableRight="@drawable/info"
+                        android:drawablePadding="@dimen/dimension20dp"
+                        android:gravity="center_vertical"
+                        ></TextView>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilDoctor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tilDate"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:hint="Name of Doctor"
-                android:paddingBottom="@dimen/dimension8dp"
-                android:paddingLeft="@dimen/dimension30dp"
-                android:paddingRight="@dimen/dimension30dp"
-                android:paddingTop="@dimen/dimension8dp"
-                android:visibility="gone">
+                    <TextView
+                        android:id="@+id/txtInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pdf For Reference"
+                        android:textSize="@dimen/dimension18dp"
+                        android:textColor="@color/colorBlackDark"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_below="@+id/txtHeader"
+                        ></TextView>
 
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-
-
-                <AutoCompleteTextView
-                    android:id="@+id/txtDoctor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/dimension15dp"
-                    android:paddingTop="@dimen/dimension2dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/dimension20dp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilDone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tilDoctor"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:hint="Treatment Location"
-                android:paddingBottom="@dimen/dimension8dp"
-                android:paddingLeft="@dimen/dimension30dp"
-                android:paddingRight="@dimen/dimension30dp"
-                android:paddingTop="@dimen/dimension8dp"
-                android:visibility="gone">
-
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-
-
-                <AutoCompleteTextView
-                    android:id="@+id/txtDone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/dimension15dp"
-                    android:paddingTop="@dimen/dimension2dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/dimension20dp" />
-
-            </android.support.design.widget.TextInputLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/llAddConn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension60dp"
-            android:layout_below="@+id/rlextra"
-            android:layout_marginLeft="@dimen/dimension15dp"
-            android:layout_marginRight="@dimen/dimension15dp"
-            android:layout_marginTop="@dimen/dimension15dp"
-            android:background="@color/colorGreen">
-
-            <ImageView
-                android:id="@+id/imgAdd"
-                android:layout_width="@dimen/dimension60dp"
-                android:layout_height="@dimen/dimension60dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/adddoc" />
-
-            <TextView
-                android:id="@+id/txtAdd"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension60dp"
-                android:layout_toRightOf="@+id/imgAdd"
-                android:gravity="center"
-                android:text="Add"
-                android:textAllCaps="true"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/dimension24dp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rlPdf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimension10dp"
-            android:background="@drawable/darkgray_white_border"
-            android:layout_below="@+id/llAddConn"
-            android:layout_marginTop="@dimen/dimension40dp"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_marginRight="@dimen/dimension10dp"
-            android:layout_marginBottom="@dimen/dimension30dp"
-            android:layout_centerHorizontal="true"
-
-            >
-            <TextView
-                android:id="@+id/txtHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pdf For Reference"
-                android:textStyle="italic|bold"
-                android:textSize="@dimen/dimension20dp"
-                android:textColor="@color/colorBlackDark"
-                android:layout_marginLeft="@dimen/dimension10dp"
-                 android:layout_marginTop="@dimen/dimension10dp"
-                android:drawableRight="@drawable/info"
-                android:drawablePadding="@dimen/dimension20dp"
-                android:gravity="center_vertical"
-                ></TextView>
-
-            <TextView
-                android:id="@+id/txtInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pdf For Reference"
-                android:textSize="@dimen/dimension18dp"
-                android:textColor="@color/colorBlackDark"
-                android:layout_marginLeft="@dimen/dimension10dp"
-                android:layout_below="@+id/txtHeader"
-                ></TextView>
-
-        </RelativeLayout>
+                </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
 
-</RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

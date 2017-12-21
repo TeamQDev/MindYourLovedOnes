@@ -487,7 +487,13 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListImplants.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Implant a = AllargyLists.get(i);
-                String allergy = "Implant: " + a.getName()+ "\nOther Implant: " + a.getOther() + "\nDate: " + a.getDate();
+                String allergy="";
+                if (a.getName().equals("Other")) {
+                     allergy = "Implant: " + a.getName()+" - "+a.getOther() + "\nDate: " + a.getDate();
+                }
+                else{
+                    allergy = "Implant: " + a.getName()+ "\nDate: " + a.getDate();
+                }
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {
@@ -686,7 +692,14 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListVaccine.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Vaccine a = AllargyLists.get(i);
-                String allergy = "Vaccine: " + a.getName() +"\nOther Vaccine: " + a.getOther()+ "\nDate: " + a.getDate();
+                String allergy="";
+                if (a.getName().equals("Other"))
+                {
+                     allergy = "Vaccine: " + a.getName()+" - "+a.getOther() + "\nDate: " + a.getDate();
+                }
+                else {
+                    allergy = "Vaccine: " + a.getName() + "\nDate: " + a.getDate();
+                }
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {
@@ -742,7 +755,13 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListAllergy.setVisibility(View.VISIBLE);
             for (int i = 0; i < AllargyLists.size(); i++) {
                 Allergy a = AllargyLists.get(i);
-                String allergy = "Allergy: " + a.getAllergy() + "\nReaction: " + a.getReaction() + "\nTreatment: " + a.getTreatment();
+                String allergy="";
+                if (a.getReaction().equals("Other"))
+                {
+                   allergy = "Allergy: " + a.getAllergy() + "\nReaction: " + a.getReaction()+" - "+a.getOtherReaction() + "\nTreatment: " + a.getTreatment();
+                }else {
+                    allergy = "Allergy: " + a.getAllergy() + "\nReaction: " + a.getReaction() + "\nTreatment: " + a.getTreatment();
+                }
                 allergyList.add(allergy);
             }
             if (allergyList.size() != 0) {

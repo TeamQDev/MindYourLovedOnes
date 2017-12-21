@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class Allergy implements Serializable{
+
     public int getUserId() {
         return userId;
     }

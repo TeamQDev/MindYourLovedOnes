@@ -23,7 +23,7 @@ public class AllergyQuery {
     public static final String COL_USERID = "UserId";
     public static final String COL_ALLERGY = "Allergy";
     public static final String COL_REACTION = "Reaction";
-   // public static final String COL_OTHER_REACTION = "OtherReaction";
+    public static final String COL_OTHER_REACTION = "OtherReaction";
     public static final String COL_TREATMENT = "Treatment";
 
     public AllergyQuery(Context context, DBHelper dbHelper) {
@@ -33,7 +33,7 @@ public class AllergyQuery {
 
     public static String createAllergyTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER, " +
-                COL_ALLERGY + " VARCHAR(100)," + COL_REACTION + " VARCHAR(100)," +
+                COL_ALLERGY + " VARCHAR(100)," + COL_REACTION + " VARCHAR(100)," + COL_OTHER_REACTION + " VARCHAR(100)," +
                 COL_TREATMENT + " VARCHAR(100)" +
                 ");";
         return createTableQuery;
@@ -45,7 +45,7 @@ public class AllergyQuery {
     }
 
 
-    public static Boolean insertAllergyData(int userid, String value, String reaction, String otherReaction) {
+    public static Boolean insertAllergyData(int userid, String value, String reaction, String treatment, String otherReaction) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -54,7 +54,7 @@ public class AllergyQuery {
         cv.put(COL_ALLERGY, value);
         cv.put(COL_TREATMENT, treatment);
         cv.put(COL_REACTION, reaction);
-        //cv.put(COL_OTHER_REACTION, otherReaction);
+        cv.put(COL_OTHER_REACTION, otherReaction);
 
         long rowid = db.insert(TABLE_NAME, null, cv);
 
@@ -81,7 +81,7 @@ public class AllergyQuery {
                     allergy.setAllergy(c.getString(c.getColumnIndex(COL_ALLERGY)));
                     allergy.setTreatment(c.getString(c.getColumnIndex(COL_TREATMENT)));
                     allergy.setReaction(c.getString(c.getColumnIndex(COL_REACTION)));
-                  //  allergy.setOtherReaction(c.getString(c.getColumnIndex(COL_OTHER_REACTION)));
+                    allergy.setOtherReaction(c.getString(c.getColumnIndex(COL_OTHER_REACTION)));
 
                     allergyList.add(allergy);
                 } while (c.moveToNext());
@@ -91,7 +91,7 @@ public class AllergyQuery {
         return allergyList;
     }
 
-    public static Boolean updateAllergyData(int id, String value, String reactions, String otherReation) {
+    public static Boolean updateAllergyData(int id, String value, String reactions, String treatments, String otherReactions) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -100,7 +100,7 @@ public class AllergyQuery {
         cv.put(COL_ALLERGY, value);
         cv.put(COL_TREATMENT, treatments);
         cv.put(COL_REACTION, reactions);
-       // cv.put(COL_OTHER_REACTION, otherReation);
+       cv.put(COL_OTHER_REACTION,otherReactions);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
