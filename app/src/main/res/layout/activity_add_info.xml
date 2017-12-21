@@ -162,64 +162,116 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlName">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilReaction"
+            <RelativeLayout
+                android:id="@+id/rlSpinnerReaction"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:hint="Reaction"
-                android:paddingBottom="@dimen/dimension8dp"
-                android:paddingLeft="@dimen/dimension30dp"
-                android:paddingRight="@dimen/dimension30dp"
-                android:paddingTop="@dimen/dimension8dp"
-                android:visibility="gone">
-
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-
-
-                <AutoCompleteTextView
-                    android:id="@+id/txtReaction"
+                android:layout_height="wrap_content">
+                <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                    android:id="@+id/spinnerReaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/dimension15dp"
-                    android:paddingTop="@dimen/dimension2dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/dimension20dp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilTreatment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tilReaction"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:hint="Treatment"
-                android:paddingBottom="@dimen/dimension8dp"
-                android:paddingLeft="@dimen/dimension30dp"
-                android:paddingRight="@dimen/dimension30dp"
-                android:paddingTop="@dimen/dimension8dp"
-                android:visibility="gone">
-
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-
-
-                <AutoCompleteTextView
-                    android:id="@+id/txtTreatment"
+                    android:layout_marginLeft="@dimen/dimension35dp"
+                    android:layout_marginRight="@dimen/dimension35dp"
+                    android:imeOptions="actionNext"
+                    android:visibility="gone"
+                    app:ms_arrowColor="@color/colorBlue"
+                    app:ms_arrowSize="16dp"
+                    app:ms_floatingLabelText="Types of Reaction"
+                    app:ms_multiline="true"
+                    custom:ms_floatingLabelColor="@color/colorBlue"
+                    custom:ms_hintColor="@color/colorDarkGray" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilReaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/dimension15dp"
-                    android:paddingTop="@dimen/dimension2dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/dimension20dp" />
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:hint="Reaction"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp"
+                    android:paddingTop="@dimen/dimension8dp"
+                    android:visibility="gone">
 
-            </android.support.design.widget.TextInputLayout>
+                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtReaction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTreatment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilReaction"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:hint="Treatment"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp"
+                    android:paddingTop="@dimen/dimension8dp"
+                    android:visibility="gone">
+
+                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+                    <AutoCompleteTextView
+                        android:id="@+id/txtTreatment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilOtherReaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Other"
+                    android:layout_below="@+id/spinnerReaction"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:paddingLeft="@dimen/dimension30dp"
+                    android:paddingRight="@dimen/dimension30dp"
+                    android:paddingTop="@dimen/dimension8dp"
+                    android:visibility="gone">
+                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                    <AutoCompleteTextView
+                        android:id="@+id/txtOtherReaction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension2dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+
+                    <requestFocus />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilDate"

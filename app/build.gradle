@@ -52,7 +52,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.squareup.okhttp:okhttp:2.7.5'
     testCompile 'junit:junit:4.12'
-    compile files('libs/itextpdf-5.2.1.jar')
     compile 'com.google.firebase:firebase-crash:10.2.0'
     compile 'com.google.android.gms:play-services:10.2.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {

@@ -369,7 +369,7 @@
             android:layout_below="@+id/tilPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimension30dp"
-            android:text="By creating an account, you agree to MYLO "
+            android:text="By creating an account, you agree to MYLO's "
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
 
@@ -387,7 +387,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Private Policy "
+                android:text="Privacy Policy "
                 android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold" />
@@ -425,7 +425,7 @@
             android:layout_below="@+id/rlok"
             android:gravity="center_horizontal"
             android:paddingLeft="@dimen/dimension15dp"
-            android:text="All Information"
+            android:text="All information"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension30dp"
             android:textColorLink="#000000"
@@ -441,7 +441,7 @@
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension15dp"
-            android:text="Mind Your Loved Ones only has access to your email address"
+            android:text="Mind Your Loved Ones(MYLO) only has access to your email address"
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
         <TextView

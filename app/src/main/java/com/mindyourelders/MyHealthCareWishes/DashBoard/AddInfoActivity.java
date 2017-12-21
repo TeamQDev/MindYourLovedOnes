@@ -46,32 +46,33 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-public class AddInfoActivity extends AppCompatActivity  implements View.OnClickListener{
-    private static final int RESULT_CONDITION =500 ;
-    private static final int RESULT_VACCINE =700 ;
-    Context context=this;
-    ImageView imgBack,imgInfo;
-    RelativeLayout llAddConn,rlInfo,rlPdf;
-    TextView txtName,txtReaction,txtTreatment,txtTitle,txtAdd,txtDate,txtDoctor,txtDone,txtOtherVaccine;
-    TextInputLayout tilTitle,tilReaction,tilTreatment,tilDate,tilDoctor,tilDone,tilOtherVaccine;
-    public static final int RESULT_ALLERGY=100;
-    public static final int RESULT_HISTORY=200;
-    public static final int RESULT_IMPLANTS=300;
-    public static final int RESULT_HOSPITAL=400;
-    String from,name,title;
-    Boolean isAllergy,isHistory,isImplant;
+public class AddInfoActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int RESULT_CONDITION = 500;
+    private static final int RESULT_VACCINE = 700;
+    Context context = this;
+    ImageView imgBack, imgInfo;
+    RelativeLayout llAddConn, rlInfo, rlPdf;
+    TextView txtName, txtReaction, txtTreatment, txtTitle, txtAdd, txtDate, txtDoctor, txtDone, txtOtherVaccine;
+    TextInputLayout tilTitle, tilReaction, tilTreatment, tilDate, tilDoctor, tilDone, tilOtherVaccine;
+    public static final int RESULT_ALLERGY = 100;
+    public static final int RESULT_HISTORY = 200;
+    public static final int RESULT_IMPLANTS = 300;
+    public static final int RESULT_HOSPITAL = 400;
+    String from, name, title;
+    Boolean isAllergy, isHistory, isImplant;
     Preferences preferences;
     DBHelper dbHelper;
     int id;
-    String data="";
-    String header="";
-            String msg="";
-TextView txtHeader,txtInfo;
-RelativeLayout rlName;
-MySpinner spinner;
+    String data = "";
+    String header = "";
+    String msg = "";
+    TextView txtHeader, txtInfo;
+    RelativeLayout rlName;
+    MySpinner spinner;
 
     String[] vaccineList = {"Chickenpox (Varicella)", "Hepatitis A", "Hepatitis B", "Hib", "Human Papillomavirus (HPV)", "Influenza (Flu)", "Measles, Mumps, Rubella (MMR)", "Meningococcal", "Polio (IPV)", "Pneumococcal (PCV and PPSV)", "Shingles (Herpes Zoster)", "Tetanus, Diphtheria, Pertussis (Td, Tdap)", "Other"};
-    String[] implantList = {"Aneurysm Stent or Aneurysm Clip","Artifical Limbs","Artificial Heart Value","Body Art","Coronary Stents (Drug Coated/Bare Methal/Unknown)","Crowns","Dental metal implants","Fillings","Gastric Band","HBody Piercing","Implanted Cardio Defibrilator (ICD)","Implanted Devices/Pumps/Stimulator","Joint Replacements (specify)","Lens Implants","Metal Implants","Middle Ear Prosthesis","Pacemaker","Penile Implant","Pins/Rods/Screws","Prosthetic Eye","Renal or other Stents","Tracheotomy", "Other"};
+    String[] implantList = {"Aneurysm Stent or Aneurysm Clip", "Artifical Limbs", "Artificial Heart Value", "Body Art", "Coronary Stents (Drug Coated/Bare Methal/Unknown)", "Dental – metal crowns, filings, implants", "Gastric Band", "HBody Piercing", "Implanted Cardio Defibrilator (ICD)", "Implanted Devices/Pumps/Stimulator", "Joint Replacements (specify)", "Lens Implants", "Metal Implants", "Middle Ear Prosthesis", "Pacemaker", "Penile Implant", "Pins/Rods/Screws", "Prosthetic Eye", "Renal or other Stents", "Tracheotomy", "Other"};
+   // String[] allergyList= {"hdshfcjh","gschfchh","bcbdb","Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +85,15 @@ MySpinner spinner;
     }
 
     private void InitComponent() {
-        preferences=new Preferences(context);
-        dbHelper=new DBHelper(context);
-        AllergyQuery a=new AllergyQuery(context,dbHelper);
+        preferences = new Preferences(context);
+        dbHelper = new DBHelper(context);
+        AllergyQuery a = new AllergyQuery(context, dbHelper);
 
-        Intent i=getIntent();
-        if (i.getExtras()!=null)
-        {
-           from=i.getExtras().getString("ADD");
-            name=i.getExtras().getString("Name");
-            title=i.getExtras().getString("Title");
+        Intent i = getIntent();
+        if (i.getExtras() != null) {
+            from = i.getExtras().getString("ADD");
+            name = i.getExtras().getString("Name");
+            title = i.getExtras().getString("Title");
             txtTitle.setText(title);
             txtAdd.setText(title);
             tilTitle.setHint(name);
@@ -107,18 +107,26 @@ MySpinner spinner;
                     return false;
                 }
             });
-            if (from.equals("VaccineUpdate")||from.equals("Vaccine")) {
+            if (from.equals("VaccineUpdate") || from.equals("Vaccine")) {
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, vaccineList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter1);
 
-            }
-            else{
+            } else {
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, implantList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter1);
 
             }
+           /* if(from.equals("AllergyUpdate") || from.equals("Allergy"))
+            {
+                ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, allergyList);
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter2);
+            }*//*else
+            {
+
+            }*/
 
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -134,20 +142,39 @@ MySpinner spinner;
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
-              switch (from) {
+
+          /*  spinnerReaction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                        tilOtherReaction.setVisibility(View.VISIBLE);
+                    } else {
+                        tilOtherReaction.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });*/
+            switch (from) {
                 case "Allergy":
-                    rlPdf.setVisibility(View.VISIBLE);
-                    tilTitle.setVisibility(View.VISIBLE);
-                    spinner.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                  /*  tilOtherVaccine.setHint("Other Reaction");
+                    spinner.setHint("Types of Reaction");*/
                     break;
 
                 case "AllergyUpdate":
-                    rlPdf.setVisibility(View.VISIBLE);
-                    tilTitle.setVisibility(View.VISIBLE);
-                    spinner.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
+                    /*tilOtherVaccine.setHint("Other Reaction");
+                    spinner.setHint("Types of Reaction");*/
                     break;
                 case "Implants":
-                    rlPdf.setVisibility(View.VISIBLE);
+                    rlPdf.setVisibility(View.GONE);
                     tilTitle.setVisibility(View.GONE);
                     spinner.setVisibility(View.VISIBLE);
                     tilOtherVaccine.setHint("Other Implants");
@@ -155,7 +182,7 @@ MySpinner spinner;
                     break;
 
                 case "ImplantUpdate":
-                    rlPdf.setVisibility(View.VISIBLE);
+                    rlPdf.setVisibility(View.GONE);
                     tilTitle.setVisibility(View.GONE);
                     spinner.setVisibility(View.VISIBLE);
                     tilOtherVaccine.setHint("Other Implants");
@@ -196,7 +223,7 @@ MySpinner spinner;
                     break;
 
                 case "Vaccine":
-                    rlPdf.setVisibility(View.VISIBLE);
+                    rlPdf.setVisibility(View.GONE);
                     tilTitle.setVisibility(View.GONE);
                     spinner.setVisibility(View.VISIBLE);
                     tilOtherVaccine.setHint("Other Vaccine");
@@ -204,7 +231,7 @@ MySpinner spinner;
                     break;
 
                 case "VaccineUpdate":
-                    rlPdf.setVisibility(View.VISIBLE);
+                    rlPdf.setVisibility(View.GONE);
                     tilTitle.setVisibility(View.GONE);
                     spinner.setVisibility(View.VISIBLE);
                     tilOtherVaccine.setHint("Other Vaccine");
@@ -216,19 +243,19 @@ MySpinner spinner;
 
                 case "Allergy":
                     header = "Types of Reaction to Consider :";
-                    msg =   "<br>Anaphylaxis<br>" +
+                    msg = "<br>Anaphylaxis<br>" +
                             "Difficulty Breathing<br>" +
                             "Hives<br>" +
                             "Nausea<br>" +
                             "Rash<br>" +
                             "Vomiting";
-                   txtHeader.setText(header);
-                   txtInfo.setText(Html.fromHtml(msg));
+                    txtHeader.setText(header);
+                    txtInfo.setText(Html.fromHtml(msg));
                     break;
 
                 case "AllergyUpdate":
                     header = "Types of Reaction to Consider :";
-                    msg =   "<br>Anaphylaxis<br>" +
+                    msg = "<br>Anaphylaxis<br>" +
                             "Difficulty Breathing<br>" +
                             "Hives<br>" +
                             "Nausea<br>" +
@@ -288,12 +315,12 @@ MySpinner spinner;
                             "<li>Tracheotomy</li></ul>";
                     txtHeader.setText(header);
                     txtInfo.setText(Html.fromHtml(msg));
-                   break;
+                    break;
                 case "Condition":
-                    header = "Recommendation:<br>Use Medical History Template";
-                    msg =   "<br>" +
+                    header = "See Medical History Template: <br>";
+                    msg = "<br>" +
                             "Click on<br>" +
-                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
+                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>";
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
 
@@ -307,9 +334,9 @@ MySpinner spinner;
 
                 case "ConditionUpdate":
                     header = "Recommendation:<br>Use Medical History Template";
-                    msg =   "<br>" +
+                    msg = "<br>" +
                             "Click on<br>" +
-                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
+                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>";
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
 
@@ -328,8 +355,8 @@ MySpinner spinner;
 
                     break;
                 case "History":
-                    header="Surgical History to Consider :";
-                    msg="<br><ul><li>Appendix</li>" +
+                    header = "Surgical History to Consider :";
+                    msg = "<br><ul><li>Appendix</li>" +
                             "<li>Breast Biopsy/Mastectomy</li>" +
                             "<li>Cataract</li>" +
                             "<li>Colon</li>" +
@@ -354,8 +381,8 @@ MySpinner spinner;
                     break;
 
                 case "HistoryUpdate":
-                    header="Surgical History to Consider :";
-                    msg="<br><ul><li>Appendix</li>" +
+                    header = "Surgical History to Consider :";
+                    msg = "<br><ul><li>Appendix</li>" +
                             "<li>Breast Biopsy/Mastectomy</li>" +
                             "<li>Cataract</li>" +
                             "<li>Colon</li>" +
@@ -380,8 +407,8 @@ MySpinner spinner;
                     break;
 
                 case "Vaccine":
-                    header="Vaccines to Consider :";
-                    msg="<br><ul><li>Chickenpox (Varicella)</li>" +
+                    header = "Vaccines to Consider :";
+                    msg = "<br><ul><li>Chickenpox (Varicella)</li>" +
                             "<li>Hepatitis A</li>" +
                             "<li>Hepatitis B</li>" +
                             "<li>Hib</li>" +
@@ -398,8 +425,8 @@ MySpinner spinner;
                     break;
 
                 case "VaccineUpdate":
-                    header="Vaccines to Consider :";
-                    msg="<br><ul><li>Chickenpox (Varicella)</li>" +
+                    header = "Vaccines to Consider :";
+                    msg = "<br><ul><li>Chickenpox (Varicella)</li>" +
                             "<li>Hepatitis A</li>" +
                             "<li>Hepatitis B</li>" +
                             "<li>Hib</li>" +
@@ -460,51 +487,55 @@ MySpinner spinner;
                     imgInfo.setVisibility(View.GONE);
                     break;
             }*/
-            isAllergy=i.getExtras().getBoolean("IsAllergy");
-            isHistory=i.getExtras().getBoolean("IsHistory");
-            isImplant=i.getExtras().getBoolean("IsImplant");
-            if (isAllergy==true)
-            {
+            isAllergy = i.getExtras().getBoolean("IsAllergy");
+            isHistory = i.getExtras().getBoolean("IsHistory");
+            isImplant = i.getExtras().getBoolean("IsImplant");
+            if (isAllergy == true) {
                 tilTreatment.setVisibility(View.VISIBLE);
                 tilReaction.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 tilTreatment.setVisibility(View.GONE);
                 tilReaction.setVisibility(View.GONE);
             }
 
-           if (isHistory==true)
-            {
+            if (isHistory == true) {
                 tilDone.setVisibility(View.VISIBLE);
                 tilDoctor.setVisibility(View.VISIBLE);
-               // tilDate.setVisibility(View.VISIBLE);
-            }else{
+                // tilDate.setVisibility(View.VISIBLE);
+            } else {
                 tilDone.setVisibility(View.GONE);
                 tilDoctor.setVisibility(View.GONE);
                 //tilDate.setVisibility(View.GONE);
             }
-            if (isImplant==true||isHistory==true)
-            {
+            if (isImplant == true || isHistory == true) {
                 tilDate.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 tilDate.setVisibility(View.GONE);
             }
 
             switch (from) {
                 case "AllergyUpdate":
-                    Allergy allergy= (Allergy) i.getExtras().getSerializable("AllergyObject");
-                    txtName.setText(allergy.getAllergy());
+                    Allergy allergy = (Allergy) i.getExtras().getSerializable("AllergyObject");
+                   txtName.setText(allergy.getAllergy());
                     txtReaction.setText(allergy.getReaction());
+                   // txtOtherReaction.setText(allergy.getOtherReaction());
                     txtTreatment.setText(allergy.getTreatment());
-                    id=allergy.getId();
+                    id = allergy.getId();
+                 /*   int indexs1 =0;
+                    for (int j = 0; j < allergyList.length; j++) {
+                        if (allergy.getAllergy().equals(allergyList[j])) {
+                            indexs1 = j;
+                        }
+                    }
+                    spinnerReaction.setSelection(indexs1 + 1);*/
                     break;
 
                 case "ImplantUpdate":
-                    Implant implant= (Implant) i.getExtras().getSerializable("ImplantObject");
+                    Implant implant = (Implant) i.getExtras().getSerializable("ImplantObject");
                     //txtName.setText(implant.getName());
                     txtOtherVaccine.setText(implant.getOther());
                     txtDate.setText(implant.getDate());
-                    id=implant.getId();
+                    id = implant.getId();
                     int index = 0;
                     for (int j = 0; j < implantList.length; j++) {
                         if (implant.getName().equals(implantList[j])) {
@@ -515,11 +546,11 @@ MySpinner spinner;
                     break;
 
                 case "VaccineUpdate":
-                    Vaccine vaccine= (Vaccine) i.getExtras().getSerializable("VaccineObject");
-                   // txtName.setText(vaccine.getName());
+                    Vaccine vaccine = (Vaccine) i.getExtras().getSerializable("VaccineObject");
+                    // txtName.setText(vaccine.getName());
                     txtDate.setText(vaccine.getDate());
                     txtOtherVaccine.setText(vaccine.getOther());
-                    id=vaccine.getId();
+                    id = vaccine.getId();
                     int indexs = 0;
                     for (int j = 0; j < vaccineList.length; j++) {
                         if (vaccine.getName().equals(vaccineList[j])) {
@@ -530,24 +561,24 @@ MySpinner spinner;
                     break;
 
                 case "ConditionUpdate":
-                    String valuef= i.getExtras().getString("ConditionObject");
+                    String valuef = i.getExtras().getString("ConditionObject");
                     txtName.setText(valuef);
-                    data=valuef;
+                    data = valuef;
                     break;
 
                 case "HospitalUpdate":
-                    String values= i.getExtras().getString("HospitalObject");
+                    String values = i.getExtras().getString("HospitalObject");
                     txtName.setText(values);
-                    data=values;
+                    data = values;
                     break;
 
                 case "HistoryUpdate":
-                    History history= (History) i.getExtras().getSerializable("HistoryObject");
+                    History history = (History) i.getExtras().getSerializable("HistoryObject");
                     txtName.setText(history.getName());
                     txtDone.setText(history.getDone());
                     txtDate.setText(history.getDate());
                     txtDoctor.setText(history.getDoctor());
-                    id=history.getId();
+                    id = history.getId();
                     break;
 
             }
@@ -561,18 +592,17 @@ MySpinner spinner;
         InputStream in = null;
         OutputStream out = null;
         File file = new File(getFilesDir(), documentPath);
-        try
-        {
+        try {
             in = assetManager.open(documentPath);
-            outFile=new File(getExternalFilesDir(null),documentPath);
-            out=new FileOutputStream(outFile);
+            outFile = new File(getExternalFilesDir(null), documentPath);
+            out = new FileOutputStream(outFile);
 
-            copyFiles(in,out);
+            copyFiles(in, out);
             in.close();
-            in=null;
+            in = null;
             out.flush();
             out.close();
-            out=null;
+            out = null;
             /*out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
 
             copyFiles(in, out);
@@ -581,11 +611,10 @@ MySpinner spinner;
             out.flush();
             out.close();
             out = null;*/
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e("tag", e.getMessage());
         }
-        Uri uri=null;
+        Uri uri = null;
         // Uri uri= Uri.parse("file://" + getFilesDir() +"/"+documentPath);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //  intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -601,12 +630,10 @@ MySpinner spinner;
 
     }
 
-    private void copyFiles(InputStream in, OutputStream out) throws IOException
-    {
+    private void copyFiles(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
-        while ((read = in.read(buffer)) != -1)
-        {
+        while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
 
@@ -621,51 +648,53 @@ MySpinner spinner;
     }
 
     private void initUi() {
-        imgBack= (ImageView) findViewById(R.id.imgBack);
-        imgInfo= (ImageView) findViewById(R.id.imgInfo);
-        llAddConn= (RelativeLayout) findViewById(R.id.llAddConn);
-        tilTitle= (TextInputLayout) findViewById(R.id.tilTitle);
-        txtName= (TextView) findViewById(R.id.txtName);
-        tilReaction= (TextInputLayout) findViewById(R.id.tilReaction);
-        txtReaction= (TextView) findViewById(R.id.txtReaction);
-        txtAdd= (TextView) findViewById(R.id.txtAdd);
-        txtTitle= (TextView) findViewById(R.id.txtTitle);
-        txtHeader= (TextView) findViewById(R.id.txtHeader);
-        txtInfo= (TextView) findViewById(R.id.txtInfo);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgInfo = (ImageView) findViewById(R.id.imgInfo);
+        llAddConn = (RelativeLayout) findViewById(R.id.llAddConn);
+        tilTitle = (TextInputLayout) findViewById(R.id.tilTitle);
+        txtName = (TextView) findViewById(R.id.txtName);
+        tilReaction = (TextInputLayout) findViewById(R.id.tilReaction);
+        txtReaction = (TextView) findViewById(R.id.txtReaction);
+        txtAdd = (TextView) findViewById(R.id.txtAdd);
+        txtTitle = (TextView) findViewById(R.id.txtTitle);
+        txtHeader = (TextView) findViewById(R.id.txtHeader);
+        txtInfo = (TextView) findViewById(R.id.txtInfo);
 
-        txtDate= (TextView) findViewById(R.id.txtDate);
-        txtDoctor= (TextView) findViewById(R.id.txtDoctor);
-        txtDone= (TextView) findViewById(R.id.txtDone);
-        tilTreatment= (TextInputLayout) findViewById(R.id.tilTreatment);
-        txtTreatment= (TextView) findViewById(R.id.txtTreatment);
-        txtOtherVaccine= (TextView) findViewById(R.id.txtOtherVaccine);
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        txtDoctor = (TextView) findViewById(R.id.txtDoctor);
+        txtDone = (TextView) findViewById(R.id.txtDone);
+        tilTreatment = (TextInputLayout) findViewById(R.id.tilTreatment);
+        txtTreatment = (TextView) findViewById(R.id.txtTreatment);
+        txtOtherVaccine = (TextView) findViewById(R.id.txtOtherVaccine);
+       // txtOtherReaction = (TextView) findViewById(R.id.txtOtherReaction);
 
-        tilOtherVaccine= (TextInputLayout) findViewById(R.id.tilOtherVaccine);
+        tilOtherVaccine = (TextInputLayout) findViewById(R.id.tilOtherVaccine);
+      //  tilOtherReaction = (TextInputLayout) findViewById(R.id.tilOtherReaction);
 
-        tilDate= (TextInputLayout) findViewById(R.id.tilDate);
-        tilDoctor= (TextInputLayout) findViewById(R.id.tilDoctor);
-        tilDone= (TextInputLayout) findViewById(R.id.tilDone);
+        tilDate = (TextInputLayout) findViewById(R.id.tilDate);
+        tilDoctor = (TextInputLayout) findViewById(R.id.tilDoctor);
+        tilDone = (TextInputLayout) findViewById(R.id.tilDone);
 
-        spinner=findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
+        //spinnerReaction = findViewById(R.id.spinnerReaction);
 
-        rlName=findViewById(R.id.rlName);
-        rlPdf= (RelativeLayout) findViewById(R.id.rlPdf);
-        rlInfo= (RelativeLayout) findViewById(R.id.rlInfo);
+        rlName = findViewById(R.id.rlName);
+       // rlextra = (RelativeLayout) findViewById(R.id.rlextra);
+        rlPdf = (RelativeLayout) findViewById(R.id.rlPdf);
+        rlInfo = (RelativeLayout) findViewById(R.id.rlInfo);
         rlInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              hideSoftKeyboard();
+                hideSoftKeyboard();
             }
         });
-
 
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.imgBack:
                 hideSoftKeyboard();
                 finish();
@@ -674,31 +703,31 @@ MySpinner spinner;
             case R.id.imgInfo:
                 switch (from) {
                     case "Allergy":
-                         header="Allergy";
-                         msg="<b>Types of Reaction to Consider :</b><br>"+
+                        header = "Allergy";
+                        msg = "<b>Types of Reaction to Consider :</b><br>" +
                                 "Anaphylaxis<br>" +
                                 "Difficulty Breathing<br>" +
                                 "Hives<br>" +
                                 "Nausea<br>" +
                                 "Rash<br>" +
                                 "Vomiting <br>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
 
                     case "AllergyUpdate":
-                        header="Allergy";
-                      msg="<b>Types of Reaction to Consider :</b><br>"+
+                        header = "Allergy";
+                        msg = "<b>Types of Reaction to Consider :</b><br>" +
                                 "Anaphylaxis<br>" +
                                 "Difficulty Breathing<br>" +
                                 "Hives<br>" +
                                 "Nausea<br>" +
                                 "Rash<br>" +
                                 "Vomiting <br>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
                     case "Implants":
-                        header="Medical Implants to Consider";
-                        msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                        header = "Medical Implants to Consider";
+                        msg = "<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
                                 "<li>Artifical Limbs</li>" +
                                 "<li>Artificial Heart Value</li>" +
                                 "<li>Body Art</li>" +
@@ -717,12 +746,12 @@ MySpinner spinner;
                                 "<li>Prosthetic Eye</li>" +
                                 "<li>Renal or other Stents</li>" +
                                 "<li>Tracheotomy</li></ul>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
 
                     case "ImplantUpdate":
-                        header="Medical Implants to Consider";
-                        msg="<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
+                        header = "Medical Implants to Consider";
+                        msg = "<ul><li>Aneurysm Stent or Aneurysm Clip</li>" +
                                 "<li>Artifical Limbs</li>" +
                                 "<li>Artificial Heart Value</li>" +
                                 "<li>Body Art</li>" +
@@ -741,7 +770,7 @@ MySpinner spinner;
                                 "<li>Prosthetic Eye</li>" +
                                 "<li>Renal or other Stents</li>" +
                                 "<li>Tracheotomy</li></ul>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
                     case "Condition":
 
@@ -758,8 +787,8 @@ MySpinner spinner;
 
                         break;
                     case "History":
-                        header="Surgical History to Consider";
-                        msg="<ul><li>Appendix</li>" +
+                        header = "Surgical History to Consider";
+                        msg = "<ul><li>Appendix</li>" +
                                 "<li>Breast Biopsy/Mastectomy</li>" +
                                 "<li>Cataract</li>" +
                                 "<li>Colon</li>" +
@@ -779,12 +808,12 @@ MySpinner spinner;
                                 "<li>Tonsils</li>" +
                                 "<li>Vascular Surgery</li>" +
                                 "<li>Wisdom Teeth</li></ul>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
 
                     case "HistoryUpdate":
-                        header="Surgical History to Consider";
-                        msg="<ul><li>Appendix</li>" +
+                        header = "Surgical History to Consider";
+                        msg = "<ul><li>Appendix</li>" +
                                 "<li>Breast Biopsy/Mastectomy</li>" +
                                 "<li>Cataract</li>" +
                                 "<li>Colon</li>" +
@@ -804,7 +833,7 @@ MySpinner spinner;
                                 "<li>Tonsils</li>" +
                                 "<li>Vascular Surgery</li>" +
                                 "<li>Wisdom Teeth</li></ul>";
-                        showViewDialog(context,msg,header);
+                        showViewDialog(context, msg, header);
                         break;
                 }
 
@@ -832,31 +861,33 @@ MySpinner spinner;
                 dpd.show();
                 break;*/
             case R.id.llAddConn:
-                String value="";
-                if (from.equals("VaccineUpdate")||from.equals("Vaccine"))
-                {
+                String value = "";
+                if (from.equals("VaccineUpdate") || from.equals("Vaccine")) {
                     int indexValue = spinner.getSelectedItemPosition();
                     if (indexValue != 0) {
                         value = vaccineList[indexValue - 1];
                     }
-                }
-                else if (from.equals("ImplantUpdate")||from.equals("Implants"))
-                {
+                } else if (from.equals("ImplantUpdate") || from.equals("Implants")) {
                     int indexValue = spinner.getSelectedItemPosition();
                     if (indexValue != 0) {
                         value = implantList[indexValue - 1];
                     }
-                }
-                else{
-                    value=txtName.getText().toString().trim();
+                }/*else if (from.equals("AllergyUpdate") || from.equals("Allergy")) {
+                    int indexValue = spinner.getSelectedItemPosition();
+                    if (indexValue != 0) {
+                        value = allergyList[indexValue - 1];
+                    }
+                }*/ else {
+                    value = txtName.getText().toString().trim();
                 }
 
-                if (value.length()!=0) {
+                if (value.length() != 0) {
                     switch (from) {
                         case "Allergy":
-                            String reaction=txtReaction.getText().toString();
-                            String treatment=txtTreatment.getText().toString();
-                            Boolean flag = AllergyQuery.insertAllergyData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,reaction,treatment);
+                            String reaction = txtReaction.getText().toString();
+                            //String otherReaction = txtOtherReaction.getText().toString();
+                            String treatment = txtTreatment.getText().toString();
+                            Boolean flag = AllergyQuery.insertAllergyData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, reaction, treatment);
                             if (flag == true) {
                                 Toast.makeText(context, "Allergy Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -872,9 +903,10 @@ MySpinner spinner;
                             break;
 
                         case "AllergyUpdate":
-                            String reactions=txtReaction.getText().toString();
-                            String treatments=txtTreatment.getText().toString();
-                            Boolean flags = AllergyQuery.updateAllergyData(id,value,reactions,treatments);
+                            String reactions = txtReaction.getText().toString();
+                          //  String otherReactions = txtOtherReaction.getText().toString();
+                            String treatments = txtTreatment.getText().toString();
+                            Boolean flags = AllergyQuery.updateAllergyData(id, value, reactions, treatments);
                             if (flags == true) {
                                 Toast.makeText(context, "Allergy updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -889,9 +921,9 @@ MySpinner spinner;
                             finish();
                             break;
                         case "Implants":
-                            String dater=txtDate.getText().toString();
-                            String otheri=txtOtherVaccine.getText().toString();
-                            Boolean flage = MedicalImplantsQuery.insertImplantData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,dater,otheri);
+                            String dater = txtDate.getText().toString();
+                            String otheri = txtOtherVaccine.getText().toString();
+                            Boolean flage = MedicalImplantsQuery.insertImplantData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, dater, otheri);
                             if (flage == true) {
                                 Toast.makeText(context, "Implant Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -906,9 +938,9 @@ MySpinner spinner;
 
                         case "Vaccine":
 
-                            String datev=txtDate.getText().toString();
-                            String other=txtOtherVaccine.getText().toString();
-                            Boolean flagr = VaccineQuery.insertVaccineData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,datev,other);
+                            String datev = txtDate.getText().toString();
+                            String other = txtOtherVaccine.getText().toString();
+                            Boolean flagr = VaccineQuery.insertVaccineData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, datev, other);
                             if (flagr == true) {
                                 Toast.makeText(context, "Vaccine Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -922,9 +954,9 @@ MySpinner spinner;
                             break;
 
                         case "VaccineUpdate":
-                            String dates=txtDate.getText().toString();
-                            String others=txtOtherVaccine.getText().toString();
-                            Boolean flagf = VaccineQuery.updateVaccineData(id,value,dates,others);
+                            String dates = txtDate.getText().toString();
+                            String others = txtOtherVaccine.getText().toString();
+                            Boolean flagf = VaccineQuery.updateVaccineData(id, value, dates, others);
                             if (flagf == true) {
                                 Toast.makeText(context, "Vaccine Updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -938,9 +970,9 @@ MySpinner spinner;
                             break;
 
                         case "ImplantUpdate":
-                            String datee=txtDate.getText().toString();
-                            String otherd=txtOtherVaccine.getText().toString();
-                            Boolean flagw= MedicalImplantsQuery.updateImplantData(id,value,datee,otherd);
+                            String datee = txtDate.getText().toString();
+                            String otherd = txtOtherVaccine.getText().toString();
+                            Boolean flagw = MedicalImplantsQuery.updateImplantData(id, value, datee, otherd);
                             if (flagw == true) {
                                 Toast.makeText(context, "Implant Updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -953,7 +985,7 @@ MySpinner spinner;
                             finish();
                             break;
                         case "Condition":
-                            Boolean flagj = MedicalConditionQuery.insertImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
+                            Boolean flagj = MedicalConditionQuery.insertImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID), value);
                             if (flagj == true) {
                                 Toast.makeText(context, "Medical Condition Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -967,7 +999,7 @@ MySpinner spinner;
                             break;
 
                         case "ConditionUpdate":
-                            Boolean flag1ss = MedicalConditionQuery.updateImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
+                            Boolean flag1ss = MedicalConditionQuery.updateImplantsData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, data);
                             if (flag1ss == true) {
                                 Toast.makeText(context, "Medical Condition updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -976,11 +1008,11 @@ MySpinner spinner;
 
                             Intent intentImplanto = new Intent();
                             // intentImplants.putExtra("Value", value);
-                            setResult(RESULT_CONDITION,intentImplanto);
+                            setResult(RESULT_CONDITION, intentImplanto);
                             finish();
                             break;
                         case "Hospital":
-                            Boolean flag2 = HospitalQuery.insertHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID),value);
+                            Boolean flag2 = HospitalQuery.insertHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID), value);
                             if (flag2 == true) {
                                 Toast.makeText(context, "Hospital Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -988,13 +1020,13 @@ MySpinner spinner;
                             }
 
                             Intent intentHospital = new Intent();
-                          //  intentHospital.putExtra("Value", value);
+                            //  intentHospital.putExtra("Value", value);
                             setResult(RESULT_HOSPITAL, intentHospital);
                             finish();
                             break;
 
                         case "HospitalUpdate":
-                            Boolean flag2s = HospitalQuery.updateHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,data);
+                            Boolean flag2s = HospitalQuery.updateHospitalData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, data);
                             if (flag2s == true) {
                                 Toast.makeText(context, "Hospital updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -1007,10 +1039,10 @@ MySpinner spinner;
                             finish();
                             break;
                         case "History":
-                            String date=txtDate.getText().toString();
-                            String doctor=txtDoctor.getText().toString();
-                            String done=txtDone.getText().toString();
-                            Boolean flag3= HistoryQuery.insertHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,date,doctor,done);
+                            String date = txtDate.getText().toString();
+                            String doctor = txtDoctor.getText().toString();
+                            String done = txtDone.getText().toString();
+                            Boolean flag3 = HistoryQuery.insertHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID), value, date, doctor, done);
                             if (flag3 == true) {
                                 Toast.makeText(context, "History Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -1024,10 +1056,10 @@ MySpinner spinner;
                             break;
 
                         case "HistoryUpdate":
-                            String dateu=txtDate.getText().toString();
-                            String doctors=txtDoctor.getText().toString();
-                            String dones=txtDone.getText().toString();
-                            Boolean flag3s= HistoryQuery.updateHistoryData(id,value,dateu,doctors,dones);
+                            String dateu = txtDate.getText().toString();
+                            String doctors = txtDoctor.getText().toString();
+                            String dones = txtDone.getText().toString();
+                            Boolean flag3s = HistoryQuery.updateHistoryData(id, value, dateu, doctors, dones);
                             if (flag3s == true) {
                                 Toast.makeText(context, "History updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -1041,13 +1073,13 @@ MySpinner spinner;
                             break;
                     }
                     break;
-                }
-                else{
-                    Toast.makeText(context,"Value should not be empty",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Value should not be empty", Toast.LENGTH_SHORT).show();
                 }
         }
     }
-    private void showViewDialog(Context context,String Message,String title) {
+
+    private void showViewDialog(Context context, String Message, String title) {
         final Dialog customDialog;
 
         // LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
@@ -1057,11 +1089,11 @@ MySpinner spinner;
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         customDialog.setContentView(R.layout.dialog_living);
         customDialog.setCancelable(false);
-        TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+        TextView txtNotes = (TextView) customDialog.findViewById(R.id.txtNotes);
         txtNotes.setText(Html.fromHtml(Message));
-        TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+        TextView txtNoteHeader = (TextView) customDialog.findViewById(R.id.txtNoteHeader);
         txtNoteHeader.setText(title);
-        TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+        TextView btnYes = (TextView) customDialog.findViewById(R.id.btnYes);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1071,10 +1103,10 @@ MySpinner spinner;
         customDialog.show();
     }
 
-public void hideSoftKeyboard() {
-    if (getCurrentFocus() != null) {
-        InputMethodManager inm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    public void hideSoftKeyboard() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager inm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
-}
 }

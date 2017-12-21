@@ -613,14 +613,14 @@ public class Individual {
                 if (a.getVeterian() != null) {
                     veterian = a.getVeterian();
                 }
-                cell = new PdfPCell(new Phrase("Veterinarian name,address,person : " + veterian));
+                cell = new PdfPCell(new Phrase("Veterinarian : " + veterian));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
 
-                messageInfo3.add("Veterinarian name,address,person :");
+                messageInfo3.add("Veterinarian :");
                 messageInfo3.add(veterian);
 
 
@@ -1819,14 +1819,14 @@ public class Individual {
                 if (a.getVeterian() != null) {
                     veterian = a.getVeterian();
                 }
-                cell = new PdfPCell(new Phrase("Veterinarian name,address,person : " + veterian));
+                cell = new PdfPCell(new Phrase("Veterinarian : " + veterian));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
 
-                messageInfo3.add("Veterinarian name,address,person :");
+                messageInfo3.add("Veterinarian :");
                 messageInfo3.add(veterian);
 
 

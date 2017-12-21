@@ -254,7 +254,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="@dimen/dimension40dp"
-            android:text="&quot;Courtesy of Barbara Keller&quot;"
+            android:text="Courtesy of Barbara Keller"
             android:textSize="@dimen/dimension17dp"
             android:textColor="@color/colorBlackDark"
 

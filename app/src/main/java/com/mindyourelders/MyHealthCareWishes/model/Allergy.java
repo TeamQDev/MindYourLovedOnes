@@ -53,4 +53,14 @@ public class Allergy implements Serializable{
 
     String treatment="";
     String reaction="";
+
+    public String getOtherReaction() {
+        return otherReaction;
+    }
+
+    public void setOtherReaction(String otherReaction) {
+        this.otherReaction = otherReaction;
+    }
+
+    String otherReaction="";
 }

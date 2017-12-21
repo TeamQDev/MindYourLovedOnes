@@ -226,7 +226,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy5= (TextView) findViewById(R.id.txtPolicy5);
         txtPolicy2.setClickable(true);
         txtPolicy2.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a> <font color='orange'> Private Policy </a></font>";
+        String text = "<a> <font color='orange'> Privacy Policy </a></font>";
         txtPolicy2.setText(Html.fromHtml(text));
 
         txtPolicy4.setClickable(true);
@@ -234,7 +234,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String text1 = "<a> Terms of Use </a>";
         txtPolicy4.setText(Html.fromHtml(text1));
 
-        String texts = "<b> <font color='black'><a> All Information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";
+        String texts = "<b> <font color='black'><a> All information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";
         String texts2= "<b> <font color='black'> <a> do not apply </a> </b> </font>.";
         txtPolicy5.setText(Html.fromHtml(texts+texts2));
         String data=txtPolicy5.getText().toString();
