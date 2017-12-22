@@ -41,7 +41,7 @@ public class Header {
             Font.BOLD);
 
     public static Font BlackFont = new Font(Font.FontFamily.TIMES_ROMAN, 15,
-            Font.BOLD);
+            Font.NORMAL);
     public static Document document;
     public static float[] widths = {0.15f, 0.85f};
     public static PdfPTable table;
@@ -180,8 +180,8 @@ public class Header {
                 image = Image.getInstance(stream.toByteArray());
 
                 image.setAlignment(Element.ALIGN_RIGHT);
-                image.scaleAbsoluteHeight(30);
-                image.scaleAbsoluteWidth(15);
+                image.scaleAbsoluteHeight(40);
+                image.scaleAbsoluteWidth(20);
                 image.scalePercent(50);
                 image.setAbsolutePosition(50, 720);
                 image.scaleAbsolute(59f, 59f);
@@ -212,8 +212,8 @@ public class Header {
             image = Image.getInstance(photo);
 
             image.setAlignment(Element.ALIGN_RIGHT);
-            image.scaleAbsoluteHeight(30);
-            image.scaleAbsoluteWidth(15);
+            image.scaleAbsoluteHeight(50);
+            image.scaleAbsoluteWidth(20);
             image.scalePercent(50);
             image.setAbsolutePosition(50, 720);
             image.scaleAbsolute(59f, 59f);

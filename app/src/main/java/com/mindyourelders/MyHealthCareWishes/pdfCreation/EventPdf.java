@@ -172,8 +172,8 @@ public class EventPdf {
     public EventPdf(ArrayList<Note> noteList, int i) {
         try {
             Header.addEmptyLine(1);
-            Header.addChank("Event Notes");
-            messageEvent.add("Event Notes");
+            Header.addChank("Notes");
+            messageEvent.add("Notes");
             Header.addEmptyLine(1);
 
             PdfPTable table1;

@@ -58,7 +58,6 @@ dependencies {
         transitive = true
     }
     compile 'com.google.firebase:firebase-core:10.2.0'
-    compile files('libs/dropbox-android-sdk-1.6.1.jar')
     compile files('libs/httpmime-4.0.3.jar')
     compile files('libs/itextpdf-5.2.1.jar')
 }

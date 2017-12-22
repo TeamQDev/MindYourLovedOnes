@@ -44,13 +44,13 @@ public class PrescriptionPdf {
                 if (prescriptionList.get(i).getMedicine() != null) {
                     medicine = prescriptionList.get(i).getMedicine();
                 }
-                cell = new PdfPCell(new Phrase("Name of Medication or Supplement : " + medicine));
+                cell = new PdfPCell(new Phrase("Name : " + medicine));
                 cell.setBorder(Rectangle.BOTTOM);
                 cell.setUseBorderPadding(true);
                 cell.setBorderWidthBottom(5);
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
-                messagePrescription.add("Name of Medication or Supplement :");
+                messagePrescription.add("Name :");
                 messagePrescription.add(medicine);
 
                 String dosage = "";
