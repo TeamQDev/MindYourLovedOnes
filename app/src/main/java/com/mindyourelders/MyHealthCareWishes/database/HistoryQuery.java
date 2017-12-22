@@ -26,6 +26,7 @@ public class HistoryQuery {
     public static final String COL_DATE= "Date";
     public static final String COL_DOCTOR= "Doctor";
     public static final String COL_DONE= "Done";
+    public static final String COL_OTHER = "OtherHistory";
 
     public HistoryQuery(Context context, DBHelper dbHelper) {
         this.context = context;
@@ -34,7 +35,7 @@ public class HistoryQuery {
 
     public static String createHistoryTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " + COL_USERID + " INTEGER, " +
-                COL_HISTORY + " VARCHAR(100),"+ COL_DATE + " VARCHAR(20),"+ COL_DOCTOR + " VARCHAR(50),"+ COL_DONE + " VARCHAR(50)"+
+                COL_HISTORY + " VARCHAR(100),"+ COL_DATE + " VARCHAR(20),"+ COL_DOCTOR + " VARCHAR(50),"+COL_OTHER + " VARCHAR(100)," + COL_DONE + " VARCHAR(50)"+
                 ");";
         return createTableQuery;
     }
@@ -45,7 +46,7 @@ public class HistoryQuery {
     }
 
 
-    public static Boolean insertHistoryData(int userid, String value, String date, String doctor, String done) {
+    public static Boolean insertHistoryData(int userid, String value, String date, String doctor, String done, String otherH) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -55,6 +56,7 @@ public class HistoryQuery {
         cv.put(COL_DATE, date);
         cv.put(COL_DOCTOR, doctor);
         cv.put(COL_DONE, done);
+        cv.put(COL_OTHER, otherH);
 
 
         long rowid = db.insert(TABLE_NAME, null, cv);
@@ -97,7 +99,7 @@ public class HistoryQuery {
         return true;
     }
 
-    public static Boolean updateHistoryData(int id, String value, String date, String doctor, String done) {
+    public static Boolean updateHistoryData(int id, String value, String date, String doctor, String done, String otherHU) {
         boolean flag;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -107,6 +109,7 @@ public class HistoryQuery {
         cv.put(COL_DATE, date);
         cv.put(COL_DOCTOR, R.drawable.doctor);
         cv.put(COL_DONE, done);
+        cv.put(COL_OTHER, otherHU);
 
 
         //int rowid=db.update(TABLE_NAME,cv,COL_IMPLANTS + "='" + value + "' and "+COL_USERID+"=" + userid,null);
@@ -142,6 +145,7 @@ public class HistoryQuery {
                     allergy.setDate(c.getString(c.getColumnIndex(COL_DATE)));
                     allergy.setDoctor(c.getString(c.getColumnIndex(COL_DOCTOR)));
                     allergy.setDone(c.getString(c.getColumnIndex(COL_DONE)));
+                    allergy.setOther(c.getString(c.getColumnIndex(COL_OTHER)));
                     allergyList.add(allergy);
                 } while (c.moveToNext());
             }

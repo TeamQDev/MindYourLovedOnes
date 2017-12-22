@@ -7,6 +7,15 @@ import java.io.Serializable;
  */
 
 public class History implements Serializable{
+    public String getOther() {
+        return Other;
+    }
+
+    public void setOther(String other) {
+        Other = other;
+    }
+
+    String Other="";
     public int getUserId() {
         return userId;
     }

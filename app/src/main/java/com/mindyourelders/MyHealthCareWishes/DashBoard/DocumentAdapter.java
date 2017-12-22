@@ -55,6 +55,7 @@ public class DocumentAdapter extends BaseAdapter {
             holder=new ViewHolder();
             holder.txtDocHeader= (TextView) convertView.findViewById(R.id.txtDocHeader);
             holder.txtDocTime= (TextView) convertView.findViewById(R.id.txtDocTime);
+            holder.txtDocDate= (TextView) convertView.findViewById(R.id.txtDocDate);
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgNext);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
@@ -65,8 +66,14 @@ public class DocumentAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        holder.txtDocHeader.setText(documentList.get(position).getType());
+        if (documentList.get(position).getType().equals("Other"))
+        {
+            holder.txtDocHeader.setText(documentList.get(position).getType()+" - "+documentList.get(position).getOtherDoc());
+        }else{
+            holder.txtDocHeader.setText(documentList.get(position).getType());
+        }
         holder.txtDocTime.setText(documentList.get(position).getPerson());
+        holder.txtDocDate.setText(documentList.get(position).getDate());
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
         holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +129,7 @@ public class DocumentAdapter extends BaseAdapter {
 
     public class ViewHolder
     {
-        TextView txtDocHeader, txtDocDesc,txtDocTime;
+        TextView txtDocHeader, txtDocDate,txtDocTime;
         ImageView imgDocType,imgForword,imgEdit;
     }
 }

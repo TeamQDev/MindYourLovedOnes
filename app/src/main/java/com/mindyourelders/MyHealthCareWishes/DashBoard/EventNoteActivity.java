@@ -333,7 +333,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 String note = etNote.getText().toString();
                 //   String date=etDate.getText().toString();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy hh:mm a");
                 String currentDateandTime = sdf.format(new Date());
                 if (note.length() != 0) {
                     Boolean flag = EventNoteQuery.insertNoteData(preferences.getInt(PrefConstants.CONNECTED_USERID), note, currentDateandTime);

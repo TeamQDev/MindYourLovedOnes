@@ -90,7 +90,12 @@ public class Individual {
             messageInfo.add(name);
 
             if (connection.getRelationType() != null) {
-                realtion = connection.getRelationType();
+                if (connection.getRelationType().equals("Other")) {
+                    realtion = connection.getRelationType()+" - "+connection.getOtherRelation();
+                }
+                else{
+                    realtion = connection.getRelationType();
+                }
             }
 
             cell1 = new PdfPCell(new Phrase("Relationship : " + realtion));
@@ -380,83 +385,6 @@ public class Individual {
             messageInfo2.add("Language Spoken :");
             messageInfo2.add(language);
 
-
-            if (connection.getEmployed() != null) {
-                employedBy = connection.getEmployed();
-            }
-            cell3 = new PdfPCell(new Phrase("Employed By : " + employedBy));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Employed By :");
-            messageInfo2.add(employedBy);
-
-            if (connection.getManager_phone() != null) {
-                telephone = connection.getManager_phone();
-            }
-            cell3 = new PdfPCell(new Phrase("Manager Phone : " + telephone));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Manager Phone :");
-            messageInfo2.add(telephone);
-
-
-            if (connection.getMarital_status() != null) {
-                marital_status = connection.getMarital_status();
-            }
-            cell3 = new PdfPCell(new Phrase("Marital Status : " + marital_status));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Marital Status :");
-            messageInfo2.add(marital_status);
-
-            if (connection.getReligion() != null) {
-                religionNote = connection.getReligion();
-            }
-            cell3 = new PdfPCell(new Phrase("Religion Note : " + religionNote));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Religion Note :");
-            messageInfo2.add(religionNote);
-
-            if (connection.getProfession() != null) {
-                profession = connection.getProfession();
-            }
-            cell3 = new PdfPCell(new Phrase("Profession : " + profession));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Profession :");
-            messageInfo2.add(profession);
-
-            cell3 = new PdfPCell(new Phrase(""));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("");
-            messageInfo2.add(profession);
-
             Header.document.add(table3);
             Paragraph p3 = new Paragraph(" ");
             DottedLineSeparator line3 = new DottedLineSeparator();
@@ -465,6 +393,110 @@ public class Individual {
             p3.add(line3);
             Header.document.add(p3);
             Header.addEmptyLine(1);
+
+            PdfPTable tablep;
+            tablep= new PdfPTable(2);
+            PdfPCell cellp;
+            tablep.setWidthPercentage(100);
+
+            if (connection.getEmployed() != null) {
+                employedBy = connection.getEmployed();
+            }
+            cellp = new PdfPCell(new Phrase("Employed By : " + employedBy));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Employed By :");
+            messageInfo2.add(employedBy);
+
+            if (connection.getManager_phone() != null) {
+                telephone = connection.getManager_phone();
+            }
+            cellp = new PdfPCell(new Phrase("Manager Phone : " + telephone));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Manager Phone :");
+            messageInfo2.add(telephone);
+
+            if (connection.getProfession() != null) {
+                profession = connection.getProfession();
+            }
+            cellp = new PdfPCell(new Phrase("Profession : " + profession));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Profession :");
+            messageInfo2.add(profession);
+
+            cellp = new PdfPCell(new Phrase(""));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("");
+            messageInfo2.add(profession);
+
+            Header.document.add(tablep);
+            Paragraph pp = new Paragraph(" ");
+            DottedLineSeparator linep = new DottedLineSeparator();
+            linep.setOffset(-4);
+            linep.setLineColor(BaseColor.LIGHT_GRAY);
+            pp.add(linep);
+            Header.document.add(pp);
+            Header.addEmptyLine(1);
+
+            PdfPTable tablem;
+            tablem= new PdfPTable(2);
+            PdfPCell cellm;
+            tablem.setWidthPercentage(100);
+            if (connection.getMarital_status() != null) {
+                marital_status = connection.getMarital_status();
+            }
+            cellm = new PdfPCell(new Phrase("Marital Status : " + marital_status));
+            cellm.setBorder(Rectangle.BOTTOM);
+            cellm.setUseBorderPadding(true);
+            cellm.setBorderWidthBottom(5);
+            cellm.setBorderColorBottom(BaseColor.WHITE);
+            tablem.addCell(cellm);
+
+            messageInfo2.add("Marital Status :");
+            messageInfo2.add(marital_status);
+
+            if (connection.getReligion() != null) {
+                religionNote = connection.getReligion();
+            }
+            cellm = new PdfPCell(new Phrase("Religion Note : " + religionNote));
+            cellm.setBorder(Rectangle.BOTTOM);
+            cellm.setUseBorderPadding(true);
+            cellm.setBorderWidthBottom(5);
+            cellm.setBorderColorBottom(BaseColor.WHITE);
+            tablem.addCell(cellm);
+
+            messageInfo2.add("Religion Note :");
+            messageInfo2.add(religionNote);
+
+            Header.document.add(tablem);
+            Paragraph pm = new Paragraph(" ");
+            DottedLineSeparator linem = new DottedLineSeparator();
+            linem.setOffset(-4);
+            linem.setLineColor(BaseColor.LIGHT_GRAY);
+            pm.add(linem);
+            Header.document.add(pm);
+            Header.addEmptyLine(1);
+
+           /**/
 
 
             PdfPTable table4;
@@ -1586,83 +1618,6 @@ public class Individual {
             messageInfo2.add("Language Spoken :");
             messageInfo2.add(language);
 
-            if (connection.getEmployed() != null) {
-                employedBy = connection.getEmployed();
-            }
-            cell3 = new PdfPCell(new Phrase("Employed By : " + employedBy));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Employed By :");
-            messageInfo2.add(employedBy);
-
-            if (connection.getManager_phone() != null) {
-                telephone = connection.getManager_phone();
-            }
-            cell3 = new PdfPCell(new Phrase("Manager Phone : " + telephone));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Manager Phone :");
-            messageInfo2.add(telephone);
-
-
-
-            if (connection.getMarital_status() != null) {
-                marital_status = connection.getMarital_status();
-            }
-            cell3 = new PdfPCell(new Phrase("Marital Status : " + marital_status));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Marital Status :");
-            messageInfo2.add(marital_status);
-
-            if (connection.getReligion() != null) {
-                religionNote = connection.getReligion();
-            }
-            cell3 = new PdfPCell(new Phrase("Religion Note : " + religionNote));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Religion Note :");
-            messageInfo2.add(religionNote);
-
-            if (connection.getProfession() != null) {
-                profession = connection.getProfession();
-            }
-            cell3 = new PdfPCell(new Phrase("Profession : " + profession));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("Profession :");
-            messageInfo2.add(profession);
-
-            cell3 = new PdfPCell(new Phrase(""));
-            cell3.setBorder(Rectangle.BOTTOM);
-            cell3.setUseBorderPadding(true);
-            cell3.setBorderWidthBottom(5);
-            cell3.setBorderColorBottom(BaseColor.WHITE);
-            table3.addCell(cell3);
-
-            messageInfo2.add("");
-            messageInfo2.add(profession);
-
             Header.document.add(table3);
             Paragraph p3 = new Paragraph(" ");
             DottedLineSeparator line3 = new DottedLineSeparator();
@@ -1671,6 +1626,109 @@ public class Individual {
             p3.add(line3);
             Header.document.add(p3);
             Header.addEmptyLine(1);
+
+            PdfPTable tablep;
+            tablep= new PdfPTable(2);
+            PdfPCell cellp;
+            tablep.setWidthPercentage(100);
+
+            if (connection.getEmployed() != null) {
+                employedBy = connection.getEmployed();
+            }
+            cellp = new PdfPCell(new Phrase("Employed By : " + employedBy));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Employed By :");
+            messageInfo2.add(employedBy);
+
+            if (connection.getManager_phone() != null) {
+                telephone = connection.getManager_phone();
+            }
+            cellp = new PdfPCell(new Phrase("Manager Phone : " + telephone));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Manager Phone :");
+            messageInfo2.add(telephone);
+
+            if (connection.getProfession() != null) {
+                profession = connection.getProfession();
+            }
+            cellp = new PdfPCell(new Phrase("Profession : " + profession));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("Profession :");
+            messageInfo2.add(profession);
+
+            cellp = new PdfPCell(new Phrase(""));
+            cellp.setBorder(Rectangle.BOTTOM);
+            cellp.setUseBorderPadding(true);
+            cellp.setBorderWidthBottom(5);
+            cellp.setBorderColorBottom(BaseColor.WHITE);
+            tablep.addCell(cellp);
+
+            messageInfo2.add("");
+            messageInfo2.add(profession);
+
+            Header.document.add(tablep);
+            Paragraph pp = new Paragraph(" ");
+            DottedLineSeparator linep = new DottedLineSeparator();
+            linep.setOffset(-4);
+            linep.setLineColor(BaseColor.LIGHT_GRAY);
+            pp.add(linep);
+            Header.document.add(pp);
+            Header.addEmptyLine(1);
+
+            PdfPTable tablem;
+            tablem= new PdfPTable(2);
+            PdfPCell cellm;
+            tablem.setWidthPercentage(100);
+            if (connection.getMarital_status() != null) {
+                marital_status = connection.getMarital_status();
+            }
+            cellm = new PdfPCell(new Phrase("Marital Status : " + marital_status));
+            cellm.setBorder(Rectangle.BOTTOM);
+            cellm.setUseBorderPadding(true);
+            cellm.setBorderWidthBottom(5);
+            cellm.setBorderColorBottom(BaseColor.WHITE);
+            tablem.addCell(cellm);
+
+            messageInfo2.add("Marital Status :");
+            messageInfo2.add(marital_status);
+
+            if (connection.getReligion() != null) {
+                religionNote = connection.getReligion();
+            }
+            cellm = new PdfPCell(new Phrase("Religion Note : " + religionNote));
+            cellm.setBorder(Rectangle.BOTTOM);
+            cellm.setUseBorderPadding(true);
+            cellm.setBorderWidthBottom(5);
+            cellm.setBorderColorBottom(BaseColor.WHITE);
+            tablem.addCell(cellm);
+
+            messageInfo2.add("Religion Note :");
+            messageInfo2.add(religionNote);
+
+            Header.document.add(tablem);
+            Paragraph pm = new Paragraph(" ");
+            DottedLineSeparator linem = new DottedLineSeparator();
+            linem.setOffset(-4);
+            linem.setLineColor(BaseColor.LIGHT_GRAY);
+            pm.add(linem);
+            Header.document.add(pm);
+            Header.addEmptyLine(1);
+
 
 
             PdfPTable table4;
@@ -1974,7 +2032,12 @@ public class Individual {
 
                 String reationType = "";
                 if (e.getRelationType() != null) {
-                    reationType = e.getRelationType();
+                    if (e.getRelationType().equals("Other"))
+                    {
+                        reationType = e.getRelationType()+" - "+e.getOtherRelation();
+                    }else {
+                        reationType = e.getRelationType();
+                    }
                 }
                 cell = new PdfPCell(new Phrase("Relation Type : " + reationType));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -1987,7 +2050,7 @@ public class Individual {
                 messageEmergency.add(reationType);
 
 
-                String relationOther = "";
+             /*   String relationOther = "";
                 if (e.getOtherRelation() != null) {
                     relationOther = e.getOtherRelation();
                 }
@@ -1999,7 +2062,7 @@ public class Individual {
                 table.addCell(cell);
 
                 messageEmergency.add("Other :");
-                messageEmergency.add(relationOther);
+                messageEmergency.add(relationOther);*/
 
                 String priority = "";
                 if (e.getIsPrimary() == 0) {
@@ -2442,7 +2505,12 @@ public class Individual {
 
                 String relationShip = "";
                 if (p.getRelationType() != null) {
-                    relationShip = p.getRelationType();
+                    if (p.getRelationType().equals("Other"))
+                    {
+                        relationShip = p.getRelationType()+" - "+p.getOtherRelation();
+                    }else {
+                        relationShip = p.getRelationType();
+                    }
                 }
                 cell = new PdfPCell(new Phrase("Relationship : " + relationShip));
                 cell.setBorder(Rectangle.BOTTOM);

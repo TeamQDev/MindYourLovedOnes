@@ -72,6 +72,9 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     String[] vaccineList = {"Chickenpox (Varicella)", "Hepatitis A", "Hepatitis B", "Hib", "Human Papillomavirus (HPV)", "Influenza (Flu)", "Measles, Mumps, Rubella (MMR)", "Meningococcal", "Polio (IPV)", "Pneumococcal (PCV and PPSV)", "Shingles (Herpes Zoster)", "Tetanus, Diphtheria, Pertussis (Td, Tdap)", "Other"};
     String[] implantList = {"Aneurysm Stent or Aneurysm Clip","Artifical Limbs","Artificial Heart Value","Body Art","Coronary Stents(Drug Coated/Bare Methal/Unknown)","Dental – metal crowns, filings, implants","Gastric Band","HBody Piercing","Implanted Cardio Defibrilator (ICD)","Implanted Devices/Pumps/Stimulator","Joint Replacements (specify)","Lens Implants","Metal Implants","Middle Ear Prosthesis","Pacemaker","Penile Implant","Pins/Rods/Screws","Prosthetic Eye","Renal or other Stents","Tracheotomy", "Other"};
     String[] reactionList={"Anaphylaxis","Difficulty Breathing","Hives","Nausea","Rash","Vomiting","Other"};
+    String[] surgeryList={"Appendix","Breast Biopsy/Mastectomy","Cataract","Colon","Gallbladder","Heart, Angio/Stent","Heart, Bypass","Heart, Valve","Hernia","Hip Replacement","Hysterectomy"
+            ,"Metal Implants","Middle Ear Prosthesis","Mohs – Basal Cell","Mohs – Squamous Cell","Knee Surgery/Replacement","Lasik Surgery","Spine Surgery","Thyroid Surgery","Tonsils","Vascular Surgery","Wisdom Teeth","Other"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,8 +114,14 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                 spinner.setAdapter(adapter1);
 
             }
-            else{
+            else if (from.equals("ImplantUpdate")||from.equals("Implants")){
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, implantList);
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter1);
+
+            }
+            else if (from.equals("HistoryUpdate")||from.equals("History")){
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, surgeryList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter1);
 
@@ -227,19 +236,23 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
                     break;
                 case "History":
-                    rlPdf.setVisibility(View.VISIBLE);
-                    tilTitle.setVisibility(View.VISIBLE);
-                    spinner.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
                     spinnerReaction.setVisibility(View.GONE);
                     tilReaction.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other History");
+                    spinner.setHint("Surgical History");
                     break;
 
                 case "HistoryUpdate":
-                    rlPdf.setVisibility(View.VISIBLE);
-                    tilTitle.setVisibility(View.VISIBLE);
-                    spinner.setVisibility(View.GONE);
+                    rlPdf.setVisibility(View.GONE);
+                    tilTitle.setVisibility(View.GONE);
+                    spinner.setVisibility(View.VISIBLE);
                     spinnerReaction.setVisibility(View.GONE);
                     tilReaction.setVisibility(View.VISIBLE);
+                    tilOtherVaccine.setHint("Other History");
+                    spinner.setHint("Surgical History");
                     break;
 
                 case "Vaccine":
@@ -341,10 +354,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     txtInfo.setText(Html.fromHtml(msg));
                     break;
                 case "Condition":
-                    header = "Recommendation:<br>Use Medical History Template";
+                    header = "See Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
-                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
+                            "<a><font color='blue'><u>Resources/Forms and Templates/Medical History Template</u></font></a>" ;
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
 
@@ -357,11 +370,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     break;
 
                 case "ConditionUpdate":
-                    header = "Recommendation to \n" +
-                            "See Medical History Template \n";
+                    header = "See Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
-                            "<a><font color='blue'>Resources/Forms and Templates/Medical History Template</font></a>" ;
+                            "<a><font color='blue'><u>Resources/Forms and Templates/Medical History Template</u></font></a>" ;
                     txtHeader.setText(Html.fromHtml(header));
                     txtInfo.setText(Html.fromHtml(msg));
 
@@ -613,11 +625,19 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
 
                 case "HistoryUpdate":
                     History history= (History) i.getExtras().getSerializable("HistoryObject");
-                    txtName.setText(history.getName());
+                   // txtName.setText(history.getName());
                     txtDone.setText(history.getDone());
                     txtDate.setText(history.getDate());
                     txtDoctor.setText(history.getDoctor());
+                    txtOtherVaccine.setText(history.getOther());
                     id=history.getId();
+                    int indexH = 0;
+                    for (int j = 0; j < surgeryList.length; j++) {
+                        if (history.getName().equals(surgeryList[j])) {
+                            indexH = j;
+                        }
+                    }
+                    spinner.setSelection(indexH + 1);
                     break;
 
             }
@@ -923,6 +943,13 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                         value = implantList[indexValue - 1];
                     }
                 }
+                else if (from.equals("HistoryUpdate")||from.equals("History"))
+                {
+                    int indexValue = spinner.getSelectedItemPosition();
+                    if (indexValue != 0) {
+                        value = surgeryList[indexValue - 1];
+                    }
+                }
                 else{
                     value=txtName.getText().toString().trim();
                 }
@@ -1098,7 +1125,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             String date=txtDate.getText().toString();
                             String doctor=txtDoctor.getText().toString();
                             String done=txtDone.getText().toString();
-                            Boolean flag3= HistoryQuery.insertHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,date,doctor,done);
+                            String otherH=txtOtherVaccine.getText().toString();
+                            Boolean flag3= HistoryQuery.insertHistoryData(preferences.getInt(PrefConstants.CONNECTED_USERID),value,date,doctor,done,otherH);
                             if (flag3 == true) {
                                 Toast.makeText(context, "History Added Succesfully", Toast.LENGTH_SHORT).show();
                             } else {
@@ -1115,7 +1143,8 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                             String dateu=txtDate.getText().toString();
                             String doctors=txtDoctor.getText().toString();
                             String dones=txtDone.getText().toString();
-                            Boolean flag3s= HistoryQuery.updateHistoryData(id,value,dateu,doctors,dones);
+                            String otherHU=txtOtherVaccine.getText().toString();
+                            Boolean flag3s= HistoryQuery.updateHistoryData(id,value,dateu,doctors,dones,otherHU);
                             if (flag3s == true) {
                                 Toast.makeText(context, "History updated Succesfully", Toast.LENGTH_SHORT).show();
                             } else {

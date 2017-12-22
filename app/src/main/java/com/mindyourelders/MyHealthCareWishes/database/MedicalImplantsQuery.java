@@ -23,7 +23,7 @@ public class MedicalImplantsQuery {
     public static final String COL_USERID = "UserId";
     public static final String COL_NAME = "Name";
     public static final String COL_DATE = "Date";
-    public static final String COL_OTHER = "OtherVaccine";
+    public static final String COL_OTHER = "OtherImplant";
 
 
     public MedicalImplantsQuery(Context context, DBHelper dbHelper) {

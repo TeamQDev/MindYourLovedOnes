@@ -592,8 +592,14 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             ListHistory.setVisibility(View.VISIBLE);
             for (int i = 0; i < HistoryLists.size(); i++) {
                 History a = HistoryLists.get(i);
-                String allergy = "Surgical History: " + a.getName() + "\nDate: " + a.getDate() + "\nDoctor: " + a.getDoctor() + "\nLocation: " + a.getDone();
-                allergyList.add(allergy);
+                String allergy ="";
+                if (a.getName().equals("Other")) {
+                     allergy = "Surgical History: " + a.getName()+" - "+a.getOther() + "\nDate: " + a.getDate() + "\nDoctor: " + a.getDoctor() + "\nLocation: " + a.getDone();
+                }
+                else{
+                    allergy = "Surgical History: " + a.getName() + "\nDate: " + a.getDate() + "\nDoctor: " + a.getDoctor() + "\nLocation: " + a.getDone();
+                }
+                    allergyList.add(allergy);
             }
 
            // final ArrayList<History> historList = HistoryQuery.fetchHistoryRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));

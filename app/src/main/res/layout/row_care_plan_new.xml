@@ -53,9 +53,18 @@
                 android:text= "Primary Proxy"
                 android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension17dp"
-                android:layout_marginBottom="@dimen/dimension5dp"
                 android:layout_below="@+id/txtDocHeader"
-                android:layout_marginTop="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtDocDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:text= "Date Signed"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/dimension17dp"
+                android:layout_marginBottom="@dimen/dimension5dp"
+                android:layout_below="@+id/txtDocTime"
                 />
 
             <ImageView

@@ -7,6 +7,15 @@ import java.io.Serializable;
  */
 
 public class Document implements Serializable {
+    public String getOtherDoc() {
+        return OtherDoc;
+    }
+
+    public void setOtherDoc(String otherDoc) {
+        OtherDoc = otherDoc;
+    }
+
+    String OtherDoc="";
     public String getOtherCategory() {
         return OtherCategory;
     }
