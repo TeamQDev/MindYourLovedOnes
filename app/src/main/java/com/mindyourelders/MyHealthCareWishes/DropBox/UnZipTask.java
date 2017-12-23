@@ -7,11 +7,11 @@ import android.os.AsyncTask;
 import com.mindyourelders.MyHealthCareWishes.DashBoard.DropboxLoginActivity;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -44,7 +44,58 @@ Context con;
 
     @Override
     protected String doInBackground(String... strings) {
-        InputStream is;
+        FileInputStream fis= null;
+        ZipInputStream zis=null;
+        try {
+            fis = new FileInputStream(inputFolderPath);
+            zis = new ZipInputStream(
+                new BufferedInputStream(fis));
+        try {
+            ZipEntry ze;
+            int count;
+            byte[] buffer = new byte[8192];
+            while ((ze = zis.getNextEntry()) != null) {
+                File file = new File(outZipPath, ze.getName());
+                File dir = ze.isDirectory() ? file : file.getParentFile();
+                if (!dir.isDirectory() && !dir.mkdirs())
+                    throw new FileNotFoundException("Failed to ensure directory: " +
+                            dir.getAbsolutePath());
+                if (ze.isDirectory())
+                    continue;
+                FileOutputStream fout = new FileOutputStream(file);
+                try {
+                    while ((count = zis.read(buffer)) != -1)
+                        fout.write(buffer, 0, count);
+                } finally {
+                    fout.close();
+                }
+            /* if time should be restored as well
+            long time = ze.getTime();
+            if (time > 0)
+                file.setLastModified(time);
+            */
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "No";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "No";
+        }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "No";
+        }
+        finally {
+            try {
+                zis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "No";
+            }
+        }
+        return "Yes";
+        /*InputStream is;
         ZipInputStream zis;
         String file="";
         try
@@ -60,7 +111,7 @@ Context con;
                 int count;
 
                 String filename = ze.getName();
-                FileOutputStream fout = new FileOutputStream(outZipPath);
+                FileOutputStream fout = new FileOutputStream(filename);
 
                 // reading and writing
                 while((count = zis.read(buffer)) != -1)
@@ -83,7 +134,7 @@ Context con;
             return null;
         }
 
-        return file;
+        return file;*/
     }
 
     @Override

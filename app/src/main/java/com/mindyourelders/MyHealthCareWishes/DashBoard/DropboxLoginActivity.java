@@ -249,7 +249,9 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
 
                         File folder = new File(sd,backupDBPath);
                         File destfolder = new File(Environment.getExternalStorageDirectory(),
-                                "/MYLO/MYLO_ZIP");
+                                "/MYLO/MYLO");
+                       /* File destfolder = new File(Environment.getExternalStorageDirectory(),
+                                "/MYLO/MYLO_ZIP");*/
                         if (!destfolder.exists())
                         {
                            // try {
@@ -307,7 +309,8 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
         FileChannel destination = null;
         String currentDBPath = "//data//com.mindyourelders.MyHealthCareWishes.HomeActivity"
                 + "//databases//" + "MYLO.db";
-        String backupDBPath = "/Download/" + "MYLO.db";;
+        //String backupDBPath = "/MYLO/MYLO_ZIP/" + "MYLO.db";;
+        String backupDBPath = "/MYLO/MYLO/" + "MYLO.db";;
         File currentDB = new File( data.getAbsolutePath());
         File backupDB = new File(sd,backupDBPath);
         try {
@@ -348,6 +351,12 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
 
     @Override
     public void getFile(String res) {
-        Toast.makeText(context,"Unzipped",Toast.LENGTH_SHORT).show();
+        if (res.equals("Yes")) {
+            copydb(context);
+            Toast.makeText(context, "Unzipped and restored files Successfully", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(context, "Restoring Failed, Please try again", Toast.LENGTH_SHORT).show();
+        }
     }
 }
