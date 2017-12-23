@@ -49,7 +49,7 @@ Context con;
         String file="";
         try
         {
-            is = new FileInputStream(outZipPath + inputFolderPath);
+            is = new FileInputStream(inputFolderPath);
             zis = new ZipInputStream(new BufferedInputStream(is));
             ZipEntry ze;
 
@@ -60,7 +60,7 @@ Context con;
                 int count;
 
                 String filename = ze.getName();
-                FileOutputStream fout = new FileOutputStream(outZipPath + filename);
+                FileOutputStream fout = new FileOutputStream(outZipPath);
 
                 // reading and writing
                 while((count = zis.read(buffer)) != -1)

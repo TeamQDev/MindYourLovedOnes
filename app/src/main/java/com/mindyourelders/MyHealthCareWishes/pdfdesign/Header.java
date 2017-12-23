@@ -42,6 +42,10 @@ public class Header {
 
     public static Font BlackFont = new Font(Font.FontFamily.TIMES_ROMAN, 15,
             Font.NORMAL);
+
+    public static Font CompFont = new Font(Font.FontFamily.TIMES_ROMAN, 13,
+            Font.NORMAL);
+
     public static Document document;
     public static float[] widths = {0.15f, 0.85f};
     public static PdfPTable table;
@@ -278,6 +282,22 @@ public class Header {
     public static void addChank(String chunk) {
         BlackFont.setColor(102, 204, 0);//255, 99, 26);
         Chunk underline = new Chunk(chunk, BlackFont);
+//        underline.setUnderline(0.1f, -2f); // 0.1 thick, -2 y-location
+        Paragraph p = new Paragraph(underline);
+        p.setAlignment(Paragraph.ALIGN_LEFT);
+
+        try {
+            document.add(p);
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void addCompany(String chunk) {
+        CompFont.setColor(102, 204, 0);//255, 99, 26);
+        Chunk underline = new Chunk(chunk, CompFont);
 //        underline.setUnderline(0.1f, -2f); // 0.1 thick, -2 y-location
         Paragraph p = new Paragraph(underline);
         p.setAlignment(Paragraph.ALIGN_LEFT);

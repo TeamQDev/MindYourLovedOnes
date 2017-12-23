@@ -224,6 +224,8 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Specialty Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(1);
+
+
                   /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Specialty");*/
 
@@ -262,6 +264,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Personal & Medical Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(1);
+                    Header.addChank("MindYour-LovedOnes.com");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Paragraph p = new Paragraph(" ");
                     LineSeparator line = new LineSeparator();
                     line.setOffset(-4);
@@ -330,7 +333,9 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Insurance");//preferences.getString(PrefConstants.CONNECTED_NAME));
-                   /* new Header().createPdfHeader(file.getAbsolutePath(),
+                    Header.addEmptyLine(1);
+
+                    /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Insurance");
 
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));*/
@@ -363,6 +368,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Event And Appointment Checklist");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(1);
+
                    /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Event And Appointment Checklist");
 

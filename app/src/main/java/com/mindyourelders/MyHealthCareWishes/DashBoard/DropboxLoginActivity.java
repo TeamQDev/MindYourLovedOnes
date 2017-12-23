@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.v2.users.FullAccount;
@@ -146,19 +147,19 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
+
         btnBackup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.STORE,"Backup");
-
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
+
         btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.STORE,"Restore");
-
                 startActivity(FilesActivity.getIntent(DropboxLoginActivity.this, ""));
             }
         });
@@ -251,11 +252,11 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
                                 "/MYLO/MYLO_ZIP");
                         if (!destfolder.exists())
                         {
-                            try {
-                                destfolder.createNewFile();
-                            } catch (IOException e) {
+                           // try {
+                                destfolder.mkdir();
+                           /* } catch (IOException e) {
                                 e.printStackTrace();
-                            }
+                            }*/
                         }
                         new UnZipTask(DropboxLoginActivity.this,folder.getAbsolutePath(),destfolder.getAbsolutePath()).execute();
                         // copydb(context);
@@ -347,6 +348,6 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
 
     @Override
     public void getFile(String res) {
-
+        Toast.makeText(context,"Unzipped",Toast.LENGTH_SHORT).show();
     }
 }
