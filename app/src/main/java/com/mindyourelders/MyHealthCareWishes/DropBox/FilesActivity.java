@@ -134,7 +134,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
        // File currentDB = new File(str.substring(0,index+1));
         File currentDB = new File(str);
         File backupDB = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/MYLO.db");
+                "/MYLO/MYLO/MYLO.db");
         if (!backupDB.exists())
         {
             try {
@@ -149,9 +149,23 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
             e.printStackTrace();
         }
         File folder = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO");
-        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mylo/MYLO.zip");
-        if (!destfolder.exists())
+                "/MYLO/MYLO/");
+        if (!folder.exists())
+        {
+            try {
+                folder.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+       /* File older = new File(Environment.getExternalStorageDirectory(),"/MYLO/MYLO_ZIP/");
+        if (!older.exists())
+        {
+            older.mkdir();
+        }
+*/
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/MYLO/MYLO.zip");
+      if (!destfolder.exists())
         {
             try {
                 destfolder.createNewFile();
@@ -477,7 +491,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
     }
 
     public void getFile(String s) {
-        File destfolder = new File(Environment.getExternalStorageDirectory(),"/mylo/MYLO.zip");
+        File destfolder = new File(Environment.getExternalStorageDirectory(),"/MYLO/MYLO.zip");
         if (!destfolder.exists())
         {
             try {

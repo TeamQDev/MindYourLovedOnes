@@ -1836,7 +1836,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
         FileOutputStream outStream = null;
         File file = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/");
+                "/MYLO/MYLO/");
         String path = file.getAbsolutePath();
         if (!file.exists()) {
             file.mkdirs();

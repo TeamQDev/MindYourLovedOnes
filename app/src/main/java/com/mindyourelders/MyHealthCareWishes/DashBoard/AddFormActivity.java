@@ -49,6 +49,15 @@ public class AddFormActivity extends AppCompatActivity  {
                 File imgFile1 = new File(photo);
                 if (imgFile1.exists()) {
                     myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                    if(myBitmap.getWidth() > myBitmap.getHeight())
+                    {
+                        // imgDoc.setRotation(180);
+                    }else
+                    {
+                        imgDoc.setRotation(90);
+                    }
+                    imgDoc.setImageBitmap(myBitmap);
+
                     //   imgCard.setImageBitmap(myBitmap);
                 }
             }
@@ -56,14 +65,6 @@ public class AddFormActivity extends AppCompatActivity  {
             Bitmap photoCard = BitmapFactory.decodeByteArray(photo, 0, photo.length);*/
          /*   int nh = (int) ( photoCard.getHeight() * (600.0 / photoCard.getWidth()) );
             Bitmap scaled = Bitmap.createScaledBitmap(photoCard, 600, nh, true);*/
-            if(myBitmap.getWidth() > myBitmap.getHeight())
-            {
-               // imgDoc.setRotation(180);
-            }else
-            {
-                imgDoc.setRotation(90);
-            }
-            imgDoc.setImageBitmap(myBitmap);
 
 
             if (i.getExtras().containsKey("IsDelete")) {

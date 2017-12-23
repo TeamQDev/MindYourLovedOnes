@@ -595,7 +595,7 @@ if (isEdit==false) {
     private void storeImage(Bitmap selectedImage, String profile) {
         FileOutputStream outStream = null;
         File file = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/");
+                "/MYLO/MYLO/");
         String path = file.getAbsolutePath();
         if (!file.exists()) {
             file.mkdirs();

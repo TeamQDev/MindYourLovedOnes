@@ -89,7 +89,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             callFragment("DASHBOARD", fragmentDashboard);
         }*/
         if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
-            callFragment("CONNECTION", fragmentConnection);
+            callFirstFragment("CONNECTION", fragmentConnection);
         }
 
     }
@@ -187,54 +187,22 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void callFragment(String fragName, Fragment fragment) {
-      /*  switch (fragName) {
-          *//*  case "OVERVIEW":
-               // imgLocationFeed.setVisibility(View.GONE);
-                imgNoti.setVisibility(View.GONE);
-                txtTitle.setVisibility(View.VISIBLE);
-                txtTitle.setText("Overview");
-                imgLogout.setVisibility(View.VISIBLE);
-                header.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-                break;*//*
-
-            case "DASHBOARD":
-               // imgLocationFeed.setVisibility(View.VISIBLE);
-                imgNoti.setVisibility(View.VISIBLE);
-                txtTitle.setVisibility(View.GONE);
-                imgLogout.setVisibility(View.GONE);
-                header.setBackgroundColor(Color.TRANSPARENT);
-                break;
-
-            case "CONNECTION":
-                txtTitle.setVisibility(View.VISIBLE);
-                txtTitle.setText("My Connections");
-                // imgLocationFeed.setVisibility(View.VISIBLE);
-               *//* imgNoti.setVisibility(View.VISIBLE);
-                txtTitle.setVisibility(View.GONE);
-                imgLogout.setVisibility(View.GONE);
-                header.setBackgroundColor(Color.TRANSPARENT);*//*
-                break;
-
-            case "NOTIFICATION":
-                txtTitle.setVisibility(View.VISIBLE);
-                txtTitle.setText("Notifications");
-                // imgLocationFeed.setVisibility(View.VISIBLE);
-               *//* imgNoti.setVisibility(View.VISIBLE);
-                txtTitle.setVisibility(View.GONE);
-                imgLogout.setVisibility(View.GONE);
-                header.setBackgroundColor(Color.TRANSPARENT);*//*
-                break;
-        }*/
-
         fragmentTransaction = fragmentManager.beginTransaction();
-     if (fragName.equals("CONNECTION"))
+    /* if (fragName.equals("CONNECTION"))
          fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
-      else
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName).addToBackStack(fragName);
-
+      else*/
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName).addToBackStack("CONNECTION");
         drawerLayout.closeDrawer(leftDrawer);
         fragmentTransaction.commit();
     }
+
+    public void callFirstFragment(String fragName, Fragment fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
+        fragmentTransaction.commit();
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -409,21 +377,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;*/
         }
-    }
-
-
-
-    @Override
-    public void onBackPressed() {
-
-        int count = getFragmentManager().getBackStackEntryCount();
-        if (count == 0) {
-            super.onBackPressed();
-            //additional code
-        } else {
-            getFragmentManager().popBackStack();
-        }
-
     }
 
     @Override

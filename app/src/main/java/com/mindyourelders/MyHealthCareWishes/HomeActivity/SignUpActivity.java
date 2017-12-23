@@ -632,7 +632,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         FileOutputStream outStream = null;
         File file = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/");
+                "/MYLO/MYLO");
         String path = file.getAbsolutePath();
         if (!file.exists()) {
             file.mkdirs();

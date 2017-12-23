@@ -24,6 +24,7 @@ import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.DropboxClientFactory;
 import com.mindyourelders.MyHealthCareWishes.DropBox.FilesActivity;
 import com.mindyourelders.MyHealthCareWishes.DropBox.GetCurrentAccountTask;
+import com.mindyourelders.MyHealthCareWishes.DropBox.UnZipTask;
 import com.mindyourelders.MyHealthCareWishes.DropBox.ZipListner;
 import com.mindyourelders.MyHealthCareWishes.HomeActivity.R;
 import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
@@ -238,16 +239,16 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-/*
+
                         String sd= Environment.getExternalStorageDirectory().getAbsolutePath();
                         //  File data=DropboxLoginActivity.this.getDatabasePath(DBHelper.DATABASE_NAME);
                         String backupDBPath = "/Download/" + "MYLO.zip";;
-                        *//*File currentDB = new File( data.getAbsolutePath());
-                        File backupDB = new File(sd,backupDBPath);*//*
+                        //File currentDB = new File( data.getAbsolutePath());
+                       // File backupDB = new File(sd,backupDBPath);
 
                         File folder = new File(sd,backupDBPath);
                         File destfolder = new File(Environment.getExternalStorageDirectory(),
-                                "/MYLO");
+                                "/MYLO/MYLO_ZIP");
                         if (!destfolder.exists())
                         {
                             try {
@@ -257,7 +258,7 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
                             }
                         }
                         new UnZipTask(DropboxLoginActivity.this,folder.getAbsolutePath(),destfolder.getAbsolutePath()).execute();
-                        // copydb(context);*/
+                        // copydb(context);
                     }
                 });
                 alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
