@@ -225,6 +225,18 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addusereNameChank("Specialty Contacts");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(1);
 
+                    Header.addChank("MindYour-LovedOnes.com");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Paragraph p = new Paragraph(" ");
+                    LineSeparator line = new LineSeparator();
+                    line.setOffset(-4);
+                    line.setLineColor(BaseColor.LIGHT_GRAY);
+                    p.add(line);
+                    try {
+                        Header.document.add(p);
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
+                    Header.addEmptyLine(1);
 
                   /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Specialty");*/
@@ -335,6 +347,19 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addusereNameChank("Insurance");//preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(1);
 
+                    Header.addChank("MindYour-LovedOnes.com");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Paragraph p = new Paragraph(" ");
+                    LineSeparator line = new LineSeparator();
+                    line.setOffset(-4);
+                    line.setLineColor(BaseColor.LIGHT_GRAY);
+                    p.add(line);
+                    try {
+                        Header.document.add(p);
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
+                    Header.addEmptyLine(1);
+
                     /* new Header().createPdfHeader(file.getAbsolutePath(),
                             "Insurance");
 
@@ -367,6 +392,19 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addImage(TARGET_BASE_PATH+"ic_launcher.png");
                     Header.addEmptyLine(1);
                     Header.addusereNameChank("Event And Appointment Checklist");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Header.addEmptyLine(1);
+
+                    Header.addChank("MindYour-LovedOnes.com");//preferences.getString(PrefConstants.CONNECTED_NAME));
+                    Paragraph p = new Paragraph(" ");
+                    LineSeparator line = new LineSeparator();
+                    line.setOffset(-4);
+                    line.setLineColor(BaseColor.LIGHT_GRAY);
+                    p.add(line);
+                    try {
+                        Header.document.add(p);
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
                     Header.addEmptyLine(1);
 
                    /* new Header().createPdfHeader(file.getAbsolutePath(),
