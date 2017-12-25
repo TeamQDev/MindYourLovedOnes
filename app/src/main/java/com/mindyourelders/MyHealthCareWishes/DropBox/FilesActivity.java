@@ -417,11 +417,21 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
             public void onUploadComplete(FileMetadata result) {
                 dialog.dismiss();
 
-                String message = result.getName() + " size " + result.getSize() + " modified " +
+                String message ="Backup is stored in: " + result.getName() + "\nsize: " + result.getSize() + "\nmodified: " +
                         DateFormat.getDateTimeInstance().format(result.getClientModified());
-                Toast.makeText(FilesActivity.this, message, Toast.LENGTH_SHORT)
-                        .show();
-
+               /* Toast.makeText(FilesActivity.this, message, Toast.LENGTH_SHORT)
+                        .show();*/
+                final AlertDialog.Builder alert=new AlertDialog.Builder(FilesActivity.this);
+               alert.setTitle("Success");
+                alert.setMessage(message);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        FilesActivity.this.finish();
+                    }
+                });
+                alert.show();
                 // Reload the folder
                 loadData();
 

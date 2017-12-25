@@ -49,8 +49,8 @@ import static com.mindyourelders.MyHealthCareWishes.HomeActivity.R.id.rlEmergenc
 
 public class FragmentDashboard extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     FragmentOverview fragmentOverview;
-    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti,imgLogo,imgPdf;
-    TextView txtName,txtAddress, txtRelation;
+    ImageView imgProfile, imgShareLocation, imgLocationFeed, imgNoti,imgLogo,imgPdf,imgDrawerProfile;
+    TextView txtName,txtAddress, txtRelation,txtDrawerName;
     RelativeLayout rlEmergencyContact, rlSpecialist, rlInsuranceCard, rlEmergencyEvent, rlPrescription, rlCarePlan;
     View rootview;
     boolean flag = false;
@@ -58,6 +58,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     Preferences preferences;
     DBHelper dbHelper;
     PersonalInfo personalInfo;
+    RelativeLayout leftDrawer;
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int REQUEST_WRITE_PERMISSION = 200;
@@ -195,6 +196,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
             preferences.putString(PrefConstants.USER_PROFILEIMAGE, personalInfo.getPhoto());
+            preferences.putString(PrefConstants.CONNECTED_NAME, personalInfo.getName());
             String name =personalInfo.getName();
             String address=personalInfo.getAddress();
             String relation = "Self";
@@ -219,6 +221,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         }
         else {
             connection = MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
+            preferences.putString(PrefConstants.CONNECTED_NAME, connection.getName());
             String name =connection.getName();
             String address=connection.getAddress();
             String relation=connection.getRelationType();
@@ -279,6 +282,10 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         imgProfile.setVisibility(View.VISIBLE);
         txtName = (TextView)rootview.findViewById(R.id.txtName);
         txtName.setVisibility(View.VISIBLE);
+
+        leftDrawer = (RelativeLayout) getActivity().findViewById(R.id.leftDrawer);
+        txtDrawerName = (TextView) leftDrawer.findViewById(R.id.txtDrawerName);
+        imgDrawerProfile = (ImageView) leftDrawer.findViewById(R.id.imgDrawerProfile);
         // rlOverview= (RelativeLayout) rootview.findViewById(rlOverview);
         rlCarePlan = (RelativeLayout) rootview.findViewById(R.id.rlCarePlan);
         rlEmergencyContact = (RelativeLayout) rootview.findViewById(R.id.rlEmergencyContact);
@@ -434,6 +441,20 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     public void onResume() {
         super.onResume();
         initComponent();
+        getProfile();
+        String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
+        //byte[] photo = Base64.decode(image, Base64.DEFAULT);
+        txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
+        if (!image.equals("")) {
+            File imgFile = new File(image);
+            if (imgFile.exists()) {
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgDrawerProfile,displayImageOptions);
+               /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgDrawerProfile.setImageBitmap(myBitmap);*/
+            }
+        }else{
+            imgDrawerProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
     }
 
     @Override
@@ -457,5 +478,11 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             // other 'switch' lines to check for other
             // permissions this app might request
         }
+    }
+    private void getProfile() {
+        personalInfo = PersonalInfoQuery.fetchProfiles();
+        preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
+        preferences.putString(PrefConstants.USER_NAME,personalInfo.getName());
+        preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());
     }
 }

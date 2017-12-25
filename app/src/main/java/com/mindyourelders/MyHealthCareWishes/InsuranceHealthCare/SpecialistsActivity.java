@@ -688,4 +688,10 @@ public class SpecialistsActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
     }
+}

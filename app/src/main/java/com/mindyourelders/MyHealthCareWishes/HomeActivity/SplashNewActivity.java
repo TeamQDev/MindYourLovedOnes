@@ -2,11 +2,15 @@ package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +22,9 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -34,6 +41,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_splashes_);
+       // hashKey();
         accessPermission();
         variableInitialization();
         initUI();
@@ -45,6 +53,23 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                 .build();
         Fabric.with(fabric);
 
+    }
+
+    private void hashKey() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.mindyourelders.MyHealthCareWishes.HomeActivity",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("VKey:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
     private void accessPermission() {

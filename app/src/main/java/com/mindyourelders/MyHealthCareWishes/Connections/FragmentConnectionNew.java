@@ -3,8 +3,10 @@ package com.mindyourelders.MyHealthCareWishes.Connections;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,13 @@ import com.mindyourelders.MyHealthCareWishes.model.PersonalInfo;
 import com.mindyourelders.MyHealthCareWishes.model.RelativeConnection;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -37,24 +46,47 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     ArrayList<RelativeConnection> connectionList;
     TextView txtAdd;
     //RelativeLayout llAddConn;
-    TextView txtTitle, txtName;
-    ImageView imgNoti, imgProfile, imgLogo, imgPdf;
+    TextView txtTitle, txtName,txtDrawerName;
+    ImageView imgNoti, imgProfile, imgLogo, imgPdf,imgDrawerProfile;
     DBHelper dbHelper;
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
     PersonalInfo personalInfo;
-
+    RelativeLayout leftDrawer;
+    ImageLoader imageLoader;
+    DisplayImageOptions displayImageOptions;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_connection_new, null);
         initComponent();
-        getProfile();
+
+       // getProfile();
 
         // getData();
         initUI();
         initListener();
+        initImageLoader();
         return rootview;
+    }
+
+    private void initImageLoader() {
+        displayImageOptions = new DisplayImageOptions.Builder() // resource
+                .resetViewBeforeLoading(true) // default
+                .cacheInMemory(true) // default
+                .cacheOnDisk(true) // default
+                .showImageOnLoading(R.drawable.ic_profile_defaults)
+                .considerExifParams(false) // default
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED) // default
+                .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new RoundedBitmapDisplayer(150)) // default //for square SimpleBitmapDisplayer()
+                .handler(new Handler()) // default
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(displayImageOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+        imageLoader = ImageLoader.getInstance();
     }
 
     private void initComponent() {
@@ -83,6 +115,9 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         imgPdf.setVisibility(View.GONE);
         imgProfile = (ImageView) getActivity().findViewById(R.id.imgProfile);
         txtName = (TextView) getActivity().findViewById(R.id.txtName);
+        leftDrawer = (RelativeLayout) getActivity().findViewById(R.id.leftDrawer);
+        txtDrawerName = (TextView) leftDrawer.findViewById(R.id.txtDrawerName);
+        imgDrawerProfile = (ImageView) leftDrawer.findViewById(R.id.imgDrawerProfile);
         txtName.setVisibility(View.GONE);
         imgProfile.setVisibility(View.GONE);
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
@@ -190,8 +225,11 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     }
 
     private void getProfile() {
-        personalInfo = PersonalInfoQuery.fetchProfile(preferences.getString(PrefConstants.USER_EMAIL));
+      //  personalInfo = PersonalInfoQuery.fetchProfile(preferences.getString(PrefConstants.USER_EMAIL));
+        personalInfo = PersonalInfoQuery.fetchProfiles();
         preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
+        preferences.putString(PrefConstants.USER_NAME,personalInfo.getName());
+        preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());
     }
 
     /* private void deleteConnection(RelativeConnection item) {
@@ -206,6 +244,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
  */
     private void getData() {
         connectionList = MyConnectionsQuery.fetchAllRecord(preferences.getInt(PrefConstants.USER_ID), 1);
+
 
         /*RelativeConnection P1 = new RelativeConnection();
         P1.setName("Caiete Charlo");
@@ -269,8 +308,22 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        getProfile();
         getData();
         setListData();
+        String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);
+        //byte[] photo = Base64.decode(image, Base64.DEFAULT);
+        txtDrawerName.setText(preferences.getString(PrefConstants.USER_NAME));
+        if (!image.equals("")) {
+            File imgFile = new File(image);
+            if (imgFile.exists()) {
+                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgDrawerProfile,displayImageOptions);
+               /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgDrawerProfile.setImageBitmap(myBitmap);*/
+            }
+        }else{
+            imgDrawerProfile.setImageResource(R.drawable.ic_profile_defaults);
+        }
     }
 
     public void deleteConnection(int id) {

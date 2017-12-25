@@ -1536,6 +1536,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
+                preferences.putString(PrefConstants.CONNECTED_NAME,name);
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
@@ -1546,6 +1547,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
+                preferences.putString(PrefConstants.CONNECTED_NAME,name);
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
