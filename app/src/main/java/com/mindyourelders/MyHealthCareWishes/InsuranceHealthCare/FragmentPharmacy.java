@@ -45,6 +45,7 @@ public class FragmentPharmacy extends Fragment implements View.OnClickListener{
     ArrayList<Pharmacy> PharmacyList;
     RelativeLayout llAddPharmacy;
     Preferences preferences;
+    RelativeLayout rlGuide;
 DBHelper dbHelper;
     final String dialog_items[]={"View","Email","Fax"};
     @Nullable
@@ -70,9 +71,11 @@ DBHelper dbHelper;
             PharmacyAdapter pharmacyAdapter = new PharmacyAdapter(getActivity(), PharmacyList);
             lvPharmacy.setAdapter(pharmacyAdapter);
             lvPharmacy.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         }
         else{
             lvPharmacy.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -83,6 +86,7 @@ DBHelper dbHelper;
 
     private void initUI() {
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddPharmacy= (RelativeLayout) rootview.findViewById(R.id.llAddPharmacy);
         lvPharmacy= (SwipeMenuListView) rootview.findViewById(R.id.lvPharmacy);

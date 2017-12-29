@@ -47,7 +47,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     SwipeMenuListView lvNote;
     ArrayList<Note> noteList = new ArrayList<>();
     ImageView imgBack, imgAdd, imgEdit,imgRight;
-    TextView txtView;
+    RelativeLayout rlGuide;
     Preferences preferences;
     DBHelper dbHelper;
     RelativeLayout header,rlEvent;
@@ -138,7 +138,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                 });
             }
         });
-        txtView = (TextView) findViewById(R.id.txtView);
+        rlGuide = (RelativeLayout) findViewById(R.id.rlGuide);
         if (noteList.size() != 0) {
             setNoteData();
         }
@@ -177,9 +177,9 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     private void setNoteData() {
         if (noteList.size() != 0) {
             lvNote.setVisibility(View.VISIBLE);
-            txtView.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.GONE);
         } else {
-            txtView.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.VISIBLE);
             lvNote.setVisibility(View.GONE);
         }
         NoteAdapter adapter = new NoteAdapter(context, noteList);

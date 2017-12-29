@@ -54,6 +54,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
     EmergencyAdapter emergencyAdapter;
+    RelativeLayout rlGuide;
      String finalText="";
     final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Nullable
@@ -74,8 +75,18 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
     }
 
     private void setListData() {
-        emergencyAdapter = new EmergencyAdapter(getActivity(), emergencyList);
-        lvEmergency.setAdapter(emergencyAdapter);
+     /*   emergencyAdapter = new EmergencyAdapter(getActivity(), emergencyList);
+        lvEmergency.setAdapter(emergencyAdapter);*/
+        if (emergencyList.size()!=0) {
+            emergencyAdapter = new EmergencyAdapter(getActivity(), emergencyList);
+            lvEmergency.setAdapter(emergencyAdapter);
+            rlGuide.setVisibility(View.GONE);
+            lvEmergency.setVisibility(View.VISIBLE);
+        }
+        else{
+            rlGuide.setVisibility(View.VISIBLE);
+            lvEmergency.setVisibility(View.GONE);
+        }
     }
 
     private void initListener() {
@@ -90,6 +101,7 @@ public class FragmentEmergency extends Fragment implements View.OnClickListener{
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("EMERGENCY CONTACTS &\nHEALTH CARE PROXY AGENT");
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         /*imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);*/

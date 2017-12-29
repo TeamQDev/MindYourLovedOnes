@@ -46,6 +46,7 @@ public class FragmentFinance extends Fragment implements View.OnClickListener {
     RelativeLayout llAddFinance;
     Preferences preferences;
     DBHelper dbHelper;
+    RelativeLayout rlGuide;
     final String dialog_items[] = {"View", "Email", "Fax"};
 
     @Nullable
@@ -71,8 +72,10 @@ public class FragmentFinance extends Fragment implements View.OnClickListener {
             FinanceAdapter financeAdapter = new FinanceAdapter(getActivity(), FinanceList);
             lvFinance.setAdapter(financeAdapter);
             lvFinance.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         } else {
             lvFinance.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -84,6 +87,7 @@ public class FragmentFinance extends Fragment implements View.OnClickListener {
 
     private void initUI() {
         imgRight = (ImageView) getActivity().findViewById(R.id.imgRight);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddFinance = (RelativeLayout) rootview.findViewById(R.id.llAddFinance);
         lvFinance = (SwipeMenuListView) rootview.findViewById(R.id.lvFinance);

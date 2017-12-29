@@ -47,7 +47,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     SwipeMenuListView lvNote;
     ArrayList<Appoint> noteList = new ArrayList<>();
     ImageView imgBack, imgAdd, imgEdit, imgRight;
-    TextView txtView;
+    RelativeLayout rlGuide;
     Preferences preferences;
     ArrayList<DateClass> dateList;
     DBHelper dbHelper;
@@ -213,7 +213,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
         });
 */
 
-        txtView = (TextView) findViewById(R.id.txtView);
+        rlGuide = (RelativeLayout) findViewById(R.id.rlGuide);
         if (noteList.size() != 0) {
             setNoteData();
         }
@@ -267,9 +267,9 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     private void setNoteData() {
         if (noteList.size() != 0) {
             lvNote.setVisibility(View.VISIBLE);
-            txtView.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.GONE);
         } else {
-            txtView.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.VISIBLE);
             lvNote.setVisibility(View.GONE);
         }
         AppointAdapter adapter = new AppointAdapter(context, noteList);

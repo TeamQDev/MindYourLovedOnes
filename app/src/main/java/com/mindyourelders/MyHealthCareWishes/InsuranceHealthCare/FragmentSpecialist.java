@@ -46,6 +46,7 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
     RelativeLayout llAddSpecialist;
     Preferences preferences;
     DBHelper dbHelper;
+    RelativeLayout rlGuide;
     final String dialog_items[]={"View","Email","Fax"};
     @Nullable
     @Override
@@ -70,9 +71,11 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
             SpecialistAdapter specialistAdapter = new SpecialistAdapter(getActivity(), specialistList);
             lvSpecialist.setAdapter(specialistAdapter);
             lvSpecialist.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         }
         else{
             lvSpecialist.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
 
     }
@@ -86,6 +89,7 @@ public class FragmentSpecialist extends Fragment implements View.OnClickListener
     private void initUI() {
 
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);
         lvSpecialist= (SwipeMenuListView) rootview.findViewById(R.id.lvSpecialist);

@@ -54,6 +54,7 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     RelativeLayout llAddDoc;
     Preferences preferences;
     DBHelper dbHelper;
+    RelativeLayout rlGuide;
 
     @Nullable
     @Override
@@ -78,8 +79,10 @@ public class FragementForm extends Fragment implements View.OnClickListener {
             DocumentsAdapter insuranceAdapter = new DocumentsAdapter(getActivity(), documentList);
             lvDoc.setAdapter(insuranceAdapter);
             lvDoc.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         } else {
             lvDoc.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -93,6 +96,7 @@ public class FragementForm extends Fragment implements View.OnClickListener {
 
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddDoc = (RelativeLayout) rootview.findViewById(R.id.llAddDoc);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         lvDoc = (SwipeMenuListView) rootview.findViewById(R.id.lvDoc);
         lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);

@@ -29,6 +29,7 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
     FragmentPharmacy fragmentPharmacy=null;
     FragmentFinance fragmentFinance=null;
     FragmentHospital fragmentHospital=null;
+    RelativeLayout rlGuide;
 TextView txtTitle;
     Spinner spinner;
 

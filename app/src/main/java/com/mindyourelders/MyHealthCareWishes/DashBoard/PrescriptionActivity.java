@@ -52,7 +52,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     ImageView imgBack,imgRight;
     ArrayList<Prescription> PrescriptionList;
     RelativeLayout llAddPrescription;
-    TextView txtView;
+    RelativeLayout rlGuide;
    public static final int REQUEST_PRES=100;
     Preferences preferences;
     DBHelper dbHelper;
@@ -96,7 +96,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
         llAddPrescription= (RelativeLayout) findViewById(R.id.llAddPrescription);
         lvPrescription= (SwipeMenuListView) findViewById(R.id.lvPrescription);
        // lvPrescription= (ListView)findViewById(R.id.lvPrescription);
-        txtView= (TextView) findViewById(R.id.txtView);
+        rlGuide= (RelativeLayout) findViewById(R.id.rlGuide);
         imgRight= (ImageView)findViewById(R.id.imgRight);
 
         lvPrescription.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
@@ -293,9 +293,9 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
       if (PrescriptionList.size()!=0)
         {
             lvPrescription.setVisibility(View.VISIBLE);
-            txtView.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.GONE);
         }else{
-            txtView.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.VISIBLE);
             lvPrescription.setVisibility(View.GONE);
         }
         PrescriptionAdapter adapter=new PrescriptionAdapter(context,PrescriptionList);

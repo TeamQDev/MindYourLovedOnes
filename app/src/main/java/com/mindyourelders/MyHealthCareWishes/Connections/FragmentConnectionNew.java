@@ -55,6 +55,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     RelativeLayout leftDrawer;
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
+    RelativeLayout rlGuide;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -97,8 +98,16 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     }
 
     private void setListData() {
-        connectionAdapter = new ConnectionAdapter(getActivity(), connectionList);
-        lvConnection.setAdapter(connectionAdapter);
+        if (connectionList.size()!=0) {
+            connectionAdapter = new ConnectionAdapter(getActivity(), connectionList);
+            lvConnection.setAdapter(connectionAdapter);
+            if (connectionList.size()>1) {
+                rlGuide.setVisibility(View.GONE);
+            }
+            else{
+                rlGuide.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void initListener() {
@@ -123,10 +132,11 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
         imgNoti = (ImageView) getActivity().findViewById(R.id.imgNoti);
         imgNoti.setVisibility(View.GONE);
         imgLogo = (ImageView) getActivity().findViewById(R.id.imgLogo);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         imgLogo.setVisibility(View.VISIBLE);
         String deviceName = android.os.Build.MODEL;
         String deviceMan = android.os.Build.MANUFACTURER;
-        Toast.makeText(getActivity(), deviceMan + " " + deviceName, Toast.LENGTH_LONG).show();
+     //   Toast.makeText(getActivity(), deviceMan + " " + deviceName, Toast.LENGTH_LONG).show();
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         //llAddConn = (RelativeLayout) rootview.findViewById(llAddConn);
         lvConnection = (GridView) rootview.findViewById(R.id.lvConnection);

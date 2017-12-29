@@ -56,7 +56,9 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     final CharSequence[] dialog_items ={"View", "Email", "Fax" };
     RelativeLayout llAddDoc;
     Preferences preferences;
-
+    RelativeLayout rlGuide;
+    ImageView imgPicture;
+    TextView txtHeader,txtMsg;
 DBHelper dbHelper;
 
     @Override
@@ -84,8 +86,10 @@ DBHelper dbHelper;
             DocumentAdapter documentAdapter = new DocumentAdapter(context, documentListOld);
             lvDoc.setAdapter(documentAdapter);
             lvDoc.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         }else{
             lvDoc.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -101,8 +105,12 @@ DBHelper dbHelper;
     lvNote.setMenuCreator(creator);*/
     private void initUI() {
         imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgPicture=findViewById(R.id.imgPicture);
+        txtHeader=findViewById(R.id.txtHeader);
+        txtMsg=findViewById(R.id.txtMsg);
         imgRight= (ImageView) findViewById(R.id.imgRight);
         lvDoc= (SwipeMenuListView) findViewById(R.id.lvDoc);
+        rlGuide=findViewById(R.id.rlGuide);
         lvDoc.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         SwipeMenuCreation s=new SwipeMenuCreation();
         SwipeMenuCreator creator=s.createSingleMenu(context);
@@ -131,14 +139,26 @@ DBHelper dbHelper;
             case "AD":
                 txtTitle.setText("Advance Directives");
                 txtAdd.setText("Add Advance Directives");
+                imgPicture.setImageResource(R.drawable.v_doc);
+                txtHeader.setText("Add Adv. Directive Docs");
+                txtMsg.setText("Storing Advance Care Directives directly on your phone allows medical staff to quickly obtain access to the information.");
                 break;
             case "Record":
                 txtTitle.setText("Medical Records");
                 txtAdd.setText("Add Medical Records");
+                imgPicture.setImageResource(R.drawable.v_record);
+                txtHeader.setText("Add Medical Records");
+                txtMsg.setText("You can keep any records that you want in any format. \n\n" +
+                        "Personally I prefer keeping digital records that can easily be  emailed or faxed to my doctors than paper records.  I don’t want to lug around a shopping bag of records.");
                 break;
             case "Other":
                 txtTitle.setText("Other Documents");
                 txtAdd.setText("Add Other Documents");
+                imgPicture.setImageResource(R.drawable.v_other);
+                txtHeader.setText("Add Other Documents");
+                txtMsg.setText("You can keep any records that you want in any format. \n" +
+                        "\n" +
+                        "For example –  you may want to keep pictures of your drivers license, social security card, diploma, or credit cards.  You  might also consider keeping a copy of your Last Will & Testament, Trust, Disposition of Remains or Letters of Instruction.");
                 break;
             case "Legal":
                 txtTitle.setText("Legal and Financial Documents");

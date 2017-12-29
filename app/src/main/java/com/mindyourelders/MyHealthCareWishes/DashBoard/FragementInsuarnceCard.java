@@ -62,6 +62,7 @@ ImageView imgRight;
     final String dialog_items[]={"View","Email","Fax"};
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
+    RelativeLayout rlGuide;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -132,6 +133,7 @@ ImageView imgRight;
 
     private void initUI() {
         llAddCard = (RelativeLayout) rootview.findViewById(R.id.llAddCard);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         lvCard = (SwipeMenuListView) rootview.findViewById(R.id.lvCard);
         txtView = (TextView) rootview.findViewById(R.id.txtView);
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
@@ -147,6 +149,7 @@ ImageView imgRight;
             lvCard.setVisibility(View.GONE);
         }*/
         if (CardList.size() != 0) {
+            rlGuide.setVisibility(View.GONE);
             lvCard.setVisibility(View.VISIBLE);
             CardAdapter adapter = new CardAdapter(getActivity(), CardList);
             lvCard.setAdapter(adapter);
@@ -209,6 +212,7 @@ ImageView imgRight;
             });
         } else {
             lvCard.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
 
 

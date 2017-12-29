@@ -46,6 +46,7 @@ public class FragmentHospital extends Fragment implements View.OnClickListener {
     RelativeLayout llAddHospital;
     Preferences preferences;
     DBHelper dbHelper;
+    RelativeLayout rlGuide;
     final String dialog_items[] = {"View","Email","Fax"};
 
     @Nullable
@@ -71,8 +72,10 @@ public class FragmentHospital extends Fragment implements View.OnClickListener {
             HospitalAdapter hospitalAdapter = new HospitalAdapter(getActivity(), hospitalList);
             lvHospital.setAdapter(hospitalAdapter);
             lvHospital.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         } else {
             lvHospital.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -85,6 +88,7 @@ public class FragmentHospital extends Fragment implements View.OnClickListener {
     private void initUI() {
         imgRight = (ImageView) getActivity().findViewById(R.id.imgRight);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         llAddHospital = (RelativeLayout) rootview.findViewById(R.id.llAddHospital);
         lvHospital = (SwipeMenuListView) rootview.findViewById(R.id.lvHospital);
         setListData();

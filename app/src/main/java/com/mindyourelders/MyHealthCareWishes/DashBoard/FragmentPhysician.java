@@ -53,6 +53,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     TextView txtAdd;
     DBHelper dbHelper;
     SpecialistAdapter specialistAdapter;
+    RelativeLayout rlGuide;
     final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Nullable
     @Override
@@ -78,9 +79,11 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
             specialistAdapter = new SpecialistAdapter(getActivity(), specialistList);
             lvSpecialist.setAdapter(specialistAdapter);
             lvSpecialist.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         }
         else{
             lvSpecialist.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -93,6 +96,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     private void initUI() {
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setText("PRIMARY PHYSICIAN");
+        rlGuide=rootview.findViewById(R.id.rlGuide);
        imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddSpecialist= (RelativeLayout) rootview.findViewById(R.id.llAddSpecialist);

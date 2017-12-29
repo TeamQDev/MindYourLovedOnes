@@ -67,13 +67,48 @@
         android:visibility="gone"
         android:transcriptMode="alwaysScroll"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
-    <TextView
-        android:id="@+id/txtView"
+    <RelativeLayout
+        android:id="@+id/rlGuide"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="No Appointment Available"
-        android:layout_below="@+id/header"
-        android:gravity="center"
-        android:textSize="@dimen/dimension18dp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/dimension20dp"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/imgPicture"
+            android:layout_width="@dimen/dimension90dp"
+            android:layout_height="@dimen/dimension90dp"
+            android:src="@drawable/v_calendar"
+            android:layout_centerHorizontal="true"
+
+            />
+        <TextView
+            android:id="@+id/txtHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Establish an Annual Medical Calendar"
+            android:layout_below="@+id/imgPicture"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimension24dp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add standing medical appointments and keep track of the dates completed.
+Monitor year over year changes."
+            android:layout_below="@+id/txtHeader"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorGuide"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            />
+    </RelativeLayout>
 </RelativeLayout>

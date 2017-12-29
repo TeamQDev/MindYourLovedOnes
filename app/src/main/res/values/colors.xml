@@ -24,6 +24,7 @@
     <color name="colorGrayButton">#D9D9D9</color>
     <color name="colorGrayDarkButton">#A1A7Ac</color>
     <color name="colorMaroon">#C00000</color>
+    <color name="colorGuide">#7f7f7f</color>
 
 <!--
  <color name="colorOne">#408000</color>

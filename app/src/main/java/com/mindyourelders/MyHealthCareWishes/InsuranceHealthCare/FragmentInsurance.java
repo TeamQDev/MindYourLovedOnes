@@ -46,6 +46,7 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
     RelativeLayout llAddInsurance;
     Preferences preferences;
     DBHelper dbHelper;
+    RelativeLayout rlGuide;
     final String dialog_items[]={"View","Email","Fax"};
 
     @Nullable
@@ -71,8 +72,10 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
             InsuranceAdapter insuranceAdapter = new InsuranceAdapter(getActivity(), insuranceList);
             lvInsurance.setAdapter(insuranceAdapter);
             lvInsurance.setVisibility(View.VISIBLE);
+            rlGuide.setVisibility(View.GONE);
         } else {
             lvInsurance.setVisibility(View.GONE);
+            rlGuide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -84,6 +87,7 @@ public class FragmentInsurance extends Fragment implements View.OnClickListener 
 
     private void initUI() {
         imgRight= (ImageView) getActivity().findViewById(R.id.imgRight);
+        rlGuide=rootview.findViewById(R.id.rlGuide);
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddInsurance = (RelativeLayout) rootview.findViewById(R.id.llAddInsurance);
         lvInsurance = (SwipeMenuListView) rootview.findViewById(R.id.lvInsurance);

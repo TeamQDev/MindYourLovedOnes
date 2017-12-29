@@ -49,4 +49,48 @@
         android:divider="@color/colorLightGray"
         android:layout_alignParentTop="true"
         android:scrollbars="none"/>
+
+    <RelativeLayout
+        android:id="@+id/rlGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/dimension20dp"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/imgPicture"
+            android:layout_width="@dimen/dimension90dp"
+            android:layout_height="@dimen/dimension90dp"
+            android:src="@drawable/v_emergency"
+            android:layout_centerHorizontal="true"
+
+            />
+        <TextView
+            android:id="@+id/txtHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add a Emergency and Proxy Contact"
+            android:layout_below="@+id/imgPicture"
+          android:gravity="center_horizontal"
+            android:textSize="@dimen/dimension24dp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dimension10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You can identify as many primary and secondary emergency contacts as you want.\n\n
+If you have a Health Care Proxy add your primary agent and in case they are not available your alternate."
+            android:layout_below="@+id/txtHeader"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimension20dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorGuide"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            />
+    </RelativeLayout>
 </RelativeLayout>
