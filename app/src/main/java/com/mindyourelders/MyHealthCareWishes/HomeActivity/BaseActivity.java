@@ -59,8 +59,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout leftDrawer, container, footer, header;
    RelativeLayout rlLogOutt;
     Preferences preferences;
-    RelativeLayout rlHome,rlSupport,rlContact,rlResources,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail;
-    boolean flagResource=false,flagMarket=false;
+    TextView txtPrivacyPolicy,txtEULA;
+    RelativeLayout rlHome,rlSupport,rlContact,rlResources,rlPrivacy,rlMarketPlace,rlVideos,rlBackup,rlResourcesDetail,rlMarketDetail,rlPrivacyDetail;
+    boolean flagResource=false,flagMarket=false,flagPrivacy=false;
 
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
@@ -126,6 +127,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlHome.setOnClickListener(this);
         rlSupport.setOnClickListener(this);
         rlResources.setOnClickListener(this);
+        rlPrivacy.setOnClickListener(this);
         rlMarketPlace.setOnClickListener(this);
         rlVideos.setOnClickListener(this);
         rlBackup.setOnClickListener(this);
@@ -135,6 +137,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         txtForm.setOnClickListener(this);
         txtSenior.setOnClickListener(this);
         txtAdvance.setOnClickListener(this);
+        rlPrivacyDetail.setOnClickListener(this);
+        txtPrivacyPolicy.setOnClickListener(this);
+        txtEULA.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -146,6 +151,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         imgLocationFeed = (ImageView) findViewById(R.id.imgLocationFeed);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         txtName = (TextView) findViewById(R.id.txtName);
+
 
         txtBank = (TextView) findViewById(R.id.txtBank);
         txtForm = (TextView) findViewById(R.id.txtForm);
@@ -166,12 +172,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         rlHome= (RelativeLayout) leftDrawer.findViewById(R.id.rlHome);
         rlSupport= (RelativeLayout) leftDrawer.findViewById(R.id.rlSupport);
         rlResources= (RelativeLayout) leftDrawer.findViewById(R.id.rlResources);
+        rlPrivacy= (RelativeLayout) leftDrawer.findViewById(R.id.rlPrivacy);
         rlMarketPlace= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketPlace);
         rlVideos= (RelativeLayout) leftDrawer.findViewById(R.id.rlVideos);
         rlBackup= (RelativeLayout) leftDrawer.findViewById(R.id.rlBackup);
         rlMarketDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlMarketDetail);
         rlResourcesDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlResourcesDetail);
+        rlPrivacyDetail= (RelativeLayout) leftDrawer.findViewById(R.id.rlPrivacyDetail);
         rlContact= (RelativeLayout) leftDrawer.findViewById(R.id.rlContact);
+        txtPrivacyPolicy = (TextView) leftDrawer.findViewById(R.id.txtPrivacyPolicy);
+        txtEULA = (TextView) leftDrawer.findViewById(R.id.txtEULA);
     }
 
     private void fragmentData() {
@@ -263,6 +273,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                     rlResourcesDetail.setVisibility(View.GONE);
                     flagResource=false;
                 }
+
+            case R.id.rlPrivacy:
+                if (flagPrivacy==false) {
+                    rlPrivacyDetail.setVisibility(View.VISIBLE);
+                    flagPrivacy=true;
+                }
+                else  if (flagPrivacy==true){
+                    rlPrivacyDetail.setVisibility(View.GONE);
+                    flagPrivacy=false;
+                }
               /* // if (fragmentManager.findFragmentByTag("RESOURCES") == null) {
                     callFragment("RESOURCES", fragmentResources);
               //  }
@@ -288,6 +308,18 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txtForm:
                // callFragment("FORM", fragmentResources);
                 CopyReadAssetss("medical_history_form.pdf");
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.txtPrivacyPolicy:
+                // callFragment("FORM", fragmentResources);
+                CopyReadAssetss("mobile_app_privacy_policy.pdf");
+                drawerLayout.closeDrawer(leftDrawer);
+                break;
+
+            case R.id.txtEULA:
+                // callFragment("FORM", fragmentResources);
+                CopyReadAssetss("eula.pdf");
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 

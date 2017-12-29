@@ -58,17 +58,70 @@ View rootview;
         Links l2=new Links();
         l2.setName("Caring Info - all 50 states ");
         l2.setUrl("http://www.caringinfo.org/i4a/pages/index.cfm?pageid=1");
-        l2.setImage(R.drawable.care);
+        l2.setImage(R.drawable.aba_market);
 
         Links l3=new Links();
         l3.setName("Aging with Dignity - all 50 states");
         l3.setUrl("https://www.agingwithdignity.org/");
-        l3.setImage(R.drawable.aging);
+        l3.setImage(R.drawable.aba_market);
+
+        Links l4=new Links();
+        l4.setName("AARP links to Advance Directive Forms by State (PDF)");
+        l4.setUrl("https://www.aarp.org/caregiving/financial-legal/free-printable-advance-directives/");
+        l4.setImage(R.drawable.aba_market);
+
+        Links l5=new Links();
+        l5.setName("Aging with Dignity, Five Wishes");
+        l5.setUrl("https://www.agingwithdignity.org/");
+        l5.setImage(R.drawable.aba_market);
+
+        Links l6=new Links();
+        l6.setName("American Health Lawyers Association, Loving Conversations");
+        l6.setUrl("https://www.healthlawyers.org/Pages/PageNotFoundError.aspx?requestUrl=https://www.healthlawyers.org/hlresources/PI/InfoSeries/Pages/LovingConversations.aspx");
+        l6.setImage(R.drawable.aba_market);
+
+        Links l7=new Links();
+        l7.setName("American Hospital Association, Put It In Writing");
+        l7.setUrl("http://www.aha.org/advocacy-issues/initiatives/piiw/index.shtml");
+        l7.setImage(R.drawable.aba_market);
+
+        Links l8=new Links();
+        l8.setName("Caring Connections links to Advance Directive Forms by State (PDF)");
+        l8.setUrl("http://www.caringinfo.org/i4a/pages/index.cfm?pageid=3289");
+        l8.setImage(R.drawable.aba_market);
+
+        Links l9=new Links();
+        l9.setName("Center for Practical Bioethics, Caring Conversations");
+        l9.setUrl("http://practicalbioethics.org/documents/caring-conversations/Caring-Conversations.pdf");
+        l9.setImage(R.drawable.aba_market);
+
+        Links l10=new Links();
+        l10.setName("National Healthcare Decisions Day, Learning more about advance directives");
+        l10.setUrl("https://www.nhdd.org/learn-more/");
+        l10.setImage(R.drawable.aba_market);
+
+        Links l11=new Links();
+        l11.setName("The Commission on Law and Aging, ABA,Simple Health Care Power of Attorney form");
+        l11.setUrl("https://www.americanbar.org/content/dam/aba/uncategorized/2011/2011_aging_hcdec_univhcpaform_4_2012_v2.authcheckdam.pdf");
+        l11.setImage(R.drawable.aba_market);
+
+        Links l12=new Links();
+        l12.setName("The Commission on Law and Aging, ABA, Consumer’s Tool Kit for Advance Planning");
+        l12.setUrl("https://www.americanbar.org/content/dam/aba/uncategorized/2011/2011_aging_bk_consumer_tool_kit_bk.authcheckdam.pdf");
+        l12.setImage(R.drawable.aba_market);
 
         UrlList.add(l1);
         UrlList.add(l2);
         UrlList.add(l3);
-
+        UrlList.add(l4);
+        UrlList.add(l5);
+        UrlList.add(l6);
+        UrlList.add(l7);
+        UrlList.add(l8);
+        UrlList.add(l9);
+        UrlList.add(l10);
+        UrlList.add(l11);
+        UrlList.add(l12);
         //Fol show
        // Datalist=new ArrayList<>();
         //Datalist.add("ABA - Elder Law");

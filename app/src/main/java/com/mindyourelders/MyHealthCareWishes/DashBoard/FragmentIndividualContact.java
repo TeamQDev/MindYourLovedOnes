@@ -95,10 +95,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
    // byte[] photoCard=null;
     ImageView imgRight;
     RelativeLayout llIndividual;
-    TextView txtSignUp, txtLogin, txtForgotPassword,txtOther;
+    TextView txtSignUp, txtLogin, txtForgotPassword,txtOther,txtOtherLanguage;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
-    TextInputLayout tilOtherRelation,tilId,tilOther;
+    TextInputLayout tilOtherRelation,tilId,tilOther,tilOtherLanguage;
 
     RelativeLayout rlPet,rlLive;
     String name="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
@@ -123,7 +123,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     String imagepath = "",cardpath="";//
     String relation;
-
+    String OtherLang="";
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
     RelativeLayout rlCard;
@@ -246,6 +246,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         });
         chkOther= (CheckBox) rootview.findViewById(R.id.chkOther);
 
+        txtOtherLanguage = (TextView) rootview.findViewById(R.id.txtOtherLanguage);
+        tilOtherLanguage = (TextInputLayout) rootview.findViewById(R.id.tilOtherLanguage);
+        tilOtherLanguage.setHint("Other Language");
 
         chkChild= (CheckBox) rootview.findViewById(R.id.chkChild);
         chkFriend= (CheckBox) rootview.findViewById(R.id.chkFriend);
@@ -340,6 +343,23 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRelation.setAdapter(adapter1);
         spinnerRelation.setHint("Relationship");
+
+        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().equals("Other")) {
+                    tilOtherLanguage.setVisibility(View.VISIBLE);
+                    //txtOtherLanguage.requestFocus();
+                } else {
+                    tilOtherLanguage.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         chkOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -707,6 +727,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     for (int i = 0; i < LangList.length; i++) {
                         if (personalInfo.getLanguage().equalsIgnoreCase(LangList[i])) {
                             indexs = i;
+                            if (personalInfo.getLanguage().equals("Other"))
+                            {
+                                tilOtherLanguage.setVisibility(View.VISIBLE);
+                                txtOtherLanguage.setText(personalInfo.getOtherLang());
+                            }
+                            else
+                            {
+                                tilOtherLanguage.setVisibility(View.GONE);
+                                txtOtherLanguage.setText("");
+                            }
                         }
                     }
                     spinnerLanguage.setSelection(indexs + 1);
@@ -948,6 +978,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     for (int i = 0; i < LangList.length; i++) {
                         if (connection.getLanguage().equalsIgnoreCase(LangList[i])) {
                             indexs = i;
+                            if (connection.getLanguage().equals("Other"))
+                            {
+                                tilOtherLanguage.setVisibility(View.VISIBLE);
+                                txtOtherLanguage.setText(connection.getOtherLang());
+                            }
+                            else
+                            {
+                                tilOtherLanguage.setVisibility(View.GONE);
+                                txtOtherLanguage.setText("");
+                            }
                         }
                     }
                     spinnerLanguage.setSelection(indexs + 1);
@@ -1032,7 +1072,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                  }
                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
                                 hideSoftKeyboard();
@@ -1400,6 +1440,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         int i2= spinnerLanguage.getSelectedItemPosition();
         if (i2!=0)
         language=LangList[i2-1];
+        if (language.equals("Other"))
+        {
+            OtherLang=txtOtherLanguage.getText().toString();
+        }else{
+            OtherLang="";
+        }
         int i3= spinnerMarital.getSelectedItemPosition();
         if (i3!=0)
         marital_status=MaritalList[i3-1];
@@ -1488,6 +1534,12 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         int indexValuex = spinnerLanguage.getSelectedItemPosition();
         if (indexValuex!=0)
         language =LangList[indexValuex-1];
+        if (language.equals("Other"))
+        {
+            OtherLang=txtOtherLanguage.getText().toString();
+        }else{
+            OtherLang="";
+        }
 
         int indexValues = spinnerMarital.getSelectedItemPosition();
         if (indexValues!=0)
@@ -1533,7 +1585,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void editToConnection(String photo, String photoCard) {
         if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                 preferences.putString(PrefConstants.CONNECTED_NAME,name);
@@ -1544,7 +1596,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live, OtherLang);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                 preferences.putString(PrefConstants.CONNECTED_NAME,name);

@@ -5,7 +5,15 @@ package com.mindyourelders.MyHealthCareWishes.model;
  */
 
 public class PersonalInfo {
+    public String getOtherLang() {
+        return OtherLang;
+    }
 
+    public void setOtherLang(String otherLang) {
+        OtherLang = otherLang;
+    }
+
+    String OtherLang="";
     String live="";
     String children="";
     String friend="";

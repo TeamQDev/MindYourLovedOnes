@@ -66,6 +66,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.riontech.staggeredtextgridview.StaggeredTextGridView;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -252,8 +253,20 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             Cemail = bundle.getString("Email");
             Cphone = bundle.getString("Phone");
             byte[] image = bundle.getByteArray("Photo");
-            Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
-            imgProfile.setImageBitmap(photo);
+          /*  Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
+            imgProfile.setImageBitmap(photo);*/
+            ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(image);
+            Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
+            storeImage(bitmap,"Profile");
+            if (!imagepath.equals("")) {
+                File imgFile = new File(imagepath);
+                if (imgFile.exists()) {
+                    imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
+                }
+            }
+            else{
+                imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+            }
 
             source = preferences.getString(PrefConstants.SOURCE);
             switch (source) {
@@ -279,7 +292,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
-                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        mobile=mobile.replace("-","");
+                        mobile=mobile.replace("(","");
+                        mobile=mobile.replace(")","");
+                        mobile=mobile.replace(" ","");
+                        mobile=mobile.replace("+","").trim();
+                        int count=mobile.length();
+                        mobile=mobile.substring(count-10,count);
+                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
                         txtHospitalOfficePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -292,7 +312,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
-                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        mobile=mobile.replace("-","");
+                        mobile=mobile.replace("(","");
+                        mobile=mobile.replace(")","");
+                        mobile=mobile.replace(" ","");
+                        mobile=mobile.replace("+","").trim();
+                        int count=mobile.length();
+                        mobile=mobile.substring(count-10,count);
+                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
                         txtPharmacyPhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -305,7 +332,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
-                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        mobile=mobile.replace("-","");
+                        mobile=mobile.replace("(","");
+                        mobile=mobile.replace(")","");
+                        mobile=mobile.replace(" ","");
+                        mobile=mobile.replace("+","").trim();
+                        int count=mobile.length();
+                        mobile=mobile.substring(count-10,count);
+                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
                         txtAideOfficePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -318,7 +352,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
-                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        mobile=mobile.replace("-","");
+                        mobile=mobile.replace("(","");
+                        mobile=mobile.replace(")","");
+                        mobile=mobile.replace(" ","");
+                        mobile=mobile.replace("+","").trim();
+                        int count=mobile.length();
+                        mobile=mobile.substring(count-10,count);
+                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
                         txtFinanceMobilePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -331,7 +372,14 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                         String mobile = "";
                         mobile = Cphone;
                         String code = mobile.substring(0, 3);
-                        mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+                        mobile=mobile.replace("-","");
+                        mobile=mobile.replace("(","");
+                        mobile=mobile.replace(")","");
+                        mobile=mobile.replace(" ","");
+                        mobile=mobile.replace("+","").trim();
+                        int count=mobile.length();
+                        mobile=mobile.substring(count-10,count);
+                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
                         txtInsuarancePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1635,7 +1683,15 @@ imagepath=specialist.getPhoto();
             String mobile = "";
             mobile = Cphone;
             String code = mobile.substring(0, 3);
-            mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+            mobile=mobile.replace("-","");
+            mobile=mobile.replace("(","");
+            mobile=mobile.replace(")","");
+            mobile=mobile.replace(" ","");
+            mobile=mobile.replace("+","").trim();
+            int count=mobile.length();
+            mobile=mobile.substring(count-10,count);
+            mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
+
             txtDoctorOfficePhone.setText(mobile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -1649,7 +1705,15 @@ imagepath=specialist.getPhoto();
             String mobile = "";
             mobile = Cphone;
             String code = mobile.substring(0, 3);
-            mobile = mobile.substring(3, 6) + "-" + mobile.substring(6, 9) + "-" + mobile.substring(9, mobile.length());
+            mobile=mobile.replace("-","");
+            mobile=mobile.replace("(","");
+            mobile=mobile.replace(")","");
+            mobile=mobile.replace(" ","");
+            mobile=mobile.replace("+","").trim();
+            int count=mobile.length();
+            mobile=mobile.substring(count-10,count);
+            mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
+
             txtMobile.setText(mobile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -2823,7 +2887,7 @@ imagepath=specialist.getPhoto();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
 
-                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 2, prior, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "");
+                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 2, prior, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "", "");
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated emergency contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -2862,7 +2926,7 @@ imagepath=specialist.getPhoto();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                             byte[] photo = baos.toByteArray();*/
-                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 3, prox, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "");
+                            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(id, name, email, address, mobile, phone, workphone, relation, imagepath, note, 3, prox, otherRelation, "", "", "", "", "", "", "", "", "", "", "", "", cardPath, "", "", "", "", "", "", "", "", "", "");
                             if (flag == true) {
                                 Toast.makeText(getActivity(), "You have updated proxy contact successfully", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
@@ -3359,10 +3423,10 @@ imagepath=specialist.getPhoto();
             } /*else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
-            } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            } */else if (!email.equals("")&&!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                 txtEmail.setError("Please enter valid email");
                 showAlert("Please enter valid email", getActivity());
-            } else if (mobile.equals("")) {
+            } /*else if (mobile.equals("")) {
                 txtMobile.setError("Please Enter Mobile");
                 showAlert("Please Enter Mobile", getActivity());
             }*/ else if (mobile.length() != 0 && mobile.length() < 10) {
@@ -3618,6 +3682,10 @@ imagepath=specialist.getPhoto();
                 txtFName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
             }
+            else if (!email.equals("")&&!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                txtFinanceEmail.setError("Please enter valid email");
+                showAlert("Please enter valid email", getActivity());
+            }
 
          /*   if (mobile.equals("")) {
                 txtFinanceOfficePhone.setError("Please Enter Mobile");
@@ -3664,6 +3732,9 @@ imagepath=specialist.getPhoto();
                 txtInsuaranceName.setError("Please Enter Name of Insurance Company");
                 showAlert("Please Enter Name of Insurance Company", getActivity());
 
+            }  else if (!email.equals("")&&!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                txtInsuaranceEmail.setError("Please enter valid email");
+                showAlert("Please enter valid email", getActivity());
             }
             /*else if (phone.equals("")) {
                 txtInsuarancePhone.setError("Please Enter Home Phone");

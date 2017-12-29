@@ -57,6 +57,7 @@ public class PersonalInfoQuery {
     public static final String COL_OTHER_SIGN= "significant_other";
     public static final String COL_OTHER= "other";
     public static final String COL_LIVE= "Living";
+    public static final String COL_OTHER_LANG= "other_language";
 
 
 
@@ -72,7 +73,7 @@ public class PersonalInfoQuery {
                 COL_MANGER_PHONE+" VARCHAR(20),"+COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_ENGLISH+" VARCHAR(10),"+
                 COL_PET+" VARCHAR(10),"+COL_IDNUMBER+" VARCHAR(10),"+COL_PHOTOCARD+" VARCHAR(50),"+
                 COL_CHILD+" VARCHAR(10),"+COL_FRIEND+" VARCHAR(10),"+COL_GRAND+" VARCHAR(10),"+COL_PARENT+" VARCHAR(10),"+COL_SPOUSE+" VARCHAR(10),"+
-                COL_OTHER_SIGN+" VARCHAR(20),"+COL_OTHER+" VARCHAR(20),"+COL_LIVE+" VARCHAR(20),"+
+                COL_OTHER_SIGN+" VARCHAR(20),"+COL_OTHER_LANG+" VARCHAR(20),"+COL_OTHER+" VARCHAR(20),"+COL_LIVE+" VARCHAR(20),"+
                 COL_PHOTO+" VARCHAR(50));";
 
         return createTableQuery;
@@ -168,6 +169,7 @@ public class PersonalInfoQuery {
                             Person.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
                             Person.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
                             Person.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
+                            Person.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
 
                             personList.add(Person);
                         }
@@ -176,7 +178,7 @@ public class PersonalInfoQuery {
             }
         }
 
-               return personList;
+        return personList;
     }
 
 
@@ -225,6 +227,7 @@ public class PersonalInfoQuery {
                 connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
                 connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
                 connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
+                connection.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
 
             } while (c.moveToNext());
         }
@@ -242,13 +245,13 @@ public class PersonalInfoQuery {
             flag=true;
         }
         else{
-          flag=false;
+            flag=false;
         }
 
         return flag;
     }
 
-    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, String photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live) {
+    public static Boolean updatePersonalInfoData(int id, String name, String email, String address, String country, String phone, String bdate, String photo, String homephone, String gender, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live, String otherLang) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -286,6 +289,7 @@ public class PersonalInfoQuery {
         cv.put(COL_OTHER_SIGN,other);
         cv.put(COL_OTHER,liveOther);
         cv.put(COL_LIVE,live);
+        cv.put(COL_OTHER_LANG,otherLang);
 
 
 
@@ -348,6 +352,8 @@ public class PersonalInfoQuery {
                 connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
                 connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
                 connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
+                connection.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
+
             } while (c.moveToNext());
         }
 
@@ -400,6 +406,8 @@ public class PersonalInfoQuery {
                 connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
                 connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
                 connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
+                connection.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
+
             } while (c.moveToNext());
         }
 

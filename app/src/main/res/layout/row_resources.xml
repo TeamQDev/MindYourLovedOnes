@@ -4,23 +4,24 @@
     android:layout_height="match_parent">
 <ImageView
     android:id="@+id/imgLogo"
-    android:layout_width="@dimen/dimension70dp"
-    android:layout_height="@dimen/dimension70dp"
-    android:layout_margin="@dimen/dimension20dp"
+    android:layout_width="@dimen/dimension50dp"
+    android:layout_height="@dimen/dimension50dp"
     android:src="@drawable/aba_market"
     android:gravity="center_vertical"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="@dimen/dimension20dp"
     />
     <TextView
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension70dp"
-        android:layout_marginTop="@dimen/dimension20dp"
-        android:layout_marginBottom="@dimen/dimension20dp"
         android:padding="@dimen/dimension10dp"
         android:text="jkhjksdf"
         android:textColor="@color/colorBlackDark"
         android:textSize="@dimen/dimension20dp"
         android:layout_toRightOf="@+id/imgLogo"
         android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dimension10dp"
         />
 </RelativeLayout>

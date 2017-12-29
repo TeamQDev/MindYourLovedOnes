@@ -59,5 +59,6 @@ dependencies {
     }
     compile 'com.google.firebase:firebase-core:10.2.0'
     compile files('libs/itextpdf-5.2.1.jar')
+    compile files('libs/httpmime-4.0.3.jar')
 }
 apply plugin: 'com.google.gms.google-services'

@@ -284,7 +284,6 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         setImplantData();
         setConditionData();
         setVaccineData();
-
         setHistoryData();
         setHospitalData();
 
@@ -346,33 +345,12 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private void setMedInfo() {
         MedInfo medInfo = MedInfoQuery.fetchOneRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
         if (medInfo != null) {
-            etFt.setText(medInfo.getFeet());
-            etInch.setText(medInfo.getInch());
-            etWeight.setText(medInfo.getWeight());
-            etAdditional.setText(medInfo.getLang2());
-            etPet.setText(medInfo.getPet());
+
             etPreNote.setText(medInfo.getNote());
             etMouthNote.setText(medInfo.getMouthnote());
-
             etDietNote.setText(medInfo.getDietNote());
             etVisionNote.setText(medInfo.getVisionNote());
-            etFunctionalNote.setText(medInfo.getFunctionnote());
             etAideNote.setText(medInfo.getAideNote());
-            int index = 0;
-            for (int i = 0; i < EyesList.length; i++) {
-                if (medInfo.getColor().equals(EyesList[i])) {
-                    index = i;
-                }
-            }
-            spinnerEyes.setSelection(index);
-
-            int indexs = 0;
-            for (int i = 0; i < LangList.length; i++) {
-                if (medInfo.getLang1().equals(LangList[i])) {
-                    indexs = i;
-                }
-            }
-            spinnerLang.setSelection(indexs);
 
             int indexi = 0;
             for (int i = 0; i < BloodList.length; i++) {
@@ -382,31 +360,6 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
             }
             spinnerBlood.setSelection(indexi);
 
-            etAdditional.setText(medInfo.getLang2());
-
-            if (medInfo.getMedicate().equals("Yes")) {
-                tbMedicate.setChecked(true);
-                medicate="Yes";
-            } else if (medInfo.getMedicate().equals("No")) {
-                tbMedicate.setChecked(false);
-                medicate="No";
-            }
-
-            if (medInfo.getToilet().equals("Yes")) {
-                tbToilet.setChecked(true);
-                toilet="Yes";
-            } else if (medInfo.getToilet().equals("No")) {
-                tbToilet.setChecked(false);
-                toilet="No";
-            }
-
-            if (medInfo.getFeed().equals("Yes")) {
-                tbFeed.setChecked(true);
-                feed="Yes";
-            } else if (medInfo.getFeed().equals("No")) {
-                tbFeed.setChecked(false);
-                feed="No";
-            }
 
             if (medInfo.getSpeech().equals("Yes")) {
                 tbSpeech.setChecked(true);
@@ -951,7 +904,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                 functionnote=etFunctionalNote.getText().toString().trim();
                 dietnote=etDietNote.getText().toString().trim();
 
-                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID), ft, inch, weight, color, lang1, lang2, pet, blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote,visionnote,Aidenote,functionnote,dietnote,blind,speech,medicate,toilet,feed);
+                Boolean flag = MedInfoQuery.insertMedInfoData(preferences.getInt(PrefConstants.CONNECTED_USERID),blood, glass, lense, falses, implants, aid, donor,note,mouth,mouthnote,visionnote,Aidenote,dietnote,blind,speech);
                 if (flag == true) {
                     Toast.makeText(getActivity(), "Medical Profile Saved", Toast.LENGTH_SHORT).show();
                     hideSoftKeyboard();
