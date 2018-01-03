@@ -56,13 +56,18 @@
         android:layout_alignParentStart="true"
         android:visibility="gone"
         />-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddCard"
+        >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-        android:visibility="gone"
+
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -81,16 +86,19 @@
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlackDark"
             android:layout_marginTop="@dimen/dimension10dp"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Take pictures of insurance cards and eliminate the need to rummage through your wallet or your loved one’s wallet."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -98,4 +106,5 @@
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

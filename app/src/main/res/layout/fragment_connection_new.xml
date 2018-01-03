@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
@@ -42,20 +46,24 @@
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create profiles for members of your family or friends.  Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue at hand."
+            android:text=""
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
             />
+        <!--   android:text="Create profiles for members of your family or friends.  Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue at hand."-->
     </RelativeLayout>
 </RelativeLayout>
+</ScrollView>

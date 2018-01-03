@@ -2,6 +2,7 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,9 +11,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -66,7 +69,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     private static final int REQUEST_VACCINE =700 ;
     View rootview;
     RelativeLayout rlMedical;
-    ImageView imgBack, imgDone,imgRight;
+    ImageView imgBack, imgDone,imgRight,imgInfo;
     TextView txtTitle,imgAddFlueShot;
     EditText etPreNote,etMouthNote,etVisionNote,etAideNote,etFunctionalNote,etDietNote;
     TextView imgAddPneumonia,imgAddHPV,imgAddRubella,imgAddVaricella,imgAddShingles,imgAddTetanus,imgAddHepatitis,imgAddFlue,imgAddFlueNH,imgAddPneumococcal;
@@ -163,6 +166,43 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
     }
 
     private void initUI() {
+
+        imgInfo=rootview.findViewById(R.id.imgInfo);
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog customDialog;
+                customDialog = new Dialog(getActivity());
+                customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                customDialog.setContentView(R.layout.dialog_living);
+                customDialog.setCancelable(false);
+                TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+                String msg="<b>First Time User:</b><br>" +
+                        "To add information click the plus box for each section and" +
+                        "and then click the green bar." +
+                        "<br><br>" +
+                        "To save information click the check mark" +
+                        " on the upper right side of the screen." +
+                        "<br><br>" +
+                        "To edit information in a particular section click the picture of the pencil. To save your edits click the green bar at the lower half of the screen." +
+                        "<br><br>" +
+                        "To delete information in a particular section click the garbage can.  For certain sections you can simply delete the data." +
+                        "<br><br>" +
+                        "To view a report or to email or fax the data in each section click the three dots on the upper right side of the screen.";
+
+                txtNotes.setText(Html.fromHtml(msg));
+                TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+                txtNoteHeader.setText("Help");
+                TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        customDialog.dismiss();
+                    }
+                });
+                customDialog.show();
+            }
+        });
         rlMedical= (RelativeLayout) rootview.findViewById(R.id.rlMedical);
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);

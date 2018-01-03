@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,7 +58,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     Preferences preferences;
     DBHelper dbHelper;
     boolean isEdit;
-    TextView txtName;
+    TextView txtName,txtMsg;
 
     // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
     final CharSequence[] dialog_items = {"View","Email","Fax" };
@@ -89,6 +90,19 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initUI() {
+        txtMsg=findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To <b>add</b> information click the green bar at the bottom of the screen Add Prescription." +
+                "<br><br>" +
+                "To <b>save</b> click the <b>check mark</b> on the upper right side of the screen" +
+                "<br><br>" +
+                "To <b>edit</b> information click the arrow symbol on the right side of the screen and make changes. Save by clicking the <b>check mark</b> again." +
+                "<br><br>" +
+                "To <b>delete</b> left swipe and click the garbage can." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+        txtMsg.setText(Html.fromHtml(msg));
         txtName=(TextView) findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         PrescriptionList=new ArrayList<>();

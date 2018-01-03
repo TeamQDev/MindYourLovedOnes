@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -141,25 +142,58 @@ DBHelper dbHelper;
                 txtAdd.setText("Add Advance Directives");
                 imgPicture.setImageResource(R.drawable.v_doc);
                 txtHeader.setText("Add Adv. Directive Docs");
-                txtMsg.setText("Storing Advance Care Directives directly on your phone allows medical staff to quickly obtain access to the information.");
-                break;
+                String msg="<b>First Time User:</b><br>" +
+                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                        "<br><br>" +
+                        "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
+                        "<br><br>" +
+                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "<br><br>" +
+                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "<br><br>" +
+                        "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                        "<br><br>" +
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+                txtMsg.setText(Html.fromHtml(msg));  break;
             case "Record":
                 txtTitle.setText("Medical Records");
                 txtAdd.setText("Add Medical Records");
                 imgPicture.setImageResource(R.drawable.v_record);
                 txtHeader.setText("Add Medical Records");
-                txtMsg.setText("You can keep any records that you want in any format. \n\n" +
-                        "Personally I prefer keeping digital records that can easily be  emailed or faxed to my doctors than paper records.  I don’t want to lug around a shopping bag of records.");
-                break;
+                String msgs="<b>First Time User:</b><br>" +
+                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                        "<br><br>" +
+                        "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
+                        "<br><br>" +
+                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "<br><br>" +
+                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "<br><br>" +
+                        "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                        "<br><br>" +
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+                txtMsg.setText(Html.fromHtml(msgs));  break;
             case "Other":
                 txtTitle.setText("Other Documents");
                 txtAdd.setText("Add Other Documents");
                 imgPicture.setImageResource(R.drawable.v_other);
                 txtHeader.setText("Add Other Documents");
-                txtMsg.setText("You can keep any records that you want in any format. \n" +
-                        "\n" +
-                        "For example –  you may want to keep pictures of your drivers license, social security card, diploma, or credit cards.  You  might also consider keeping a copy of your Last Will & Testament, Trust, Disposition of Remains or Letters of Instruction.");
-                break;
+                String msgd="<b>First Time User:</b><br>" +
+                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                        "<br><br>" +
+                        "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
+                        "<br><br>" +
+                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "<br><br>" +
+                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "<br><br>" +
+                        "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                        "<br><br>" +
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+                txtMsg.setText(Html.fromHtml(msgd));  break;
             case "Legal":
                 txtTitle.setText("Legal and Financial Documents");
                 break;

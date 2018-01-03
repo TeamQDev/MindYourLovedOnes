@@ -42,14 +42,17 @@
         android:scrollbars="none"
         android:layout_alignParentTop="true"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddSpecialist"
+        >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-android:visibility="gone"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -69,15 +72,17 @@ android:visibility="gone"
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add the name and number of the physician you would  most likely want to reach in case of an emergency. Don’t forget to take a picture of their card. You may want to email, text or print it."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -85,4 +90,5 @@ android:visibility="gone"
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

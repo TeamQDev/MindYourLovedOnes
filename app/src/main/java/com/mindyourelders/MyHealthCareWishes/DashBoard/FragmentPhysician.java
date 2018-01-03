@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,11 @@ import com.mindyourelders.MyHealthCareWishes.database.DBHelper;
 import com.mindyourelders.MyHealthCareWishes.database.DoctorQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
 import com.mindyourelders.MyHealthCareWishes.model.Specialist;
-import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.MessageString;
 import com.mindyourelders.MyHealthCareWishes.pdfCreation.PDFDocumentProcess;
-import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
 import com.mindyourelders.MyHealthCareWishes.pdfdesign.Header;
+import com.mindyourelders.MyHealthCareWishes.pdfdesign.Individual;
+import com.mindyourelders.MyHealthCareWishes.utility.CallDialog;
 import com.mindyourelders.MyHealthCareWishes.utility.PrefConstants;
 import com.mindyourelders.MyHealthCareWishes.utility.Preferences;
 import com.mindyourelders.MyHealthCareWishes.utility.SwipeMenuCreation;
@@ -50,7 +51,7 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     RelativeLayout llAddSpecialist;
     Preferences preferences;
     TextView txtTitle;
-    TextView txtAdd;
+    TextView txtAdd,txtMsg;
     DBHelper dbHelper;
     SpecialistAdapter specialistAdapter;
     RelativeLayout rlGuide;
@@ -94,6 +95,22 @@ public class FragmentPhysician extends Fragment implements View.OnClickListener{
     }
 
     private void initUI() {
+        txtMsg=rootview.findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To <b>add</b> information click the green bar at the bottom of the screen.If the person is in your <b>Contacts</b> click the grayed out bar on the upper right side of your screen to load data." +
+                "<br><br>" +
+                "To <b>save</b> information click the green bar at the bottom of the screen." +
+                "<br><br>" +
+                "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                "<br><br>" +
+                "To <b>make an automated call</b> or <b>delete</b> the entry <b>swipe the left</b> arrow symbol." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen." +
+                "<br><br>" +
+                "To <b>add a picture</b> click on the picture of the <b>pencil</b> and" +
+                "either <b>take a photo</b> or grab one from your <b>gallery</b>. To edit or delete the picture click the pencil again.Use the same process to add a business card.";
+        txtMsg.setText(Html.fromHtml(msg));
+
         txtTitle= (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setText("PRIMARY PHYSICIAN");
         rlGuide=rootview.findViewById(R.id.rlGuide);

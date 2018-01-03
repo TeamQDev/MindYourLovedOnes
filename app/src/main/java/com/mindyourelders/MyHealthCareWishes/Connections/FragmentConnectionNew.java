@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     View rootview;
     GridView lvConnection;
     ArrayList<RelativeConnection> connectionList;
-    TextView txtAdd;
+    TextView txtAdd,txtMsg;
     //RelativeLayout llAddConn;
     TextView txtTitle, txtName,txtDrawerName;
     ImageView imgNoti, imgProfile, imgLogo, imgPdf,imgDrawerProfile;
@@ -117,6 +118,15 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     }
 
     private void initUI() {
+        txtMsg=rootview.findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To add a Profile click the <b>plus</b> box." +
+                "You will be brought to the Personal Information Screen.<br>" +
+                "If the person is in your <b>Contacts</b> click the grayed out bar on the upper right side of your screen to load information.<br><br>" +
+                "Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue(s) at hand.<br><br>" +
+                "When completed click on the green bar at the bottom of the screen that says <b>Add Profile</b>.<br><br>" +
+                "To <b>delete</b> a Profile <b>long press</b> on profile box.";
+        txtMsg.setText(Html.fromHtml(msg));
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PROFILES");

@@ -41,14 +41,17 @@
         android:scrollbars="none"
 android:layout_alignParentTop="true"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddSpecialist"
+        >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
+        android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-       android:visibility="gone"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -62,21 +65,24 @@ android:layout_alignParentTop="true"
             android:id="@+id/txtHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a Doctor"
+            android:text="Add a Doctor or other Health Care Professional"
             android:layout_below="@+id/imgPicture"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add doctors and other health care professionals. Take pictures of their business cards. Make sure information is available when you need it."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -84,4 +90,5 @@ android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

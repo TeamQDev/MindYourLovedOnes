@@ -42,14 +42,17 @@
         android:layout_alignParentTop="true"
 
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddHospital"
+        >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-        android:visibility="gone"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -57,27 +60,28 @@
             android:layout_height="@dimen/dimension90dp"
             android:src="@drawable/v_hosp"
             android:layout_centerHorizontal="true"
-
             />
         <TextView
             android:id="@+id/txtHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a Hospital"
+            android:text="Add a Hospital and Rehab Center"
             android:layout_below="@+id/imgPicture"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="The idea is to provide a section where you can easily access this type of information. Personally, I like it  segregated from my other contacts."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -85,4 +89,5 @@
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

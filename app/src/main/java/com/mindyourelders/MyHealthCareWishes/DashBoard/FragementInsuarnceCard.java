@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
 ImageView imgRight;
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
-    TextView txtView;
+    TextView txtView,txtMsg;
     public static final int REQUEST_PRES = 100;
     DBHelper dbHelper;
     final String dialog_items[]={"View","Email","Fax"};
@@ -132,6 +133,19 @@ ImageView imgRight;
     }
 
     private void initUI() {
+        txtMsg=rootview.findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To <b>add</b> information click the green bar at the bottom of the screen Add Insurance Card." +
+                "<br><br>" +
+                "Type the Provider name and the Type of Insurance and then take a picture of your card (front and back).Click the plus box." +
+                "<br><br>" +
+                "When completed click the <b>check mark</b> on the upper right side of the screen" +
+                "<br><br>" +
+                "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+        txtMsg.setText(Html.fromHtml(msg));
         llAddCard = (RelativeLayout) rootview.findViewById(R.id.llAddCard);
         rlGuide=rootview.findViewById(R.id.rlGuide);
         lvCard = (SwipeMenuListView) rootview.findViewById(R.id.lvCard);

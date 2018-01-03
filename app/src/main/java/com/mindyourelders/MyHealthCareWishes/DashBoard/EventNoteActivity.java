@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -50,6 +51,7 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout rlGuide;
     Preferences preferences;
     DBHelper dbHelper;
+    TextView txtMsg;
     RelativeLayout header,rlEvent;
     final CharSequence[] dialog_items = {"View","Email","Fax"};
     @Override
@@ -71,6 +73,15 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initUI() {
+        txtMsg=findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To add a note click plus box " +
+                "at the top right of the screen.  Once completed click Add.  The note is automatically saved." +
+                "<br><br>" +
+                "To <b>edit</b> the note  click the picture of the pencil to the right of the screen. To save your edits click the green bar marked Update Appointment. To <b>delete</b> the appointment swipe (right to left) and  click the garbage can." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+        txtMsg.setText(Html.fromHtml(msg));
         rlEvent= (RelativeLayout) findViewById(R.id.rlEvent);
         header = (RelativeLayout) findViewById(R.id.header);
         header.setBackgroundResource(R.color.colorFour);
@@ -89,7 +100,8 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
         lvNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-               // hideSoftKeyboard();
+
+                // hideSoftKeyboard();
                 TextView txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
                 ImageView imgForward = (ImageView) view.findViewById(R.id.imgForword);
                 imgForward.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +149,8 @@ public class EventNoteActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
             }
-        });
+            });
+
         rlGuide = (RelativeLayout) findViewById(R.id.rlGuide);
         if (noteList.size() != 0) {
             setNoteData();

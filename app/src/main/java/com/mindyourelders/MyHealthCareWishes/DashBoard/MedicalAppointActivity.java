@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -54,6 +55,7 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     RelativeLayout header;
     final CharSequence[] dialog_items = {"View", "Email", "Fax"};
     boolean flag=false;
+    TextView txtMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,17 @@ public class MedicalAppointActivity extends AppCompatActivity implements View.On
     }
 
     private void initUI() {
+        txtMsg=findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To <b>add</b> an Appointment  click  the <b>plus</b> box" +
+                "at the top right of the screen. Choose a Specialist or Type of test, Dr.’s name, and Frequency.  Once completed click <b>Add Appointment</b> on the green bar." +
+                "<br><br>" +
+                "To edit the Appointment  click the picture of the pencil to the right of the screen. To save your edits click the green bar marked Update Appointment. To <b>delete</b> the appointment swipe (right to left) and  click the garbage can." +
+                "<br><br>" +
+                "To <b>add</b> the completed date(s) click <b>Set Completion Date</b> and click Add." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+        txtMsg.setText(Html.fromHtml(msg));
         header = (RelativeLayout) findViewById(R.id.header);
         header.setBackgroundResource(R.color.colorFour);
         imgBack = (ImageView) findViewById(R.id.imgBack);

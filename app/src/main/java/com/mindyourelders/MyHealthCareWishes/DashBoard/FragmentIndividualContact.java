@@ -22,6 +22,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -93,9 +94,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     Uri imageUriProfile=null,imageUriCard=null;
 
    // byte[] photoCard=null;
-    ImageView imgRight;
+    ImageView imgRight,imgInfo;
     RelativeLayout llIndividual;
-    TextView txtSignUp, txtLogin, txtForgotPassword,txtOther,txtOtherLanguage;
+    TextView txtSignUp, txtLogin, txtForgotPassword,txtOther,txtOtherLanguage,txtMsg;
     ImageView imgEdit,imgProfile,imgDone,imgAddpet,imgEditCard,imgCard;
     TextView txtHeight,txtWeight,txtProfession,txttelephone,txtEmployed,txtReligion,txtIdNumber,txtOtherRelation,txtTitle, txtName, txtEmail,txtAddress, txtCountry, txtPhone,txtHomePhone,txtWorkPhone, txtBdate,txtGender, txtPassword,txtRelation;
     TextInputLayout tilOtherRelation,tilId,tilOther,tilOtherLanguage;
@@ -230,6 +231,40 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     }
 
     private void initUI() {
+        imgInfo=rootview.findViewById(R.id.imgInfo);
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog customDialog;
+                customDialog = new Dialog(getActivity());
+                customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                customDialog.setContentView(R.layout.dialog_living);
+                customDialog.setCancelable(false);
+                TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+                String msg="<b>First Time User:</b><br>" +
+                        "To add information type responses.<br>" +
+                        "To save information click the check mark" +
+                        " on the upper right side of the screen.<br><br>" +
+                        "To edit or delete information simply work on the screen and then save your edits by clicking on the check mark on the upper right side of the screen." +
+                        "<br><br>" +
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+
+                txtNotes.setText(Html.fromHtml(msg));
+                TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+                txtNoteHeader.setText("Help");
+                TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        customDialog.dismiss();
+                    }
+                });
+                customDialog.show();
+            }
+        });
+        /*txtMsg=rootview.findViewById(R.id.txtMsg);
+
+        txtMsg.setText(Html.fromHtml(msg));*/
         llIndividual= (RelativeLayout) rootview.findViewById(R.id.llIndividual);
         rlCard= (RelativeLayout) rootview.findViewById(R.id.rlCard);
         rlLive= (RelativeLayout) rootview.findViewById(R.id.rlLive);

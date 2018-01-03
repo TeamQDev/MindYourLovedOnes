@@ -49,14 +49,16 @@
         android:divider="@color/colorLightGray"
         android:layout_alignParentTop="true"
         android:scrollbars="none"/>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/llAddConn"
+    >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-        android:visibility="gone"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -64,7 +66,6 @@
             android:layout_height="@dimen/dimension90dp"
             android:src="@drawable/v_emergency"
             android:layout_centerHorizontal="true"
-
             />
         <TextView
             android:id="@+id/txtHeader"
@@ -76,16 +77,18 @@
             android:textSize="@dimen/dimension24dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="You can identify as many primary and secondary emergency contacts as you want.\n\n
 If you have a Health Care Proxy add your primary agent and in case they are not available your alternate."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -93,4 +96,5 @@ If you have a Health Care Proxy add your primary agent and in case they are not 
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+</ScrollView>
 </RelativeLayout>

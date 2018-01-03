@@ -45,7 +45,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
 
     View rootview;
     RelativeLayout rlLiving;
-    ImageView imgBack, imgDone,imgRight;
+    ImageView imgBack, imgDone,imgRight,imgInfo;
     Preferences preferences;
     TextView txtTitle, txtName;
     DBHelper dbHelper;
@@ -91,6 +91,37 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
     }
 
     private void initUI() {
+        imgInfo=rootview.findViewById(R.id.imgInfo);
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog customDialog;
+                customDialog = new Dialog(getActivity());
+                customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                customDialog.setContentView(R.layout.dialog_living);
+                customDialog.setCancelable(false);
+                TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
+                String msg="<b>First Time User:</b><br>" +
+                        "To save information click the check mark" +
+                        " on the upper right side of the screen." +
+                        "<br><br>" +
+                        "To edit information simply change the data and then save your edits by clicking on the check mark on the upper right side of the screen." +
+                        "<br><br>" +
+                        "To view, email, or fax the data in each section click on the three dots on the upper right side of the screen.";
+
+                txtNotes.setText(Html.fromHtml(msg));
+                TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
+                txtNoteHeader.setText("Help");
+                TextView btnYes= (TextView) customDialog.findViewById(R.id.btnYes);
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        customDialog.dismiss();
+                    }
+                });
+                customDialog.show();
+            }
+        });
         rlLiving= (RelativeLayout) rootview.findViewById(R.id.rlLiving);
         txtName = (TextView) rootview.findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));

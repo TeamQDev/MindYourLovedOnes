@@ -41,14 +41,18 @@
         android:paddingTop="@dimen/dimension10dp"
         android:layout_alignParentTop="true"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAddPharmacy"
+        >
     <RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
-android:visibility="gone"
+
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -62,22 +66,25 @@ android:visibility="gone"
             android:id="@+id/txtHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a Pharmacy"
+            android:text="Add a Pharmacy or Home Medical Equipment Company"
             android:layout_below="@+id/imgPicture"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension24dp"
+            android:gravity="center_horizontal"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dimension10dp"
+            android:textColor="@color/colorBlackDark"
             />
 
         <TextView
+            android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="It’s helpful to have the name, number and address of your or your loved ones’ pharmacy.  You may need to pick something up or ask about a particular prescription.\n\n
 By the way you may need a completed HIPAA form before they will speak to you.  Call and find out before an emergency."
             android:layout_below="@+id/txtHeader"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/colorGuide"
@@ -85,4 +92,5 @@ By the way you may need a completed HIPAA form before they will speak to you.  C
             android:layout_marginRight="@dimen/dimension10dp"
             />
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

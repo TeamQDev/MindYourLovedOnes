@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     ArrayList<Form> documentList;
     ArrayList<Document> documentListOld;
     ImageView imgBack;
-    TextView txtTitle;
+    TextView txtTitle,txtMsg;
     String From;
     final String dialog_items[]={"View","Email","Fax"};
     RelativeLayout llAddDoc;
@@ -93,7 +94,21 @@ public class FragementForm extends Fragment implements View.OnClickListener {
     }
 
     private void initUI() {
+        txtMsg=rootview.findViewById(R.id.txtMsg);
+        String msg="<b>First Time User:</b><br>" +
+                "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                "<br><br>" +
+                "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
+                "<br><br>" +
+                "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                "<br><br>" +
+                "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                "<br><br>" +
+                "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
 
+        txtMsg.setText(Html.fromHtml(msg));
         // imgADMTick= (ImageView) rootview.findViewById(imgADMTick);
         llAddDoc = (RelativeLayout) rootview.findViewById(R.id.llAddDoc);
         rlGuide=rootview.findViewById(R.id.rlGuide);
