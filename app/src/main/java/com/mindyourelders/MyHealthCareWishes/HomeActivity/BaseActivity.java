@@ -88,7 +88,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
             callFragment("CONNECTION", fragmentConnection);
         }
-
     }
 
     private void initImageLoader() {
