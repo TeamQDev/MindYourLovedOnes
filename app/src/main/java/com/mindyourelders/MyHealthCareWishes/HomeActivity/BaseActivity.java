@@ -75,7 +75,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         FirebaseCrash.report(new Exception("My first Android non-fatal error"));
-
         //I'm also creating a log message, which we'll look at in more detail later//
         FirebaseCrash.log("MainActivity started");
         accessPermission();
