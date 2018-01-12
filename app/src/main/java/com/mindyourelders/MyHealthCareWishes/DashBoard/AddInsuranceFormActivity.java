@@ -279,7 +279,8 @@ public class AddInsuranceFormActivity extends AppCompatActivity implements View.
                 " shared this document with you. Please check the attachment. \n" +
                 "\n" +
                 "Thanks,\n" +
-                "Mind Your Loved Ones - Support";
+                name;
+              //  "Mind Your Loved Ones - Support";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

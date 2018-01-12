@@ -86,6 +86,7 @@ public class SliderPagerAdapter extends PagerAdapter {
             public void onClick(View v) {
                 Intent i=new Intent(activity,AddFormActivity.class);
                 i.putExtra("Image",image_arraylist.get(position));
+                i.putExtra("FROM","Insurance");
                 activity.startActivity(i);
             }
         });

@@ -107,17 +107,83 @@
         android:visibility="gone"
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
     <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtName"
+        android:layout_above="@+id/llAddPrescription"
+        >
+        <RelativeLayout
+            android:id="@+id/rlGuide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/dimension20dp"
+            >
+            <ImageView
+                android:id="@+id/imgPicture"
+                android:layout_width="@dimen/dimension90dp"
+                android:layout_height="@dimen/dimension90dp"
+                android:src="@drawable/v_rx"
+                android:layout_centerHorizontal="true"
+
+                />
+            <TextView
+                android:id="@+id/txtHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create a Prescription Tracker"
+                android:layout_below="@+id/imgPicture"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/dimension24dp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:textColor="@color/colorBlackDark"
+                />
+            <TextView
+                android:id="@+id/txtFTU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ftu"
+                android:layout_below="@+id/txtHeader"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/dimension18dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorBlue"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                />
+            <TextView
+                android:id="@+id/txtMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add medications, dosages,  frequencies, etc. for easy reference. You can also take a picture and keep a digital copy of your prescriptions."
+                android:layout_below="@+id/txtFTU"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/dimension18dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorGuide"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </ScrollView>
+  <!--  <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llAddPrescription"
         android:layout_below="@+id/txtName"
-        >
-    <RelativeLayout
+        >-->
+    <!--<RelativeLayout
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dimension20dp"
+        android:layout_below="@+id/txtName"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -153,6 +219,6 @@
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
             />
-    </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>-->
+  <!--  </ScrollView>-->
 </RelativeLayout>

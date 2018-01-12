@@ -65,6 +65,7 @@
                 android:textSize="@dimen/dimension17dp"
                 android:layout_marginBottom="@dimen/dimension5dp"
                 android:layout_below="@+id/txtDocTime"
+                android:visibility="gone"
                 />
 
             <ImageView

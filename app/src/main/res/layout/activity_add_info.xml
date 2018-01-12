@@ -412,8 +412,6 @@
                         android:textColor="@color/colorBlackDark"
                         android:layout_marginLeft="@dimen/dimension10dp"
                         android:layout_marginTop="@dimen/dimension10dp"
-                        android:drawableRight="@drawable/info"
-                        android:drawablePadding="@dimen/dimension20dp"
                         android:gravity="center_vertical"
                         ></TextView>
 
@@ -426,6 +424,7 @@
                         android:textColor="@color/colorBlackDark"
                         android:layout_marginLeft="@dimen/dimension10dp"
                         android:layout_below="@+id/txtHeader"
+
                         ></TextView>
 
                 </RelativeLayout>

@@ -18,23 +18,34 @@
 
           <RelativeLayout
               android:id="@+id/rlBackup"
-              android:layout_width="@dimen/dimension150dp"
-              android:layout_height="@dimen/dimension150dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:background="@drawable/cir"
               android:layout_margin="@dimen/dimension10dp"
               android:gravity="center"
               android:layout_gravity="center"
-              android:visibility="gone"
               >
               <TextView
-                  android:layout_width="wrap_content"
+                  android:id="@+id/txtMsg"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="Backup"
+                  android:text="Using Backup you can store your images, database, files into zip format to the dropbox server."
+                  android:textSize="@dimen/dimension20dp"
+                  android:textColor="@color/colorBlackDark"
+                  android:gravity="center_horizontal"
+                  />
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Backup Your Data"
                   android:textSize="@dimen/dimension25dp"
                   android:textStyle="bold"
+                  android:layout_below="@+id/txtMsg"
+                  android:gravity="center_horizontal"
                   android:textColor="@color/colorWhite"
-                  android:layout_centerInParent="true"
+                  android:background="@color/colorBlue"
+                  android:padding="@dimen/dimension10dp"
+                  android:layout_marginTop="@dimen/dimension40dp"
                   />
           </RelativeLayout>
         <ImageView

@@ -93,6 +93,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String Cname = "";
     String Cemail = "";
     String Cphone = "";
+    String CAddress="";
+    String CHPhone="";
+    String CWPhone="";
     RelativeLayout rlCard, rlContact;
     TextView txtCard;
     //TextView btnShowMore,btnShowLess,btnSon;
@@ -123,7 +126,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     TextInputLayout tilOtherCategoryHospital;
 
     String location = "";
-    String name = "", email = "", mobile = "", speciality = "", phone = "", address = "", workphone = "", note = "", member = "", group = "", subscriber = "", type = "";
+    String name = "",Email="", email = "", mobile = "", speciality = "", phone = "", address = "", workphone = "", note = "", member = "", group = "", subscriber = "", type = "";
     String network = "", affil = "", practice_name = "", website = "", lastseen = "";
     String fax = "";
     String relation = "";
@@ -157,7 +160,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
     String[] HospitalType = {"Hospital", "Rehabilitation Center", "Other"};
 
     String[] proxyType = {"Primary - Health Care Proxy Agent", "Successor - Health Care Proxy Agent"};
-    String[] priorityType = {"Primary-Proxy Agent","Primary-Emergency Contact", "Secondary-Proxy Agent","Secondary-Emergency Contact"};
+    String[] priorityType = {"Primary - Proxy Agent","Primary - Emergency Contact", "Secondary - Proxy Agent","Secondary - Emergency Contact"};
 
     Boolean isEdit;
 
@@ -252,6 +255,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
             Cname = bundle.getString("Name");
             Cemail = bundle.getString("Email");
             Cphone = bundle.getString("Phone");
+            CAddress=bundle.getString("Address");
+            CHPhone=bundle.getString("HPhone");
+            CWPhone=bundle.getString("WPhone");
             byte[] image = bundle.getByteArray("Photo");
           /*  Bitmap photo = BitmapFactory.decodeByteArray(image, 0, image.length);
             imgProfile.setImageBitmap(photo);*/
@@ -287,40 +293,48 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     break;
                 case "Hospital":
                     txtFNameHospital.setText(Cname);
+                    txtHospitalAddress.setText(CAddress);
                     // txtEmail.setText(email);
                     try {
                         String mobile = "";
-                        mobile = Cphone;
-                        String code = mobile.substring(0, 3);
-                        mobile=mobile.replace("-","");
-                        mobile=mobile.replace("(","");
-                        mobile=mobile.replace(")","");
-                        mobile=mobile.replace(" ","");
-                        mobile=mobile.replace("+","").trim();
-                        int count=mobile.length();
-                        mobile=mobile.substring(count-10,count);
-                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
-                        txtHospitalOfficePhone.setText(mobile);
+                        mobile = CWPhone;
+                        if (!mobile.equals("")) {
+                            mobile = getMobile(mobile);
+                            txtHospitalOfficePhone.setText(mobile);
+                        }
+                        else{
+                            String OtherM = "";
+                            OtherM = Cphone;
+                            OtherM=getMobile(OtherM);
+                            txtHospitalOfficePhone.setText(OtherM);
+                        }
+
+                        String OtherP = "";
+                        OtherP = CHPhone;
+                        OtherP=getMobile(OtherP);
+                        txtHospitalOtherPhone.setText(OtherP);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 case "Pharmacy":
                     txtPharmacyName.setText(Cname);
+                    txtPharmacyAddress.setText(CAddress);
                     // txtEmail.setText(email);
                     try {
                         String mobile = "";
-                        mobile = Cphone;
-                        String code = mobile.substring(0, 3);
-                        mobile=mobile.replace("-","");
-                        mobile=mobile.replace("(","");
-                        mobile=mobile.replace(")","");
-                        mobile=mobile.replace(" ","");
-                        mobile=mobile.replace("+","").trim();
-                        int count=mobile.length();
-                        mobile=mobile.substring(count-10,count);
-                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
-                        txtPharmacyPhone.setText(mobile);
+                        mobile = CWPhone;
+                        if (!mobile.equals("")) {
+                            mobile = getMobile(mobile);
+                            txtPharmacyPhone.setText(mobile);
+                        }
+                        else{
+                            String OtherM = "";
+                            OtherM = Cphone;
+                            OtherM=getMobile(OtherM);
+                            txtPharmacyPhone.setText(OtherM);
+                        }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -329,17 +343,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtAideCompName.setText(Cname);
                     txtAideEmail.setText(Cemail);
                     try {
-                        String mobile = "";
-                        mobile = Cphone;
-                        String code = mobile.substring(0, 3);
-                        mobile=mobile.replace("-","");
-                        mobile=mobile.replace("(","");
-                        mobile=mobile.replace(")","");
-                        mobile=mobile.replace(" ","");
-                        mobile=mobile.replace("+","").trim();
-                        int count=mobile.length();
-                        mobile=mobile.substring(count-10,count);
-                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
+
                         txtAideOfficePhone.setText(mobile);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -347,20 +351,23 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     break;
                 case "Finance":
                     txtFName.setText(Cname);
-                    // txtEmail.setText(email);
+                    txtFinanceEmail.setText(Cemail);
+                    txtFinanceAddress.setText(CAddress);
                     try {
                         String mobile = "";
                         mobile = Cphone;
-                        String code = mobile.substring(0, 3);
-                        mobile=mobile.replace("-","");
-                        mobile=mobile.replace("(","");
-                        mobile=mobile.replace(")","");
-                        mobile=mobile.replace(" ","");
-                        mobile=mobile.replace("+","").trim();
-                        int count=mobile.length();
-                        mobile=mobile.substring(count-10,count);
-                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
+                        mobile=getMobile(mobile);
                         txtFinanceMobilePhone.setText(mobile);
+
+                        String hphone="";
+                        hphone=CHPhone;
+                        hphone=getMobile(hphone);
+                        txtFinanceOtherPhone.setText(hphone);
+
+                        String wphone="";
+                        wphone=CWPhone;
+                        wphone=getMobile(wphone);
+                        txtFinanceOfficePhone.setText(wphone);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -370,17 +377,17 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtInsuaranceEmail.setText(Cemail);
                     try {
                         String mobile = "";
-                        mobile = Cphone;
-                        String code = mobile.substring(0, 3);
-                        mobile=mobile.replace("-","");
-                        mobile=mobile.replace("(","");
-                        mobile=mobile.replace(")","");
-                        mobile=mobile.replace(" ","");
-                        mobile=mobile.replace("+","").trim();
-                        int count=mobile.length();
-                        mobile=mobile.substring(count-10,count);
-                        mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
-                        txtInsuarancePhone.setText(mobile);
+                        mobile = CWPhone;
+                        if (!mobile.equals("")) {
+                            mobile = getMobile(mobile);
+                            txtInsuarancePhone.setText(mobile);
+                        }
+                        else{
+                            String OtherM = "";
+                            OtherM = Cphone;
+                            OtherM=getMobile(OtherM);
+                            txtInsuarancePhone.setText(OtherM);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -555,13 +562,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
                     id = rel.getId();
-                    int index = 0;
-                    for (int i = 0; i < Relationship.length; i++) {
-                        if (rel.getRelationType().equals(Relationship[i])) {
-                            index = i;
+                    if (!rel.getRelationType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < Relationship.length; i++) {
+                            if (rel.getRelationType().equals(Relationship[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerRelation.setSelection(index + 1);
                     }
-                    spinnerRelation.setSelection(index + 1);
                    /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
@@ -623,13 +632,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
                     id = rel.getId();
-                    int index = 0;
-                    for (int i = 0; i < Relationship.length; i++) {
-                        if (rel.getRelationType().equals(Relationship[i])) {
-                            index = i;
+                    if (!rel.getRelationType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < Relationship.length; i++) {
+                            if (rel.getRelationType().equals(Relationship[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerRelation.setSelection(index + 1);
                     }
-                    spinnerRelation.setSelection(index + 1);
                    /* prox=rel.getIsPrimary();
                     if (prox==1) {
                         spinnerProxy.setSelection(0);
@@ -688,7 +699,6 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 txtTitle.setText("Update Emergency Contact & Proxy Agent");
                 Intent EmergencyIntent = getActivity().getIntent();
                 if (EmergencyIntent.getExtras() != null) {
-
                     Emergency rel = (Emergency) EmergencyIntent.getExtras().getSerializable("EmergencyObject");
                     txtName.setText(rel.getName());
                     txtEmail.setText(rel.getEmail());
@@ -699,14 +709,16 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
                     id = rel.getId();
-                    int index = 0;
-                    for (int i = 0; i < Relationship.length; i++) {
-                        if (rel.getRelationType().equals(Relationship[i])) {
-                            index = i;
+                    if (!rel.getRelationType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < Relationship.length; i++) {
+                            if (rel.getRelationType().equals(Relationship[i])) {
+                                index = i;
+                            }
                         }
-                    }
 
-                    spinnerRelation.setSelection(index + 1);
+                        spinnerRelation.setSelection(index + 1);
+                    }
                     int indexs = 0;
                    /* int pr=rel.getIsPrimary();String priem="";
                     if (pr==0)
@@ -721,8 +733,9 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                             indexs = i;
                         }
                     }*/
-
-                    spinnerPriority.setSelection(rel.getIsPrimary() + 1);
+                       if (rel.getIsPrimary()!=4) {
+                           spinnerPriority.setSelection(rel.getIsPrimary() + 1);
+                       }
 
                     String photo = rel.getPhoto();
                     imagepath=rel.getPhoto();
@@ -778,15 +791,19 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtEmergencyNote.setText(rel.getNote());
                     txtOtherRelation.setText(rel.getOtherRelation());
                     id = rel.getId();
-                    int index = 0;
-                    for (int i = 0; i < Relationship.length; i++) {
-                        if (rel.getRelationType().equals(Relationship[i])) {
-                            index = i;
+                    if (!rel.getRelationType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < Relationship.length; i++) {
+                            if (rel.getRelationType().equals(Relationship[i])) {
+                                index = i;
+                            }
                         }
-                    }
 
-                    spinnerRelation.setSelection(index + 1);
-                    spinnerPriority.setSelection(rel.getIsPrimary() + 1);
+                        spinnerRelation.setSelection(index + 1);
+                    }
+                    if (rel.getIsPrimary()!=4) {
+                        spinnerPriority.setSelection(rel.getIsPrimary() + 1);
+                    }
                     String photo = rel.getPhoto();
                     imagepath=rel.getPhoto();
                     File imgFile = new File(photo);
@@ -857,13 +874,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
                     isPhysician = specialist.getIsPhysician();
-                    int index = 0;
-                    for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialist.getType().equals(healthSpeciality[i])) {
-                            index = i;
+                    if (!specialist.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < healthSpeciality.length; i++) {
+                            if (specialist.getType().equals(healthSpeciality[i])) {
+                                index = i;
+                            }
                         }
+                        spinner.setSelection(index + 1);
                     }
-                    spinner.setSelection(index + 1);
 
                     String photo = specialist.getPhoto();
                     imagepath=specialist.getPhoto();
@@ -922,13 +941,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
                     isPhysician = specialist.getIsPhysician();
-                    int index = 0;
-                    for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialist.getType().equals(healthSpeciality[i])) {
-                            index = i;
+                    if (!specialist.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < healthSpeciality.length; i++) {
+                            if (specialist.getType().equals(healthSpeciality[i])) {
+                                index = i;
+                            }
                         }
+                        spinner.setSelection(index + 1);
                     }
-                    spinner.setSelection(index + 1);
 
                    String photo = specialist.getPhoto();
                    imagepath=specialist.getPhoto();
@@ -989,13 +1010,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
                     isPhysician = specialist.getIsPhysician();
-                    int index = 0;
-                    for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialist.getType().equals(healthSpeciality[i])) {
-                            index = i;
+                    if (!specialist.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < healthSpeciality.length; i++) {
+                            if (specialist.getType().equals(healthSpeciality[i])) {
+                                index = i;
+                            }
                         }
+                        spinner.setSelection(index + 1);
                     }
-                    spinner.setSelection(index + 1);
 
                     String photo = specialist.getPhoto();
                     imagepath=specialist.getPhoto();
@@ -1054,13 +1077,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtDoctorNote.setText(specialist.getNote());
                     id = specialist.getId();
                     isPhysician = specialist.getIsPhysician();
-                    int index = 0;
-                    for (int i = 0; i < healthSpeciality.length; i++) {
-                        if (specialist.getType().equals(healthSpeciality[i])) {
-                            index = i;
+                    if (!specialist.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < healthSpeciality.length; i++) {
+                            if (specialist.getType().equals(healthSpeciality[i])) {
+                                index = i;
+                            }
                         }
+                        spinner.setSelection(index + 1);
                     }
-                    spinner.setSelection(index + 1);
 
                     String photo = specialist.getPhoto();
                     imagepath=specialist.getPhoto();
@@ -1113,13 +1138,16 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 Intent insuranceIntent = getActivity().getIntent();
                 if (insuranceIntent.getExtras() != null) {
                     Insurance insurance = (Insurance) insuranceIntent.getExtras().getSerializable("InsuranceObject");
-                    int index = 0;
-                    for (int i = 0; i < insuaranceType.length; i++) {
-                        if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
-                            index = i;
+                    if (!insurance.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < insuaranceType.length; i++) {
+                            if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerInsuarance.setSelection(index + 1);
                     }
-                    spinnerInsuarance.setSelection(index + 1);
+
                     spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
                     txtInsuarancePhone.setText(insurance.getPhone());
                     txtId.setText(insurance.getMember());
@@ -1177,13 +1205,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                 Intent insuranceIntent2 = getActivity().getIntent();
                 if (insuranceIntent2.getExtras() != null) {
                     Insurance insurance = (Insurance) insuranceIntent2.getExtras().getSerializable("InsuranceObject");
-                    int index = 0;
-                    for (int i = 0; i < insuaranceType.length; i++) {
-                        if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
-                            index = i;
+                    if (!insurance.getType().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < insuaranceType.length; i++) {
+                            if (insurance.getType().equalsIgnoreCase(insuaranceType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerInsuarance.setSelection(index + 1);
                     }
-                    spinnerInsuarance.setSelection(index + 1);
                     spinnerInsuarance.setDisabledColor(getActivity().getResources().getColor(R.color.colorBlack));
                     txtInsuarancePhone.setText(insurance.getPhone());
                     txtId.setText(insurance.getMember());
@@ -1382,14 +1412,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtOtherCategoryHospital.setText(specialist.getOtherCategory());
                     txtHospitalLocation.setText(specialist.getLocation());
                     id = specialist.getId();
-
-                    int index = 0;
-                    for (int i = 0; i < HospitalType.length; i++) {
-                        if (specialist.getCategory().equals(HospitalType[i])) {
-                            index = i;
+                    if (!specialist.getCategory().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < HospitalType.length; i++) {
+                            if (specialist.getCategory().equals(HospitalType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerHospital.setSelection(index + 1);
                     }
-                    spinnerHospital.setSelection(index + 1);
 
                     String photo = specialist.getPhoto();
                     imagepath=specialist.getPhoto();
@@ -1449,14 +1480,15 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     txtOtherCategoryHospital.setText(specialist.getOtherCategory());
                     txtHospitalLocation.setText(specialist.getLocation());
                     id = specialist.getId();
-
-                    int index = 0;
-                    for (int i = 0; i < HospitalType.length; i++) {
-                        if (specialist.getCategory().equals(HospitalType[i])) {
-                            index = i;
+                    if (!specialist.getCategory().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < HospitalType.length; i++) {
+                            if (specialist.getCategory().equals(HospitalType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerHospital.setSelection(index + 1);
                     }
-                    spinnerHospital.setSelection(index + 1);
 
 imagepath=specialist.getPhoto();
                    String photo = specialist.getPhoto();
@@ -1518,13 +1550,15 @@ imagepath=specialist.getPhoto();
                     txtFinanceNote.setText(specialist.getNote());
                     txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
-                    int index = 0;
-                    for (int i = 0; i < financeType.length; i++) {
-                        if (specialist.getCategory().equals(financeType[i])) {
-                            index = i;
+                    if (!specialist.getCategory().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < financeType.length; i++) {
+                            if (specialist.getCategory().equals(financeType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerFinance.setSelection(index + 1);
                     }
-                    spinnerFinance.setSelection(index + 1);
 imagepath=specialist.getPhoto();
                     String photo = specialist.getPhoto();
                     File imgFile = new File(photo);
@@ -1585,13 +1619,15 @@ imagepath=specialist.getPhoto();
                     txtFinanceNote.setText(specialist.getNote());
                     txtOtherCategory.setText(specialist.getOtherCategory());
                     id = specialist.getId();
-                    int index = 0;
-                    for (int i = 0; i < financeType.length; i++) {
-                        if (specialist.getCategory().equals(financeType[i])) {
-                            index = i;
+                    if (!specialist.getCategory().equals("")) {
+                        int index = 0;
+                        for (int i = 0; i < financeType.length; i++) {
+                            if (specialist.getCategory().equals(financeType[i])) {
+                                index = i;
+                            }
                         }
+                        spinnerFinance.setSelection(index + 1);
                     }
-                    spinnerFinance.setSelection(index + 1);
 imagepath=specialist.getPhoto();
                     String photo = specialist.getPhoto();
                     File imgFile = new File(photo);
@@ -1678,21 +1714,22 @@ imagepath=specialist.getPhoto();
 
     private void getSContact() {
         txtDoctorName.setText(Cname);
-        // txtEmail.setText(email);
+        txtDoctorAddress.setText(CAddress);
         try {
             String mobile = "";
             mobile = Cphone;
-            String code = mobile.substring(0, 3);
-            mobile=mobile.replace("-","");
-            mobile=mobile.replace("(","");
-            mobile=mobile.replace(")","");
-            mobile=mobile.replace(" ","");
-            mobile=mobile.replace("+","").trim();
-            int count=mobile.length();
-            mobile=mobile.substring(count-10,count);
-            mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
-
+            mobile=getMobile(mobile);
             txtDoctorOfficePhone.setText(mobile);
+
+            String hphone="";
+            hphone=CHPhone;
+            hphone=getMobile(hphone);
+            txtDoctorHourOfficePhone.setText(hphone);
+
+            String wphone="";
+            wphone=CWPhone;
+            wphone=getMobile(wphone);
+            txtDoctorOtherPhone.setText(wphone);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1701,23 +1738,41 @@ imagepath=specialist.getPhoto();
     private void getContact() {
         txtName.setText(Cname);
         txtEmail.setText(Cemail);
+        txtAddress.setText(CAddress);
+        txtHomePhone.setText(CHPhone);
+        txtWorkPhone.setText(CWPhone);
         try {
             String mobile = "";
             mobile = Cphone;
-            String code = mobile.substring(0, 3);
-            mobile=mobile.replace("-","");
-            mobile=mobile.replace("(","");
-            mobile=mobile.replace(")","");
-            mobile=mobile.replace(" ","");
-            mobile=mobile.replace("+","").trim();
-            int count=mobile.length();
-            mobile=mobile.substring(count-10,count);
-            mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length()); txtHospitalOfficePhone.setText(mobile);
-
+            mobile=getMobile(mobile);
             txtMobile.setText(mobile);
+
+            String hphone="";
+            hphone=CHPhone;
+            hphone=getMobile(hphone);
+            txtHomePhone.setText(hphone);
+
+            String wphone="";
+            wphone=CWPhone;
+            wphone=getMobile(wphone);
+            txtWorkPhone.setText(wphone);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String getMobile(String mobile) {
+        mobile=mobile.replace("-","");
+        mobile=mobile.replace("(","");
+        mobile=mobile.replace(")","");
+        mobile=mobile.replace(" ","");
+        mobile=mobile.replace("+","").trim();
+        int count=mobile.length();
+        mobile=mobile.substring(count-10,count);
+        if (!mobile.equals("")) {
+            mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6, mobile.length());
+        }
+        return mobile;
     }
 
     private void disablePharmacy() {
@@ -1755,6 +1810,8 @@ imagepath=specialist.getPhoto();
         txtEmergencyNote.setEnabled(false);
         spinnerRelation.setClickable(false);
         spinnerPriority.setClickable(false);
+        spinnerRelation.setFocusable(false);
+        spinnerPriority.setFocusable(false);
         imgEdit.setVisibility(View.GONE);
         llAddConn.setVisibility(View.GONE);
     }
@@ -2837,25 +2894,36 @@ imagepath=specialist.getPhoto();
                 switch (source) {
                     case "Connection":
                         if (validate("Connection")) {
+                           if (email.equals(""))
+                           {
+                               Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, mobile, phone, workphone, relation, imagepath, "", 1, 2, otherRelation, cardPath);
+                               if (flag == true) {
+                                   Toast.makeText(getActivity(), "You have added connection Successfully", Toast.LENGTH_SHORT).show();
+                                   getActivity().finish();
+                               } else {
+                                   Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                               }
+                               Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
+                           }
+                           else{
+                               Boolean flags=MyConnectionsQuery.fetchEmailRecord(email);
+                               if (flags==true)
+                               {
+                                   Toast.makeText(getActivity(), "This email address is already registered by another profile, Please add another email address", Toast.LENGTH_SHORT).show();
+                                   txtEmail.setError("This email address is already registered by another profile, Please add another email address");
+                               }
+                               else {
+                                   Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, mobile, phone, workphone, relation, imagepath, "", 1, 2, otherRelation, cardPath);
+                                   if (flag == true) {
+                                       Toast.makeText(getActivity(), "You have added connection Successfully", Toast.LENGTH_SHORT).show();
+                                       getActivity().finish();
+                                   } else {
+                                       Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                   }
+                                   Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
+                               }
+                          }
 
-                           /* Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            byte[] photo = baos.toByteArray();*/
-                            Boolean flag = MyConnectionsQuery.insertMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, mobile, phone, workphone, relation, imagepath, "", 1, 2, otherRelation, cardPath);
-                            if (flag == true) {
-                                Toast.makeText(getActivity(), "You have added connection Successfully", Toast.LENGTH_SHORT).show();
-                                    /*Intent signupIntent = new Intent(context, LoginActivity.class);
-                                    startActivity(signupIntent);*/
-                                getActivity().finish();
-                            } else {
-                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                            }
-                  /*  */
-
-                            Toast.makeText(getActivity(), "Succesas", Toast.LENGTH_SHORT).show();
-                            //  dialogManager = new DialogManager(new FragmentNewContact());
-                            //  dialogManager.showCommonDialog("Save?", "Do you want to save Connection?", getActivity(), "ADD_CONNECTION", null);
                         }
                         break;
 
@@ -3363,6 +3431,12 @@ imagepath=specialist.getPhoto();
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");
                 showAlert("Please Enter Name", getActivity());
+            } else if (relation.equals("")) {
+                spinnerRelation.setError("Please Select Relation");
+                showAlert("Please Select Relation", getActivity());
+            }else if (relation.equals("Other")&&otherRelation.equals("")) {
+                txtOtherRelation.setError("Please Enter Other Relation");
+                showAlert("Please Enter Other Relation", getActivity());
             }/* else if (email.equals("")) {
                 txtEmail.setError("Please Enter email");
                 showAlert("Please Enter email", getActivity());
@@ -3395,7 +3469,6 @@ imagepath=specialist.getPhoto();
 
             } else return true;
         } else if (screen.equals("Emergency")) {
-
             int indexs = spinnerPriority.getSelectedItemPosition();
             if (indexValue != 0) {
                 relation = Relationship[indexValue - 1];
@@ -3406,16 +3479,19 @@ imagepath=specialist.getPhoto();
             otherRelation = txtOtherRelation.getText().toString();
             note = txtEmergencyNote.getText().toString().trim();
 
-            if (priority.equals("Primary-Proxy Agent")) {
+            if (priority.equals("Primary - Proxy Agent")) {
                 prior = 0;
-            } else if(priority.equals("Primary-Emergency Contact")) {
+            } else if(priority.equals("Primary - Emergency Contact")) {
                 prior = 1;
             }
-            else if(priority.equals("Secondary-Proxy Agent")) {
+            else if(priority.equals("Secondary - Proxy Agent")) {
                 prior = 2;
             }
-            else if(priority.equals("Secondary-Emergency Contact")) {
+            else if(priority.equals("Secondary - Emergency Contact")) {
                 prior = 3;
+            }
+            else{
+                prior=4;
             }
             if (name.equals("")) {
                 txtName.setError("Please Enter Name");

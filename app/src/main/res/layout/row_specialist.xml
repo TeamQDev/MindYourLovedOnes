@@ -177,7 +177,9 @@
             android:scaleType="fitXY"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/imgNext"
+            android:paddingRight="@dimen/dimension5dp"
             />
+
         <ImageView
             android:id="@+id/imgNext"
             android:layout_width="@dimen/dimension40dp"

@@ -105,7 +105,32 @@ class PrescriptionAdapter extends BaseAdapter {
         }
         holder.txtDoctor.setText(prescriptionList.get(position).getDoctor());
         holder.txtDate.setText(prescriptionList.get(position).getDates());
-        holder.txt.setText(prescriptionList.get(position).getDose()+", "+prescriptionList.get(position).getFrequency());
+        if (prescriptionList.get(position).getDose().equals("")&&prescriptionList.get(position).getFrequency().equals(""))
+        {
+            holder.txt.setVisibility(View.GONE);
+        }
+        else{
+            holder.txt.setVisibility(View.VISIBLE);
+            String dose="",freq="";
+            if (prescriptionList.get(position).getFrequency().equals("")&&!prescriptionList.get(position).getDose().equals(""))
+            {
+                freq=prescriptionList.get(position).getDose();
+                holder.txt.setText(freq);
+            }
+            if (!prescriptionList.get(position).getFrequency().equals("")&&prescriptionList.get(position).getDose().equals(""))
+            {
+                freq=prescriptionList.get(position).getFrequency();
+                holder.txt.setText(freq);
+            }
+            if (!prescriptionList.get(position).getFrequency().equals("")&&!prescriptionList.get(position).getDose().equals(""))
+            {
+                freq=prescriptionList.get(position).getDose()+","+prescriptionList.get(position).getFrequency();
+                holder.txt.setText(freq);
+            }
+
+
+        }
+
         holder.txtName.setText(prescriptionList.get(position).getMedicine());
 
         holder.imgForward.setOnClickListener(new View.OnClickListener() {

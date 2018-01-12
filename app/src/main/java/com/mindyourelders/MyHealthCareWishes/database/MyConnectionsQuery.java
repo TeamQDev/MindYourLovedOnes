@@ -241,6 +241,21 @@ public class MyConnectionsQuery {
         return connection;
     }
 
+    public static Boolean fetchEmailRecord(String email) {
+       Boolean flag=false;
+        RelativeConnection connection=new RelativeConnection();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_EMAIL + "='" + email + "';", null);
+
+        if (c.moveToFirst()) {
+            flag=true;
+        }
+        else{
+            flag=false;
+        }
+
+        return flag;
+    }
 
     public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, String photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live, String otherLang) {
         boolean flag;

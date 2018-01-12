@@ -39,7 +39,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
 /**
  * Created by varsha on 8/28/2017.
@@ -218,8 +217,6 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
             final String[] PROJECTION = new String[]{
                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                     ContactsContract.Contacts.DISPLAY_NAME,
-                    ContactsContract.CommonDataKinds.Phone.NUMBER
-                    //ContactsContract.Contacts.Photo.PHOTO
             };
 
             ContentResolver cr = getActivity().getContentResolver();
@@ -227,35 +224,70 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
             if (cursor != null) {
                 try {
                     final int nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                    final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                   final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                     final int idIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID);
+
+                  /*  final int typeIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
+                    final int typeIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);*/
                     // final int photoIndex = cursor.getColumnIndex(ContactsContract.Contacts.Photo.PHOTO);
 
-                    String name, number, id;
-
-
+                    String name, number = "",home="",work="", id;
                     while (cursor.moveToNext()) {
+
 
                         byte[] photo = new byte[0];
                         Bitmap profile = null;
 
                         id = cursor.getString(idIndex);
                         name = cursor.getString(nameIndex);
-                        number = cursor.getString(numberIndex);
+                       // number = cursor.getString(numberIndex);
 
-                        String UriContactNumber = Uri.encode(number);
+                        Cursor phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                       number="";
+                       home="";
+                       work="";
+                        while (phones.moveToNext()) {
+                            //  String number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            int type = phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
+                            switch (type) {
+                                case ContactsContract.CommonDataKinds.Phone.TYPE_HOME:
+                                    // do something with the Home number here...
+                                    home = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA));
+                                    home = home.replaceAll("\\s", "");
+                                    break;
+                                case ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE:
+                                    number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA));
+                                    number = number.replaceAll("\\s", "");
+                                    break;
+                                case ContactsContract.CommonDataKinds.Phone.TYPE_WORK:
+                                    // do something with the Work number here...
+                                    work = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA));
+                                    work = work.replaceAll("\\s", "");
+                                    break;
+                            }
+                        }
+                        phones.close();
+
+                       /* String UriContactNumber = Uri.encode(number);
                         long phoneContactID = new Random().nextInt();
                         Cursor contactLookupCursor = getActivity().getContentResolver().query(Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, UriContactNumber),
                                 new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup._ID}, null, null, null);
                         while (contactLookupCursor.moveToNext()) {
                             phoneContactID = contactLookupCursor.getLong(contactLookupCursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
                         }
-                        contactLookupCursor.close();
+                        contactLookupCursor.close();*/
 
-                        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, phoneContactID);
+                        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long.parseLong(id));
                         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-                        Cursor curs = getActivity().getContentResolver().query(photoUri,
-                                new String[]{ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
+                        Cursor curs=null;
+                        try {
+                            curs = getActivity().getContentResolver().query(photoUri,
+                                    new String[]{ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
+                        }catch (Exception e)
+                        {
+                            return null;
+                        }
                         if (curs == null) {
                             return null;
                         }
@@ -286,12 +318,34 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                                 ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
                                 new String[]{id}, null);
                         while (emailCur.moveToNext()) {
-                            email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-
-                            //   emailList.add(email); // Here you will get list of email
-
+                            email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));//   emailList.add(email); // Here you will get list of email
                         }
                         emailCur.close();
+
+                        String address="";
+                        Cursor addressCur = cr.query(
+                                ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
+                                null,
+                                ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
+                                new String[]{id}, null);
+                        while (addressCur.moveToNext()) {
+                            address=addressCur.getString(addressCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS));
+                           /* String Strt = addressCur.getString(addressCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.STREET));
+                            String Cty = addressCur.getString(addressCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.CITY));
+                            String cntry = addressCur.getString(addressCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY));
+                           if (Strt!=null)
+                           {
+                               address=Strt+" ";
+                           }
+                           if (Cty!=null)
+                           {
+                               address=address+Cty+" ";
+                           }
+                           if (cntry!=null) {
+                               address =address+cntry+" ";
+                           }*/
+                        }
+                        addressCur.close();
 /*
                         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,Integer.parseInt(id));
                         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
@@ -317,6 +371,9 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
                         Contact objContact = new Contact();
                         objContact.setName(name);
                         objContact.setPhone(number);
+                        objContact.setWorkPhone(work);
+                        objContact.setHomePhone(home);
+                        objContact.setAddress(address);
                         //if (photo!=null||photo.length!=0) {
                         objContact.setImage(photo);
                         /*    Log.v("IMAGE",name+" "+photo);
@@ -367,7 +424,7 @@ public class FragmentGrabContact extends Fragment implements View.OnClickListene
         ContactTableQuery.deleteContactData();
         for (int i = 0; i < contactList.size(); i++) {
             Contact contect = contactList.get(i);
-            boolean flag = ContactTableQuery.insertContactData(contect.getId(), contect.getName(), contect.getPhone(), contect.getEmail(), contect.getImage());
+            boolean flag = ContactTableQuery.insertContactData(contect.getId(), contect.getName(), contect.getPhone(), contect.getEmail(), contect.getImage(),contect.getAddress(),contect.getHomePhone(),contect.getWorkPhone());
         }
 
         getOfflineContacts();

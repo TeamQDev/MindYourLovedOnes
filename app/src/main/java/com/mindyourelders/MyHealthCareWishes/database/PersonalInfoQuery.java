@@ -414,4 +414,19 @@ public class PersonalInfoQuery {
         return connection;
 
     }
+
+    public static Boolean fetchEmailRecord(String email) {
+        Boolean flag=false;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_EMAIL + "='" + email + "';", null);
+
+        if (c.moveToFirst()) {
+            flag=true;
+        }
+        else{
+            flag=false;
+        }
+
+        return flag;
+    }
 }

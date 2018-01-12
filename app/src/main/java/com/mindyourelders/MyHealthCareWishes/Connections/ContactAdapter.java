@@ -61,7 +61,11 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
            holder=new ViewHolder();
             holder.txtConName= (TextView) convertView.findViewById(R.id.txtConName);
             holder.txtPhone= (TextView) convertView.findViewById(R.id.txtPhone);
+            holder.txtHPhone= (TextView) convertView.findViewById(R.id.txtHPhone);
+            holder.txtWPhone= (TextView) convertView.findViewById(R.id.txtWPhone);
             holder.txtEmail= (TextView) convertView.findViewById(R.id.txtEmail);
+            holder.txtAddress= (TextView) convertView.findViewById(R.id.txtAddress);
+
             holder.imgConPhoto= (ImageView) convertView.findViewById(R.id.imgConPhoto);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgForword);
             convertView.setTag(holder);
@@ -70,10 +74,31 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
             holder= (ViewHolder) convertView.getTag();
         }
 
+        Contact c=contactList.get(position);
         holder.txtConName.setText(contactList.get(position).getName());
 
         if (!contactList.get(position).getPhone().equals("")) {
-            holder.txtPhone.setText(contactList.get(position).getPhone());
+            holder.txtPhone.setText(c.getPhone());
+            holder.txtPhone.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.txtPhone.setVisibility(View.GONE);
+        }
+
+        if (!contactList.get(position).getHomePhone().equals("")) {
+            holder.txtHPhone.setText(c.getHomePhone());
+            holder.txtHPhone.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.txtHPhone.setVisibility(View.GONE);
+        }
+
+        if (!contactList.get(position).getWorkPhone().equals("")) {
+            holder.txtWPhone.setText(c.getWorkPhone());
+            holder.txtWPhone.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.txtWPhone.setVisibility(View.GONE);
         }
 
         if(contactList.get(position).getEmail().equals(""))
@@ -83,6 +108,15 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
         else {
             holder.txtEmail.setVisibility(View.VISIBLE);
             holder.txtEmail.setText(contactList.get(position).getEmail());
+        }
+
+        if(contactList.get(position).getAddress().equals(""))
+        {
+            holder.txtAddress.setVisibility(View.GONE);
+        }
+        else {
+            holder.txtAddress.setVisibility(View.VISIBLE);
+            holder.txtAddress.setText(contactList.get(position).getAddress());
         }
 
         if (contactList.get(position).getImage()!=null) {
@@ -102,6 +136,9 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
                 args.putString("Name", contactList.get(position).getName());
                 args.putString("Email", contactList.get(position).getEmail());
                 args.putString("Phone", contactList.get(position).getPhone());
+                args.putString("Address", contactList.get(position).getAddress());
+                args.putString("HPhone", contactList.get(position).getHomePhone());
+                args.putString("WPhone", contactList.get(position).getWorkPhone());
                 args.putByteArray("Photo",contactList.get(position).getImage());
                 fragmentNewContact.setArguments(args);
                 ((GrabConnectionActivity)context).callFragment("NEWCONTACT",fragmentNewContact);
@@ -127,7 +164,7 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
 
     public class ViewHolder
     {
-        TextView txtConName, txtPhone,txtEmail;
+        TextView txtConName, txtPhone,txtEmail,txtAddress,txtHPhone,txtWPhone;
         ImageView imgConPhoto,imgForword;
     }
 
@@ -169,7 +206,7 @@ public class ContactAdapter extends BaseAdapter implements Filterable {
                         String data = mOriginalValues.get(i).getName();
                         if (data.toLowerCase().contains(constraint.toString())) {
 
-                            FilteredArrList.add(new Contact(mOriginalValues.get(i).getName(),mOriginalValues.get(i).getEmail(),mOriginalValues.get(i).getPhone(),mOriginalValues.get(i).getImage()));
+                            FilteredArrList.add(new Contact(mOriginalValues.get(i).getName(),mOriginalValues.get(i).getEmail(),mOriginalValues.get(i).getPhone(),mOriginalValues.get(i).getImage(),mOriginalValues.get(i).getAddress(),mOriginalValues.get(i).getHomePhone(),mOriginalValues.get(i).getWorkPhone()));
                         }
                     }
                     // set the Filtered result to return

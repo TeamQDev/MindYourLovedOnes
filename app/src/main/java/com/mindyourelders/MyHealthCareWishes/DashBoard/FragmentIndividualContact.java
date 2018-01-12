@@ -22,7 +22,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -102,7 +101,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     TextInputLayout tilOtherRelation,tilId,tilOther,tilOtherLanguage;
 
     RelativeLayout rlPet,rlLive;
-    String name="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
+    String name="",Email="", email="", phone="",manager_phone="", country="", bdate="",address="",homePhone="",workPhone="",gender="";
     String height="",weight="",profession="",employed="",religion="",idnumber="";
     String pet="No",veteran="No",english="No",live="No";
     String eyes,language,marital_status;
@@ -129,7 +128,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     DisplayImageOptions displayImageOptions;
     RelativeLayout rlCard;
     TextView txtCard;
-    final CharSequence[] dialog_items = {"View","Email","Fax"};
+    final CharSequence[] dialog_items = {"View","Email","Fax","First Time User Instructions"};
     DBHelper dbHelper;
     View rootview;
     Preferences preferences;
@@ -235,20 +234,21 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         imgInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog customDialog;
+                Intent i=new Intent(getActivity(),InstructionActivity.class);
+                i.putExtra("From","Personal");
+                startActivity(i);
+               /* final Dialog customDialog;
                 customDialog = new Dialog(getActivity());
                 customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 customDialog.setContentView(R.layout.dialog_living);
                 customDialog.setCancelable(false);
                 TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
-                String msg="<b>First Time User:</b><br>" +
-                        "To add information type responses.<br>" +
-                        "To save information click the check mark" +
-                        " on the upper right side of the screen.<br><br>" +
-                        "To edit or delete information simply work on the screen and then save your edits by clicking on the check mark on the upper right side of the screen." +
+                String msg="To <b>add</b> information type responses.<br>" +
+                        "To <b>save</b> information click the check mark" +
+                        " on the <b>top right</b> side of the screen.<br><br>" +
+                        "To <b>edit</b> or <b>delete</b> information simply work on the screen and then save your edits by clicking on the <b>check mark</b> on the <b>top right</b> side of the screen." +
                         "<br><br>" +
-                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
-
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the <b>three dots</b> on the top right side of the screen.";
                 txtNotes.setText(Html.fromHtml(msg));
                 TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
                 txtNoteHeader.setText("Help");
@@ -259,7 +259,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         customDialog.dismiss();
                     }
                 });
-                customDialog.show();
+                customDialog.show();*/
             }
         });
         /*txtMsg=rootview.findViewById(R.id.txtMsg);
@@ -299,6 +299,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         txtSignUp = (TextView) rootview.findViewById(R.id.txtSignUp);
         tilName = (TextInputLayout) rootview.findViewById(R.id.tilName);
         tilOtherRelation = (TextInputLayout) rootview.findViewById(R.id.tilOtherRelation);
+        tilOtherRelation.setHint("Other Relation");
         tilWorkPhone = (TextInputLayout) rootview.findViewById(R.id.tilWorkPhone);
         tilId = (TextInputLayout) rootview.findViewById(R.id.tilId);
         rlPet= (RelativeLayout) rootview.findViewById(R.id.rlPet);
@@ -605,6 +606,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getItemAtPosition(position).toString().equals("Other")) {
                     tilOtherRelation.setVisibility(View.VISIBLE);
+                    tilOtherRelation.setHint("Other Relation");
                 } else {
                     tilOtherRelation.setVisibility(View.GONE);
                 }
@@ -639,6 +641,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 txtGender.setText(personalInfo.getGender());
                 txtName.setText(personalInfo.getName());
                 txtEmail.setText(personalInfo.getEmail());
+                Email=personalInfo.getEmail();
                 txtAddress.setText(personalInfo.getAddress());
                 txtHomePhone.setText(personalInfo.getHomePhone());
                 txtOther.setText(personalInfo.getOther_person());
@@ -859,6 +862,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
             if (connection != null) {
                 txtName.setText(connection.getName());
                 txtEmail.setText(connection.getEmail());
+                Email=connection.getEmail();
                 txtAddress.setText(connection.getAddress());
                 txtPhone.setText(connection.getMobile());
                 txtOtherRelation.setText(connection.getOtherRelation());
@@ -1107,24 +1111,65 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                  }
                 if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
-                            Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
-                            if (flag == true) {
-                                Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
-                                hideSoftKeyboard();
-                                preferences.putString(PrefConstants.USER_NAME,name);
-                                preferences.putString(PrefConstants.USER_PROFILEIMAGE,imagepath);
-                                getActivity().finish();
-                                editToConnection(imagepath,cardpath);
-                            } else {
-                                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                            if (email.equals("")||email.equals(Email))
+                            {
+                                Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
+                                if (flag == true) {
+                                    Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
+                                    hideSoftKeyboard();
+                                    preferences.putString(PrefConstants.USER_NAME,name);
+                                    preferences.putString(PrefConstants.USER_PROFILEIMAGE,imagepath);
+                                    getActivity().finish();
+                                    editToConnection(imagepath,cardpath);
+                                } else {
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Boolean flags=MyConnectionsQuery.fetchEmailRecord(email);
+                                if (flags==true)
+                                {
+                                    Toast.makeText(getActivity(), "This email address is already registered by another profile, Please add another email address", Toast.LENGTH_SHORT).show();
+                                    txtEmail.setError("This email address is already registered by another profile, Please add another email address");
+                                }
+                                else{
+                                    Boolean flag = PersonalInfoQuery.updatePersonalInfoData(preferences.getInt(PrefConstants.USER_ID), name, email, address, country, phone, bdate, imagepath,homePhone,gender,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone,cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
+                                    if (flag == true) {
+                                        Toast.makeText(getActivity(), "You have updated Successfully", Toast.LENGTH_SHORT).show();
+                                        hideSoftKeyboard();
+                                        preferences.putString(PrefConstants.USER_NAME,name);
+                                        preferences.putString(PrefConstants.USER_PROFILEIMAGE,imagepath);
+                                        getActivity().finish();
+                                        editToConnection(imagepath,cardpath);
+                                    } else {
+                                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         }
                     }
                     else {
                         if (validateConnection()) {
-                            editToConnection(imagepath,cardpath);
+                            if (email.equals("")||email.equals(Email))
+                            {
+                                editToConnection(imagepath,cardpath);
+                                getActivity().finish();
+                            }
+                            else{
+                                Boolean flags=MyConnectionsQuery.fetchEmailRecord(email);
+                                if (flags==true)
+                                {
+                                    Toast.makeText(getActivity(), "This email address is already registered by another profile, Please add another email address", Toast.LENGTH_SHORT).show();
+                                    txtEmail.setError("This email address is already registered by another profile, Please add another email address");
+                                }
+                                else{
+                                    editToConnection(imagepath,cardpath);
+                                    getActivity().finish();
+                                }
+                            }
 
-                            getActivity().finish();
+
+
                         }
                     }
 
@@ -1270,6 +1315,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                                 new FaxCustomDialog(getActivity(), path).show();
                                 break;
 
+                            case 3://fax
+                                Intent i=new Intent(getActivity(),InstructionActivity.class);
+                                i.putExtra("From","Personal");
+                                startActivity(i);
+                                break;
+
+
                         }
                     }
 
@@ -1301,7 +1353,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 break;
 
             case R.id.txtBdate:
-                Calendar calendar = Calendar.getInstance();
+                final Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -1317,7 +1369,13 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
                         DateClass d=new DateClass();
                         d.setDate(reportDate);
-                        txtBdate.setText(reportDate);
+                        if (datePickerDate.after(calendar.getTime()))
+                        {
+                            Toast.makeText(getActivity(),"Birthdate should be greater than today's date",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            txtBdate.setText(reportDate);
+                        }
                     }
                 }, year, month, day);
                 dpd.show();
@@ -1475,12 +1533,18 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         int i2= spinnerLanguage.getSelectedItemPosition();
         if (i2!=0)
         language=LangList[i2-1];
+        if (language!=null)
+        {
         if (language.equals("Other"))
         {
             OtherLang=txtOtherLanguage.getText().toString();
         }else{
             OtherLang="";
         }
+    }
+        else{
+        language="";
+    }
         int i3= spinnerMarital.getSelectedItemPosition();
         if (i3!=0)
         marital_status=MaritalList[i3-1];
@@ -1498,10 +1562,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
             showAlert("Please Enter Name", getActivity());
-        } else if (email.equals("")) {
+        }else if (relation.equals("")) {
+            spinnerRelation.setError("Please Select Relation");
+            showAlert("Please Select Relation", getActivity());
+        }else if (relation.equals("Other")&&otherRelation.equals("")) {
+            txtOtherRelation.setError("Please Enter Other Relation");
+            showAlert("Please Enter Other Relation", getActivity());
+        } /*else if (email.equals("")) {
             txtEmail.setError("Please Enter email");
             showAlert("Please Enter email",  getActivity());
-        } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+        }*/ else if (!email.equals("")&&!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
         } /*else if (height.length()!=0 && height.length()<5)
@@ -1569,11 +1639,15 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         int indexValuex = spinnerLanguage.getSelectedItemPosition();
         if (indexValuex!=0)
         language =LangList[indexValuex-1];
-        if (language.equals("Other"))
-        {
-            OtherLang=txtOtherLanguage.getText().toString();
-        }else{
-            OtherLang="";
+        if (language!=null) {
+            if (language.equals("Other")) {
+                OtherLang = txtOtherLanguage.getText().toString();
+            } else {
+                OtherLang = "";
+            }
+        }
+        else{
+            language="";
         }
 
         int indexValues = spinnerMarital.getSelectedItemPosition();
@@ -1584,10 +1658,10 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         if (name.equals("")) {
             txtName.setError("Please Enter Name");
             showAlert("Please Enter Name", getActivity());
-        } else if (email.equals("")) {
+        } /*else if (email.equals("")) {
             txtEmail.setError("Please Enter email");
             showAlert("Please Enter email",  getActivity());
-        } else if (!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+        } */else if (!email.equals("")&&!email.trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             txtEmail.setError("Please enter valid email");
             showAlert("Please enter valid email",  getActivity());
         }/* else if (height.length()!=0 && height.length()<5)
@@ -1619,18 +1693,18 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     }
 
     private void editToConnection(String photo, String photoCard) {
-        if (preferences.getString(PrefConstants.CONNECTED_USEREMAIL).equals(preferences.getString(PrefConstants.USER_EMAIL))) {
+        if (preferences.getInt(PrefConstants.CONNECTED_USERID)==preferences.getInt(PrefConstants.USER_ID)) {
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                 preferences.putString(PrefConstants.CONNECTED_NAME,name);
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-        }
+            }
         }
         else{
             int indexValuex = spinnerRelation.getSelectedItemPosition();
-           String relation =Relationship[indexValuex-1];
+            String relation =Relationship[indexValuex-1];
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live, OtherLang);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
@@ -1639,6 +1713,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     private boolean validate() {

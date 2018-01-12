@@ -5,12 +5,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -41,11 +43,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_CALL_PERMISSION =600 ;
     Context context=this;
     public static FragmentManager fragmentManager;
     public FragmentTransaction fragmentTransaction;
     FragmentDashboard fragmentDashboard = null;
     FragmentResources fragmentResources=null;
+    FragmentForm fragmentForm=null;
     FragmentMarketPlace fragmentMarketPlace=null;
     FragmentVideos fragmentVideos=null;
     FragmentBackup fragmentBackup=null;
@@ -74,23 +78,15 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
         //I'm also creating a log message, which we'll look at in more detail later//
         FirebaseCrash.log("MainActivity started");
-
+        accessPermission();
         //Crashlytics.getInstance().crash(); // Force a crash
         initImageLoader();
         initComponent();
         initUI();
         initListener();
         fragmentData();
-       /* if (fragmentManager.findFragmentByTag("DASHBOARD") == null) {
-           // imgLocationFeed.setVisibility(View.VISIBLE);
-            imgNoti.setVisibility(View.VISIBLE);
-            txtTitle.setVisibility(View.GONE);
-            imgLogout.setVisibility(View.GONE);
-            header.setBackgroundColor(Color.TRANSPARENT);
-            callFragment("DASHBOARD", fragmentDashboard);
-        }*/
         if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
-            callFirstFragment("CONNECTION", fragmentConnection);
+            callFragment("CONNECTION", fragmentConnection);
         }
 
     }
@@ -191,6 +187,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         fragmentConnection=new FragmentConnectionNew();
         fragmentNotification=new FragmentNotification();
         fragmentResources=new FragmentResources();
+        fragmentForm=new FragmentForm();
         fragmentMarketPlace=new FragmentMarketPlace();
         fragmentVideos=new FragmentVideos();
         fragmentBackup=new FragmentBackup();
@@ -198,11 +195,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     public void callFragment(String fragName, Fragment fragment) {
         fragmentTransaction = fragmentManager.beginTransaction();
-    /* if (fragName.equals("CONNECTION"))
-         fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
-      else*/
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName).addToBackStack("CONNECTION");
-        drawerLayout.closeDrawer(leftDrawer);
+        if (fragName.equals("DASHBOARD")||fragName.equals("ADVANCE"))
+            fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName).addToBackStack("CONNECTION");
+        else
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
         fragmentTransaction.commit();
     }
 
@@ -226,18 +222,27 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rlHome:
-             //   if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
+               //if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
+                if (fragmentConnection.isAdded())
+                {
+                    drawerLayout.closeDrawer(leftDrawer);
+                    return;
+                }else {
                     callFragment("CONNECTION", fragmentConnection);
-               // }
+                }
+             //  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.rlSupport:
-                Intent intent = new Intent();
+
+                CopyReadAssetss("support_faqs.pdf");
+                drawerLayout.closeDrawer(leftDrawer);
+               /* Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse("http://www.myhealthcarewishes.com/support.html"));
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
 
             case R.id.rlContact:
@@ -307,49 +312,66 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.txtForm:
                // callFragment("FORM", fragmentResources);
-                CopyReadAssetss("medical_history_form.pdf");
+               //CopyReadAssetss("medical_history_form.pdf");
+                //drawerLayout.closeDrawer(leftDrawer);
+
+                   if (fragmentManager.findFragmentByTag("FORM") == null) {
+                callFragment("FORM", fragmentForm);
+                  }
                 drawerLayout.closeDrawer(leftDrawer);
+
                 break;
 
             case R.id.txtPrivacyPolicy:
                 // callFragment("FORM", fragmentResources);
-                CopyReadAssetss("mobile_app_privacy_policy.pdf");
+                CopyReadAssetss("privacy_policy.pdf");
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.txtEULA:
                 // callFragment("FORM", fragmentResources);
-                CopyReadAssetss("eula.pdf");
+                CopyReadAssetss("eula_draft.pdf");
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.txtAdvance:
-                //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
-                callFragment("FORM", fragmentResources);
-                //  }
+                  if (fragmentManager.findFragmentByTag("ADVANCE") == null) {
+                callFragment("ADVANCE", fragmentResources);
+                  }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.txtBank:
                 //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
-                callFragment("MARKET", fragmentMarketPlace);
+              //  callFragment("MARKET", fragmentMarketPlace);
                 //  }
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("http://wordpress.arihantwebconsultancy.com/"));
+                startActivity(intent);
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
             case R.id.txtSenior:
                 //   if (fragmentManager.findFragmentByTag("MARKET") == null) {
-                callFragment("MARKET", fragmentMarketPlace);
+               // callFragment("MARKET", fragmentMarketPlace);
                 //  }
+                Intent intents = new Intent();
+                intents.setAction(Intent.ACTION_VIEW);
+                intents.addCategory(Intent.CATEGORY_BROWSABLE);
+                intents.setData(Uri.parse("http://wordpress.arihantwebconsultancy.com/"));
+                startActivity(intents);
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
 
 
             case R.id.rlVideos:
-               // if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
+                if (fragmentManager.findFragmentByTag("VIDEOS") == null) {
                     callFragment("VIDEOS", fragmentVideos);
-              //  }
+                }
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
@@ -363,51 +385,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.closeDrawer(leftDrawer);
                 break;
 
-
-
-         /*   case R.id.imgPdf:
-              *//*  StringBuffer result = new StringBuffer();
-                result.append(new MessageString().getProfile());*//*
-              *//*  result.append(new MessageString().getMedicalMsg());
-                result.append(new MessageString().getInsuranceMsg());*//*
-             *//*   new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                    + "/mye/" + preferences.getString(PrefConstants.CONNECTED_USERID) + "_" +  preferences.getString(PrefConstants.USER_ID)
-                    + "/Mind Your Elders Summary Report.pdf",
-                    BaseActivity.this, result);*//*
-
-                new PDFDocumentProcess(Environment.getExternalStorageDirectory()
-                        + "/mye/" +  preferences.getString(PrefConstants.CONNECTED_USERID) + "_" +  preferences.getString(PrefConstants.USER_ID)
-                        + "/Profile.pdf", BaseActivity.this,
-                        new MessageString().getProfileData());
-                break;*/
-
-            case R.id.imgNoti:
-                if (fragmentManager.findFragmentByTag("NOTIFICATION") == null) {
-                    callFragment("NOTIFICATION", fragmentNotification);
-                }
-                break;
-
             case R.id.rlLogOutt:
                 preferences.clearPreferences();
                 finish();
                 startActivity(new Intent(BaseActivity.this,LoginActivity.class));
                 break;
-            /*case R.id.txtNew:
-                Intent signupIntent=new Intent(context,SignUpActivity.class);
-                startActivity(signupIntent);
-                finish();
-                break;
-            case R.id.txtForgotPassword:
-
-                break;
-
-            case R.id.imgFbSignup:
-
-                break;
-
-            case R.id.imgGoogleSignup:
-
-                break;*/
         }
     }
 
@@ -484,6 +466,62 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             out.write(buffer, 0, read);
         }
 
+
+    }
+    private void accessPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+            requestPermissions(new String[]{android.Manifest.permission.CALL_PHONE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+            }, REQUEST_CALL_PERMISSION);
+
+        } else {
+            // checkForRegistration();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CALL_PERMISSION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //  checkForRegistration();
+
+                } else {
+
+                    accessPermission();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'switch' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
 
     }
 }

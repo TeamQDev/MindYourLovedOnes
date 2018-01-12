@@ -132,11 +132,24 @@
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
+    <TextView
+        android:id="@+id/txtCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkGray"
+        android:text="@string/guide"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/tilType"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/dimension20dp"
+        android:textSize="@dimen/dimension20dp"
+        android:layout_marginTop="@dimen/dimension10dp"
+        />
     <RelativeLayout
         android:id="@+id/rlPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilType"
+        android:layout_below="@+id/txtCard"
         android:layout_marginLeft="@dimen/dimension30dp"
         android:layout_marginRight="@dimen/dimension30dp"
         android:layout_marginTop="@dimen/dimension15dp"

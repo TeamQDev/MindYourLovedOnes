@@ -296,16 +296,16 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 txtHosp.setVisibility(View.GONE);
                 txtName.setVisibility(View.GONE);
                 tilName.setVisibility(View.GONE);
-                txtPName.setHint("Name of Person");
-                txtDate.setHint("Date Signed");
+               // txtPName.setHint("Name of Person");
+               // txtDate.setHint("Date Signed");
             } else if (From.equals("Other")) {
                 spinnerDoc.setVisibility(View.GONE);
                 tilDocType.setVisibility(View.VISIBLE);
                 txtHosp.setVisibility(View.GONE);
                 txtName.setVisibility(View.GONE);
                 tilName.setVisibility(View.GONE);
-                txtPName.setHint("Name of Person");
-                txtDate.setHint("Date Signed");
+             //   txtPName.setHint("Name of Person");
+              //  txtDate.setHint("Date Signed");
             } else if (From.equals("Record")) {
                 spinnerDoc.setVisibility(View.GONE);
                 spinnerType.setVisibility(View.GONE);
@@ -315,8 +315,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 txtHosp.setVisibility(View.VISIBLE);
                 txtName.setVisibility(View.GONE);
                 tilName.setVisibility(View.GONE);
-                txtPName.setHint("Name on Document");
-                txtDate.setHint("Date of Document");
+               // txtPName.setHint("Name on Document");
+              //  txtDate.setHint("Date of Document");
             }
             //  imgDot.setVisibility(View.VISIBLE);
             //imgDone.setVisibility(View.GONE);
@@ -343,13 +343,15 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
 
             } else {
                 txtDocTYpe.setText(document.getType());
-                int indexs = 0;
-                for (int j = 0; j < OtherList.length; j++) {
-                    if (document.getCategory().equals(OtherList[j])) {
-                        indexs = j;
+                if (!document.getCategory().equals("")) {
+                    int indexs = 0;
+                    for (int j = 0; j < OtherList.length; j++) {
+                        if (document.getCategory().equals(OtherList[j])) {
+                            indexs = j;
+                        }
                     }
+                    spinnerType.setSelection(indexs + 1);
                 }
-                spinnerType.setSelection(indexs + 1);
             }
 
             if (document.getFrom().equals("AD")) {
@@ -360,6 +362,7 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 spinnerDoc.setHint("Document Type");
                 for (int j = 0; j < ADList.length; j++) {
                     if (document.getType().equals(ADList[j])) {
+
                         indexs = j;
                         if (ADList[j].equals("Other")) {
                             tilOtherDocType.setVisibility(View.VISIBLE);
@@ -647,7 +650,8 @@ public class AddDocumentActivity extends AppCompatActivity implements View.OnCli
                 " shared this document with you. Please check the attachment. \n" +
                 "\n" +
                 "Thanks,\n" +
-                "Mind Your Loved Ones - Support";
+                name;
+               // "Mind Your Loved Ones - Support";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

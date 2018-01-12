@@ -5,6 +5,33 @@ package com.mindyourelders.MyHealthCareWishes.model;
  */
 
 public class Contact {
+    public String getHomePhone() {
+        return HomePhone;
+    }
+
+    public void setHomePhone(String homePhone) {
+        HomePhone = homePhone;
+    }
+
+    String HomePhone="";
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public void setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+    }
+
+    String address="";
+    String workPhone="";
     String name="";
 
     public String getId() {
@@ -17,11 +44,14 @@ public class Contact {
 
     String id="";
 
-    public Contact(String name, String email, String phone, byte[] image) {
+    public Contact(String name, String email, String phone, byte[] image, String address, String homePhone, String workPhone) {
        this.name=name;
         this.image=image;
         this.phone=phone;
         this.email=email;
+        this.address=address;
+        this.HomePhone=homePhone;
+        this.workPhone=workPhone;
     }
 
     public Contact() {

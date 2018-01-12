@@ -23,15 +23,11 @@
 
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_toRightOf="@+id/flProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimension60dp"
-            android:layout_marginTop="@dimen/dimension10dp"
-            android:paddingLeft="@dimen/dimension30dp"
-          android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="@dimen/dimension110dp"
+            android:layout_height="@dimen/dimension100dp"
+            android:layout_marginTop="@dimen/dimension30dp"
             android:src="@drawable/ic_launcher"
-            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             />
 
         <FrameLayout
@@ -39,7 +35,9 @@
             android:layout_width="@dimen/dimension110dp"
             android:layout_height="@dimen/dimension110dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dimension40dp">
+            android:layout_marginTop="@dimen/dimension40dp"
+            android:visibility="gone"
+            >
 
             <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
                 android:id="@+id/imgProfile"
@@ -65,14 +63,18 @@
             android:padding="@dimen/dimension10dp"
             android:text="Feeling Lazy? Sign up via"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension18dp" />
+            android:textSize="@dimen/dimension18dp"
+            android:visibility="gone"
+            />
 
         <LinearLayout
             android:id="@+id/llLoginVia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtLoginVia"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:id="@+id/imgFbSignup"
@@ -102,15 +104,16 @@
             android:id="@+id/tilName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/llLoginVia"
-            android:layout_marginTop="@dimen/dimension20dp"
+            android:layout_below="@+id/imgLogo"
+            android:layout_marginTop="@dimen/dimension40dp"
             app:hintEnabled="false"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/dimension8dp"
             android:paddingLeft="@dimen/dimension30dp"
             android:paddingRight="@dimen/dimension30dp"
-            android:paddingTop="@dimen/dimension8dp">
+            android:paddingTop="@dimen/dimension8dp"
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtName"
@@ -131,9 +134,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tilName"
-
             android:paddingLeft="@dimen/dimension30dp"
-            android:paddingRight="@dimen/dimension30dp">
+            android:paddingRight="@dimen/dimension30dp"
+
+            >
             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
             <AutoCompleteTextView
                 android:id="@+id/txtEmail"
@@ -369,24 +373,28 @@
             android:layout_below="@+id/tilPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimension30dp"
-            android:text="By creating an account, you agree to MYLO's "
+            android:gravity="center_horizontal"
+            android:text="By creating an account, you agree to Mind Your Loved Ones (“MYLO”) "
             android:textColor="@color/colorGrayPolicy"
-            android:textSize="@dimen/dimension16dp" />
+            android:textSize="@dimen/dimension16dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            />
 
         <RelativeLayout
             android:id="@+id/rlok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtPolicy1"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
             android:gravity="center_horizontal"
-
             >
 
             <TextView
                 android:id="@+id/txtPolicy2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Privacy Policy "
                 android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension16dp"
@@ -406,13 +414,11 @@
                 android:id="@+id/txtPolicy4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terms of Use"
+                android:text="End User License Agreement"
                 android:textColor="@color/colorBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:textStyle="bold"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/txtPolicy3"
-                android:layout_toEndOf="@+id/txtPolicy3" />
+                android:layout_toRightOf="@+id/txtPolicy3" />
 
 
         </RelativeLayout>
@@ -441,7 +447,7 @@
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
             android:layout_marginTop="@dimen/dimension15dp"
-            android:text="Mind Your Loved Ones(MYLO) only has access to your email address"
+            android:text="MYLO only has access to your name and email.  It does NOT have access or store any other information you input into this app."
             android:textColor="@color/colorGrayPolicy"
             android:textSize="@dimen/dimension16dp" />
         <TextView

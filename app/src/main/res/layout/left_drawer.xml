@@ -508,7 +508,7 @@
                 android:id="@+id/txtBank"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
-                android:text="Banking and other Financial Services"
+                android:text="Financial Services"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"

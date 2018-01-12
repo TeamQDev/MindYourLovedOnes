@@ -141,7 +141,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         txtPolicy2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CopyReadAssetss("mobile_app_privacy_policy.pdf");
+                CopyReadAssetss("privacy_policy.pdf");
+            }
+        });
+
+        txtPolicy4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CopyReadAssetss("eula_draft.pdf");
             }
         });
     }
@@ -231,7 +238,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         txtPolicy4.setClickable(true);
         txtPolicy4.setMovementMethod(LinkMovementMethod.getInstance());
-        String text1 = "<a> Terms of Use </a>";
+        String text1 = "<a> End User License Agreement </a>";
         txtPolicy4.setText(Html.fromHtml(text1));
 
         String texts = "<b> <font color='black'><a> All information </a> </b> </font> on this app resides on your smartphone or tablet.<b> HIPAA </b>federal privacy rules ";

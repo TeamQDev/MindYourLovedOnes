@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +49,7 @@ public class LivingActivity extends AppCompatActivity implements View.OnClickLis
     ToggleButton tbFinances, tbPreparing, tbShopping, tbUsing, tbBathing, tbContinence, tbDressing, tbfeed, tbToileting, tbTranfering, tbTransport, tbPets, tbDriving, tbKeeping, tbMedication;
     String finance = "No", prepare = "No", shop = "No", use = "No", bath = "No", continence = "No", dress = "No", feed = "No", toileting = "No", transfer = "No", transport = "No", pets = "No", drive = "No", keep = "No", medication = "No";
     String functionnote = "", fouctionOther = "", instaOther = "", instaNote = "";
-    final CharSequence[] dialog_items = {"View","Email","Fax"};
+    final CharSequence[] dialog_items = {"View","Email","Fax","First Time User Instructions"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,19 +88,21 @@ public class LivingActivity extends AppCompatActivity implements View.OnClickLis
         imgInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog customDialog;
+                Intent i=new Intent(LivingActivity.this,InstructionActivity.class);
+                i.putExtra("From","Living");
+                startActivity(i);
+               /* final Dialog customDialog;
                 customDialog = new Dialog(LivingActivity.this);
                 customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 customDialog.setContentView(R.layout.dialog_living);
                 customDialog.setCancelable(false);
                 TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
-                String msg="<b>First Time User:</b><br>" +
-                        "To save information click the check mark" +
-                        " on the upper right side of the screen." +
+                String msg="To save information click the check mark" +
+                        " on the top right side of the screen." +
                         "<br><br>" +
-                        "To edit information simply change the data and then save your edits by clicking on the check mark on the upper right side of the screen." +
+                        "To edit information simply change the data and then save your edits by clicking on the check mark on the top right side of the screen." +
                         "<br><br>" +
-                        "To view, email, or fax the data in each section click on the three dots on the upper right side of the screen.";
+                        "To view, email, or fax the data in each section click on the three dots on the top right side of the screen.";
 
                 txtNotes.setText(Html.fromHtml(msg));
                 TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
@@ -111,7 +114,7 @@ public class LivingActivity extends AppCompatActivity implements View.OnClickLis
                         customDialog.dismiss();
                     }
                 });
-                customDialog.show();
+                customDialog.show();*/
             }
         });
         rlLiving= (RelativeLayout) findViewById(R.id.rlLiving);
@@ -370,6 +373,11 @@ public class LivingActivity extends AppCompatActivity implements View.OnClickLis
                                 new FaxCustomDialog(context, path).show();
                                 break;
 
+                            case 3://fax
+                                Intent i=new Intent(context,InstructionActivity.class);
+                                i.putExtra("From","Living");
+                                startActivity(i);
+                                break;
                         }
                     }
 

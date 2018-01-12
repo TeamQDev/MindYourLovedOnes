@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +60,9 @@ public class CarePlanListActivity extends AppCompatActivity implements View.OnCl
     Preferences preferences;
     RelativeLayout rlGuide;
     ImageView imgPicture;
-    TextView txtHeader,txtMsg;
+    TextView txtHeader,txtMsg,txtFTU;
 DBHelper dbHelper;
+ScrollView scroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +90,11 @@ DBHelper dbHelper;
             lvDoc.setAdapter(documentAdapter);
             lvDoc.setVisibility(View.VISIBLE);
             rlGuide.setVisibility(View.GONE);
+            scroll.setVisibility(View.GONE);
         }else{
             lvDoc.setVisibility(View.GONE);
             rlGuide.setVisibility(View.VISIBLE);
+            scroll.setVisibility(View.VISIBLE);
         }
     }
 
@@ -109,6 +113,14 @@ DBHelper dbHelper;
         imgPicture=findViewById(R.id.imgPicture);
         txtHeader=findViewById(R.id.txtHeader);
         txtMsg=findViewById(R.id.txtMsg);
+        txtFTU=findViewById(R.id.txtFTU);
+        txtFTU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtMsg.setVisibility(View.VISIBLE);
+            }
+        });
+        scroll=findViewById(R.id.scroll);
         imgRight= (ImageView) findViewById(R.id.imgRight);
         lvDoc= (SwipeMenuListView) findViewById(R.id.lvDoc);
         rlGuide=findViewById(R.id.rlGuide);
@@ -142,18 +154,17 @@ DBHelper dbHelper;
                 txtAdd.setText("Add Advance Directives");
                 imgPicture.setImageResource(R.drawable.v_doc);
                 txtHeader.setText("Add Adv. Directive Docs");
-                String msg="<b>First Time User:</b><br>" +
-                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                String msg= "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
                         "<br><br>" +
                         "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
                         "<br><br>" +
-                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "To <b>save</b> information click the <b>check mark</b> on the top right side of the screen" +
                         "<br><br>" +
-                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "To <b>delete</b> the entry <b>swipe right to left </b> the arrow symbol on the right side of the screen." +
                         "<br><br>" +
-                        "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                        "To <b>edit</b> information click the picture of the <b>pencil</b>.To <b>save</b> your edits click the check mark again." +
                         "<br><br>" +
-                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
                 txtMsg.setText(Html.fromHtml(msg));  break;
             case "Record":
@@ -161,18 +172,17 @@ DBHelper dbHelper;
                 txtAdd.setText("Add Medical Records");
                 imgPicture.setImageResource(R.drawable.v_record);
                 txtHeader.setText("Add Medical Records");
-                String msgs="<b>First Time User:</b><br>" +
-                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                String msgs="To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
                         "<br><br>" +
                         "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
                         "<br><br>" +
-                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "To <b>save</b> information click the <b>check mark</b> on the top right side of the screen" +
                         "<br><br>" +
-                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "To <b>delete</b> delete the entry <b>swipe right to left</b> the arrow symbol on the right side of the screen." +
                         "<br><br>" +
                         "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
                         "<br><br>" +
-                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
                 txtMsg.setText(Html.fromHtml(msgs));  break;
             case "Other":
@@ -180,18 +190,17 @@ DBHelper dbHelper;
                 txtAdd.setText("Add Other Documents");
                 imgPicture.setImageResource(R.drawable.v_other);
                 txtHeader.setText("Add Other Documents");
-                String msgd="<b>First Time User:</b><br>" +
-                        "To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
+                String msgd="To <b>add</b> information click the green bar at the bottom of the screen. Click the plus sign to Select the File." +
                         "<br><br>" +
                         "The file is either sitting on your phone or in your Dropbox . Choose the location and click Add." +
                         "<br><br>" +
-                        "To <b>save</b> information click the <b>check mark</b> on the upper right side of the screen" +
+                        "To <b>save</b> information click the <b>check mark</b> on the top right side of the screen" +
                         "<br><br>" +
-                        "To <b>delete</b> delete the entry <b>right swipe</b> the arrow symbol on the right side of the screen." +
+                        "To <b>delete</b> delete the entry <b>swipe right to left</b> the arrow symbol on the right side of the screen." +
                         "<br><br>" +
                         "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
                         "<br><br>" +
-                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
                 txtMsg.setText(Html.fromHtml(msgd));  break;
             case "Legal":

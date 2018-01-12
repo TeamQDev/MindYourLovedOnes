@@ -19,6 +19,7 @@
     android:src="@drawable/info"
     android:layout_alignParentRight="true"
     android:layout_margin="@dimen/dimension5dp"
+    android:visibility="gone"
     />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -371,8 +372,66 @@
                 custom:ms_floatingLabelColor="@color/colorBlue"
 
                 custom:ms_hintColor="@color/colorDarkGray" />
-
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilOtherRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerRelation"
+                android:paddingBottom="@dimen/dimension8dp"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:paddingRight="@dimen/dimension30dp"
+                android:visibility="gone">
+
+                <AutoCompleteTextView
+                    android:id="@+id/txtOtherRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Other Relation"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/dimension15dp"
+                    android:paddingTop="@dimen/dimension2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    android:textSize="@dimen/dimension20dp" />
+
+                <requestFocus />
+
+            </android.support.design.widget.TextInputLayout>
+            <!--<android.support.design.widget.TextInputLayout
+                android:id="@+id/tilOtherRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerRelation"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:paddingBottom="@dimen/dimension8dp"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:paddingRight="@dimen/dimension30dp"
+                app:ms_floatingLabelText="Other Relation"
+                android:paddingTop="@dimen/dimension8dp"
+                android:visibility="gone"
+                app:hintEnabled="false">
+                &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
+                <AutoCompleteTextView
+                    android:id="@+id/txtOtherRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:hint="Other Relation"
+                    android:paddingLeft="@dimen/dimension15dp"
+                    android:paddingTop="@dimen/dimension2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimension20dp" />
+
+                <requestFocus />
+            </android.support.design.widget.TextInputLayout>-->
+           <!-- <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilOtherRelation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -385,13 +444,14 @@
                 android:paddingTop="@dimen/dimension8dp"
                 android:visibility="gone"
                 app:hintEnabled="false">
-                <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                &lt;!&ndash;app:hintTextAppearance="@style/CustomTextAppearance"&ndash;&gt;
                 <AutoCompleteTextView
                     android:id="@+id/txtOtherRelation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
                     android:maxLength="30"
+                    android:hint="Other Relation"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/dimension15dp"
                     android:paddingTop="@dimen/dimension2dp"
@@ -400,7 +460,7 @@
                     android:textSize="@dimen/dimension20dp" />
 
                 <requestFocus />
-            </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>-->
         </RelativeLayout>
 
         <com.mindyourelders.MyHealthCareWishes.customview.MySpinner

@@ -156,27 +156,32 @@ public class EmergencyAdapter extends BaseAdapter {
             holder.txtType.setVisibility(View.VISIBLE);
         }*/
         String[] priorityType = {"","", "",""};
-
-        if (emergencyList.get(position).getIsPrimary()==0)
-        {
-            holder.txtState.setText("Primary-Proxy Agent");
-        }else if (emergencyList.get(position).getIsPrimary()==1)
-        {
-            holder.txtState.setText("Primary-Emergency Contact");
-        }
-        else if (emergencyList.get(position).getIsPrimary()==2)
-        {
-            holder.txtState.setText("Secondary-Proxy Agent");
-        }
-        else if (emergencyList.get(position).getIsPrimary()==3)
-        {
-            holder.txtState.setText("Secondary-Emergency Contact");
-        }
-
+if (emergencyList.get(position).getIsPrimary()==4)
+{
+    holder.txtState.setVisibility(View.GONE);
+}else {
+    holder.txtState.setVisibility(View.VISIBLE);
+    if (emergencyList.get(position).getIsPrimary() == 0) {
+        holder.txtState.setText("Primary - Proxy Agent");
+    } else if (emergencyList.get(position).getIsPrimary() == 1) {
+        holder.txtState.setText("Primary - Emergency Contact");
+    } else if (emergencyList.get(position).getIsPrimary() == 2) {
+        holder.txtState.setText("Secondary - Proxy Agent");
+    } else if (emergencyList.get(position).getIsPrimary() == 3) {
+        holder.txtState.setText("Secondary - Emergency Contact");
+    } else if (emergencyList.get(position).getIsPrimary() == 0) {
+        holder.txtState.setText("");
+    }
+}
         holder.txtName.setText(emergencyList.get(position).getName());
         holder.txtOfficePhone.setText(emergencyList.get(position).getWorkPhone());
         holder.txtPhone.setText(emergencyList.get(position).getMobile());
-        holder.txtType.setText(emergencyList.get(position).getRelationType());
+        if (emergencyList.get(position).getRelationType().equals("")&&emergencyList.get(position).getIsPrimary()==4) {
+            holder.txtType.setVisibility(View.GONE);
+        }else{
+            holder.txtType.setVisibility(View.VISIBLE);
+            holder.txtType.setText(emergencyList.get(position).getRelationType());
+        }
         holder.txtTelePhone.setText(emergencyList.get(position).getPhone());
 
 

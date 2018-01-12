@@ -50,7 +50,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     ContentValues values;
     Uri imageUriFront,imageUriBack;
     Context context = this;
-    TextView txtName, txttype,txtTitle;
+    TextView txtName, txttype,txtTitle,txtCard;
     TextInputLayout tilTitle;
     Bitmap bitmap1,bitmap2;
     String imagePathFront="",imagePathBack="";
@@ -68,6 +68,7 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     DBHelper dbHelper;
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
+    boolean frontFlag,backFlag;
 
 
     @Override
@@ -115,6 +116,16 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initUI() {
+        txtCard=(TextView) findViewById(R.id.txtCard);
+
+        txtCard.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           Intent i = new Intent(AddCardActivity.this, InstructionActivity.class);
+                                           i.putExtra("From", "Card");
+                                           startActivity(i);
+                                       }
+                                   });
         txtTitle= (TextView) findViewById(R.id.txtTitle);
         imgDone = (ImageView) findViewById(R.id.imgDone);
         imgBack = (ImageView) findViewById(R.id.imgBack);
@@ -170,6 +181,10 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
                 imgfrontCard.setImageBitmap(rotatedBitmap);*/
                 //bitmap = Bitmap.createScaledBitmap(bitmap,bitmap.getWidth(),bitmap.getHeight(),true);
                imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile)), imgfrontCard, displayImageOptions);
+               frontFlag=true;
+            }
+            else{
+                frontFlag=false;
             }
             String photo1=card.getImgBack();
             imagePathBack=photo1;
@@ -189,6 +204,10 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
 //                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap , 0, 0, bitmap .getWidth(), bitmap .getHeight(), matrix, true);
 //                imgBackCard.setImageBitmap(rotatedBitmap);
                 imageLoader.displayImage(String.valueOf(Uri.fromFile(imgFile1)), imgBackCard, displayImageOptions);
+                backFlag=true;
+            }
+            else{
+                backFlag=false;
             }
            /* Bitmap bmp1 = BitmapFactory.decodeByteArray(photo1, 0, photo1.length);
             imgBackCard.setImageBitmap(bmp1);*/
@@ -201,15 +220,21 @@ public class AddCardActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.imgFrontCard:
-                Intent i=new Intent(context,AddFormActivity.class);
-                i.putExtra("Image",imagePathFront);
-                startActivityForResult(i,REQUEST_CARD);
+                if (frontFlag==true) {
+                    Intent i = new Intent(context, AddFormActivity.class);
+                    i.putExtra("Image", imagePathFront);
+                    i.putExtra("FROM","Insurance");
+                    startActivityForResult(i, REQUEST_CARD);
+                }
                 break;
 
             case R.id.imgBackCard:
-                Intent j=new Intent(context,AddFormActivity.class);
-                j.putExtra("Image",imagePathBack);
-                startActivityForResult(j,REQUEST_CARD);
+                if (backFlag==true) {
+                    Intent j = new Intent(context, AddFormActivity.class);
+                    j.putExtra("Image", imagePathBack);
+                    j.putExtra("FROM","Insurance");
+                    startActivityForResult(j, REQUEST_CARD);
+                }
                 break;
             case R.id.imgDone:
                 name = txtName.getText().toString();
@@ -351,10 +376,12 @@ if (isEdit==false) {
                 if (from.equals("Front")) {
                     imgfrontCard.setImageResource(R.drawable.ins_card);
                     imagePathFront="";
+                    frontFlag=false;
                 }else if (from.equals("Back"))
                 {
                     imagePathBack="";
                     imgBackCard.setImageResource(R.drawable.ins_card);
+                    backFlag=false;
                 }
                 dialog.dismiss();
             }
@@ -404,6 +431,7 @@ if (isEdit==false) {
         ImageView imgfrontCard = (ImageView) findViewById(R.id.imgFrontCard);
         ImageView imgBackCard = (ImageView) findViewById(R.id.imgBackCard);
         if (requestCode == RESULT_SELECT_PHOTO1 && null != data) {
+            frontFlag=true;
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream =getContentResolver().openInputStream(imageUri);
@@ -437,6 +465,7 @@ if (isEdit==false) {
             }*/
 
         } else if (requestCode == RESULT_CAMERA_IMAGE1) {
+            frontFlag=true;
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriFront);
                // String imageurl = getRealPathFromURI(imageUriFront);
@@ -502,6 +531,7 @@ if (isEdit==false) {
 */
 
         } else if (requestCode == RESULT_SELECT_PHOTO2 && null != data) {
+            backFlag=true;
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream =getContentResolver().openInputStream(imageUri);
@@ -524,6 +554,7 @@ if (isEdit==false) {
                 e.printStackTrace();
             }
         } else if (requestCode == RESULT_CAMERA_IMAGE2 ) {
+            backFlag=true;
             try {
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUriBack);
                // String imageurl = getRealPathFromURI(imageUriBack);

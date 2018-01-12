@@ -63,6 +63,10 @@ public class Specialty {
                 String speciality = "";
                 if (s.getType() != null) {
                     speciality = s.getType();
+                    if (speciality.equals("Other"))
+                    {
+                        speciality=speciality+" - "+s.getOtherType();
+                    }
                 }
                 cell = new PdfPCell(new Phrase("Speciality : " + speciality));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -73,7 +77,7 @@ public class Specialty {
                 messageDoctor.add("Speciality :");
                 messageDoctor.add(speciality);
 
-                String specialityOther = "";
+              /*  String specialityOther = "";
                 if (s.getOtherType() != null) {
                     specialityOther = s.getOtherType();
                 }
@@ -84,7 +88,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageDoctor.add("Speciality :");
-                messageDoctor.add(specialityOther);
+                messageDoctor.add(specialityOther);*/
 
                 String name = "";
                 if (s.getName() != null) {
@@ -304,6 +308,10 @@ public class Specialty {
                 String category = "";
                 if (h.getCategory() != null) {
                     category = h.getCategory();
+                    if (category.equals("Other"))
+                    {
+                        category=category+" - "+h.getOtherCategory();
+                    }
                 }
                 cell = new PdfPCell(new Phrase("Category : " + category));
                 cell.setBorder(Rectangle.BOTTOM);
@@ -314,7 +322,7 @@ public class Specialty {
                 messageHospital.add("Category :");
                 messageHospital.add(category);
 
-                String othercategory = "";
+                /*String othercategory = "";
                 if (h.getOtherCategory() != null) {
                     othercategory = h.getOtherCategory();
                 }
@@ -325,7 +333,7 @@ public class Specialty {
                 cell.setBorderColorBottom(BaseColor.WHITE);
                 table.addCell(cell);
                 messageHospital.add("Other Category :");
-                messageHospital.add(othercategory);
+                messageHospital.add(othercategory);*/
 
                 String name = "";
                 if (h.getName() != null) {

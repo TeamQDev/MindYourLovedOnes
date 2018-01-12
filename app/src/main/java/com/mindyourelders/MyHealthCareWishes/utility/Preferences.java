@@ -143,7 +143,8 @@ public class Preferences {
                 " shared this document with you. Please check the attachment. \n" +
                 "\n" +
                 "Thanks,\n" +
-                "Mind Your Loved Ones - Support";
+                name;
+                //"Mind Your Loved Ones - Support";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
 
         Uri uri=null;

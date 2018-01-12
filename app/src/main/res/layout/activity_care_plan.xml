@@ -91,10 +91,12 @@
         ></com.baoyz.swipemenulistview.SwipeMenuListView>
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llAddDoc"
-        android:layout_below="@+id/header"
+       android:layout_below="@+id/header"
+        android:layout_centerInParent="true"
         >
         <RelativeLayout
             android:id="@+id/rlGuide"
@@ -123,13 +125,26 @@
                 android:layout_marginTop="@dimen/dimension10dp"
                 android:textColor="@color/colorBlackDark"
                 />
-
+            <TextView
+                android:id="@+id/txtFTU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ftu"
+                android:layout_below="@+id/txtHeader"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/dimension18dp"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorBlue"
+                android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                />
             <TextView
                 android:id="@+id/txtMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Storing Advance Care Directives directly on your phone allows medical staff to quickly obtain access to the information."
-                android:layout_below="@+id/txtHeader"
+                android:layout_below="@+id/txtFTU"
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/dimension18dp"
                 android:layout_marginTop="@dimen/dimension10dp"
@@ -137,6 +152,7 @@
                 android:textColor="@color/colorGuide"
                 android:layout_marginLeft="@dimen/dimension10dp"
                 android:layout_marginRight="@dimen/dimension10dp"
+                android:visibility="gone"
                 />
         </RelativeLayout>
     </ScrollView>

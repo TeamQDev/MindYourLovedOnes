@@ -2,7 +2,6 @@ package com.mindyourelders.MyHealthCareWishes.DashBoard;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,11 +10,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -103,7 +100,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
 
     Preferences preferences;
     DBHelper dbHelper;
-    final CharSequence[] dialog_items = {"View","Email","Fax"};
+    final CharSequence[] dialog_items = {"View","Email","Fax","First Time User Instruction"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -171,24 +168,26 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
         imgInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog customDialog;
-                customDialog = new Dialog(getActivity());
+                Intent i=new Intent(getActivity(),InstructionActivity.class);
+                i.putExtra("From","Medical");
+                startActivity(i);
+               // final Dialog customDialog;
+               /* customDialog = new Dialog(getActivity());
                 customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 customDialog.setContentView(R.layout.dialog_living);
                 customDialog.setCancelable(false);
                 TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
-                String msg="<b>First Time User:</b><br>" +
-                        "To add information click the plus box for each section and" +
+                String msg="To <b>add</b> information click the <b>plus box</b> for each section " +
                         "and then click the green bar." +
                         "<br><br>" +
-                        "To save information click the check mark" +
-                        " on the upper right side of the screen." +
+                        "To <b>save</b> information click the <b>check mark</b>" +
+                        " on the top right side of the screen." +
                         "<br><br>" +
-                        "To edit information in a particular section click the picture of the pencil. To save your edits click the green bar at the lower half of the screen." +
+                        "To <b>edit</b> information in a particular section click the picture of the <b>pencil</b>. To save your edits click the green bar at the lower half of the screen." +
                         "<br><br>" +
-                        "To delete information in a particular section click the garbage can.  For certain sections you can simply delete the data." +
+                        "To <b>delete</b> information in a particular section click the <b>garbage can</b>. For sections without the garbage can, simply delete the data." +
                         "<br><br>" +
-                        "To view a report or to email or fax the data in each section click the three dots on the upper right side of the screen.";
+                        "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
                 txtNotes.setText(Html.fromHtml(msg));
                 TextView txtNoteHeader= (TextView) customDialog.findViewById(R.id.txtNoteHeader);
@@ -200,7 +199,7 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                         customDialog.dismiss();
                     }
                 });
-                customDialog.show();
+                customDialog.show();*/
             }
         });
         rlMedical= (RelativeLayout) rootview.findViewById(R.id.rlMedical);
@@ -634,9 +633,10 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                         });
                     }
                 });
-            } else {
-                ListHistory.setVisibility(View.GONE);
             }
+        }
+        else {
+            ListHistory.setVisibility(View.GONE);
         }
     }
 
@@ -917,6 +917,12 @@ public class FragmentMedicalInfo extends Fragment implements View.OnClickListene
                                 break;
                             case 2://fax
                                 new FaxCustomDialog(getActivity(), path).show();
+                                break;
+
+                            case 3://fax
+                                Intent i=new Intent(getActivity(),InstructionActivity.class);
+                                i.putExtra("From","Medical");
+                                startActivity(i);
                                 break;
 
                         }

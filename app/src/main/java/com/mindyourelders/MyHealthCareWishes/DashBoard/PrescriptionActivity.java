@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +59,8 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     Preferences preferences;
     DBHelper dbHelper;
     boolean isEdit;
-    TextView txtName,txtMsg;
+    TextView txtName,txtMsg,txtFTU;
+    ScrollView scroll;
 
     // final CharSequence[] dialog_items = {"Print", "Fax", "View" };
     final CharSequence[] dialog_items = {"View","Email","Fax" };
@@ -90,19 +92,26 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initUI() {
+        scroll=findViewById(R.id.scroll);
         txtMsg=findViewById(R.id.txtMsg);
-        String msg="<b>First Time User:</b><br>" +
-                "To <b>add</b> information click the green bar at the bottom of the screen Add Prescription." +
+        String msg="To <b>add</b> information click the green bar at the bottom of the screen Add Prescription." +
                 "<br><br>" +
-                "To <b>save</b> click the <b>check mark</b> on the upper right side of the screen" +
+                "To <b>save</b> information click the <b>check mark</b> on the top right side of the screen" +
                 "<br><br>" +
                 "To <b>edit</b> information click the arrow symbol on the right side of the screen and make changes. Save by clicking the <b>check mark</b> again." +
                 "<br><br>" +
                 "To <b>delete</b> left swipe and click the garbage can." +
                 "<br><br>" +
-                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
         txtMsg.setText(Html.fromHtml(msg));
+        txtFTU=findViewById(R.id.txtFTU);
+        txtFTU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtMsg.setVisibility(View.VISIBLE);
+            }
+        });
         txtName=(TextView) findViewById(R.id.txtName);
         txtName.setText(preferences.getString(PrefConstants.CONNECTED_NAME));
         PrescriptionList=new ArrayList<>();
@@ -308,9 +317,11 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
         {
             lvPrescription.setVisibility(View.VISIBLE);
             rlGuide.setVisibility(View.GONE);
+            scroll.setVisibility(View.GONE);
         }else{
             rlGuide.setVisibility(View.VISIBLE);
             lvPrescription.setVisibility(View.GONE);
+          scroll.setVisibility(View.VISIBLE);
         }
         PrescriptionAdapter adapter=new PrescriptionAdapter(context,PrescriptionList);
         lvPrescription.setAdapter(adapter);

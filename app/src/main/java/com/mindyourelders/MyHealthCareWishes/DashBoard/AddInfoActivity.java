@@ -70,10 +70,10 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
     MySpinner spinner,spinnerReaction;
     String reactions="";
     String[] vaccineList = {"Chickenpox (Varicella)", "Hepatitis A", "Hepatitis B", "Hib", "Human Papillomavirus (HPV)", "Influenza (Flu)", "Measles, Mumps, Rubella (MMR)", "Meningococcal", "Polio (IPV)", "Pneumococcal (PCV and PPSV)", "Shingles (Herpes Zoster)", "Tetanus, Diphtheria, Pertussis (Td, Tdap)", "Other"};
-    String[] implantList = {"Aneurysm Stent or Aneurysm Clip","Artifical Limbs","Artificial Heart Value","Body Art","Coronary Stents(Drug Coated/Bare Methal/Unknown)","Dental – metal crowns, filings, implants","Gastric Band","HBody Piercing","Implanted Cardio Defibrilator (ICD)","Implanted Devices/Pumps/Stimulator","Joint Replacements (specify)","Lens Implants","Metal Implants","Middle Ear Prosthesis","Pacemaker","Penile Implant","Pins/Rods/Screws","Prosthetic Eye","Renal or other Stents","Tracheotomy", "Other"};
+    String[] implantList = {"Aneurysm Stent or Aneurysm Clip","Artifical Limbs","Artificial Heart Value","Body Art","Coronary Stents(Drug Coated/Bare Methal/Unknown)","Dental – metal crowns, filings, implants","Gastric Band","HBody Piercing","Implanted Cardio Defibrilator (ICD)","Implanted Devices/Pumps/Stimulator","Joint Replacements (specify)","Lens Implants","Metal Implants","Middle Ear Prosthesis","None","Pacemaker","Penile Implant","Pins/Rods/Screws","Prosthetic Eye","Renal or other Stents","Tracheotomy", "Other"};
     String[] reactionList={"Anaphylaxis","Difficulty Breathing","Hives","Nausea","Rash","Vomiting","Other"};
     String[] surgeryList={"Appendix","Breast Biopsy/Mastectomy","Cataract","Colon","Gallbladder","Heart, Angio/Stent","Heart, Bypass","Heart, Valve","Hernia","Hip Replacement","Hysterectomy"
-            ,"Metal Implants","Middle Ear Prosthesis","Mohs – Basal Cell","Mohs – Squamous Cell","Knee Surgery/Replacement","Lasik Surgery","Spine Surgery","Thyroid Surgery","Tonsils","Vascular Surgery","Wisdom Teeth","Other"};
+            ,"Knee Surgery/Replacement","Lasik Surgery","Metal Implants","Middle Ear Prosthesis","Mohs – Basal Cell","Mohs – Squamous Cell","None","Spine Surgery","Thyroid Surgery","Tonsils","Vascular Surgery","Wisdom Teeth","Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -354,7 +354,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     txtInfo.setText(Html.fromHtml(msg));
                     break;
                 case "Condition":
-                    header = "See Medical History Template";
+                    header = "For Assistance See Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
                             "<a><font color='blue'><u>Resources/Forms and Templates/Medical History Template</u></font></a>" ;
@@ -370,7 +370,7 @@ public class AddInfoActivity extends AppCompatActivity  implements View.OnClickL
                     break;
 
                 case "ConditionUpdate":
-                    header = "See Medical History Template";
+                    header = "For Assistance See Medical History Template";
                     msg =   "<br>" +
                             "Click on<br>" +
                             "<a><font color='blue'><u>Resources/Forms and Templates/Medical History Template</u></font></a>" ;

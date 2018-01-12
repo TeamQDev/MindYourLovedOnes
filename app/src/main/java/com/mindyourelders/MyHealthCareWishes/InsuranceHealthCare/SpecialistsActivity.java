@@ -630,7 +630,8 @@ public class SpecialistsActivity extends AppCompatActivity {
                 " shared this document with you. Please check the attachment. \n" +
                 "\n" +
                 "Thanks,\n" +
-                "Mind Your Loved Ones - Support";
+                name;
+               // "Mind Your Loved Ones - Support";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body); // Body
         Uri uri=null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

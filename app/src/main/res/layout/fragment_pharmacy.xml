@@ -75,14 +75,27 @@
             android:layout_marginTop="@dimen/dimension10dp"
             android:textColor="@color/colorBlackDark"
             />
-
+        <TextView
+            android:id="@+id/txtFTU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ftu"
+            android:layout_below="@+id/txtHeader"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimension18dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlue"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            />
         <TextView
             android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="It’s helpful to have the name, number and address of your or your loved ones’ pharmacy.  You may need to pick something up or ask about a particular prescription.\n\n
 By the way you may need a completed HIPAA form before they will speak to you.  Call and find out before an emergency."
-            android:layout_below="@+id/txtHeader"
+            android:layout_below="@+id/txtFTU"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
@@ -90,6 +103,7 @@ By the way you may need a completed HIPAA form before they will speak to you.  C
             android:textColor="@color/colorGuide"
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
+            android:visibility="gone"
             />
     </RelativeLayout>
     </ScrollView>

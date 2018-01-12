@@ -53,7 +53,7 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
     Button btnLogin,btnAdd;
     Button btnFiles,btnBackup,btnRestore;
     TextView txtName,txtFile;
-    ImageView imgBack;
+    ImageView imgBack,imgDot;
     static boolean isLogin=false;
     Preferences preferences;
     String from="";
@@ -66,9 +66,15 @@ public class DropboxLoginActivity extends DropboxActivity implements ZipListner{
         preferences.putString(PrefConstants.RESULT,"");
         preferences.putString(URI,"");
         accessPermission();
-
-
-
+        imgDot=findViewById(R.id.imgDot);
+        imgDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,InstructionActivity.class);
+                i.putExtra("From","Dropbox");
+                startActivity(i);
+            }
+        });
         btnLogin= (Button) findViewById(R.id.btnLogin);
         btnAdd= (Button) findViewById(R.id.btnAdd);
         txtName= (TextView) findViewById(R.id.txtLogin);

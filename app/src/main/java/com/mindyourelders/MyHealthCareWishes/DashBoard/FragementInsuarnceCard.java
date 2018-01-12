@@ -57,7 +57,7 @@ public class FragementInsuarnceCard extends Fragment implements View.OnClickList
 ImageView imgRight;
     ArrayList<Card> CardList;
     RelativeLayout llAddCard;
-    TextView txtView,txtMsg;
+    TextView txtView,txtMsg,txtFTU;
     public static final int REQUEST_PRES = 100;
     DBHelper dbHelper;
     final String dialog_items[]={"View","Email","Fax"};
@@ -134,18 +134,28 @@ ImageView imgRight;
 
     private void initUI() {
         txtMsg=rootview.findViewById(R.id.txtMsg);
-        String msg="<b>First Time User:</b><br>" +
-                "To <b>add</b> information click the green bar at the bottom of the screen Add Insurance Card." +
+        String msg="To <b>get started</b> click the green bar at the bottom of the screen Add Insurance Card." +
                 "<br><br>" +
-                "Type the Provider name and the Type of Insurance and then take a picture of your card (front and back).Click the plus box." +
+                "To <b>add</b> information type  the Provider name and the Type of Insurance and click the check mark on the top right side of the screen." +
                 "<br><br>" +
-                "When completed click the <b>check mark</b> on the upper right side of the screen" +
+                "To <b>take a picture</b> of your insurance card (front and back). Click the <b>plus box</b>. It is recommended that you hold your phone horizontal when taking a picture of the card." +
                 "<br><br>" +
-                "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>green bar</b> at the bottom of the screen." +
+                "To <b>save</b> your information click the check mark on the top right side of the screen." +
                 "<br><br>" +
-                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the upper right side of the screen.";
+                "To <b>edit</b> information click the picture of the <b>pencil</b>. To <b>save</b> your edits click the <b>check mark</b> again." +
+                "<br><br>" +
+                "To <b>delete</b> the entry swipe right to left the arrow symbol on the right side." +
+                "<br><br>" +
+                "To <b>view a report</b> or to <b>email</b> or <b>fax</b> the data in each section click the three dots on the top right side of the screen.";
 
         txtMsg.setText(Html.fromHtml(msg));
+        txtFTU=rootview.findViewById(R.id.txtFTU);
+        txtFTU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtMsg.setVisibility(View.VISIBLE);
+            }
+        });
         llAddCard = (RelativeLayout) rootview.findViewById(R.id.llAddCard);
         rlGuide=rootview.findViewById(R.id.rlGuide);
         lvCard = (SwipeMenuListView) rootview.findViewById(R.id.lvCard);

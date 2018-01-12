@@ -111,7 +111,12 @@ public class ConnectionAdapter extends BaseSwipListAdapter {
         }
         if (position!=connectionList.size()) {
             holder.txtConName.setText(connectionList.get(position).getName());
-            holder.txtConRelation.setText(connectionList.get(position).getRelationType());
+            if (connectionList.get(position).getRelationType().equals("Other"))
+            {
+                holder.txtConRelation.setText(connectionList.get(position).getOtherRelation());
+            }else {
+                holder.txtConRelation.setText(connectionList.get(position).getRelationType());
+            }
 
             if (!connectionList.get(position).getPhoto().equals("")) {
                 File imgFile = new File(connectionList.get(position).getPhoto());

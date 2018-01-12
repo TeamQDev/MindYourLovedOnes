@@ -5,7 +5,11 @@
     <string name="msg">Mobile Tech for Seniors and their Families<html></html></string>
     <string name="msgstay">Stay Connected<html></html></string>
     <string name="LivingMsg">
+
+
 </string>
+    <string name="ftu"><u>First Time User Instructions</u></string>
+    <string name="guide"><u>Guideline for add Card</u></string>
 
     <!-- <string-array name="specialist_arrays">
         <item>Insurance</item>

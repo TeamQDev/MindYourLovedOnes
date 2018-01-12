@@ -79,7 +79,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     ToggleButton tbPre;
     TextInputLayout tilTitle;
     public static final int RESULT_PRES = 100;
-    TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre,txtMedicine,txtDose,txtFrequency;
+    TextView txtName, txtDate,txtPurpose,txtNote,txtRX,txtPre,txtMedicine,txtDose,txtFrequency,txtTitle;
     EditText etNote;
     MySpinner spinner;
     RadioGroup rgCounter;
@@ -159,6 +159,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
     }
 
     private void initUI() {
+        txtTitle= (TextView) findViewById(R.id.txtTitle);
         txtName = (TextView) findViewById(R.id.txtName);
         txtDate = (TextView) findViewById(R.id.txtDate);
         txtPurpose= (TextView) findViewById(R.id.txtPurpose);
@@ -227,6 +228,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
             Prescription p= (Prescription) i.getExtras().getSerializable("PrescriptionObject");
             isEdit=i.getExtras().getBoolean("IsEdit");
             if (isEdit==true) {
+                txtTitle.setText("Update Prescription");
                 id = p.getUnique();
                 userid=p.getUserid();
                 colid=p.getId();
@@ -250,6 +252,9 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 imageListOld=imageList;
                 setDosageData();
                 setImageListData();
+            }
+            else{
+                txtTitle.setText("Add Prescription");
             }
         }
 
@@ -328,24 +333,28 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                 String dose=txtDose.getText().toString().trim();
                 String frequency=txtFrequency.getText().toString().trim();
                 String medicine=txtMedicine.getText().toString().trim();
-                if (isEdit==false) {
-                Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique,pre,rx,dose,frequency,medicine);
-                if (flag == true) {
-                    Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
-                    closeKeyboard(AddPrescriptionActivity.this);
-                } else {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-                else{
-                    Boolean flag = PrescriptionQuery.updatePrescriptionData(colid,id, doctor, purpose, note, date, dosageList, imageList,preferences.getInt(PrefConstants.CONNECTED_USERID),pre,rx,dose,frequency,medicine,imageListOld);
-                    if (flag == true) {
-                        Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
-                        closeKeyboard(AddPrescriptionActivity.this);
+                if (medicine.equals(""))
+                {
+                    Toast.makeText(context,"Please Enter Medicine",Toast.LENGTH_SHORT).show();
+                    txtMedicine.setError("Please Enter Medicine");
+                }else {
+                    if (isEdit == false) {
+                        Boolean flag = PrescriptionQuery.insertPrescriptionData(preferences.getInt(PrefConstants.CONNECTED_USERID), doctor, purpose, note, date, dosageList, imageList, unique, pre, rx, dose, frequency, medicine);
+                        if (flag == true) {
+                            Toast.makeText(context, "Prescription Added Succesfully", Toast.LENGTH_SHORT).show();
+                            closeKeyboard(AddPrescriptionActivity.this);
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        Boolean flag = PrescriptionQuery.updatePrescriptionData(colid, id, doctor, purpose, note, date, dosageList, imageList, preferences.getInt(PrefConstants.CONNECTED_USERID), pre, rx, dose, frequency, medicine, imageListOld);
+                        if (flag == true) {
+                            Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
+                            closeKeyboard(AddPrescriptionActivity.this);
+                        } else {
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
                 Intent i=new Intent();
                /* i.putExtra("Name",txtName.getText().toString().trim());
@@ -362,6 +371,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
 */
                 setResult(RESULT_PRES,i);
                 finish();
+                }
                 break;
             case R.id.imgAddDosage:
                 showInputDialog(context, null,false);

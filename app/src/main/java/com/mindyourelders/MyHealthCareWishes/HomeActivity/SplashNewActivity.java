@@ -42,7 +42,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_splashes_);
        // hashKey();
-        accessPermission();
+      //  accessPermission();
         variableInitialization();
         initUI();
         initListener();

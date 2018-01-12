@@ -127,7 +127,22 @@ public class InsuranceAdapter extends BaseAdapter {
             holder= (ViewHolder) convertView.getTag();
         }
 
-        holder.txtName.setText(insuranceList.get(position).getName()+" - "+insuranceList.get(position).getType());
+        String name=insuranceList.get(position).getName();
+        String type=insuranceList.get(position).getType();
+        if (!type.equals(""))
+        {
+            if (type.equals("Other"))
+            {
+                holder.txtName.setText(name + " - " + insuranceList.get(position).getOtherInsurance());
+            }
+            else {
+                holder.txtName.setText(name + " - " + type);
+            }
+        }
+        else{
+            holder.txtName.setText(name);
+        }
+
         if(insuranceList.get(position).getPhone().equals(""))
         {
             holder.txtPhone.setVisibility(View.GONE);

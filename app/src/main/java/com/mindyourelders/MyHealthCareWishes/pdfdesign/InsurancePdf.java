@@ -71,6 +71,10 @@ public class InsurancePdf {
                 String type = "";
                 if (s.getType() != null) {
                     type = s.getType();
+                    if (type.equals("Other"))
+                    {
+                        type=type+" - "+s.getOtherInsurance();
+                    }
                 }
                 cell = new PdfPCell(new Phrase("Type of Insurance : " +type));
                 cell.setBorder(Rectangle.BOTTOM);

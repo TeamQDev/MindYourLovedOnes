@@ -225,6 +225,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
             String name =connection.getName();
             String address=connection.getAddress();
             String relation=connection.getRelationType();
+            String otherrelation=connection.getOtherRelation();
             /*int index = 0;
             for (int i = 0; i < Relationship.length; i++) {
                 if (connection.getRelationType().equalsIgnoreCase(Relationship[i])) {
@@ -243,8 +244,15 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
                 imgProfile.setImageResource(R.drawable.ic_profile_defaults);
             }
             // byte[] array = Base64.decode(image, Base64.DEFAULT);
-            txtName.setText(name+" - "+relation);
-            txtRelation.setText(relation);
+
+            if (relation.equals("Other"))
+            {
+                txtName.setText(name+" - "+otherrelation);
+                txtRelation.setText(otherrelation);
+            }else {
+                txtName.setText(name+" - "+relation);
+                txtRelation.setText(relation);
+            }
             txtAddress.setText(address);
 //            Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
 //            imgProfile.setImageBitmap(bmp);
@@ -485,4 +493,6 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         preferences.putString(PrefConstants.USER_NAME,personalInfo.getName());
         preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());
     }
+
+
 }

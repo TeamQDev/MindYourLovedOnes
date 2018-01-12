@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     >
-    <GridView
+    <com.mindyourelders.MyHealthCareWishes.customview.NonScrollGridView
         android:id="@+id/lvConnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,10 +23,9 @@
         android:id="@+id/rlGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lvConnection"
+      android:layout_below="@+id/lvConnection"
         android:layout_marginTop="@dimen/dimension20dp"
         android:padding="@dimen/dimension20dp"
-        android:visibility="gone"
         >
         <ImageView
             android:id="@+id/imgPicture"
@@ -48,13 +47,26 @@
             android:layout_marginTop="@dimen/dimension10dp"
             android:textColor="@color/colorBlackDark"
             />
-
+        <TextView
+            android:id="@+id/txtFTU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ftu"
+            android:layout_below="@+id/txtHeader"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimension18dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlue"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
+            />
         <TextView
             android:id="@+id/txtMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_below="@+id/txtHeader"
+            android:text="First Time User Instructions"
+            android:layout_below="@+id/txtFTU"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/dimension18dp"
             android:layout_marginTop="@dimen/dimension10dp"
@@ -62,8 +74,11 @@
             android:textColor="@color/colorGuide"
             android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
+            android:visibility="gone"
             />
-        <!--   android:text="Create profiles for members of your family or friends.  Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue at hand."-->
+<!--   android:text="Create profiles for members of your family or friends.  Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue at hand."
+           -->
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>
+

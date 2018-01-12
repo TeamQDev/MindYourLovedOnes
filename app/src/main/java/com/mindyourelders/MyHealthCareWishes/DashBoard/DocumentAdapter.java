@@ -59,6 +59,7 @@ public class DocumentAdapter extends BaseAdapter {
             holder.imgDocType= (ImageView) convertView.findViewById(R.id.imgDocType);
             holder.imgForword= (ImageView) convertView.findViewById(R.id.imgNext);
             holder.imgEdit= (ImageView) convertView.findViewById(R.id.imgEdit);
+            holder.txtDocDate.setVisibility(View.VISIBLE);
 
             convertView.setTag(holder);
         }
@@ -72,8 +73,20 @@ public class DocumentAdapter extends BaseAdapter {
         }else{
             holder.txtDocHeader.setText(documentList.get(position).getType());
         }
-        holder.txtDocTime.setText(documentList.get(position).getPerson());
-        holder.txtDocDate.setText(documentList.get(position).getDate());
+        if (documentList.get(position).getPerson().equals("")) {
+            holder.txtDocTime.setVisibility(View.GONE);
+        }
+        else{
+            holder.txtDocTime.setVisibility(View.VISIBLE);
+            holder.txtDocTime.setText(documentList.get(position).getPerson());
+        }
+        if (documentList.get(position).getDate().equals("")) {
+            holder.txtDocDate.setVisibility(View.GONE);
+        }
+        else{
+            holder.txtDocDate.setVisibility(View.VISIBLE);
+            holder.txtDocDate.setText(documentList.get(position).getDate());
+        }
         holder.imgDocType.setImageResource(documentList.get(position).getImage());
         holder.imgForword.setOnClickListener(new View.OnClickListener() {
             @Override

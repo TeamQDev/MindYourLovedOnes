@@ -101,8 +101,7 @@ public class FragmentLiving extends Fragment implements View.OnClickListener, Co
                 customDialog.setContentView(R.layout.dialog_living);
                 customDialog.setCancelable(false);
                 TextView txtNotes= (TextView) customDialog.findViewById(R.id.txtNotes);
-                String msg="<b>First Time User:</b><br>" +
-                        "To save information click the check mark" +
+                String msg="To save information click the check mark" +
                         " on the upper right side of the screen." +
                         "<br><br>" +
                         "To edit information simply change the data and then save your edits by clicking on the check mark on the upper right side of the screen." +

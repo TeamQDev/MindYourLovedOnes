@@ -45,7 +45,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     View rootview;
     GridView lvConnection;
     ArrayList<RelativeConnection> connectionList;
-    TextView txtAdd,txtMsg;
+    TextView txtAdd,txtMsg,txtFTU;
     //RelativeLayout llAddConn;
     TextView txtTitle, txtName,txtDrawerName;
     ImageView imgNoti, imgProfile, imgLogo, imgPdf,imgDrawerProfile;
@@ -119,14 +119,20 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
 
     private void initUI() {
         txtMsg=rootview.findViewById(R.id.txtMsg);
-        String msg="<b>First Time User:</b><br>" +
-                "To add a Profile click the <b>plus</b> box." +
+        String msg="To <b>add</b> a Profile click the <b>plus</b> box." +
                 "You will be brought to the Personal Information Screen.<br>" +
-                "If the person is in your <b>Contacts</b> click the grayed out bar on the upper right side of your screen to load information.<br><br>" +
+                "If the person is in your <b>Contacts</b> click the gray bar on the top right side of your screen to load information.<br><br>" +
                 "Add as much or as little information as you want. The goal is to create less stress and allow you to focus on the issue(s) at hand.<br><br>" +
                 "When completed click on the green bar at the bottom of the screen that says <b>Add Profile</b>.<br><br>" +
                 "To <b>delete</b> a Profile <b>long press</b> on profile box.";
         txtMsg.setText(Html.fromHtml(msg));
+        txtFTU=rootview.findViewById(R.id.txtFTU);
+        txtFTU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtMsg.setVisibility(View.VISIBLE);
+            }
+        });
         txtTitle = (TextView) getActivity().findViewById(R.id.txtTitle);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("PROFILES");
