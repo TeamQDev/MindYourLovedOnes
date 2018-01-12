@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         initListener();
         fragmentData();
         if (fragmentManager.findFragmentByTag("CONNECTION") == null) {
-            callFragment("CONNECTION", fragmentConnection);
+            callFirstFragment("CONNECTION", fragmentConnection);
         }
     }
 
@@ -196,7 +196,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         if (fragName.equals("DASHBOARD")||fragName.equals("ADVANCE"))
             fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName).addToBackStack("CONNECTION");
         else
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
+       fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragName);
         fragmentTransaction.commit();
     }
 
@@ -226,7 +226,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                     drawerLayout.closeDrawer(leftDrawer);
                     return;
                 }else {
-                    callFragment("CONNECTION", fragmentConnection);
+                   // callFragment("CONNECTION", fragmentConnection);
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer, fragmentConnection, "CONNECTION").addToBackStack("CONNECTION");
+                    fragmentTransaction.commit();
                 }
              //  }
                 drawerLayout.closeDrawer(leftDrawer);
@@ -517,8 +520,14 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         if (count == 0) {
             super.onBackPressed();
             //additional code
+
         } else {
-            getFragmentManager().popBackStack();
+            if (getFragmentManager().findFragmentByTag("CONNECTION").isResumed()) {
+                finish();
+            }
+            else{
+                getFragmentManager().popBackStack();
+            }
         }
 
     }
