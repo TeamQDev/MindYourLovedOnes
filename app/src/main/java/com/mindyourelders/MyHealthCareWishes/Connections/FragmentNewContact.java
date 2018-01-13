@@ -534,7 +534,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
                 }
                 break;
@@ -833,7 +833,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
 
                 }
@@ -1049,7 +1049,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
 
                 }
@@ -1116,7 +1116,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
 
                 }
@@ -1256,7 +1256,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
                 }
                 break;
@@ -1371,7 +1371,7 @@ public class FragmentNewContact extends Fragment implements View.OnClickListener
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
                 }
 
@@ -1519,7 +1519,7 @@ imagepath=specialist.getPhoto();
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
                 }
                 break;
@@ -1657,7 +1657,7 @@ imagepath=specialist.getPhoto();
                     } else {
                         imgCard.setVisibility(View.GONE);
                         rlCard.setVisibility(View.GONE);
-                        txtCard.setVisibility(View.VISIBLE);
+                        txtCard.setVisibility(View.GONE);
                     }
                 }
                 break;
@@ -1681,6 +1681,9 @@ imagepath=specialist.getPhoto();
         spinnerHospital.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+
     }
 
     private void visiHospital() {
@@ -1782,8 +1785,11 @@ imagepath=specialist.getPhoto();
         txtPharmacyFax.setEnabled(false);
         txtPharmacyPhone.setEnabled(false);
         txtPharmacyNote.setEnabled(false);
+
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
         llAddConn.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
     }
 
     private void disableProxy() {
@@ -1797,6 +1803,8 @@ imagepath=specialist.getPhoto();
         spinnerRelation.setClickable(false);
 
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
         llAddConn.setVisibility(View.GONE);
     }
 
@@ -1813,6 +1821,8 @@ imagepath=specialist.getPhoto();
         spinnerRelation.setFocusable(false);
         spinnerPriority.setFocusable(false);
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
         llAddConn.setVisibility(View.GONE);
     }
 
@@ -1909,6 +1919,8 @@ imagepath=specialist.getPhoto();
         spinnerFinance.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
 
     }
 
@@ -1925,6 +1937,8 @@ imagepath=specialist.getPhoto();
         txtAideNote.setEnabled(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
 
     }
 
@@ -1942,6 +1956,8 @@ imagepath=specialist.getPhoto();
         spinnerInsuarance.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
 
     }
 
@@ -1962,6 +1978,8 @@ imagepath=specialist.getPhoto();
         spinner.setClickable(false);
         llAddConn.setVisibility(View.GONE);
         imgEdit.setVisibility(View.GONE);
+        txtCard.setVisibility(View.GONE);
+        imgEditCard.setVisibility(View.GONE);
 
     }
 
