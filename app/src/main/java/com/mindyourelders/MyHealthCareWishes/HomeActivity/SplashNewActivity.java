@@ -44,6 +44,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
        // hashKey();
       //  accessPermission();
         variableInitialization();
+
         initUI();
         initListener();
         init();
@@ -52,6 +53,7 @@ public class SplashNewActivity extends AppCompatActivity implements View.OnClick
                 .debuggable(true)           // Enables Crashlytics debugger
                 .build();
         Fabric.with(fabric);
+
 
     }
 
