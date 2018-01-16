@@ -52,7 +52,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     DBHelper dbHelper;
     ConnectionAdapter connectionAdapter;
     Preferences preferences;
-    PersonalInfo personalInfo;
+   // PersonalInfo personalInfo;
     RelativeLayout leftDrawer;
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
@@ -94,7 +94,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     private void initComponent() {
         preferences = new Preferences(getActivity());
         dbHelper = new DBHelper(getActivity());
-        PersonalInfoQuery p = new PersonalInfoQuery(getActivity(), dbHelper);
+       // PersonalInfoQuery p = new PersonalInfoQuery(getActivity(), dbHelper);
         MyConnectionsQuery m = new MyConnectionsQuery(getActivity(), dbHelper);
     }
 
@@ -252,10 +252,10 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
 
     private void getProfile() {
       //  personalInfo = PersonalInfoQuery.fetchProfile(preferences.getString(PrefConstants.USER_EMAIL));
-        personalInfo = PersonalInfoQuery.fetchProfiles();
+       /* personalInfo = PersonalInfoQuery.fetchProfiles();
         preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
         preferences.putString(PrefConstants.USER_NAME,personalInfo.getName());
-        preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());
+        preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());*/
     }
 
     /* private void deleteConnection(RelativeConnection item) {
@@ -334,7 +334,7 @@ public class FragmentConnectionNew extends Fragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        getProfile();
+       // getProfile();
         getData();
         setListData();
         String image=preferences.getString(PrefConstants.USER_PROFILEIMAGE);

@@ -1,5 +1,6 @@
 package com.mindyourelders.MyHealthCareWishes.HomeActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -95,6 +96,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     Preferences preferences;
     DBHelper dbHelper;
 
+    int userid=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void initComponent() {
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
-        PersonalInfoQuery s=new PersonalInfoQuery(context,dbHelper);
+       // PersonalInfoQuery s=new PersonalInfoQuery(context,dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
     }
 
@@ -322,14 +325,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.txtSignUp:
                 if (validate()) {
-                    Boolean flags = PersonalInfoQuery.searchEmailAvailability(email);
+                    //CallWebservice get user profile
+
+                    //After Success
+                    Boolean flag= MyConnectionsQuery.insertMyConnectionsData(userid,name,email,address,mobile,"","","Self",imagepath,"",1,2, "", "");
+                    if (flag==true)
+                    {
+                        Toast.makeText(context,"You have added connection Successfully",Toast.LENGTH_SHORT).show();
+                        preferences.putInt(PrefConstants.USER_ID,userid);
+                        Intent signupIntent = new Intent(context, BaseActivity.class);
+                        preferences.putString(PrefConstants.USER_EMAIL, email);
+                        preferences.putString(PrefConstants.USER_NAME, name);
+                        preferences.setREGISTERED(true);
+                        preferences.setLogin(true);
+                        startActivity(signupIntent);
+                        finish();
+                        
+                    }
+                    else{
+                        Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
+                    }
+                    /*Boolean flags = PersonalInfoQuery.searchEmailAvailability(email);
                     if (flags == true) {
                         Toast.makeText(context, "This email is already registered", Toast.LENGTH_SHORT).show();
                     } else {
-                      /*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+                      *//*  Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                        byte[] photo = baos.toByteArray();*/
+                        byte[] photo = baos.toByteArray();*//*
                       Log.v("Path",imagepath);
                         Boolean flag = PersonalInfoQuery.insertPersonalInfoData(name, email, address, country, mobile, bdate, password, imagepath,"","","");
                         if (flag == true) {
@@ -352,9 +375,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             finish();
                         } else {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                   /*  */
-                    }
+                  //  }
                 }
                 break;
 

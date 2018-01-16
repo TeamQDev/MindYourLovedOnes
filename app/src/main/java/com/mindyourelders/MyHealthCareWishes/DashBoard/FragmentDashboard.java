@@ -57,7 +57,7 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     TextView txtTitle;
     Preferences preferences;
     DBHelper dbHelper;
-    PersonalInfo personalInfo;
+    //PersonalInfo personalInfo;
     RelativeLayout leftDrawer;
     RelativeConnection connection;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -189,21 +189,23 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
     }
     private void initComponent() {
         dbHelper=new DBHelper(getActivity());
-        PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
+      //  PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
         MedInfoQuery mq=new MedInfoQuery(getActivity(),dbHelper);
+
+
         if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
         {
-            personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-            preferences.putString(PrefConstants.USER_PROFILEIMAGE, personalInfo.getPhoto());
-            preferences.putString(PrefConstants.CONNECTED_NAME, personalInfo.getName());
-            String name =personalInfo.getName();
-            String address=personalInfo.getAddress();
+            connection=MyConnectionsQuery.fetchOneRecord("Self");
+            preferences.putString(PrefConstants.USER_PROFILEIMAGE, connection.getPhoto());
+            preferences.putString(PrefConstants.CONNECTED_NAME, connection.getName());
+            String name =connection.getName();
+            String address=connection.getAddress();
             String relation = "Self";
             //byte[]array =personalInfo.getPhoto();
-            if (!personalInfo.getPhoto().equals(""))
+            if (!connection.getPhoto().equals(""))
             {
-            File imgFile = new File(personalInfo.getPhoto());
+            File imgFile = new File(connection.getPhoto());
             if (imgFile.exists()) {
                /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imgProfile.setImageBitmap(myBitmap);*/
@@ -488,10 +490,10 @@ public class FragmentDashboard extends Fragment implements View.OnClickListener,
         }
     }
     private void getProfile() {
-        personalInfo = PersonalInfoQuery.fetchProfiles();
-        preferences.putInt(PrefConstants.USER_ID, personalInfo.getId());
-        preferences.putString(PrefConstants.USER_NAME,personalInfo.getName());
-        preferences.putString(PrefConstants.USER_PROFILEIMAGE,personalInfo.getPhoto());
+        connection = MyConnectionsQuery.fetchOneRecord("Self");
+        preferences.putInt(PrefConstants.USER_ID, connection.getId());
+        preferences.putString(PrefConstants.USER_NAME,connection.getName());
+        preferences.putString(PrefConstants.USER_PROFILEIMAGE,connection.getPhoto());
     }
 
 

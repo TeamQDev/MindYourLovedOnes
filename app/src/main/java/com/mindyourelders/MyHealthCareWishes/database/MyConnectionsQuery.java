@@ -60,6 +60,8 @@ public class MyConnectionsQuery {
     public static final String COL_OTHER= "other";
     public static final String COL_LIVE= "Living";
     public static final String COL_OTHER_LANG= "other_language";
+    public static final String COL_GENDER= "Gender";
+    public static final String COL_DOB= "DOB";
 
     public MyConnectionsQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -68,7 +70,7 @@ public class MyConnectionsQuery {
 
     public static String createMyConnectionsTable() {
         String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_USER_ID+" INTEGER, "+COL_NAME+" VARCHAR(50),"+COL_EMAIL+" VARCHAR(50),"+COL_HOME_PHONE+" VARCHAR(20),"+
-                COL_WORK_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_MOBILE+" VARCHAR(20),"+COL_RELATION+" VARCHAR(50),"+COL_OTHER_RELATION+" VARCHAR(50),"+COL_NOTE+" VARCHAR(100),"+
+                COL_GENDER+" VARCHAR(20),"+COL_DOB+" VARCHAR(20),"+COL_WORK_PHONE+" VARCHAR(20),"+COL_ADDRESS+" VARCHAR(100),"+COL_MOBILE+" VARCHAR(20),"+COL_RELATION+" VARCHAR(50),"+COL_OTHER_RELATION+" VARCHAR(50),"+COL_NOTE+" VARCHAR(100),"+
                 COL_FLAG+" INTEGER,"+COL_ISPRIMARY+" INTEGER,"+
                 COL_HEIGHT+" VARCHAR(10),"+COL_WEIGHT+" VARCHAR(10),"+COL_PROFESSION+" VARCHAR(10),"+COL_EMPLOYED+" VARCHAR(10),"+COL_RELIGION+" VARCHAR(10),"+
                 COL_EYES+" VARCHAR(10),"+COL_LANG+" VARCHAR(10),"+COL_MARITAL+" VARCHAR(10),"+COL_VETERAN+" VARCHAR(10),"+COL_PET+" VARCHAR(10),"+
@@ -139,6 +141,9 @@ public class MyConnectionsQuery {
                     connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
                     connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+
+                    connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
+                    connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
 
                     connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
                     connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
@@ -215,6 +220,10 @@ public class MyConnectionsQuery {
                 connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
                 connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
 
+                connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
+                connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
+
+
                 connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
                 connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
                 connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
@@ -257,7 +266,7 @@ public class MyConnectionsQuery {
         return flag;
     }
 
-    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, String photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live, String otherLang) {
+    public static Boolean updateMyConnectionsData(int id, String name, String email, String address, String mobile, String homephone, String wotrkPhone, String relation, String photo, String note, int connectionflag, int isPrimary, String otherRelation, String height, String weight, String eyes, String profession, String employed, String language, String marital_status, String religion, String veteran, String idnumber, String pet, String manager_phone, String photoCard, String english, String child, String friend, String grandParent, String parent, String spouse, String other, String liveOther, String live, String otherLang, String bdate, String gender) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -300,6 +309,8 @@ public class MyConnectionsQuery {
         cv.put(COL_OTHER,liveOther);
         cv.put(COL_LIVE,live);
         cv.put(COL_OTHER_LANG,otherLang);
+        cv.put(COL_DOB,bdate);
+        cv.put(COL_GENDER,gender);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 
@@ -470,5 +481,62 @@ public class MyConnectionsQuery {
         }
 
         return flag;
+    }
+
+    public static RelativeConnection fetchOneRecord(String self) {
+        RelativeConnection connection=new RelativeConnection();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_RELATION + "='" + self + "';", null);
+
+        if (c.moveToFirst()) {
+            do {
+                connection.setName(c.getString(c.getColumnIndex(COL_NAME)));
+                connection.setId(c.getInt(c.getColumnIndex(COL_ID)));
+                connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
+                connection.setEmail(c.getString(c.getColumnIndex(COL_EMAIL)));
+                connection.setMobile(c.getString(c.getColumnIndex(COL_MOBILE)));
+                connection.setPhone(c.getString(c.getColumnIndex(COL_HOME_PHONE)));
+                connection.setWorkPhone(c.getString(c.getColumnIndex(COL_WORK_PHONE)));
+                connection.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
+                connection.setConnectionFlag(c.getInt(c.getColumnIndex(COL_FLAG)));
+                connection.setIsPrimary(c.getInt(c.getColumnIndex(COL_ISPRIMARY)));
+                connection.setRelationType(c.getString(c.getColumnIndex(COL_RELATION)));
+                connection.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
+                connection.setOtherRelation(c.getString(c.getColumnIndex(COL_OTHER_RELATION)));
+
+                connection.setHeight(c.getString(c.getColumnIndex(COL_HEIGHT)));
+                connection.setWeight(c.getString(c.getColumnIndex(COL_WEIGHT)));
+                connection.setProfession(c.getString(c.getColumnIndex(COL_PROFESSION)));
+                connection.setEmployed(c.getString(c.getColumnIndex(COL_EMPLOYED)));
+                connection.setReligion(c.getString(c.getColumnIndex(COL_RELIGION)));
+
+                connection.setDob(c.getString(c.getColumnIndex(COL_DOB)));
+                connection.setGender(c.getString(c.getColumnIndex(COL_GENDER)));
+
+
+                connection.setEyes(c.getString(c.getColumnIndex(COL_EYES)));
+                connection.setLanguage(c.getString(c.getColumnIndex(COL_LANG)));
+                connection.setMarital_status(c.getString(c.getColumnIndex(COL_MARITAL)));
+                connection.setVeteran(c.getString(c.getColumnIndex(COL_VETERAN)));
+                connection.setPet(c.getString(c.getColumnIndex(COL_PET)));
+                connection.setIdnumber(c.getString(c.getColumnIndex(COL_IDNUMBER)));
+                connection.setManager_phone(c.getString(c.getColumnIndex(COL_MANGER_PHONE)));
+                connection.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
+                connection.setEnglish(c.getString(c.getColumnIndex(COL_ENGLISH)));
+
+                connection.setChildren(c.getString(c.getColumnIndex(COL_CHILD)));
+                connection.setFriend(c.getString(c.getColumnIndex(COL_FRIEND)));
+
+                connection.setGrand(c.getString(c.getColumnIndex(COL_GRAND)));
+                connection.setParents(c.getString(c.getColumnIndex(COL_PARENT)));
+                connection.setSpouse(c.getString(c.getColumnIndex(COL_SPOUSE)));
+                connection.setSign_other(c.getString(c.getColumnIndex(COL_OTHER_SIGN)));
+                connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
+                connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
+                connection.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
+            } while (c.moveToNext());
+        }
+
+        return connection;
     }
 }

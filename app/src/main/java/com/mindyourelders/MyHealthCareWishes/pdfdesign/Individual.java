@@ -178,6 +178,31 @@ public class Individual {
             messageInfo2.add("Address :");
             messageInfo2.add(address);
 
+            String bdates = "";
+            if (connection.getDob() != null) {
+                bdates = connection.getDob();
+            }
+            cell1 = new PdfPCell(new Phrase("Birth Date : " + bdates));
+            cell1.setBorder(Rectangle.BOTTOM);
+            cell1.setUseBorderPadding(true);
+            cell1.setBorderWidthBottom(5);
+            cell1.setBorderColorBottom(BaseColor.WHITE);
+            table1.addCell(cell1);
+            messageInfo2.add("Birth Date :");
+            messageInfo2.add(bdate);
+
+            if (connection.getGender() != null) {
+                gender = connection.getGender();
+            }
+            cell1 = new PdfPCell(new Phrase("Gender : " + gender));
+            cell1.setBorder(Rectangle.BOTTOM);
+            cell1.setUseBorderPadding(true);
+            cell1.setBorderWidthBottom(5);
+            cell1.setBorderColorBottom(BaseColor.WHITE);
+            table1.addCell(cell1);
+
+            messageInfo2.add("Gender :");
+            messageInfo2.add(gender);
 
 
             if (connection.getHeight() != null) {

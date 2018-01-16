@@ -5,6 +5,24 @@ package com.mindyourelders.MyHealthCareWishes.model;
  */
 
 public class RelativeConnection {
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    String dob="";
+    String gender="";
     public String getOtherLang() {
         return OtherLang;
     }

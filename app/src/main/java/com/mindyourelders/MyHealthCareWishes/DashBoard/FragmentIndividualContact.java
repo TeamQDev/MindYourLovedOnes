@@ -122,7 +122,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     String[] countryList = {"Canada", "Mexico", "USA", "UK", "California", "India"};
 
     String imagepath = "",cardpath="";//
-    String relation;
+    String relation="Self";
     String OtherLang="";
     ImageLoader imageLoader;
     DisplayImageOptions displayImageOptions;
@@ -134,7 +134,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     Preferences preferences;
     ImageView imgBack;
     RelativeConnection connection;
-    PersonalInfo personalInfo;
+ //   PersonalInfo personalInfo;
 
     TextInputLayout tilBdate,tilName,tilWorkPhone;
     String[] Relationship = {"Aunt","Brother","Cousin","Dad","Daughter","Father-in-law","Friend","GrandDaughter","GrandFather","GrandMother","GrandSon","Husband","Mom","Mother-in-law","Neighbor","Nephew","Niece","Sister","Son","Uncle","Wife", "Other"};
@@ -198,16 +198,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
 
     private void initComponent() {
         dbHelper=new DBHelper(getActivity());
-        PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
+      //  PersonalInfoQuery s=new PersonalInfoQuery(getActivity(),dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(getActivity(),dbHelper);
         PetQuery p=new PetQuery(getActivity(),dbHelper);
-        if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
+        /*if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
         }
-        else {
+        else {*/
             connection = MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-        }
+       // }
     }
 
 
@@ -629,7 +629,230 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     }
 
     private void setValues() {
-        if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+        if (connection.getRelationType().equals("Self"))
+        {
+            tilBdate.setVisibility(View.VISIBLE);
+            // spinner.setVisibility(View.VISIBLE);
+            txtGender.setVisibility(View.VISIBLE);
+            spinnerRelation.setVisibility(View.GONE);
+            txtWorkPhone.setVisibility(View.GONE);
+            tilWorkPhone.setVisibility(View.GONE);
+            txtHomePhone.setVisibility(View.VISIBLE);
+        }
+        else {
+            tilBdate.setVisibility(View.GONE);
+            // spinner.setVisibility(View.GONE);
+            txtWorkPhone.setVisibility(View.VISIBLE);
+            tilWorkPhone.setVisibility(View.VISIBLE);
+            spinnerRelation.setVisibility(View.VISIBLE);
+            txtGender.setVisibility(View.GONE);
+        }
+            if (connection != null) {
+                txtName.setText(connection.getName());
+                txtEmail.setText(connection.getEmail());
+                Email=connection.getEmail();
+                txtAddress.setText(connection.getAddress());
+                txtPhone.setText(connection.getMobile());
+                txtOtherRelation.setText(connection.getOtherRelation());
+                txtHomePhone.setText(connection.getPhone());
+                txtWorkPhone.setText(connection.getWorkPhone());
+                txtGender.setText(connection.getGender());
+                txtBdate.setText(connection.getDob());
+                int index = 0;
+                for (int i = 0; i < Relationship.length; i++) {
+                    if (connection.getRelationType().equalsIgnoreCase(Relationship[i])) {
+                        index = i;
+                    }
+                }
+                if (index!=0)
+                spinnerRelation.setSelection(index+1);
+
+                txtOther.setText(connection.getOther_person());
+
+            if (connection.getLive()!=null) {
+                if (connection.getLive().equals("Yes")) {
+                    rbYesLive.setChecked(true);
+                    rbNoLive.setChecked(false);
+                    live = "Yes";
+                    rlLive.setVisibility(View.GONE);
+                } else {
+                    rbYesLive.setChecked(false);
+                    rbNoLive.setChecked(true);
+                    live = "No";
+                    rlLive.setVisibility(View.VISIBLE);
+                }
+            }
+            if (connection.getChildren() != null) {
+                if (connection.getChildren().equals("Yes")) {
+                    chkChild.setChecked(true);
+                    child = "Yes";
+                } else if (connection.getChildren().equals("No")) {
+                    chkChild.setChecked(false);
+                    child = "No";
+                }
+            }
+            if (connection.getFriend() != null) {
+                if (connection.getFriend().equals("Yes")) {
+                    chkFriend.setChecked(true);
+                    friend = "Yes";
+                } else if (connection.getFriend().equals("No")) {
+                    chkFriend.setChecked(false);
+                    friend = "No";
+                }
+            }
+
+            if (connection.getGrand() != null) {
+                if (connection.getGrand().equals("Yes")) {
+                    chkGrandParent.setChecked(true);
+                    grandParent = "Yes";
+                } else if (connection.getGrand().equals("No")) {
+                    chkGrandParent.setChecked(false);
+                    grandParent = "No";
+                }
+            }
+            if (connection.getParents() != null) {
+                if (connection.getParents().equals("Yes")) {
+                    chkParent.setChecked(true);
+                    parent = "Yes";
+                } else if (connection.getParents().equals("No")) {
+                    chkParent.setChecked(false);
+                    parent = "No";
+                }
+            }
+            if (connection.getSpouse() != null) {
+                if (connection.getSpouse().equals("Yes")) {
+                    chkSpouse.setChecked(true);
+                    spouse = "Yes";
+                } else if (connection.getSpouse().equals("No")) {
+                    chkSpouse.setChecked(false);
+                    spouse = "No";
+                }
+            }
+            if (connection.getSign_other() != null) {
+                if (connection.getSign_other().equals("Yes")) {
+                    chkOther.setChecked(true);
+                    other = "Yes";
+                    tilOther.setVisibility(View.VISIBLE);
+                } else if (connection.getSign_other().equals("No")) {
+                    chkOther.setChecked(false);
+                    other = "No";
+                    tilOther.setVisibility(View.GONE);
+                }
+            }
+
+            imagepath=connection.getPhoto();
+            if (!imagepath.equals("")) {
+                File imgFile = new File(imagepath);
+                if (imgFile.exists()) {
+                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    imgProfile.setImageBitmap(myBitmap);*/
+                    imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
+                }
+            }
+            else{
+                imgProfile.setImageResource(R.drawable.ic_profile_defaults);
+            }
+              /*  byte[] photo=personalInfo.getPhoto();
+            Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            imgProfile.setImageBitmap(bmp);*/
+            cardpath=connection.getPhotoCard();
+            if (!connection.getPhotoCard().equals("")) {
+                File imgFile1 = new File(connection.getPhotoCard());
+                if (imgFile1.exists()) {
+                      /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                    imgCard.setImageBitmap(myBitmap);*/
+                    imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),imgCard,displayImageOptionsCard);
+                }
+                   /* byte[] photoCard = personalInfo.getPhotoCard();
+                Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+                // imgCard.setImageBitmap(bmps);
+                imgCard.setVisibility(View.VISIBLE);
+                rlCard.setVisibility(View.VISIBLE);
+                txtCard.setVisibility(View.GONE);
+            }
+            else{
+                imgCard.setVisibility(View.GONE);
+                rlCard.setVisibility(View.GONE);
+                txtCard.setVisibility(View.VISIBLE);
+            }
+
+            txtHeight.setText(connection.getHeight());
+            txtWeight.setText(connection.getWeight());
+            txtProfession.setText(connection.getProfession());
+            txtEmployed.setText(connection.getEmployed());
+            txttelephone.setText(connection.getManager_phone());
+            txtReligion.setText(connection.getReligion());
+            txtIdNumber.setText(connection.getIdnumber());
+            int indexd = 0;
+
+            if (connection.getEyes()!=null) {
+                for (int i = 0; i < EyesList.length; i++) {
+                    if (connection.getEyes().equalsIgnoreCase(EyesList[i])) {
+                        indexd = i;
+                    }
+                }
+                spinnerEyes.setSelection(indexd + 1);
+            }
+
+            if (connection.getLanguage()!=null) {
+                int indexs = 0;
+                for (int i = 0; i < LangList.length; i++) {
+                    if (connection.getLanguage().equalsIgnoreCase(LangList[i])) {
+                        indexs = i;
+                        if (connection.getLanguage().equals("Other"))
+                        {
+                            tilOtherLanguage.setVisibility(View.VISIBLE);
+                            txtOtherLanguage.setText(connection.getOtherLang());
+                        }
+                        else
+                        {
+                            tilOtherLanguage.setVisibility(View.GONE);
+                            txtOtherLanguage.setText("");
+                        }
+                    }
+                }
+                spinnerLanguage.setSelection(indexs + 1);
+            }
+
+            if (connection.getMarital_status()!=null) {
+                int indexss = 0;
+                for (int i = 0; i < MaritalList.length; i++) {
+                    if (connection.getMarital_status().equalsIgnoreCase(MaritalList[i])) {
+                        indexss = i;
+                    }
+                }
+                spinnerMarital.setSelection(indexss + 1);
+            }
+            if (connection.getVeteran()!=null) {
+                if (connection.getVeteran().equals("Yes")) {
+                    rbYes.setChecked(true);
+                    rbNo.setChecked(false);
+                } else {
+                    rbYes.setChecked(false);
+                    rbNo.setChecked(true);
+                }
+            }
+            if (connection.getEnglish()!=null) {
+                if (connection.getEnglish().equals("Yes")) {
+                    rbYess.setChecked(true);
+                    rbNoo.setChecked(false);
+                } else {
+                    rbYess.setChecked(false);
+                    rbNoo.setChecked(true);
+                }
+            }
+            if (connection.getPet()!=null) {
+                if (connection.getPet().equals("Yes")) {
+                    rbYesPet.setChecked(true);
+                    rbNoPet.setChecked(false);
+                } else {
+                    rbYesPet.setChecked(false);
+                    rbNoPet.setChecked(true);
+                }
+            }
+
+        }
+       /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
             tilBdate.setVisibility(View.VISIBLE);
            // spinner.setVisibility(View.VISIBLE);
             txtGender.setVisibility(View.VISIBLE);
@@ -645,7 +868,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 txtAddress.setText(personalInfo.getAddress());
                 txtHomePhone.setText(personalInfo.getHomePhone());
                 txtOther.setText(personalInfo.getOther_person());
-             /*   if (personalInfo.getLive() != null) {
+             *//*   if (personalInfo.getLive() != null) {
                     if (personalInfo.getLive().equals("Yes")) {
                         rbYes.setChecked(true);
 
@@ -654,7 +877,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         live = "No";
                         rlLive.setVisibility(View.VISIBLE);
                     }
-                }*/
+                }*//*
                 if (personalInfo.getLive()!=null) {
                     if (personalInfo.getLive().equals("Yes")) {
                         rbYesLive.setChecked(true);
@@ -726,7 +949,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     }
                 }
 
-/*
+*//*
                 if (personalInfo.getCountry()!=null) {
                     int index = 0;
                     for (int i = 0; i < countryList.length; i++) {
@@ -738,7 +961,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 }
                 else{
                     spinner.setHint("Country");
-                }*/
+                }*//*
                 txtPhone.setText(personalInfo.getPhone());
                 txtBdate.setText(personalInfo.getDob());
 
@@ -819,27 +1042,27 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!imagepath.equals("")) {
                     File imgFile = new File(imagepath);
                     if (imgFile.exists()) {
-                      /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                        imgProfile.setImageBitmap(myBitmap);*/
+                      *//*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);*//*
                         imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
                     }
                 }
                 else{
                     imgProfile.setImageResource(R.drawable.ic_profile_defaults);
                 }
-              /*  byte[] photo=personalInfo.getPhoto();
+              *//*  byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-               imgProfile.setImageBitmap(bmp);*/
+               imgProfile.setImageBitmap(bmp);*//*
                 cardpath=personalInfo.getPhotoCard();
                 if (!personalInfo.getPhotoCard().equals("")) {
                     File imgFile1 = new File(personalInfo.getPhotoCard());
                     if (imgFile1.exists()) {
-                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
-                        imgCard.setImageBitmap(myBitmap);*/
+                       *//* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);*//*
                         imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),imgCard,displayImageOptionsCard);
                     }
-                   /* byte[] photoCard = personalInfo.getPhotoCard();
-                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+                   *//* byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*//*
                    // imgCard.setImageBitmap(bmps);
                     imgCard.setVisibility(View.VISIBLE);
                     rlCard.setVisibility(View.VISIBLE);
@@ -877,7 +1100,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     spinnerRelation.setSelection(index+1);
 
                 txtOther.setText(connection.getOther_person());
-             /*   if (personalInfo.getLive() != null) {
+             *//*   if (personalInfo.getLive() != null) {
                     if (personalInfo.getLive().equals("Yes")) {
                         rbYes.setChecked(true);
 
@@ -886,7 +1109,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         live = "No";
                         rlLive.setVisibility(View.VISIBLE);
                     }
-                }*/
+                }*//*
                 if (connection.getLive()!=null) {
                     if (connection.getLive().equals("Yes")) {
                         rbYesLive.setChecked(true);
@@ -962,27 +1185,27 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 if (!imagepath.equals("")) {
                     File imgFile = new File(imagepath);
                     if (imgFile.exists()) {
-                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                        imgProfile.setImageBitmap(myBitmap);*/
+                       *//* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imgProfile.setImageBitmap(myBitmap);*//*
                         imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
                     }
                 }
                 else{
                     imgProfile.setImageResource(R.drawable.ic_profile_defaults);
                 }
-              /*  byte[] photo=personalInfo.getPhoto();
+              *//*  byte[] photo=personalInfo.getPhoto();
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-               imgProfile.setImageBitmap(bmp);*/
+               imgProfile.setImageBitmap(bmp);*//*
                 cardpath=connection.getPhotoCard();
                 if (!connection.getPhotoCard().equals("")) {
                     File imgFile1 = new File(connection.getPhotoCard());
                     if (imgFile1.exists()) {
-                      /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
-                        imgCard.setImageBitmap(myBitmap);*/
+                      *//*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
+                        imgCard.setImageBitmap(myBitmap);*//*
                         imageLoaderCard.displayImage(String.valueOf(Uri.fromFile(imgFile1)),imgCard,displayImageOptionsCard);
                     }
-                   /* byte[] photoCard = personalInfo.getPhotoCard();
-                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*/
+                   *//* byte[] photoCard = personalInfo.getPhotoCard();
+                    Bitmap bmps = BitmapFactory.decodeByteArray(photoCard, 0, photoCard.length);*//*
                     // imgCard.setImageBitmap(bmps);
                     imgCard.setVisibility(View.VISIBLE);
                     rlCard.setVisibility(View.VISIBLE);
@@ -1069,7 +1292,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                     }
                 }
             }
-            }
+            }*/
         }
 
 
@@ -1109,7 +1332,8 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                          // ListPet.requestFocus();
                      }
                  }
-                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+
+               /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         if (validateUser()) {
                             if (email.equals("")||email.equals(Email))
                             {
@@ -1148,29 +1372,24 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                             }
                         }
                     }
-                    else {
+                    else {*/
                         if (validateConnection()) {
-                            if (email.equals("")||email.equals(Email))
-                            {
-                                editToConnection(imagepath,cardpath);
+                            if (email.equals("") || email.equals(Email)) {
+                                editToConnection(imagepath, cardpath);
                                 getActivity().finish();
-                            }
-                            else{
-                                Boolean flags=MyConnectionsQuery.fetchEmailRecord(email);
-                                if (flags==true)
-                                {
+                            } else {
+                                Boolean flags = MyConnectionsQuery.fetchEmailRecord(email);
+                                if (flags == true) {
                                     Toast.makeText(getActivity(), "This email address is already registered by another profile, Please add another email address", Toast.LENGTH_SHORT).show();
                                     txtEmail.setError("This email address is already registered by another profile, Please add another email address");
-                                }
-                                else{
-                                    editToConnection(imagepath,cardpath);
+                                } else {
+                                    editToConnection(imagepath, cardpath);
                                     getActivity().finish();
                                 }
                             }
 
 
-
-                        }
+                        //}
                     }
 
 
@@ -1266,17 +1485,16 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         "Personal Profile");
                 Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                 Header.addEmptyLine(2);*/
-                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+               /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                     final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final PersonalInfo personalInfoList =  PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     new Individual(personalInfoList,PetLists);
                 }
-                else{
+                else{*/
                     final RelativeConnection personalInfoList =  MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
-
                     final ArrayList<Pet> PetList = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     new Individual(personalInfoList,PetList);
-                }
+               // }
 
                 Header.document.close();
 
@@ -1294,11 +1512,11 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                         switch (itemPos) {
                             case 0: //View
                                 StringBuffer result = new StringBuffer();
-                                if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                               /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                                     result.append(new MessageString().getProfileUser());
-                                }else {
+                                }else {*/
                                     result.append(new MessageString().getProfileProfile());
-                                }
+                               // }
 
                                 new PDFDocumentProcess(path,
                                         getActivity(), result);
@@ -1527,6 +1745,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         if (i!=0)
         relation=Relationship[i-1];
 
+
         int i1= spinnerEyes.getSelectedItemPosition();
         if (i1!=0)
         eyes=EyesList[i1-1];
@@ -1549,7 +1768,9 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
         if (i3!=0)
         marital_status=MaritalList[i3-1];
 
-
+        bdate = txtBdate.getText().toString().trim();
+        homePhone=txtHomePhone.getText().toString().trim();
+        gender=txtGender.getText().toString().trim();
         liveOther=txtOther.getText().toString();
         idnumber=txtIdNumber.getText().toString();
         height=txtHeight.getText().toString();
@@ -1693,7 +1914,7 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
     }
 
     private void editToConnection(String photo, String photoCard) {
-        if (preferences.getInt(PrefConstants.CONNECTED_USERID)==preferences.getInt(PrefConstants.USER_ID)) {
+       /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==preferences.getInt(PrefConstants.USER_ID)) {
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
@@ -1702,17 +1923,17 @@ public class FragmentIndividualContact extends Fragment implements View.OnClickL
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
         }
-        else{
-            int indexValuex = spinnerRelation.getSelectedItemPosition();
-            String relation =Relationship[indexValuex-1];
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live, OtherLang);
+        else{*/
+            /*int indexValuex = spinnerRelation.getSelectedItemPosition();
+            String relation =Relationship[indexValuex-1];*/
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone,homePhone,workPhone,relation , imagepath,"", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet, manager_phone, cardpath, english,child,friend,grandParent,parent,spouse,other,liveOther,live, OtherLang,bdate,gender);
             if (flag == true) {
                 Toast.makeText(getActivity(), "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                 preferences.putString(PrefConstants.CONNECTED_NAME,name);
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
-        }
+     //   }
 
     }
 
