@@ -340,7 +340,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         preferences.setLogin(true);
                         startActivity(signupIntent);
                         finish();
-                        
                     }
                     else{
                         Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show();
