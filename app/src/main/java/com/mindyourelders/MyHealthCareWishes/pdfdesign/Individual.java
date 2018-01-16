@@ -138,24 +138,24 @@ public class Individual {
             messageInfo2.add(hPhone);
 
 
-            String bdate = "";
+            String workph = "";
             if (connection.getWorkPhone() != null) {
-                bdate = connection.getWorkPhone();
+                workph = connection.getWorkPhone();
             }
-            cell1 = new PdfPCell(new Phrase("Work Phone : " + bdate));
+            cell1 = new PdfPCell(new Phrase("Work Phone : " + workph));
             cell1.setBorder(Rectangle.BOTTOM);
             cell1.setUseBorderPadding(true);
             cell1.setBorderWidthBottom(5);
             cell1.setBorderColorBottom(BaseColor.WHITE);
             table1.addCell(cell1);
             messageInfo2.add("Work Phone :");
-            messageInfo2.add(bdate);
+            messageInfo2.add(workph);
 
-
+             String email="";
             if (connection.getEmail() != null) {
-                gender = connection.getEmail();
+                email = connection.getEmail();
             }
-            cell1 = new PdfPCell(new Phrase("Email : " + gender));
+            cell1 = new PdfPCell(new Phrase("Email : " + email));
             cell1.setBorder(Rectangle.BOTTOM);
             cell1.setUseBorderPadding(true);
             cell1.setBorderWidthBottom(5);
@@ -163,7 +163,7 @@ public class Individual {
             table1.addCell(cell1);
 
             messageInfo2.add("Email :");
-            messageInfo2.add(gender);
+            messageInfo2.add(email);
 
             if (connection.getAddress() != null) {
                 address = connection.getAddress();
@@ -189,12 +189,13 @@ public class Individual {
             cell1.setBorderColorBottom(BaseColor.WHITE);
             table1.addCell(cell1);
             messageInfo2.add("Birth Date :");
-            messageInfo2.add(bdate);
+            messageInfo2.add(bdates);
 
+            String genders="";
             if (connection.getGender() != null) {
-                gender = connection.getGender();
+                genders = connection.getGender();
             }
-            cell1 = new PdfPCell(new Phrase("Gender : " + gender));
+            cell1 = new PdfPCell(new Phrase("Gender : " + genders));
             cell1.setBorder(Rectangle.BOTTOM);
             cell1.setUseBorderPadding(true);
             cell1.setBorderWidthBottom(5);
@@ -202,7 +203,7 @@ public class Individual {
             table1.addCell(cell1);
 
             messageInfo2.add("Gender :");
-            messageInfo2.add(gender);
+            messageInfo2.add(genders);
 
 
             if (connection.getHeight() != null) {

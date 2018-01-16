@@ -347,7 +347,7 @@ public class AddPrescriptionActivity extends AppCompatActivity implements View.O
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Boolean flag = PrescriptionQuery.updatePrescriptionData(colid, id, doctor, purpose, note, date, dosageList, imageList, preferences.getInt(PrefConstants.CONNECTED_USERID), pre, rx, dose, frequency, medicine, imageListOld);
+                        Boolean flag = PrescriptionQuery.updatePrescriptionData(colid, unique, doctor, purpose, note, date, dosageList, imageList, preferences.getInt(PrefConstants.CONNECTED_USERID), pre, rx, dose, frequency, medicine, imageListOld);
                         if (flag == true) {
                             Toast.makeText(context, "Prescription Updated Succesfully", Toast.LENGTH_SHORT).show();
                             closeKeyboard(AddPrescriptionActivity.this);

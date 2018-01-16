@@ -41,7 +41,6 @@ import com.mindyourelders.MyHealthCareWishes.database.MedInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalConditionQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MedicalImplantsQuery;
 import com.mindyourelders.MyHealthCareWishes.database.MyConnectionsQuery;
-import com.mindyourelders.MyHealthCareWishes.database.PersonalInfoQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PetQuery;
 import com.mindyourelders.MyHealthCareWishes.database.PharmacyQuery;
 import com.mindyourelders.MyHealthCareWishes.database.SpecialistQuery;
@@ -171,7 +170,7 @@ public class SpecialistsActivity extends AppCompatActivity {
         preferences=new Preferences(context);
         dbHelper=new DBHelper(context);
 
-        PersonalInfoQuery p=new PersonalInfoQuery(context,dbHelper);
+        //PersonalInfoQuery p=new PersonalInfoQuery(context,dbHelper);
         MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
         AllergyQuery a=new AllergyQuery(context,dbHelper);
         MedicalImplantsQuery ml=new MedicalImplantsQuery(context,dbHelper);
@@ -295,15 +294,15 @@ public class SpecialistsActivity extends AppCompatActivity {
                     Header.addusereNameChank(preferences.getString(PrefConstants.CONNECTED_NAME));
                     Header.addEmptyLine(2);*/
 
-                    if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                  /*  if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                         final ArrayList<Pet> PetLists = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
 
                         new Individual((PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetLists);
                     }
-                    else{
+                    else{*/
                         final ArrayList<Pet> PetList = PetQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                         new Individual((MyConnectionsQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID))),PetList);
-                    }
+                   // }
                     // new MessageString().getProfileProfile(connection);
                     final ArrayList<Allergy> AllargyLists = AllergyQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
                     final ArrayList<Implant> implantsList = MedicalImplantsQuery.fetchAllRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -467,7 +466,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                 }
                                 else if (from.equals("Emergency"))
                                 {
-                                    if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
+                                    /*if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID))) {
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileUser());
                                         result.append(new MessageString().getMedicalInfo());
@@ -482,7 +481,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                                                 context, result);
 
                                         System.out.println("\n" + result + "\n");
-                                    }else{
+                                    }else{*/
                                         StringBuffer result = new StringBuffer();
                                         result.append(new MessageString().getProfileProfile());
                                         result.append(new MessageString().getMedicalInfo());
@@ -501,7 +500,7 @@ public class SpecialistsActivity extends AppCompatActivity {
                             + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
                             + "/Profile.pdf", getActivity(),
                             new MessageString().getProfileProfile(connection));*/
-                                    }
+                                  //  }
                                 }
                                 else if (from.equals("Insurance"))
                                 {
