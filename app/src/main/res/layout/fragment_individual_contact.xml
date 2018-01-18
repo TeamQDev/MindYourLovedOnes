@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     android:layout_marginBottom="@dimen/dimension20dp"
-    tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
+   >
 <RelativeLayout
     android:id="@+id/llIndividual"
     android:layout_width="match_parent"
@@ -357,7 +357,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tilName">
 
-            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            <com.mindyourlovedones.healthcare.customview.MySpinner
                 android:id="@+id/spinnerRelation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -463,7 +463,7 @@
             </android.support.design.widget.TextInputLayout>-->
         </RelativeLayout>
 
-        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+        <com.mindyourlovedones.healthcare.customview.MySpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -597,7 +597,7 @@
             <requestFocus />
         </android.support.design.widget.TextInputLayout>
 
-        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+        <com.mindyourlovedones.healthcare.customview.MySpinner
             android:id="@+id/spinnerEyes"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension85dp"
@@ -847,7 +847,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/view4"
             >
-            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            <com.mindyourlovedones.healthcare.customview.MySpinner
                 android:id="@+id/spinnerLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension85dp"
@@ -939,7 +939,7 @@
             android:layout_marginTop="@dimen/dimension15dp"
             android:background="@color/colorLightGray"></View>
 
-        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+        <com.mindyourlovedones.healthcare.customview.MySpinner
             android:id="@+id/spinnerMarital"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension85dp"
@@ -1172,7 +1172,7 @@
                 android:layout_margin="@dimen/dimension5dp"
                 android:background="@color/colorLightGray"></View>
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListPet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

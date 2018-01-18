@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        <com.mindyourlovedones.healthcare.customview.MySpinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                            <com.mindyourlovedones.healthcare.customview.MySpinner
                                 android:id="@+id/spinnerFinance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -569,7 +569,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        <com.mindyourlovedones.healthcare.customview.MySpinner
                             android:id="@+id/spinnerHospital"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -909,7 +909,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tilName">
 
-                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        <com.mindyourlovedones.healthcare.customview.MySpinner
                             android:id="@+id/spinnerRelation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -954,7 +954,7 @@
                         </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
 
-                    <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                    <com.mindyourlovedones.healthcare.customview.MySpinner
                         android:id="@+id/spinnerPriority"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1107,7 +1107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rlCommon">
 
-                    <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                    <com.mindyourlovedones.healthcare.customview.MySpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimension35dp"
@@ -1584,7 +1584,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tilInsuaranceName">
 
-                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        <com.mindyourlovedones.healthcare.customview.MySpinner
                             android:id="@+id/spinnerInsuarance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -2220,7 +2220,7 @@
                     android:layout_below="@+id/rlConnection"
                     android:visibility="gone">
 
-                    <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                    <com.mindyourlovedones.healthcare.customview.MySpinner
                         android:id="@+id/spinnerProxy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

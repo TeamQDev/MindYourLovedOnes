@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorLightBlue"
     android:layout_height="match_parent"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.ViewCardActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.ViewCardActivity">
 
     <RelativeLayout
         android:id="@+id/header"

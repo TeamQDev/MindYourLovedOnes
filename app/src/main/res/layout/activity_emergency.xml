@@ -345,13 +345,13 @@
             android:padding="@dimen/dimension10dp"
             android:layout_margin="@dimen/dimension5dp"
             >-->
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/lvEmergency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlContact"
                 android:layout_margin="@dimen/dimension5dp"
-                ></com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView>
+                ></com.mindyourlovedones.healthcare.customview.NonScrollListView>
         <!--</RelativeLayout>-->
         <RelativeLayout
             android:id="@+id/rlPrimary"
@@ -378,13 +378,13 @@
                 android:layout_centerVertical="true"
                 />
         </RelativeLayout>
-        <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+        <com.mindyourlovedones.healthcare.customview.NonScrollListView
             android:id="@+id/lvPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rlPrimary"
             android:layout_margin="@dimen/dimension5dp"
-            ></com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView>
+            ></com.mindyourlovedones.healthcare.customview.NonScrollListView>
         <RelativeLayout
             android:id="@+id/rlOther"
             android:layout_width="match_parent"

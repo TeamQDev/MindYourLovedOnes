@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/colorLightBlue"
-    tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SplashActivity">
+    >
 <RelativeLayout
     android:id="@+id/rlHeader"
     android:layout_width="match_parent"
@@ -191,11 +191,43 @@
         android:layout_marginTop="@dimen/dimension5dp"
         android:layout_above="@+id/rlFooter"
         >
+        <RelativeLayout
+            android:id="@+id/llSubscribe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension60dp"
+            android:orientation="horizontal"
+            android:background="@color/colorBlue"
+            >
+
+            <TextView
+                android:id="@+id/txtSubscribe"
+                style="@style/SplashButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subscribe for Mind Your Loved Ones"
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@+id/imgNext"
+
+                />
+            <ImageView
+                android:id="@+id/imgNext"
+                android:layout_width="@dimen/dimension80dp"
+                android:layout_height="@dimen/dimension40dp"
+                android:src="@drawable/rightarrow"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
     <LinearLayout
         android:id="@+id/llSplash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
 
         <TextView
             android:id="@+id/txtNew"

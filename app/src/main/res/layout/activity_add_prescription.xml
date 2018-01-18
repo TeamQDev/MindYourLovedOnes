@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddPrescriptionActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.AddPrescriptionActivity">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -343,7 +343,7 @@
             android:textSize="@dimen/dimension20dp" />
 
     </android.support.design.widget.TextInputLayout>
-    <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+    <com.mindyourlovedones.healthcare.customview.MySpinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -398,7 +398,7 @@
     android:layout_below="@+id/txtDosageHeader"
     android:background="@color/colorDarkGray"
     ></View>
-        <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+        <com.mindyourlovedones.healthcare.customview.NonScrollListView
             android:id="@+id/ListDosage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -503,7 +503,7 @@
             android:layout_below="@+id/txtPhotoHeader"
             android:background="@color/colorDarkGray"
             ></View>
-        <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+        <com.mindyourlovedones.healthcare.customview.NonScrollListView
             android:id="@+id/ListPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

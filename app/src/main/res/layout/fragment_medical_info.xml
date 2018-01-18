@@ -65,7 +65,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListAllergy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -362,7 +362,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListCondtion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1165,7 +1165,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListVaccine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1826,7 +1826,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListImplants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1875,7 +1875,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListHospital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1968,7 +1968,7 @@
                 android:padding="@dimen/dimension5dp"
                 android:src="@drawable/add_square" />
 
-            <com.mindyourelders.MyHealthCareWishes.customview.NonScrollListView
+            <com.mindyourlovedones.healthcare.customview.NonScrollListView
                 android:id="@+id/ListHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

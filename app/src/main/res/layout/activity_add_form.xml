@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorLightBlue"
-        tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity">
+        tools:context="com.mindyourlovedones.healthcare.DashBoard.AddDocumentActivity">
 
         <RelativeLayout
             android:id="@+id/header"
@@ -58,7 +58,7 @@
 
         </RelativeLayout>
 
-            <com.mindyourelders.MyHealthCareWishes.customview.TouchImageView
+            <com.mindyourlovedones.healthcare.customview.TouchImageView
                 android:id="@+id/imgDoc"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"

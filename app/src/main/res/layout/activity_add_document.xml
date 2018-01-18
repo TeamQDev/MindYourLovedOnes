@@ -7,13 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.AddDocumentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorLightBlue"
-        tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity">
+        tools:context="com.mindyourlovedones.healthcare.DashBoard.AddDocumentActivity">
 
         <LinearLayout
             android:id="@+id/header"
@@ -129,7 +129,7 @@
             android:layout_marginRight="@dimen/dimension35dp"
             android:layout_marginTop="@dimen/dimension10dp">
 
-            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            <com.mindyourlovedones.healthcare.customview.MySpinner
                 android:id="@+id/spinnerType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
            android:layout_height="wrap_content"
            android:visibility="gone"
            >
-            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+            <com.mindyourlovedones.healthcare.customview.MySpinner
                 android:id="@+id/spinnerDoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

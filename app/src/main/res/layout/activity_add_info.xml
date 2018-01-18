@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddInfoActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.AddInfoActivity">
 
     <RelativeLayout
         android:id="@+id/rlInfo"
@@ -83,7 +83,7 @@
                         android:id="@+id/rlSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                        <com.mindyourlovedones.healthcare.customview.MySpinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                             android:id="@+id/rlReactionSpinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+                            <com.mindyourlovedones.healthcare.customview.MySpinner
                                 android:id="@+id/spinnerReaction"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

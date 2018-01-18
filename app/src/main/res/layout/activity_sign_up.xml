@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
-    tools:context="com.mindyourelders.MyHealthCareWishes.HomeActivity.SignUpActivity">
+   >
 
     <RelativeLayout
         android:id="@+id/llSignUp"
@@ -39,7 +39,7 @@
             android:visibility="gone"
             >
 
-            <com.mindyourelders.MyHealthCareWishes.customview.RoundedImageView
+            <com.mindyourlovedones.healthcare.customview.RoundedImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/dimension100dp"
                 android:layout_height="@dimen/dimension100dp"
@@ -202,7 +202,7 @@
                 android:textSize="@dimen/dimension20dp" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.mindyourelders.MyHealthCareWishes.customview.MySpinner
+        <com.mindyourlovedones.healthcare.customview.MySpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

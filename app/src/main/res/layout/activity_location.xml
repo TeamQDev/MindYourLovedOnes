@@ -9,7 +9,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.LocationActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.LocationActivity">
 
     <RelativeLayout
         android:id="@+id/header"

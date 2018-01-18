@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mindyourelders.MyHealthCareWishes.Connections.GrabConnectionActivity"
+    tools:context="com.mindyourlovedones.healthcare.Connections.GrabConnectionActivity"
     android:background="@color/colorLightBlue"
     >
     <RelativeLayout

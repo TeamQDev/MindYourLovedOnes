@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     >
-    <com.mindyourelders.MyHealthCareWishes.customview.NonScrollGridView
+    <com.mindyourlovedones.healthcare.customview.NonScrollGridView
         android:id="@+id/lvConnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

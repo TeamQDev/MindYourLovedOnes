@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     android:paddingBottom="@dimen/dimension15dp"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.PrescriptionActivity">
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.PrescriptionActivity">
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"

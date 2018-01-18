@@ -9,13 +9,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
-    tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity"
+    tools:context="com.mindyourlovedones.healthcare.DashBoard.AddDocumentActivity"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorLightBlue"
-        tools:context="com.mindyourelders.MyHealthCareWishes.DashBoard.AddDocumentActivity">
+        tools:context="com.mindyourlovedones.healthcare.DashBoard.AddDocumentActivity">
 
         <RelativeLayout
             android:id="@+id/header"
