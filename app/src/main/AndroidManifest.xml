@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name="com.mindyourlovedones.healthcare.HomeActivity.SplashActivity"
+            android:name=".SplashActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -44,7 +44,7 @@
             android:value="false" />
 
         <activity
-            android:name="com.mindyourlovedones.healthcare.HomeActivity.SplashNewActivity"
+            android:name=".SplashNewActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -55,17 +55,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mindyourlovedones.healthcare.HomeActivity.LoginActivity"
+            android:name=".LoginActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.mindyourlovedones.healthcare.HomeActivity.SignUpActivity"
+            android:name=".SignUpActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.mindyourlovedones.healthcare.HomeActivity.BaseActivity"
+            android:name=".BaseActivity"
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -135,9 +135,11 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
+          <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-                <data android:mimeType="application/pdf"/>
+
+                <data android:mimeType="application/pdf" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 />
             </intent-filter>
@@ -259,8 +261,9 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.mindyourlovedones.healthcare.DashBoard.ImageActivity" />
-        <activity android:name="com.mindyourlovedones.healthcare.DashBoard.InstructionActivity"></activity>
+      
+        <activity android:name="com.mindyourlovedones.healthcare.DashBoard.InstructionActivity" />
+        <activity android:name="com.mindyourlovedones.healthcare.DashBoard.ProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -64,13 +64,17 @@
             android:gravity="center"
             android:orientation="horizontal"></LinearLayout>
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightBlue"
+        android:layout_below="@+id/rlMain"
+        android:layout_margin="@dimen/dimension15dp">
     <RelativeLayout
         android:id="@+id/rlProvider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightBlue"
-       android:layout_below="@+id/rlMain"
-        android:layout_margin="@dimen/dimension15dp"
         >
 
         <TextView
@@ -111,5 +115,42 @@
             android:text="Type"
             android:textColor="@color/colorDarkGray"
             android:textSize="@dimen/dimension18dp" />
+
+            <RelativeLayout
+                android:id="@+id/rlInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtTypeValue"
+                >
+                <TextView
+                    android:id="@+id/txtHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Insurance Card Instructions"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/imgPicture"
+                    android:textSize="@dimen/dimension20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:textColor="@color/colorBlackDark"
+                    />
+                <TextView
+                    android:id="@+id/txtMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By clicking the above card, You can see card in full view. \nTo email your card image click on share icon at top right corner of the screen"
+                    android:layout_below="@+id/txtHeader"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/dimension18dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:textColor="@color/colorGuide"
+                    android:layout_marginLeft="@dimen/dimension10dp"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:paddingBottom="20dp"
+                    />
+            </RelativeLayout>
+
     </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

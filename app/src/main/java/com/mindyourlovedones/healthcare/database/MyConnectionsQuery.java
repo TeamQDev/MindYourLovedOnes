@@ -105,6 +105,7 @@ public class MyConnectionsQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_PHOTOCARD,photoCard);
         cv.put(COL_OTHER_RELATION,otherRelation);
+        cv.put(COL_LANG,"");
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -534,6 +535,7 @@ public class MyConnectionsQuery {
                 connection.setOther_person(c.getString(c.getColumnIndex(COL_OTHER)));
                 connection.setLive(c.getString(c.getColumnIndex(COL_LIVE)));
                 connection.setOtherLang(c.getString(c.getColumnIndex(COL_OTHER_LANG)));
+                connection.setUserid(c.getInt(c.getColumnIndex(COL_USER_ID)));
             } while (c.moveToNext());
         }
 

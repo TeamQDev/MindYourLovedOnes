@@ -885,7 +885,7 @@
                         android:paddingLeft="@dimen/dimension30dp"
                         android:paddingRight="@dimen/dimension30dp"
                         android:paddingTop="@dimen/dimension8dp"
-                        app:hintEnabled="false">
+                        app:hintEnabled="true">
                         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
                         <AutoCompleteTextView
                             android:id="@+id/txtName"

@@ -34,13 +34,38 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />
-
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilUserName"
+        android:id="@+id/tilName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtLogo"
         android:layout_marginTop="@dimen/dimension20dp"
+        android:paddingBottom="@dimen/dimension8dp"
+        android:paddingLeft="@dimen/dimension30dp"
+        android:paddingRight="@dimen/dimension30dp"
+        android:paddingTop="@dimen/dimension8dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        >
+        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+        <AutoCompleteTextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/dimension20dp" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilName"
         android:paddingBottom="@dimen/dimension8dp"
         android:paddingLeft="@dimen/dimension30dp"
         android:paddingRight="@dimen/dimension30dp"
@@ -132,6 +157,7 @@
         android:textSize="@dimen/dimension16dp"
         android:layout_below="@+id/txtSignIn"
         android:gravity="bottom"
+        android:visibility="gone"
         />
 
     <LinearLayout
@@ -139,7 +165,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llFooter"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
 
         <ImageView
             android:id="@+id/imgFbSignup"
@@ -194,7 +222,9 @@
             android:padding="@dimen/dimension10dp"
             android:text="Forgot your password?"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension16dp" />
+            android:textSize="@dimen/dimension16dp"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </RelativeLayout>
 </RelativeLayout>

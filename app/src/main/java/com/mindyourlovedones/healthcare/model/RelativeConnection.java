@@ -384,4 +384,14 @@ public class RelativeConnection {
     String relationType="";
     String address="";
     int image;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    int userid;
 }
