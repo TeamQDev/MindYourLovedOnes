@@ -5,6 +5,79 @@ package com.mindyourlovedones.healthcare.model;
  */
 
 public class MedInfo {
+    String tobaco="";
+    String drink="";
+    String drug="";
+    String t_type="";
+
+    public String getTobaco() {
+        return tobaco;
+    }
+
+    public void setTobaco(String tobaco) {
+        this.tobaco = tobaco;
+    }
+
+    public String getDrink() {
+        return drink;
+    }
+
+    public void setDrink(String drink) {
+        this.drink = drink;
+    }
+
+    public String getDrug() {
+        return drug;
+    }
+
+    public void setDrug(String drug) {
+        this.drug = drug;
+    }
+
+    public String getT_type() {
+        return t_type;
+    }
+
+    public void setT_type(String t_type) {
+        this.t_type = t_type;
+    }
+
+    public String getT_amt() {
+        return t_amt;
+    }
+
+    public void setT_amt(String t_amt) {
+        this.t_amt = t_amt;
+    }
+
+    public String getT_year() {
+        return t_year;
+    }
+
+    public void setT_year(String t_year) {
+        this.t_year = t_year;
+    }
+
+    public String getDrink_amt() {
+        return drink_amt;
+    }
+
+    public void setDrink_amt(String drink_amt) {
+        this.drink_amt = drink_amt;
+    }
+
+    public String getDrug_type() {
+        return drug_type;
+    }
+
+    public void setDrug_type(String drug_type) {
+        this.drug_type = drug_type;
+    }
+
+    String t_amt="";
+    String t_year="";
+    String drink_amt="";
+    String drug_type="";
     int id;
     int userId;
     String feet="";
@@ -14,6 +87,16 @@ public class MedInfo {
     String toilet="No";
 
     String aideNote="";
+
+    public String getAllergyNote() {
+        return allergyNote;
+    }
+
+    public void setAllergyNote(String allergyNote) {
+        this.allergyNote = allergyNote;
+    }
+
+    String allergyNote="";
 
     public String getAideNote() {
         return aideNote;

@@ -301,7 +301,16 @@
                 android:drawablePadding="@dimen/dimension10dp"
                 android:layout_below="@+id/viewg"
                 />
+            <View
+                android:id="@+id/viewd"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_below="@+id/txtEULA"
+                android:layout_marginLeft="@dimen/dimension60dp"
+                ></View>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rlLogOut"
             android:layout_width="match_parent"
@@ -650,6 +659,40 @@
                 android:background="@color/colorLightGray"
                 android:layout_below="@+id/txtBackup"
                 android:layout_toRightOf="@id/imgBackup"
+                ></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlGuide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlPrivacyDetail"
+            android:background="@color/colorWhite"
+            >
+            <ImageView
+                android:id="@+id/imgGuide"
+                android:layout_width="@dimen/dimension50dp"
+                android:layout_height="@dimen/dimension50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension10dp"
+                android:src="@drawable/user_manual" />
+            <TextView
+                android:id="@+id/txtGuide"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension50dp"
+                android:text="HELP"
+                android:textColor="@color/colorDarkBlue"
+                android:textSize="@dimen/dimension16dp"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/imgGuide"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension1dp"
+                android:background="@color/colorLightGray"
+                android:layout_below="@+id/txtGuide"
+                android:layout_toRightOf="@id/imgGuide"
                 ></View>
         </RelativeLayout>
     </RelativeLayout>

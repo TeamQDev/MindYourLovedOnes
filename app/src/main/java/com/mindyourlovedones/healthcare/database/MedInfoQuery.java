@@ -35,6 +35,16 @@ public class MedInfoQuery {
     public static final String COL_AIDE_NOTE="Aide_Note";
     public static final String COL_VISION_NOTE="VisionNote";
     public static final String COL_DIET_NOTE="DietNote";
+    public static final String COL_ALLERGY_NOTE="AllergyNote";
+
+    public static final String COL_TOBACO="Tobaco";
+    public static final String COL_T_TYPE="Tobaco_type";
+    public static final String COL_T_AMT="Tobaco_amt";
+    public static final String COL_T_YEAR ="Tobaco_year";
+    public static final String COL_DRINK="Drink";
+    public static final String COL_DRINK_AMT ="Drink_amt";
+    public static final String COL_DRUG="Drug";
+    public static final String COL_DRUG_TYPE="Drug_type";
 
     public MedInfoQuery(Context context, DBHelper dbHelper) {
         this.context=context;
@@ -48,7 +58,11 @@ public class MedInfoQuery {
                 COL_BLOODTYPE+" VARCHAR(20),"+COL_ORGANDONOR+" VARCHAR(20),"+COL_NOTE+" VARCHAR(20),"+
                 COL_SPEECH+" VARCHAR(20),"+COL_BLIND+" VARCHAR(20),"+COL_AIDE_NOTE+" VARCHAR(20),"+
                COL_VISION_NOTE+" VARCHAR(20),"+COL_DIET_NOTE+" VARCHAR(20),"+
-                COL_MOUTH_NOTE+" VARCHAR(20),"+COL_TEETH_MOUTH+" VARCHAR(20)"+
+                COL_MOUTH_NOTE+" VARCHAR(20),"+COL_TEETH_MOUTH+" VARCHAR(20),"+COL_ALLERGY_NOTE+" VARCHAR(20),"+
+                COL_TOBACO+" VARCHAR(20),"+COL_T_TYPE+" VARCHAR(20),"+
+                COL_T_AMT+" VARCHAR(20),"+COL_T_YEAR+" VARCHAR(20),"+
+                COL_DRINK+" VARCHAR(20),"+COL_DRINK_AMT+" VARCHAR(20),"+
+                COL_DRUG+" VARCHAR(20),"+COL_DRUG_TYPE+" VARCHAR(20)"+
                 ");";
         return createTableQuery;
     }
@@ -58,7 +72,7 @@ public class MedInfoQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertMedInfoData(int userid,String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote, String visionnote, String aidenote, String dietnote, String blind, String speech) {
+    public static Boolean insertMedInfoData(int userid, String blood, String glass, String lense, String falses, String implants, String aid, String donor, String note, String mouth, String mouthnote, String visionnote, String aidenote, String dietnote, String blind, String speech, String allergynote, String tobaco, String t_type, String t_amt, String t_year, String drink, String drink_amt, String drug, String drug_type) {
         boolean flag=false;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -78,6 +92,16 @@ public class MedInfoQuery {
         cv.put(COL_AIDE_NOTE,aidenote);
         cv.put(COL_VISION_NOTE,visionnote);
         cv.put(COL_DIET_NOTE,dietnote);
+        cv.put(COL_ALLERGY_NOTE,allergynote);
+
+        cv.put(COL_TOBACO,tobaco);
+        cv.put(COL_T_TYPE,t_type);
+        cv.put(COL_T_AMT,t_amt);
+        cv.put(COL_T_YEAR,t_year);
+        cv.put(COL_DRINK,drink);
+        cv.put(COL_DRINK_AMT,drink_amt);
+        cv.put(COL_DRUG,drug);
+        cv.put(COL_DRUG_TYPE,drug_type);
 
        Cursor c = MedInfoQuery.fetchOneRecordCursor(userid);
         if (c.moveToFirst()) {
@@ -142,6 +166,17 @@ public class MedInfoQuery {
                 medInfo.setAideNote(c.getString(c.getColumnIndex(COL_AIDE_NOTE)));
                 medInfo.setVisionNote(c.getString(c.getColumnIndex(COL_VISION_NOTE)));
                 medInfo.setDietNote(c.getString(c.getColumnIndex(COL_DIET_NOTE)));
+                medInfo.setAllergyNote(c.getString(c.getColumnIndex(COL_ALLERGY_NOTE)));
+
+                medInfo.setTobaco(c.getString(c.getColumnIndex(COL_TOBACO)));
+                medInfo.setT_type(c.getString(c.getColumnIndex(COL_T_TYPE)));
+                medInfo.setT_amt(c.getString(c.getColumnIndex(COL_T_AMT)));
+                medInfo.setT_year(c.getString(c.getColumnIndex(COL_T_YEAR)));
+                medInfo.setDrink(c.getString(c.getColumnIndex(COL_DRINK)));
+                medInfo.setDrink_amt(c.getString(c.getColumnIndex(COL_DRINK_AMT)));
+                medInfo.setDrug(c.getString(c.getColumnIndex(COL_DRUG)));
+                medInfo.setDrug_type(c.getString(c.getColumnIndex(COL_DRUG_TYPE)));
+
 
             } while (c.moveToNext());
         }

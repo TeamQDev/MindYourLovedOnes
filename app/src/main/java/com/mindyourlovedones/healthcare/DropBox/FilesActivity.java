@@ -341,6 +341,7 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
                     String ext = result.getName().substring(result.getName().indexOf(".") + 1);
                     String type = mime.getMimeTypeFromExtension(ext);
 
+                   /*25 Oct Commented for pdf back/restore
                     Uri contentUri = null;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -349,17 +350,10 @@ public class FilesActivity extends DropboxActivity implements ZipListner{
                         contentUri = Uri.fromFile(result);
                     }
 
-                    intent.setDataAndType(contentUri, type);
+                    intent.setDataAndType(contentUri, type);*/
 
-                    // Check for a handler first to avoid a crash
-                   /* PackageManager manager = getPackageManager();
-                    List<ResolveInfo> resolveInfo = manager.queryIntentActivities(intent, 0);
-                    if (resolveInfo.size() > 0) {
-                        startActivity(intent);
-                    }
-                    */
                     preferences=new Preferences(FilesActivity.this);
-                    preferences.putString(PrefConstants.URI, contentUri.toString());
+                    preferences.putString(PrefConstants.URI, result.getAbsolutePath());
                     preferences.putString(PrefConstants.RESULT, result.getName());
                     finish();
                 }

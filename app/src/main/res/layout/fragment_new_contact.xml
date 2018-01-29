@@ -591,13 +591,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/spinnerHospital"
-                            android:descendantFocusability="beforeDescendants"
-                            android:focusableInTouchMode="true"
                             android:paddingBottom="@dimen/dimension8dp"
                             android:paddingLeft="@dimen/dimension30dp"
                             android:paddingRight="@dimen/dimension30dp"
                             android:paddingTop="@dimen/dimension8dp"
-                            app:hintEnabled="false">
+                            app:hintEnabled="true">
                             <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
                             <AutoCompleteTextView
                                 android:id="@+id/txtOtherCategoryHospital"
@@ -606,6 +604,7 @@
                                 android:imeOptions="actionNext"
                                 android:maxLength="30"
                                 android:maxLines="1"
+                                android:hint="Other Hospital"
                                 android:paddingLeft="@dimen/dimension15dp"
                                 android:paddingTop="@dimen/dimension2dp"
                                 android:singleLine="true"

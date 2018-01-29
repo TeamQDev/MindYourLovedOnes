@@ -143,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     String[] LangList = {"Arabic","Chinese","English","French","German","Greek","Hebrew","Hindi","Italian","Japanese","Korean","Russian","Spanish","Other"};
     ImageLoader imageLoaderProfile,imageLoaderCard;
     DisplayImageOptions displayImageOptionsProfile,displayImageOptionsCard;
+    boolean checkSave=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

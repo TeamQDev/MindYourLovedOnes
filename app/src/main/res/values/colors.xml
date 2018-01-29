@@ -25,33 +25,6 @@
     <color name="colorGrayDarkButton">#A1A7Ac</color>
     <color name="colorMaroon">#C00000</color>
     <color name="colorGuide">#7f7f7f</color>
-
-<!--
- <color name="colorOne">#408000</color>
-
-    <color name="colorThree">#cc9900</color>
-
- <color name="colorOne">#4CAF50</color>
-
-    <color name="colorThree">#FF9800</color>
-
-     <color name="colorOne">#33691e</color>
-
-    <color name="colorThree">#fdd835</color>
-
-      <color name="colorOne">#004d40</color>
-
-    <color name="colorThree">#8e24aa</color>
-
-    <color name="colorOne">#00e676</color>
-
-    <color name="colorThree">#e91e63</color>
-
-      <color name="colorOne">#00e676</color>
-
-    <color name="colorThree">#ff6d00</color>
-
--->
     <color name="colorOne">#4CAF50</color>
 
     <color name="colorThree">#FF9800</color>

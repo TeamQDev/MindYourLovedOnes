@@ -33,12 +33,16 @@
 
             <TextView
                 android:id="@+id/txtTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension10dp"
                 android:text="Emergency Info"
+                android:layout_toRightOf="@+id/imgBack"
+                android:layout_toLeftOf="@+id/imgDone"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/dimension21dp" />

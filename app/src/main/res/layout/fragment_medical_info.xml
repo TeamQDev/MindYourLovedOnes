@@ -53,9 +53,9 @@
                 android:id="@+id/txtAllergyHeader"
                 style="@style/EmergencyCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension40dp"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgAllergy"
-                android:text="Allergies" />
+                android:text="Allergies and Medication Reactions" />
 
             <ImageView
                 android:id="@+id/imgAddAllergy"
@@ -72,6 +72,19 @@
                 android:layout_below="@+id/txtAllergyHeader"
                 android:layout_toRightOf="@+id/imgAllergy"
                 android:divider="@null" />
+            <EditText
+                android:id="@+id/etAllergyNote"
+                style="@style/EmergencyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ListAllergy"
+                android:layout_margin="@dimen/dimension15dp"
+                android:background="@drawable/darkgray_white_border"
+                android:gravity="top"
+                android:hint="Note"
+                android:layout_toRightOf="@+id/imgAllergy"
+                android:textColor="@color/colorBlue"
+                android:padding="@dimen/dimension8dp" />
 
         </RelativeLayout>
         <RelativeLayout
@@ -2161,6 +2174,366 @@
                 android:padding="@dimen/dimension8dp" />
         </RelativeLayout>
 
+        <View
+            android:id="@+id/view16"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlEyes"
+            />
+        <RelativeLayout
+            android:id="@+id/rlTobaco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view16"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgTobaco"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/tobaco" />
+            <TextView
+                android:id="@+id/txtTobacoHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:text="Smoking/ Tobacco Use"
+                android:layout_toRightOf="@+id/imgTobaco"
+                />
+            <RelativeLayout
+                android:id="@+id/rlRadios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTobacoHeader"
+                android:layout_toRightOf="@+id/imgTobaco">
+
+                <RadioGroup
+                    android:id="@+id/rgTobaco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbTobacoCurrent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:text="Current"
+                        android:textSize="@dimen/dimension18dp"
+
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rbTobacoPast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Past"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:textSize="@dimen/dimension18dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbTobacoNever"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Never"
+                        android:textSize="@dimen/dimension18dp" />
+                </RadioGroup>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlTobacoDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlRadios"
+                android:layout_toRightOf="@+id/imgTobaco"
+                android:visibility="gone"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTobacoType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                   >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtTobacoType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Type"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTobacoAmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension5dp"
+                    android:layout_below="@+id/tilTobacoType"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtTobacoAmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount/day"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilTobacoYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension5dp"
+                    android:layout_below="@+id/tilTobacoAmt"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtTobacoYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Number of Years"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view17"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlTobaco"
+            />
+
+        <!---->
+        <RelativeLayout
+            android:id="@+id/rlDrug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view18"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgDrug"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/drug" />
+            <TextView
+                android:id="@+id/txtDrugHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:text="Recreational Drug Use"
+                android:layout_toRightOf="@+id/imgDrug"
+                />
+            <RelativeLayout
+                android:id="@+id/rlRadioDrug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDrugHeader"
+                android:layout_toRightOf="@+id/imgDrug">
+
+                <RadioGroup
+                    android:id="@+id/rgDrug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbDrugCurrent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:text="Current"
+                        android:textSize="@dimen/dimension18dp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rbDrugPast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Past"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:textSize="@dimen/dimension18dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbDrugNever"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Never"
+                        android:textSize="@dimen/dimension18dp" />
+                </RadioGroup>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlDrugDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlRadioDrug"
+                android:layout_toRightOf="@+id/imgDrug"
+                android:visibility="gone"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDrugType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtDrugType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Type"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view18"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlDrink"
+            />
+
+        <!---->
+
+        <RelativeLayout
+            android:id="@+id/rlDrink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view17"
+            android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/gray_white_border"
+            android:padding="@dimen/dimension5dp">
+
+            <ImageView
+                android:id="@+id/imgDrink"
+                android:layout_width="@dimen/dimension70dp"
+                android:layout_height="@dimen/dimension70dp"
+                android:layout_marginRight="@dimen/dimension10dp"
+                android:padding="@dimen/dimension6dp"
+                android:src="@drawable/drink" />
+            <TextView
+                android:id="@+id/txtDrinkHeader"
+                style="@style/EmergencyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension40dp"
+                android:text="Alcohol"
+                android:layout_toRightOf="@+id/imgDrink"
+                />
+            <RelativeLayout
+                android:id="@+id/rlRadioDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDrinkHeader"
+                android:layout_toRightOf="@+id/imgDrink">
+
+                <RadioGroup
+                    android:id="@+id/rgDrink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbDrinkCurrent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimension10dp"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:text="Current"
+                        android:textSize="@dimen/dimension18dp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rbDrinkPast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Past"
+                        android:layout_marginRight="@dimen/dimension10dp"
+                        android:textSize="@dimen/dimension18dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbDrinkNever"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Never"
+                        android:textSize="@dimen/dimension18dp" />
+                </RadioGroup>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlDrinkDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlRadioDrink"
+                android:layout_toRightOf="@+id/imgDrink"
+                android:visibility="gone"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDrinkAmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtDrinkAmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount/day"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view19"
+            android:layout_height="@dimen/dimension20dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
+            android:layout_below="@+id/rlDrug"
+            />
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>

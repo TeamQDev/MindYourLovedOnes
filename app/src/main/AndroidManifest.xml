@@ -261,7 +261,7 @@
             android:configChanges="keyboard|keyboardHidden|uiMode|screenLayout|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-      
+
         <activity android:name="com.mindyourlovedones.healthcare.DashBoard.InstructionActivity" />
         <activity android:name="com.mindyourlovedones.healthcare.DashBoard.ProfileActivity"></activity>
     </application>
