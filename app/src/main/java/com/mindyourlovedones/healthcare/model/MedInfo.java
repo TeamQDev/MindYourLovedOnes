@@ -78,6 +78,36 @@ public class MedInfo {
     String t_year="";
     String drink_amt="";
     String drug_type="";
+
+    String drink_year="";
+
+    public String getDrink_year() {
+        return drink_year;
+    }
+
+    public void setDrink_year(String drink_year) {
+        this.drink_year = drink_year;
+    }
+
+    public String getDrug_amt() {
+        return drug_amt;
+    }
+
+    public void setDrug_amt(String drug_amt) {
+        this.drug_amt = drug_amt;
+    }
+
+    public String getDrug_year() {
+        return drug_year;
+    }
+
+    public void setDrug_year(String drug_year) {
+        this.drug_year = drug_year;
+    }
+
+    String drug_amt="";
+    String drug_year="";
+
     int id;
     int userId;
     String feet="";

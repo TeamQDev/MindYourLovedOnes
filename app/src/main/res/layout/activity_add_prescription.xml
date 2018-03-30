@@ -434,7 +434,7 @@
             android:id="@+id/etNote"
             style="@style/EmergencyDesc"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension70dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtPetHeader"
             android:layout_margin="@dimen/dimension8dp"
             android:background="@drawable/darkgray_white_border"
@@ -484,7 +484,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkGray"
-            android:text="Add photo of prescription"
+            android:text="Add Photo of Prescription"
+            android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/imgAddPhoto"
             android:layout_toStartOf="@+id/imgAddPhoto" />

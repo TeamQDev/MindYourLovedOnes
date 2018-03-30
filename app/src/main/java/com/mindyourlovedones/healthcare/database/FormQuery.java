@@ -47,7 +47,9 @@ public class FormQuery {
     public static ArrayList<Form> fetchAllDocumentRecord(int userid) {
         ArrayList<Form> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid+ "';",null);
+              Cursor c=db.rawQuery("select * from "+TABLE_NAME + ";",null);
+
+        //   Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid+ "';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
@@ -72,7 +74,7 @@ public class FormQuery {
         ContentValues cv=new ContentValues();
         cv.put(COL_USER_ID,userid);
         cv.put(COL_NAME,name);
-        cv.put(COL_DOCUMENT,document);
+        cv.put(COL_DOCUMENT,name);
         cv.put(COL_PHOTO,photo);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
@@ -109,7 +111,7 @@ public class FormQuery {
         ContentValues cv=new ContentValues();
 
         cv.put(COL_NAME,name);
-        cv.put(COL_DOCUMENT,documentPath);
+        cv.put(COL_DOCUMENT,name);
         cv.put(COL_PHOTO,photo);
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 

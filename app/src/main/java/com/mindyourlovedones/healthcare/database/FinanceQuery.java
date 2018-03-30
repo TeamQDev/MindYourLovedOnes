@@ -47,7 +47,9 @@ public class FinanceQuery {
     public static ArrayList<Finance> fetchAllFinanceRecord(int id) {
         ArrayList<Finance> connectionList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id+ ";";
+        String query="select * from " + TABLE_NAME + ";";
+
+     //   String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id+ ";";
         Cursor c = db.rawQuery(query, null);
 
             if (c.moveToFirst()) {

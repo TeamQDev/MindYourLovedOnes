@@ -34,6 +34,16 @@ public class RelativeConnection {
     String OtherLang="";
     String live="";
     String children="";
+
+    public String getSibling() {
+        return sibling;
+    }
+
+    public void setSibling(String sibling) {
+        this.sibling = sibling;
+    }
+
+    String sibling="";
     String friend="";
 
     public String getLive() {

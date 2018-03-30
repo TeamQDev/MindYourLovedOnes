@@ -76,7 +76,9 @@ if (dateList!=null) {
     public static ArrayList<Appoint> fetchAllAppointmentRecord(int userid) {
         ArrayList<Appoint> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid + "';",null);
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME + ";",null);
+
+       // Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USERID + "='" + userid + "';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {

@@ -8,6 +8,16 @@ import java.io.Serializable;
 
 public class Specialist implements Serializable {
     String lastseen="";
+
+    public String getLocator() {
+        return locator;
+    }
+
+    public void setLocator(String locator) {
+        this.locator = locator;
+    }
+
+    String locator="";
     String website="";
     String photoCard;
     public String getPhotoCard() {

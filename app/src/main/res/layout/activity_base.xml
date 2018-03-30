@@ -76,17 +76,17 @@
 
                 <ImageView
                     android:id="@+id/imgNoti"
-                    android:layout_width="@dimen/dimension80dp"
-                    android:layout_height="@dimen/dimension85dp"
+                    android:layout_width="@dimen/dimension120dp"
+                    android:layout_height="@dimen/dimension100dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dimension15dp"
-                    android:src="@drawable/ic_launcher"
+                    android:layout_marginRight="@dimen/dimension10dp"
+                    android:src="@drawable/aba"
                     android:padding="@dimen/dimension10dp"
                     />
                 <ImageView
                     android:id="@+id/imgLogo"
-                    android:layout_width="@dimen/dimension80dp"
+                    android:layout_width="@dimen/dimension85dp"
                     android:layout_height="@dimen/dimension85dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"

@@ -349,7 +349,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/tilDate"
+            android:layout_below="@+id/tilLocation"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/dimension8dp"
@@ -365,6 +365,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Associated Dr. or Hospital"
+                android:imeOptions="actionNext"
+                android:paddingLeft="@dimen/dimension15dp"
+                android:paddingTop="@dimen/dimension2dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/dimension20dp"
+                android:visibility="gone" />
+
+            <requestFocus />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLocator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tilHosp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/dimension8dp"
+            android:paddingLeft="@dimen/dimension30dp"
+            android:paddingRight="@dimen/dimension30dp"
+            android:paddingTop="@dimen/dimension8dp">
+
+            <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+
+
+            <AutoCompleteTextView
+                android:id="@+id/txtLocator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Electronic Protected Health Information Record Locator (if applicable)"
                 android:imeOptions="actionNext"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension2dp"
@@ -493,7 +526,7 @@
                 android:id="@+id/txtLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location of Originals"
+                android:hint="Location of Original"
                 android:imeOptions="actionNext"
                 android:paddingLeft="@dimen/dimension15dp"
                 android:paddingTop="@dimen/dimension2dp"

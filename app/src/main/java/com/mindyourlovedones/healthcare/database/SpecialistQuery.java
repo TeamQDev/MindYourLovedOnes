@@ -37,6 +37,7 @@ public class SpecialistQuery {
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
     public static final String COL_LASTSEEN = "LastSeen";
+    public static final String COL_LOCATOR = "Locator";
     public static final String COL_PHOTOCARD= "PhotoCard";
 
 
@@ -48,7 +49,9 @@ public class SpecialistQuery {
     public static ArrayList<Specialist> fetchAllPhysicianRecord(int id, int physician) {
         ArrayList<Specialist> connectionList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";";
+        String query="select * from " + TABLE_NAME +" where " + COL_ISPHISYCIAN + "=" + physician + ";";
+
+        //   String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";";
         Cursor c = db.rawQuery(query, null);
 
             if (c.moveToFirst()) {
@@ -60,6 +63,7 @@ public class SpecialistQuery {
                     connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                     connection.setWebsite(c.getString(c.getColumnIndex(COL_WEBSITE)));
                     connection.setLastseen(c.getString(c.getColumnIndex(COL_LASTSEEN)));
+                    connection.setLocator(c.getString(c.getColumnIndex(COL_LOCATOR)));
                     connection.setOfficePhone(c.getString(c.getColumnIndex(COL_OFFICE_PHONE)));
                     connection.setHourPhone(c.getString(c.getColumnIndex(COL_HOUR_PHONE)));
                     connection.setOtherPhone(c.getString(c.getColumnIndex(COL_OTHER_PHONE)));
@@ -81,7 +85,7 @@ public class SpecialistQuery {
 
         return connectionList;
     }
-    public static Boolean insertPhysicianData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard, String otherDoctor) {
+    public static Boolean insertPhysicianData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard, String otherDoctor, String locator) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -90,6 +94,7 @@ public class SpecialistQuery {
         cv.put(COL_NAME,name);
         cv.put(COL_WEBSITE,website);
         cv.put(COL_LASTSEEN,lastseen);
+        cv.put(COL_LOCATOR,locator);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_OFFICE_PHONE,officephone);
         cv.put(COL_HOUR_PHONE,hourphone);
@@ -123,7 +128,7 @@ public class SpecialistQuery {
     public static String createDoctorTable() {
         String createTableQuery = "create table  If Not Exists " + TABLE_NAME + "(" + COL_ID + " INTEGER PRIMARY KEY, " +
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50)," + COL_LASTSEEN + " VARCHAR(50),"+
-                COL_HOUR_PHONE + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
+                COL_HOUR_PHONE + " VARCHAR(20)," +COL_LOCATOR + " VARCHAR(40)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
                 COL_OFFICE_PHONE + " VARCHAR(20)," + COL_SPECIALITY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
                 " VARCHAR(20)," + COL_ISPHISYCIAN + " INTEGER," +
                 COL_NETWORK + " VARCHAR(50)," + COL_AFFIL + " VARCHAR(50)," +COL_OTHER_SPECIALITY + " VARCHAR(50)," + COL_NOTE + " VARCHAR(50)," +
@@ -137,7 +142,7 @@ public class SpecialistQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updatePhysicianData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard, String otherDoctor) {
+    public static Boolean updatePhysicianData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String network, String affil, String note, int i, String lastseen, String photoCard, String otherDoctor, String locator) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -146,6 +151,7 @@ public class SpecialistQuery {
         cv.put(COL_NAME,name);
         cv.put(COL_WEBSITE,website);
         cv.put(COL_LASTSEEN,lastseen);
+        cv.put(COL_LOCATOR,locator);
         cv.put(COL_ADDRESS,address);
         cv.put(COL_OFFICE_PHONE,officephone);
         cv.put(COL_HOUR_PHONE,hourphone);

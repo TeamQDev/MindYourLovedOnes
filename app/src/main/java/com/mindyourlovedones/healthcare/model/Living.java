@@ -65,6 +65,35 @@ public class Living extends ArrayList<Living> implements Serializable {
     String InstNote="";
     String finance = "", prepare = "", shop = "", use = "", bath = "", continence = "",dress="",feed="",toileting="",transfer="",transport="",pets="",drive="",keep="",medication="";
 
+    String remote = "";
+    String alert="";
+
+    public String getRemote() {
+        return remote;
+    }
+
+    public void setRemote(String remote) {
+        this.remote = remote;
+    }
+
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
+
+    public String getComputer() {
+        return computer;
+    }
+
+    public void setComputer(String computer) {
+        this.computer = computer;
+    }
+
+    String computer="";
+
     public String getFinance() {
         return finance;
     }

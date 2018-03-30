@@ -14,12 +14,20 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="@dimen/dimension100dp"
+        android:layout_width="@dimen/dimension160dp"
         android:layout_height="@dimen/dimension100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimension30dp"
         android:layout_marginBottom="@dimen/dimension20dp"
         android:src="@drawable/ic_launcher" />
+    <!--<ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="@dimen/dimension100dp"
+        android:layout_height="@dimen/dimension100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimension30dp"
+        android:layout_marginBottom="@dimen/dimension20dp"
+        android:src="@drawable/ic_launcher" />-->
 
     <TextView
         android:id="@+id/txtLogo"

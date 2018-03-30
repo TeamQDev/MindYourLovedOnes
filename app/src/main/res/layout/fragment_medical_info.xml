@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgAllergy"
+                android:layout_toLeftOf="@+id/imgAddAllergy"
                 android:text="Allergies and Medication Reactions" />
 
             <ImageView
@@ -726,7 +727,7 @@
                     android:layout_height="@dimen/dimension50dp"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dimension5dp"
-                    android:text="Hearing Aids" />
+                    android:text="Hearing Aid(s)" />
 
                 <ToggleButton
                     android:id="@+id/tbHearingAid"
@@ -1878,7 +1879,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension40dp"
                 android:layout_toRightOf="@+id/imgHospital"
-                android:text="Preferred Hospital" />
+                android:text="Preferred Hospitals" />
 
             <ImageView
                 android:id="@+id/imgAddHospital"
@@ -2112,10 +2113,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlRadio"
-                android:layout_toRightOf="@+id/imgDonor"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|left"
                 android:padding="@dimen/dimension5dp"
-                android:text=" If yes, see Drivers License or Health Care Proxy"
+                android:text=" If yes, see Driver's License or Health Care Proxy"
                 android:textSize="@dimen/dimension17dp" />
 
             <TextView
@@ -2288,7 +2288,7 @@
                         android:id="@+id/txtTobacoAmt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Amount/day"
+                        android:hint="Amount/Frequency"
                         android:imeOptions="actionNext"
                         android:paddingBottom="@dimen/dimension10dp"
                         android:paddingLeft="@dimen/dimension15dp"
@@ -2310,7 +2310,7 @@
                         android:id="@+id/txtTobacoYear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Number of Years"
+                        android:hint="@string/numOfYear"
                         android:imeOptions="actionNext"
                         android:paddingBottom="@dimen/dimension10dp"
                         android:paddingLeft="@dimen/dimension15dp"
@@ -2421,6 +2421,48 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dimension20dp" />
                 </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDrugAmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:layout_below="@+id/tilDrugType"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtDrugAmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount/Frequency/Other Notes"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDrugYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension5dp"
+                    android:layout_below="@+id/tilDrugAmt"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtDrugYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/numOfYear"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
         </RelativeLayout>
         <View
@@ -2517,7 +2559,28 @@
                         android:id="@+id/txtDrinkAmt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Amount/day"
+                        android:hint="Amount/Frequency/Other Notes"
+                        android:imeOptions="actionNext"
+                        android:paddingBottom="@dimen/dimension10dp"
+                        android:paddingLeft="@dimen/dimension15dp"
+                        android:paddingTop="@dimen/dimension10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/dimension20dp" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDrinkYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:paddingBottom="@dimen/dimension8dp"
+                    android:layout_marginTop="@dimen/dimension5dp"
+                    android:layout_below="@+id/tilDrinkAmt"
+                    >
+                    <AutoCompleteTextView
+                        android:id="@+id/txtDrinkYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/numOfYear"
                         android:imeOptions="actionNext"
                         android:paddingBottom="@dimen/dimension10dp"
                         android:paddingLeft="@dimen/dimension15dp"

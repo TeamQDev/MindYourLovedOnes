@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     >
+    <!--  android:background="@drawable/corner_gray_white_border"-->
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -49,8 +50,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilName"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
-       
+        android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/dimension8dp"
@@ -66,23 +66,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:maxLength="30"
-            android:maxLines="1"
-
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilBreed"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -99,16 +95,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Breed"
-            android:maxLength="30"
-            android:maxLines="1"
-
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -116,7 +108,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilColor"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -133,16 +125,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Color"
-            android:maxLength="30"
-            android:maxLines="1"
-
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -150,7 +138,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilChip"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -167,22 +155,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Microchip number"
-            android:maxLength="30"
-            android:maxLines="1"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -192,21 +177,19 @@
         android:paddingTop="@dimen/dimension8dp"
         android:gravity="bottom"
         android:layout_below="@+id/tilChip"
+        android:visibility="gone"
         >
         <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Special Needs"
-            android:maxLength="30"
-            android:maxLines="1"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -214,7 +197,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilVeteran"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -231,21 +214,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Veterinarian name, address, phone"
-            android:maxLines="3"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilCare"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -262,14 +243,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Person(s) who will care for pet (name, address, phone, email) "
-            android:maxLines="3"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -277,7 +256,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilPetBirthDate"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
 
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -293,15 +272,13 @@
             android:id="@+id/txtPetBirthDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="BirthDate"
-            android:maxLines="3"
+            android:hint="Birthdate"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -309,7 +286,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilPetNote"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
 
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -326,14 +303,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Notes about Pet"
-            android:maxLines="3"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
+
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>
@@ -341,7 +316,7 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tilCares"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension80dp"
+        android:layout_height="wrap_content"
        
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -358,14 +333,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Person(s) who will care for pet (name, address, phone, email) "
-            android:maxLines="3"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingTop="@dimen/dimension10dp"
             android:paddingBottom="@dimen/dimension10dp"
-            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimension20dp"
-            android:background="@drawable/corner_gray_white_border"
             android:imeOptions="actionNext"
             /><requestFocus />
     </android.support.design.widget.TextInputLayout>

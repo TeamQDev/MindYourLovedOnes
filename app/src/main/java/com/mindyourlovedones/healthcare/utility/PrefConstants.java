@@ -21,4 +21,10 @@ public class PrefConstants {
     public static final String URI = "FileUri";
     public static final String RESULT = "FileName";
     public static final String STORE = "Store";
+    public static final String CONNECTED_USERDB = "Current_DB";
+    public static final String CONNECTED_PATH ="CurrentPath" ;
+    public static final String TODO ="ToDo" ;
+    public static final String FROM_DB ="FromDb" ;
+
+    public static final String TODOWHAT ="ToDoWhat" ;
 }

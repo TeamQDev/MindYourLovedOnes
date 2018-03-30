@@ -61,6 +61,7 @@ import com.mindyourlovedones.healthcare.pdfCreation.PDFDocumentProcess;
 import com.mindyourlovedones.healthcare.pdfdesign.Header;
 import com.mindyourlovedones.healthcare.pdfdesign.Individual;
 import com.mindyourlovedones.healthcare.utility.DialogManager;
+import com.mindyourlovedones.healthcare.utility.NetworkUtils;
 import com.mindyourlovedones.healthcare.utility.PrefConstants;
 import com.mindyourlovedones.healthcare.utility.Preferences;
 import com.mindyourlovedones.healthcare.webservice.WebService;
@@ -87,7 +88,8 @@ import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity implements  View.OnClickListener,CompoundButton.OnCheckedChangeListener{
     Context context=this;
-    
+    Bitmap ProfileMap=null,CardMap=null;
+
     private static final int REQUEST_CARD = 50;
     ContentValues values;
     Uri imageUriProfile=null,imageUriCard=null;
@@ -113,8 +115,8 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     RadioGroup rgPet,rgVeteran,rgUnderstand,rgLive;
     RadioButton rbYes,rbNo,rbYesPet,rbNoPet,rbYess,rbNoo,rbYesLive,rbNoLive;
     public static final int REQUEST_PET= 400;
-    CheckBox chkOther,chkChild,chkFriend,chkGrandParent,chkParent,chkSpouse;
-    String child="No",friend="No",grandParent="No",parent="No",spouse="No",other="No";
+    CheckBox chkOther,chkChild,chkFriend,chkGrandParent,chkParent,chkSpouse,chkSibling;
+    String child="No",friend="No",grandParent="No",parent="No",spouse="No",other="No",sibling="No";
     String liveOther="";
 
     ListView ListPet;
@@ -129,7 +131,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     RelativeLayout rlCard;
     TextView txtCard;
     final CharSequence[] dialog_items = {"View","Email","Fax","First Time User Instructions"};
-    DBHelper dbHelper;
+    DBHelper dbHelper,dbHelper1;
     View rootview;
     Preferences preferences;
     ImageView imgBack;
@@ -196,9 +198,11 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     }
 
     private void initComponent() {
-        dbHelper=new DBHelper(context);
+        dbHelper=new DBHelper(context,"MASTER");
         MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
-        PetQuery p=new PetQuery(context,dbHelper);
+        dbHelper1=new DBHelper(context,preferences.getString(PrefConstants.CONNECTED_USERDB));
+        PetQuery p=new PetQuery(context,dbHelper1);
+
         /*if (preferences.getInt(PrefConstants.CONNECTED_USERID)==(preferences.getInt(PrefConstants.USER_ID)))
         {
             personalInfo = PersonalInfoQuery.fetchEmailRecord(preferences.getInt(PrefConstants.CONNECTED_USERID));
@@ -221,6 +225,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
         imgAddpet.setOnClickListener(this);
         imgRight.setOnClickListener(this);
         chkChild.setOnCheckedChangeListener(this);
+        chkSibling.setOnCheckedChangeListener(this);
         chkFriend.setOnCheckedChangeListener(this);
         chkGrandParent.setOnCheckedChangeListener(this);
         chkParent.setOnCheckedChangeListener(this);
@@ -285,6 +290,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
         tilOtherLanguage.setHint("Other Language");
 
         chkChild= (CheckBox) findViewById(R.id.chkChild);
+        chkSibling= (CheckBox) findViewById(R.id.chkSibling);
         chkFriend= (CheckBox) findViewById(R.id.chkFriend);
         chkGrandParent= (CheckBox) findViewById(R.id.chkGrandParent);
         chkParent= (CheckBox) findViewById(R.id.chkParent);
@@ -362,7 +368,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
         ArrayAdapter<String> adapters = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, EyesList);
         adapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEyes.setAdapter(adapters);
-        spinnerEyes.setHint("Eyes Color");
+        spinnerEyes.setHint("Eye Color");
 
         ArrayAdapter<String> adapterl = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, LangList);
         adapterl.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -453,9 +459,10 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 if (checkedId == R.id.rbYesLive) {
                     live = "Yes";
                     rlLive.setVisibility(View.GONE);
-                    child="No";friend="No";grandParent="No";parent="No";spouse="No";other="No";
+                    child="No";friend="No";grandParent="No";parent="No";spouse="No";other="No";sibling="No";
                     liveOther="";
                     chkChild.setChecked(false);
+                    chkSibling.setChecked(false);
                     chkFriend.setChecked(false);
                     chkGrandParent.setChecked(false);
                     chkParent.setChecked(false);
@@ -661,10 +668,11 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
             for (int i = 0; i < Relationship.length; i++) {
                 if (connection.getRelationType().equalsIgnoreCase(Relationship[i])) {
                     index = i;
+                    spinnerRelation.setSelection(index+1);
                 }
             }
-            if (index!=0)
-                spinnerRelation.setSelection(index+1);
+           /* if (index!=0)
+                spinnerRelation.setSelection(index+1);*/
             txtOther.setText(connection.getOther_person());
 
             if (connection.getLive()!=null) {
@@ -689,6 +697,17 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                     child = "No";
                 }
             }
+
+            if (connection.getSibling() != null) {
+                if (connection.getSibling().equals("Yes")) {
+                    chkSibling.setChecked(true);
+                    sibling = "Yes";
+                } else if (connection.getSibling().equals("No")) {
+                    chkSibling.setChecked(false);
+                    sibling = "No";
+                }
+            }
+
             if (connection.getFriend() != null) {
                 if (connection.getFriend().equals("Yes")) {
                     chkFriend.setChecked(true);
@@ -740,11 +759,12 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
 
             imagepath=connection.getPhoto();
             if (!imagepath.equals("")) {
-                File imgFile = new File(imagepath);
+                File imgFile = new File(preferences.getString(PrefConstants.CONNECTED_PATH),imagepath);
                 if (imgFile.exists()) {
-                       /* Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                    imgProfile.setImageBitmap(myBitmap);*/
                     imageLoaderProfile.displayImage(String.valueOf(Uri.fromFile(imgFile)),imgProfile,displayImageOptionsProfile);
+                }
+                else{
+                    Toast.makeText(context,"File Not Found",Toast.LENGTH_SHORT).show();
                 }
             }
             else{
@@ -755,7 +775,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
             imgProfile.setImageBitmap(bmp);*/
             cardpath=connection.getPhotoCard();
             if (!connection.getPhotoCard().equals("")) {
-                File imgFile1 = new File(connection.getPhotoCard());
+                File imgFile1 = new File(preferences.getString(PrefConstants.CONNECTED_PATH),connection.getPhotoCard());
                 if (imgFile1.exists()) {
                       /*  Bitmap myBitmap = BitmapFactory.decodeFile(imgFile1.getAbsolutePath());
                     imgCard.setImageBitmap(myBitmap);*/
@@ -1456,7 +1476,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
             case R.id.imgRight:
 
                 final String RESULT = Environment.getExternalStorageDirectory()
-                        + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID) + "/";
+                        + "/mylopdf/";
                 File dirfile = new File(RESULT);
                 dirfile.mkdirs();
                 File file = new File(dirfile, "PersonalProfile.pdf");
@@ -1465,9 +1485,13 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 }
                 new Header().createPdfHeader(file.getAbsolutePath(),
                         ""+preferences.getString(PrefConstants.CONNECTED_NAME));
+                preferences.copyFile("ic_launcher.png",context);
+                Header.addImage( "/sdcard/MYLO/images/"+"ic_launcher.png");
                 Header.addEmptyLine(1);
                 Header.addusereNameChank("Personal Profile");//preferences.getString(PrefConstants.CONNECTED_NAME));
                 Header.addEmptyLine(1);
+                Header.addChank("MindYour-LovedOnes.com");//preferences.getString(PrefConstants.CONNECTED_NAME));
+
                 Paragraph p = new Paragraph(" ");
                 LineSeparator line = new LineSeparator();
                 line.setOffset(-4);
@@ -1505,7 +1529,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
 
                     public void onClick(DialogInterface dialog, int itemPos) {
                         String path=Environment.getExternalStorageDirectory()
-                                + "/mylo/" + preferences.getInt(PrefConstants.CONNECTED_USERID) + "_" + preferences.getInt(PrefConstants.USER_ID)
+                                + "/mylopdf"
                                 + "/PersonalProfile.pdf";
                         switch (itemPos) {
                             case 0: //View
@@ -1667,6 +1691,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 {
                     imgProfile.setImageResource(R.drawable.ic_profile_defaults);
                     imagepath="";
+                    ProfileMap=null;
                 }
                 else if(from.equals("Card"))
                 {
@@ -1674,6 +1699,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                     rlCard.setVisibility(View.GONE);
                     txtCard.setVisibility(View.VISIBLE);
                     cardpath="";
+                    CardMap=null;
                     //photoCard = null;
                 }
                 dialog.dismiss();
@@ -1732,6 +1758,8 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     }
 
     private boolean validateConnection() {
+        storeImage(ProfileMap, "Profile");
+        storeImage(CardMap, "Card");
         name = txtName.getText().toString().trim();
         email = txtEmail.getText().toString().trim();
         phone = txtPhone.getText().toString().trim();
@@ -1927,9 +1955,15 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
         {
             if (connection.getName().equals(name)&&connection.getEmail().equals(email))
             {
-                Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender);
+                Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender,sibling);
                 if (flag == true) {
-                    Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
+                    DBHelper dbHelper=new DBHelper(context,preferences.getString(PrefConstants.CONNECTED_USERDB));
+                    MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
+                    Boolean flags = MyConnectionsQuery.updateMyConnectionsData(1, name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender,sibling);
+                    if (flags == true) {
+                        Toast.makeText(context, "You have edited profile information successfully", Toast.LENGTH_SHORT).show();
+                    }
+                    //Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                     preferences.putString(PrefConstants.CONNECTED_NAME, name);
                     finish();
                 } else {
@@ -1937,22 +1971,44 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 }
             }
             else {
-                UpdateUserAsynk asynk=new UpdateUserAsynk(name,email,""+preferences.getInt(PrefConstants.USER_ID));
-                asynk.execute();
+                if (!NetworkUtils.getConnectivityStatusString(ProfileActivity.this).equals("Not connected to Internet")) {
+                    UpdateUserAsynk asynk = new UpdateUserAsynk(name, email, "" + preferences.getInt(PrefConstants.USER_ID));
+                    asynk.execute();
+                }else {
+                    DialogManager.showAlert("Network Error, Check your internet connection", ProfileActivity.this);
+                }
             }
 
         }
         else {
-            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender);
+            DBHelper dbHelpers=new DBHelper(context,"MASTER");
+            MyConnectionsQuery ms=new MyConnectionsQuery(context,dbHelpers);
+            Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender, sibling);
             if (flag == true) {
-                Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
-                preferences.putString(PrefConstants.CONNECTED_NAME, name);
+                DBHelper dbHelper=new DBHelper(context,preferences.getString(PrefConstants.CONNECTED_USERDB));
+                MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
+                Boolean flags = MyConnectionsQuery.updateMyConnectionsData(1, name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender, sibling);
+                if (flags == true) {
+                    Toast.makeText(context, "You have edited profile data Successfully", Toast.LENGTH_SHORT).show();
+                    preferences.putString(PrefConstants.CONNECTED_NAME, name);
+                    String mail=email;
+                    mail=mail.replace(".","_");
+                    mail=mail.replace("@","_");
+                    File oldFolder = new File(preferences.getString(PrefConstants.CONNECTED_PATH));
+                    File newFolder = new File(Environment.getExternalStorageDirectory(), "/MYLO/" +mail + "/");
+                    boolean success = oldFolder.renameTo(newFolder);
+                    if (success) {
+                        preferences.putString(PrefConstants.CONNECTED_USERDB, mail);
+                        preferences.putString(PrefConstants.CONNECTED_PATH, Environment.getExternalStorageDirectory() + "/MYLO/" + preferences.getString(PrefConstants.CONNECTED_USERDB) + "/");
+                    }
+                }
+               // Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         }
-      //  }
+        //  }
        /* if (preferences.getInt(PrefConstants.CONNECTED_USERID)==preferences.getInt(PrefConstants.USER_ID)) {
             Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.USER_ID), name, email, address, phone," "," ", "Self", imagepath," ", 1, 2, otherRelation,height,weight,eyes,profession,employed,language,marital_status,religion,veteran,idnumber,pet,manager_phone, cardpath,english,child,friend,grandParent,parent,spouse,other,liveOther,live,OtherLang);
             if (flag == true) {
@@ -2027,7 +2083,8 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 // profileImage.setImageBitmap(selectedImage);
                 imageLoaderProfile.displayImage(String.valueOf(imageUri),imgProfile,displayImageOptionsProfile);
-                storeImage(selectedImage,"Profile");
+                // storeImage(selectedImage,"Profile");
+                ProfileMap=selectedImage;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -2038,10 +2095,11 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                         getContentResolver(), imageUriProfile);
                 String imageurl = getRealPathFromURI(imageUriProfile);
-                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                Bitmap selectedImage = imageOreintationValidator(thumbnail, imageurl);
                 imageLoaderProfile.displayImage(String.valueOf(imageUriProfile),imgProfile,displayImageOptionsProfile);
                 // profileImage.setImageBitmap(bitmap);
-                storeImage(bitmap,"Profile");
+                // storeImage(bitmap,"Profile");
+                ProfileMap=selectedImage;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -2062,7 +2120,8 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                 rlCard.setVisibility(View.VISIBLE);
                 imgCard.setVisibility(View.VISIBLE);
                 txtCard.setVisibility(View.GONE);
-                storeImage(selectedImage,"Card");
+                //   storeImage(selectedImage,"Card");
+                CardMap=selectedImage;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -2085,14 +2144,15 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                         getContentResolver(), imageUriCard);
 
                 String imageurl = getRealPathFromURI(imageUriCard);
-                Bitmap bitmap = imageOreintationValidator(thumbnail, imageurl);
+                Bitmap selectedImage = imageOreintationValidator(thumbnail, imageurl);
                 imageLoaderCard.displayImage(String.valueOf(imageUriCard),imgCard,displayImageOptionsCard);
                 //  profileCard.setImageBitmap(bitmap);
                 //
                 rlCard.setVisibility(View.VISIBLE);
                 imgCard.setVisibility(View.VISIBLE);
                 txtCard.setVisibility(View.GONE);
-                storeImage(bitmap,"Card");
+                //  storeImage(bitmap,"Card");
+                CardMap=selectedImage;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -2145,7 +2205,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                                 boolean flag= PetQuery.deleteRecord(a.getId());
                                 if(flag==true)
                                 {
-                                    Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"Deleted Pet Record",Toast.LENGTH_SHORT).show();
                                     setPetData();
                                     ListPet.requestFocus();
                                 }
@@ -2168,6 +2228,13 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                     child = "Yes";
                 else
                     child = "No";
+                break;
+
+            case R.id.chkSibling:
+                if (isChecked == true)
+                    sibling = "Yes";
+                else
+                    sibling = "No";
                 break;
 
             case R.id.chkFriend:
@@ -2251,35 +2318,45 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
     }
 
     private void storeImage(Bitmap selectedImage, String profile) {
-
         FileOutputStream outStream = null;
-        File file = new File(Environment.getExternalStorageDirectory(),
-                "/MYLO/MYLO/");
+        FileOutputStream outStream1 = null;
+        File file = new File(preferences.getString(PrefConstants.CONNECTED_PATH));
+        File files = new File(Environment.getExternalStorageDirectory()+"/MYLO/Master/");
         String path = file.getAbsolutePath();
         if (!file.exists()) {
             file.mkdirs();
         }
 
+        if (!files.exists()) {
+            files.mkdirs();
+        }
+
         try {
+            if (selectedImage!=null) {
+                if (profile.equals("Profile")) {
+                    imagepath = "MYLO_" + String.valueOf(System.currentTimeMillis())
+                            + ".jpg";
+                    // Write to SD Card
+                    outStream = new FileOutputStream(preferences.getString(PrefConstants.CONNECTED_PATH)+imagepath);
+                    outStream1 = new FileOutputStream(Environment.getExternalStorageDirectory()+"/MYLO/Master/"+imagepath);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    outStream1.write(byteArray);
+                    outStream1.close();
+                } else if (profile.equals("Card")) {
+                    cardpath = "MYLO_" + String.valueOf(System.currentTimeMillis())
+                            + ".jpg";
+                    // Write to SD Card
+                    outStream = new FileOutputStream(preferences.getString(PrefConstants.CONNECTED_PATH)+cardpath);
+                }
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+                byte[] byteArray = stream.toByteArray();
+                outStream.write(byteArray);
+                outStream.close();
 
-            if (profile.equals("Profile")) {
-                imagepath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
-                        + ".jpg";
-                // Write to SD Card
-                outStream = new FileOutputStream(imagepath);
             }
-            else   if (profile.equals("Card")){
-                cardpath = path + "/MYLO_" + String.valueOf(System.currentTimeMillis())
-                        + ".jpg";
-                // Write to SD Card
-                outStream = new FileOutputStream(cardpath);
-            }
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            selectedImage.compress(Bitmap.CompressFormat.JPEG, 40, stream);
-            byte[] byteArray = stream.toByteArray();
-            outStream.write(byteArray);
-            outStream.close();
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -2315,7 +2392,7 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
         @Override
         protected void onPreExecute() {
 
-           pd = ProgressDialog.show(context, "", "Please Wait..");
+            pd = ProgressDialog.show(context, "", "Please Wait..");
 
          /*   SharedPreferences mPref = context.getSharedPreferences(
                     "UserDetails", Context.MODE_PRIVATE);*/
@@ -2362,9 +2439,26 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                     //
                     if (errorCode.equals("0")) {
 
-                        Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender);
+                        Boolean flag = MyConnectionsQuery.updateMyConnectionsData(preferences.getInt(PrefConstants.CONNECTED_USERID), name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender, sibling);
                         if (flag == true) {
-                            Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
+                            DBHelper dbHelper=new DBHelper(context,preferences.getString(PrefConstants.CONNECTED_USERDB));
+                            MyConnectionsQuery m=new MyConnectionsQuery(context,dbHelper);
+                            Boolean flags = MyConnectionsQuery.updateMyConnectionsData(1, name, email, address, phone, homePhone, workPhone, relation, imagepath, "", 1, 2, otherRelation, height, weight, eyes, profession, employed, language, marital_status, religion, veteran, idnumber, pet, manager_phone, cardpath, english, child, friend, grandParent, parent, spouse, other, liveOther, live, OtherLang, bdate, gender, sibling);
+                            if (flags == true) {
+                                Toast.makeText(context, "You have edited profile information successfully", Toast.LENGTH_SHORT).show();
+
+                                String mail=email;
+                                mail=mail.replace(".","_");
+                                mail=mail.replace("@","_");
+                                File oldFolder = new File(preferences.getString(PrefConstants.CONNECTED_PATH));
+                                File newFolder = new File(Environment.getExternalStorageDirectory(), "/MYLO/" +mail + "/");
+                                boolean success = oldFolder.renameTo(newFolder);
+                                if (success) {
+                                    preferences.putString(PrefConstants.CONNECTED_USERDB, mail);
+                                    preferences.putString(PrefConstants.CONNECTED_PATH, Environment.getExternalStorageDirectory() + "/MYLO/" + preferences.getString(PrefConstants.CONNECTED_USERDB) + "/");
+                                }
+                            }
+                          //  Toast.makeText(context, "You have edited connection Successfully", Toast.LENGTH_SHORT).show();
                             preferences.putString(PrefConstants.CONNECTED_NAME, name);
                             finish();
                         } else {
@@ -2372,8 +2466,8 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
                         }
 
                     } else {
-                        Toast.makeText(context, "Updation Failed, Try again",
-                                Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(context, "Updation Failed, Try again",
+                                Toast.LENGTH_LONG).show();*/
                     }
                 }
 
@@ -2411,7 +2505,6 @@ public class ProfileActivity extends AppCompatActivity implements  View.OnClickL
             }
 
             else {
-
                 message = job1.getString("errorMsg");
                 Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
                 return errorCode;

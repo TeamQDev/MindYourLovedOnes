@@ -32,6 +32,7 @@ public class HospitalHealthQuery {
     public static final String COL_NOTE = "Note";
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
+    public static final String COL_LOCATOR = "Locator";
     public static final String COL_LASTSEEN = "LastSeen";
     public static final String COL_LOCATION= "Location";
     public static final String COL_PHOTOCARD= "PhotoCard";
@@ -43,7 +44,7 @@ public class HospitalHealthQuery {
     }
 
 
-    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String note, String lastseen, String otherCategory, String photoCard, String location) {
+    public static Boolean insertHospitalHealthData(int userId, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String note, String lastseen, String otherCategory, String photoCard, String location, String locator) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -63,6 +64,7 @@ public class HospitalHealthQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_OTHER_CATEGORY,otherCategory);
         cv.put(COL_PHOTOCARD,photoCard);
+        cv.put(COL_LOCATOR,locator);
 
 
         long rowid=db.insert(TABLE_NAME,null,cv);
@@ -85,7 +87,7 @@ public class HospitalHealthQuery {
                 COL_LOCATION + " VARCHAR(20)," + COL_OTHER_PHONE + " VARCHAR(20)," + COL_ADDRESS + " VARCHAR(100)," +
                 COL_OFFICE_PHONE + " VARCHAR(20)," + COL_CATEGORY + " VARCHAR(50)," + COL_OTHER_CATEGORY + " VARCHAR(50)," + COL_PRACTICENAME + " VARCHAR(30)," + COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
-                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTOCARD+" VARCHAR(50),"+ COL_LOCATOR+" VARCHAR(40),"+
                 COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
@@ -95,7 +97,7 @@ public class HospitalHealthQuery {
         return dropTableQuery;
     }
 
-    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String note, String lastseen, String otherCategory, String photoCard, String location) {
+    public static Boolean updateHospitalHealthData(int id, String name, String website, String address, String officephone, String hourphone, String otherphone, String speciality, String photo, String fax, String practice_name, String note, String lastseen, String otherCategory, String photoCard, String location, String locator) {
 
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
@@ -115,6 +117,7 @@ public class HospitalHealthQuery {
         cv.put(COL_FAX,fax);
         cv.put(COL_OTHER_CATEGORY,otherCategory);
         cv.put(COL_PHOTOCARD,photoCard);
+        cv.put(COL_LOCATOR,locator);
 
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
@@ -149,7 +152,9 @@ public class HospitalHealthQuery {
     public static ArrayList<Hospital> fetchAllHospitalhealthRecord(int id) {
         ArrayList<Hospital> hospitalList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id+ ";";
+        String query="select * from " + TABLE_NAME + ";";
+
+       // String query="select * from " + TABLE_NAME +" where " + COL_USER_ID + "=" + id+ ";";
         Cursor c = db.rawQuery(query, null);
 
         if (c.moveToFirst()) {
@@ -161,6 +166,7 @@ public class HospitalHealthQuery {
                 connection.setAddress(c.getString(c.getColumnIndex(COL_ADDRESS)));
                 connection.setWebsite(c.getString(c.getColumnIndex(COL_WEBSITE)));
                 connection.setLastseen(c.getString(c.getColumnIndex(COL_LASTSEEN)));
+                connection.setLocator(c.getString(c.getColumnIndex(COL_LOCATOR)));
                 connection.setOfficePhone(c.getString(c.getColumnIndex(COL_OFFICE_PHONE)));
                 connection.setLocation(c.getString(c.getColumnIndex(COL_LOCATION)));
                 connection.setOtherPhone(c.getString(c.getColumnIndex(COL_OTHER_PHONE)));

@@ -139,22 +139,23 @@
             android:gravity="top|left"
             android:layout_marginBottom="@dimen/dimension5dp"
             />
+
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txtName"
+            android:layout_marginBottom="@dimen/dimension5dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:drawableLeft="@drawable/time"
+            android:drawablePadding="@dimen/dimension10dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimension5dp"
             android:text="Aug 06,2017 15:30"
             android:textColor="@color/colorDarkGray"
             android:textSize="@dimen/dimension16dp"
-            android:layout_toRightOf="@+id/imgProfile"
-            android:layout_below="@+id/txtName"
-            android:layout_marginLeft="@dimen/dimension10dp"
-            android:drawableLeft="@drawable/time"
-            android:gravity="center"
-            android:drawablePadding="@dimen/dimension10dp"
-            android:layout_marginBottom="@dimen/dimension5dp"
-            android:paddingLeft="@dimen/dimension5dp"
-            />
+            tools:fontFamily="sans-serif" />
 
         <TextView
             android:id="@+id/txtAddress"

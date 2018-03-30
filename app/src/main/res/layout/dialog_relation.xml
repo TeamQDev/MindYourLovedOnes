@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/gray_white_border"
+        android:padding="@dimen/dimension5dp">
+
+        <ImageView
+            android:id="@+id/imgPet"
+            android:layout_width="@dimen/dimension40dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:padding="@dimen/dimension6dp"
+            android:src="@drawable/add_event"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/txtNoteHeader"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_toRightOf="@+id/imgPet"
+            android:text="Add Note"
+            android:textSize="@dimen/dimension20dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/txtNotes"
+            style="@style/EmergencyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_below="@+id/txtNoteHeader"
+            android:layout_marginTop="@dimen/dimension15dp"
+            android:layout_marginLeft="@dimen/dimension15dp"
+            android:layout_marginRight="@dimen/dimension15dp"
+            android:layout_marginBottom="@dimen/dimension10dp"
+            android:text="Add Relation for this profile"
+            android:textSize="@dimen/dimension20dp" />
+        <RelativeLayout
+            android:id="@+id/rlRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNotes">
+
+            <com.mindyourlovedones.healthcare.customview.MySpinner
+                android:id="@+id/spinnerRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimension35dp"
+                android:layout_marginRight="@dimen/dimension35dp"
+                app:ms_arrowColor="@color/colorBlue"
+                app:ms_arrowSize="16dp"
+                app:ms_floatingLabelText="Relationship"
+                app:ms_hint="hint"
+                app:ms_multiline="true"
+                custom:ms_floatingLabelColor="@color/colorBlue"
+                custom:ms_hintColor="@color/colorDarkGray" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilOtherRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerRelation"
+                android:paddingBottom="@dimen/dimension8dp"
+                android:paddingLeft="@dimen/dimension30dp"
+                android:paddingRight="@dimen/dimension30dp"
+                android:visibility="gone">
+
+                <AutoCompleteTextView
+                    android:id="@+id/txtOtherRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Other Relation"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/dimension15dp"
+                    android:paddingTop="@dimen/dimension2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/dimension20dp" />
+
+                <requestFocus />
+
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+       <!-- <EditText
+            android:id="@+id/etNote"
+            style="@style/EmergencyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNotes"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginBottom="@dimen/dimension10dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:background="@drawable/darkgray_white_border"
+            android:gravity="top"
+            android:padding="@dimen/dimension10dp" />
+
+        <requestFocus />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlRelation"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimension10dp">
+
+            <TextView
+                android:id="@+id/btnYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/dimension10dp"
+                android:layout_marginRight="@dimen/dimension30dp"
+                android:layout_marginLeft="@dimen/dimension30dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Add"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold"
+                android:imeOptions="actionDone"
+                />
+
+            <TextView
+                android:id="@+id/btnNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dimension5dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_button"
+                android:gravity="center"
+                android:padding="@dimen/dimension10dp"
+                android:text="Cancel"
+                android:visibility="gone"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimension20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+</ScrollView>

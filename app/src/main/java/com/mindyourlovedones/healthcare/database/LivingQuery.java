@@ -38,6 +38,10 @@ public class LivingQuery {
     public static final String COL_KEEP="keep";
     public static final String COL_MEDICATION="medication";
 
+    public static final String COL_COMPUTER="computer";
+    public static final String COL_REMOTE="remote";
+    public static final String COL_ALERT="alert";
+
     public static final String COL_INST_OTHER="InstOther";
     public static final String COL_FUNCTION_OTHER="functionOther";
 
@@ -50,6 +54,7 @@ public class LivingQuery {
         String createTableQuery="create table  If Not Exists "+TABLE_NAME+"("+COL_ID+" INTEGER PRIMARY KEY, "+COL_USERID+" INTEGER, "+
                 COL_FINANCE+" VARCHAR(20),"+COL_INST_NOTE+" VARCHAR(20),"+
                 COL_PREPARE+" VARCHAR(20),"+COL_SHOP+" VARCHAR(20),"+COL_USE+" VARCHAR(20),"+
+                COL_REMOTE+" VARCHAR(20),"+COL_ALERT+" VARCHAR(20),"+COL_COMPUTER+" VARCHAR(20),"+
                 COL_BATH+" VARCHAR(20),"+COL_FEED+" VARCHAR(20),"+COL_CONTINENCE+" VARCHAR(20),"+COL_DRESS+" VARCHAR(20),"+
                 COL_TOILETING+" VARCHAR(20),"+COL_TRANSFER+" VARCHAR(20),"+COL_TRANSPORT+" VARCHAR(20),"+
                 COL_DRIVE+" VARCHAR(20),"+COL_KEEP+" VARCHAR(20),"+COL_PETS+" VARCHAR(20),"+COL_MEDICATION+" VARCHAR(20),"+
@@ -63,7 +68,7 @@ public class LivingQuery {
         return dropTableQuery;
     }
 
-    public static Boolean insertLivingData(int userid, String finance, String prepare, String shop, String use, String bath, String continence, String dress, String feed, String toileting, String transfer, String transport, String pets, String drive, String keep, String medication, String functionnote, String fouctionOther, String instaNote, String instaOther) {
+    public static Boolean insertLivingData(int userid, String finance, String prepare, String shop, String use, String bath, String continence, String dress, String feed, String toileting, String transfer, String transport, String pets, String drive, String keep, String medication, String functionnote, String fouctionOther, String instaNote, String instaOther, String remote, String alert, String computer) {
         boolean flag=false;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -87,6 +92,9 @@ public class LivingQuery {
         cv.put(COL_MEDICATION,medication);
         cv.put(COL_INST_OTHER,instaOther);
         cv.put(COL_FUNCTION_OTHER,fouctionOther);
+        cv.put(COL_COMPUTER,computer);
+        cv.put(COL_ALERT,alert);
+        cv.put(COL_REMOTE,remote);
 
        Cursor c = LivingQuery.fetchOneRecordCursor(userid);
         if (c.moveToFirst()) {
@@ -123,14 +131,18 @@ public class LivingQuery {
 
     private static Cursor fetchOneRecordCursor(int userid) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + ";", null);
+
+        //  Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "';", null);
         return c;
     }
 
     public static Living fetchOneRecord(int userid) {
         Living medInfo=new Living();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "';", null);
+        Cursor c = db.rawQuery("Select * from " + TABLE_NAME + ";", null);
+
+       // Cursor c = db.rawQuery("Select * from " + TABLE_NAME + " where " + COL_USERID + "='" + userid + "';", null);
 
         if (c.moveToFirst()) {
             do {
@@ -155,6 +167,10 @@ public class LivingQuery {
                 medInfo.setMedication(c.getString(c.getColumnIndex(COL_MEDICATION)));
                 medInfo.setInstOther(c.getString(c.getColumnIndex(COL_INST_OTHER)));
                 medInfo.setFunctionOther(c.getString(c.getColumnIndex(COL_FUNCTION_OTHER)));
+
+                medInfo.setComputer(c.getString(c.getColumnIndex(COL_COMPUTER)));
+                medInfo.setAlert(c.getString(c.getColumnIndex(COL_ALERT)));
+                medInfo.setRemote(c.getString(c.getColumnIndex(COL_REMOTE)));
              } while (c.moveToNext());
         }
         

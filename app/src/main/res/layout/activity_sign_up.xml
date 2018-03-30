@@ -20,16 +20,29 @@
             android:layout_marginLeft="@dimen/dimension20dp"
             android:layout_marginTop="@dimen/dimension20dp"
             android:src="@drawable/ic_back" />
-
         <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="@dimen/dimension160dp"
+            android:layout_height="@dimen/dimension100dp"
+            android:layout_marginTop="@dimen/dimension30dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_centerHorizontal="true"
+            />
+       <!-- <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="@dimen/dimension110dp"
             android:layout_height="@dimen/dimension100dp"
             android:layout_marginTop="@dimen/dimension30dp"
             android:src="@drawable/ic_launcher"
             android:layout_centerHorizontal="true"
-            />
-
+            />-->
+        <ImageView
+            android:id="@+id/imgABA"
+            android:layout_width="@dimen/dimension120dp"
+            android:layout_height="@dimen/dimension40dp"
+            android:layout_marginTop="@dimen/dimension20dp"
+            android:src="@drawable/aba_logo"
+            android:layout_alignParentRight="true"/>
         <FrameLayout
             android:id="@+id/flProfile"
             android:layout_width="@dimen/dimension110dp"

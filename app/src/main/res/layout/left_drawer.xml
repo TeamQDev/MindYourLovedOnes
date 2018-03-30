@@ -681,7 +681,7 @@
                 android:id="@+id/txtGuide"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension50dp"
-                android:text="HELP"
+                android:text="USER GUIDE"
                 android:textColor="@color/colorDarkBlue"
                 android:textSize="@dimen/dimension16dp"
                 android:gravity="center_vertical"

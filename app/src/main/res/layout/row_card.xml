@@ -71,37 +71,37 @@
             android:layout_margin="@dimen/dimension10dp"
             />
     </RelativeLayout>
-            <ImageView
-                android:id="@+id/imgCard"
-                android:layout_width="@dimen/dimension200dp"
-                android:layout_height="@dimen/dimension100dp"
-                android:layout_marginLeft="@dimen/dimension30dp"
-                android:layout_marginRight="@dimen/dimension30dp"
-                android:layout_marginTop="@dimen/dimension20dp"
-                android:src="@drawable/ins_card"
-                android:layout_centerInParent="true"
-                android:background="@color/colorWhite"
-                android:layout_below="@+id/rlProvider"
-                android:scaleType="fitXY"
-                />
+    <ImageView
+        android:id="@+id/imgCard"
+        android:layout_width="@dimen/dimension200dp"
+        android:layout_height="@dimen/dimension100dp"
+        android:layout_marginLeft="@dimen/dimension30dp"
+        android:layout_marginRight="@dimen/dimension30dp"
+        android:layout_marginTop="@dimen/dimension20dp"
+        android:src="@drawable/ins_card"
+        android:layout_centerInParent="true"
+        android:background="@color/colorWhite"
+        android:layout_below="@+id/rlProvider"
+        android:scaleType="fitXY"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:layout_below="@+id/imgCard"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/imgCard"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimension10dp"
         android:layout_marginBottom="@dimen/dimension10dp"
-    >
-    <ImageView
-        android:id="@+id/imgFront"
-        android:layout_width="@dimen/dimension25dp"
-        android:layout_height="@dimen/dimension25dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="@dimen/dimension10dp"
-        android:layout_weight="4"
-        android:src="@drawable/blue_dot"
-        />
+        >
+        <ImageView
+            android:id="@+id/imgFront"
+            android:layout_width="@dimen/dimension25dp"
+            android:layout_height="@dimen/dimension25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimension10dp"
+            android:layout_weight="4"
+            android:src="@drawable/blue_dot"
+            />
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="@dimen/dimension25dp"

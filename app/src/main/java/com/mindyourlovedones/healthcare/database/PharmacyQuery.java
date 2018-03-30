@@ -29,7 +29,7 @@ public class PharmacyQuery {
     public static final String COL_PHOTO = "Photo";
     public static final String COL_ID = "Id";
     public static final String COL_PHOTOCARD= "PhotoCard";
-
+    public static final String COL_LOCATOR = "Locator";
 
     public PharmacyQuery(Context context, DBHelper dbHelper) {
         this.context = context;
@@ -42,7 +42,7 @@ public class PharmacyQuery {
                 COL_USER_ID + " INTEGER, " + COL_NAME + " VARCHAR(50)," + COL_WEBSITE + " VARCHAR(50),"
                 + COL_ADDRESS + " VARCHAR(100)," + COL_OFFICE_PHONE + " VARCHAR(20)," +COL_FAX +
                 " VARCHAR(20)," + COL_NOTE + " VARCHAR(50)," +
-                COL_PHOTOCARD+" VARCHAR(50),"+
+                COL_PHOTOCARD+" VARCHAR(50),"+ COL_LOCATOR+" VARCHAR(40),"+
                 COL_PHOTO + " VARCHAR(50));";
         return createTableQuery;
     }
@@ -55,7 +55,9 @@ public class PharmacyQuery {
     public static ArrayList<Pharmacy> fetchAllPharmacyRecord(int userid) {
         ArrayList<Pharmacy> noteList=new ArrayList<>();
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "';",null);
+        Cursor c=db.rawQuery("select * from "+TABLE_NAME+ ";",null);
+
+       // Cursor c=db.rawQuery("select * from "+TABLE_NAME + " where " + COL_USER_ID + "='" + userid + "';",null);
         if(c!=null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
@@ -70,7 +72,7 @@ public class PharmacyQuery {
                     notes.setNote(c.getString(c.getColumnIndex(COL_NOTE)));
                     notes.setPhoto(c.getString(c.getColumnIndex(COL_PHOTO)));
                     notes.setPhotoCard(c.getString(c.getColumnIndex(COL_PHOTOCARD)));
-
+                    notes.setLocator(c.getString(c.getColumnIndex(COL_LOCATOR)));
 
                     noteList.add(notes);
                 } while (c.moveToNext());
@@ -80,7 +82,7 @@ public class PharmacyQuery {
         return noteList;
     }
 
-    public static Boolean insertPharmacyData(int userid, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard) {
+    public static Boolean insertPharmacyData(int userid, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard, String locator) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -94,7 +96,7 @@ public class PharmacyQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);
         cv.put(COL_PHOTOCARD,photoCard);
-
+        cv.put(COL_LOCATOR,locator);
 
         long rowid=db.insert(TABLE_NAME,null,cv);
 
@@ -110,7 +112,7 @@ public class PharmacyQuery {
         return flag;
     }
 
-    public static Boolean updatePharmacyData(int id, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard) {
+    public static Boolean updatePharmacyData(int id, String name, String website, String address, String phone, String photo, String fax, String note, String photoCard, String locator) {
         boolean flag;
         SQLiteDatabase db=dbHelper.getWritableDatabase();
 
@@ -124,6 +126,7 @@ public class PharmacyQuery {
         cv.put(COL_PHOTO,photo);
         cv.put(COL_FAX,fax);
         cv.put(COL_PHOTOCARD,photoCard);
+        cv.put(COL_LOCATOR,locator);
 
         int rowid=db.update(TABLE_NAME,cv,COL_ID+"="+id,null);
 

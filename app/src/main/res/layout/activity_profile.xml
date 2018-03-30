@@ -595,7 +595,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:hint="Birth Date"
+                    android:hint="Birthdate"
                     android:imeOptions="actionNext"
                     android:maxLength="30"
                     android:maxLines="1"
@@ -672,7 +672,7 @@
                 android:layout_marginRight="@dimen/dimension35dp"
                 app:ms_arrowColor="@color/colorBlue"
                 app:ms_arrowSize="16dp"
-                app:ms_floatingLabelText="Eyes Color"
+                app:ms_floatingLabelText="Eye Color"
                 app:ms_hint="hint"
                 app:ms_multiline="true"
                 custom:ms_floatingLabelColor="@color/colorBlue"
@@ -726,6 +726,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimension20dp"
                     android:text="No"
+                    android:checked="true"
                     android:textSize="@dimen/dimension20dp" />
             </RadioGroup>
 
@@ -735,13 +736,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rgLive"
                 android:layout_marginLeft="@dimen/dimension50dp"
-                android:visibility="gone">
+              >
 
                 <CheckBox
                     android:id="@+id/chkChild"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Children"
+                    android:text="Child"
                     android:textSize="@dimen/dimension20dp" />
 
                 <CheckBox
@@ -757,7 +758,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/chkFriend"
-                    android:text="Grand Parents"
+                    android:text="Grandparent(s)"
                     android:textSize="@dimen/dimension20dp" />
 
                 <CheckBox
@@ -765,7 +766,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/chkGrandParent"
-                    android:text="Parents"
+                    android:text="Parent(s)"
                     android:textSize="@dimen/dimension20dp" />
 
                 <CheckBox
@@ -777,10 +778,18 @@
                     android:textSize="@dimen/dimension20dp" />
 
                 <CheckBox
-                    android:id="@+id/chkOther"
+                    android:id="@+id/chkSibling"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/chkSpouse"
+                    android:text="Sibling"
+                    android:textSize="@dimen/dimension20dp" />
+
+                <CheckBox
+                    android:id="@+id/chkOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/chkSibling"
                     android:text="Significant Other"
                     android:textSize="@dimen/dimension20dp" />
 
@@ -994,6 +1003,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimension20dp"
                     android:text="No"
+                    android:checked="true"
                     android:textSize="@dimen/dimension20dp" />
             </RadioGroup>
             <View
@@ -1067,7 +1077,7 @@
                 android:paddingLeft="@dimen/dimension30dp"
                 android:paddingRight="@dimen/dimension30dp"
                 android:paddingTop="@dimen/dimension8dp"
-                android:text="Veteran Y/N"
+                android:text="Veteran"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimension20dp" />
 
@@ -1096,6 +1106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimension20dp"
                     android:text="No"
+                    android:checked="true"
                     android:textSize="@dimen/dimension20dp" />
             </RadioGroup>
 
@@ -1169,7 +1180,7 @@
                 android:paddingLeft="@dimen/dimension30dp"
                 android:paddingRight="@dimen/dimension30dp"
                 android:paddingTop="@dimen/dimension8dp"
-                android:text="Pets Y/N"
+                android:text="Pet(s)"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dimension20dp" />
 
@@ -1197,6 +1208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimension20dp"
                     android:text="No"
+                    android:checked="true"
                     android:textSize="@dimen/dimension20dp" />
             </RadioGroup>
 

@@ -9,7 +9,6 @@ import com.mindyourlovedones.healthcare.model.Specialist;
 
 import java.util.ArrayList;
 
-import static android.R.attr.id;
 import static com.mindyourlovedones.healthcare.HomeActivity.R.drawable.physician;
 
 /**
@@ -63,7 +62,9 @@ public class DoctorQuery {
     public static ArrayList<Specialist> fetchAllPhysicianRecord(int id, int physician) {
         ArrayList<Specialist> connectionList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";", null);
+        Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_ISPHISYCIAN + "=" + physician + ";", null);
+
+       // Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";", null);
         if (c != null && c.getCount() > 0) {
             if (c.moveToFirst()) {
                 do {
@@ -130,7 +131,9 @@ public class DoctorQuery {
     public static ArrayList<Specialist> fetch() {
         ArrayList<Specialist> sp=new ArrayList();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";", null);
+        Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_ISPHISYCIAN + "=" + physician + ";", null);
+
+       // Cursor c = db.rawQuery("select * from " + TABLE_NAME + " where " + COL_USER_ID + "=" + id + " and " + COL_ISPHISYCIAN + "=" + physician + ";", null);
            if (c!=null && c.getCount() > 0)
                {
     Specialist s=new Specialist();

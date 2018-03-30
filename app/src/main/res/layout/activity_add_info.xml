@@ -117,11 +117,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:imeOptions="actionNext"
-                                android:maxLength="30"
-                                android:maxLines="1"
                                 android:paddingLeft="@dimen/dimension15dp"
                                 android:paddingTop="@dimen/dimension2dp"
-                                android:singleLine="true"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="@dimen/dimension20dp" />
 
@@ -151,10 +148,8 @@
                             android:id="@+id/txtName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
                     </android.support.design.widget.TextInputLayout>
@@ -205,11 +200,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:imeOptions="actionNext"
-                                    android:maxLength="30"
-                                    android:maxLines="1"
                                     android:paddingLeft="@dimen/dimension15dp"
                                     android:paddingTop="@dimen/dimension2dp"
-                                    android:singleLine="true"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="@dimen/dimension20dp" />
 
@@ -234,10 +226,8 @@
                             android:id="@+id/txtReaction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
 
@@ -264,10 +254,8 @@
                             android:id="@+id/txtTreatment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
 
@@ -277,7 +265,6 @@
                         android:id="@+id/tilDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:descendantFocusability="beforeDescendants"
                         android:focusableInTouchMode="true"
                         android:hint="Date"
@@ -294,10 +281,8 @@
                             android:id="@+id/txtDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
 
@@ -324,10 +309,8 @@
                             android:id="@+id/txtDoctor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
 
@@ -340,7 +323,7 @@
                         android:layout_below="@+id/tilDoctor"
                         android:descendantFocusability="beforeDescendants"
                         android:focusableInTouchMode="true"
-                        android:hint="Treatment Location"
+                        android:hint="Treatment Location &amp; Other Details"
                         android:paddingBottom="@dimen/dimension8dp"
                         android:paddingLeft="@dimen/dimension30dp"
                         android:paddingRight="@dimen/dimension30dp"
@@ -354,10 +337,8 @@
                             android:id="@+id/txtDone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:paddingLeft="@dimen/dimension15dp"
                             android:paddingTop="@dimen/dimension2dp"
-                            android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/dimension20dp" />
 

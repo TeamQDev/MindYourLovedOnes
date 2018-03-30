@@ -154,7 +154,7 @@
                         android:id="@+id/txtBathing"
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Bathing"
@@ -177,7 +177,7 @@
                     <ToggleButton
                         android:id="@+id/tbBathing"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -194,14 +194,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rlBathing"
                     android:layout_toRightOf="@+id/imgFunctional"
-
                     >
 
                     <TextView
                         android:id="@+id/txtC"
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Continence"
@@ -224,7 +223,7 @@
                     <ToggleButton
                         android:id="@+id/tbContinence"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -247,7 +246,7 @@
 
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Dressing"
@@ -271,7 +270,7 @@
                     <ToggleButton
                         android:id="@+id/tbDressing"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -294,7 +293,7 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Eating"
@@ -318,7 +317,7 @@
                     <ToggleButton
                         android:id="@+id/tbfeed"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -342,7 +341,7 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Toileting"
@@ -366,7 +365,7 @@
                     <ToggleButton
                         android:id="@+id/tbToileting"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -390,10 +389,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Tranferring"
+                        android:text="Transferring"
                         android:layout_toLeftOf="@+id/tbTranfering"
                         android:layout_alignParentLeft="true"
                         android:id="@+id/txtDf"
@@ -416,7 +415,7 @@
                     <ToggleButton
                         android:id="@+id/tbTranfering"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -438,7 +437,7 @@
                     android:layout_marginBottom="@dimen/dimension10dp"
                     android:background="@drawable/darkgray_white_border"
                     android:gravity="top"
-                    android:hint="Other - specify"
+                    android:hint="Other - Specify"
                     android:textColor="@color/colorBlue"
                     android:padding="@dimen/dimension8dp"
                     android:layout_toRightOf="@+id/imgFunctional"
@@ -536,10 +535,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Accessing transportation"
+                        android:text="Accessing Transportation"
                         android:layout_toLeftOf="@+id/tbTransport"
                         android:layout_alignParentLeft="true"
                         />
@@ -547,7 +546,7 @@
                     <ToggleButton
                         android:id="@+id/tbTransport"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -568,10 +567,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Caring for pets"
+                        android:text="Caring for Pets"
                         android:layout_toLeftOf="@+id/tbPets"
                         android:layout_alignParentLeft="true"
                         />
@@ -579,7 +578,7 @@
                     <ToggleButton
                         android:id="@+id/tbPets"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -600,7 +599,7 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Driving"
@@ -611,7 +610,7 @@
                     <ToggleButton
                         android:id="@+id/tbDriving"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -632,7 +631,7 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:layout_alignParentLeft="true"
@@ -642,7 +641,7 @@
                     <ToggleButton
                         android:id="@+id/tbKeeping"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -664,10 +663,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Managing medications"
+                        android:text="Managing Medications"
                         android:layout_toLeftOf="@+id/tbMedication"
                         android:layout_alignParentLeft="true"
                         />
@@ -675,7 +674,7 @@
                     <ToggleButton
                         android:id="@+id/tbMedication"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -701,7 +700,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Managing personal finances"
+                        android:text="Managing Personal Finances"
                         android:layout_toLeftOf="@+id/tbFinances"
                         android:layout_alignParentLeft="true"
                         />
@@ -709,7 +708,7 @@
                     <ToggleButton
                         android:id="@+id/tbFinances"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -730,10 +729,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Preparing meals"
+                        android:text="Preparing Meals"
                         android:layout_toLeftOf="@+id/tbPreparing"
                         android:layout_alignParentLeft="true"
                         />
@@ -741,7 +740,7 @@
                     <ToggleButton
                         android:id="@+id/tbPreparing"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -764,7 +763,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Shopping for groceries or clothes"
+                        android:text="Shopping for Groceries or Clothes"
                         android:layout_toLeftOf="@+id/tbShopping"
                         android:layout_alignParentLeft="true"
                         />
@@ -772,7 +771,7 @@
                     <ToggleButton
                         android:id="@+id/tbShopping"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -792,10 +791,10 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
-                        android:text="Using a telephone"
+                        android:text="Using a Telephone"
                         android:layout_toLeftOf="@+id/tbUsing"
                         android:layout_alignParentLeft="true"
                         />
@@ -803,7 +802,7 @@
                     <ToggleButton
                         android:id="@+id/tbUsing"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -812,20 +811,117 @@
                         android:text=""
                         android:textOff=""
                         android:textOn="" />
-                </RelativeLayout>v
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlComputer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlUsing"
+                    android:layout_toRightOf="@+id/imgInstrumental">
+
+                    <TextView
+                        style="@style/EmergencyDesc"
+                        android:layout_width="wrap_content"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dimension5dp"
+                        android:text="Using a Computer or Tablet"
+                        android:layout_toLeftOf="@+id/tbComputer"
+                        android:layout_alignParentLeft="true"
+                        />
+
+                    <ToggleButton
+                        android:id="@+id/tbComputer"
+                        android:layout_width="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dimension15dp"
+                        android:background="@drawable/toggle_selector"
+                        android:checked="false"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlRemote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlComputer"
+                    android:layout_toRightOf="@+id/imgInstrumental">
+
+                    <TextView
+                        style="@style/EmergencyDesc"
+                        android:layout_width="wrap_content"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dimension5dp"
+                        android:text="Using a Remote Control for the TV"
+                        android:layout_toLeftOf="@+id/tbRemote"
+                        android:layout_alignParentLeft="true"
+                        />
+
+                    <ToggleButton
+                        android:id="@+id/tbRemote"
+                        android:layout_width="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dimension15dp"
+                        android:background="@drawable/toggle_selector"
+                        android:checked="false"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlAlert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlRemote"
+                    android:layout_toRightOf="@+id/imgInstrumental">
+
+                    <TextView
+                        style="@style/EmergencyDesc"
+                        android:layout_width="wrap_content"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dimension5dp"
+                        android:text="Using a Medical Alert"
+                        android:layout_toLeftOf="@+id/tbAlert"
+                        android:layout_alignParentLeft="true"
+                        />
+
+                    <ToggleButton
+                        android:id="@+id/tbAlert"
+                        android:layout_width="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dimension15dp"
+                        android:background="@drawable/toggle_selector"
+                        android:checked="false"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
+                </RelativeLayout>
+
 
                 <EditText
                     android:id="@+id/etOtherInstrument"
                     style="@style/EmergencyDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlUsing"
+                    android:layout_below="@+id/rlAlert"
                     android:layout_marginTop="@dimen/dimension10dp"
                     android:layout_marginRight="@dimen/dimension15dp"
                     android:layout_marginBottom="@dimen/dimension10dp"
                     android:background="@drawable/darkgray_white_border"
                     android:gravity="top"
-                    android:hint="Other - specify"
+                    android:hint="Other - Specify"
                     android:textColor="@color/colorBlue"
                     android:padding="@dimen/dimension8dp"
                     android:layout_toRightOf="@+id/imgInstrumental"
@@ -868,7 +964,7 @@
          <TextView
              style="@style/EmergencyDesc"
              android:layout_width="wrap_content"
-             android:layout_height="@dimen/dimension50dp"
+              android:layout_height="@dimen/dimension55dp"
              android:gravity="center_vertical"
              android:padding="@dimen/dimension5dp"
              android:layout_alignParentLeft="true"
@@ -878,7 +974,7 @@
          <ToggleButton
              android:id="@+id/tbfeed"
              android:layout_width="@dimen/dimension50dp"
-             android:layout_height="@dimen/dimension50dp"
+              android:layout_height="@dimen/dimension55dp"
              android:layout_alignParentRight="true"
              android:layout_marginRight="@dimen/dimension15dp"
              android:background="@drawable/toggle_selector"
@@ -900,7 +996,7 @@
             <TextView
                 style="@style/EmergencyDesc"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimension50dp"
+                 android:layout_height="@dimen/dimension55dp"
                 android:gravity="center_vertical"
                 android:padding="@dimen/dimension5dp"
                 android:text="Self Medicate"
@@ -909,7 +1005,7 @@
             <ToggleButton
                 android:id="@+id/tbMedicate"
                 android:layout_width="@dimen/dimension50dp"
-                android:layout_height="@dimen/dimension50dp"
+                 android:layout_height="@dimen/dimension55dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dimension15dp"
                 android:background="@drawable/toggle_selector"
@@ -931,7 +1027,7 @@
           <TextView
               style="@style/EmergencyDesc"
               android:layout_width="wrap_content"
-              android:layout_height="@dimen/dimension50dp"
+               android:layout_height="@dimen/dimension55dp"
               android:gravity="center_vertical"
               android:padding="@dimen/dimension5dp"
               android:text="Walking"
@@ -942,7 +1038,7 @@
           <ToggleButton
               android:id="@+id/tbWalking"
               android:layout_width="@dimen/dimension50dp"
-              android:layout_height="@dimen/dimension50dp"
+               android:layout_height="@dimen/dimension55dp"
               android:layout_alignParentRight="true"
               android:layout_marginRight="@dimen/dimension15dp"
               android:background="@drawable/toggle_selector"
@@ -965,7 +1061,7 @@
                     <TextView
                         style="@style/EmergencyDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimension5dp"
                         android:text="Swollowing"
@@ -976,7 +1072,7 @@
                     <ToggleButton
                         android:id="@+id/tbSwollowing"
                         android:layout_width="@dimen/dimension50dp"
-                        android:layout_height="@dimen/dimension50dp"
+                         android:layout_height="@dimen/dimension55dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dimension15dp"
                         android:background="@drawable/toggle_selector"
@@ -1000,7 +1096,7 @@
          <TextView
              style="@style/EmergencyDesc"
              android:layout_width="wrap_content"
-             android:layout_height="@dimen/dimension50dp"
+              android:layout_height="@dimen/dimension55dp"
              android:gravity="center_vertical"
              android:padding="@dimen/dimension5dp"
              android:text="Communication"
@@ -1011,7 +1107,7 @@
          <ToggleButton
              android:id="@+id/tbCommunication"
              android:layout_width="@dimen/dimension50dp"
-             android:layout_height="@dimen/dimension50dp"
+              android:layout_height="@dimen/dimension55dp"
              android:layout_alignParentRight="true"
              android:layout_marginRight="@dimen/dimension15dp"
              android:background="@drawable/toggle_selector"

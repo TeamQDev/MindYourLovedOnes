@@ -5,6 +5,6 @@ package com.mindyourlovedones.healthcare.utility;
  */
 
 public class AppConstants {
-   public static String RELATION="Relation";
-
+   public static String RELATION = "Relation";
+   public static String PATH="Environment.getExternalStorageDirectory(),"+"/MYLO/";
 }
